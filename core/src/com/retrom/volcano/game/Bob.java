@@ -16,7 +16,6 @@
 
 package com.retrom.volcano.game;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class Bob extends DynamicGameObject {
 	public static final float MAX_ACCEL = 50;
 	public static final float FRICTION_RATE = 0.9f;
 	
-	private List<Rectangle> obstacles_ = Arrays.asList();
+	private List<Rectangle> obstacles_ = Arrays.asList(new Rectangle(-320,-20,640,20), new Rectangle(100,0,100,100));
 
 	int state;
 	float stateTime;
@@ -71,24 +70,37 @@ public class Bob extends DynamicGameObject {
 		velocity.add(World.gravity.x * deltaTime, World.gravity.y * deltaTime);
 		velocity.x *= FRICTION_RATE;
 		
-		bounds.x += velocity.x;
+		bounds.y += velocity.y * deltaTime;
 		for (Rectangle rect : obstacles_) {
+			Gdx.app.log("INFO", "checking rect y");
 			if (bounds.overlaps(rect)) {
+				Gdx.app.log("INFO", "overlap!!!");
 				if (velocity.y < 0) {
-					bounds.y = rect.y + rect.height + BOB_HEIGHT/2;
+					bounds.y = rect.y + rect.height;
 					// TODO: handle grounded.
 					// TODO: set state.
 				} else
-					bounds.y = rect.y - bounds.height - BOB_HEIGHT/2;
+					bounds.y = rect.y - bounds.height;
 				velocity.y = 0;
 			}
 		}
 		
-		position.add(velocity.x * deltaTime, velocity.y * deltaTime);
+		bounds.x += velocity.x * deltaTime;
+		for (Rectangle rect : obstacles_) {
+			Gdx.app.log("INFO", "checking rect x");
+			if (bounds.overlaps(rect)) {
+				Gdx.app.log("INFO", "overlap!!!");
+				if (velocity.x < 0) {
+					bounds.x = rect.x + rect.height;
+					// TODO: handle grounded.
+					// TODO: set state.
+				} else
+					bounds.x = rect.x - bounds.width;
+				velocity.x = 0;
+			}
+		}
 		
-		bounds.x = position.x - bounds.width / 2;
-		bounds.y = position.y - bounds.height / 2;
-
-		if (position.y < 0) position.y = 0;
+		position.x = bounds.x + bounds.width / 2;
+		position.y = bounds.y + bounds.height / 2;
 	}
 }
