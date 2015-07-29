@@ -16,14 +16,14 @@
 
 package com.retrom.volcano.game;
 
-import java.util.Arrays;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
+import com.retrom.volcano.game.objects.DynamicGameObject;
 
-public class Bob extends DynamicGameObject {
+public class Player extends DynamicGameObject {
 	public static final int BOB_WIDTH = 36;
 	public static final int BOB_HEIGHT = 84;
 	
@@ -31,13 +31,16 @@ public class Bob extends DynamicGameObject {
 	
 	public static final float MAX_ACCEL = 50;
 	public static final float FRICTION_RATE = 0.9f;
+	private static final float JUMP_VEL = 900;
 	
-	private List<Rectangle> obstacles_ = Arrays.asList(new Rectangle(-320,-20,640,20), new Rectangle(100,0,100,100));
+	private List<Rectangle> obstacles_;
 
 	int state;
 	float stateTime;
-
-	public Bob (float x, float y) {
+	
+	boolean grounded_ = true;
+	
+	public Player (float x, float y) {
 		super(x, y, BOB_WIDTH, BOB_HEIGHT);
 		state = STATE_NOTHING;
 		stateTime = 0;
@@ -54,11 +57,12 @@ public class Bob extends DynamicGameObject {
 			velocity.x += MAX_ACCEL;
 		}
 		
-		if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-			velocity.y = 500;
+		if (grounded_ && Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+			grounded_ = false;
+			velocity.y = JUMP_VEL;
 		}
 	}
-
+	
 	public void update (float deltaTime) {
 		processInput();
 		tryMove(deltaTime);
@@ -72,12 +76,10 @@ public class Bob extends DynamicGameObject {
 		
 		bounds.y += velocity.y * deltaTime;
 		for (Rectangle rect : obstacles_) {
-			Gdx.app.log("INFO", "checking rect y");
 			if (bounds.overlaps(rect)) {
-				Gdx.app.log("INFO", "overlap!!!");
 				if (velocity.y < 0) {
 					bounds.y = rect.y + rect.height;
-					// TODO: handle grounded.
+					grounded_ = true;
 					// TODO: set state.
 				} else
 					bounds.y = rect.y - bounds.height;
@@ -87,13 +89,9 @@ public class Bob extends DynamicGameObject {
 		
 		bounds.x += velocity.x * deltaTime;
 		for (Rectangle rect : obstacles_) {
-			Gdx.app.log("INFO", "checking rect x");
 			if (bounds.overlaps(rect)) {
-				Gdx.app.log("INFO", "overlap!!!");
 				if (velocity.x < 0) {
-					bounds.x = rect.x + rect.height;
-					// TODO: handle grounded.
-					// TODO: set state.
+					bounds.x = rect.x + rect.width;
 				} else
 					bounds.x = rect.x - bounds.width;
 				velocity.x = 0;

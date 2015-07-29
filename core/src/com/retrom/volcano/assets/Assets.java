@@ -30,6 +30,7 @@ public class Assets {
 
 	public static Texture items;
 	public static TextureRegion player;
+	public static TextureRegion wall;
 	
 	public static TextureRegion mainMenu;
 	public static TextureRegion pauseMenu;
@@ -68,6 +69,7 @@ public class Assets {
 		backgroundRegion = new TextureRegion(background);
 
 		player = new TextureRegion(loadTexture("player.png"));
+		wall = new TextureRegion(loadTexture("x1_1.png"));
 		
 //		items = loadTexture("data/items.png");
 //		mainMenu = new TextureRegion(items, 0, 224, 300, 110);
