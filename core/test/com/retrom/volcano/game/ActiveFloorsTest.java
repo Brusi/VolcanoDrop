@@ -172,4 +172,49 @@ public class ActiveFloorsTest {
 		
 		assertEquals(3, floors.getHighestFloor());
 	}
+	
+	@Test public void getMinMax() {
+		floors.addToColumn(1);
+		floors.addToColumn(1);
+		floors.addToColumn(2);
+		floors.addToColumn(2);
+		floors.addToColumn(2);
+		floors.addToColumn(2);
+		floors.addToColumn(3);
+		floors.addToColumn(4);
+		floors.addToColumn(5);
+		floors.addToColumn(0);
+		
+		assertEquals(4, floors.getMaxRow());
+		assertEquals(1, floors.getMinRow());
+	}
+	
+	@Test public void nextCols() {
+		assertEquals(6, floors.getNextPossibleCols().size());
+	}
+	
+	@Test public void nextColsWhenDiffIs1() {
+		floors.addToColumn(0);
+		floors.addToColumn(1);
+		floors.addToColumn(4);
+		assertEquals(6, floors.getNextPossibleCols().size());
+	}
+	
+	@Test public void nextColsWhenDiffIs2() {
+		floors.addToColumn(1);
+		floors.addToColumn(1);
+		floors.addToColumn(4);
+		floors.addToColumn(4);
+		assertEquals(4, floors.getNextPossibleCols().size());
+	}
+	
+	@Test public void nextColsWhenDiffIs3() {
+		floors.addToColumn(1);
+		floors.addToColumn(1);
+		floors.addToColumn(1);
+		floors.addToColumn(4);
+		floors.addToColumn(4);
+		floors.addToColumn(3);
+		assertEquals(3, floors.getNextPossibleCols().size());
+	}
 }

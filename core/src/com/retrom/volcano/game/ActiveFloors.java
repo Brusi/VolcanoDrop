@@ -1,6 +1,7 @@
 package com.retrom.volcano.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,6 +19,13 @@ public class ActiveFloors {
 	private int totalBlocks_ = 0; 
 	private final List<Rectangle> rects_ = new ArrayList<Rectangle>();
 	
+	private int maxrow = 0;
+	private int minrow = 0;
+	
+	private static final List<Integer> allCols = Arrays.asList(0,1,2,3,4,5);
+	
+	private List<Integer> nextCols = allCols;
+	
 	private final float SIZE = 80f;
 	private final float BOTTOM = 0f;
 	private final float LEFT = -3 * SIZE;
@@ -32,10 +40,39 @@ public class ActiveFloors {
 		return rects_;
 	}
 	
-	public void addToColumn(int col) {
+	public void addToColumn(int column) {
 		totalBlocks_++;
-		hist_[col]++;
+		hist_[column]++;
 		generateRects();
+		
+		maxrow = Math.max(maxrow, hist_[column]);
+		minrow = maxrow;
+		for (int val : hist_) {
+			minrow = Math.min(minrow, val);
+		}
+		
+		// Prepare nextCols.
+		nextCols = new ArrayList<Integer>();
+		int diff = maxrow - minrow;
+		if (diff >= 3) {
+			// Accept only mins
+			for (int i=0; i < NUM_COLS; i++) {
+				if (hist_[i] == minrow) {
+					nextCols.add(i); 
+				}
+			}
+			return;
+		}
+		if (diff == 2) {
+			// Accept all but max
+			for (int i=0; i < NUM_COLS; i++) {
+				if (hist_[i] != maxrow) {
+					nextCols.add(i); 
+				}
+			}
+			return;
+		}
+		nextCols = allCols;
 	}
 	
 	private Rectangle rectAt(int col, int row) {
@@ -66,6 +103,24 @@ public class ActiveFloors {
 	
 	public int getTotalBlocks() {
 		return totalBlocks_;
+	}
+	
+	/**
+	 * Since we do not want a large difference between the heights, we allow
+	 * each time only some cols to be dropped.
+	 * 
+	 * @return a list of the possible cols.
+	 */
+	public List<Integer> getNextPossibleCols() {
+		return nextCols;
+	}
+
+	public Object getMaxRow() {
+		return maxrow;
+	}
+	
+	public Object getMinRow() {
+		return minrow;
 	}
 	
 	

@@ -46,14 +46,24 @@ public class World {
 	Rectangle floor_ = new Rectangle(-World.WIDTH / 2, -50, World.WIDTH, 50);
 	
 	ActiveFloors floors_ = new ActiveFloors();
+
+	private final Spawner spawner_;
 	
 	public World () {
 		this.player = new Player(0, 100);
+		this.spawner_ = new Spawner(floors_, new Spawner.SpawnerHandler() {
+			
+			@Override
+			public void dropWall(int col) {
+				addWall(col);
+			}
+		});
 	}
 
 	public void update (float deltaTime) {
 		updateWalls(deltaTime);
 		updatePlayer(deltaTime);
+		updateSpawner(deltaTime);
 		
 		leftWall_.y = player.bounds.y;
 		rightWall_.y = player.bounds.y;
@@ -78,6 +88,11 @@ public class World {
 		}
 	}
 	
+	private void updateSpawner(float deltaTime) {
+		spawner_.update(deltaTime);
+		
+	}
+
 	public void addWall(int col) {
 		float wallY = floors_.getTotalBlocks() / 6f * Wall.SIZE + 10*Wall.SIZE;
 		Wall wall = new Wall(col, wallY);
