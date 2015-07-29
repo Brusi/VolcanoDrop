@@ -29,23 +29,28 @@ public class WorldRenderer {
 	static final float FRUSTUM_WIDTH = 640;
 	static final float FRUSTUM_HEIGHT = FRUSTUM_WIDTH / Gdx.graphics.getWidth() * Gdx.graphics.getHeight();
 	World world;
-	OrthographicCamera cam;
 	SpriteBatch batch;
+	
+	OrthographicCamera cam;
+	private float cam_target;
 
 	public WorldRenderer (SpriteBatch batch, World world) {
 		this.world = world;
 		this.cam = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+		this.cam.position.y = FRUSTUM_HEIGHT / 3f;
 		this.batch = batch;
 	}
 	
-	public void render() {
+	public static final float CAM_SPEED = 40f;
+	
+	public void render(float deltaTime) {
 		Gdx.graphics.getGL20().glClearColor(0, 0, 0, 1);
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-		if (world.player.position.y > cam.position.y)
-			cam.position.y = world.player.position.y;
-		
-		cam.position.y = (world.floors_.getTotalBlocks()) * 80f / 6f + FRUSTUM_HEIGHT/4;
+		cam_target = (world.floors_.getTotalBlocks()) * Wall.SIZE / 6f + FRUSTUM_HEIGHT / 3f;
+		if (cam.position.y < cam_target) {
+			cam.position.y += (cam_target - cam.position.y) * deltaTime / 2;
+		}
 		
 		cam.update();
 		batch.setProjectionMatrix(cam.combined);

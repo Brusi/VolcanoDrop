@@ -23,7 +23,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	@Override
 	public void render(float delta) {
 		world_.update(delta);
-		renderer_.render();
+		renderer_.render(delta);
 	}
 
 	@Override
