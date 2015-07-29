@@ -6,7 +6,7 @@ public class Wall extends DynamicGameObject {
 	
 	public static final float SIZE = 80f;
 	private static final int NUM_COLS = 6;
-	private static final float WALL_GRAVITY_RATIO = 0.7f;
+	private static final float GRAVITY_RATIO = 0.7f;
 	
 	public static int STATUS_ACTIVE = 1;
 	public static int STATUS_INACTIVE = 2;
@@ -32,7 +32,7 @@ public class Wall extends DynamicGameObject {
 		if (status != STATUS_ACTIVE) {
 			return;
 		}
-		velocity.add(0, World.gravity.y * deltaTime * WALL_GRAVITY_RATIO);
+		velocity.add(0, World.gravity.y * deltaTime * GRAVITY_RATIO);
 		bounds.y += velocity.y * deltaTime;
 		bounds.getCenter(position);
 	}

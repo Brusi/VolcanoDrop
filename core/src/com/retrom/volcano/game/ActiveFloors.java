@@ -34,6 +34,7 @@ public class ActiveFloors {
 		for (int i = 0; i < NUM_COLS; i++) {
 			hist_[i] = 0;
 		}
+		generateRects();
 	}
 	
 	public List<Rectangle> getRects() {
@@ -83,7 +84,7 @@ public class ActiveFloors {
 		rects_.clear();
 		for (int col = 0; col < NUM_COLS; col++) {
 			int row = hist_[col];
-			while (row != 0) {
+			while (row >= 0) {
 				rects_.add(rectAt(col, row));
 				--row;
 				if ((col == 0 || hist_[col-1] >= row) && (col == NUM_COLS-1 || hist_[col+1] >= row)) {

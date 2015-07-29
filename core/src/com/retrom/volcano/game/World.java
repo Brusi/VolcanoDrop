@@ -24,6 +24,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.retrom.volcano.game.objects.Coin;
 import com.retrom.volcano.game.objects.Wall;
 
 public class World {
@@ -32,6 +33,8 @@ public class World {
 	
 	public final List<Wall> walls_ = new ArrayList<Wall>();
 	public final List<Wall> activeWalls_ = new ArrayList<Wall>();
+	
+	public final List<Coin> coins_ = new ArrayList<Coin>();
 	
 	public float heightSoFar;
 	public int score;
@@ -43,11 +46,11 @@ public class World {
 	// Permanent obstacles.
 	Rectangle leftWall_ = new Rectangle(-World.WIDTH / 2, 0, Wall.SIZE, 500);
 	Rectangle rightWall_ = new Rectangle(World.WIDTH / 2 - Wall.SIZE, 0, Wall.SIZE, 500);;
-	Rectangle floor_ = new Rectangle(-World.WIDTH / 2, -50, World.WIDTH, 50);
 	
 	ActiveFloors floors_ = new ActiveFloors();
 
 	private final Spawner spawner_;
+
 	
 	public World () {
 		this.player = new Player(0, 100);
@@ -57,11 +60,17 @@ public class World {
 			public void dropWall(int col) {
 				addWall(col);
 			}
+
+			@Override
+			public void dropCoin(float x) {
+				addCoin(x);
+			}
 		});
 	}
 
 	public void update (float deltaTime) {
 		updateWalls(deltaTime);
+		updateCoins(deltaTime);
 		updatePlayer(deltaTime);
 		updateSpawner(deltaTime);
 		
@@ -69,23 +78,21 @@ public class World {
 		rightWall_.y = player.bounds.y;
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
-			addWall(0);
+			addCoin(50);
 		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
-			addWall(1);
-		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
-			addWall(2);
-		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
-			addWall(3);
-		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)) {
-			addWall(4);
-		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_6)) {
-			addWall(5);
-		}
+	}
+	
+	public void addWall(int col) {
+		float wallY = floors_.getTotalBlocks() / 6f * Wall.SIZE + 10*Wall.SIZE;
+		Wall wall = new Wall(col, wallY);
+		walls_.add(wall);
+		activeWalls_.add(wall);
+	}
+	
+	public void addCoin(float x) {
+		float yval = floors_.getTotalBlocks() / 6f * Wall.SIZE + 10*Wall.SIZE;
+		Coin coin = new Coin(x, yval);
+		coins_ .add(coin);
 	}
 	
 	private void updateSpawner(float deltaTime) {
@@ -93,20 +100,11 @@ public class World {
 		
 	}
 
-	public void addWall(int col) {
-		float wallY = floors_.getTotalBlocks() / 6f * Wall.SIZE + 10*Wall.SIZE;
-		Wall wall = new Wall(col, wallY);
-		walls_.add(wall);
-		activeWalls_.add(wall);
-	}
-
 	private void updateWalls(float deltaTime) {
 		for (Wall wall : activeWalls_) {
 			wall.update(deltaTime);
 			
-			List<Rectangle> rects = new ArrayList<Rectangle>();
-			rects.addAll(floors_.getRects());
-			rects.add(floor_);
+			List<Rectangle> rects = new ArrayList<Rectangle>(floors_.getRects());
 			for (Rectangle rect : rects) {
 				if (wall.bounds.overlaps(rect)) {
 					wall.bounds.y = rect.y+rect.height;
@@ -126,10 +124,38 @@ public class World {
 		}
 		
 	}
+	
+	private void updateCoins(float deltaTime) {
+		for (Coin coin : coins_) {
+			coin.update(deltaTime);
+			for (Rectangle rect : floors_.getRects()) {
+				if (coin.bounds.overlaps(rect)) {
+					if (coin.status == Coin.STATUS_FALLING) {
+						coin.status = Coin.STATUS_IDLE;
+						coin.bounds.y = rect.y + rect.height;
+						coin.bounds.getCenter(coin.position);
+						coin.velocity.y = 0;
+					} else if (coin.status == Coin.STATUS_IDLE) {
+						coin.status = Coin.STATUS_CRUSHED;
+					}
+				}
+			}
+			
+			if (coin.bounds.overlaps(player.bounds)) {
+				coin.status = Coin.STATUS_TAKEN;
+			}
+		}
+		// Remove crushed coins.
+		for (Iterator<Coin> it = coins_.iterator(); it.hasNext();) {
+			Coin coin = it.next();
+			if (coin.status == Coin.STATUS_CRUSHED || coin.status == Coin.STATUS_TAKEN) {
+				it.remove();
+			}
+		}
+	}
 
 	private void updatePlayer (float deltaTime) {
 		List<Rectangle> obstacles = new ArrayList<Rectangle>();
-		obstacles.add(floor_);
 		obstacles.add(leftWall_);
 		obstacles.add(rightWall_);
 		for (Wall wall : activeWalls_) {

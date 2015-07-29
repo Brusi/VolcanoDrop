@@ -32,19 +32,17 @@ public class ActiveFloorsTest {
 
 	@Test
 	public void zeroFloors() {
-		assertEquals(0, floors.getRects().size());
+		checkRects(
+				Arrays.asList(rectAt(0, 0), rectAt(1, 0), rectAt(2, 0),
+						rectAt(3, 0), rectAt(4, 0), rectAt(5, 0)),
+				floors.getRects());
 	}
 	
 	@Test
 	public void oneRect() {
-		floors.addToColumn(0);
-		assertEquals(rectAt(0,1), floors.getRects().get(0));
-	}
-	
-	@Test
-	public void anotherRect() {
-		floors.addToColumn(1);
-		assertEquals(rectAt(1,1), floors.getRects().get(0));
+		floors.addToColumn(4);
+		checkRects(floors.getRects(), Arrays.asList(rectAt(0,0), rectAt(1,0), rectAt(2,0),
+				rectAt(3,0), rectAt(4,1), rectAt(5,0)));
 	}
 	
 	@Test
@@ -53,7 +51,7 @@ public class ActiveFloorsTest {
 		floors.addToColumn(2);
 		floors.addToColumn(4);
 		
-		checkRects(floors.getRects(), Arrays.asList(rectAt(0,1), rectAt(2,1), rectAt(4,1)));
+		checkRects(floors.getRects(), Arrays.asList(rectAt(0,1), rectAt(1,0), rectAt(2,1), rectAt(3,0), rectAt(4,1), rectAt(5,0)));
 	}
 	
 	@Test
@@ -62,7 +60,9 @@ public class ActiveFloorsTest {
 		floors.addToColumn(3);
 		floors.addToColumn(3);
 		
-		checkRects(floors.getRects(), Arrays.asList(rectAt(3,1), rectAt(3,2), rectAt(3,3)));
+		checkRects(floors.getRects(), Arrays.asList(rectAt(3,1), rectAt(3,2), rectAt(3,3),
+				
+				rectAt(0,0), rectAt(1,0), rectAt(2,0), rectAt(4,0), rectAt(5,0)));
 	}
 	
 	@Test
@@ -70,19 +70,8 @@ public class ActiveFloorsTest {
 		floors.addToColumn(0);
 		floors.addToColumn(0);
 		floors.addToColumn(0);
-		
-		checkRects(floors.getRects(), Arrays.asList(rectAt(0,1), rectAt(0,2), rectAt(0,3)));
+		checkRects(floors.getRects(), Arrays.asList(rectAt(0,1), rectAt(0,2), rectAt(0,3), rectAt(1,0), rectAt(2,0), rectAt(3,0), rectAt(4,0), rectAt(5,0)));
 	}
-	
-	@Test
-	public void towerOfRectsMostRight() {
-		floors.addToColumn(0);
-		floors.addToColumn(0);
-		floors.addToColumn(0);
-		
-		checkRects(floors.getRects(), Arrays.asList(rectAt(0,1), rectAt(0,2), rectAt(0,3)));
-	}
-	
 	
 	@Test
 	public void PodiumShapedBottomNotCounted() {
@@ -92,7 +81,7 @@ public class ActiveFloorsTest {
 		floors.addToColumn(3);
 		
 		checkRects(floors.getRects(),
-				Arrays.asList(rectAt(1, 1), rectAt(2, 2), rectAt(3, 1)));
+				Arrays.asList(rectAt(0, 0), rectAt(1, 1), rectAt(2, 2), rectAt(3, 1), rectAt(4, 0), rectAt(5, 0)));
 	}
 	
 	@Test
@@ -102,7 +91,7 @@ public class ActiveFloorsTest {
 		floors.addToColumn(2);
 		
 		checkRects(floors.getRects(),
-				Arrays.asList(rectAt(1, 1), rectAt(2, 2), rectAt(2, 1)));
+				Arrays.asList(rectAt(0, 0), rectAt(1, 1), rectAt(2, 2), rectAt(2, 1), rectAt(3, 0), rectAt(4, 0), rectAt(5, 0)));
 	}
 	
 	@Test
@@ -112,7 +101,7 @@ public class ActiveFloorsTest {
 		floors.addToColumn(1);
 		
 		checkRects(floors.getRects(),
-				Arrays.asList(rectAt(0, 2), rectAt(1, 1)));
+				Arrays.asList(rectAt(0, 2), rectAt(1, 1), rectAt(3, 0), rectAt(2, 0), rectAt(4, 0), rectAt(5, 0)));
 	}
 	
 	@Test
@@ -148,7 +137,7 @@ public class ActiveFloorsTest {
 		floors.addToColumn(5);
 		
 		checkRects(Arrays.asList(rectAt(0, 2), rectAt(1, 2), rectAt(2, 2), rectAt(4, 2), rectAt(5, 2),
-						rectAt(2,1), rectAt(4,1)), floors.getRects());
+						rectAt(2,1), rectAt(4,1), rectAt(3,0)), floors.getRects());
 	}
 	
 	@Test
