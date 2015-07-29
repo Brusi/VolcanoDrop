@@ -77,12 +77,13 @@ public class Player extends DynamicGameObject {
 		bounds.y += velocity.y * deltaTime;
 		for (Rectangle rect : obstacles_) {
 			if (bounds.overlaps(rect)) {
-				if (velocity.y < 0) {
+				if (bounds.y + bounds.height/ 2 > rect.y + rect.height / 2) {
 					bounds.y = rect.y + rect.height;
 					grounded_ = true;
 					// TODO: set state.
-				} else
+				} else {
 					bounds.y = rect.y - bounds.height;
+				}
 				velocity.y = 0;
 			}
 		}
@@ -90,7 +91,7 @@ public class Player extends DynamicGameObject {
 		bounds.x += velocity.x * deltaTime;
 		for (Rectangle rect : obstacles_) {
 			if (bounds.overlaps(rect)) {
-				if (velocity.x < 0) {
+				if (bounds.x + bounds.width/ 2 > rect.x + rect.width / 2) {
 					bounds.x = rect.x + rect.width;
 				} else
 					bounds.x = rect.x - bounds.width;
