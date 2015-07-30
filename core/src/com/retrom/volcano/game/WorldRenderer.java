@@ -16,6 +16,8 @@
 
 package com.retrom.volcano.game;
 
+import javafx.print.Collation;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -85,7 +87,19 @@ public class WorldRenderer {
 	
 	private void renderCoins() {
 		for (Collectable coin : world.collectables_) {
-			TextureRegion keyFrame = Assets.coin;
+			TextureRegion keyFrame = null;
+			switch (coin.type) {
+			case COIN3_1:
+				keyFrame = Assets.coin3_1;
+				break;
+			case COIN5_4:
+				keyFrame = Assets.coin5_4;
+				break;
+			case POWERUP_MAGNET:
+				keyFrame = Assets.powerupMagnet;
+				break;
+			}
+			
 			drawCenter(keyFrame, coin.position);
 		}
 		

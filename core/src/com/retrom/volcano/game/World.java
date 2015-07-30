@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javafx.print.Collation;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
@@ -48,6 +50,10 @@ public class World {
 	public ActiveFloors floors_ = new ActiveFloors();
 	
 	private final Spawner spawner_;
+	
+	private float magnetTime = 0f;
+
+	private List<Rectangle> obstacles_;
 
 	
 	public World () {
@@ -60,26 +66,58 @@ public class World {
 			}
 
 			@Override
-			public void dropCoin(float x) {
-				addCoin(x);
+			public void dropCoin(float x, Collectable.Type type) {
+				addCoin(x, type);
 			}
 		});
 	}
+	
+	private void updateCheats() {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
+			magnetTime += 1f;
+		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+			addCoin(0, Collectable.Type.COIN5_4);
+		}
+	}
 
 	public void update (float deltaTime) {
+		updateCheats();
+		
+		obstacles_ = new ArrayList<Rectangle>();
+		obstacles_.add(leftWall_);
+		obstacles_.add(rightWall_);
+		for (Wall wall : activeWalls_) {
+			obstacles_.add(wall.bounds);
+		}
+		obstacles_.addAll(floors_.getRects());
+		
 		updateWalls(deltaTime);
 		updateCoins(deltaTime);
 		updatePlayer(deltaTime);
 		updateSpawner(deltaTime);
+		updatePowerups(deltaTime);
 		
 		leftWall_.y = player.bounds.y;
 		rightWall_.y = player.bounds.y;
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
-			addCoin(50);
+			addCoin(50, Collectable.Type.COIN3_1);
 		}
 	}
 	
+	private void updatePowerups(float deltaTime) {
+		if (magnetTime > 0) {
+			magnetTime -= deltaTime;
+			if (magnetTime <= 0) {
+				for (Collectable c : collectables_) {
+					c.status = Collectable.STATUS_FALLING;
+					c.velocity.x = c.velocity.y = 0;
+				}
+			}
+		}
+	}
+
 	public void addWall(int col) {
 		float wallY = floors_.getTotalBlocks() / 6f * Wall.SIZE + 10*Wall.SIZE;
 		Wall wall = new Wall(col, wallY);
@@ -87,14 +125,9 @@ public class World {
 		activeWalls_.add(wall);
 	}
 	
-	public void addCoin(float x) {
+	public void addCoin(float x, Collectable.Type type) {
 		float yval = floors_.getTotalBlocks() / 6f * Wall.SIZE + 10*Wall.SIZE;
-		Collectable coin = new Collectable(x, yval, new Collectable.Handler() {
-			@Override
-			public void handle() {
-				System.out.println("Coin taken!");
-			}
-		});
+		Collectable coin = new Collectable(x, yval, type);
 		collectables_ .add(coin);
 	}
 	
@@ -129,25 +162,40 @@ public class World {
 	}
 	
 	private void updateCoins(float deltaTime) {
-		for (Collectable collectable : collectables_) {
-			collectable.update(deltaTime);
+		for (Collectable c : collectables_) {
+			if (magnetTime > 0) {
+				if (c.status == Collectable.STATUS_FALLING
+						|| c.status == Collectable.STATUS_IDLE
+						|| c.status == Collectable.STATUS_MAGNETIZED) {
+					c.magnetTo(player.position);
+				}
+			}
+			
+			c.setObstacles(obstacles_);
+			c.update(deltaTime);
 			for (Rectangle rect : floors_.getRects()) {
-				if (collectable.bounds.overlaps(rect)) {
-					if (collectable.status == Collectable.STATUS_FALLING) {
-						collectable.status = Collectable.STATUS_IDLE;
-						collectable.bounds.y = rect.y + rect.height;
-						collectable.bounds.getCenter(collectable.position);
-						collectable.velocity.y = 0;
-					} else if (collectable.status == Collectable.STATUS_IDLE) {
-						collectable.status = Collectable.STATUS_CRUSHED;
+				if (c.bounds.overlaps(rect)) {
+					if (c.status == Collectable.STATUS_IDLE
+							|| rect.contains(c.bounds) || c.status == Collectable.STATUS_MAGNETIZED && rect.contains(c.position)) {
+						System.out.println("coin crushed");
+						c.status = Collectable.STATUS_CRUSHED;
+					} else if (c.status == Collectable.STATUS_FALLING) {
+						System.out.println("coin -> idle");
+						c.status = Collectable.STATUS_IDLE;
+						c.velocity.x = c.velocity.y = 0; 
+						c.bounds.y = rect.y + rect.height;
+						c.bounds.getCenter(c.position);
+						c.velocity.y = 0;
 					}
 				}
 			}
 			
-			if (collectable.bounds.overlaps(player.bounds)) {
-				collectable.handle();
+			if (c.bounds.overlaps(player.bounds)) {
+				c.status = Collectable.STATUS_TAKEN;
+				handleCollectable(c);
 			}
 		}
+		
 		// Remove crushed coins.
 		for (Iterator<Collectable> it = collectables_.iterator(); it.hasNext();) {
 			Collectable coin = it.next();
@@ -157,15 +205,28 @@ public class World {
 		}
 	}
 
-	private void updatePlayer (float deltaTime) {
-		List<Rectangle> obstacles = new ArrayList<Rectangle>();
-		obstacles.add(leftWall_);
-		obstacles.add(rightWall_);
-		for (Wall wall : activeWalls_) {
-			obstacles.add(wall.bounds);
+	private void handleCollectable(Collectable collectable) {
+		switch (collectable.type) {
+		case COIN3_1:
+			addScore(1);
+			break;
+		case COIN5_4:
+			addScore(3);
+			break;
+		case POWERUP_MAGNET:
+			magnetTime = 5f;
+			break;
 		}
-		obstacles.addAll(floors_.getRects());
-		player.setObstacles(obstacles);
+	}
+
+	private void addScore(int scoreToAdd) {
+		score += scoreToAdd;
+		System.out.println("Score: " + score);
+		
+	}
+
+	private void updatePlayer (float deltaTime) {
+		player.setObstacles(obstacles_);
 		player.update(deltaTime);
 	}
 }
