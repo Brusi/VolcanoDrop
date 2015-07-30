@@ -23,7 +23,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.retrom.volcano.assets.Assets;
-import com.retrom.volcano.game.objects.Coin;
+import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
 
 public class WorldRenderer {
@@ -84,7 +84,7 @@ public class WorldRenderer {
 	}
 	
 	private void renderCoins() {
-		for (Coin coin : world.coins_) {
+		for (Collectable coin : world.collectables_) {
 			TextureRegion keyFrame = Assets.coin;
 			drawCenter(keyFrame, coin.position);
 		}

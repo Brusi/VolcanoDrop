@@ -24,7 +24,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.retrom.volcano.game.objects.Coin;
+import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
 
 public class World {
@@ -34,21 +34,19 @@ public class World {
 	public final List<Wall> walls_ = new ArrayList<Wall>();
 	public final List<Wall> activeWalls_ = new ArrayList<Wall>();
 	
-	public final List<Coin> coins_ = new ArrayList<Coin>();
+	public final List<Collectable> collectables_ = new ArrayList<Collectable>();
 	
-	public float heightSoFar;
-	public int score;
-	public int state;
+	public int score = 0;
 	
 	public static final Vector2 gravity = new Vector2(0, -2200);
 	public static final float WIDTH = 640f;
 	
 	// Permanent obstacles.
-	Rectangle leftWall_ = new Rectangle(-World.WIDTH / 2, 0, Wall.SIZE, 500);
-	Rectangle rightWall_ = new Rectangle(World.WIDTH / 2 - Wall.SIZE, 0, Wall.SIZE, 500);;
+	private Rectangle leftWall_ = new Rectangle(-World.WIDTH / 2, 0, Wall.SIZE, 500);
+	private Rectangle rightWall_ = new Rectangle(World.WIDTH / 2 - Wall.SIZE, 0, Wall.SIZE, 500);;
 	
-	ActiveFloors floors_ = new ActiveFloors();
-
+	public ActiveFloors floors_ = new ActiveFloors();
+	
 	private final Spawner spawner_;
 
 	
@@ -91,8 +89,13 @@ public class World {
 	
 	public void addCoin(float x) {
 		float yval = floors_.getTotalBlocks() / 6f * Wall.SIZE + 10*Wall.SIZE;
-		Coin coin = new Coin(x, yval);
-		coins_ .add(coin);
+		Collectable coin = new Collectable(x, yval, new Collectable.Handler() {
+			@Override
+			public void handle() {
+				System.out.println("Coin taken!");
+			}
+		});
+		collectables_ .add(coin);
 	}
 	
 	private void updateSpawner(float deltaTime) {
@@ -126,29 +129,29 @@ public class World {
 	}
 	
 	private void updateCoins(float deltaTime) {
-		for (Coin coin : coins_) {
-			coin.update(deltaTime);
+		for (Collectable collectable : collectables_) {
+			collectable.update(deltaTime);
 			for (Rectangle rect : floors_.getRects()) {
-				if (coin.bounds.overlaps(rect)) {
-					if (coin.status == Coin.STATUS_FALLING) {
-						coin.status = Coin.STATUS_IDLE;
-						coin.bounds.y = rect.y + rect.height;
-						coin.bounds.getCenter(coin.position);
-						coin.velocity.y = 0;
-					} else if (coin.status == Coin.STATUS_IDLE) {
-						coin.status = Coin.STATUS_CRUSHED;
+				if (collectable.bounds.overlaps(rect)) {
+					if (collectable.status == Collectable.STATUS_FALLING) {
+						collectable.status = Collectable.STATUS_IDLE;
+						collectable.bounds.y = rect.y + rect.height;
+						collectable.bounds.getCenter(collectable.position);
+						collectable.velocity.y = 0;
+					} else if (collectable.status == Collectable.STATUS_IDLE) {
+						collectable.status = Collectable.STATUS_CRUSHED;
 					}
 				}
 			}
 			
-			if (coin.bounds.overlaps(player.bounds)) {
-				coin.status = Coin.STATUS_TAKEN;
+			if (collectable.bounds.overlaps(player.bounds)) {
+				collectable.handle();
 			}
 		}
 		// Remove crushed coins.
-		for (Iterator<Coin> it = coins_.iterator(); it.hasNext();) {
-			Coin coin = it.next();
-			if (coin.status == Coin.STATUS_CRUSHED || coin.status == Coin.STATUS_TAKEN) {
+		for (Iterator<Collectable> it = collectables_.iterator(); it.hasNext();) {
+			Collectable coin = it.next();
+			if (coin.status == Collectable.STATUS_CRUSHED || coin.status == Collectable.STATUS_TAKEN) {
 				it.remove();
 			}
 		}

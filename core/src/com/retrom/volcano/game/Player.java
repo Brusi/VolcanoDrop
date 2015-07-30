@@ -75,14 +75,19 @@ public class Player extends DynamicGameObject {
 		velocity.x *= FRICTION_RATE;
 		
 		bounds.y += velocity.y * deltaTime;
+		boolean wasGrounded = grounded_;
+		grounded_ = false;
 		for (Rectangle rect : obstacles_) {
 			if (bounds.overlaps(rect)) {
 				if (bounds.y + bounds.height/ 2 > rect.y + rect.height / 2) {
 					bounds.y = rect.y + rect.height;
 					grounded_ = true;
-					// TODO: set state.
 				} else {
-					bounds.y = rect.y - bounds.height;
+					if (wasGrounded) {
+						bounds.y+=1000;
+					} else { 
+						bounds.y = rect.y - bounds.height;
+					}
 				}
 				velocity.y = 0;
 			}
