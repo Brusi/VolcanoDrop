@@ -11,13 +11,17 @@ public class Collectable extends DynamicGameObject {
 	
 	public static final float SIZE = 30f;
 	private static final float GRAVITY_RATIO = 0.7f;
-	private static final float MAGNETIZED_VELOCITY = 400f;
+	private static final float MAGNETIZED_FORCE = 1200f;
 	
 	public static final int STATUS_FALLING = 1;
 	public static final int STATUS_IDLE = 2;
 	public static final int STATUS_CRUSHED = 3;
 	public static final int STATUS_TAKEN = 4;
 	public static final int STATUS_MAGNETIZED = 5;
+	private static final float MAGNETIZED_FRICTION = 0.54716f;
+	
+	// temporary vector, defined static to prevent allocations.
+	private static Vector2 magnetDir = new Vector2();  
 	
 	public int status;
 	
@@ -72,12 +76,15 @@ public class Collectable extends DynamicGameObject {
 		bounds.getCenter(position);
 	}
 
-	public void magnetTo(Vector2 playerPos) {
+	public void magnetTo(Vector2 playerPos, float deltaTime) {
 		status = STATUS_MAGNETIZED;
-		velocity.x = playerPos.x - position.x;
-		velocity.y = playerPos.y - position.y;
-		velocity.nor();
-		velocity.x *= MAGNETIZED_VELOCITY;
-		velocity.y *= MAGNETIZED_VELOCITY;
+		magnetDir.x = playerPos.x - position.x;
+		magnetDir.y = playerPos.y - position.y;
+		magnetDir.nor();
+		velocity.x += magnetDir.x * MAGNETIZED_FORCE * deltaTime;
+		velocity.y += magnetDir.y * MAGNETIZED_FORCE * deltaTime;
+		
+		velocity.x *= Math.pow(MAGNETIZED_FRICTION, deltaTime);
+		velocity.y *= Math.pow(MAGNETIZED_FRICTION, deltaTime);
 	}
 }

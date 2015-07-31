@@ -30,7 +30,7 @@ public class Player extends DynamicGameObject {
 	public static final int STATE_NOTHING = 0;
 	
 	public static final float MAX_ACCEL = 50;
-	public static final float FRICTION_RATE = 0.9f;
+	public static final float FRICTION_RATE = 0.001797f;
 	private static final float JUMP_VEL = 900;
 	
 	private List<Rectangle> obstacles_;
@@ -72,7 +72,7 @@ public class Player extends DynamicGameObject {
 
 	private void tryMove(float deltaTime) {
 		velocity.add(World.gravity.x * deltaTime, World.gravity.y * deltaTime);
-		velocity.x *= FRICTION_RATE;
+		velocity.x *= Math.pow(FRICTION_RATE, deltaTime);
 		
 		bounds.y += velocity.y * deltaTime;
 		boolean wasGrounded = grounded_;

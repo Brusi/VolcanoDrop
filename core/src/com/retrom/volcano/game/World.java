@@ -44,8 +44,8 @@ public class World {
 	public static final float WIDTH = 640f;
 	
 	// Permanent obstacles.
-	private Rectangle leftWall_ = new Rectangle(-World.WIDTH / 2, 0, Wall.SIZE, 500);
-	private Rectangle rightWall_ = new Rectangle(World.WIDTH / 2 - Wall.SIZE, 0, Wall.SIZE, 500);;
+	private Rectangle leftWall_ = new Rectangle(-World.WIDTH / 2, 0, Wall.SIZE, 5000);
+	private Rectangle rightWall_ = new Rectangle(World.WIDTH / 2 - Wall.SIZE, 0, Wall.SIZE, 5000);
 	
 	public ActiveFloors floors_ = new ActiveFloors();
 	
@@ -98,8 +98,8 @@ public class World {
 		updateSpawner(deltaTime);
 		updatePowerups(deltaTime);
 		
-		leftWall_.y = player.bounds.y;
-		rightWall_.y = player.bounds.y;
+		leftWall_.y = player.bounds.y - leftWall_.height/2;
+		rightWall_.y = player.bounds.y - rightWall_.height/2;
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
 			addCoin(50, Collectable.Type.COIN3_1);
@@ -167,7 +167,7 @@ public class World {
 				if (c.status == Collectable.STATUS_FALLING
 						|| c.status == Collectable.STATUS_IDLE
 						|| c.status == Collectable.STATUS_MAGNETIZED) {
-					c.magnetTo(player.position);
+					c.magnetTo(player.position, deltaTime);
 				}
 			}
 			
@@ -177,10 +177,8 @@ public class World {
 				if (c.bounds.overlaps(rect)) {
 					if (c.status == Collectable.STATUS_IDLE
 							|| rect.contains(c.bounds) || c.status == Collectable.STATUS_MAGNETIZED && rect.contains(c.position)) {
-						System.out.println("coin crushed");
 						c.status = Collectable.STATUS_CRUSHED;
 					} else if (c.status == Collectable.STATUS_FALLING) {
-						System.out.println("coin -> idle");
 						c.status = Collectable.STATUS_IDLE;
 						c.velocity.x = c.velocity.y = 0; 
 						c.bounds.y = rect.y + rect.height;

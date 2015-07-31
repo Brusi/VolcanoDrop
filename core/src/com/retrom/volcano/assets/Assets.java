@@ -76,7 +76,7 @@ public class Assets {
 		wall = new TextureRegion(loadTexture("x1_1.png"));
 		coin3_1 = new TextureRegion(loadTexture("coin 3_1.png"));
 		coin5_4 = new TextureRegion(loadTexture("coin 5_4.png"));
-		powerupMagnet = new TextureRegion(loadTexture("powerupMagnet.png"));
+		powerupMagnet = new TextureRegion(loadTexture("powerupmagnet.png"));
 		
 //		items = loadTexture("data/items.png");
 //		mainMenu = new TextureRegion(items, 0, 224, 300, 110);
