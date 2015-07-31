@@ -96,10 +96,11 @@ public class Player extends DynamicGameObject {
 		bounds.x += velocity.x * deltaTime;
 		for (Rectangle rect : obstacles_) {
 			if (bounds.overlaps(rect)) {
-				if (bounds.x + bounds.width/ 2 > rect.x + rect.width / 2) {
+				if (bounds.x + bounds.width/ 2 > rect.x + rect.width / 2 && velocity.x < 0) {
 					bounds.x = rect.x + rect.width;
-				} else
+				} else if (bounds.x + bounds.width/ 2 < rect.x + rect.width / 2 && velocity.x > 0) {
 					bounds.x = rect.x - bounds.width;
+				}
 				velocity.x = 0;
 			}
 		}
