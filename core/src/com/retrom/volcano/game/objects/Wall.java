@@ -1,5 +1,8 @@
 package com.retrom.volcano.game.objects;
 
+import java.util.Random;
+
+import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.game.World;
 
 public class Wall extends DynamicGameObject {
@@ -13,7 +16,11 @@ public class Wall extends DynamicGameObject {
 	
 	public int status;
 	
+	public final int graphic_;
+	
 	private final int col_;
+	
+	private static final Random rand = new Random();
 	
 	/**
 	 * Get the x value of the wall which fits the given column.
@@ -26,6 +33,7 @@ public class Wall extends DynamicGameObject {
 		super(xOfCol(col), y, SIZE, SIZE);
 		col_ = col;
 		status = STATUS_ACTIVE;
+		graphic_ = rand.nextInt(Assets.walls1.size);
 	}
 
 	public void update(float deltaTime) {

@@ -17,7 +17,7 @@ public class Spawner {
 	
 	private final SpawnerHandler handler_;
 	private final ActiveFloors floors_;
-	private final Random rand = new Random();
+	private static final Random rand = new Random();
 	
 
 	

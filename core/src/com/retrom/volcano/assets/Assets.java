@@ -21,16 +21,22 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.game.Settings;
 
 public class Assets {
 	public static Texture background;
 	public static TextureRegion backgroundRegion;
+	
+	public static Array<Sprite> walls1;
+	public static Array<Sprite> walls2;
+	public static Array<Sprite> playerIdle;
 
 	public static Texture items;
 	public static TextureRegion player;
-	public static TextureRegion wall;
 	public static TextureRegion coin3_1;
 	public static TextureRegion coin5_4;
 	
@@ -73,10 +79,18 @@ public class Assets {
 		backgroundRegion = new TextureRegion(background);
 
 		player = new TextureRegion(loadTexture("player.png"));
-		wall = new TextureRegion(loadTexture("x1_1.png"));
 		coin3_1 = new TextureRegion(loadTexture("coin 3_1.png"));
 		coin5_4 = new TextureRegion(loadTexture("coin 5_4.png"));
 		powerupMagnet = new TextureRegion(loadTexture("powerupmagnet.png"));
+		
+		TextureAtlas wallsSheet = new TextureAtlas("walls/walls.txt");
+		 walls1 = wallsSheet.createSprites("x1");
+		 walls2 = wallsSheet.createSprites("x2");
+		 
+		 TextureAtlas playerSheet = new TextureAtlas("player/playersheet.txt");
+		 playerIdle = playerSheet.createSprites("player_idle");
+		 
+		
 		
 //		items = loadTexture("data/items.png");
 //		mainMenu = new TextureRegion(items, 0, 224, 300, 110);

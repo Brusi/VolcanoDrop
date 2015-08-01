@@ -31,6 +31,9 @@ import com.retrom.volcano.game.objects.Wall;
 public class WorldRenderer {
 	static final float FRUSTUM_WIDTH = 640;
 	static final float FRUSTUM_HEIGHT = FRUSTUM_WIDTH / Gdx.graphics.getWidth() * Gdx.graphics.getHeight();
+	
+	static final float ANIMATION_FPS = 30f;
+	
 	World world;
 	SpriteBatch batch;
 	
@@ -79,7 +82,7 @@ public class WorldRenderer {
 
 	private void renderWalls() {
 		for (Wall wall : world.walls_) {
-			TextureRegion keyFrame = Assets.wall;
+			TextureRegion keyFrame = Assets.walls1.get(wall.graphic_);
 			drawCenter(keyFrame, wall.position);
 		}
 		
@@ -109,7 +112,8 @@ public class WorldRenderer {
 		TextureRegion keyFrame = null;
 		switch (world.player.state) {
 		case Player.STATE_NOTHING:
-			keyFrame = Assets.player;
+			int frame = (int) (Math.floor(world.player.stateTime * ANIMATION_FPS)) % Assets.playerIdle.size;  
+			keyFrame = Assets.playerIdle.get(frame);
 			break;
 		}
 
