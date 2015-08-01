@@ -116,13 +116,15 @@ public class ActiveFloors {
 		return nextCols;
 	}
 
-	public Object getMaxRow() {
+	public int getMaxRow() {
 		return maxrow;
 	}
 	
-	public Object getMinRow() {
+	public int getMinRow() {
 		return minrow;
 	}
-	
-	
+
+	public float bottomLine() {
+		return minrow * SIZE;
+	}
 }

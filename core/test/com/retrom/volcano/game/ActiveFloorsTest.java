@@ -9,8 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.retrom.volcano.game.objects.Wall;
 
 public class ActiveFloorsTest {
+	
+	private static float delta = 0.0001f;
 	
 	ActiveFloors floors;
 	
@@ -205,5 +208,43 @@ public class ActiveFloorsTest {
 		floors.addToColumn(4);
 		floors.addToColumn(3);
 		assertEquals(3, floors.getNextPossibleCols().size());
+	}
+	
+	@Test public void bottomLineAtZero() {
+		float delta = 0.0001f;
+		assertEquals(0, floors.bottomLine(), delta);
+	}
+	
+	@Test public void bottomLineAtZeroWithFewBlocks() {
+		floors.addToColumn(1);
+		floors.addToColumn(1);
+		floors.addToColumn(1);
+		floors.addToColumn(4);
+		floors.addToColumn(4);
+		floors.addToColumn(3);
+		
+		float delta = 0.0001f;
+		assertEquals(0, floors.bottomLine(), delta);
+	}
+	
+	@Test
+	public void bottomLineWholeRow() {
+		floors.addToColumn(0);
+		floors.addToColumn(1);
+		floors.addToColumn(2);
+		floors.addToColumn(3);
+		floors.addToColumn(4);
+		floors.addToColumn(5);
+
+		assertEquals(1 * Wall.SIZE, floors.bottomLine(), delta);
+
+		floors.addToColumn(0);
+		floors.addToColumn(1);
+		floors.addToColumn(2);
+		floors.addToColumn(3);
+		floors.addToColumn(4);
+		floors.addToColumn(5);
+
+		assertEquals(2 * Wall.SIZE, floors.bottomLine(), delta);
 	}
 }

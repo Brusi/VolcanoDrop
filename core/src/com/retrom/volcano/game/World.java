@@ -27,6 +27,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.retrom.volcano.game.objects.Collectable;
+import com.retrom.volcano.game.objects.GameObject;
 import com.retrom.volcano.game.objects.Wall;
 
 public class World {
@@ -52,6 +53,7 @@ public class World {
 	private final Spawner spawner_;
 	
 	private float magnetTime = 0f;
+	private float slomoTime = 0f;
 
 	private List<Rectangle> obstacles_;
 
@@ -76,12 +78,24 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
 			magnetTime += 1f;
 		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+			slomoTime += 2f;
+		}
+		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
 			addCoin(0, Collectable.Type.COIN5_4);
 		}
 	}
 
 	public void update (float deltaTime) {
+		if (slomoTime > 0) {
+			if (slomoTime > 1) {
+				deltaTime /= 2;
+			} else {
+				deltaTime /= (slomoTime+1); 
+			}
+		}
+		
 		updateCheats();
 		
 		obstacles_ = new ArrayList<Rectangle>();
@@ -115,6 +129,9 @@ public class World {
 					c.velocity.x = c.velocity.y = 0;
 				}
 			}
+		}
+		if (slomoTime > 0) {
+			slomoTime -= deltaTime;
 		}
 	}
 
@@ -161,8 +178,22 @@ public class World {
 		
 	}
 	
+	private boolean isOutOfBounds(GameObject obj) {
+		if (Math.abs(obj.position.x) > World.WIDTH/2) {
+			return true;
+		}
+		if (obj.position.y < floors_.bottomLine()) {
+			return true;
+		}
+		return false;
+	}
+	
 	private void updateCoins(float deltaTime) {
 		for (Collectable c : collectables_) {
+			if (isOutOfBounds(c)) {
+				c.status = Collectable.STATUS_CRUSHED;
+			}
+			
 			if (magnetTime > 0) {
 				if (c.status == Collectable.STATUS_FALLING
 						|| c.status == Collectable.STATUS_IDLE
