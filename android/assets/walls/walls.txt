@@ -43,108 +43,101 @@ x1
   size: 80, 82
   orig: 80, 82
   offset: 0, 0
-  index: 11
+  index: 2
 x1
   rotate: false
   xy: 353, 2
   size: 80, 82
   orig: 80, 82
   offset: 0, 0
-  index: 2
+  index: 3
 x1
   rotate: false
   xy: 2, 86
   size: 80, 82
   orig: 80, 82
   offset: 0, 0
-  index: 3
+  index: 4
 x1
   rotate: false
   xy: 84, 86
   size: 80, 82
   orig: 80, 82
   offset: 0, 0
-  index: 4
+  index: 5
 x1
   rotate: false
   xy: 166, 86
   size: 80, 82
   orig: 80, 82
   offset: 0, 0
-  index: 5
+  index: 6
 x1
   rotate: false
   xy: 248, 86
   size: 80, 82
   orig: 80, 82
   offset: 0, 0
-  index: 6
+  index: 7
 x1
   rotate: false
   xy: 330, 86
   size: 80, 82
   orig: 80, 82
   offset: 0, 0
-  index: 7
+  index: 8
 x1
   rotate: false
   xy: 412, 86
   size: 80, 82
   orig: 80, 82
   offset: 0, 0
-  index: 8
-x1
-  rotate: false
-  xy: 2, 170
-  size: 80, 82
-  orig: 80, 82
-  offset: 0, 0
   index: 9
 x2
   rotate: false
-  xy: 84, 170
+  xy: 2, 170
   size: 160, 82
   orig: 160, 82
   offset: 0, 0
   index: 1
 x2
   rotate: false
-  xy: 246, 170
+  xy: 164, 170
   size: 160, 82
   orig: 160, 82
   offset: 0, 0
   index: 2
 x2
   rotate: false
-  xy: 2, 254
+  xy: 326, 170
   size: 160, 82
   orig: 160, 82
   offset: 0, 0
   index: 3
 x2
   rotate: false
-  xy: 164, 254
+  xy: 2, 254
   size: 160, 82
   orig: 160, 82
   offset: 0, 0
   index: 4
 x2
   rotate: false
-  xy: 326, 254
+  xy: 164, 254
   size: 160, 82
   orig: 160, 82
   offset: 0, 0
   index: 5
 x2
   rotate: false
-  xy: 2, 338
+  xy: 326, 254
   size: 160, 82
   orig: 160, 82
   offset: 0, 0
   index: 6
 x2
   rotate: false
-  xy: 164, 338
+  xy: 2, 338
   size: 160, 82
   orig: 160, 82
   offset: 0, 0
