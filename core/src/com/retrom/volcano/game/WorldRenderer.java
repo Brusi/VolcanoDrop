@@ -21,6 +21,7 @@ import javafx.print.Collation;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -39,11 +40,12 @@ public class WorldRenderer {
 	
 	OrthographicCamera cam;
 	private float cam_target;
+	private float cam_position;
 
 	public WorldRenderer (SpriteBatch batch, World world) {
 		this.world = world;
 		this.cam = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-		this.cam.position.y = FRUSTUM_HEIGHT / 3f;
+		cam_position = this.cam.position.y = FRUSTUM_HEIGHT / 3f;
 		this.batch = batch;
 	}
 	
@@ -54,10 +56,11 @@ public class WorldRenderer {
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
 		cam_target = (world.floors_.getTotalBlocks()) * Wall.SIZE / 6f + FRUSTUM_HEIGHT / 3f;
-		if (cam.position.y < cam_target) {
-			cam.position.y += (cam_target - cam.position.y) * deltaTime / 2;
+		if (cam_position < cam_target) {
+			cam_position += (cam_target - cam_position) * deltaTime / 2;
 		}
 		
+		cam.position.y = Math.round(cam_position);
 		cam.update();
 		batch.setProjectionMatrix(cam.combined);
 		renderBackground();
@@ -109,17 +112,16 @@ public class WorldRenderer {
 	}
 
 	private void renderPlayer () {
-		TextureRegion keyFrame = null;
+		Sprite keyFrame = null;
 		switch (world.player.state) {
 		case Player.STATE_NOTHING:
 			int frame = (int) (Math.floor(world.player.stateTime * ANIMATION_FPS)) % Assets.playerIdle.size;  
 			keyFrame = Assets.playerIdle.get(frame);
+			keyFrame.setFlip(world.player.side, false);
 			break;
 		}
 
-		float side = world.player.velocity.x < 0 ? -1 : 1;
 		drawCenter(keyFrame, world.player.position);
-//		batch.draw(keyFrame, world.player.position.x, world.player.position.y, keyFrame.getRegionWidth() * side, keyFrame.getRegionHeight());
 	}
 	
 	private void drawCenter(TextureRegion keyFrame, Vector2 position) {

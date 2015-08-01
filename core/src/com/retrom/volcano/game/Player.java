@@ -40,6 +40,11 @@ public class Player extends DynamicGameObject {
 	
 	boolean grounded_ = true;
 	
+	static final boolean LEFT = true; 
+	static final boolean RIGHT = false;
+	
+	boolean side;
+	
 	public Player (float x, float y) {
 		super(x, y, BOB_WIDTH, BOB_HEIGHT);
 		state = STATE_NOTHING;
@@ -73,6 +78,12 @@ public class Player extends DynamicGameObject {
 	private void tryMove(float deltaTime) {
 		velocity.add(World.gravity.x * deltaTime, World.gravity.y * deltaTime);
 		velocity.x *= Math.pow(FRICTION_RATE, deltaTime);
+		
+		if (velocity.x > 0) {
+			side = RIGHT;
+		} else if (velocity.x < 0) {
+			side = LEFT;
+		}
 		
 		bounds.y += velocity.y * deltaTime;
 		boolean wasGrounded = grounded_;
