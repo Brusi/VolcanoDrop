@@ -24,10 +24,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.retrom.volcano.game.objects.DynamicGameObject;
 
 public class Player extends DynamicGameObject {
-	public static final int BOB_WIDTH = 36;
-	public static final int BOB_HEIGHT = 84;
+	public static final int WIDTH = 36;
+	public static final int HEIGHT = 84;
 	
-	public static final int STATE_NOTHING = 0;
+	public static final int STATE_IDLE = 1;
+	public static final int STATE_RUNNING = 2;
+	public static final int STATE_JUMPING = 3;
+	public static final int STATE_LANDING = 4;
 	
 	public static final float MAX_ACCEL = 50;
 	public static final float FRICTION_RATE = 0.001797f;
@@ -35,7 +38,7 @@ public class Player extends DynamicGameObject {
 	
 	private List<Rectangle> obstacles_;
 
-	int state;
+	private int state_ = STATE_IDLE;
 	float stateTime;
 	
 	boolean grounded_ = true;
@@ -46,8 +49,8 @@ public class Player extends DynamicGameObject {
 	boolean side;
 	
 	public Player (float x, float y) {
-		super(x, y, BOB_WIDTH, BOB_HEIGHT);
-		state = STATE_NOTHING;
+		super(x, y, WIDTH, HEIGHT);
+		setState(STATE_IDLE);
 		stateTime = 0;
 	}
 	
@@ -71,8 +74,34 @@ public class Player extends DynamicGameObject {
 	public void update (float deltaTime) {
 		processInput();
 		tryMove(deltaTime);
+		
+		updateState(deltaTime);
+	}
 
+	private void updateState(float deltaTime) {
+		if (grounded_) {
+			if (Math.abs(velocity.x) > 50) {
+				setState(STATE_RUNNING);
+			} else if (state_ != STATE_LANDING || stateTime > 1/30f * 9) {
+				setState(STATE_IDLE);
+			}
+		} else {
+			setState(STATE_JUMPING);
+		}
 		stateTime += deltaTime;
+	}
+
+	private void setState(int state) {
+		if (state_ == state) {
+			return;
+		}
+		state_ = state;
+		stateTime = 0;
+	}
+	
+
+	public int state() {
+		return state_;
 	}
 
 	private void tryMove(float deltaTime) {
@@ -102,6 +131,10 @@ public class Player extends DynamicGameObject {
 				}
 				velocity.y = 0;
 			}
+		}
+		
+		if (!wasGrounded && grounded_) {
+			setState(STATE_LANDING);
 		}
 		
 		bounds.x += velocity.x * deltaTime;

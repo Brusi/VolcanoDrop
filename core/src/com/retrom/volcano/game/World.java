@@ -57,6 +57,7 @@ public class World {
 
 	private List<Rectangle> obstacles_;
 
+	public float camTarget;
 	
 	public World () {
 		this.player = new Player(0, 100);
@@ -111,6 +112,7 @@ public class World {
 		updatePlayer(deltaTime);
 		updateSpawner(deltaTime);
 		updatePowerups(deltaTime);
+		updateCamera(deltaTime);
 		
 		leftWall_.y = player.bounds.y - leftWall_.height/2;
 		rightWall_.y = player.bounds.y - rightWall_.height/2;
@@ -120,6 +122,11 @@ public class World {
 		}
 	}
 	
+	private void updateCamera(float deltaTime) {
+		camTarget = (floors_.getTotalBlocks()) * Wall.SIZE / 6f + WorldRenderer.FRUSTUM_HEIGHT / 3f;
+		
+	}
+
 	private void updatePowerups(float deltaTime) {
 		if (magnetTime > 0) {
 			magnetTime -= deltaTime;
@@ -171,7 +178,20 @@ public class World {
 		// Remove inactive walls
 		for (Iterator<Wall> it = activeWalls_.iterator(); it.hasNext();) {
 			Wall wall = it.next();
-			if (wall.status == Wall.STATUS_INACTIVE) {
+			if (wall.status == Wall.STATUS_INACTIVE || wall.status == Wall.STATUS_GONE) {
+				it.remove();
+			}
+		}
+		
+		for (Iterator<Wall> it = walls_.iterator(); it.hasNext();) {
+			Wall wall = it.next();
+			
+			if (wall.position.y < camTarget - 8*Wall.SIZE) {
+				wall.status = Wall.STATUS_GONE;
+				System.out.println("wall gone!");
+			}
+			
+			if (wall.status == Wall.STATUS_GONE) {
 				it.remove();
 			}
 		}
@@ -250,7 +270,7 @@ public class World {
 
 	private void addScore(int scoreToAdd) {
 		score += scoreToAdd;
-		System.out.println("Score: " + score);
+//		System.out.println("Score: " + score);
 		
 	}
 

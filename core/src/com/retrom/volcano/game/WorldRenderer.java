@@ -16,8 +16,6 @@
 
 package com.retrom.volcano.game;
 
-import javafx.print.Collation;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -25,6 +23,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
@@ -33,7 +32,8 @@ public class WorldRenderer {
 	static final float FRUSTUM_WIDTH = 640;
 	static final float FRUSTUM_HEIGHT = FRUSTUM_WIDTH / Gdx.graphics.getWidth() * Gdx.graphics.getHeight();
 	
-	static final float ANIMATION_FPS = 30f;
+	static final float FPS = 30f;
+	static final float FRAME_TIME = 1 / FPS;
 	
 	World world;
 	SpriteBatch batch;
@@ -55,7 +55,7 @@ public class WorldRenderer {
 		Gdx.graphics.getGL20().glClearColor(0, 0, 0, 1);
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-		cam_target = (world.floors_.getTotalBlocks()) * Wall.SIZE / 6f + FRUSTUM_HEIGHT / 3f;
+		cam_target = world.camTarget;
 		if (cam_position < cam_target) {
 			cam_position += (cam_target - cam_position) * deltaTime / 2;
 		}
@@ -113,15 +113,44 @@ public class WorldRenderer {
 
 	private void renderPlayer () {
 		Sprite keyFrame = null;
-		switch (world.player.state) {
-		case Player.STATE_NOTHING:
-			int frame = (int) (Math.floor(world.player.stateTime * ANIMATION_FPS)) % Assets.playerIdle.size;  
-			keyFrame = Assets.playerIdle.get(frame);
+		switch (world.player.state()) {
+		case Player.STATE_IDLE:
+			keyFrame = getFrameLoop(Assets.playerIdle, world.player.stateTime);
 			keyFrame.setFlip(world.player.side, false);
 			break;
+		case Player.STATE_RUNNING:
+			float startTime = FPS * Assets.playerRunStart.size;
+			if (world.player.stateTime < FRAME_TIME * Assets.playerRunStart.size) {
+				keyFrame = getFrameLoop(Assets.playerRunStart, world.player.stateTime); 
+			} else {
+				keyFrame = getFrameLoop(Assets.playerRun, world.player.stateTime - startTime);
+			}
+			keyFrame.setFlip(world.player.side, false);
+			break;
+		case Player.STATE_JUMPING:
+			keyFrame = getFrameLoop(Assets.playerJump, world.player.stateTime);
+			keyFrame.setFlip(world.player.side, false);
+			break;
+		case Player.STATE_LANDING:
+			keyFrame = getFrameStopAtLastFrame(Assets.playerLand, world.player.stateTime);
+			keyFrame.setFlip(world.player.side, false);
+			break;
+		default:
+			Gdx.app.log("ERROR", "Player is in invalid state: " + world.player.state());
 		}
-
 		drawCenter(keyFrame, world.player.position);
+	}
+	
+	private Sprite getFrameLoop(Array<Sprite> anim, float stateTime) {
+		return anim.get((int) (world.player.stateTime * FPS) % anim.size);
+	}
+	
+	private Sprite getFrameStopAtLastFrame(Array<Sprite> anim, float stateTime) {
+		int frameIndex = (int) (world.player.stateTime * FPS);
+		if (frameIndex >= anim.size) {
+			frameIndex = anim.size-1;
+		}
+		return anim.get(frameIndex);
 	}
 	
 	private void drawCenter(TextureRegion keyFrame, Vector2 position) {

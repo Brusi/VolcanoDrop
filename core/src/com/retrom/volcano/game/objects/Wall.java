@@ -13,6 +13,7 @@ public class Wall extends DynamicGameObject {
 	
 	public static int STATUS_ACTIVE = 1;
 	public static int STATUS_INACTIVE = 2;
+	public static int STATUS_GONE = 3;
 	
 	public int status;
 	
