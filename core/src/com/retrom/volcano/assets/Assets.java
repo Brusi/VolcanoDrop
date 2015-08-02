@@ -37,6 +37,11 @@ public class Assets {
 	public static Array<Sprite> playerRunStart;
 	public static Array<Sprite> playerJump;
 	public static Array<Sprite> playerLand;
+	
+	public static Array<Sprite> pillars;
+	public static Array<Sprite> pillars_big;
+	public static Sprite pillars_start;
+	public static Sprite pillars_end;
 
 	public static Texture items;
 	public static TextureRegion player;
@@ -75,6 +80,12 @@ public class Assets {
 		 playerRunStart = playerSheet.createSprites("player_run_start");
 		 playerJump = playerSheet.createSprites("player_jump");
 		 playerLand = playerSheet.createSprites("player_land");
+		 
+		 TextureAtlas environmentSheet = new TextureAtlas("walls/enviroment.txt");
+		 pillars = environmentSheet.createSprites("pillars");
+		 pillars_big = environmentSheet.createSprites("pillars_big");
+		 pillars_start = environmentSheet.createSprite("pillars_start");
+		 pillars_end = environmentSheet.createSprite("pillars_end");
 
 //		font = new BitmapFont(Gdx.files.internal("data/font.fnt"), Gdx.files.internal("data/font.png"), false);
 //

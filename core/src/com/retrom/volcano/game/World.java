@@ -58,6 +58,8 @@ public class World {
 	private List<Rectangle> obstacles_;
 
 	public float camTarget;
+
+	public Background background = new Background();
 	
 	public World () {
 		this.player = new Player(0, 100);
@@ -124,6 +126,7 @@ public class World {
 	
 	private void updateCamera(float deltaTime) {
 		camTarget = (floors_.getTotalBlocks()) * Wall.SIZE / 6f + WorldRenderer.FRUSTUM_HEIGHT / 3f;
+		background.setY(camTarget);
 		
 	}
 

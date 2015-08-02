@@ -1,0 +1,130 @@
+enviroment.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+relic_background
+  rotate: false
+  xy: 2, 2
+  size: 244, 62
+  orig: 244, 62
+  offset: 0, 0
+  index: -1
+pillars
+  rotate: false
+  xy: 248, 2
+  size: 70, 76
+  orig: 70, 76
+  offset: 0, 0
+  index: 1
+pillars_start
+  rotate: false
+  xy: 320, 2
+  size: 70, 76
+  orig: 70, 76
+  offset: 0, 0
+  index: -1
+pillars
+  rotate: false
+  xy: 392, 2
+  size: 70, 76
+  orig: 70, 76
+  offset: 0, 0
+  index: 3
+pillars_hole_front
+  rotate: false
+  xy: 464, 2
+  size: 70, 76
+  orig: 70, 76
+  offset: 0, 0
+  index: -1
+pillars_hole_back
+  rotate: false
+  xy: 536, 2
+  size: 68, 76
+  orig: 70, 76
+  offset: 1, 0
+  index: -1
+pillars
+  rotate: false
+  xy: 606, 2
+  size: 70, 76
+  orig: 70, 76
+  offset: 0, 0
+  index: 2
+pillars_end
+  rotate: false
+  xy: 678, 2
+  size: 70, 76
+  orig: 70, 76
+  offset: 0, 0
+  index: -1
+gargol
+  rotate: false
+  xy: 750, 2
+  size: 91, 77
+  orig: 92, 77
+  offset: 0, 0
+  index: 1
+pillars_entrance_start
+  rotate: false
+  xy: 843, 2
+  size: 101, 89
+  orig: 101, 89
+  offset: 0, 0
+  index: -1
+floor
+  rotate: false
+  xy: 2, 93
+  size: 492, 94
+  orig: 492, 94
+  offset: 0, 0
+  index: 1
+pillars_big
+  rotate: false
+  xy: 496, 93
+  size: 76, 111
+  orig: 76, 111
+  offset: 0, 0
+  index: 1
+pillars_big
+  rotate: false
+  xy: 574, 93
+  size: 76, 111
+  orig: 76, 111
+  offset: 0, 0
+  index: 2
+relic_stand
+  rotate: false
+  xy: 652, 93
+  size: 166, 112
+  orig: 170, 118
+  offset: 2, 0
+  index: -1
+tourch1
+  rotate: false
+  xy: 820, 93
+  size: 60, 116
+  orig: 60, 116
+  offset: 0, 0
+  index: -1
+relic_stand_glow
+  rotate: false
+  xy: 2, 211
+  size: 170, 118
+  orig: 170, 118
+  offset: 0, 0
+  index: -1
+background_entrance pillar
+  rotate: false
+  xy: 174, 211
+  size: 86, 152
+  orig: 86, 152
+  offset: 0, 0
+  index: -1
+bg
+  rotate: false
+  xy: 262, 211
+  size: 640, 213
+  orig: 640, 213
+  offset: 0, 0
+  index: 1

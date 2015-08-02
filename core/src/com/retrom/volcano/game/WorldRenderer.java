@@ -16,6 +16,10 @@
 
 package com.retrom.volcano.game;
 
+import java.util.Deque;
+
+import javafx.animation.KeyFrame;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -63,6 +67,7 @@ public class WorldRenderer {
 		cam.position.y = Math.round(cam_position);
 		cam.update();
 		batch.setProjectionMatrix(cam.combined);
+		
 		renderBackground();
 		renderObjects();
 	}
@@ -70,8 +75,41 @@ public class WorldRenderer {
 	public void renderBackground () {
 		batch.disableBlending();
 		batch.begin();
-		batch.draw(Assets.backgroundRegion, -Assets.backgroundRegion.getRegionWidth()/2, -Assets.backgroundRegion.getRegionHeight()/2);
+		drawPillar(world.background.leftPillar, FRUSTUM_WIDTH / 2 - 35, world.background.leftBaseY());
+		drawPillar(world.background.rightPillar, -(FRUSTUM_WIDTH / 2 - 35), world.background.rightBaseY());
+		
+//		batch.draw(Assets.backgroundRegion, -Assets.backgroundRegion.getRegionWidth()/2, -Assets.backgroundRegion.getRegionHeight()/2);
 		batch.end();
+	}
+	
+	public void drawPillar(Deque<Background.Element> pillar, float x, float y) {
+		for (Background.Element e : pillar) {
+			TextureRegion keyFrame = null;
+			switch (e) {
+			case PILLAR_1:
+			case PILLAR_2:
+			case PILLAR_3:
+				int index = e.index();
+				keyFrame = Assets.pillars.get(index);
+				break;
+			case PILLAR_BIG_1:
+			case PILLAR_BIG_2:
+				keyFrame = Assets.pillars_big.get(e.index() % Assets.pillars_big.size);
+				break;
+			case PILLAR_END:
+				keyFrame = Assets.pillars_end;
+				break;
+			case PILLAR_START:
+				keyFrame = Assets.pillars_start;
+				break;
+			default:
+				Gdx.app.log("ERROR", "Unhandled pillar type: " + e);
+				break;
+			}
+			
+			drawCenterBottom(keyFrame, x, y);
+			y += e.height();
+		}
 	}
 
 	public void renderObjects () {
@@ -153,7 +191,15 @@ public class WorldRenderer {
 		return anim.get(frameIndex);
 	}
 	
+	private void drawCenterBottom(TextureRegion keyFrame, float x, float y) {
+		drawCenter(keyFrame, x, y + keyFrame.getRegionHeight()/2);
+	}
+	
 	private void drawCenter(TextureRegion keyFrame, Vector2 position) {
-		batch.draw(keyFrame, position.x - keyFrame.getRegionWidth()/2, position.y - keyFrame.getRegionHeight()/2);
+		drawCenter(keyFrame, position.x, position.y);
+	}
+	
+	private void drawCenter(TextureRegion keyFrame, float x, float y) {
+		batch.draw(keyFrame, x - keyFrame.getRegionWidth()/2, y - keyFrame.getRegionHeight()/2);
 	}
 }
