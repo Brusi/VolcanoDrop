@@ -27,7 +27,6 @@ import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.game.Settings;
 
 public class Assets {
-	public static Texture background;
 	public static TextureRegion backgroundRegion;
 	
 	public static Array<Sprite> walls1;
@@ -42,6 +41,9 @@ public class Assets {
 	public static Array<Sprite> pillars_big;
 	public static Sprite pillars_start;
 	public static Sprite pillars_end;
+	
+	public static Sprite background;
+	public static Sprite floor;
 
 	public static Texture items;
 	public static TextureRegion player;
@@ -62,9 +64,6 @@ public class Assets {
 	}
 
 	public static void load () {
-		background = loadTexture("background.jpg");
-		backgroundRegion = new TextureRegion(background);
-
 		player = new TextureRegion(loadTexture("player.png"));
 		coin3_1 = new TextureRegion(loadTexture("coin 3_1.png"));
 		coin5_4 = new TextureRegion(loadTexture("coin 5_4.png"));
@@ -86,6 +85,8 @@ public class Assets {
 		 pillars_big = environmentSheet.createSprites("pillars_big");
 		 pillars_start = environmentSheet.createSprite("pillars_start");
 		 pillars_end = environmentSheet.createSprite("pillars_end");
+		 background = environmentSheet.createSprite("bg");
+		 floor = environmentSheet.createSprite("floor");
 
 //		font = new BitmapFont(Gdx.files.internal("data/font.fnt"), Gdx.files.internal("data/font.png"), false);
 //

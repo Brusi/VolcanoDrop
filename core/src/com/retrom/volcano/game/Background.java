@@ -22,7 +22,9 @@ public class Background {
 		PILLAR_START(76f),
 		PILLAR_END(76f),
 		PILLAR_BIG_1(111f, 0),
-		PILLAR_BIG_2(111f, 1);
+		PILLAR_BIG_2(111f, 1),
+		
+		BACKGROUND(213f);
 		
 		private float height_;
 		private int index_;
@@ -70,12 +72,15 @@ public class Background {
 	public Deque<Element> rightPillar = new LinkedList<Element>();
 	private float rightHeight = 0f;
 	
+	public Deque<Element> bgPillar = new LinkedList<Element>();
+	private float bgHeight;
 	
 	
 	private float leftBaseY_ = BASE;
 	private float rightBaseY_ = BASE;
+	private float bgBaseY_ = BASE;
 	private float y_ = 0f;
-	
+
 	public void setY(float y) {
 		y_ = y;
 		// Add to the top of the pillars.
@@ -88,6 +93,12 @@ public class Background {
 			rightHeight += heightAdded;
 		}
 		
+		while(bgHeight < y_ + HEIGHT) {
+			float heightAdded = Element.BACKGROUND.height_;
+			bgPillar.addLast(Element.BACKGROUND);
+			bgHeight += heightAdded;
+		}
+		
 		// Remove from the bottom of the pillars.
 		if (y_ > leftBaseY_ + HEIGHT) {
 			leftBaseY_ = leftBaseY_ + leftPillar.getFirst().height();
@@ -97,6 +108,11 @@ public class Background {
 		if (y_ > rightBaseY_ + HEIGHT) {
 			rightBaseY_ += rightPillar.getFirst().height();
 			rightPillar.removeFirst();
+		}
+		
+		if (y_ > bgBaseY_ + HEIGHT) {
+			bgBaseY_ += bgPillar.getFirst().height();
+			bgPillar.removeFirst();
 		}
 		
 	}
@@ -130,5 +146,9 @@ public class Background {
 	
 	public float rightBaseY() {
 		return rightBaseY_;
+	}
+	
+	public float bgBaseY() {
+		return bgBaseY_;
 	}
 }

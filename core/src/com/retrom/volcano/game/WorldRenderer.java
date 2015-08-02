@@ -75,10 +75,10 @@ public class WorldRenderer {
 	public void renderBackground () {
 		batch.disableBlending();
 		batch.begin();
+		drawPillar(world.background.bgPillar, 0, world.background.bgBaseY());
 		drawPillar(world.background.leftPillar, FRUSTUM_WIDTH / 2 - 35, world.background.leftBaseY());
 		drawPillar(world.background.rightPillar, -(FRUSTUM_WIDTH / 2 - 35), world.background.rightBaseY());
 		
-//		batch.draw(Assets.backgroundRegion, -Assets.backgroundRegion.getRegionWidth()/2, -Assets.backgroundRegion.getRegionHeight()/2);
 		batch.end();
 	}
 	
@@ -102,6 +102,9 @@ public class WorldRenderer {
 			case PILLAR_START:
 				keyFrame = Assets.pillars_start;
 				break;
+			case BACKGROUND:
+				keyFrame = Assets.background;
+				break;
 			default:
 				Gdx.app.log("ERROR", "Unhandled pillar type: " + e);
 				break;
@@ -118,7 +121,14 @@ public class WorldRenderer {
 		renderPlayer();
 		renderWalls();
 		renderCoins();
+		renderFloor();
 		batch.end();
+	}
+
+	private void renderFloor() {
+		drawCenterBottom(Assets.floor, 0, -90);
+		drawCenter(Assets.pillars_big.get(0), 0, -149);
+		drawCenter(Assets.pillars_end, 0, -260);
 	}
 
 	private void renderWalls() {
