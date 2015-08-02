@@ -76,9 +76,6 @@ public class WorldRenderer {
 		batch.disableBlending();
 		batch.begin();
 		drawPillar(world.background.bgPillar, 0, world.background.bgBaseY());
-		drawPillar(world.background.leftPillar, FRUSTUM_WIDTH / 2 - 35, world.background.leftBaseY());
-		drawPillar(world.background.rightPillar, -(FRUSTUM_WIDTH / 2 - 35), world.background.rightBaseY());
-		
 		batch.end();
 	}
 	
@@ -122,6 +119,9 @@ public class WorldRenderer {
 		renderWalls();
 		renderCoins();
 		renderFloor();
+		
+		drawPillar(world.background.leftPillar, FRUSTUM_WIDTH / 2 - 40, world.background.leftBaseY());
+		drawPillar(world.background.rightPillar, -(FRUSTUM_WIDTH / 2 - 40), world.background.rightBaseY());
 		batch.end();
 	}
 
@@ -139,24 +139,67 @@ public class WorldRenderer {
 		
 	}
 	
+	private Array<Sprite> getCoinAnimation(Collectable.Type type) {
+		switch(type) {
+		case COIN_1_1: return Assets.coin1_1_land;
+		case COIN_1_2: return Assets.coin1_2_land;
+		case COIN_2_1:
+		case COIN_2_2:
+		case COIN_2_3:
+		case COIN_3_1:
+		case COIN_3_2:
+		case COIN_3_3:
+		case COIN_4_1:
+		case COIN_4_2:
+		case COIN_4_3:
+		case COIN_5_1:
+		case COIN_5_2:
+		case COIN_5_3:
+		case COIN_5_4:
+		case POWERUP_MAGNET:
+		}
+		return null;
+	}
+	
+	private TextureRegion getCoinKeyFrame(Collectable.Type type) {
+		switch(type) {
+		case COIN_1_1: return Assets.coin1_1;
+		case COIN_1_2: return Assets.coin1_2;
+		case COIN_2_1: return Assets.coin2_1;
+		case COIN_2_2:
+		case COIN_2_3:
+		case COIN_3_1:
+		case COIN_3_2:
+		case COIN_3_3:
+		case COIN_4_1:
+		case COIN_4_2:
+		case COIN_4_3:
+		case COIN_5_1:
+		case COIN_5_2:
+		case COIN_5_3:
+		case COIN_5_4:
+		case POWERUP_MAGNET: return Assets.powerupMagnet;
+		}
+		return null;
+	}
+	
 	private void renderCoins() {
 		for (Collectable coin : world.collectables_) {
 			TextureRegion keyFrame = null;
-			switch (coin.type) {
-			case COIN3_1:
-				keyFrame = Assets.coin3_1;
-				break;
-			case COIN5_4:
-				keyFrame = Assets.coin5_4;
-				break;
-			case POWERUP_MAGNET:
-				keyFrame = Assets.powerupMagnet;
-				break;
+			if (coin.isPowerup() || coin.state() != Collectable.STATUS_IDLE) {
+				keyFrame = getCoinKeyFrame(coin.type);
+			} else {
+				keyFrame = getFrameStopAtLastFrame(getCoinAnimation(coin.type), coin.stateTime());
 			}
 			
-			drawCenter(keyFrame, coin.position);
+			drawWithTilt(keyFrame, coin.position, -15f, -15f);
 		}
 		
+	}
+
+	private void drawWithTilt(TextureRegion keyFrame, Vector2 position,
+			float xTilt, float yTilt) {
+		batch.draw(keyFrame, position.x + xTilt, position.y + yTilt);
 	}
 
 	private void renderPlayer () {
@@ -167,8 +210,8 @@ public class WorldRenderer {
 			keyFrame.setFlip(world.player.side, false);
 			break;
 		case Player.STATE_RUNNING:
-			float startTime = FPS * Assets.playerRunStart.size;
-			if (world.player.stateTime < FRAME_TIME * Assets.playerRunStart.size) {
+			float startTime = FRAME_TIME * Assets.playerRunStart.size / 3;
+			if (world.player.stateTime < startTime * Assets.playerRunStart.size) {
 				keyFrame = getFrameLoop(Assets.playerRunStart, world.player.stateTime); 
 			} else {
 				keyFrame = getFrameLoop(Assets.playerRun, world.player.stateTime - startTime);
@@ -190,11 +233,11 @@ public class WorldRenderer {
 	}
 	
 	private Sprite getFrameLoop(Array<Sprite> anim, float stateTime) {
-		return anim.get((int) (world.player.stateTime * FPS) % anim.size);
+		return anim.get((int) (stateTime * FPS) % anim.size);
 	}
 	
 	private Sprite getFrameStopAtLastFrame(Array<Sprite> anim, float stateTime) {
-		int frameIndex = (int) (world.player.stateTime * FPS);
+		int frameIndex = (int) (stateTime * FPS);
 		if (frameIndex >= anim.size) {
 			frameIndex = anim.size-1;
 		}

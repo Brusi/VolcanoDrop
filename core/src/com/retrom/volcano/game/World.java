@@ -86,7 +86,7 @@ public class World {
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-			addCoin(0, Collectable.Type.COIN5_4);
+			addCoin((float) (Math.random() * 200), Collectable.Type.COIN_1_2);
 		}
 	}
 
@@ -120,7 +120,7 @@ public class World {
 		rightWall_.y = player.bounds.y - rightWall_.height/2;
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
-			addCoin(50, Collectable.Type.COIN3_1);
+			addCoin(50, Collectable.Type.COIN_3_1);
 		}
 	}
 	
@@ -135,7 +135,7 @@ public class World {
 			magnetTime -= deltaTime;
 			if (magnetTime <= 0) {
 				for (Collectable c : collectables_) {
-					c.status = Collectable.STATUS_FALLING;
+					c.setState(Collectable.STATUS_FALLING);
 					c.velocity.x = c.velocity.y = 0;
 				}
 			}
@@ -214,13 +214,13 @@ public class World {
 	private void updateCoins(float deltaTime) {
 		for (Collectable c : collectables_) {
 			if (isOutOfBounds(c)) {
-				c.status = Collectable.STATUS_CRUSHED;
+				c.setState(Collectable.STATUS_CRUSHED);
 			}
 			
 			if (magnetTime > 0) {
-				if (c.status == Collectable.STATUS_FALLING
-						|| c.status == Collectable.STATUS_IDLE
-						|| c.status == Collectable.STATUS_MAGNETIZED) {
+				if (c.state() == Collectable.STATUS_FALLING
+						|| c.state() == Collectable.STATUS_IDLE
+						|| c.state() == Collectable.STATUS_MAGNETIZED) {
 					c.magnetTo(player.position, deltaTime);
 				}
 			}
@@ -229,11 +229,11 @@ public class World {
 			c.update(deltaTime);
 			for (Rectangle rect : floors_.getRects()) {
 				if (c.bounds.overlaps(rect)) {
-					if (c.status == Collectable.STATUS_IDLE
-							|| rect.contains(c.bounds) || c.status == Collectable.STATUS_MAGNETIZED && rect.contains(c.position)) {
-						c.status = Collectable.STATUS_CRUSHED;
-					} else if (c.status == Collectable.STATUS_FALLING) {
-						c.status = Collectable.STATUS_IDLE;
+					if (c.state() == Collectable.STATUS_IDLE
+							|| rect.contains(c.bounds) || c.state() == Collectable.STATUS_MAGNETIZED && rect.contains(c.position)) {
+						c.setState(Collectable.STATUS_CRUSHED);
+					} else if (c.state() == Collectable.STATUS_FALLING) {
+						c.setState(Collectable.STATUS_IDLE);
 						c.velocity.x = c.velocity.y = 0; 
 						c.bounds.y = rect.y + rect.height;
 						c.bounds.getCenter(c.position);
@@ -243,7 +243,7 @@ public class World {
 			}
 			
 			if (c.bounds.overlaps(player.bounds)) {
-				c.status = Collectable.STATUS_TAKEN;
+				c.setState(Collectable.STATUS_TAKEN);
 				handleCollectable(c);
 			}
 		}
@@ -251,7 +251,7 @@ public class World {
 		// Remove crushed coins.
 		for (Iterator<Collectable> it = collectables_.iterator(); it.hasNext();) {
 			Collectable coin = it.next();
-			if (coin.status == Collectable.STATUS_CRUSHED || coin.status == Collectable.STATUS_TAKEN) {
+			if (coin.state() == Collectable.STATUS_CRUSHED || coin.state() == Collectable.STATUS_TAKEN) {
 				it.remove();
 			}
 		}
@@ -259,10 +259,10 @@ public class World {
 
 	private void handleCollectable(Collectable collectable) {
 		switch (collectable.type) {
-		case COIN3_1:
+		case COIN_3_1:
 			addScore(1);
 			break;
-		case COIN5_4:
+		case COIN_5_4:
 			addScore(3);
 			break;
 		case POWERUP_MAGNET:

@@ -44,11 +44,26 @@ public class Assets {
 	
 	public static Sprite background;
 	public static Sprite floor;
+	
+	public static Sprite coin1_1;
+	public static Array<Sprite> coin1_1_land;
+	public static Sprite coin1_2;
+	public static Array<Sprite> coin1_2_land;
+	public static Sprite coin2_1;
+	public static Sprite coin2_2;
+	public static Sprite coin2_3;
+	public static Sprite coin3_1;
+	public static Sprite coin3_2;
+	public static Sprite coin3_3;
+	public static Sprite coin4_1;
+	public static Sprite coin4_2;
+	public static Sprite coin4_3;
+	public static Sprite coin5_1;
+	public static Sprite coin5_2;
+	public static Sprite coin5_3;
+	public static Sprite coin5_4;
 
-	public static Texture items;
 	public static TextureRegion player;
-	public static TextureRegion coin3_1;
-	public static TextureRegion coin5_4;
 	
 	public static TextureRegion powerupMagnet;
 	
@@ -63,30 +78,52 @@ public class Assets {
 		return new Texture(Gdx.files.internal(file));
 	}
 
-	public static void load () {
+	public static void load() {
 		player = new TextureRegion(loadTexture("player.png"));
-		coin3_1 = new TextureRegion(loadTexture("coin 3_1.png"));
-		coin5_4 = new TextureRegion(loadTexture("coin 5_4.png"));
 		powerupMagnet = new TextureRegion(loadTexture("powerupmagnet.png"));
-		
+
 		TextureAtlas wallsSheet = new TextureAtlas("walls/walls.txt");
-		 walls1 = wallsSheet.createSprites("x1");
-		 walls2 = wallsSheet.createSprites("x2");
-		 
-		 TextureAtlas playerSheet = new TextureAtlas("player/playersheet.txt");
-		 playerIdle = playerSheet.createSprites("player_idle");
-		 playerRun = playerSheet.createSprites("player_run");
-		 playerRunStart = playerSheet.createSprites("player_run_start");
-		 playerJump = playerSheet.createSprites("player_jump");
-		 playerLand = playerSheet.createSprites("player_land");
-		 
-		 TextureAtlas environmentSheet = new TextureAtlas("walls/enviroment.txt");
-		 pillars = environmentSheet.createSprites("pillars");
-		 pillars_big = environmentSheet.createSprites("pillars_big");
-		 pillars_start = environmentSheet.createSprite("pillars_start");
-		 pillars_end = environmentSheet.createSprite("pillars_end");
-		 background = environmentSheet.createSprite("bg");
-		 floor = environmentSheet.createSprite("floor");
+		walls1 = wallsSheet.createSprites("x1");
+		walls2 = wallsSheet.createSprites("x2");
+
+		TextureAtlas playerSheet = new TextureAtlas("player/playersheet.txt");
+		playerIdle = playerSheet.createSprites("player_idle");
+		playerRun = playerSheet.createSprites("player_run");
+		playerRunStart = playerSheet.createSprites("player_run_start");
+		playerJump = playerSheet.createSprites("player_jump");
+		playerLand = playerSheet.createSprites("player_land");
+
+		TextureAtlas environmentSheet = new TextureAtlas("walls/enviroment.txt");
+		pillars = environmentSheet.createSprites("pillars");
+		pillars_big = environmentSheet.createSprites("pillars_big");
+		pillars_start = environmentSheet.createSprite("pillars_start");
+		pillars_end = environmentSheet.createSprite("pillars_end");
+		background = environmentSheet.createSprite("bg");
+		floor = environmentSheet.createSprite("floor");
+
+		TextureAtlas treasure = new TextureAtlas("treasure/treasure.txt");
+		
+		Array<Sprite> coin1Arr = treasure.createSprites("coin_1");
+		coin1_1 = coin1Arr.get(0);
+		coin1_2 = coin1Arr.get(1);
+		
+		coin1_1_land = treasure.createSprites("coin_1_1_land/coin_1_1_land");
+		coin1_2_land = treasure.createSprites("coin_1_2_land/coin_1_2_land");
+		
+//		coin1_2;
+//		coin2_1;
+//		coin2_2;
+//		coin2_3;
+//		coin3_1;
+//		coin3_2;
+//		coin3_3;
+//		coin4_1;
+//		coin4_2;
+//		coin4_3;
+//		coin5_1;
+//		coin5_2;
+//		coin5_3;
+//		coin5_4;
 
 //		font = new BitmapFont(Gdx.files.internal("data/font.fnt"), Gdx.files.internal("data/font.png"), false);
 //

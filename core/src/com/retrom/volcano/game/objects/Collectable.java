@@ -23,10 +23,17 @@ public class Collectable extends DynamicGameObject {
 	// temporary vector, defined static to prevent allocations.
 	private static Vector2 magnetDir = new Vector2();  
 	
-	public int status;
+	private int state_;
+	private float stateTime_;
 	
 	public enum Type {
-		COIN3_1, COIN5_4, POWERUP_MAGNET
+		COIN_1_1, COIN_1_2,
+		COIN_2_1, COIN_2_2, COIN_2_3, 
+		COIN_3_1, COIN_3_2, COIN_3_3, 
+		COIN_4_1, COIN_4_2, COIN_4_3, 
+		COIN_5_1, COIN_5_2, COIN_5_3, COIN_5_4, 
+		
+		POWERUP_MAGNET;
 	}
 	
 	public final Type type;
@@ -35,7 +42,7 @@ public class Collectable extends DynamicGameObject {
 	public Collectable(float x, float y, Type type) {
 		super(x, y, SIZE, SIZE);
 		this.type = type;
-		status = STATUS_FALLING;
+		setState(STATUS_FALLING);
 	}
 	
 	public void setObstacles(List<Rectangle> rects) {
@@ -43,10 +50,12 @@ public class Collectable extends DynamicGameObject {
 	}
 	
 	public void update(float deltaTime) {
-		if (status == STATUS_FALLING) {
+		stateTime_ += deltaTime;
+		
+		if (state() == STATUS_FALLING) {
 			velocity.add(0, World.gravity.y * deltaTime * GRAVITY_RATIO);
 		}
-		if (status == STATUS_MAGNETIZED) {
+		if (state() == STATUS_MAGNETIZED) {
 			bounds.y += velocity.y * deltaTime;
 			for (Rectangle rect : obstacles_) {
 				if (bounds.overlaps(rect)) {
@@ -77,7 +86,7 @@ public class Collectable extends DynamicGameObject {
 	}
 
 	public void magnetTo(Vector2 playerPos, float deltaTime) {
-		status = STATUS_MAGNETIZED;
+		setState(STATUS_MAGNETIZED);
 		magnetDir.x = playerPos.x - position.x;
 		magnetDir.y = playerPos.y - position.y;
 		magnetDir.nor();
@@ -86,5 +95,26 @@ public class Collectable extends DynamicGameObject {
 		
 		velocity.x *= Math.pow(MAGNETIZED_FRICTION, deltaTime);
 		velocity.y *= Math.pow(MAGNETIZED_FRICTION, deltaTime);
+	}
+
+	public int state() {
+		return state_;
+	}
+
+	public void setState(int state) {
+		if (state_ == state) {
+			return;
+		}
+		System.out.println("state set to " + state_);
+		state_ = state;
+		stateTime_ = 0f;
+	}
+
+	public float stateTime() {
+		return stateTime_;
+	}
+
+	public boolean isPowerup() {
+		return type == Type.POWERUP_MAGNET; // TODO handle other types.
 	}
 }
