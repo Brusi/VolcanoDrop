@@ -123,9 +123,13 @@ public class Background {
 			pillar.addLast(Element.PILLAR_END);
 			heightAdded += Element.PILLAR_END.height();
 			
-			Element bigPillar = Element.bigPillar(); 
-			pillar.addLast(bigPillar);
-			heightAdded += bigPillar.height();
+			// Possibly 2 big pillars in a row.
+			int numBigPullars = rand.nextInt(2);
+			for (int i=0; i <= numBigPullars; i++) {
+				Element bigPillar = Element.bigPillar(); 
+				pillar.addLast(bigPillar);
+				heightAdded += bigPillar.height();
+			}
 			
 			pillar.addLast(Element.PILLAR_START);
 			heightAdded += Element.PILLAR_START.height();
