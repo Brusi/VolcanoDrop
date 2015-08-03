@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.game.World;
+import com.retrom.volcano.game.WorldRenderer;
 
 public class Wall extends DynamicGameObject {
 	
@@ -15,7 +16,8 @@ public class Wall extends DynamicGameObject {
 	public static int STATUS_INACTIVE = 2;
 	public static int STATUS_GONE = 3;
 	
-	public int status;
+	private int status_;
+	private float stateTime_;
 	
 	public final int graphic_;
 	
@@ -33,12 +35,15 @@ public class Wall extends DynamicGameObject {
 	public Wall(int col, float y) {
 		super(xOfCol(col), y, SIZE, SIZE);
 		col_ = col;
-		status = STATUS_ACTIVE;
+		setStatus(STATUS_ACTIVE);
 		graphic_ = rand.nextInt(Assets.walls1.size);
+	}
+	public void updateStateTime(float deltaTime) {
+		stateTime_ += deltaTime;
 	}
 
 	public void update(float deltaTime) {
-		if (status != STATUS_ACTIVE) {
+		if (status() == STATUS_INACTIVE) {
 			return;
 		}
 		velocity.add(0, World.gravity.y * deltaTime * GRAVITY_RATIO);
@@ -48,5 +53,21 @@ public class Wall extends DynamicGameObject {
 
 	public int col() {
 		return col_;
+	}
+
+	public int status() {
+		return status_;
+	}
+
+	public void setStatus(int status) {
+		if (status == status_) {
+			return;
+		}
+		status_ = status;
+		stateTime_ = 0;
+	}
+
+	public float stateTime() {
+		return stateTime_;
 	}
 }

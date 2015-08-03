@@ -16,9 +16,9 @@
 
 package com.retrom.volcano.game;
 
+import java.util.Arrays;
 import java.util.Deque;
-
-import javafx.animation.KeyFrame;
+import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -36,8 +36,10 @@ public class WorldRenderer {
 	static final float FRUSTUM_WIDTH = 640;
 	static final float FRUSTUM_HEIGHT = FRUSTUM_WIDTH / Gdx.graphics.getWidth() * Gdx.graphics.getHeight();
 	
-	static final float FPS = 30f;
-	static final float FRAME_TIME = 1 / FPS;
+	public static final float FPS = 30f;
+	public static final float FRAME_TIME = 1 / FPS;
+	
+	private static final List<Integer> wallBounceArray = Arrays.asList(1,6,8,6,3,1,2,3,2,0,1,0);
 	
 	World world;
 	SpriteBatch batch;
@@ -134,7 +136,13 @@ public class WorldRenderer {
 	private void renderWalls() {
 		for (Wall wall : world.walls_) {
 			TextureRegion keyFrame = Assets.walls1.get(wall.graphic_);
-			drawCenter(keyFrame, wall.position);
+			float y = wall.position.y;
+			if (wall.status() == Wall.STATUS_INACTIVE) {
+				int index = (int) (wall.stateTime() * FPS);
+				if (index < wallBounceArray.size())
+				y +=  wallBounceArray.get(index);
+			}
+			drawCenter(keyFrame, wall.position.x, y);
 		}
 		
 	}
@@ -190,7 +198,6 @@ public class WorldRenderer {
 				keyFrame = getCoinKeyFrame(coin.type);
 			} else {
 				
-				System.out.println("Type="+coin.type);
 				keyFrame = getFrameStopAtLastFrame(getCoinAnimation(coin.type), coin.stateTime());
 			}
 			

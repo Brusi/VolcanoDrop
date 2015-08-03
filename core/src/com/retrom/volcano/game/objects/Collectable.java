@@ -105,7 +105,6 @@ public class Collectable extends DynamicGameObject {
 		if (state_ == state) {
 			return;
 		}
-		System.out.println("state set to " + state_);
 		state_ = state;
 		stateTime_ = 0f;
 	}

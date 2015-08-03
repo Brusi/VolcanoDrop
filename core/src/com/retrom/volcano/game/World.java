@@ -172,7 +172,7 @@ public class World {
 				if (wall.bounds.overlaps(rect)) {
 					wall.bounds.y = rect.y+rect.height;
 					wall.bounds.getCenter(wall.position);
-					wall.status = Wall.STATUS_INACTIVE;
+					wall.setStatus(Wall.STATUS_INACTIVE);
 					floors_.addToColumn(wall.col());
 				}
 			}
@@ -181,20 +181,20 @@ public class World {
 		// Remove inactive walls
 		for (Iterator<Wall> it = activeWalls_.iterator(); it.hasNext();) {
 			Wall wall = it.next();
-			if (wall.status == Wall.STATUS_INACTIVE || wall.status == Wall.STATUS_GONE) {
+			if (wall.status() == Wall.STATUS_INACTIVE || wall.status() == Wall.STATUS_GONE) {
 				it.remove();
 			}
 		}
 		
 		for (Iterator<Wall> it = walls_.iterator(); it.hasNext();) {
 			Wall wall = it.next();
+			wall.updateStateTime(deltaTime);
 			
 			if (wall.position.y < camTarget - 8*Wall.SIZE) {
-				wall.status = Wall.STATUS_GONE;
-				System.out.println("wall gone!");
+				wall.setStatus(Wall.STATUS_GONE);
 			}
 			
-			if (wall.status == Wall.STATUS_GONE) {
+			if (wall.status() == Wall.STATUS_GONE) {
 				it.remove();
 			}
 		}
