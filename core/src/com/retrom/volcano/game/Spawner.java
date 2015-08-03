@@ -46,12 +46,19 @@ public class Spawner {
 		if (Math.random() < deltaTime / AVG_COIN_TIME) {
 			float coinX = (float) (Math.random() * Wall.SIZE * 6 - Wall.SIZE * 3);
 			
-			Collectable.Type type = Math.random() < 0.5 ? Collectable.Type.COIN_1_1 : Collectable.Type.COIN_1_2;
+			Collectable.Type type = getCoinType();
+			
+			
 			if (Math.random() < 0.1) {
 				type = Collectable.Type.POWERUP_MAGNET;
 			}
 			
 			handler_.dropCoin(coinX, type);
 		}
+	}
+
+	private Collectable.Type getCoinType() {
+		int index = rand.nextInt(15);
+		return Collectable.Type.values()[index];
 	}
 }

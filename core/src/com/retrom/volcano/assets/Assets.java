@@ -50,18 +50,31 @@ public class Assets {
 	public static Sprite coin1_2;
 	public static Array<Sprite> coin1_2_land;
 	public static Sprite coin2_1;
+	public static Array<Sprite> coin2_1_land;
 	public static Sprite coin2_2;
+	public static Array<Sprite> coin2_2_land;
 	public static Sprite coin2_3;
+	public static Array<Sprite> coin2_3_land;
 	public static Sprite coin3_1;
+	public static Array<Sprite> coin3_1_land;
 	public static Sprite coin3_2;
+	public static Array<Sprite> coin3_2_land;
 	public static Sprite coin3_3;
+	public static Array<Sprite> coin3_3_land;
 	public static Sprite coin4_1;
+	public static Array<Sprite> coin4_1_land;
 	public static Sprite coin4_2;
+	public static Array<Sprite> coin4_2_land;
 	public static Sprite coin4_3;
+	public static Array<Sprite> coin4_3_land;
 	public static Sprite coin5_1;
+	public static Array<Sprite> coin5_1_land;
 	public static Sprite coin5_2;
+	public static Array<Sprite> coin5_2_land;
 	public static Sprite coin5_3;
+	public static Array<Sprite> coin5_3_land;
 	public static Sprite coin5_4;
+	public static Array<Sprite> coin5_4_land;
 
 	public static TextureRegion player;
 	
@@ -107,24 +120,51 @@ public class Assets {
 		coin1_1 = coin1Arr.get(0);
 		coin1_2 = coin1Arr.get(1);
 		
+		Array<Sprite> coin2Arr = treasure.createSprites("coin_2");
+		coin2_1 = coin2Arr.get(0);
+		coin2_2 = coin2Arr.get(1);
+		coin2_3 = coin2Arr.get(2);
+		
+		Array<Sprite> coin3Arr = treasure.createSprites("coin_3");
+		coin3_1 = coin3Arr.get(0);
+		coin3_2 = coin3Arr.get(1);
+		coin3_3 = coin3Arr.get(2);
+		
+		Array<Sprite> coin4Arr = treasure.createSprites("coin_4");
+		coin4_1 = coin4Arr.get(0);
+		coin4_2 = coin4Arr.get(1);
+		coin4_3 = coin4Arr.get(2);
+		
+		Array<Sprite> coin5Arr = treasure.createSprites("coin_5");
+		coin5_1 = coin5Arr.get(0);
+		coin5_2 = coin5Arr.get(1);
+		coin5_3 = coin5Arr.get(2);
+		coin5_4 = coin5Arr.get(3);
+		
 		coin1_1_land = treasure.createSprites("coin_1_1_land/coin_1_1_land");
 		coin1_2_land = treasure.createSprites("coin_1_2_land/coin_1_2_land");
 		
-//		coin1_2;
-//		coin2_1;
-//		coin2_2;
-//		coin2_3;
-//		coin3_1;
-//		coin3_2;
-//		coin3_3;
-//		coin4_1;
-//		coin4_2;
-//		coin4_3;
-//		coin5_1;
-//		coin5_2;
-//		coin5_3;
-//		coin5_4;
-
+		coin2_1_land = treasure.createSprites("coin_2_1_land/coin_2_1_land");
+		coin2_2_land = treasure.createSprites("coin_2_2_land/coin_2_2_land");
+		coin2_3_land = treasure.createSprites("coin_2_3_land/coin_2_3_land");
+		
+		coin3_1_land = treasure.createSprites("coin_3_1_land/coin_3_1_land");
+		coin3_2_land = treasure.createSprites("coin_3_2_land/coin_3_2_land");
+		coin3_3_land = treasure.createSprites("coin_3_3_land/coin_3_3_land");
+		
+		coin3_1_land = treasure.createSprites("coin_3_1_land/coin_3_1_land");
+		coin3_2_land = treasure.createSprites("coin_3_2_land/coin_3_2_land");
+		coin3_3_land = treasure.createSprites("coin_3_3_land/coin_3_3_land");
+		
+		coin4_1_land = treasure.createSprites("coin_4_1_land/coin_4_1_land");
+		coin4_2_land = treasure.createSprites("coin_4_2_land/coin_4_2_land");
+		coin4_3_land = treasure.createSprites("coin_4_3_land/coin_4_3_land");
+		
+		coin5_1_land = treasure.createSprites("coin_5_1_land/coin_5_1_land");
+		coin5_2_land = treasure.createSprites("coin_5_2_land/coin_5_2_land");
+		coin5_3_land = treasure.createSprites("coin_5_3_land/coin_5_3_land");
+		coin5_4_land = treasure.createSprites("coin_5_4_land/coin_5_4_land");
+		
 //		font = new BitmapFont(Gdx.files.internal("data/font.fnt"), Gdx.files.internal("data/font.png"), false);
 //
 //		music = Gdx.audio.newMusic(Gdx.files.internal("data/music.mp3"));

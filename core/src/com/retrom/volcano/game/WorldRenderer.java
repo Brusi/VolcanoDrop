@@ -143,19 +143,19 @@ public class WorldRenderer {
 		switch(type) {
 		case COIN_1_1: return Assets.coin1_1_land;
 		case COIN_1_2: return Assets.coin1_2_land;
-		case COIN_2_1:
-		case COIN_2_2:
-		case COIN_2_3:
-		case COIN_3_1:
-		case COIN_3_2:
-		case COIN_3_3:
-		case COIN_4_1:
-		case COIN_4_2:
-		case COIN_4_3:
-		case COIN_5_1:
-		case COIN_5_2:
-		case COIN_5_3:
-		case COIN_5_4:
+		case COIN_2_1: return Assets.coin2_1_land;
+		case COIN_2_2: return Assets.coin2_2_land;
+		case COIN_2_3: return Assets.coin2_3_land;
+		case COIN_3_1: return Assets.coin3_1_land;
+		case COIN_3_2: return Assets.coin3_2_land;
+		case COIN_3_3: return Assets.coin3_3_land;
+		case COIN_4_1: return Assets.coin4_1_land;
+		case COIN_4_2: return Assets.coin4_2_land;
+		case COIN_4_3: return Assets.coin4_3_land;
+		case COIN_5_1: return Assets.coin5_1_land;
+		case COIN_5_2: return Assets.coin5_2_land;
+		case COIN_5_3: return Assets.coin5_3_land;
+		case COIN_5_4: return Assets.coin5_4_land;
 		case POWERUP_MAGNET:
 		}
 		return null;
@@ -166,18 +166,18 @@ public class WorldRenderer {
 		case COIN_1_1: return Assets.coin1_1;
 		case COIN_1_2: return Assets.coin1_2;
 		case COIN_2_1: return Assets.coin2_1;
-		case COIN_2_2:
-		case COIN_2_3:
-		case COIN_3_1:
-		case COIN_3_2:
-		case COIN_3_3:
-		case COIN_4_1:
-		case COIN_4_2:
-		case COIN_4_3:
-		case COIN_5_1:
-		case COIN_5_2:
-		case COIN_5_3:
-		case COIN_5_4:
+		case COIN_2_2: return Assets.coin2_2;
+		case COIN_2_3: return Assets.coin2_3;
+		case COIN_3_1: return Assets.coin3_1;
+		case COIN_3_2: return Assets.coin3_2;
+		case COIN_3_3: return Assets.coin3_3;
+		case COIN_4_1: return Assets.coin4_1;
+		case COIN_4_2: return Assets.coin4_2;
+		case COIN_4_3: return Assets.coin4_3;
+		case COIN_5_1: return Assets.coin5_1;
+		case COIN_5_2: return Assets.coin5_2;
+		case COIN_5_3: return Assets.coin5_3;
+		case COIN_5_4: return Assets.coin5_4;
 		case POWERUP_MAGNET: return Assets.powerupMagnet;
 		}
 		return null;
@@ -189,6 +189,8 @@ public class WorldRenderer {
 			if (coin.isPowerup() || coin.state() != Collectable.STATUS_IDLE) {
 				keyFrame = getCoinKeyFrame(coin.type);
 			} else {
+				
+				System.out.println("Type="+coin.type);
 				keyFrame = getFrameStopAtLastFrame(getCoinAnimation(coin.type), coin.stateTime());
 			}
 			
