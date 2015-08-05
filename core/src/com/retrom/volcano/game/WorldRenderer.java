@@ -29,6 +29,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
+import com.retrom.volcano.effects.Effect;
+import com.retrom.volcano.effects.EffectVisitor;
+import com.retrom.volcano.effects.Score1Effect;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
 
@@ -116,6 +119,8 @@ public class WorldRenderer {
 
 	public void renderObjects () {
 		batch.enableBlending();
+		// Set blend mode to "normal".
+		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		batch.begin();
 		renderPlayer();
 		renderWalls();
@@ -124,7 +129,30 @@ public class WorldRenderer {
 		
 		drawPillar(world.background.leftPillar, FRUSTUM_WIDTH / 2 - 40, world.background.leftBaseY());
 		drawPillar(world.background.rightPillar, -(FRUSTUM_WIDTH / 2 - 40), world.background.rightBaseY());
+		
+		renderEffects();
+		// Set blend mode to "screen".
+		batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_COLOR);
+		
+		// TODO: draw "add" and "screen" effects.
+		
 		batch.end();
+	}
+
+	private void renderEffects() {
+		for (Effect e : world.effects) {
+			Sprite s = e.accept(new EffectVisitor<Sprite>() {
+
+				@Override
+				public Sprite visit(Score1Effect e) {
+					Sprite s = Assets.scoreNum1;
+					s.setAlpha(1f - e.stateTime() / e.duration());
+					return s;
+				}
+			});
+			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
+			s.draw(batch);
+		}
 	}
 
 	private void renderFloor() {

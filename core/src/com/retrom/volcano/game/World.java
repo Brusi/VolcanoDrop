@@ -26,6 +26,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.retrom.volcano.effects.Effect;
+import com.retrom.volcano.effects.Score1Effect;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.GameObject;
 import com.retrom.volcano.game.objects.Wall;
@@ -60,6 +62,8 @@ public class World {
 	public float camTarget;
 
 	public Background background = new Background();
+
+	final public List<Effect> effects = new ArrayList<Effect>();
 	
 	public World () {
 		this.player = new Player(0, 100);
@@ -114,7 +118,10 @@ public class World {
 		updatePlayer(deltaTime);
 		updateSpawner(deltaTime);
 		updatePowerups(deltaTime);
+		updateEffects(deltaTime);
+		
 		updateCamera(deltaTime);
+		
 		
 		leftWall_.y = player.bounds.y - leftWall_.height/2;
 		rightWall_.y = player.bounds.y - rightWall_.height/2;
@@ -124,6 +131,19 @@ public class World {
 		}
 	}
 	
+	private void updateEffects(float deltaTime) {
+		for (Effect e : effects) {
+			e.update(deltaTime);
+		}
+		for (Iterator<Effect> it = effects.iterator(); it.hasNext();) {
+			Effect e = it.next();
+			if (e.state() == Effect.STATE_DONE) {
+				it.remove();
+			}
+		}
+		
+	}
+
 	private void updateCamera(float deltaTime) {
 		camTarget = (floors_.getTotalBlocks()) * Wall.SIZE / 6f + WorldRenderer.FRUSTUM_HEIGHT / 3f;
 		background.setY(camTarget);
@@ -269,6 +289,7 @@ public class World {
 			magnetTime = 5f;
 			break;
 		}
+		effects.add(new Score1Effect(collectable.position.cpy()));
 	}
 
 	private void addScore(int scoreToAdd) {

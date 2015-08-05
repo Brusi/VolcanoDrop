@@ -76,6 +76,9 @@ public class Assets {
 	public static Sprite coin5_4;
 	public static Array<Sprite> coin5_4_land;
 
+	public static Sprite scoreNum1;
+	
+	
 	public static TextureRegion player;
 	
 	public static TextureRegion powerupMagnet;
@@ -86,6 +89,8 @@ public class Assets {
 	public static Sound hitSound;
 	public static Sound coinSound;
 	public static Sound clickSound;
+
+
 
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -164,6 +169,9 @@ public class Assets {
 		coin5_2_land = treasure.createSprites("coin_5_2_land/coin_5_2_land");
 		coin5_3_land = treasure.createSprites("coin_5_3_land/coin_5_3_land");
 		coin5_4_land = treasure.createSprites("coin_5_4_land/coin_5_4_land");
+		
+		TextureAtlas scoreNumsSheet = new TextureAtlas("treasure/score_num.txt");
+		scoreNum1 = scoreNumsSheet.createSprite("gui_score_+1");
 		
 //		font = new BitmapFont(Gdx.files.internal("data/font.fnt"), Gdx.files.internal("data/font.png"), false);
 //
