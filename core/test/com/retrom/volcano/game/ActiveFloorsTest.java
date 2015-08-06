@@ -250,6 +250,69 @@ public class ActiveFloorsTest {
 	
 	@Test
 	public void nextColsWhenEmptyIs0to4() {
-		assertEquals(5, floors.getNextPossibleDualCols());
+		List<Integer> nextDualCols = floors.getNextPossibleDualCols(); 
+		assertEquals(5, nextDualCols.size());
+		assertTrue(nextDualCols.contains(0));
+		assertTrue(nextDualCols.contains(1));
+		assertTrue(nextDualCols.contains(2));
+		assertTrue(nextDualCols.contains(3));
+		assertTrue(nextDualCols.contains(4));
 	}
+	@Test
+	public void nextColsWhenFirstIsFull() {
+		floors.addToColumn(0);
+		List<Integer> nextDualCols = floors.getNextPossibleDualCols();
+		assertEquals(4, nextDualCols.size());
+		assertTrue(nextDualCols.contains(1));
+		assertTrue(nextDualCols.contains(2));
+		assertTrue(nextDualCols.contains(3));
+		assertTrue(nextDualCols.contains(4));
+	}
+	
+	@Test
+	public void nextDualColsWhenStuckInMiddle() {
+		floors.addToColumn(3);
+		
+		List<Integer> nextDualCols = floors.getNextPossibleDualCols();
+		assertEquals(3, nextDualCols.size());
+		assertTrue(nextDualCols.contains(0));
+		assertTrue(nextDualCols.contains(1));
+		assertTrue(nextDualCols.contains(4));
+	}
+	
+	@Test
+	public void nextDualColsRamp() {
+		floors.addToColumn(1);
+		floors.addToColumn(2);
+		
+		List<Integer> nextDualCols = floors.getNextPossibleDualCols();
+		assertEquals(3, nextDualCols.size());
+		assertTrue(nextDualCols.contains(1));
+		assertTrue(nextDualCols.contains(3));
+		assertTrue(nextDualCols.contains(4));
+	}
+	
+	@Test
+	public void noNextDualColsWhenTeethed() {
+		floors.addToColumn(0);
+		floors.addToColumn(2);
+		floors.addToColumn(4);
+		
+		List<Integer> nextDualCols = floors.getNextPossibleDualCols();
+		assertEquals(0, nextDualCols.size());
+	}
+	
+	@Test
+	public void nextDualBlockFromRight() {
+		floors.addToColumn(5);
+		
+		List<Integer> nextDualCols = floors.getNextPossibleDualCols();
+		assertEquals(4, nextDualCols.size());
+		assertTrue(nextDualCols.contains(0));
+		assertTrue(nextDualCols.contains(1));
+		assertTrue(nextDualCols.contains(2));
+		assertTrue(nextDualCols.contains(3));
+	}
+	
+	
 }
