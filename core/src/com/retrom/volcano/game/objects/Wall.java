@@ -9,7 +9,7 @@ import com.retrom.volcano.game.WorldRenderer;
 public class Wall extends DynamicGameObject {
 	
 	public static final float SIZE = 80f;
-	private static final int NUM_COLS = 6;
+	protected static final int NUM_COLS = 6;
 	private static final float GRAVITY_RATIO = 0.7f;
 	
 	public static int STATUS_ACTIVE = 1;
@@ -23,20 +23,13 @@ public class Wall extends DynamicGameObject {
 	
 	private final int col_;
 	
-	private static final Random rand = new Random();
+	protected static final Random rand = new Random();
 	
-	/**
-	 * Get the x value of the wall which fits the given column.
-	 */
-	public static float xOfCol(int col) {
-		return (col - NUM_COLS/2) * SIZE + SIZE/2; 
-	}
-	
-	public Wall(int col, float y) {
-		super(xOfCol(col), y, SIZE, SIZE);
+	public Wall(float x, float y, float width, float height, int col, int graphic) {
+		super(x, y, width, height);
 		col_ = col;
+		graphic_ = graphic;
 		setStatus(STATUS_ACTIVE);
-		graphic_ = rand.nextInt(Assets.walls1.size);
 	}
 	public void updateStateTime(float deltaTime) {
 		stateTime_ += deltaTime;
@@ -69,5 +62,8 @@ public class Wall extends DynamicGameObject {
 
 	public float stateTime() {
 		return stateTime_;
+	}
+	public boolean isDual() {
+		return false;
 	}
 }

@@ -12,6 +12,7 @@ public class SoundAssets {
 	public static Music music;
 	
 	public static Sound[] wallHit;
+	public static Sound[] wallDualHit;
 	
 	public static Sound[] coinsCollectBronze;
 	public static Sound[] coinsCollectSilver;
@@ -41,11 +42,7 @@ public class SoundAssets {
 //		if (Settings.soundEnabled) music.play();
 		
 		wallHit = new Sound[] {newSound("x1_rock_hit_1.wav"), newSound("x1_rock_hit_2.wav"), newSound("x1_rock_hit_3.wav"), newSound("x1_rock_hit_3.wav")};
-//		jumpSound = Gdx.audio.newSound(Gdx.files.internal("data/jump.wav"));
-//		highJumpSound = Gdx.audio.newSound(Gdx.files.internal("data/highjump.wav"));
-//		hitSound = Gdx.audio.newSound(Gdx.files.internal("data/hit.wav"));
-//		coinSound = Gdx.audio.newSound(Gdx.files.internal("data/coin.wav"));
-//		clickSound = Gdx.audio.newSound(Gdx.files.internal("data/click.wav"));
+		wallDualHit = new Sound[] {newSound("x2_rock_hit_1.wav"), newSound("x2_rock_hit_2.wav")};
 		
 		// Coins:
 		coinsCollectBronze = new Sound[] {

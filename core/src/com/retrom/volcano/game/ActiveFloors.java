@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.retrom.volcano.game.objects.Wall;
 
 /**
  * A class for generating the rectangles only the active floors.
@@ -23,13 +24,15 @@ public class ActiveFloors {
 	private int minrow = 0;
 	
 	private static final List<Integer> allCols = Arrays.asList(0,1,2,3,4,5);
+	private static final List<Integer> allColsButLast = Arrays.asList(0,1,2,3,4);
 	
 	private List<Integer> nextCols = allCols;
+	private List<Integer> nextDualCols = allColsButLast;
 	
 	private final float SIZE = 80f;
 	private final float BOTTOM = 0f;
 	private final float LEFT = -3 * SIZE;
-	
+
 	ActiveFloors() {
 		for (int i = 0; i < NUM_COLS; i++) {
 			hist_[i] = 0;
@@ -62,18 +65,24 @@ public class ActiveFloors {
 					nextCols.add(i); 
 				}
 			}
-			return;
-		}
-		if (diff == 2) {
+		} else  if (diff == 2) {
 			// Accept all but max
 			for (int i=0; i < NUM_COLS; i++) {
 				if (hist_[i] != maxrow) {
 					nextCols.add(i); 
 				}
 			}
-			return;
+		} else {
+			nextCols = allCols;
 		}
-		nextCols = allCols;
+		
+		// Prepare next dual cols.
+		nextDualCols = new ArrayList<Integer>();
+		for (int col = 0; col < NUM_COLS - 1; col++) {
+			if (hist_[col] == hist_[col+1] && nextCols.contains(col) && nextCols.contains(col+1)) {
+				nextDualCols.add(col);
+			}
+		}
 	}
 	
 	private Rectangle rectAt(int col, int row) {
@@ -126,5 +135,19 @@ public class ActiveFloors {
 
 	public float bottomLine() {
 		return minrow * SIZE;
+	}
+
+	
+	// Returns the next columns which are possible to drop a width-2 stones.
+	public List<Integer> getNextPossibleDualCols() {
+		return nextDualCols;
+	}
+	
+	@Override
+	public String toString() {
+		String s = "";
+		for (int i = 0; i < hist_.length; i++)
+			s += hist_[i] + ",";
+		return s;
 	}
 }

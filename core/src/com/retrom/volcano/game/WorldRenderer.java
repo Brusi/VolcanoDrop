@@ -43,6 +43,8 @@ import com.retrom.volcano.effects.Score5Effect;
 import com.retrom.volcano.effects.Score6Effect;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
+import com.retrom.volcano.game.objects.WallDual;
+import com.retrom.volcano.game.objects.WallSingle;
 
 public class WorldRenderer {
 	static final float FRUSTUM_WIDTH = 640;
@@ -235,7 +237,9 @@ public class WorldRenderer {
 
 	private void renderWalls() {
 		for (Wall wall : world.walls_) {
-			TextureRegion keyFrame = Assets.walls1.get(wall.graphic_);
+			TextureRegion keyFrame = wall.isDual() ? keyFrame = Assets.walls2
+					.get(wall.graphic_) : Assets.walls1.get(wall.graphic_);  
+			
 			float y = wall.position.y;
 			if (wall.status() == Wall.STATUS_INACTIVE) {
 				int index = (int) (wall.stateTime() * FPS);
