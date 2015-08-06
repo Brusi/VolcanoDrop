@@ -92,20 +92,13 @@ public class Assets {
 	
 	public static TextureRegion powerupMagnet;
 	
-	public static Music music;
-	public static Sound jumpSound;
-	public static Sound highJumpSound;
-	public static Sound hitSound;
-	public static Sound coinSound;
-	public static Sound clickSound;
-
-
-
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
 	}
 
 	public static void load() {
+//		font = new BitmapFont(Gdx.files.internal("data/font.fnt"), Gdx.files.internal("data/font.png"), false);
+		
 		player = new TextureRegion(loadTexture("player.png"));
 		powerupMagnet = new TextureRegion(loadTexture("powerupmagnet.png"));
 
@@ -190,21 +183,5 @@ public class Assets {
 		scoreNum15purple = scoreNumsSheet.createSprite("gui_score_+15purple");
 		scoreNum15teal = scoreNumsSheet.createSprite("gui_score_+15teal");
 		scoreNum25 = scoreNumsSheet.createSprite("gui_score_+25");
-		
-//		font = new BitmapFont(Gdx.files.internal("data/font.fnt"), Gdx.files.internal("data/font.png"), false);
-//
-//		music = Gdx.audio.newMusic(Gdx.files.internal("data/music.mp3"));
-//		music.setLooping(true);
-//		music.setVolume(0.5f);
-//		if (Settings.soundEnabled) music.play();
-//		jumpSound = Gdx.audio.newSound(Gdx.files.internal("data/jump.wav"));
-//		highJumpSound = Gdx.audio.newSound(Gdx.files.internal("data/highjump.wav"));
-//		hitSound = Gdx.audio.newSound(Gdx.files.internal("data/hit.wav"));
-//		coinSound = Gdx.audio.newSound(Gdx.files.internal("data/coin.wav"));
-//		clickSound = Gdx.audio.newSound(Gdx.files.internal("data/click.wav"));
-	}
-
-	public static void playSound (Sound sound) {
-		if (Settings.soundEnabled) sound.play(1);
 	}
 }

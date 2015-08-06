@@ -247,4 +247,9 @@ public class ActiveFloorsTest {
 
 		assertEquals(2 * Wall.SIZE, floors.bottomLine(), delta);
 	}
+	
+	@Test
+	public void nextColsWhenEmptyIs0to4() {
+		assertEquals(5, floors.getNextPossibleDualCols());
+	}
 }

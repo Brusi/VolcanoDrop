@@ -4,6 +4,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.assets.Assets;
+import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.game.World;
 import com.retrom.volcano.game.WorldRenderer;
 
@@ -18,6 +19,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		// TODO: switch to global batch
 		renderer_ = new WorldRenderer(new SpriteBatch(), world_);
 		Assets.load();
+		SoundAssets.load();
 	}
 
 	@Override
