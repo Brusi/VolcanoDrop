@@ -39,8 +39,10 @@ import com.retrom.volcano.effects.Score4Effect;
 import com.retrom.volcano.effects.Score5Effect;
 import com.retrom.volcano.effects.Score6Effect;
 import com.retrom.volcano.game.objects.Collectable;
+import com.retrom.volcano.game.objects.WallDual;
 import com.retrom.volcano.game.objects.GameObject;
 import com.retrom.volcano.game.objects.Wall;
+import com.retrom.volcano.game.objects.WallSingle;
 
 public class World {
 
@@ -77,7 +79,7 @@ public class World {
 	
 	public World () {
 		this.player = new Player(0, 100);
-		this.spawner_ = new Spawner(floors_, new Spawner.SpawnerHandler() {
+		this.spawner_ = new Spawner(floors_, activeWalls_, new Spawner.SpawnerHandler() {
 			
 			@Override
 			public void dropWall(int col) {
@@ -88,9 +90,14 @@ public class World {
 			public void dropCoin(float x, Collectable.Type type) {
 				addCoin(x, type);
 			}
+
+			@Override
+			public void dropDualWall(int col) {
+				addDualWall(col);
+			}
 		});
 	}
-	
+
 	private void updateCheats() {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
 			magnetTime += 1f;
@@ -167,9 +174,9 @@ public class World {
 				for (Collectable c : collectables_) {
 					c.setState(Collectable.STATUS_FALLING);
 					c.velocity.x = c.velocity.y = 0;
-					SoundAssets.stopSound(SoundAssets.powerupMagnetLoop);
-					SoundAssets.playSound(SoundAssets.powerupMagnetEnd);
 				}
+				SoundAssets.stopSound(SoundAssets.powerupMagnetLoop);
+				SoundAssets.playSound(SoundAssets.powerupMagnetEnd);
 			}
 		}
 		if (slomoTime > 0) {
@@ -179,7 +186,14 @@ public class World {
 
 	public void addWall(int col) {
 		float wallY = floors_.getTotalBlocks() / 6f * Wall.SIZE + 10*Wall.SIZE;
-		Wall wall = new Wall(col, wallY);
+		Wall wall = new WallSingle(col, wallY);
+		walls_.add(wall);
+		activeWalls_.add(wall);
+	}
+	
+	protected void addDualWall(int col) {
+		float wallY = floors_.getTotalBlocks() / 6f * Wall.SIZE + 10*Wall.SIZE;
+		Wall wall = new WallDual(col, wallY);
 		walls_.add(wall);
 		activeWalls_.add(wall);
 	}
@@ -205,9 +219,15 @@ public class World {
 					wall.bounds.y = rect.y+rect.height;
 					wall.bounds.getCenter(wall.position);
 					wall.setStatus(Wall.STATUS_INACTIVE);
-					floors_.addToColumn(wall.col());
+					if (wall.isDual()) {
+						floors_.addToColumn(wall.col());
+						floors_.addToColumn(wall.col() + 1);
+						SoundAssets.playRandomSound(SoundAssets.wallDualHit);
+					} else {
+						floors_.addToColumn(wall.col());
+						SoundAssets.playRandomSound(SoundAssets.wallHit);
+					}
 					
-					SoundAssets.playRandomSound(SoundAssets.wallHit);
 				}
 			}
 		}
@@ -360,7 +380,6 @@ public class World {
 
 	private void addScore(int scoreToAdd) {
 		score += scoreToAdd;
-//		System.out.println("Score: " + score);
 		
 	}
 
