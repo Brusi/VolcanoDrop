@@ -27,7 +27,16 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.retrom.volcano.effects.Effect;
+import com.retrom.volcano.effects.Score10Effect;
+import com.retrom.volcano.effects.Score15GreenEffect;
+import com.retrom.volcano.effects.Score15PurpleEffect;
+import com.retrom.volcano.effects.Score15TealEffect;
 import com.retrom.volcano.effects.Score1Effect;
+import com.retrom.volcano.effects.Score25Effect;
+import com.retrom.volcano.effects.Score3Effect;
+import com.retrom.volcano.effects.Score4Effect;
+import com.retrom.volcano.effects.Score5Effect;
+import com.retrom.volcano.effects.Score6Effect;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.GameObject;
 import com.retrom.volcano.game.objects.Wall;
@@ -279,17 +288,57 @@ public class World {
 
 	private void handleCollectable(Collectable collectable) {
 		switch (collectable.type) {
-		case COIN_3_1:
-			addScore(1);
-			break;
-		case COIN_5_4:
-			addScore(3);
-			break;
 		case POWERUP_MAGNET:
 			magnetTime = 5f;
 			break;
+		case COIN_1_1:
+		case COIN_1_2:
+			addScore(1);
+			effects.add(new Score1Effect(collectable.position.cpy()));
+			break;
+		case COIN_2_1:
+		case COIN_2_2:
+			addScore(3);
+			effects.add(new Score3Effect(collectable.position.cpy()));
+			break;
+		case COIN_2_3:
+			addScore(4);
+			effects.add(new Score4Effect(collectable.position.cpy()));
+			break;
+		case COIN_3_1:
+		case COIN_3_2:
+			addScore(5);
+			effects.add(new Score5Effect(collectable.position.cpy()));
+			break;
+		case COIN_3_3:
+			addScore(10);
+			effects.add(new Score10Effect(collectable.position.cpy()));
+			break;
+		case COIN_4_1:
+		case COIN_4_2:
+		case COIN_4_3:
+			addScore(6);
+			effects.add(new Score6Effect(collectable.position.cpy()));
+			break;
+		case COIN_5_1:
+			addScore(25);
+			effects.add(new Score25Effect(collectable.position.cpy()));
+			break;
+		case COIN_5_2:
+			addScore(15);
+			effects.add(new Score15TealEffect(collectable.position.cpy()));
+			break;
+		case COIN_5_3:
+			addScore(15);
+			effects.add(new Score15PurpleEffect(collectable.position.cpy()));
+			break;
+		case COIN_5_4:
+			addScore(15);
+			effects.add(new Score15GreenEffect(collectable.position.cpy()));
+			break;
+		default:
+			break;
 		}
-		effects.add(new Score1Effect(collectable.position.cpy()));
 	}
 
 	private void addScore(int scoreToAdd) {

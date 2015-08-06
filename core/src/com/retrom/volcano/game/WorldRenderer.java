@@ -31,7 +31,16 @@ import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectVisitor;
+import com.retrom.volcano.effects.Score10Effect;
+import com.retrom.volcano.effects.Score15GreenEffect;
+import com.retrom.volcano.effects.Score15PurpleEffect;
+import com.retrom.volcano.effects.Score15TealEffect;
 import com.retrom.volcano.effects.Score1Effect;
+import com.retrom.volcano.effects.Score25Effect;
+import com.retrom.volcano.effects.Score3Effect;
+import com.retrom.volcano.effects.Score4Effect;
+import com.retrom.volcano.effects.Score5Effect;
+import com.retrom.volcano.effects.Score6Effect;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
 
@@ -144,9 +153,72 @@ public class WorldRenderer {
 			Sprite s = e.accept(new EffectVisitor<Sprite>() {
 
 				@Override
-				public Sprite visit(Score1Effect e) {
+				public Sprite visit(Score1Effect effect) {
 					Sprite s = Assets.scoreNum1;
-					s.setAlpha(1f - e.stateTime() / e.duration());
+					s.setAlpha(effect.getAlpha());
+					return s;
+				}
+
+				@Override
+				public Sprite visit(Score3Effect effect) {
+					Sprite s = Assets.scoreNum3;
+					s.setAlpha(effect.getAlpha());
+					return s;
+				}
+
+				@Override
+				public Sprite visit(Score4Effect effect) {
+					Sprite s = Assets.scoreNum4;
+					s.setAlpha(effect.getAlpha());
+					return s;
+				}
+
+				@Override
+				public Sprite visit(Score5Effect effect) {
+					Sprite s = Assets.scoreNum5;
+					s.setAlpha(effect.getAlpha());
+					return s;
+				}
+
+				@Override
+				public Sprite visit(Score6Effect effect) {
+					Sprite s = Assets.scoreNum6;
+					s.setAlpha(effect.getAlpha());
+					return s;
+				}
+
+				@Override
+				public Sprite visit(Score10Effect effect) {
+					Sprite s = Assets.scoreNum10;
+					s.setAlpha(effect.getAlpha());
+					return s;
+				}
+
+				@Override
+				public Sprite visit(Score15GreenEffect effect) {
+					Sprite s = Assets.scoreNum15green;
+					s.setAlpha(effect.getAlpha());
+					return s;
+				}
+
+				@Override
+				public Sprite visit(Score15PurpleEffect effect) {
+					Sprite s = Assets.scoreNum15purple;
+					s.setAlpha(effect.getAlpha());
+					return s;
+				}
+
+				@Override
+				public Sprite visit(Score15TealEffect effect) {
+					Sprite s = Assets.scoreNum15teal;
+					s.setAlpha(effect.getAlpha());
+					return s;
+				}
+
+				@Override
+				public Sprite visit(Score25Effect effect) {
+					Sprite s = Assets.scoreNum25;
+					s.setAlpha(effect.getAlpha());
 					return s;
 				}
 			});

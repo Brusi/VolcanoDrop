@@ -56,17 +56,27 @@ public class Collectable extends DynamicGameObject {
 			velocity.add(0, World.gravity.y * deltaTime * GRAVITY_RATIO);
 		}
 		if (state() == STATUS_MAGNETIZED) {
+			// If touched by both top and bottom => is crushed.
+			boolean topTouched = false, bottomTouched = false;
 			bounds.y += velocity.y * deltaTime;
 			for (Rectangle rect : obstacles_) {
 				if (bounds.overlaps(rect)) {
 					if (bounds.y + bounds.height / 2 > rect.y + rect.height / 2) {
 						bounds.y = rect.y + rect.height;
+						bottomTouched = true;
 					} else {
 						bounds.y = rect.y - bounds.height;
+						topTouched = true;
 					}
 					velocity.y = 0;
 				}
 			}
+			if (topTouched && bottomTouched) {
+				setState(STATUS_CRUSHED);
+				System.out.println("crushed while magnetized");
+				return;
+			}
+			
 			bounds.x += velocity.x * deltaTime;
 			for (Rectangle rect : obstacles_) {
 				if (bounds.overlaps(rect)) {

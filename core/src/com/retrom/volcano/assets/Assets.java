@@ -77,6 +77,15 @@ public class Assets {
 	public static Array<Sprite> coin5_4_land;
 
 	public static Sprite scoreNum1;
+	public static Sprite scoreNum3;
+	public static Sprite scoreNum4;
+	public static Sprite scoreNum5;
+	public static Sprite scoreNum6;
+	public static Sprite scoreNum10;
+	public static Sprite scoreNum15green;
+	public static Sprite scoreNum15purple;
+	public static Sprite scoreNum15teal;
+	public static Sprite scoreNum25;
 	
 	
 	public static TextureRegion player;
@@ -172,6 +181,15 @@ public class Assets {
 		
 		TextureAtlas scoreNumsSheet = new TextureAtlas("treasure/score_num.txt");
 		scoreNum1 = scoreNumsSheet.createSprite("gui_score_+1");
+		scoreNum3 = scoreNumsSheet.createSprite("gui_score_+3");
+		scoreNum4 = scoreNumsSheet.createSprite("gui_score_+4");
+		scoreNum5 = scoreNumsSheet.createSprite("gui_score_+5");
+		scoreNum6 = scoreNumsSheet.createSprite("gui_score_+6");
+		scoreNum10 = scoreNumsSheet.createSprite("gui_score_+10");
+		scoreNum15green = scoreNumsSheet.createSprite("gui_score_+15green");
+		scoreNum15purple = scoreNumsSheet.createSprite("gui_score_+15purple");
+		scoreNum15teal = scoreNumsSheet.createSprite("gui_score_+15teal");
+		scoreNum25 = scoreNumsSheet.createSprite("gui_score_+25");
 		
 //		font = new BitmapFont(Gdx.files.internal("data/font.fnt"), Gdx.files.internal("data/font.png"), false);
 //

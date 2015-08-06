@@ -10,4 +10,8 @@ public abstract class ScoreNumEffect extends Effect {
 	ScoreNumEffect(Vector2 position) {
 		super(DURATION, position, SCORE_NUM_VEL);
 	}
+	
+	public float getAlpha() {
+		return 1f - stateTime() / duration();
+	}
 }

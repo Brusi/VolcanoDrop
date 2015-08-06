@@ -16,21 +16,21 @@ gui_score_+10
   orig: 46, 24
   offset: 0, 0
   index: -1
-gui_score_+15 green
+gui_score_+15green
   rotate: false
   xy: 104, 2
   size: 46, 24
   orig: 46, 24
   offset: 0, 0
   index: -1
-gui_score_+15 purple
+gui_score_+15purple
   rotate: false
   xy: 152, 2
   size: 46, 24
   orig: 46, 24
   offset: 0, 0
   index: -1
-gui_score_+15 teal
+gui_score_+15teal
   rotate: false
   xy: 200, 2
   size: 46, 24
