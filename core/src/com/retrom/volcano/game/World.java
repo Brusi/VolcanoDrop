@@ -333,7 +333,8 @@ public class World {
 		case COIN_2_3:
 			addScore(4);
 			effects.add(new Score4Effect(collectable.position.cpy()));
-			SoundAssets.playSound(SoundAssets.coinsCollectToken);
+			SoundAssets.playRandomSound(SoundAssets.coinsCollectSilver);
+			
 			break;
 		case COIN_3_1:
 		case COIN_3_2:
@@ -344,7 +345,7 @@ public class World {
 		case COIN_3_3:
 			addScore(10);
 			effects.add(new Score10Effect(collectable.position.cpy()));
-			SoundAssets.playSound(SoundAssets.coinsCollectToken);
+			SoundAssets.playRandomSound(SoundAssets.coinsCollectGold);
 			break;
 		case COIN_4_1:
 		case COIN_4_2:
@@ -356,7 +357,7 @@ public class World {
 		case COIN_5_1:
 			addScore(25);
 			effects.add(new Score25Effect(collectable.position.cpy()));
-			SoundAssets.playRandomSound(SoundAssets.coinsCollectDiamond);
+			SoundAssets.playSound(SoundAssets.coinsCollectToken);
 			break;
 		case COIN_5_2:
 			addScore(15);

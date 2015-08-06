@@ -13,6 +13,8 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	World world_;
 	WorldRenderer renderer_;
 	
+	boolean isPaused_ = false;
+	
 	@Override
 	public void show() {
 		world_ = new World();
@@ -24,32 +26,33 @@ public class GameScreen extends ScreenAdapter implements Screen {
 
 	@Override
 	public void render(float delta) {
-		world_.update(delta);
+		delta = Math.min(1/30f, delta);
+		System.out.println("delte="+delta);
+		if (!isPaused_) {
+			world_.update(delta);
+		}
 		renderer_.render(delta);
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-
+		isPaused_ = true;
 	}
 
 	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-
+	public void resume() 
+	{
+		isPaused_ = false;
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-
+		pause();
 	}
 
 	@Override
