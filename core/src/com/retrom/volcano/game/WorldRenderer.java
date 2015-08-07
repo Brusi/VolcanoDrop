@@ -80,12 +80,16 @@ public class WorldRenderer {
 			cam_position += (cam_target - cam_position) * deltaTime / 2;
 		}
 		
-		cam.position.y = Math.round(cam_position);
+		cam.position.y = snapToPixels(cam_position);
 		cam.update();
 		batch.setProjectionMatrix(cam.combined);
 		
 		renderBackground();
 		renderObjects();
+	}
+
+	private static float snapToPixels(float cam_position) {
+		return (float) (Math.floor(cam_position / FRUSTUM_HEIGHT * Gdx.graphics.getHeight()) * FRUSTUM_HEIGHT  / Gdx.graphics.getHeight());
 	}
 
 	public void renderBackground () {
@@ -137,7 +141,6 @@ public class WorldRenderer {
 		renderWalls();
 		renderCoins();
 		renderFloor();
-		
 		drawPillar(world.background.leftPillar, FRUSTUM_WIDTH / 2 - 40, world.background.leftBaseY());
 		drawPillar(world.background.rightPillar, -(FRUSTUM_WIDTH / 2 - 40), world.background.rightBaseY());
 		

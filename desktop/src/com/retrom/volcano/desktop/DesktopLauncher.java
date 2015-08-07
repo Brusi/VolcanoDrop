@@ -8,7 +8,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 640;
-		config.height = 960;
+//		config.height = 960;
+		config.height = 1138;
 		new LwjglApplication(new Volcano(), config);
 	}
 }

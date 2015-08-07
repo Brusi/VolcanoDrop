@@ -32,7 +32,7 @@ public class Player extends DynamicGameObject {
 	public static final int STATE_JUMPING = 3;
 	public static final int STATE_LANDING = 4;
 	
-	public static final float MAX_ACCEL = 50;
+	public static final float MAX_ACCEL = 20f;
 	public static final float FRICTION_RATE = 0.001797f;
 	private static final float JUMP_VEL = 900;
 	
@@ -59,18 +59,34 @@ public class Player extends DynamicGameObject {
 	}
 	
 	private void processInput() {
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			velocity.x -= MAX_ACCEL;
-		} else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			velocity.x += MAX_ACCEL;
-		}
+		float xAccel = getXAccel();
+		velocity.x -= MAX_ACCEL * xAccel;
 		
-		if (grounded_ && Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+		if (grounded_ && pressedUp() ) {
 			grounded_ = false;
 			velocity.y = JUMP_VEL;
 		}
 	}
 	
+	private boolean pressedUp() {
+		return Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.justTouched();  
+	}
+
+	private float getXAccel() {
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			return 4f;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+			return -4f;
+		}
+		
+		float accel = Gdx.input.getAccelerometerX();
+		if (Math.abs(accel) < 1) {
+			accel = 0;
+		}
+		return accel;
+	}
+
 	public void update (float deltaTime) {
 		processInput();
 		tryMove(deltaTime);

@@ -185,21 +185,25 @@ public class World {
 	}
 
 	public void addWall(int col) {
-		float wallY = floors_.getTotalBlocks() / 6f * Wall.SIZE + 10*Wall.SIZE;
+		float wallY = topScreenY();
 		Wall wall = new WallSingle(col, wallY);
 		walls_.add(wall);
 		activeWalls_.add(wall);
 	}
+
+	private float topScreenY() {
+		return floors_.getTotalBlocks() / 6f * Wall.SIZE + 12*Wall.SIZE;
+	}
 	
 	protected void addDualWall(int col) {
-		float wallY = floors_.getTotalBlocks() / 6f * Wall.SIZE + 10*Wall.SIZE;
+		float wallY = topScreenY();
 		Wall wall = new WallDual(col, wallY);
 		walls_.add(wall);
 		activeWalls_.add(wall);
 	}
 	
 	public void addCoin(float x, Collectable.Type type) {
-		float yval = floors_.getTotalBlocks() / 6f * Wall.SIZE + 10*Wall.SIZE;
+		float yval = topScreenY();
 		Collectable coin = new Collectable(x, yval, type);
 		collectables_ .add(coin);
 	}

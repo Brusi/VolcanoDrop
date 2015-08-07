@@ -10,7 +10,7 @@ public class Wall extends DynamicGameObject {
 	
 	public static final float SIZE = 80f;
 	protected static final int NUM_COLS = 6;
-	private static final float GRAVITY_RATIO = 0.7f;
+	private static final float GRAVITY_RATIO = 0.5f;
 	
 	public static int STATUS_ACTIVE = 1;
 	public static int STATUS_INACTIVE = 2;
