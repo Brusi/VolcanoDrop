@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectVisitor;
+import com.retrom.volcano.effects.PlayerExplodeEffect;
 import com.retrom.volcano.effects.Score10Effect;
 import com.retrom.volcano.effects.Score15GreenEffect;
 import com.retrom.volcano.effects.Score15PurpleEffect;
@@ -226,6 +227,11 @@ public class WorldRenderer {
 					s.setAlpha(effect.getAlpha());
 					return s;
 				}
+
+				@Override
+				public Sprite visit(PlayerExplodeEffect effect) {
+					return getFrameStopAtLastFrame(Assets.playerExplode, effect.stateTime());
+				}
 			});
 			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
 			s.draw(batch);
@@ -342,6 +348,9 @@ public class WorldRenderer {
 			keyFrame = getFrameStopAtLastFrame(Assets.playerLand, world.player.stateTime);
 			keyFrame.setFlip(world.player.side, false);
 			break;
+		case Player.STATE_DIE:
+		case Player.STATE_DEAD:
+			return;
 		default:
 			Gdx.app.log("ERROR", "Player is in invalid state: " + world.player.state());
 		}

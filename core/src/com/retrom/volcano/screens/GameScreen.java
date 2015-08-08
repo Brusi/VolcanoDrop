@@ -1,11 +1,14 @@
 package com.retrom.volcano.screens;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.game.World;
+import com.retrom.volcano.game.World.WorldListener;
 import com.retrom.volcano.game.WorldRenderer;
 
 public class GameScreen extends ScreenAdapter implements Screen {
@@ -17,17 +20,20 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	
 	@Override
 	public void show() {
-		world_ = new World();
+		world_ = new World(new WorldListener() {
+
+			@Override
+			public void restartGame() {
+				((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen());
+			}
+		});
 		// TODO: switch to global batch
 		renderer_ = new WorldRenderer(new SpriteBatch(), world_);
-		Assets.load();
-		SoundAssets.load();
 	}
 
 	@Override
 	public void render(float delta) {
 		delta = Math.min(1/30f, delta);
-		System.out.println("delte="+delta);
 		if (!isPaused_) {
 			world_.update(delta);
 		}

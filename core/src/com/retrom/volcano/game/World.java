@@ -20,14 +20,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javafx.print.Collation;
-
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.effects.Effect;
+import com.retrom.volcano.effects.PlayerExplodeEffect;
 import com.retrom.volcano.effects.Score10Effect;
 import com.retrom.volcano.effects.Score15GreenEffect;
 import com.retrom.volcano.effects.Score15PurpleEffect;
@@ -38,11 +38,13 @@ import com.retrom.volcano.effects.Score3Effect;
 import com.retrom.volcano.effects.Score4Effect;
 import com.retrom.volcano.effects.Score5Effect;
 import com.retrom.volcano.effects.Score6Effect;
+import com.retrom.volcano.game.EventQueue.Event;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.WallDual;
 import com.retrom.volcano.game.objects.GameObject;
 import com.retrom.volcano.game.objects.Wall;
 import com.retrom.volcano.game.objects.WallSingle;
+import com.retrom.volcano.screens.GameScreen;
 
 public class World {
 
@@ -55,6 +57,7 @@ public class World {
 	
 	public int score = 0;
 	
+	
 	public static final Vector2 gravity = new Vector2(0, -2200);
 	public static final float WIDTH = 640f;
 	
@@ -65,6 +68,7 @@ public class World {
 	public ActiveFloors floors_ = new ActiveFloors();
 	
 	private final Spawner spawner_;
+	private final EventQueue worldEvents_ = new EventQueue();
 	
 	private float magnetTime = 0f;
 	private float slomoTime = 0f;
@@ -76,8 +80,15 @@ public class World {
 	public Background background = new Background();
 
 	final public List<Effect> effects = new ArrayList<Effect>();
+
+	private final WorldListener listener_;
 	
-	public World () {
+	public interface WorldListener {
+		public void restartGame();
+	}
+	
+	public World (WorldListener listener) {
+		this.listener_ = listener;
 		this.player = new Player(0, 100);
 		this.spawner_ = new Spawner(floors_, activeWalls_, new Spawner.SpawnerHandler() {
 			
@@ -121,6 +132,7 @@ public class World {
 		}
 		
 		updateCheats();
+		worldEvents_.update(deltaTime);
 		
 		obstacles_ = new ArrayList<Rectangle>();
 		obstacles_.add(leftWall_);
@@ -300,7 +312,7 @@ public class World {
 				}
 			}
 			
-			if (c.bounds.overlaps(player.bounds)) {
+			if (player.isAlive() && c.bounds.overlaps(player.bounds)) {
 				c.setState(Collectable.STATUS_TAKEN);
 				handleCollectable(c);
 			}
@@ -389,7 +401,24 @@ public class World {
 	}
 
 	private void updatePlayer (float deltaTime) {
+		if (player.state() == Player.STATE_DIE) {
+			player.deathAcknoladged();
+			effects.add(new PlayerExplodeEffect(player.position));
+			worldEvents_.addEventFromNow(1f, new Event() {
+				@Override
+				public void invoke() {
+					finishGame();
+					listener_.restartGame();
+				}
+			});
+			return;
+		}
+		
 		player.setObstacles(obstacles_);
 		player.update(deltaTime);
+	}
+	
+	private void finishGame() {
+		SoundAssets.stopAllSounds();
 	}
 }

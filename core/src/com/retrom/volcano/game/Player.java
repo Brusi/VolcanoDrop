@@ -31,6 +31,8 @@ public class Player extends DynamicGameObject {
 	public static final int STATE_RUNNING = 2;
 	public static final int STATE_JUMPING = 3;
 	public static final int STATE_LANDING = 4;
+	public static final int STATE_DIE = 5;
+	public static final int STATE_DEAD = 6;
 	
 	public static final float MAX_ACCEL = 20f;
 	public static final float FRICTION_RATE = 0.001797f;
@@ -88,6 +90,9 @@ public class Player extends DynamicGameObject {
 	}
 
 	public void update (float deltaTime) {
+		if (state_ == STATE_DIE || state_ == STATE_DEAD) {
+			return;
+		}
 		processInput();
 		tryMove(deltaTime);
 		
@@ -95,6 +100,10 @@ public class Player extends DynamicGameObject {
 	}
 
 	private void updateState(float deltaTime) {
+		if (state_ == STATE_DIE || state_ == STATE_DEAD) {
+			return;
+		}
+
 		if (grounded_) {
 			if (Math.abs(velocity.x) > 50) {
 				setState(STATE_RUNNING);
@@ -132,16 +141,23 @@ public class Player extends DynamicGameObject {
 		
 		bounds.y += velocity.y * deltaTime;
 		boolean wasGrounded = grounded_;
+		boolean touchedFromTop = false;
 		grounded_ = false;
 		for (Rectangle rect : obstacles_) {
 			if (bounds.overlaps(rect)) {
 				if (bounds.y + bounds.height/ 2 > rect.y + rect.height / 2) {
 					bounds.y = rect.y + rect.height;
 					grounded_ = true;
+					if (touchedFromTop) {
+						setState(STATE_DIE);
+						return;
+					}
 				} else {
 					if (wasGrounded) {
-						bounds.y+=1000;
+						setState(STATE_DIE);
+						return;
 					} else { 
+						touchedFromTop = true;
 						bounds.y = rect.y - bounds.height;
 					}
 				}
@@ -167,5 +183,13 @@ public class Player extends DynamicGameObject {
 		
 		position.x = bounds.x + bounds.width / 2;
 		position.y = bounds.y + bounds.height / 2;
+	}
+
+	public void deathAcknoladged() {
+		setState(STATE_DEAD);
+	}
+
+	public boolean isAlive() {
+		return state_ != STATE_DEAD && state_ != STATE_DIE;  
 	}
 }

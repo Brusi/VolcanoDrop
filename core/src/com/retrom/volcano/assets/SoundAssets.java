@@ -95,4 +95,8 @@ public class SoundAssets {
 	public static void stopSound(Sound sound) {
 		sound.stop();
 	}
+	
+	public static void stopAllSounds() {
+		stopSound(powerupMagnetLoop);
+	}
 }

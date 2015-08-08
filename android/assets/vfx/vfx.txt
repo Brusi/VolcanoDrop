@@ -1,0 +1,179 @@
+vfx.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+player_die_explotion
+  rotate: false
+  xy: 2, 2
+  size: 1, 1
+  orig: 256, 256
+  offset: 0, 255
+  index: 0
+player_die_explotion
+  rotate: false
+  xy: 2, 2
+  size: 1, 1
+  orig: 256, 256
+  offset: 0, 255
+  index: 1
+player_die_explotion
+  rotate: false
+  xy: 5, 2
+  size: 37, 38
+  orig: 256, 256
+  offset: 109, 131
+  index: 2
+player_die_explotion
+  rotate: false
+  xy: 44, 2
+  size: 78, 79
+  orig: 256, 256
+  offset: 89, 94
+  index: 3
+player_die_explotion
+  rotate: false
+  xy: 124, 2
+  size: 89, 97
+  orig: 256, 256
+  offset: 91, 82
+  index: 19
+player_die_explotion
+  rotate: false
+  xy: 215, 2
+  size: 90, 99
+  orig: 256, 256
+  offset: 90, 81
+  index: 20
+player_die_explotion
+  rotate: false
+  xy: 307, 2
+  size: 92, 101
+  orig: 256, 256
+  offset: 89, 80
+  index: 21
+player_die_explotion
+  rotate: false
+  xy: 401, 2
+  size: 92, 103
+  orig: 256, 256
+  offset: 89, 80
+  index: 24
+player_die_explotion
+  rotate: false
+  xy: 495, 2
+  size: 93, 103
+  orig: 256, 256
+  offset: 89, 79
+  index: 22
+player_die_explotion
+  rotate: false
+  xy: 590, 2
+  size: 93, 102
+  orig: 256, 256
+  offset: 89, 81
+  index: 23
+player_die_explotion
+  rotate: false
+  xy: 685, 2
+  size: 109, 110
+  orig: 256, 256
+  offset: 73, 73
+  index: 4
+player_die_explotion
+  rotate: false
+  xy: 796, 2
+  size: 122, 139
+  orig: 256, 256
+  offset: 67, 50
+  index: 6
+player_die_explotion
+  rotate: false
+  xy: 920, 2
+  size: 127, 127
+  orig: 256, 256
+  offset: 64, 65
+  index: 5
+player_die_explotion
+  rotate: false
+  xy: 1049, 2
+  size: 130, 151
+  orig: 256, 256
+  offset: 62, 43
+  index: 7
+player_die_explotion
+  rotate: false
+  xy: 1181, 2
+  size: 147, 164
+  orig: 256, 256
+  offset: 54, 38
+  index: 8
+player_die_explotion
+  rotate: false
+  xy: 1330, 2
+  size: 164, 180
+  orig: 256, 256
+  offset: 45, 35
+  index: 9
+player_die_explotion
+  rotate: false
+  xy: 1496, 2
+  size: 182, 187
+  orig: 256, 256
+  offset: 36, 32
+  index: 10
+player_die_explotion
+  rotate: false
+  xy: 1680, 2
+  size: 199, 198
+  orig: 256, 256
+  offset: 27, 29
+  index: 11
+player_die_explotion
+  rotate: false
+  xy: 2, 202
+  size: 217, 214
+  orig: 256, 256
+  offset: 18, 22
+  index: 12
+player_die_explotion
+  rotate: false
+  xy: 221, 202
+  size: 235, 231
+  orig: 256, 256
+  offset: 9, 14
+  index: 13
+player_die_explotion
+  rotate: false
+  xy: 458, 202
+  size: 251, 252
+  orig: 256, 256
+  offset: 2, 4
+  index: 15
+player_die_explotion
+  rotate: false
+  xy: 711, 202
+  size: 252, 249
+  orig: 256, 256
+  offset: 0, 5
+  index: 14
+player_die_explotion
+  rotate: false
+  xy: 965, 202
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: 18
+player_die_explotion
+  rotate: false
+  xy: 1223, 202
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: 16
+player_die_explotion
+  rotate: false
+  xy: 1481, 202
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: 17

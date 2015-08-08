@@ -76,6 +76,8 @@ public class Assets {
 	public static Sprite coin5_4;
 	public static Array<Sprite> coin5_4_land;
 
+	//// Effects
+	// Score numbers:
 	public static Sprite scoreNum1;
 	public static Sprite scoreNum3;
 	public static Sprite scoreNum4;
@@ -86,6 +88,9 @@ public class Assets {
 	public static Sprite scoreNum15purple;
 	public static Sprite scoreNum15teal;
 	public static Sprite scoreNum25;
+	
+	// vfx:
+	public static Array<Sprite> playerExplode;
 	
 	
 	public static TextureRegion player;
@@ -183,5 +188,8 @@ public class Assets {
 		scoreNum15purple = scoreNumsSheet.createSprite("gui_score_+15purple");
 		scoreNum15teal = scoreNumsSheet.createSprite("gui_score_+15teal");
 		scoreNum25 = scoreNumsSheet.createSprite("gui_score_+25");
+		
+		TextureAtlas vfxSheet = new TextureAtlas("vfx/vfx.txt");
+		playerExplode = vfxSheet.createSprites("player_die_explotion");
 	}
 }
