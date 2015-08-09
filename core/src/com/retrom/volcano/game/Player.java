@@ -192,4 +192,9 @@ public class Player extends DynamicGameObject {
 	public boolean isAlive() {
 		return state_ != STATE_DEAD && state_ != STATE_DIE;  
 	}
+
+	public void revive() {
+		setState(STATE_IDLE);
+		this.bounds.y += 1000f;
+	}
 }
