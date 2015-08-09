@@ -253,6 +253,7 @@ public class WorldRenderer {
 				}
 			});
 			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
+			s.setRotation(e.getRotation());
 			s.draw(batch);
 		}
 	}

@@ -54,4 +54,8 @@ public abstract class Effect {
 	public float duration() {
 		return duration_;
 	}
+	
+	public float getRotation() {
+		return 0;
+	}
 }
