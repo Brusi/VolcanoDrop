@@ -19,18 +19,15 @@ public class SoundAssets {
 	public static Sound[] coinsCollectGold;
 	public static Sound[] coinsCollectDiamond;
 	public static Sound[] coinsCollectRing;
-	public static Sound coinsCollectToken;
+	public static Sound coinsCollectGoldMask;
+	public static Sound coinsCollectBigToken;
 	
 	public static Sound powerupMagnetStart;
 	public static Sound powerupMagnetLoop;
 	public static Sound powerupMagnetEnd;
 	
-	
-	public static Sound jumpSound;
-	public static Sound highJumpSound;
-	public static Sound hitSound;
-	public static Sound coinSound;
-	public static Sound clickSound;
+	public static Sound playerDeathCrush;
+	public static Sound playerDeathBurn;
 	
 	private static Random rand = new Random();
 	
@@ -65,13 +62,17 @@ public class SoundAssets {
 				newSound("coins_collect_ring_1.wav"),
 				newSound("coins_collect_ring_2.wav") };
 		
-		coinsCollectToken = newSound("coins_collect_token.wav");
+		coinsCollectBigToken = newSound("coins_collect_bigtoken.wav");
+		coinsCollectGoldMask = newSound("coins_collect_goldmask.wav");
 		
 		// Powerups:
 		powerupMagnetStart = newSound("powerups_magnet_start.wav");
 		powerupMagnetLoop = newSound("powerups_magnet_loop.wav");
 		powerupMagnetEnd = newSound("powerups_magnet_end.wav");
 		
+		// Player death:
+		playerDeathCrush = newSound("player_death_crushed.wav");
+		playerDeathBurn = newSound("player_death_burn.wav");
 	}
 	
 	public static void playSound (Sound sound) {

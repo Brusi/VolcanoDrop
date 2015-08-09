@@ -11,6 +11,6 @@ public interface EffectVisitor<T> {
 	public T visit(Score15PurpleEffect score15PurpleEffect);
 	public T visit(Score15TealEffect score15TealEffect);
 	public T visit(Score25Effect score25Effect);
-	public T visit(PlayerExplodeEffect playerExplodeEffect);
+	public T visit(FiniteAnimationEffect finiteAnimationEffect);
 
 }

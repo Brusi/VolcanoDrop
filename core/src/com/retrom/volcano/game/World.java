@@ -20,14 +20,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.effects.Effect;
-import com.retrom.volcano.effects.PlayerExplodeEffect;
+import com.retrom.volcano.effects.EffectFactory;
 import com.retrom.volcano.effects.Score10Effect;
 import com.retrom.volcano.effects.Score15GreenEffect;
 import com.retrom.volcano.effects.Score15PurpleEffect;
@@ -44,7 +43,6 @@ import com.retrom.volcano.game.objects.WallDual;
 import com.retrom.volcano.game.objects.GameObject;
 import com.retrom.volcano.game.objects.Wall;
 import com.retrom.volcano.game.objects.WallSingle;
-import com.retrom.volcano.screens.GameScreen;
 
 public class World {
 
@@ -80,8 +78,12 @@ public class World {
 	public Background background = new Background();
 
 	final public List<Effect> effects = new ArrayList<Effect>();
+	final public List<Effect> addEffects = new ArrayList<Effect>();
 
 	private final WorldListener listener_;
+
+	// Cheats:
+	private boolean godMode_ = false;
 	
 	public interface WorldListener {
 		public void restartGame();
@@ -118,7 +120,11 @@ public class World {
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-			addCoin((float) (Math.random() * 200), Collectable.Type.COIN_1_2);
+			addCoin((float) (Math.random() * 200), Collectable.Type.COIN_3_2);
+		}
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
+			godMode_ = !godMode_;
 		}
 	}
 
@@ -161,16 +167,21 @@ public class World {
 	}
 	
 	private void updateEffects(float deltaTime) {
-		for (Effect e : effects) {
+		updateEffectsList(deltaTime, effects);
+		updateEffectsList(deltaTime, addEffects);
+	}
+	
+	private void updateEffectsList(float deltaTime, List<Effect> l) {
+		for (Effect e : l) {
 			e.update(deltaTime);
 		}
-		for (Iterator<Effect> it = effects.iterator(); it.hasNext();) {
+		for (Iterator<Effect> it = l.iterator(); it.hasNext();) {
 			Effect e = it.next();
 			if (e.state() == Effect.STATE_DONE) {
 				it.remove();
+				System.out.println("Removing effect");
 			}
 		}
-		
 	}
 
 	private void updateCamera(float deltaTime) {
@@ -338,6 +349,7 @@ public class World {
 		case COIN_1_2:
 			addScore(1);
 			effects.add(new Score1Effect(collectable.position.cpy()));
+			addEffects.add(EffectFactory.bronzeCollectEffect(collectable.position));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectBronze);
 			break;
 		case COIN_2_1:
@@ -345,23 +357,26 @@ public class World {
 			addScore(3);
 			effects.add(new Score3Effect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectSilver);
+			addEffects.add(EffectFactory.silverCollectEffect(collectable.position));
 			break;
 		case COIN_2_3:
 			addScore(4);
 			effects.add(new Score4Effect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectSilver);
-			
+			addEffects.add(EffectFactory.silverCollectEffect(collectable.position));
 			break;
 		case COIN_3_1:
 		case COIN_3_2:
 			addScore(5);
 			effects.add(new Score5Effect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectGold);
+			addEffects.add(EffectFactory.goldCollectEffect(collectable.position));
 			break;
 		case COIN_3_3:
 			addScore(10);
 			effects.add(new Score10Effect(collectable.position.cpy()));
-			SoundAssets.playRandomSound(SoundAssets.coinsCollectGold);
+			SoundAssets.playSound(SoundAssets.coinsCollectGoldMask);
+			addEffects.add(EffectFactory.goldCollectEffect(collectable.position));
 			break;
 		case COIN_4_1:
 		case COIN_4_2:
@@ -369,26 +384,31 @@ public class World {
 			addScore(6);
 			effects.add(new Score6Effect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectRing);
+			addEffects.add(EffectFactory.goldCollectEffect(collectable.position));
 			break;
 		case COIN_5_1:
 			addScore(25);
 			effects.add(new Score25Effect(collectable.position.cpy()));
-			SoundAssets.playSound(SoundAssets.coinsCollectToken);
+			SoundAssets.playSound(SoundAssets.coinsCollectBigToken);
+			addEffects.add(EffectFactory.goldCollectEffect(collectable.position));
 			break;
 		case COIN_5_2:
 			addScore(15);
 			effects.add(new Score15TealEffect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectDiamond);
+			addEffects.add(EffectFactory.cyanDiamondCollectEffect(collectable.position));
 			break;
 		case COIN_5_3:
 			addScore(15);
 			effects.add(new Score15PurpleEffect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectDiamond);
+			addEffects.add(EffectFactory.purpleDiamondCollectEffect(collectable.position));
 			break;
 		case COIN_5_4:
 			addScore(15);
 			effects.add(new Score15GreenEffect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectDiamond);
+			addEffects.add(EffectFactory.greenDiamondCollectEffect(collectable.position));
 			break;
 		default:
 			break;
@@ -402,16 +422,25 @@ public class World {
 
 	private void updatePlayer (float deltaTime) {
 		if (player.state() == Player.STATE_DIE) {
-			player.deathAcknoladged();
-			effects.add(new PlayerExplodeEffect(player.position));
-			worldEvents_.addEventFromNow(1f, new Event() {
-				@Override
-				public void invoke() {
-					finishGame();
-					listener_.restartGame();
-				}
-			});
-			return;
+			if (godMode_) {
+				player.revive();
+				player.bounds.y = topScreenY();
+				return;
+			} else {
+			
+				player.deathAcknoladged();
+//				effects.add(new PlayerExplodeEffect(player.position));
+				addEffects.add(EffectFactory.getPlayerExplodeEffect(player.position));
+				SoundAssets.playSound(SoundAssets.playerDeathCrush);
+				worldEvents_.addEventFromNow(2f, new Event() {
+					@Override
+					public void invoke() {
+						finishGame();
+						listener_.restartGame();
+					}
+				});
+				return;
+			}
 		}
 		
 		player.setObstacles(obstacles_);

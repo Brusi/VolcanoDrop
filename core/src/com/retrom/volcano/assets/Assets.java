@@ -89,6 +89,20 @@ public class Assets {
 	public static Sprite scoreNum15teal;
 	public static Sprite scoreNum25;
 	
+	// Score collect
+	public static Array<Sprite> bronzeCollectEffect1;
+	public static Array<Sprite> bronzeCollectEffect2;
+	public static Array<Sprite> silverCollectEffect1;
+	public static Array<Sprite> silverCollectEffect2;
+	public static Array<Sprite> goldCollectEffect1;
+	public static Array<Sprite> goldCollectEffect2;
+	public static Array<Sprite> greenDiamondCollectEffect1;
+	public static Array<Sprite> greenDiamondCollectEffect2;
+	public static Array<Sprite> cyanDiamondCollectEffect1;
+	public static Array<Sprite> cyanDiamondCollectEffect2;
+	public static Array<Sprite> purpleDiamondCollectEffect1;
+	public static Array<Sprite> purpleDiamondCollectEffect2;
+	
 	// vfx:
 	public static Array<Sprite> playerExplode;
 	
@@ -96,6 +110,7 @@ public class Assets {
 	public static TextureRegion player;
 	
 	public static TextureRegion powerupMagnet;
+
 	
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -189,7 +204,21 @@ public class Assets {
 		scoreNum15teal = scoreNumsSheet.createSprite("gui_score_+15teal");
 		scoreNum25 = scoreNumsSheet.createSprite("gui_score_+25");
 		
+		
 		TextureAtlas vfxSheet = new TextureAtlas("vfx/vfx.txt");
 		playerExplode = vfxSheet.createSprites("player_die_explotion");
+		bronzeCollectEffect1 = vfxSheet.createSprites("coin_collect_bronze1");
+		bronzeCollectEffect2 = vfxSheet.createSprites("coin_collect_bronze2"); 
+		silverCollectEffect1 = vfxSheet.createSprites("coin_collect_silver1"); 
+		silverCollectEffect2 = vfxSheet.createSprites("coin_collect_silver2"); 
+		goldCollectEffect1 = vfxSheet.createSprites("coin_collect_gold1"); 
+		goldCollectEffect2 = vfxSheet.createSprites("coin_collect_gold2"); 
+		
+		greenDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_green1"); 
+		greenDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_green2"); 
+		cyanDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_cyan1"); 
+		cyanDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_cyan2"); 
+		purpleDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_purple1"); 
+		purpleDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_purple2"); 
 	}
 }

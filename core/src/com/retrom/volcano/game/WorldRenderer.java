@@ -31,7 +31,7 @@ import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectVisitor;
-import com.retrom.volcano.effects.PlayerExplodeEffect;
+import com.retrom.volcano.effects.FiniteAnimationEffect;
 import com.retrom.volcano.effects.Score10Effect;
 import com.retrom.volcano.effects.Score15GreenEffect;
 import com.retrom.volcano.effects.Score15PurpleEffect;
@@ -44,8 +44,6 @@ import com.retrom.volcano.effects.Score5Effect;
 import com.retrom.volcano.effects.Score6Effect;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
-import com.retrom.volcano.game.objects.WallDual;
-import com.retrom.volcano.game.objects.WallSingle;
 
 public class WorldRenderer {
 	static final float FRUSTUM_WIDTH = 640;
@@ -132,11 +130,22 @@ public class WorldRenderer {
 			y += e.height();
 		}
 	}
+	
+	private void setBlendFuncNormal() {
+		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+	}
+	
+	private void setBlendFuncAdd() {
+		batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE);
+	}
 
+	private void setBlendFuncScreen() {
+		batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_COLOR);
+	}
+	
 	public void renderObjects () {
 		batch.enableBlending();
-		// Set blend mode to "normal".
-		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+		setBlendFuncNormal();
 		batch.begin();
 		renderPlayer();
 		renderWalls();
@@ -145,23 +154,24 @@ public class WorldRenderer {
 		drawPillar(world.background.leftPillar, FRUSTUM_WIDTH / 2 - 40, world.background.leftBaseY());
 		drawPillar(world.background.rightPillar, -(FRUSTUM_WIDTH / 2 - 40), world.background.rightBaseY());
 		
-		renderEffects();
+		renderEffects(world.effects);
 		// Set blend mode to "screen".
-		batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_COLOR);
+		setBlendFuncAdd();
+		renderEffects(world.addEffects);
 		
 		// TODO: draw "add" and "screen" effects.
 		
 		batch.end();
 	}
-
-	private void renderEffects() {
-		for (Effect e : world.effects) {
+	private void renderEffects(List<Effect> effects) {
+		for (Effect e : effects) {
 			Sprite s = e.accept(new EffectVisitor<Sprite>() {
 
 				@Override
 				public Sprite visit(Score1Effect effect) {
 					Sprite s = Assets.scoreNum1;
 					s.setAlpha(effect.getAlpha());
+					s.setScale(effect.getScale());
 					return s;
 				}
 
@@ -169,6 +179,7 @@ public class WorldRenderer {
 				public Sprite visit(Score3Effect effect) {
 					Sprite s = Assets.scoreNum3;
 					s.setAlpha(effect.getAlpha());
+					s.setScale(effect.getScale());
 					return s;
 				}
 
@@ -176,6 +187,7 @@ public class WorldRenderer {
 				public Sprite visit(Score4Effect effect) {
 					Sprite s = Assets.scoreNum4;
 					s.setAlpha(effect.getAlpha());
+					s.setScale(effect.getScale());
 					return s;
 				}
 
@@ -183,6 +195,7 @@ public class WorldRenderer {
 				public Sprite visit(Score5Effect effect) {
 					Sprite s = Assets.scoreNum5;
 					s.setAlpha(effect.getAlpha());
+					s.setScale(effect.getScale());
 					return s;
 				}
 
@@ -190,6 +203,7 @@ public class WorldRenderer {
 				public Sprite visit(Score6Effect effect) {
 					Sprite s = Assets.scoreNum6;
 					s.setAlpha(effect.getAlpha());
+					s.setScale(effect.getScale());
 					return s;
 				}
 
@@ -197,6 +211,7 @@ public class WorldRenderer {
 				public Sprite visit(Score10Effect effect) {
 					Sprite s = Assets.scoreNum10;
 					s.setAlpha(effect.getAlpha());
+					s.setScale(effect.getScale());
 					return s;
 				}
 
@@ -204,6 +219,7 @@ public class WorldRenderer {
 				public Sprite visit(Score15GreenEffect effect) {
 					Sprite s = Assets.scoreNum15green;
 					s.setAlpha(effect.getAlpha());
+					s.setScale(effect.getScale());
 					return s;
 				}
 
@@ -211,6 +227,7 @@ public class WorldRenderer {
 				public Sprite visit(Score15PurpleEffect effect) {
 					Sprite s = Assets.scoreNum15purple;
 					s.setAlpha(effect.getAlpha());
+					s.setScale(effect.getScale());
 					return s;
 				}
 
@@ -218,6 +235,7 @@ public class WorldRenderer {
 				public Sprite visit(Score15TealEffect effect) {
 					Sprite s = Assets.scoreNum15teal;
 					s.setAlpha(effect.getAlpha());
+					s.setScale(effect.getScale());
 					return s;
 				}
 
@@ -225,12 +243,13 @@ public class WorldRenderer {
 				public Sprite visit(Score25Effect effect) {
 					Sprite s = Assets.scoreNum25;
 					s.setAlpha(effect.getAlpha());
+					s.setScale(effect.getScale());
 					return s;
 				}
 
 				@Override
-				public Sprite visit(PlayerExplodeEffect effect) {
-					return getFrameStopAtLastFrame(Assets.playerExplode, effect.stateTime());
+				public Sprite visit(FiniteAnimationEffect effect) {
+					return getFrameStopAtLastFrame(effect.getAnimation(), effect.stateTime());
 				}
 			});
 			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
@@ -363,9 +382,7 @@ public class WorldRenderer {
 	
 	private Sprite getFrameStopAtLastFrame(Array<Sprite> anim, float stateTime) {
 		int frameIndex = (int) (stateTime * FPS);
-		if (frameIndex >= anim.size) {
-			frameIndex = anim.size-1;
-		}
+		frameIndex = Math.min(frameIndex, anim.size-1);
 		return anim.get(frameIndex);
 	}
 	
