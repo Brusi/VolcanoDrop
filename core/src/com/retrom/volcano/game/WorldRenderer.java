@@ -155,9 +155,10 @@ public class WorldRenderer {
 		drawPillar(world.background.rightPillar, -(FRUSTUM_WIDTH / 2 - 40), world.background.rightBaseY());
 		
 		renderEffects(world.effects);
-		// Set blend mode to "screen".
 		setBlendFuncAdd();
 		renderEffects(world.addEffects);
+		setBlendFuncScreen();
+		renderEffects(world.screenEffects);
 		
 		// TODO: draw "add" and "screen" effects.
 		

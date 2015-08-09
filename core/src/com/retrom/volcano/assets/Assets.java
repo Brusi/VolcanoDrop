@@ -106,12 +106,12 @@ public class Assets {
 	// vfx:
 	public static Array<Sprite> playerExplode;
 	
+	public static Array<Sprite> coinCrushedEffect;
 	
 	public static TextureRegion player;
 	
 	public static TextureRegion powerupMagnet;
 
-	
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
 	}
@@ -220,5 +220,6 @@ public class Assets {
 		cyanDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_cyan2"); 
 		purpleDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_purple1"); 
 		purpleDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_purple2"); 
+		coinCrushedEffect = vfxSheet.createSprites("loot_crushed_puff");
 	}
 }

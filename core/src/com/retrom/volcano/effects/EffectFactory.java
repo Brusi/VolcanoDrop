@@ -11,7 +11,7 @@ public class EffectFactory {
 	
 	private static Random rand = new Random();
 	
-	public static Effect getPlayerExplodeEffect(Vector2 position) {
+	public static Effect playerExplodeEffect(Vector2 position) {
 		return new FiniteAnimationEffect(Assets.playerExplode, position);
 	}
 
@@ -43,6 +43,10 @@ public class EffectFactory {
 	public static Effect cyanDiamondCollectEffect(Vector2 position) {
 		Array<Sprite> animation = rand.nextBoolean() ? Assets.cyanDiamondCollectEffect1 : Assets.cyanDiamondCollectEffect2;    
 		return new FiniteAnimationEffect(animation, position);
+	}
+
+	public static Effect coinCrushedEffect(Vector2 position) {
+		return new FiniteAnimationEffect(Assets.coinCrushedEffect, position);
 	}
 	
 }

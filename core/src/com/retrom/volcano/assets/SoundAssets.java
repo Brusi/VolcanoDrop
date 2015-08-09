@@ -22,6 +22,9 @@ public class SoundAssets {
 	public static Sound coinsCollectGoldMask;
 	public static Sound coinsCollectBigToken;
 	
+	public static Sound coinCrushed;
+	public static Sound powerupCrushed;
+	
 	public static Sound powerupMagnetStart;
 	public static Sound powerupMagnetLoop;
 	public static Sound powerupMagnetEnd;
@@ -64,6 +67,9 @@ public class SoundAssets {
 		
 		coinsCollectBigToken = newSound("coins_collect_bigtoken.wav");
 		coinsCollectGoldMask = newSound("coins_collect_goldmask.wav");
+		
+		coinCrushed = newSound("coins_crushed.wav");
+		powerupCrushed = newSound("powerups_crushed.wav");
 		
 		// Powerups:
 		powerupMagnetStart = newSound("powerups_magnet_start.wav");

@@ -79,11 +79,13 @@ public class World {
 
 	final public List<Effect> effects = new ArrayList<Effect>();
 	final public List<Effect> addEffects = new ArrayList<Effect>();
+	final public List<Effect> screenEffects = new ArrayList<Effect>();
 
 	private final WorldListener listener_;
 
 	// Cheats:
 	private boolean godMode_ = false;
+
 	
 	public interface WorldListener {
 		public void restartGame();
@@ -169,6 +171,7 @@ public class World {
 	private void updateEffects(float deltaTime) {
 		updateEffectsList(deltaTime, effects);
 		updateEffectsList(deltaTime, addEffects);
+		updateEffectsList(deltaTime, screenEffects);
 	}
 	
 	private void updateEffectsList(float deltaTime, List<Effect> l) {
@@ -282,22 +285,9 @@ public class World {
 		
 	}
 	
-	private boolean isOutOfBounds(GameObject obj) {
-		if (Math.abs(obj.position.x) > World.WIDTH/2) {
-			return true;
-		}
-		if (obj.position.y < floors_.bottomLine()) {
-			return true;
-		}
-		return false;
-	}
-	
 	private void updateCoins(float deltaTime) {
+		boolean coinCrushed = false;
 		for (Collectable c : collectables_) {
-			if (isOutOfBounds(c)) {
-				c.setState(Collectable.STATUS_CRUSHED);
-			}
-			
 			if (magnetTime > 0) {
 				if (c.state() == Collectable.STATUS_FALLING
 						|| c.state() == Collectable.STATUS_IDLE
@@ -322,10 +312,16 @@ public class World {
 					}
 				}
 			}
-			
 			if (player.isAlive() && c.bounds.overlaps(player.bounds)) {
 				c.setState(Collectable.STATUS_TAKEN);
 				handleCollectable(c);
+			}
+			if (c.state() == Collectable.STATUS_CRUSHED) {
+				if (!coinCrushed) {
+					SoundAssets.playSound(SoundAssets.coinCrushed);
+					coinCrushed = true;
+				}
+				screenEffects.add(EffectFactory.coinCrushedEffect(c.position));
 			}
 		}
 		
@@ -430,7 +426,7 @@ public class World {
 			
 				player.deathAcknoladged();
 //				effects.add(new PlayerExplodeEffect(player.position));
-				addEffects.add(EffectFactory.getPlayerExplodeEffect(player.position));
+				addEffects.add(EffectFactory.playerExplodeEffect(player.position));
 				SoundAssets.playSound(SoundAssets.playerDeathCrush);
 				worldEvents_.addEventFromNow(2f, new Event() {
 					@Override
