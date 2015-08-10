@@ -46,7 +46,9 @@ public class EffectFactory {
 	}
 
 	public static Effect coinCrushedEffect(Vector2 position) {
-		return new FiniteAnimationEffect(Assets.coinCrushedEffect, position);
+		FiniteAnimationEffect $ = new FiniteAnimationEffect(Assets.coinCrushedEffect, position);
+		$.setRandomScale(0.75f, 1f);
+		return $;
 	}
 	
 }

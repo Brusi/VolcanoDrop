@@ -9,6 +9,7 @@ public class FiniteAnimationEffect extends Effect {
 	
 	private Array<Sprite> animation_;
 	private float rotation_ = 0;
+	private float scale_ = 1f;
 
 	public FiniteAnimationEffect(Array<Sprite> animation_, Vector2 position) {
 		super(getDuration(animation_), position);
@@ -23,6 +24,10 @@ public class FiniteAnimationEffect extends Effect {
 	public void setRandomRotation() {
 		rotation_ = (float) Math.random() * 360;
 	}
+	
+	public void setRandomScale(float minScale, float maxScale) {
+		scale_ = (float) Math.random() * (maxScale - minScale) + minScale; 
+	}
 
 	
 	@Override
@@ -33,6 +38,11 @@ public class FiniteAnimationEffect extends Effect {
 	@Override
 	public float getRotation() {
 		return rotation_;
+	}
+	
+	@Override
+	public float getScale() {
+		return scale_;
 	}
 	
 	public Array<Sprite> getAnimation() {

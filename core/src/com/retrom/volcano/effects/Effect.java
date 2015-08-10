@@ -58,4 +58,8 @@ public abstract class Effect {
 	public float getRotation() {
 		return 0;
 	}
+
+	public float getScale() {
+		return 1f;
+	}
 }
