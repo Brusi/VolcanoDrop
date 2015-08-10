@@ -32,6 +32,10 @@ public class SoundAssets {
 	public static Sound playerDeathCrush;
 	public static Sound playerDeathBurn;
 	
+	public static Sound burningWallStart;
+	public static Sound burningWallEnd;
+	
+	
 	private static Random rand = new Random();
 	
 	public static void load() {
@@ -79,6 +83,10 @@ public class SoundAssets {
 		// Player death:
 		playerDeathCrush = newSound("player_death_crushed.wav");
 		playerDeathBurn = newSound("player_death_burn.wav");
+		
+		//Enemies:
+		burningWallStart = newSound("burner_rock_start.wav");
+		burningWallEnd = newSound("burner_rock_end.wav");
 	}
 	
 	public static void playSound (Sound sound) {

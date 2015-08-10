@@ -42,8 +42,12 @@ public class Wall extends DynamicGameObject {
 		velocity.add(0, World.gravity.y * deltaTime * GRAVITY_RATIO);
 		bounds.y += velocity.y * deltaTime;
 		bounds.getCenter(position);
+		childSpecificUpdating();
 	}
 
+	protected void childSpecificUpdating() {
+		// Can be implemented by children.
+	}
 	public int col() {
 		return col_;
 	}
@@ -58,6 +62,7 @@ public class Wall extends DynamicGameObject {
 		}
 		status_ = status;
 		stateTime_ = 0;
+		childSpecificUpdating();
 	}
 
 	public float stateTime() {

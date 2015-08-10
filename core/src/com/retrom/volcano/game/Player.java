@@ -21,7 +21,9 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
+import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.DynamicGameObject;
+import com.retrom.volcano.game.objects.Wall;
 
 public class Player extends DynamicGameObject {
 	public static final int WIDTH = 36;
@@ -39,6 +41,7 @@ public class Player extends DynamicGameObject {
 	private static final float JUMP_VEL = 900;
 	
 	private List<Rectangle> obstacles_;
+	private List<Wall> activeWalls_;
 
 	private int state_ = STATE_IDLE;
 	float stateTime;
@@ -143,6 +146,15 @@ public class Player extends DynamicGameObject {
 		boolean wasGrounded = grounded_;
 		boolean touchedFromTop = false;
 		grounded_ = false;
+		for (Wall wall : activeWalls_) {
+			if (wall.bounds.overlaps(this.bounds)) {
+				if (wall instanceof BurningWall) {
+					setState(STATE_DIE);
+					return;
+				}
+			} 
+		}
+		
 		for (Rectangle rect : obstacles_) {
 			if (bounds.overlaps(rect)) {
 				if (bounds.y + bounds.height/ 2 > rect.y + rect.height / 2) {
@@ -170,6 +182,15 @@ public class Player extends DynamicGameObject {
 		}
 		
 		bounds.x += velocity.x * deltaTime;
+		for (Wall wall : activeWalls_) {
+			if (wall.bounds.overlaps(this.bounds)) {
+				if (wall instanceof BurningWall) {
+					setState(STATE_DIE);
+					return;
+				}
+			} 
+		}
+		
 		for (Rectangle rect : obstacles_) {
 			if (bounds.overlaps(rect)) {
 				if (bounds.x + bounds.width/ 2 > rect.x + rect.width / 2 && velocity.x < 0) {
@@ -196,5 +217,10 @@ public class Player extends DynamicGameObject {
 	public void revive() {
 		setState(STATE_IDLE);
 		this.bounds.y += 1000f;
+	}
+
+	public void setActiveWalls(List<Wall> activeWalls_) {
+		this.activeWalls_ = activeWalls_;
+		
 	}
 }
