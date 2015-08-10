@@ -25,6 +25,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.retrom.volcano.assets.SoundAssets;
+import com.retrom.volcano.effects.BurningWallGlow;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectFactory;
 import com.retrom.volcano.effects.Score10Effect;
@@ -241,9 +242,11 @@ public class World {
 	
 	public void addBurningWall(int col) {
 		float wallY = topScreenY();
-		Wall wall = new BurningWall(col, wallY);
+		BurningWall wall = new BurningWall(col, wallY);
 		walls_.add(wall);
 		activeWalls_.add(wall);
+		
+		addEffects.add(new BurningWallGlow(wall));
 	}
 	
 	public void addCoin(float x, Collectable.Type type) {
@@ -259,10 +262,6 @@ public class World {
 
 	private void updateWalls(float deltaTime) {
 		for (Wall wall : activeWalls_) {
-//			if (/*wall instanceof BurningWall && */wall.bounds.overlaps(player.bounds)) {
-//				System.out.println("Wall touches player!");
-//				player.killByBurningWall();
-//			}
 			wall.update(deltaTime);
 			List<Rectangle> rects = new ArrayList<Rectangle>(floors_.getRects());
 			for (Rectangle rect : rects) {
@@ -445,10 +444,11 @@ public class World {
 				return;
 			} else {
 				player.deathAcknoladged();
-				addEffects.add(EffectFactory.playerExplodeEffect(player.position));
 				if (player.deathType == Player.DEATH_BY_BURN) {
 					SoundAssets.playSound(SoundAssets.playerDeathBurn);
+					addEffects.add(EffectFactory.playerExplodeEffect(player.position));
 				} else if (player.deathType == Player.DEATH_BY_CRUSH) {
+					addEffects.add(EffectFactory.playerExplodeEffect(new Vector2(player.position.x, player.position.y - player.bounds.height/2)));
 					SoundAssets.playSound(SoundAssets.playerDeathCrush);
 				} else {
 					Gdx.app.error("ERROR", "Player death type not specified.");

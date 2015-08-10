@@ -32,6 +32,7 @@ import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectVisitor;
 import com.retrom.volcano.effects.FiniteAnimationEffect;
+import com.retrom.volcano.effects.OneFrameEffect;
 import com.retrom.volcano.effects.Score10Effect;
 import com.retrom.volcano.effects.Score15GreenEffect;
 import com.retrom.volcano.effects.Score15PurpleEffect;
@@ -156,15 +157,16 @@ public class WorldRenderer {
 		drawPillar(world.background.rightPillar, -(FRUSTUM_WIDTH / 2 - 40), world.background.rightBaseY());
 		
 		renderEffects(world.effects);
-		setBlendFuncAdd();
-		renderEffects(world.addEffects);
 		setBlendFuncScreen();
 		renderEffects(world.screenEffects);
+		setBlendFuncAdd();
+		renderEffects(world.addEffects);
 		
 		// TODO: draw "add" and "screen" effects.
 		
 		batch.end();
 	}
+
 	private void renderEffects(List<Effect> effects) {
 		for (Effect e : effects) {
 			Sprite s = e.accept(new EffectVisitor<Sprite>() {
@@ -252,6 +254,12 @@ public class WorldRenderer {
 				@Override
 				public Sprite visit(FiniteAnimationEffect effect) {
 					return getFrameStopAtLastFrame(effect.getAnimation(), effect.stateTime());
+				}
+
+				@Override
+				public Sprite visit(OneFrameEffect effect) {
+					Sprite s = effect.sprite();
+					return s;
 				}
 			});
 			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
@@ -398,6 +406,7 @@ public class WorldRenderer {
 				Gdx.app.log("ERROR", "Player is in death type: " + world.player.deathType);
 			}
 			keyFrame.setFlip(world.player.side, false);
+			break;
 		default:
 			Gdx.app.log("ERROR", "Player is in invalid state: " + world.player.state());
 		}

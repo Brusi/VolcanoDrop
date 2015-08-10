@@ -1,6 +1,5 @@
 package com.retrom.volcano.game.objects;
 
-import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.game.WorldRenderer;
 
@@ -18,7 +17,7 @@ public class BurningWall extends Wall {
 	}
 	
 	public BurningWall(int col, float y) {
-		super(xOfCol(col), y, Wall.SIZE, Wall.SIZE, col, rand.nextInt(Assets.walls1.size));
+		super(xOfCol(col), y, Wall.SIZE, Wall.SIZE, col, -1);
 	}
 	
 	@Override

@@ -12,5 +12,6 @@ public interface EffectVisitor<T> {
 	public T visit(Score15TealEffect score15TealEffect);
 	public T visit(Score25Effect score25Effect);
 	public T visit(FiniteAnimationEffect finiteAnimationEffect);
+	public T visit(OneFrameEffect oneFrameEffect);
 
 }

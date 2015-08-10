@@ -111,6 +111,9 @@ public class Assets {
 	public static Array<Sprite> playerExplode;
 	public static Array<Sprite> coinCrushedEffect;
 	
+	// Glow:
+	public static Sprite burningWallGlow;
+	
 	// Enemies:
 	public static Sprite burningWall;
 	public static Array<Sprite> burningWallStart;
@@ -120,6 +123,7 @@ public class Assets {
 	public static TextureRegion player;
 	
 	public static TextureRegion powerupMagnet;
+
 
 
 
@@ -235,6 +239,8 @@ public class Assets {
 		purpleDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_purple1"); 
 		purpleDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_purple2"); 
 		coinCrushedEffect = vfxSheet.createSprites("loot_crushed_puff");
+		
+		burningWallGlow = vfxSheet.createSprite("fire_glow");
 		
 		TextureAtlas enemiesSheet = new TextureAtlas("enemies/enemies.txt");
 		burningWall = enemiesSheet.createSprite("burning_wall");
