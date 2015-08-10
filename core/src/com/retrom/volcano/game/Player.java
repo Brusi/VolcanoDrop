@@ -91,10 +91,11 @@ public class Player extends DynamicGameObject {
 		}
 		
 		float accel = Gdx.input.getAccelerometerX();
-		if (Math.abs(accel) < 1) {
-			accel = 0;
+		if (Math.abs(accel) < 0.5) {
+			return 0;
 		}
-		return accel;
+//		return (float) (Math.sin((accel - Math.signum(accel)) / 9 *Math.PI) * 10);
+		return Math.signum(accel) * (Math.abs(accel) - 0.5f);
 	}
 
 	public void update (float deltaTime) {

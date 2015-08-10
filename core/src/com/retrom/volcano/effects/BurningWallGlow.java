@@ -17,7 +17,6 @@ public class BurningWallGlow extends OneFrameEffect {
 	
 	@Override
 	public Sprite sprite() {
-		System.out.println("+++++++++++++Get burning wall glow sprite");
 		Sprite $ = super.sprite();
 		setTint($, getGlowAlpha());
 		return $;

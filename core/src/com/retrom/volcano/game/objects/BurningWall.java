@@ -8,7 +8,7 @@ public class BurningWall extends Wall {
 	boolean start_sound_played;
 	boolean end_sound_played;
 	
-	public static final float TIME_WITHOUT_BURN = 0.5f;
+	public static final float TIME_WITHOUT_BURN = 0.7f;
 	private static final int START_NUM_FRAMES = 20;
 	public static final float TIME_START =  TIME_WITHOUT_BURN + START_NUM_FRAMES * WorldRenderer.FRAME_TIME;
 

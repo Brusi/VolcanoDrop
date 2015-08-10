@@ -116,5 +116,6 @@ public class SoundAssets {
 	
 	public static void stopAllSounds() {
 		stopSound(powerupMagnetLoop);
+		stopSound(flamethrowerStart);
 	}
 }

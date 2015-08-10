@@ -61,11 +61,15 @@ public class Spawner {
 				}
 			}
 			if (!dualDropped) {
+				Integer col = candidates.get(rand.nextInt(candidates.size()));
 				if (rand.nextInt(3) == 0) {
-//					handler_.dropBurningWall(candidates.get(rand.nextInt(candidates.size())));
-					handler_.dropFlamethrower(candidates.get(rand.nextInt(candidates.size())));
+					if (rand.nextBoolean()) {
+						handler_.dropBurningWall(col);
+					} else {
+						handler_.dropFlamethrower(col);
+					}
 				} else {
-					handler_.dropWall(candidates.get(rand.nextInt(candidates.size())));
+					handler_.dropWall(col);
 				}
 			}
 		}

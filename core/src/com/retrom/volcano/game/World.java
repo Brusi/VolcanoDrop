@@ -29,6 +29,7 @@ import com.retrom.volcano.effects.BurningWallGlow;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectFactory;
 import com.retrom.volcano.effects.FlameEffect;
+import com.retrom.volcano.effects.FlameGlowEffect;
 import com.retrom.volcano.effects.Score10Effect;
 import com.retrom.volcano.effects.Score15GreenEffect;
 import com.retrom.volcano.effects.Score15PurpleEffect;
@@ -143,8 +144,10 @@ public class World {
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-			screenEffects.add(EffectFactory.coinCrushedEffect(new Vector2(100,100)));
-			addEffects.add(EffectFactory.coinCrushedEffect(new Vector2(-100,100)));
+//			screenEffects.add(EffectFactory.coinCrushedEffect(new Vector2(100,100)));
+//			addEffects.add(EffectFactory.coinCrushedEffect(new Vector2(-100,100)));
+			
+			addEffects.add(new FlameGlowEffect(new Vector2(100,100)));
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
@@ -336,6 +339,7 @@ public class World {
 				if (wall.status() == Wall.STATUS_INACTIVE && !f.flameAdded && wall.stateTime() > 1.1) {
 					f.flameAdded = true;
 					addEffects.add(new FlameEffect(new Vector2(new Vector2(wall.position.x, wall.position.y + 96))));
+					addEffects.add(new FlameGlowEffect(new Vector2(new Vector2(wall.position.x, wall.position.y + Wall.SIZE/2))));
 					enemies_.add(new Flame(wall.position.x, wall.position.y + 96));
 				}
 			}

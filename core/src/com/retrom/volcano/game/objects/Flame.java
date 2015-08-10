@@ -2,7 +2,7 @@ package com.retrom.volcano.game.objects;
 
 public class Flame extends Enemy {
 	
-	private static final float duration = 3.5f;
+	private static final float duration = 3f;
 
 	public Flame(float x, float y) {
 		super(x, y, 30, 30);

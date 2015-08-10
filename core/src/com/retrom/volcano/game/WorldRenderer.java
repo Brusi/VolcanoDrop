@@ -151,8 +151,8 @@ public class WorldRenderer {
 		batch.enableBlending();
 		setBlendFuncNormal();
 		batch.begin();
-		renderPlayer();
 		renderWalls();
+		renderPlayer();
 		renderCoins();
 		renderFloor();
 		drawPillar(world.background.leftPillar, FRUSTUM_WIDTH / 2 - 40, world.background.leftBaseY());
