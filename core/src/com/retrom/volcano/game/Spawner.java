@@ -12,6 +12,7 @@ public class Spawner {
 		public void dropWall(int col);
 		public void dropCoin(float x, Collectable.Type type);
 		public void dropDualWall(int col);
+		public void dropBurningWall(int col);
 	}
 	
 	private final SpawnerHandler handler_;
@@ -67,7 +68,11 @@ public class Spawner {
 				}
 			}
 			if (!dualDropped) {
-				handler_.dropWall(candidates.get(rand.nextInt(candidates.size())));
+				if (rand.nextInt(3) == 0) {
+					handler_.dropBurningWall(candidates.get(rand.nextInt(candidates.size())));
+				} else {
+					handler_.dropWall(candidates.get(rand.nextInt(candidates.size())));
+				}
 			}
 		}
 		

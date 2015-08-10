@@ -42,6 +42,7 @@ import com.retrom.volcano.effects.Score3Effect;
 import com.retrom.volcano.effects.Score4Effect;
 import com.retrom.volcano.effects.Score5Effect;
 import com.retrom.volcano.effects.Score6Effect;
+import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
 
@@ -267,11 +268,28 @@ public class WorldRenderer {
 
 	private void renderWalls() {
 		for (Wall wall : world.walls_) {
-			TextureRegion keyFrame = wall.isDual() ? keyFrame = Assets.walls2
-					.get(wall.graphic_) : Assets.walls1.get(wall.graphic_);  
-			
 			float y = wall.position.y;
-			if (wall.status() == Wall.STATUS_INACTIVE) {
+			TextureRegion keyFrame = null;
+			if (wall instanceof BurningWall) {
+				if (wall.status() == Wall.STATUS_ACTIVE) {
+					if (wall.stateTime() < BurningWall.TIME_WITHOUT_BURN) {
+						keyFrame = Assets.burningWall;
+					} else if (wall.stateTime() < BurningWall.TIME_START){
+						keyFrame = getFrameStopAtLastFrame(Assets.burningWallStart, wall.stateTime() - BurningWall.TIME_WITHOUT_BURN);
+					} else {
+						keyFrame = getFrameLoop(Assets.burningWallBurn, wall.stateTime() - BurningWall.TIME_START);
+					}
+				} else if (wall.status() == Wall.STATUS_INACTIVE) {
+					keyFrame = getFrameStopAtLastFrame(Assets.burningWallEnd, wall.stateTime());
+				}
+				y += 12;
+			} else {
+				keyFrame = wall.isDual() ? keyFrame = Assets.walls2
+						.get(wall.graphic_) : Assets.walls1.get(wall.graphic_);  
+			}
+			
+			
+			if (wall.status() == Wall.STATUS_INACTIVE && !(wall instanceof BurningWall)) {
 				int index = (int) (wall.stateTime() * FPS);
 				if (index < wallBounceArray.size())
 				y +=  wallBounceArray.get(index);

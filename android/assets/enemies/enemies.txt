@@ -1,0 +1,508 @@
+enemies.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+burning_wall
+  rotate: false
+  xy: 2, 2
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 1
+burning_wall_burn
+  rotate: false
+  xy: 106, 2
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 0
+burning_wall_burn
+  rotate: false
+  xy: 210, 2
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 1
+burning_wall_burn
+  rotate: false
+  xy: 314, 2
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 2
+burning_wall_burn
+  rotate: false
+  xy: 418, 2
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 3
+burning_wall_burn
+  rotate: false
+  xy: 522, 2
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 4
+burning_wall_burn
+  rotate: false
+  xy: 626, 2
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 5
+burning_wall_burn
+  rotate: false
+  xy: 730, 2
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 6
+burning_wall_burn
+  rotate: false
+  xy: 834, 2
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 7
+burning_wall_burn
+  rotate: false
+  xy: 2, 109
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 8
+burning_wall_burn
+  rotate: false
+  xy: 106, 109
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 9
+burning_wall_burn
+  rotate: false
+  xy: 210, 109
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 10
+burning_wall_burn
+  rotate: false
+  xy: 314, 109
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 11
+burning_wall_burn
+  rotate: false
+  xy: 418, 109
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 12
+burning_wall_burn
+  rotate: false
+  xy: 522, 109
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 13
+burning_wall_burn
+  rotate: false
+  xy: 626, 109
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 14
+burning_wall_burn
+  rotate: false
+  xy: 730, 109
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 15
+burning_wall_burn
+  rotate: false
+  xy: 834, 109
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 16
+burning_wall_burn
+  rotate: false
+  xy: 2, 216
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 17
+burning_wall_burn
+  rotate: false
+  xy: 106, 216
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 18
+burning_wall_burn
+  rotate: false
+  xy: 210, 216
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 19
+burning_wall_burn
+  rotate: false
+  xy: 314, 216
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 20
+burning_wall_burn
+  rotate: false
+  xy: 418, 216
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 21
+burning_wall_burn
+  rotate: false
+  xy: 522, 216
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 22
+burning_wall_burn
+  rotate: false
+  xy: 626, 216
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 23
+burning_wall_burn
+  rotate: false
+  xy: 730, 216
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 24
+burning_wall_burn
+  rotate: false
+  xy: 834, 216
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 25
+burning_wall_burn
+  rotate: false
+  xy: 2, 323
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 26
+burning_wall_burn
+  rotate: false
+  xy: 106, 323
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 27
+burning_wall_burn
+  rotate: false
+  xy: 210, 323
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 28
+burning_wall_burn
+  rotate: false
+  xy: 314, 323
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 29
+burning_wall_end
+  rotate: false
+  xy: 418, 323
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 0
+burning_wall_end
+  rotate: false
+  xy: 522, 323
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 1
+burning_wall_end
+  rotate: false
+  xy: 626, 323
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 2
+burning_wall_end
+  rotate: false
+  xy: 730, 323
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 3
+burning_wall_end
+  rotate: false
+  xy: 834, 323
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 4
+burning_wall_end
+  rotate: false
+  xy: 2, 430
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 5
+burning_wall_end
+  rotate: false
+  xy: 106, 430
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 6
+burning_wall_end
+  rotate: false
+  xy: 210, 430
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 7
+burning_wall_end
+  rotate: false
+  xy: 314, 430
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 8
+burning_wall_end
+  rotate: false
+  xy: 418, 430
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 9
+burning_wall_end
+  rotate: false
+  xy: 522, 430
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 10
+burning_wall_end
+  rotate: false
+  xy: 626, 430
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 11
+burning_wall_end
+  rotate: false
+  xy: 730, 430
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 12
+burning_wall_end
+  rotate: false
+  xy: 834, 430
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 13
+burning_wall_end
+  rotate: false
+  xy: 2, 537
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 14
+burning_wall_end
+  rotate: false
+  xy: 106, 537
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 15
+burning_wall_end
+  rotate: false
+  xy: 210, 537
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 16
+burning_wall_end
+  rotate: false
+  xy: 314, 537
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 17
+burning_wall_end
+  rotate: false
+  xy: 418, 537
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 18
+burning_wall_end
+  rotate: false
+  xy: 522, 537
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 19
+burning_wall_end
+  rotate: false
+  xy: 626, 537
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 20
+burning_wall_start
+  rotate: false
+  xy: 730, 537
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 0
+burning_wall_start
+  rotate: false
+  xy: 834, 537
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 1
+burning_wall_start
+  rotate: false
+  xy: 2, 644
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 2
+burning_wall_start
+  rotate: false
+  xy: 106, 644
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 3
+burning_wall_start
+  rotate: false
+  xy: 210, 644
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 4
+burning_wall_start
+  rotate: false
+  xy: 314, 644
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 5
+burning_wall_start
+  rotate: false
+  xy: 418, 644
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 6
+burning_wall_start
+  rotate: false
+  xy: 522, 644
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 7
+burning_wall_start
+  rotate: false
+  xy: 626, 644
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 8
+burning_wall_start
+  rotate: false
+  xy: 730, 644
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 9
+burning_wall_start
+  rotate: false
+  xy: 834, 644
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 10
+burning_wall_start
+  rotate: false
+  xy: 2, 751
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 11
+burning_wall_start
+  rotate: false
+  xy: 106, 751
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 12
+burning_wall_start
+  rotate: false
+  xy: 210, 751
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 13
+burning_wall_start
+  rotate: false
+  xy: 314, 751
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 14
+burning_wall_start
+  rotate: false
+  xy: 418, 751
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 15
+burning_wall_start
+  rotate: false
+  xy: 522, 751
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 16
+burning_wall_start
+  rotate: false
+  xy: 626, 751
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 17
+burning_wall_start
+  rotate: false
+  xy: 730, 751
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 18
+burning_wall_start
+  rotate: false
+  xy: 834, 751
+  size: 102, 105
+  orig: 102, 105
+  offset: 0, 0
+  index: 19

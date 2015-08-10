@@ -38,6 +38,7 @@ import com.retrom.volcano.effects.Score4Effect;
 import com.retrom.volcano.effects.Score5Effect;
 import com.retrom.volcano.effects.Score6Effect;
 import com.retrom.volcano.game.EventQueue.Event;
+import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.WallDual;
 import com.retrom.volcano.game.objects.GameObject;
@@ -110,6 +111,11 @@ public class World {
 			public void dropDualWall(int col) {
 				addDualWall(col);
 			}
+
+			@Override
+			public void dropBurningWall(int col) {
+				addBurningWall(col);
+			}
 		});
 	}
 
@@ -123,6 +129,11 @@ public class World {
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
 			addCoin((float) (Math.random() * 200), Collectable.Type.COIN_3_2);
+		}
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+			screenEffects.add(EffectFactory.coinCrushedEffect(new Vector2(100,100)));
+			addEffects.add(EffectFactory.coinCrushedEffect(new Vector2(-100,100)));
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
@@ -150,9 +161,9 @@ public class World {
 		}
 		obstacles_.addAll(floors_.getRects());
 		
+		updatePlayer(deltaTime);
 		updateWalls(deltaTime);
 		updateCoins(deltaTime);
-		updatePlayer(deltaTime);
 		updateSpawner(deltaTime);
 		updatePowerups(deltaTime);
 		updateEffects(deltaTime);
@@ -210,6 +221,10 @@ public class World {
 		}
 	}
 
+	private float topScreenY() {
+		return floors_.getTotalBlocks() / 6f * Wall.SIZE + 12*Wall.SIZE;
+	}
+	
 	public void addWall(int col) {
 		float wallY = topScreenY();
 		Wall wall = new WallSingle(col, wallY);
@@ -217,13 +232,16 @@ public class World {
 		activeWalls_.add(wall);
 	}
 
-	private float topScreenY() {
-		return floors_.getTotalBlocks() / 6f * Wall.SIZE + 12*Wall.SIZE;
-	}
-	
 	protected void addDualWall(int col) {
 		float wallY = topScreenY();
 		Wall wall = new WallDual(col, wallY);
+		walls_.add(wall);
+		activeWalls_.add(wall);
+	}
+	
+	public void addBurningWall(int col) {
+		float wallY = topScreenY();
+		Wall wall = new BurningWall(col, wallY);
 		walls_.add(wall);
 		activeWalls_.add(wall);
 	}
@@ -241,8 +259,11 @@ public class World {
 
 	private void updateWalls(float deltaTime) {
 		for (Wall wall : activeWalls_) {
+//			if (/*wall instanceof BurningWall && */wall.bounds.overlaps(player.bounds)) {
+//				System.out.println("Wall touches player!");
+//				player.killByBurningWall();
+//			}
 			wall.update(deltaTime);
-			
 			List<Rectangle> rects = new ArrayList<Rectangle>(floors_.getRects());
 			for (Rectangle rect : rects) {
 				if (wall.bounds.overlaps(rect)) {
@@ -440,6 +461,7 @@ public class World {
 		}
 		
 		player.setObstacles(obstacles_);
+		player.setActiveWalls(activeWalls_);
 		player.update(deltaTime);
 	}
 	

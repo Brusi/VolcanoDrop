@@ -105,12 +105,20 @@ public class Assets {
 	
 	// vfx:
 	public static Array<Sprite> playerExplode;
-	
 	public static Array<Sprite> coinCrushedEffect;
+	
+	// Enemies:
+	public static Sprite burningWall;
+	public static Array<Sprite> burningWallStart;
+	public static Array<Sprite> burningWallBurn;
+	public static Array<Sprite> burningWallEnd;
 	
 	public static TextureRegion player;
 	
 	public static TextureRegion powerupMagnet;
+
+
+
 
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -221,5 +229,11 @@ public class Assets {
 		purpleDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_purple1"); 
 		purpleDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_purple2"); 
 		coinCrushedEffect = vfxSheet.createSprites("loot_crushed_puff");
+		
+		TextureAtlas enemiesSheet = new TextureAtlas("enemies/enemies.txt");
+		burningWall = enemiesSheet.createSprite("burning_wall");
+		burningWallStart = enemiesSheet.createSprites("burning_wall_start");
+		burningWallBurn = enemiesSheet.createSprites("burning_wall_burn");
+		burningWallEnd = enemiesSheet.createSprites("burning_wall_end");
 	}
 }
