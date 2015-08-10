@@ -13,6 +13,7 @@ public class Spawner {
 		public void dropCoin(float x, Collectable.Type type);
 		public void dropDualWall(int col);
 		public void dropBurningWall(int col);
+		public void dropFlamethrower(int col);
 	}
 	
 	private final SpawnerHandler handler_;
@@ -52,14 +53,6 @@ public class Spawner {
 				int col = dualCandidates.isEmpty() ? -1 : dualCandidates.get(rand.nextInt(dualCandidates.size()));
 				
 				boolean isClear = isClearForDualWall(col);
-				System.out.println("---------"+col);
-				System.out.println("dualCandidates="+dualCandidates);
-				System.out.println("floors_="+floors_.toString());
-				System.out.println("col="+col);
-				System.out.println("isClearForDualWall(col)="+isClearForDualWall(col));
-				System.out.println("candidates.contains(col)="+candidates.contains(col));
-				System.out.println("candidates.contains(col+1)="+candidates.contains(col+1));
-				
 				
 				if (col >= 0 &&  isClear && candidates.contains(col) && candidates.contains(col+1)) {
 					System.out.println("Dropping at " + col);
@@ -69,7 +62,8 @@ public class Spawner {
 			}
 			if (!dualDropped) {
 				if (rand.nextInt(3) == 0) {
-					handler_.dropBurningWall(candidates.get(rand.nextInt(candidates.size())));
+//					handler_.dropBurningWall(candidates.get(rand.nextInt(candidates.size())));
+					handler_.dropFlamethrower(candidates.get(rand.nextInt(candidates.size())));
 				} else {
 					handler_.dropWall(candidates.get(rand.nextInt(candidates.size())));
 				}

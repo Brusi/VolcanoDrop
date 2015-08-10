@@ -34,9 +34,11 @@ public class SoundAssets {
 	
 	public static Sound burningWallStart;
 	public static Sound burningWallEnd;
+	public static Sound flamethrowerStart;
 	
 	
 	private static Random rand = new Random();
+
 	
 	public static void load() {
 //
@@ -87,6 +89,7 @@ public class SoundAssets {
 		//Enemies:
 		burningWallStart = newSound("burner_rock_start.wav");
 		burningWallEnd = newSound("burner_rock_end.wav");
+		flamethrowerStart = newSound("flamethrower_rock_start.wav");
 	}
 	
 	public static void playSound (Sound sound) {

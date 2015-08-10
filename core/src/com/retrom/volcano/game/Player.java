@@ -154,8 +154,7 @@ public class Player extends DynamicGameObject {
 		for (Wall wall : activeWalls_) {
 			if (wall.bounds.overlaps(this.bounds)) {
 				if (wall instanceof BurningWall) {
-					setState(STATE_DIE);
-					deathType = DEATH_BY_BURN;
+					killByBurn();
 					return;
 				}
 			} 
@@ -167,14 +166,12 @@ public class Player extends DynamicGameObject {
 					bounds.y = rect.y + rect.height;
 					grounded_ = true;
 					if (touchedFromTop) {
-						setState(STATE_DIE);
-						deathType = DEATH_BY_CRUSH;
+						killByCrash();
 						return;
 					}
 				} else {
 					if (wasGrounded) {
-						setState(STATE_DIE);
-						deathType = DEATH_BY_CRUSH;
+						killByCrash();
 						return;
 					} else { 
 						touchedFromTop = true;
@@ -193,8 +190,7 @@ public class Player extends DynamicGameObject {
 		for (Wall wall : activeWalls_) {
 			if (wall.bounds.overlaps(this.bounds)) {
 				if (wall instanceof BurningWall) {
-					setState(STATE_DIE);
-					deathType = DEATH_BY_BURN;
+					killByBurn();
 					return;
 				}
 			} 
@@ -215,6 +211,16 @@ public class Player extends DynamicGameObject {
 		position.y = bounds.y + bounds.height / 2;
 	}
 
+	public void killByBurn() {
+		setState(STATE_DIE);
+		deathType = DEATH_BY_BURN;
+	}
+
+	public void killByCrash() {
+		setState(STATE_DIE);
+		deathType = DEATH_BY_CRUSH;
+	}
+
 	public void deathAcknoladged() {
 		setState(STATE_DEAD);
 	}
@@ -231,5 +237,9 @@ public class Player extends DynamicGameObject {
 	public void setActiveWalls(List<Wall> activeWalls_) {
 		this.activeWalls_ = activeWalls_;
 		
+	}
+
+	public boolean isDead() {
+		return state() == STATE_DEAD || state() == STATE_DIE; 
 	}
 }

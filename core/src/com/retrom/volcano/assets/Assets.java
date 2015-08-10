@@ -120,6 +120,10 @@ public class Assets {
 	public static Array<Sprite> burningWallBurn;
 	public static Array<Sprite> burningWallEnd;
 	
+	public static Sprite flamethrower;
+	public static Array<Sprite> flamethrowerAll;
+	public static Array<Sprite> flamethrowerFlame;
+	
 	public static TextureRegion player;
 	
 	public static TextureRegion powerupMagnet;
@@ -247,5 +251,11 @@ public class Assets {
 		burningWallStart = enemiesSheet.createSprites("burning_wall_start");
 		burningWallBurn = enemiesSheet.createSprites("burning_wall_burn");
 		burningWallEnd = enemiesSheet.createSprites("burning_wall_end");
+		
+		flamethrower = enemiesSheet.createSprite("flamethrower");
+		flamethrowerAll = enemiesSheet.createSprites("flamethrower_all");
+		
+		TextureAtlas enemiesAddSheet = new TextureAtlas("enemies/enemies_add.txt");
+		flamethrowerFlame = enemiesAddSheet.createSprites("flamethrower_flame");
 	}
 }

@@ -32,6 +32,7 @@ import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectVisitor;
 import com.retrom.volcano.effects.FiniteAnimationEffect;
+import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.OneFrameEffect;
 import com.retrom.volcano.effects.Score10Effect;
 import com.retrom.volcano.effects.Score15GreenEffect;
@@ -45,6 +46,7 @@ import com.retrom.volcano.effects.Score5Effect;
 import com.retrom.volcano.effects.Score6Effect;
 import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.Collectable;
+import com.retrom.volcano.game.objects.FlamethrowerWall;
 import com.retrom.volcano.game.objects.Wall;
 
 public class WorldRenderer {
@@ -261,6 +263,11 @@ public class WorldRenderer {
 					Sprite s = effect.sprite();
 					return s;
 				}
+
+				@Override
+				public Sprite visit(FlameEffect effect) {
+					return getFrameStopAtLastFrame(Assets.flamethrowerFlame, effect.stateTime());
+				}
 			});
 			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
 			s.setRotation(e.getRotation());
@@ -290,6 +297,13 @@ public class WorldRenderer {
 					}
 				} else if (wall.status() == Wall.STATUS_INACTIVE) {
 					keyFrame = getFrameStopAtLastFrame(Assets.burningWallEnd, wall.stateTime());
+				}
+				y += 12;
+			} else if (wall instanceof FlamethrowerWall) {
+				if (wall.status() == Wall.STATUS_ACTIVE) {
+					keyFrame = Assets.flamethrower;
+				} else if (wall.status() == Wall.STATUS_INACTIVE) {
+					keyFrame = getFrameStopAtLastFrame(Assets.flamethrowerAll, wall.stateTime());
 				}
 				y += 12;
 			} else {

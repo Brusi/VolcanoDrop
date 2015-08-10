@@ -28,6 +28,7 @@ import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.effects.BurningWallGlow;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectFactory;
+import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.Score10Effect;
 import com.retrom.volcano.effects.Score15GreenEffect;
 import com.retrom.volcano.effects.Score15PurpleEffect;
@@ -41,8 +42,10 @@ import com.retrom.volcano.effects.Score6Effect;
 import com.retrom.volcano.game.EventQueue.Event;
 import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.Collectable;
+import com.retrom.volcano.game.objects.Enemy;
+import com.retrom.volcano.game.objects.Flame;
+import com.retrom.volcano.game.objects.FlamethrowerWall;
 import com.retrom.volcano.game.objects.WallDual;
-import com.retrom.volcano.game.objects.GameObject;
 import com.retrom.volcano.game.objects.Wall;
 import com.retrom.volcano.game.objects.WallSingle;
 
@@ -52,6 +55,8 @@ public class World {
 	
 	public final List<Wall> walls_ = new ArrayList<Wall>();
 	public final List<Wall> activeWalls_ = new ArrayList<Wall>();
+	
+	public final List<Enemy> enemies_ = new ArrayList<Enemy>();
 	
 	public final List<Collectable> collectables_ = new ArrayList<Collectable>();
 	
@@ -117,6 +122,11 @@ public class World {
 			public void dropBurningWall(int col) {
 				addBurningWall(col);
 			}
+
+			@Override
+			public void dropFlamethrower(int col) {
+				addFlamethrower(col);
+			}
 		});
 	}
 
@@ -164,6 +174,7 @@ public class World {
 		
 		updatePlayer(deltaTime);
 		updateWalls(deltaTime);
+		updateEnemies(deltaTime);
 		updateCoins(deltaTime);
 		updateSpawner(deltaTime);
 		updatePowerups(deltaTime);
@@ -180,6 +191,23 @@ public class World {
 		}
 	}
 	
+	private void updateEnemies(float deltaTime) {
+		for (Enemy e : enemies_) {
+			e.update(deltaTime);
+			if (e.bounds.overlaps(player.bounds) && !player.isDead()) {
+				
+				player.killByBurn();
+			}
+		}
+		for (Iterator<Enemy> it = enemies_.iterator(); it.hasNext();) {
+			Enemy e = it.next();
+			if (e.state() == Enemy.STATE_DONE) {
+				it.remove();
+				System.out.println("Removing enemy");
+			}
+		}
+	}
+
 	private void updateEffects(float deltaTime) {
 		updateEffectsList(deltaTime, effects);
 		updateEffectsList(deltaTime, addEffects);
@@ -194,7 +222,6 @@ public class World {
 			Effect e = it.next();
 			if (e.state() == Effect.STATE_DONE) {
 				it.remove();
-				System.out.println("Removing effect");
 			}
 		}
 	}
@@ -249,6 +276,13 @@ public class World {
 		addEffects.add(new BurningWallGlow(wall));
 	}
 	
+	protected void addFlamethrower(int col) {
+		float wallY = topScreenY();
+		FlamethrowerWall wall = new FlamethrowerWall(col, wallY);
+		walls_.add(wall);
+		activeWalls_.add(wall);
+	}
+	
 	public void addCoin(float x, Collectable.Type type) {
 		float yval = topScreenY();
 		Collectable coin = new Collectable(x, yval, type);
@@ -273,6 +307,9 @@ public class World {
 						floors_.addToColumn(wall.col());
 						floors_.addToColumn(wall.col() + 1);
 						SoundAssets.playRandomSound(SoundAssets.wallDualHit);
+					} else if (wall instanceof FlamethrowerWall){
+						floors_.addToColumn(wall.col());
+						SoundAssets.playSound(SoundAssets.flamethrowerStart);
 					} else {
 						floors_.addToColumn(wall.col());
 						SoundAssets.playRandomSound(SoundAssets.wallHit);
@@ -293,6 +330,15 @@ public class World {
 		for (Iterator<Wall> it = walls_.iterator(); it.hasNext();) {
 			Wall wall = it.next();
 			wall.updateStateTime(deltaTime);
+			
+			if (wall instanceof FlamethrowerWall) {
+				FlamethrowerWall f = (FlamethrowerWall) wall;
+				if (wall.status() == Wall.STATUS_INACTIVE && !f.flameAdded && wall.stateTime() > 1.1) {
+					f.flameAdded = true;
+					addEffects.add(new FlameEffect(new Vector2(new Vector2(wall.position.x, wall.position.y + 96))));
+					enemies_.add(new Flame(wall.position.x, wall.position.y + 96));
+				}
+			}
 			
 			if (wall.position.y < camTarget - 8*Wall.SIZE) {
 				wall.setStatus(Wall.STATUS_GONE);
