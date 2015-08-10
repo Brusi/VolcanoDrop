@@ -389,7 +389,14 @@ public class WorldRenderer {
 			break;
 		case Player.STATE_DIE:
 		case Player.STATE_DEAD:
-			return;
+			if (world.player.deathType == Player.DEATH_BY_BURN) {
+				keyFrame = getFrameDisappearAfterLastFrame(Assets.playerBurn, world.player.stateTime);
+			} else if (world.player.deathType == Player.DEATH_BY_CRUSH) {
+				keyFrame = getFrameDisappearAfterLastFrame(Assets.playerSquash, world.player.stateTime);
+			} else {
+				Gdx.app.log("ERROR", "Player is in death type: " + world.player.deathType);
+			}
+			keyFrame.setFlip(world.player.side, false);
 		default:
 			Gdx.app.log("ERROR", "Player is in invalid state: " + world.player.state());
 		}
@@ -403,6 +410,14 @@ public class WorldRenderer {
 	private Sprite getFrameStopAtLastFrame(Array<Sprite> anim, float stateTime) {
 		int frameIndex = (int) (stateTime * FPS);
 		frameIndex = Math.min(frameIndex, anim.size-1);
+		return anim.get(frameIndex);
+	}
+	
+	private Sprite getFrameDisappearAfterLastFrame(Array<Sprite> anim, float stateTime) {
+		int frameIndex = (int) (stateTime * FPS);
+		if (frameIndex > anim.size-1) {
+			return Assets.empty;
+		}
 		return anim.get(frameIndex);
 	}
 	

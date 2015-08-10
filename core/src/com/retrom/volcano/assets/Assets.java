@@ -36,6 +36,10 @@ public class Assets {
 	public static Array<Sprite> playerRunStart;
 	public static Array<Sprite> playerJump;
 	public static Array<Sprite> playerLand;
+	public static Array<Sprite> playerBurn;
+	public static Array<Sprite> playerSquash;
+	public static Sprite empty;
+	
 	
 	public static Array<Sprite> pillars;
 	public static Array<Sprite> pillars_big;
@@ -119,7 +123,6 @@ public class Assets {
 
 
 
-
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
 	}
@@ -140,6 +143,9 @@ public class Assets {
 		playerRunStart = playerSheet.createSprites("player_run_start");
 		playerJump = playerSheet.createSprites("player_jump");
 		playerLand = playerSheet.createSprites("player_land");
+		playerBurn = playerSheet.createSprites("player_die_burn");
+		playerSquash = playerSheet.createSprites("player_die_squash");
+		empty = playerSheet.createSprite("empty");
 
 		TextureAtlas environmentSheet = new TextureAtlas("walls/enviroment.txt");
 		pillars = environmentSheet.createSprites("pillars");

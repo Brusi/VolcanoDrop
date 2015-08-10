@@ -36,6 +36,9 @@ public class Player extends DynamicGameObject {
 	public static final int STATE_DIE = 5;
 	public static final int STATE_DEAD = 6;
 	
+	public static final int DEATH_BY_CRUSH = 1;
+	public static final int DEATH_BY_BURN = 2;
+	
 	public static final float MAX_ACCEL = 20f;
 	public static final float FRICTION_RATE = 0.001797f;
 	private static final float JUMP_VEL = 900;
@@ -45,6 +48,8 @@ public class Player extends DynamicGameObject {
 
 	private int state_ = STATE_IDLE;
 	float stateTime;
+	
+	public int deathType;
 	
 	boolean grounded_ = true;
 	
@@ -93,6 +98,7 @@ public class Player extends DynamicGameObject {
 	}
 
 	public void update (float deltaTime) {
+		stateTime += deltaTime;
 		if (state_ == STATE_DIE || state_ == STATE_DEAD) {
 			return;
 		}
@@ -116,7 +122,6 @@ public class Player extends DynamicGameObject {
 		} else {
 			setState(STATE_JUMPING);
 		}
-		stateTime += deltaTime;
 	}
 
 	private void setState(int state) {
@@ -150,6 +155,7 @@ public class Player extends DynamicGameObject {
 			if (wall.bounds.overlaps(this.bounds)) {
 				if (wall instanceof BurningWall) {
 					setState(STATE_DIE);
+					deathType = DEATH_BY_BURN;
 					return;
 				}
 			} 
@@ -162,11 +168,13 @@ public class Player extends DynamicGameObject {
 					grounded_ = true;
 					if (touchedFromTop) {
 						setState(STATE_DIE);
+						deathType = DEATH_BY_CRUSH;
 						return;
 					}
 				} else {
 					if (wasGrounded) {
 						setState(STATE_DIE);
+						deathType = DEATH_BY_CRUSH;
 						return;
 					} else { 
 						touchedFromTop = true;
@@ -186,6 +194,7 @@ public class Player extends DynamicGameObject {
 			if (wall.bounds.overlaps(this.bounds)) {
 				if (wall instanceof BurningWall) {
 					setState(STATE_DIE);
+					deathType = DEATH_BY_BURN;
 					return;
 				}
 			} 

@@ -444,11 +444,15 @@ public class World {
 				player.bounds.y = topScreenY();
 				return;
 			} else {
-			
 				player.deathAcknoladged();
-//				effects.add(new PlayerExplodeEffect(player.position));
 				addEffects.add(EffectFactory.playerExplodeEffect(player.position));
-				SoundAssets.playSound(SoundAssets.playerDeathCrush);
+				if (player.deathType == Player.DEATH_BY_BURN) {
+					SoundAssets.playSound(SoundAssets.playerDeathBurn);
+				} else if (player.deathType == Player.DEATH_BY_CRUSH) {
+					SoundAssets.playSound(SoundAssets.playerDeathCrush);
+				} else {
+					Gdx.app.error("ERROR", "Player death type not specified.");
+				}
 				worldEvents_.addEventFromNow(2f, new Event() {
 					@Override
 					public void invoke() {
@@ -456,7 +460,6 @@ public class World {
 						listener_.restartGame();
 					}
 				});
-				return;
 			}
 		}
 		
