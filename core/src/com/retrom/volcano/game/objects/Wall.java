@@ -9,7 +9,7 @@ import com.retrom.volcano.game.WorldRenderer;
 public class Wall extends DynamicGameObject {
 	
 	public static final float SIZE = 80f;
-	protected static final int NUM_COLS = 6;
+	public static final int NUM_COLS = 6;
 	private static final float GRAVITY_RATIO = 0.3f;
 	
 	public static int STATUS_ACTIVE = 1;

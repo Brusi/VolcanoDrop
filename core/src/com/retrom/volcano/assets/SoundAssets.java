@@ -36,12 +36,14 @@ public class SoundAssets {
 	public static Sound burningWallEnd;
 	public static Sound flamethrowerStart;
 	
+	public static Sound fireballStart;
+	public static Sound fireballEnd;
 	
 	private static Random rand = new Random();
 
+
 	
 	public static void load() {
-//
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/gameplay.mp3"));
 		music.setLooping(true);
 		music.setVolume(0.5f);
@@ -90,6 +92,9 @@ public class SoundAssets {
 		burningWallStart = newSound("burner_rock_start.wav");
 		burningWallEnd = newSound("burner_rock_end.wav");
 		flamethrowerStart = newSound("flamethrower_rock_start.wav");
+		
+		fireballStart = newSound("fireball_start.wav");
+		fireballEnd = newSound("fireball_end.wav");
 	}
 	
 	public static void playSound (Sound sound) {
@@ -117,5 +122,6 @@ public class SoundAssets {
 	public static void stopAllSounds() {
 		stopSound(powerupMagnetLoop);
 		stopSound(flamethrowerStart);
+		stopSound(fireballStart);
 	}
 }

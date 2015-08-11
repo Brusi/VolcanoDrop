@@ -1,6 +1,6 @@
 package com.retrom.volcano.game.objects;
 
-public class Enemy extends DynamicGameObject {
+public abstract class Enemy extends DynamicGameObject {
 	
 	public static final int STATE_ACTIVE = 1;
 	public static final int STATE_DONE = 2;
@@ -27,7 +27,23 @@ public class Enemy extends DynamicGameObject {
 		return state_;
 	}
 
-	public float StateTime() {
+	public float stateTime() {
 		return stateTime_;
+	}
+	
+
+	protected void setState(int state) {
+		if (state_ == state) {
+			return;
+		}
+		state_ = state;
+		stateTime_ = 0;
+	}
+	
+	public abstract <T> T accept(Visitor<T> v);
+	
+	public static interface Visitor<T> {
+		T visit(Flame flame);
+		T visit(TopFireball topFireball);
 	}
 }

@@ -25,6 +25,10 @@ public class FiniteAnimationEffect extends Effect {
 		rotation_ = (float) Math.random() * 360;
 	}
 	
+	public void setNoRotation() {
+		rotation_ = 0f;
+	}
+	
 	public void setRandomScale(float minScale, float maxScale) {
 		scale_ = (float) Math.random() * (maxScale - minScale) + minScale; 
 	}

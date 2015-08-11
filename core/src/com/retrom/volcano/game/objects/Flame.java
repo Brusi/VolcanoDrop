@@ -11,8 +11,13 @@ public class Flame extends Enemy {
 	
 	@Override
 	protected void childSpecificUpdating() {
-		if (StateTime() >= duration) {
+		if (stateTime() >= duration) {
 			state_ = Enemy.STATE_DONE;
 		}
+	}
+
+	@Override
+	public <T> T accept(Visitor<T> v) {
+		return v.visit(this);
 	}
 }

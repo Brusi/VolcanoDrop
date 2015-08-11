@@ -110,6 +110,8 @@ public class Assets {
 	// vfx:
 	public static Array<Sprite> playerExplode;
 	public static Array<Sprite> coinCrushedEffect;
+	public static Array<Sprite> fireballExplodeEffect;
+	public static Array<Sprite> fireballStartEffect;
 	
 	// Glow:
 	public static Sprite burningWallGlow;
@@ -124,10 +126,11 @@ public class Assets {
 	public static Array<Sprite> flamethrowerAll;
 	public static Array<Sprite> flamethrowerFlame;
 	
+	public static Array<Sprite> topFireballLoop;
+	
 	public static TextureRegion player;
 	
 	public static TextureRegion powerupMagnet;
-
 
 
 
@@ -255,7 +258,13 @@ public class Assets {
 		flamethrower = enemiesSheet.createSprite("flamethrower");
 		flamethrowerAll = enemiesSheet.createSprites("flamethrower_all");
 		
-		TextureAtlas enemiesAddSheet = new TextureAtlas("enemies/enemies_add.txt");
-		flamethrowerFlame = enemiesAddSheet.createSprites("flamethrower_flame");
+		topFireballLoop = enemiesSheet.createSprites("fireball_loop");
+		
+		TextureAtlas enemiesAddSheet1 = new TextureAtlas("enemies/enemies_add_1.txt");
+		flamethrowerFlame = enemiesAddSheet1.createSprites("flamethrower_flame");
+		fireballStartEffect = enemiesAddSheet1.createSprites("fireball_start");
+		
+		TextureAtlas enemiesAddSheet2 = new TextureAtlas("enemies/enemies_add_2.txt");
+		fireballExplodeEffect = enemiesAddSheet2.createSprites("fireball_end");
 	}
 }

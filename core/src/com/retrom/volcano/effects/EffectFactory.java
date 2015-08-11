@@ -50,5 +50,15 @@ public class EffectFactory {
 		$.setRandomScale(0.75f, 1f);
 		return $;
 	}
-	
+
+	public static Effect fireballExpodeEffect(Vector2 position) {
+		FiniteAnimationEffect $ = new FiniteAnimationEffect(Assets.fireballExplodeEffect, position);
+		$.setNoRotation();
+		return $;
+	}
+
+	public static Effect fireballStartEffect(Vector2 position) {
+		FiniteAnimationEffect $ = new FiniteAnimationEffect(Assets.fireballStartEffect, position);
+		return $;
+	}
 }

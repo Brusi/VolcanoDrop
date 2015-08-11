@@ -26,7 +26,12 @@ public class BurningWallGlow extends OneFrameEffect {
 		$.setColor(glowAlpha, glowAlpha, glowAlpha, glowAlpha);
 		
 	}
-
+	
+	@Override
+	public float getScale() {
+		return 0.75f;
+	}
+	
 	private float getGlowAlpha() {
 		if (wall_.status() == Wall.STATUS_ACTIVE) {
 			if (wall_.stateTime() < BurningWall.TIME_WITHOUT_BURN) {

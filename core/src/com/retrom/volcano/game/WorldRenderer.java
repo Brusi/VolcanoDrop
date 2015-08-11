@@ -46,7 +46,10 @@ import com.retrom.volcano.effects.Score5Effect;
 import com.retrom.volcano.effects.Score6Effect;
 import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.Collectable;
+import com.retrom.volcano.game.objects.Enemy;
+import com.retrom.volcano.game.objects.Flame;
 import com.retrom.volcano.game.objects.FlamethrowerWall;
+import com.retrom.volcano.game.objects.TopFireball;
 import com.retrom.volcano.game.objects.Wall;
 
 public class WorldRenderer {
@@ -153,6 +156,7 @@ public class WorldRenderer {
 		batch.begin();
 		renderWalls();
 		renderPlayer();
+		renderEnemies();
 		renderCoins();
 		renderFloor();
 		drawPillar(world.background.leftPillar, FRUSTUM_WIDTH / 2 - 40, world.background.leftBaseY());
@@ -167,6 +171,26 @@ public class WorldRenderer {
 		// TODO: draw "add" and "screen" effects.
 		
 		batch.end();
+	}
+
+	private void renderEnemies() {
+		for (Enemy e : world.enemies_) {
+			Sprite s = e.accept(new Enemy.Visitor<Sprite>() {
+				@Override
+				public Sprite visit(Flame flame) {
+					return null;
+				}
+
+				@Override
+				public Sprite visit(TopFireball topFireball) {
+					return getFrameLoop(Assets.topFireballLoop, topFireball.stateTime()); 
+				}
+			});
+			if (s == null) {
+				continue;
+			}
+			drawCenter(s, e.position);
+		}
 	}
 
 	private void renderEffects(List<Effect> effects) {

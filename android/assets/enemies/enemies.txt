@@ -506,919 +506,1129 @@ burning_wall_start
   orig: 102, 105
   offset: 0, 0
   index: 19
-flamethrower
+fireball_loop
   rotate: false
   xy: 1562, 323
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 0
+fireball_loop
+  rotate: false
+  xy: 1610, 323
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 1
+fireball_loop
+  rotate: false
+  xy: 1658, 323
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 2
+fireball_loop
+  rotate: false
+  xy: 1706, 323
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 3
+fireball_loop
+  rotate: false
+  xy: 1754, 323
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 4
+fireball_loop
+  rotate: false
+  xy: 1802, 323
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 5
+fireball_loop
+  rotate: false
+  xy: 1850, 323
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 6
+fireball_loop
+  rotate: false
+  xy: 1898, 323
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 7
+fireball_loop
+  rotate: false
+  xy: 1946, 323
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 8
+fireball_loop
+  rotate: false
+  xy: 1994, 323
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 9
+fireball_loop
+  rotate: false
+  xy: 2, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 10
+fireball_loop
+  rotate: false
+  xy: 50, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 11
+fireball_loop
+  rotate: false
+  xy: 98, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 12
+fireball_loop
+  rotate: false
+  xy: 146, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 13
+fireball_loop
+  rotate: false
+  xy: 194, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 14
+fireball_loop
+  rotate: false
+  xy: 242, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 15
+fireball_loop
+  rotate: false
+  xy: 290, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 16
+fireball_loop
+  rotate: false
+  xy: 338, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 17
+fireball_loop
+  rotate: false
+  xy: 386, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 18
+fireball_loop
+  rotate: false
+  xy: 434, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 19
+fireball_loop
+  rotate: false
+  xy: 482, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 20
+fireball_loop
+  rotate: false
+  xy: 530, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 21
+fireball_loop
+  rotate: false
+  xy: 578, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 22
+fireball_loop
+  rotate: false
+  xy: 626, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 23
+fireball_loop
+  rotate: false
+  xy: 674, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 24
+fireball_loop
+  rotate: false
+  xy: 722, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 25
+fireball_loop
+  rotate: false
+  xy: 770, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 26
+fireball_loop
+  rotate: false
+  xy: 818, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 27
+fireball_loop
+  rotate: false
+  xy: 866, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 28
+fireball_loop
+  rotate: false
+  xy: 914, 443
+  size: 46, 118
+  orig: 46, 118
+  offset: 0, 0
+  index: 29
+flamethrower
+  rotate: false
+  xy: 962, 443
   size: 80, 82
   orig: 80, 82
   offset: 0, 0
   index: 1
 flamethrower_all
   rotate: false
-  xy: 1644, 323
+  xy: 1044, 443
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 0
 flamethrower_all
   rotate: false
-  xy: 1746, 323
+  xy: 1146, 443
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 1
 flamethrower_all
   rotate: false
-  xy: 1848, 323
+  xy: 1248, 443
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 2
 flamethrower_all
   rotate: false
-  xy: 2, 430
+  xy: 1350, 443
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 3
 flamethrower_all
   rotate: false
-  xy: 2, 430
+  xy: 1350, 443
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 4
 flamethrower_all
   rotate: false
-  xy: 104, 430
+  xy: 1452, 443
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 5
 flamethrower_all
   rotate: false
-  xy: 206, 430
+  xy: 1554, 443
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 6
 flamethrower_all
   rotate: false
-  xy: 308, 430
+  xy: 1656, 443
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 7
 flamethrower_all
   rotate: false
-  xy: 410, 430
+  xy: 1758, 443
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 8
 flamethrower_all
   rotate: false
-  xy: 512, 430
+  xy: 1860, 443
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 9
 flamethrower_all
   rotate: false
-  xy: 614, 430
+  xy: 2, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 10
 flamethrower_all
   rotate: false
-  xy: 716, 430
+  xy: 104, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 11
 flamethrower_all
   rotate: false
-  xy: 818, 430
+  xy: 206, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 12
 flamethrower_all
   rotate: false
-  xy: 920, 430
+  xy: 308, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 13
 flamethrower_all
   rotate: false
-  xy: 1022, 430
+  xy: 410, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 14
 flamethrower_all
   rotate: false
-  xy: 1124, 430
+  xy: 512, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 15
 flamethrower_all
   rotate: false
-  xy: 1226, 430
+  xy: 614, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 16
 flamethrower_all
   rotate: false
-  xy: 1328, 430
+  xy: 716, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 17
 flamethrower_all
   rotate: false
-  xy: 1430, 430
+  xy: 818, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 18
 flamethrower_all
   rotate: false
-  xy: 1532, 430
+  xy: 920, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 19
 flamethrower_all
   rotate: false
-  xy: 1634, 430
+  xy: 1022, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 20
 flamethrower_all
   rotate: false
-  xy: 1736, 430
+  xy: 1124, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 21
 flamethrower_all
   rotate: false
-  xy: 1838, 430
+  xy: 1226, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 22
 flamethrower_all
   rotate: false
-  xy: 1940, 430
+  xy: 1328, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 23
 flamethrower_all
   rotate: false
-  xy: 2, 535
+  xy: 1430, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 24
 flamethrower_all
   rotate: false
-  xy: 104, 535
+  xy: 1532, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 25
 flamethrower_all
   rotate: false
-  xy: 206, 535
+  xy: 1634, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 26
 flamethrower_all
   rotate: false
-  xy: 308, 535
+  xy: 1736, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 27
 flamethrower_all
   rotate: false
-  xy: 410, 535
+  xy: 1838, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 28
 flamethrower_all
   rotate: false
-  xy: 512, 535
+  xy: 1940, 563
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 29
 flamethrower_all
   rotate: false
-  xy: 614, 535
+  xy: 2, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 30
 flamethrower_all
   rotate: false
-  xy: 716, 535
+  xy: 104, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 31
 flamethrower_all
   rotate: false
-  xy: 818, 535
+  xy: 206, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 32
 flamethrower_all
   rotate: false
-  xy: 920, 535
+  xy: 308, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 33
 flamethrower_all
   rotate: false
-  xy: 1022, 535
+  xy: 410, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 34
 flamethrower_all
   rotate: false
-  xy: 1124, 535
+  xy: 512, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 35
 flamethrower_all
   rotate: false
-  xy: 1226, 535
+  xy: 614, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 36
 flamethrower_all
   rotate: false
-  xy: 1328, 535
+  xy: 716, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 37
 flamethrower_all
   rotate: false
-  xy: 1430, 535
+  xy: 818, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 38
 flamethrower_all
   rotate: false
-  xy: 1532, 535
+  xy: 920, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 39
 flamethrower_all
   rotate: false
-  xy: 1634, 535
+  xy: 1022, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 40
 flamethrower_all
   rotate: false
-  xy: 1736, 535
+  xy: 1124, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 41
 flamethrower_all
   rotate: false
-  xy: 1838, 535
+  xy: 1226, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 42
 flamethrower_all
   rotate: false
-  xy: 1940, 535
+  xy: 1328, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 43
 flamethrower_all
   rotate: false
-  xy: 2, 640
+  xy: 1430, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 44
 flamethrower_all
   rotate: false
-  xy: 104, 640
+  xy: 1532, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 45
 flamethrower_all
   rotate: false
-  xy: 206, 640
+  xy: 1634, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 46
 flamethrower_all
   rotate: false
-  xy: 308, 640
+  xy: 1736, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 47
 flamethrower_all
   rotate: false
-  xy: 410, 640
+  xy: 1838, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 48
 flamethrower_all
   rotate: false
-  xy: 512, 640
+  xy: 1940, 668
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 49
 flamethrower_all
   rotate: false
-  xy: 614, 640
+  xy: 2, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 50
 flamethrower_all
   rotate: false
-  xy: 716, 640
+  xy: 104, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 51
 flamethrower_all
   rotate: false
-  xy: 818, 640
+  xy: 206, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 52
 flamethrower_all
   rotate: false
-  xy: 920, 640
+  xy: 308, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 53
 flamethrower_all
   rotate: false
-  xy: 1022, 640
+  xy: 410, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 54
 flamethrower_all
   rotate: false
-  xy: 1022, 640
+  xy: 410, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 55
 flamethrower_all
   rotate: false
-  xy: 1124, 640
+  xy: 512, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 56
 flamethrower_all
   rotate: false
-  xy: 1226, 640
+  xy: 614, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 57
 flamethrower_all
   rotate: false
-  xy: 1328, 640
+  xy: 716, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 58
 flamethrower_all
   rotate: false
-  xy: 1430, 640
+  xy: 818, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 59
 flamethrower_all
   rotate: false
-  xy: 1532, 640
+  xy: 920, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 60
 flamethrower_all
   rotate: false
-  xy: 1634, 640
+  xy: 1022, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 61
 flamethrower_all
   rotate: false
-  xy: 1634, 640
+  xy: 1022, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 82
 flamethrower_all
   rotate: false
-  xy: 1736, 640
+  xy: 1124, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 62
 flamethrower_all
   rotate: false
-  xy: 1736, 640
+  xy: 1124, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 81
 flamethrower_all
   rotate: false
-  xy: 1736, 640
+  xy: 1124, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 105
 flamethrower_all
   rotate: false
-  xy: 1838, 640
+  xy: 1226, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 63
 flamethrower_all
   rotate: false
-  xy: 1940, 640
+  xy: 1328, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 64
 flamethrower_all
   rotate: false
-  xy: 2, 745
+  xy: 1430, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 65
 flamethrower_all
   rotate: false
-  xy: 104, 745
+  xy: 1532, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 66
 flamethrower_all
   rotate: false
-  xy: 206, 745
+  xy: 1634, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 67
 flamethrower_all
   rotate: false
-  xy: 308, 745
+  xy: 1736, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 68
 flamethrower_all
   rotate: false
-  xy: 410, 745
+  xy: 1838, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 69
 flamethrower_all
   rotate: false
-  xy: 512, 745
+  xy: 1940, 773
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 70
 flamethrower_all
   rotate: false
-  xy: 614, 745
+  xy: 2, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 71
 flamethrower_all
   rotate: false
-  xy: 716, 745
+  xy: 104, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 72
 flamethrower_all
   rotate: false
-  xy: 818, 745
+  xy: 206, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 73
 flamethrower_all
   rotate: false
-  xy: 920, 745
+  xy: 308, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 74
 flamethrower_all
   rotate: false
-  xy: 1022, 745
+  xy: 410, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 75
 flamethrower_all
   rotate: false
-  xy: 1022, 745
+  xy: 410, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 100
 flamethrower_all
   rotate: false
-  xy: 1124, 745
+  xy: 512, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 76
 flamethrower_all
   rotate: false
-  xy: 1226, 745
+  xy: 614, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 77
 flamethrower_all
   rotate: false
-  xy: 1328, 745
+  xy: 716, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 78
 flamethrower_all
   rotate: false
-  xy: 1430, 745
+  xy: 818, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 79
 flamethrower_all
   rotate: false
-  xy: 1532, 745
+  xy: 920, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 80
 flamethrower_all
   rotate: false
-  xy: 1634, 745
+  xy: 1022, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 83
 flamethrower_all
   rotate: false
-  xy: 1736, 745
+  xy: 1124, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 84
 flamethrower_all
   rotate: false
-  xy: 1838, 745
+  xy: 1226, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 85
 flamethrower_all
   rotate: false
-  xy: 1940, 745
+  xy: 1328, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 86
 flamethrower_all
   rotate: false
-  xy: 2, 850
+  xy: 1430, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 87
 flamethrower_all
   rotate: false
-  xy: 104, 850
+  xy: 1532, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 88
 flamethrower_all
   rotate: false
-  xy: 206, 850
+  xy: 1634, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 89
 flamethrower_all
   rotate: false
-  xy: 308, 850
+  xy: 1736, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 90
 flamethrower_all
   rotate: false
-  xy: 410, 850
+  xy: 1838, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 91
 flamethrower_all
   rotate: false
-  xy: 512, 850
+  xy: 1940, 878
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 92
 flamethrower_all
   rotate: false
-  xy: 614, 850
+  xy: 2, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 93
 flamethrower_all
   rotate: false
-  xy: 716, 850
+  xy: 104, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 94
 flamethrower_all
   rotate: false
-  xy: 818, 850
+  xy: 206, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 95
 flamethrower_all
   rotate: false
-  xy: 920, 850
+  xy: 308, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 96
 flamethrower_all
   rotate: false
-  xy: 1022, 850
+  xy: 410, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 97
 flamethrower_all
   rotate: false
-  xy: 1124, 850
+  xy: 512, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 98
 flamethrower_all
   rotate: false
-  xy: 1226, 850
+  xy: 614, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 99
 flamethrower_all
   rotate: false
-  xy: 1328, 850
+  xy: 716, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 101
 flamethrower_all
   rotate: false
-  xy: 1430, 850
+  xy: 818, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 102
 flamethrower_all
   rotate: false
-  xy: 1532, 850
+  xy: 920, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 103
 flamethrower_all
   rotate: false
-  xy: 1634, 850
+  xy: 1022, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 104
 flamethrower_all
   rotate: false
-  xy: 1736, 850
+  xy: 1124, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 106
 flamethrower_all
   rotate: false
-  xy: 1838, 850
+  xy: 1226, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 107
 flamethrower_all
   rotate: false
-  xy: 1940, 850
+  xy: 1328, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 108
 flamethrower_all
   rotate: false
-  xy: 2, 955
+  xy: 1430, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 109
 flamethrower_all
   rotate: false
-  xy: 104, 955
+  xy: 1532, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 110
 flamethrower_all
   rotate: false
-  xy: 206, 955
+  xy: 1634, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 111
 flamethrower_all
   rotate: false
-  xy: 308, 955
+  xy: 1736, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 112
 flamethrower_all
   rotate: false
-  xy: 410, 955
+  xy: 1838, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 113
 flamethrower_all
   rotate: false
-  xy: 512, 955
+  xy: 1940, 983
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 114
 flamethrower_all
   rotate: false
-  xy: 614, 955
+  xy: 2, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 115
 flamethrower_all
   rotate: false
-  xy: 716, 955
+  xy: 104, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 116
 flamethrower_all
   rotate: false
-  xy: 818, 955
+  xy: 206, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 117
 flamethrower_all
   rotate: false
-  xy: 920, 955
+  xy: 308, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 118
 flamethrower_all
   rotate: false
-  xy: 1022, 955
+  xy: 410, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 119
 flamethrower_all
   rotate: false
-  xy: 1124, 955
+  xy: 512, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 120
 flamethrower_all
   rotate: false
-  xy: 1226, 955
+  xy: 614, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 121
 flamethrower_all
   rotate: false
-  xy: 1328, 955
+  xy: 716, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 122
 flamethrower_all
   rotate: false
-  xy: 1430, 955
+  xy: 818, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 123
 flamethrower_all
   rotate: false
-  xy: 1532, 955
+  xy: 920, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 124
 flamethrower_all
   rotate: false
-  xy: 1634, 955
+  xy: 1022, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 125
 flamethrower_all
   rotate: false
-  xy: 1736, 955
+  xy: 1124, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 126
 flamethrower_all
   rotate: false
-  xy: 1838, 955
+  xy: 1226, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 127
 flamethrower_all
   rotate: false
-  xy: 1940, 955
+  xy: 1328, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0
   index: 128
 flamethrower_all
   rotate: false
-  xy: 2, 1060
+  xy: 1430, 1088
   size: 100, 103
   orig: 100, 103
   offset: 0, 0

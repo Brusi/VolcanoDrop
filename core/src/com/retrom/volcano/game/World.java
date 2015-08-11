@@ -46,6 +46,7 @@ import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Enemy;
 import com.retrom.volcano.game.objects.Flame;
 import com.retrom.volcano.game.objects.FlamethrowerWall;
+import com.retrom.volcano.game.objects.TopFireball;
 import com.retrom.volcano.game.objects.WallDual;
 import com.retrom.volcano.game.objects.Wall;
 import com.retrom.volcano.game.objects.WallSingle;
@@ -128,6 +129,11 @@ public class World {
 			public void dropFlamethrower(int col) {
 				addFlamethrower(col);
 			}
+
+			@Override
+			public void dropFireball(int col) {
+				prepareFireball(col);
+			}
 		});
 	}
 
@@ -143,11 +149,14 @@ public class World {
 			addCoin((float) (Math.random() * 200), Collectable.Type.COIN_3_2);
 		}
 		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+//			addFireball((int) Math.floor(Math.random() * 6));
+		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+			prepareFireball((int) Math.floor(Math.random() * 6));
+		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-//			screenEffects.add(EffectFactory.coinCrushedEffect(new Vector2(100,100)));
-//			addEffects.add(EffectFactory.coinCrushedEffect(new Vector2(-100,100)));
-			
-			addEffects.add(new FlameGlowEffect(new Vector2(100,100)));
+			addEffects.add(EffectFactory.fireballStartEffect(new Vector2(100,100)));
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
@@ -197,10 +206,35 @@ public class World {
 	private void updateEnemies(float deltaTime) {
 		for (Enemy e : enemies_) {
 			e.update(deltaTime);
-			if (e.bounds.overlaps(player.bounds) && !player.isDead()) {
-				
-				player.killByBurn();
-			}
+			e.accept(new Enemy.Visitor<Void>() {
+				@Override
+				public Void visit(Flame flame) {
+					if (flame.bounds.overlaps(player.bounds) && !player.isDead()) {
+						player.killByBurn();
+					}
+					return null;
+				}
+
+				@Override
+				public Void visit(TopFireball fireball) {
+					if (fireball.state() == Enemy.STATE_ACTIVE && fireball.bounds.overlaps(player.bounds) && !player.isDead()) {
+						player.killByBurn();
+						fireball.explode();
+					} else if (fireball.state() == Enemy.STATE_ACTIVE) {
+						for (Rectangle obstacle : obstacles_) {
+							if (fireball.bounds.overlaps(obstacle)) {
+								fireball.explode();
+							}
+						}
+					}
+					if (fireball.state() == Enemy.STATE_DONE) {
+						System.out.println("boom!");
+						addEffects.add(EffectFactory.fireballExpodeEffect(new Vector2(fireball.position.x, fireball.position.y + 10f)));
+						SoundAssets.playSound(SoundAssets.fireballEnd);
+					}
+					return null;
+				}
+			});
 		}
 		for (Iterator<Enemy> it = enemies_.iterator(); it.hasNext();) {
 			Enemy e = it.next();
@@ -254,6 +288,23 @@ public class World {
 
 	private float topScreenY() {
 		return floors_.getTotalBlocks() / 6f * Wall.SIZE + 12*Wall.SIZE;
+	}
+	
+	private void prepareFireball(final int col) {
+		final float y = topScreenY() - TopFireball.DISTANCE_FROM_TOP;
+		addEffects.add(EffectFactory.fireballStartEffect(new Vector2(Utils
+				.xOfCol(col), y)));
+		SoundAssets.playSound(SoundAssets.fireballStart);
+		worldEvents_.addEventFromNow(TopFireball.PREPARATION_DELAY, new Event() {
+			@Override
+			public void invoke() {
+				addFireball(col, y);
+			}
+		});
+	}
+	
+	private void addFireball(int col, float y) {
+		enemies_.add(new TopFireball(col, y));
 	}
 	
 	public void addWall(int col) {
