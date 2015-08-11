@@ -101,13 +101,13 @@ public class WorldRenderer {
 	public void renderBackground () {
 		batch.disableBlending();
 		batch.begin();
-		drawPillar(world.background.bgPillar, 0, world.background.bgBaseY());
+		drawPillar(world.background.bgPillar, 0, world.background.bgBaseY(), false);
 		batch.end();
 	}
 	
-	public void drawPillar(Deque<Background.Element> pillar, float x, float y) {
+	public void drawPillar(Deque<Background.Element> pillar, float x, float y, boolean flip) {
 		for (Background.Element e : pillar) {
-			TextureRegion keyFrame = null;
+			Sprite keyFrame = null;
 			switch (e) {
 			case PILLAR_1:
 			case PILLAR_2:
@@ -132,7 +132,7 @@ public class WorldRenderer {
 				Gdx.app.log("ERROR", "Unhandled pillar type: " + e);
 				break;
 			}
-			
+			keyFrame.setFlip(flip, false);
 			drawCenterBottom(keyFrame, x, y);
 			y += e.height();
 		}
@@ -159,8 +159,8 @@ public class WorldRenderer {
 		renderEnemies();
 		renderCoins();
 		renderFloor();
-		drawPillar(world.background.leftPillar, FRUSTUM_WIDTH / 2 - 40, world.background.leftBaseY());
-		drawPillar(world.background.rightPillar, -(FRUSTUM_WIDTH / 2 - 40), world.background.rightBaseY());
+		drawPillar(world.background.leftPillar, -(FRUSTUM_WIDTH / 2 - 40), world.background.rightBaseY(), false);
+		drawPillar(world.background.rightPillar, FRUSTUM_WIDTH / 2 - 40, world.background.leftBaseY(), true);
 		
 		renderEffects(world.effects);
 		setBlendFuncScreen();
