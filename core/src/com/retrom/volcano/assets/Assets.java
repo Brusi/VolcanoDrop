@@ -258,13 +258,13 @@ public class Assets {
 		flamethrower = enemiesSheet.createSprite("flamethrower");
 		flamethrowerAll = enemiesSheet.createSprites("flamethrower_all");
 		
-		topFireballLoop = enemiesSheet.createSprites("fireball_loop");
 		
 		TextureAtlas enemiesAddSheet1 = new TextureAtlas("enemies/enemies_add_1.txt");
 		flamethrowerFlame = enemiesAddSheet1.createSprites("flamethrower_flame");
-		fireballStartEffect = enemiesAddSheet1.createSprites("fireball_start");
+		fireballExplodeEffect = enemiesAddSheet1.createSprites("fireball_end");
+		topFireballLoop = enemiesAddSheet1.createSprites("fireball_loop");
 		
 		TextureAtlas enemiesAddSheet2 = new TextureAtlas("enemies/enemies_add_2.txt");
-		fireballExplodeEffect = enemiesAddSheet2.createSprites("fireball_end");
+		fireballStartEffect = enemiesAddSheet2.createSprites("fireball_start");
 	}
 }

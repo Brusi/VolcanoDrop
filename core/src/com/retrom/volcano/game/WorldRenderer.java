@@ -32,6 +32,7 @@ import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectVisitor;
 import com.retrom.volcano.effects.FiniteAnimationEffect;
+import com.retrom.volcano.effects.FireballAnimationEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.OneFrameEffect;
 import com.retrom.volcano.effects.Score10Effect;
@@ -183,7 +184,8 @@ public class WorldRenderer {
 
 				@Override
 				public Sprite visit(TopFireball topFireball) {
-					return getFrameLoop(Assets.topFireballLoop, topFireball.stateTime()); 
+//					return getFrameLoop(Assets.topFireballLoop, topFireball.stateTime());
+					return null;
 				}
 			});
 			if (s == null) {
@@ -291,6 +293,11 @@ public class WorldRenderer {
 				@Override
 				public Sprite visit(FlameEffect effect) {
 					return getFrameStopAtLastFrame(Assets.flamethrowerFlame, effect.stateTime());
+				}
+
+				@Override
+				public Sprite visit(FireballAnimationEffect effect) {
+					return getFrameLoop(Assets.topFireballLoop, effect.stateTime());
 				}
 			});
 			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);

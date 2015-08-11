@@ -28,6 +28,8 @@ import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.effects.BurningWallGlow;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectFactory;
+import com.retrom.volcano.effects.FireballAnimationEffect;
+import com.retrom.volcano.effects.FireballGlow;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.FlameGlowEffect;
 import com.retrom.volcano.effects.Score10Effect;
@@ -304,7 +306,10 @@ public class World {
 	}
 	
 	private void addFireball(int col, float y) {
-		enemies_.add(new TopFireball(col, y));
+		TopFireball fireball = new TopFireball(col, y); 
+		enemies_.add(fireball);
+		addEffects.add(new FireballAnimationEffect(fireball));
+		addEffects.add(new FireballGlow(fireball));
 	}
 	
 	public void addWall(int col) {
@@ -326,7 +331,6 @@ public class World {
 		BurningWall wall = new BurningWall(col, wallY);
 		walls_.add(wall);
 		activeWalls_.add(wall);
-		
 		addEffects.add(new BurningWallGlow(wall));
 	}
 	

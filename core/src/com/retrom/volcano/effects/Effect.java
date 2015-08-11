@@ -10,7 +10,7 @@ public abstract class Effect {
 	public Vector2 velocity_;
 	
 	private float stateTime_ = 0;
-	private int state_;
+	protected int state_;
 	
 	private final float duration_;
 	
