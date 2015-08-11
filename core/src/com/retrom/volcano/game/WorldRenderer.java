@@ -160,8 +160,8 @@ public class WorldRenderer {
 		renderEnemies();
 		renderCoins();
 		renderFloor();
-		drawPillar(world.background.leftPillar, -(FRUSTUM_WIDTH / 2 - 40), world.background.rightBaseY(), false);
-		drawPillar(world.background.rightPillar, FRUSTUM_WIDTH / 2 - 40, world.background.leftBaseY(), true);
+		drawPillar(world.background.leftPillar, -(FRUSTUM_WIDTH / 2 - 40), world.background.leftBaseY(), false);
+		drawPillar(world.background.rightPillar, FRUSTUM_WIDTH / 2 - 40, world.background.rightBaseY(), true);
 		
 		renderEffects(world.effects);
 		setBlendFuncScreen();
