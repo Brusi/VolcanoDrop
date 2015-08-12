@@ -15,7 +15,7 @@ public class FireballGlow extends OneFrameEffect {
 	}
 	
 	@Override
-	protected void childSpecificUpdating() {
+	protected void childSpecificUpdating(float deltaTime) {
 		this.position_.y = fireball_.position.y - 30f;
 	}
 	

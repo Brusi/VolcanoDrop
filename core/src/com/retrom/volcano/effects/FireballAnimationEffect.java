@@ -18,7 +18,7 @@ public class FireballAnimationEffect extends Effect {
 	}
 	
 	@Override
-	protected void childSpecificUpdating() {
+	protected void childSpecificUpdating(float deltaTime) {
 		if (fireball_.state() == Enemy.STATE_DONE) {
 			state_ = Effect.STATE_DONE;
 		}

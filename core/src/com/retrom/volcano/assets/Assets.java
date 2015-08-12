@@ -107,6 +107,14 @@ public class Assets {
 	public static Array<Sprite> purpleDiamondCollectEffect1;
 	public static Array<Sprite> purpleDiamondCollectEffect2;
 	
+	// Score particles:
+	public static Array<Sprite> bronzeCoinBreak;
+	public static Array<Sprite> silverCoinBreak;
+	public static Array<Sprite> goldCoinBreak;
+	public static Array<Sprite> greenDiamondBreak;
+	public static Array<Sprite> purpleDiamondBreak;
+	public static Array<Sprite> cyanDiamondBreak;
+	
 	// vfx:
 	public static Array<Sprite> playerExplode;
 	public static Array<Sprite> coinCrushedEffect;
@@ -216,6 +224,13 @@ public class Assets {
 		coin5_2_land = treasure.createSprites("coin_5_2_land/coin_5_2_land");
 		coin5_3_land = treasure.createSprites("coin_5_3_land/coin_5_3_land");
 		coin5_4_land = treasure.createSprites("coin_5_4_land/coin_5_4_land");
+		
+		bronzeCoinBreak = treasure.createSprites("coins_bronze_break");
+		silverCoinBreak = treasure.createSprites("coins_silver_break");
+		goldCoinBreak = treasure.createSprites("coins_gold_break");
+		greenDiamondBreak = treasure.createSprites("coins_diamonds_green_break");
+		purpleDiamondBreak = treasure.createSprites("coins_diamonds_purple_break");
+		cyanDiamondBreak = treasure.createSprites("coins_diamonds_cyan_break");
 		
 		TextureAtlas scoreNumsSheet = new TextureAtlas("treasure/score_num.txt");
 		scoreNum1 = scoreNumsSheet.createSprite("gui_score_+1");

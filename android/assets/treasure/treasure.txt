@@ -2424,709 +2424,793 @@ coin_5_4_land/coin_5_4_land
   orig: 44, 45
   offset: 0, 0
   index: 19
-gold_sack
+coins_bronze_break
   rotate: false
   xy: 646, 529
+  size: 15, 14
+  orig: 15, 14
+  offset: 0, 0
+  index: 1
+coins_bronze_break
+  rotate: false
+  xy: 663, 529
+  size: 16, 25
+  orig: 16, 25
+  offset: 0, 0
+  index: 2
+coins_diamonds_cyan_break
+  rotate: false
+  xy: 681, 529
+  size: 33, 32
+  orig: 33, 32
+  offset: 0, 0
+  index: 1
+coins_diamonds_cyan_break
+  rotate: false
+  xy: 716, 529
+  size: 30, 29
+  orig: 30, 29
+  offset: 0, 0
+  index: 2
+coins_diamonds_green_break
+  rotate: false
+  xy: 748, 529
+  size: 23, 28
+  orig: 23, 28
+  offset: 0, 0
+  index: 1
+coins_diamonds_green_break
+  rotate: false
+  xy: 773, 529
+  size: 26, 28
+  orig: 26, 28
+  offset: 0, 0
+  index: 2
+coins_diamonds_purple_break
+  rotate: false
+  xy: 801, 529
+  size: 28, 32
+  orig: 28, 32
+  offset: 0, 0
+  index: 1
+coins_diamonds_purple_break
+  rotate: false
+  xy: 831, 529
+  size: 30, 28
+  orig: 30, 28
+  offset: 0, 0
+  index: 2
+coins_gold_break
+  rotate: false
+  xy: 863, 529
+  size: 20, 29
+  orig: 20, 29
+  offset: 0, 0
+  index: 1
+coins_gold_break
+  rotate: false
+  xy: 885, 529
+  size: 17, 19
+  orig: 17, 19
+  offset: 0, 0
+  index: 2
+coins_silver_break
+  rotate: false
+  xy: 904, 529
+  size: 17, 20
+  orig: 17, 20
+  offset: 0, 0
+  index: 1
+coins_silver_break
+  rotate: false
+  xy: 923, 529
+  size: 18, 19
+  orig: 18, 19
+  offset: 0, 0
+  index: 2
+gold_sack
+  rotate: false
+  xy: 943, 529
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 1
 gold_sack
   rotate: false
-  xy: 737, 529
+  xy: 1034, 529
   size: 74, 71
   orig: 74, 71
   offset: 0, 0
   index: 3
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 813, 529
+  xy: 1110, 529
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 77
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 904, 529
+  xy: 1201, 529
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 78
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 995, 529
+  xy: 1292, 529
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 79
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1086, 529
+  xy: 2, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 80
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1177, 529
+  xy: 93, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 81
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1268, 529
+  xy: 184, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 82
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1359, 529
+  xy: 275, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 83
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 2, 602
+  xy: 366, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 84
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 93, 602
+  xy: 457, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 85
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 184, 602
+  xy: 548, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 86
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 275, 602
+  xy: 639, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 87
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 366, 602
+  xy: 730, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 88
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 457, 602
+  xy: 821, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 89
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 548, 602
+  xy: 912, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 90
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 639, 602
+  xy: 1003, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 91
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 730, 602
+  xy: 1094, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 92
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 821, 602
+  xy: 1185, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 93
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 912, 602
+  xy: 1276, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 94
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1003, 602
+  xy: 1367, 602
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 95
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1094, 602
+  xy: 2, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 96
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1185, 602
+  xy: 93, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 97
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1276, 602
+  xy: 184, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 98
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1367, 602
+  xy: 275, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 99
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 2, 668
+  xy: 366, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 100
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 93, 668
+  xy: 457, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 101
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 184, 668
+  xy: 548, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 102
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 275, 668
+  xy: 639, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 103
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 366, 668
+  xy: 730, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 104
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 457, 668
+  xy: 821, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 105
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 548, 668
+  xy: 912, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 106
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 639, 668
+  xy: 1003, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 107
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 730, 668
+  xy: 1094, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 108
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 821, 668
+  xy: 1185, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 109
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 912, 668
+  xy: 1276, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 110
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1003, 668
+  xy: 1367, 668
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 111
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1094, 668
+  xy: 2, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 112
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1185, 668
+  xy: 93, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 113
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1276, 668
+  xy: 184, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 114
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1367, 668
+  xy: 275, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 115
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 2, 734
+  xy: 366, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 116
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 93, 734
+  xy: 457, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 117
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 184, 734
+  xy: 548, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 118
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 275, 734
+  xy: 639, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 119
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 366, 734
+  xy: 730, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 120
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 457, 734
+  xy: 821, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 121
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 548, 734
+  xy: 912, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 122
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 639, 734
+  xy: 1003, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 123
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 730, 734
+  xy: 1094, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 124
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 821, 734
+  xy: 1185, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 125
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 912, 734
+  xy: 1276, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 126
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1003, 734
+  xy: 1367, 734
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 127
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1094, 734
+  xy: 2, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 128
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1185, 734
+  xy: 93, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 129
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1276, 734
+  xy: 184, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 130
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1367, 734
+  xy: 275, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 131
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 2, 800
+  xy: 366, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 132
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 93, 800
+  xy: 457, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 133
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 184, 800
+  xy: 548, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 134
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 275, 800
+  xy: 639, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 135
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 366, 800
+  xy: 730, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 136
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 457, 800
+  xy: 821, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 137
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 548, 800
+  xy: 912, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 138
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 639, 800
+  xy: 1003, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 139
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 730, 800
+  xy: 1094, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 140
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 821, 800
+  xy: 1185, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 141
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 912, 800
+  xy: 1276, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 142
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1003, 800
+  xy: 1367, 800
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 143
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1094, 800
+  xy: 2, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 144
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1185, 800
+  xy: 93, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 145
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 1276, 800
-  size: 89, 64
-  orig: 89, 64
-  offset: 0, 0
-  index: 0
-gold_sack_landing/gold_sack_landing
-  rotate: false
-  xy: 1367, 800
-  size: 89, 64
-  orig: 89, 64
-  offset: 0, 0
-  index: 1
-gold_sack_landing/gold_sack_landing
-  rotate: false
-  xy: 2, 866
-  size: 89, 64
-  orig: 89, 64
-  offset: 0, 0
-  index: 2
-gold_sack_landing/gold_sack_landing
-  rotate: false
-  xy: 93, 866
-  size: 89, 64
-  orig: 89, 64
-  offset: 0, 0
-  index: 3
-gold_sack_landing/gold_sack_landing
-  rotate: false
   xy: 184, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 4
+  index: 0
 gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 275, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 5
+  index: 1
 gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 366, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 6
+  index: 2
 gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 457, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 7
+  index: 3
 gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 548, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 8
+  index: 4
 gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 639, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 9
+  index: 5
 gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 730, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 10
+  index: 6
 gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 821, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 11
+  index: 7
 gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 912, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 12
+  index: 8
 gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 1003, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 13
+  index: 9
 gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 1094, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 14
+  index: 10
 gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 1185, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 15
+  index: 11
 gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 1276, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 16
+  index: 12
 gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 1367, 866
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 17
-gold_sack_pump/gold_sack_pump
+  index: 13
+gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 2, 932
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 0
-gold_sack_pump/gold_sack_pump
+  index: 14
+gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 93, 932
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 1
-gold_sack_pump/gold_sack_pump
+  index: 15
+gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 184, 932
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 2
-gold_sack_pump/gold_sack_pump
+  index: 16
+gold_sack_landing/gold_sack_landing
   rotate: false
   xy: 275, 932
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 3
+  index: 17
 gold_sack_pump/gold_sack_pump
   rotate: false
   xy: 366, 932
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 4
+  index: 0
 gold_sack_pump/gold_sack_pump
   rotate: false
   xy: 457, 932
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 5
+  index: 1
 gold_sack_pump/gold_sack_pump
   rotate: false
   xy: 548, 932
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 6
+  index: 2
 gold_sack_pump/gold_sack_pump
   rotate: false
   xy: 639, 932
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 7
+  index: 3
 gold_sack_pump/gold_sack_pump
   rotate: false
   xy: 730, 932
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 8
+  index: 4
 gold_sack_pump/gold_sack_pump
   rotate: false
   xy: 821, 932
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 9
+  index: 5
 gold_sack_pump/gold_sack_pump
   rotate: false
   xy: 912, 932
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
-  index: 10
+  index: 6
 gold_sack_pump/gold_sack_pump
   rotate: false
   xy: 1003, 932
+  size: 89, 64
+  orig: 89, 64
+  offset: 0, 0
+  index: 7
+gold_sack_pump/gold_sack_pump
+  rotate: false
+  xy: 1094, 932
+  size: 89, 64
+  orig: 89, 64
+  offset: 0, 0
+  index: 8
+gold_sack_pump/gold_sack_pump
+  rotate: false
+  xy: 1185, 932
+  size: 89, 64
+  orig: 89, 64
+  offset: 0, 0
+  index: 9
+gold_sack_pump/gold_sack_pump
+  rotate: false
+  xy: 1276, 932
+  size: 89, 64
+  orig: 89, 64
+  offset: 0, 0
+  index: 10
+gold_sack_pump/gold_sack_pump
+  rotate: false
+  xy: 1367, 932
   size: 89, 64
   orig: 89, 64
   offset: 0, 0

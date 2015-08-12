@@ -2,10 +2,12 @@ package com.retrom.volcano.effects;
 
 import java.util.Random;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
+import com.retrom.volcano.game.objects.Collectable;
 
 public class EffectFactory {
 	
@@ -60,5 +62,37 @@ public class EffectFactory {
 	public static Effect fireballStartEffect(Vector2 position) {
 		FiniteAnimationEffect $ = new FiniteAnimationEffect(Assets.fireballStartEffect, position);
 		return $;
+	}
+	
+	public static Effect coinCrushParticle(Collectable.Type type, Vector2 position) {
+		switch (type) {
+		case COIN_1_1:
+		case COIN_1_2:
+			return new CoinBreakParticle(Assets.bronzeCoinBreak, position);
+		case COIN_2_1:
+		case COIN_2_2:
+		case COIN_2_3:
+			return new CoinBreakParticle(Assets.silverCoinBreak, position);
+		case COIN_3_1:
+		case COIN_3_2:
+		case COIN_3_3:
+		case COIN_4_1:
+		case COIN_4_2:
+		case COIN_4_3:
+		case COIN_5_1:
+			return new CoinBreakParticle(Assets.goldCoinBreak, position);
+		case COIN_5_2:
+			return new CoinBreakParticle(Assets.cyanDiamondBreak, position);
+		case COIN_5_3:
+			return new CoinBreakParticle(Assets.purpleDiamondBreak, position);
+		case COIN_5_4:
+			return new CoinBreakParticle(Assets.greenDiamondBreak, position);
+		case POWERUP_MAGNET:
+			// TODO: only temporary.
+			return new CoinBreakParticle(Assets.greenDiamondBreak, position);
+		default:
+			Gdx.app.error("ERROR", "Unsupported collectable particle.");
+		}
+		return null;
 	}
 }

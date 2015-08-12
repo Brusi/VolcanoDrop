@@ -230,7 +230,6 @@ public class World {
 						}
 					}
 					if (fireball.state() == Enemy.STATE_DONE) {
-						System.out.println("boom!");
 						addEffects.add(EffectFactory.fireballExpodeEffect(new Vector2(fireball.position.x, fireball.position.y + 10f)));
 						SoundAssets.playSound(SoundAssets.fireballEnd);
 					}
@@ -242,7 +241,6 @@ public class World {
 			Enemy e = it.next();
 			if (e.state() == Enemy.STATE_DONE) {
 				it.remove();
-				System.out.println("Removing enemy");
 			}
 		}
 	}
@@ -446,6 +444,9 @@ public class World {
 					SoundAssets.playSound(SoundAssets.coinCrushed);
 					coinCrushed = true;
 				}
+				effects.add(EffectFactory.coinCrushParticle(c.type, c.position));
+				effects.add(EffectFactory.coinCrushParticle(c.type, c.position));
+				effects.add(EffectFactory.coinCrushParticle(c.type, c.position));
 				screenEffects.add(EffectFactory.coinCrushedEffect(c.position));
 			}
 		}

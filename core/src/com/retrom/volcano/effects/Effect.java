@@ -34,10 +34,10 @@ public abstract class Effect {
 			state_ = STATE_DONE;
 		}
 		
-		childSpecificUpdating();
+		childSpecificUpdating(deltaTime);
 	}
 
-	protected void childSpecificUpdating() {
+	protected void childSpecificUpdating(float deltaTime) {
 		// Will be overriden by children.
 	}
 	
