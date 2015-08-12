@@ -45,6 +45,8 @@ public class Assets {
 	public static Array<Sprite> pillars_big;
 	public static Sprite pillars_start;
 	public static Sprite pillars_end;
+	public static Sprite pillars_hole;
+	public static Sprite pillars_hole_bg;
 	
 	public static Sprite background;
 	public static Sprite floor;
@@ -171,6 +173,8 @@ public class Assets {
 		pillars_big = environmentSheet.createSprites("pillars_big");
 		pillars_start = environmentSheet.createSprite("pillars_start");
 		pillars_end = environmentSheet.createSprite("pillars_end");
+		pillars_hole = environmentSheet.createSprite("pillars_hole_front");
+		pillars_hole_bg = environmentSheet.createSprite("pillars_hole_back");
 		background = environmentSheet.createSprite("bg");
 		floor = environmentSheet.createSprite("floor");
 

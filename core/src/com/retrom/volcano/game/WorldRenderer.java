@@ -62,6 +62,8 @@ public class WorldRenderer {
 	
 	private static final List<Integer> wallBounceArray = Arrays.asList(1,6,8,6,3,1,2,3,2,0,1,0);
 	
+	private static final float PILLAR_POS = FRUSTUM_WIDTH / 2 - 40;
+	
 	World world;
 	SpriteBatch batch;
 	
@@ -129,6 +131,12 @@ public class WorldRenderer {
 			case BACKGROUND:
 				keyFrame = Assets.background;
 				break;
+			case PILLAR_HOLE:
+				keyFrame = Assets.pillars_hole;
+				break;
+			case PILLAR_HOLE_BG:
+				keyFrame = Assets.pillars_hole_bg;
+				break;
 			default:
 				Gdx.app.log("ERROR", "Unhandled pillar type: " + e);
 				break;
@@ -155,23 +163,32 @@ public class WorldRenderer {
 		batch.enableBlending();
 		setBlendFuncNormal();
 		batch.begin();
+		renderPillarBg();
 		renderWalls();
 		renderPlayer();
 		renderEnemies();
 		renderCoins();
 		renderFloor();
-		drawPillar(world.background.leftPillar, -(FRUSTUM_WIDTH / 2 - 40), world.background.leftBaseY(), false);
-		drawPillar(world.background.rightPillar, FRUSTUM_WIDTH / 2 - 40, world.background.rightBaseY(), true);
+		drawPillar(world.background.leftPillar, -PILLAR_POS, world.background.leftBaseY(), false);
+		drawPillar(world.background.rightPillar, PILLAR_POS, world.background.rightBaseY(), true);
 		
 		renderEffects(world.effects);
 		setBlendFuncScreen();
 		renderEffects(world.screenEffects);
 		setBlendFuncAdd();
 		renderEffects(world.addEffects);
-		
-		// TODO: draw "add" and "screen" effects.
-		
 		batch.end();
+	}
+
+	private void renderPillarBg() {
+		for (float f : world.background.leftHoleList) {
+			Assets.pillars_hole_bg.setFlip(false, false);
+			drawCenterBottom(Assets.pillars_hole_bg, -PILLAR_POS, f+Background.BASE);
+		}
+		for (float f : world.background.rightHoleList) {
+			Assets.pillars_hole_bg.setFlip(true, false);
+			drawCenterBottom(Assets.pillars_hole_bg, +PILLAR_POS, f+Background.BASE);
+		}
 	}
 
 	private void renderEnemies() {

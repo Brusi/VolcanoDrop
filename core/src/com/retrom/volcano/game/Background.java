@@ -1,7 +1,9 @@
 package com.retrom.volcano.game;
 
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 import com.retrom.volcano.game.objects.Wall;
@@ -13,9 +15,7 @@ import com.retrom.volcano.game.objects.Wall;
  *
  */
 public class Background {
-	
 	public enum Element {
-		
 		PILLAR_1(76f, 0),
 		PILLAR_2(76f, 1),
 		PILLAR_3(76f, 2),
@@ -23,6 +23,8 @@ public class Background {
 		PILLAR_END(76f),
 		PILLAR_BIG_1(111f, 0),
 		PILLAR_BIG_2(111f, 1),
+		PILLAR_HOLE(76f),
+		PILLAR_HOLE_BG(0),
 		
 		BACKGROUND(213f);
 		
@@ -63,8 +65,10 @@ public class Background {
 	private static final Random rand = new Random();
 	
 	public static final float HEIGHT = 1000f; 
+	public static final float BASE = -3 * Wall.SIZE;
 	
-	public static final float BASE = -3 * Wall.SIZE; 
+	// The minimal y value from which holes start to appear on walls.
+	private static final float HOLE_MIN_HEIGHT = 100f;
 	
 	public Deque<Element> leftPillar = new LinkedList<Element>();
 	private float leftHeight = 0f;
@@ -74,6 +78,9 @@ public class Background {
 	
 	public Deque<Element> bgPillar = new LinkedList<Element>();
 	private float bgHeight;
+	
+	public Deque<Float> leftHoleList = new LinkedList<Float>();
+	public Deque<Float> rightHoleList = new LinkedList<Float>();
 	
 	
 	private float leftBaseY_ = BASE;
@@ -85,11 +92,11 @@ public class Background {
 		y_ = y;
 		// Add to the top of the pillars.
 		while (leftHeight < y_ + HEIGHT) {
-			float heightAdded = addToPillar(leftPillar);
+			float heightAdded = addToPillar(leftPillar, leftHoleList, leftHeight);
 			leftHeight += heightAdded;
 		}
 		while (rightHeight < y_ + HEIGHT) {
-			float heightAdded = addToPillar(rightPillar);
+			float heightAdded = addToPillar(rightPillar, rightHoleList, rightHeight);
 			rightHeight += heightAdded;
 		}
 		
@@ -115,10 +122,23 @@ public class Background {
 			bgPillar.removeFirst();
 		}
 		
+		
+		if (leftHoleList.peek() != null && y_ > leftHoleList.peek() + HEIGHT) {
+			System.out.println("Hole removed!");
+			leftHoleList.removeFirst();
+		}
 	}
 
-	private float addToPillar(Deque<Element> pillar) {
+	private float addToPillar(Deque<Element> pillar, Deque<Float> holeList, float height) {
 		float heightAdded = 0f;
+		if (height >= HOLE_MIN_HEIGHT && rand.nextInt(2) == 0) {
+//			pillar.addLast(Element.PILLAR_HOLE_BG);
+			pillar.addLast(Element.PILLAR_HOLE);
+			heightAdded += Element.PILLAR_HOLE.height();
+			holeList.addLast(height);
+			return heightAdded;
+		}
+		
 		if (rand.nextInt(10) == 0) {
 			pillar.addLast(Element.PILLAR_END);
 			heightAdded += Element.PILLAR_END.height();
