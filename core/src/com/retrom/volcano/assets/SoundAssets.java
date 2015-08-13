@@ -38,6 +38,7 @@ public class SoundAssets {
 	
 	public static Sound fireballStart;
 	public static Sound fireballEnd;
+	public static Sound spitterSequence;
 	
 	private static Random rand = new Random();
 
@@ -95,6 +96,8 @@ public class SoundAssets {
 		
 		fireballStart = newSound("fireball_start.wav");
 		fireballEnd = newSound("fireball_end.wav");
+		
+		spitterSequence = newSound("wallspitter_sequence.wav");
 	}
 	
 	public static void playSound (Sound sound) {

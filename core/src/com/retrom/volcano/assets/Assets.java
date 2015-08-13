@@ -136,14 +136,15 @@ public class Assets {
 	public static Array<Sprite> flamethrowerAll;
 	public static Array<Sprite> flamethrowerFlame;
 	
+	public static Array<Sprite> spitter;
+	
 	public static Array<Sprite> topFireballLoop;
 	
 	public static TextureRegion player;
 	
 	public static TextureRegion powerupMagnet;
 
-
-
+	
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
 	}
@@ -277,6 +278,7 @@ public class Assets {
 		flamethrower = enemiesSheet.createSprite("flamethrower");
 		flamethrowerAll = enemiesSheet.createSprites("flamethrower_all");
 		
+		spitter = enemiesSheet.createSprites("wall_spitter_sequence");
 		
 		TextureAtlas enemiesAddSheet1 = new TextureAtlas("enemies/enemies_add_1.txt");
 		flamethrowerFlame = enemiesAddSheet1.createSprites("flamethrower_flame");

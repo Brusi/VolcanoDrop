@@ -14,6 +14,7 @@ public abstract class Enemy extends DynamicGameObject {
 	
 	public void update(float deltaTime) {
 		stateTime_ += deltaTime;
+		bounds.x += velocity.x * deltaTime;
 		bounds.y += velocity.y * deltaTime;
 		bounds.getCenter(position);
 		childSpecificUpdating();
@@ -45,5 +46,7 @@ public abstract class Enemy extends DynamicGameObject {
 	public static interface Visitor<T> {
 		T visit(Flame flame);
 		T visit(TopFireball topFireball);
+		T visit(Spitter flame);
+		T visit(SideFireball sideFireball);
 	}
 }

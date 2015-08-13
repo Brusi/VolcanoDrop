@@ -68,7 +68,7 @@ public class Background {
 	public static final float BASE = -3 * Wall.SIZE;
 	
 	// The minimal y value from which holes start to appear on walls.
-	private static final float HOLE_MIN_HEIGHT = 100f;
+	private static final float HOLE_MIN_HEIGHT = 400f;
 	
 	public Deque<Element> leftPillar = new LinkedList<Element>();
 	private float leftHeight = 0f;
@@ -135,7 +135,7 @@ public class Background {
 //			pillar.addLast(Element.PILLAR_HOLE_BG);
 			pillar.addLast(Element.PILLAR_HOLE);
 			heightAdded += Element.PILLAR_HOLE.height();
-			holeList.addLast(height);
+			holeList.addLast(height + BASE);
 			return heightAdded;
 		}
 		

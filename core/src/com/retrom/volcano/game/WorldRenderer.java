@@ -29,6 +29,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
+import com.retrom.volcano.effects.DiamondGlowEffect;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectVisitor;
 import com.retrom.volcano.effects.FiniteAnimationEffect;
@@ -50,6 +51,8 @@ import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Enemy;
 import com.retrom.volcano.game.objects.Flame;
 import com.retrom.volcano.game.objects.FlamethrowerWall;
+import com.retrom.volcano.game.objects.SideFireball;
+import com.retrom.volcano.game.objects.Spitter;
 import com.retrom.volcano.game.objects.TopFireball;
 import com.retrom.volcano.game.objects.Wall;
 
@@ -183,11 +186,11 @@ public class WorldRenderer {
 	private void renderPillarBg() {
 		for (float f : world.background.leftHoleList) {
 			Assets.pillars_hole_bg.setFlip(false, false);
-			drawCenterBottom(Assets.pillars_hole_bg, -PILLAR_POS, f+Background.BASE);
+			drawCenterBottom(Assets.pillars_hole_bg, -PILLAR_POS, f);
 		}
 		for (float f : world.background.rightHoleList) {
 			Assets.pillars_hole_bg.setFlip(true, false);
-			drawCenterBottom(Assets.pillars_hole_bg, +PILLAR_POS, f+Background.BASE);
+			drawCenterBottom(Assets.pillars_hole_bg, +PILLAR_POS, f);
 		}
 	}
 
@@ -201,7 +204,18 @@ public class WorldRenderer {
 
 				@Override
 				public Sprite visit(TopFireball topFireball) {
-//					return getFrameLoop(Assets.topFireballLoop, topFireball.stateTime());
+					return null;
+				}
+
+				@Override
+				public Sprite visit(Spitter spitter) {
+					Sprite $ = getFrameStopAtLastFrame(Assets.spitter, spitter.stateTime());
+					$.setFlip(spitter.side(), false);
+					return $;
+				}
+
+				@Override
+				public Sprite visit(SideFireball sideFireball) {
 					return null;
 				}
 			});

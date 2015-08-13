@@ -17,6 +17,7 @@
 package com.retrom.volcano.game;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,6 +27,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.effects.BurningWallGlow;
+import com.retrom.volcano.effects.DiamondGlowEffect;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectFactory;
 import com.retrom.volcano.effects.FireballAnimationEffect;
@@ -48,6 +50,8 @@ import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Enemy;
 import com.retrom.volcano.game.objects.Flame;
 import com.retrom.volcano.game.objects.FlamethrowerWall;
+import com.retrom.volcano.game.objects.SideFireball;
+import com.retrom.volcano.game.objects.Spitter;
 import com.retrom.volcano.game.objects.TopFireball;
 import com.retrom.volcano.game.objects.WallDual;
 import com.retrom.volcano.game.objects.Wall;
@@ -93,6 +97,9 @@ public class World {
 	final public List<Effect> screenEffects = new ArrayList<Effect>();
 
 	private final WorldListener listener_;
+	
+	private float leftHighestSpitter = 0;
+	private float rightHighestSpitter = 0;
 
 	// Cheats:
 	private boolean godMode_ = false;
@@ -151,8 +158,18 @@ public class World {
 			addCoin((float) (Math.random() * 200), Collectable.Type.COIN_3_2);
 		}
 		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+			listener_.restartGame();
+		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.H)) {
+			addSpitter(400, false);
+		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
+			addSpitter(400, true);
+		}
+		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-//			addFireball((int) Math.floor(Math.random() * 6));
+			addSideFireball(0, 500, false);
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
 			prepareFireball((int) Math.floor(Math.random() * 6));
@@ -189,6 +206,9 @@ public class World {
 		updatePlayer(deltaTime);
 		updateWalls(deltaTime);
 		updateEnemies(deltaTime);
+		
+		checkSpitters();
+		
 		updateCoins(deltaTime);
 		updateSpawner(deltaTime);
 		updatePowerups(deltaTime);
@@ -205,6 +225,23 @@ public class World {
 		}
 	}
 	
+	private void checkSpitters() {
+		for (float hole : background.leftHoleList) {
+			if (player.position.y > hole + 40 && hole > leftHighestSpitter) {
+				leftHighestSpitter = hole;
+				addSpitter(hole + 30, Spitter.LEFT);
+			}
+		}
+		
+		for (float hole : background.rightHoleList) {
+			if (player.position.y > hole + 40 && hole > rightHighestSpitter) {
+				rightHighestSpitter = hole;
+				addSpitter(hole + 30, Spitter.RIGHT);
+			}
+		}
+		
+	}
+
 	private void updateEnemies(float deltaTime) {
 		for (Enemy e : enemies_) {
 			e.update(deltaTime);
@@ -219,6 +256,31 @@ public class World {
 
 				@Override
 				public Void visit(TopFireball fireball) {
+					if (fireball.state() == Enemy.STATE_ACTIVE && fireball.bounds.overlaps(player.bounds) && !player.isDead()) {
+						player.killByBurn();
+						fireball.explode();
+					} else if (fireball.state() == Enemy.STATE_ACTIVE) {
+						for (Rectangle obstacle : obstacles_) {
+							if (fireball.bounds.overlaps(obstacle)) {
+								fireball.explode();
+							}
+						}
+					}
+					if (fireball.state() == Enemy.STATE_DONE) {
+						addEffects.add(EffectFactory.fireballExpodeEffect(new Vector2(fireball.position.x, fireball.position.y + 10f)));
+						SoundAssets.playSound(SoundAssets.fireballEnd);
+					}
+					return null;
+				}
+
+				@Override
+				public Void visit(Spitter spitter) {
+					return null;
+				}
+
+				@Override
+				public Void visit(SideFireball fireball) {
+					// TODO: combine with topFireball
 					if (fireball.state() == Enemy.STATE_ACTIVE && fireball.bounds.overlaps(player.bounds) && !player.isDead()) {
 						player.killByBurn();
 						fireball.explode();
@@ -303,11 +365,19 @@ public class World {
 		});
 	}
 	
+	private void addSideFireball(float x, float y, boolean side) {
+		SideFireball fireball = new SideFireball(x, y, side);
+		enemies_.add(fireball);
+		int side3 = side ? FireballAnimationEffect.RIGHT : FireballAnimationEffect.LEFT; 
+		addEffects.add(new FireballAnimationEffect(fireball, side3));
+		addEffects.add(new FireballGlow(fireball, side3));
+	}
+	
 	private void addFireball(int col, float y) {
 		TopFireball fireball = new TopFireball(col, y); 
 		enemies_.add(fireball);
-		addEffects.add(new FireballAnimationEffect(fireball));
-		addEffects.add(new FireballGlow(fireball));
+		addEffects.add(new FireballAnimationEffect(fireball, FireballAnimationEffect.DOWN));
+		addEffects.add(new FireballGlow(fireball, 0));
 	}
 	
 	public void addWall(int col) {
@@ -343,6 +413,30 @@ public class World {
 		float yval = topScreenY();
 		Collectable coin = new Collectable(x, yval, type);
 		collectables_ .add(coin);
+	
+	public void addSpitter(final float y, final boolean side) {
+		Deque<Float> holeList = side == Spitter.LEFT ? background.leftHoleList : background.rightHoleList;
+		if (holeList.peek() == null) {
+			// Do not create spitter if there is no hole.
+			return;
+		}
+		
+		final float x = side == Spitter.LEFT ? -250 : 250;
+		final float fireX = side == Spitter.LEFT ? -220 : 220;
+		final Spitter spitter = new Spitter(x, y, side);
+		enemies_.add(spitter);
+		EventQueue.Event shootFireEvent = new Event() {
+			@Override
+			public void invoke() {
+				addSideFireball(fireX, spitter.position.y, side);
+			}
+		};
+		
+		worldEvents_.addEventFromNow(3.2f, shootFireEvent);
+		worldEvents_.addEventFromNow(3.9f, shootFireEvent);
+		worldEvents_.addEventFromNow(4.6f, shootFireEvent);
+		
+		SoundAssets.playSound(SoundAssets.spitterSequence);
 	}
 	
 	private void updateSpawner(float deltaTime) {

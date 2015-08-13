@@ -2,21 +2,38 @@ package com.retrom.volcano.effects;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.retrom.volcano.assets.Assets;
-import com.retrom.volcano.game.objects.TopFireball;
+import com.retrom.volcano.game.objects.Enemy;
 
 public class FireballGlow extends OneFrameEffect {
 	
 	private static float DURATION = 5f;
-	private final TopFireball fireball_;
+	private final Enemy fireball_;
+	private int side_;
 
-	public FireballGlow(TopFireball fireball) {
+	public FireballGlow(Enemy fireball, int side) {
 		super(Assets.burningWallGlow, DURATION, fireball.position.cpy());
 		this.fireball_ = fireball;
+		this.side_ = side;
 	}
 	
 	@Override
 	protected void childSpecificUpdating(float deltaTime) {
-		this.position_.y = fireball_.position.y - 30f;
+		float offsetX = 0;
+		float offsetY = 0;
+		switch (side_) {
+		case FireballAnimationEffect.DOWN:
+			offsetY = -30;
+			break;
+		case FireballAnimationEffect.LEFT:
+			offsetX = 30;
+			break;
+		case FireballAnimationEffect.RIGHT:
+			offsetX = -30;
+			break;
+		}
+
+		this.position_.x = fireball_.position.x + offsetX;
+		this.position_.y = fireball_.position.y + offsetY;
 	}
 	
 	@Override
