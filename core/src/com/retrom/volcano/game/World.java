@@ -412,7 +412,11 @@ public class World {
 	public void addCoin(float x, Collectable.Type type) {
 		float yval = topScreenY();
 		Collectable coin = new Collectable(x, yval, type);
-		collectables_ .add(coin);
+		collectables_.add(coin);
+		if (coin.type == Collectable.Type.COIN_5_2 || coin.type == Collectable.Type.COIN_5_3 || coin.type == Collectable.Type.COIN_5_4) {
+			addEffects.add(new DiamondGlowEffect(coin));
+		}
+	}
 	
 	public void addSpitter(final float y, final boolean side) {
 		Deque<Float> holeList = side == Spitter.LEFT ? background.leftHoleList : background.rightHoleList;

@@ -330,6 +330,22 @@ public class WorldRenderer {
 				public Sprite visit(FireballAnimationEffect effect) {
 					return getFrameLoop(Assets.topFireballLoop, effect.stateTime());
 				}
+
+				@Override
+				public Sprite visit(DiamondGlowEffect effect) {
+					switch (effect.diamond.type) {
+					case COIN_5_2:
+						return Assets.diamondCyanGlow;
+					case COIN_5_3:
+						return Assets.diamondPurpleGlow;
+					case COIN_5_4:
+						return Assets.diamondGreenGlow;
+					default:
+						Gdx.app.error("Error", "Diamond glow on a non-diamond collectable.");
+						break;
+					}
+					return null;
+				}
 			});
 			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
 			s.setRotation(e.getRotation());
@@ -438,7 +454,7 @@ public class WorldRenderer {
 				keyFrame = getFrameStopAtLastFrame(getCoinAnimation(coin.type), coin.stateTime());
 			}
 			
-			drawWithTilt(keyFrame, coin.position, -15f, -15f);
+			drawCenter(keyFrame, coin.position);//, 0,0/*-15f, -15f*/);
 		}
 		
 	}

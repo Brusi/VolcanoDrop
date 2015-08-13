@@ -126,6 +126,10 @@ public class Assets {
 	// Glow:
 	public static Sprite burningWallGlow;
 	
+	public static Sprite diamondCyanGlow;
+	public static Sprite diamondGreenGlow;
+	public static Sprite diamondPurpleGlow;
+	
 	// Enemies:
 	public static Sprite burningWall;
 	public static Array<Sprite> burningWallStart;
@@ -257,7 +261,11 @@ public class Assets {
 		silverCollectEffect1 = vfxSheet.createSprites("coin_collect_silver1"); 
 		silverCollectEffect2 = vfxSheet.createSprites("coin_collect_silver2"); 
 		goldCollectEffect1 = vfxSheet.createSprites("coin_collect_gold1"); 
-		goldCollectEffect2 = vfxSheet.createSprites("coin_collect_gold2"); 
+		goldCollectEffect2 = vfxSheet.createSprites("coin_collect_gold2");
+		
+		diamondCyanGlow = vfxSheet.createSprite("diamond_cyan_glow");
+		diamondGreenGlow = vfxSheet.createSprite("diamond_green_glow");
+		diamondPurpleGlow = vfxSheet.createSprite("diamond_purple_glow");
 		
 		greenDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_green1"); 
 		greenDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_green2"); 

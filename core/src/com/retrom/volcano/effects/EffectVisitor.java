@@ -15,5 +15,6 @@ public interface EffectVisitor<T> {
 	public T visit(OneFrameEffect oneFrameEffect);
 	public T visit(FlameEffect flameEffect);
 	public T visit(FireballAnimationEffect fireballAnimationEffect);
+	public T visit(DiamondGlowEffect diamondGlowEffect);
 
 }

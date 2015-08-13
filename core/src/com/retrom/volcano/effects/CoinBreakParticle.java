@@ -16,9 +16,6 @@ public class CoinBreakParticle extends Particle {
 	private float rotation_;
 	private float rotationSpeed_;
 	
-	private float scaele;
-	
-
 	public CoinBreakParticle(Array<Sprite> sprites, Vector2 position) {
 		super(sprites.random(), DURATION, position.cpy(), getInitVel());
 		rotation_ = (float) (Math.random() * 360);
