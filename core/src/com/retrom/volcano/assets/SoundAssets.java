@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.retrom.volcano.game.Settings;
+import com.retrom.volcano.utils.SoundEvictingQueue;
 
 public class SoundAssets {
 	
@@ -45,7 +46,9 @@ public class SoundAssets {
 	
 	private static Random rand = new Random();
 
-
+	
+	private final static SoundEvictingQueue currentlyPlaying = new SoundEvictingQueue(40);
+	private static float pitch = 1f;
 	
 	public static void load() {
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/gameplay.mp3"));
@@ -107,7 +110,11 @@ public class SoundAssets {
 	}
 	
 	public static void playSound (Sound sound) {
-		if (Settings.soundEnabled) sound.play(1);
+		if (!Settings.soundEnabled)
+			return;
+		long id = sound.play(1);
+		currentlyPlaying.add(sound, id);
+		sound.setPitch(id, pitch);
 	}
 	
 	public static void playRandomSound(Sound[] sounds) {
@@ -129,8 +136,30 @@ public class SoundAssets {
 	}
 	
 	public static void stopAllSounds() {
-		stopSound(powerupMagnetLoop);
-		stopSound(flamethrowerStart);
-		stopSound(fireballStart);
+		currentlyPlaying.forEach(new SoundEvictingQueue.Consumer() {
+			@Override
+			public void accept(Sound s, long id) {
+				s.stop();
+			}
+		});
+		currentlyPlaying.clear();
+	}
+	
+	public static void setPitch(float newPitch) {
+		if (newPitch == pitch) {
+			return;
+		}
+		pitch = newPitch;
+		currentlyPlaying.forEach(new SoundEvictingQueue.Consumer() {
+			@Override
+			public void accept(Sound s, long id) {
+				s.setPitch(id, pitch);
+			}
+		});
+	}
+	
+	public static void restart() {
+		stopAllSounds();
+		pitch = 1;
 	}
 }

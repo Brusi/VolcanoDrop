@@ -186,11 +186,17 @@ public class World {
 
 	public void update (float deltaTime) {
 		if (slomoTime > 0) {
+			float slomoRatio;
 			if (slomoTime > 1) {
-				deltaTime /= 2;
+				slomoRatio = 0.5f;
 			} else {
-				deltaTime /= (slomoTime+1); 
+				slomoRatio = 1f / (slomoTime+1);
 			}
+			deltaTime *= slomoRatio;
+			
+			SoundAssets.setPitch(slomoRatio);
+		} else {
+			SoundAssets.setPitch(1f);
 		}
 		
 		updateCheats();
