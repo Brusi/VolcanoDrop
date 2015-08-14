@@ -156,7 +156,7 @@ public class World {
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-			addCoin((float) (Math.random() * 200), Collectable.Type.COIN_3_2);
+			addCoin((float) (Math.random() * 200), Collectable.Type.COIN_5_1);
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
@@ -420,7 +420,7 @@ public class World {
 		float yval = topScreenY();
 		Collectable coin = new Collectable(x, yval, type);
 		collectables_.add(coin);
-		if (coin.type == Collectable.Type.COIN_5_2 || coin.type == Collectable.Type.COIN_5_3 || coin.type == Collectable.Type.COIN_5_4) {
+		if (coin.type == Collectable.Type.COIN_5_1 || coin.type == Collectable.Type.COIN_5_2 || coin.type == Collectable.Type.COIN_5_3 || coin.type == Collectable.Type.COIN_5_4) {
 			addEffects.add(new DiamondGlowEffect(coin));
 		}
 	}

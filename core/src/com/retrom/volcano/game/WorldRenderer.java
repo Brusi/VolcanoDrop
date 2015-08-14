@@ -20,12 +20,15 @@ import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 
+import javafx.print.Collation;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
@@ -336,6 +339,9 @@ public class WorldRenderer {
 				public Sprite visit(DiamondGlowEffect effect) {
 					Sprite s = null;
 					switch (effect.diamond.type) {
+					case COIN_5_1:
+						s = Assets.tokenGlow;
+						break;
 					case COIN_5_2:
 						s = Assets.diamondCyanGlow;
 						break;
@@ -351,6 +357,8 @@ public class WorldRenderer {
 					}
 					float tint = (float) (0.5 + (Math.sin(effect.stateTime() * 6) + 1) / 5);
 					s.setColor(tint, tint, tint, tint);
+					effect.position_.y = effect.diamond.position.y + getBounceY(effect.diamond.stateTime());
+					effect.position_.x = effect.diamond.position.x;
 					return s;
 				}
 
@@ -472,9 +480,23 @@ public class WorldRenderer {
 				keyFrame = getFrameStopAtLastFrame(getCoinAnimation(coin.type), coin.stateTime());
 			}
 			
-			drawCenter(keyFrame, coin.position);//, 0,0/*-15f, -15f*/);
+			float y = coin.position.y;
+			if (coin.state() == Collectable.STATUS_IDLE) {
+				y += getBounceY(coin.stateTime());
+			}
+			drawCenter(keyFrame, coin.position.x, y);
 		}
-		
+	}
+
+	private float getBounceY(float stateTime) {
+		int index = (int) (stateTime * FPS);
+		if (index < wallBounceArray.size())
+			return wallBounceArray.get(index);
+		return 0;
+	}
+
+	private void drawCenterWithTilt(TextureRegion keyFrame, Vector2 position, float xTilt, float yTilt) {
+		batch.draw(keyFrame, position.x - keyFrame.getRegionWidth()/2+ xTilt, position.y - keyFrame.getRegionHeight()/2 + yTilt);
 	}
 
 	private void drawWithTilt(TextureRegion keyFrame, Vector2 position,

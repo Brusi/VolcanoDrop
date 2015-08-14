@@ -8,7 +8,7 @@ public class DiamondGlowEffect extends Effect {
 	public final Collectable diamond; 
 
 	public DiamondGlowEffect(Collectable diamond) {
-		super(DURATION, diamond.position);
+		super(DURATION, diamond.position.cpy());
 		this.diamond = diamond;
 	}
 

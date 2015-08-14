@@ -132,6 +132,7 @@ public class Assets {
 	public static Sprite diamondCyanGlow;
 	public static Sprite diamondGreenGlow;
 	public static Sprite diamondPurpleGlow;
+	public static Sprite tokenGlow;
 	
 	// Enemies:
 	public static Sprite burningWall;
@@ -146,7 +147,7 @@ public class Assets {
 	public static Array<Sprite> spitter;
 	
 	public static Array<Sprite> topFireballLoop;
-	
+
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
 	}
@@ -264,6 +265,7 @@ public class Assets {
 		diamondCyanGlow = vfxSheet.createSprite("diamond_cyan_glow");
 		diamondGreenGlow = vfxSheet.createSprite("diamond_green_glow");
 		diamondPurpleGlow = vfxSheet.createSprite("diamond_purple_glow");
+		tokenGlow = vfxSheet.createSprite("token_glow");
 		
 		greenDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_green1"); 
 		greenDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_green2"); 

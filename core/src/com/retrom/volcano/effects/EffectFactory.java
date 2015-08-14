@@ -85,6 +85,8 @@ public class EffectFactory {
 		case POWERUP_MAGNET:
 			// TODO: only temporary.
 			return new CoinBreakParticle(Assets.greenDiamondBreak, position);
+		case POWERUP_SLOMO:
+			return new CoinBreakParticle(Assets.purpleDiamondBreak, position);
 		default:
 			Gdx.app.error("ERROR", "Unsupported collectable particle.");
 		}
