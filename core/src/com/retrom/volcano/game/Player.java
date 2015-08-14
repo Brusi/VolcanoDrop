@@ -21,6 +21,7 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
+import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.DynamicGameObject;
 import com.retrom.volcano.game.objects.Wall;
@@ -48,6 +49,7 @@ public class Player extends DynamicGameObject {
 
 	private int state_ = STATE_IDLE;
 	float stateTime;
+	private float timeSinceLanding;
 	
 	public int deathType;
 	
@@ -75,6 +77,11 @@ public class Player extends DynamicGameObject {
 		if (grounded_ && pressedUp() ) {
 			grounded_ = false;
 			velocity.y = JUMP_VEL;
+			if (timeSinceLanding > 0.1f) {
+				SoundAssets.playRandomSound(SoundAssets.playerJump);
+			} else {
+				SoundAssets.playRandomSound(SoundAssets.playerJumpIntense);
+			}
 		}
 	}
 	
@@ -100,6 +107,7 @@ public class Player extends DynamicGameObject {
 
 	public void update (float deltaTime) {
 		stateTime += deltaTime;
+		timeSinceLanding += deltaTime;
 		if (state_ == STATE_DIE || state_ == STATE_DEAD) {
 			return;
 		}
@@ -185,6 +193,7 @@ public class Player extends DynamicGameObject {
 		
 		if (!wasGrounded && grounded_) {
 			setState(STATE_LANDING);
+			timeSinceLanding = 0;
 		}
 		
 		bounds.x += velocity.x * deltaTime;

@@ -9,7 +9,8 @@ import com.retrom.volcano.game.World;
 
 public class Collectable extends DynamicGameObject {
 	
-	public static final float SIZE = 30f;
+	public static final float WIDTH = 30f;
+	public static final float HEIGHT = 40f;
 	private static final float GRAVITY_RATIO = 0.5f;
 	private static final float MAGNETIZED_FORCE = 1200f;
 	
@@ -40,7 +41,7 @@ public class Collectable extends DynamicGameObject {
 	private List<Rectangle> obstacles_;
 
 	public Collectable(float x, float y, Type type) {
-		super(x, y, SIZE, SIZE);
+		super(x, y, WIDTH, HEIGHT);
 		this.type = type;
 		setState(STATUS_FALLING);
 	}

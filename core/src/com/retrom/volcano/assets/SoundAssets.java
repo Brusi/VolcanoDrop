@@ -11,6 +11,9 @@ public class SoundAssets {
 	
 	public static Music music;
 	
+	public static Sound[] playerJump;
+	public static Sound[] playerJumpIntense;
+	
 	public static Sound[] wallHit;
 	public static Sound[] wallDualHit;
 	
@@ -49,6 +52,9 @@ public class SoundAssets {
 		music.setLooping(true);
 		music.setVolume(0.5f);
 //		if (Settings.soundEnabled) music.play();
+		
+		playerJump = new Sound[] {newSound("player_jump_0a.wav"), newSound("player_jump_0b.wav")};
+		playerJumpIntense = new Sound[] {newSound("player_jump_1.wav"), newSound("player_jump_2.wav"), newSound("player_jump_3.wav"), newSound("player_jump_4.wav")};
 		
 		wallHit = new Sound[] {newSound("x1_rock_hit_1.wav"), newSound("x1_rock_hit_2.wav"), newSound("x1_rock_hit_3.wav"), newSound("x1_rock_hit_3.wav")};
 		wallDualHit = new Sound[] {newSound("x2_rock_hit_1.wav"), newSound("x2_rock_hit_2.wav")};
