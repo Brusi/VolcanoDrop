@@ -13,6 +13,7 @@ public interface EffectVisitor<T> {
 	public T visit(Score25Effect score25Effect);
 	public T visit(FiniteAnimationEffect finiteAnimationEffect);
 	public T visit(OneFrameEffect oneFrameEffect);
+	public T visit(FireballStartEffect oneFrameEffect);
 	public T visit(FlameEffect flameEffect);
 	public T visit(FireballAnimationEffect fireballAnimationEffect);
 	public T visit(DiamondGlowEffect diamondGlowEffect);

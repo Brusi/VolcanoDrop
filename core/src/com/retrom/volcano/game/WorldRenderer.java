@@ -34,6 +34,7 @@ import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectVisitor;
 import com.retrom.volcano.effects.FiniteAnimationEffect;
 import com.retrom.volcano.effects.FireballAnimationEffect;
+import com.retrom.volcano.effects.FireballStartEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.OneFrameEffect;
 import com.retrom.volcano.effects.Score10Effect;
@@ -345,6 +346,14 @@ public class WorldRenderer {
 						break;
 					}
 					return null;
+				}
+
+				@Override
+				public Sprite visit(FireballStartEffect effect) {
+					effect.position_.y = effect.originalY + cam_position; 
+					Sprite $ = getFrameStopAtLastFrame(effect.getAnimation(), effect.stateTime());
+					$.setY($.getY() + world.camTarget);
+					return $;
 				}
 			});
 			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);

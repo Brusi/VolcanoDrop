@@ -32,6 +32,7 @@ import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectFactory;
 import com.retrom.volcano.effects.FireballAnimationEffect;
 import com.retrom.volcano.effects.FireballGlow;
+import com.retrom.volcano.effects.FireballStartEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.FlameGlowEffect;
 import com.retrom.volcano.effects.Score10Effect;
@@ -175,7 +176,7 @@ public class World {
 			prepareFireball((int) Math.floor(Math.random() * 6));
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-			addEffects.add(EffectFactory.fireballStartEffect(new Vector2(100,100)));
+			addEffects.add(new FireballStartEffect(new Vector2(100,100)));
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
@@ -353,14 +354,14 @@ public class World {
 	}
 	
 	private void prepareFireball(final int col) {
-		final float y = topScreenY() - TopFireball.DISTANCE_FROM_TOP;
-		addEffects.add(EffectFactory.fireballStartEffect(new Vector2(Utils
+		final float y = topScreenY() - TopFireball.DISTANCE_FROM_TOP - camTarget;
+		addEffects.add(new FireballStartEffect(new Vector2(Utils
 				.xOfCol(col), y)));
 		SoundAssets.playSound(SoundAssets.fireballStart);
 		worldEvents_.addEventFromNow(TopFireball.PREPARATION_DELAY, new Event() {
 			@Override
 			public void invoke() {
-				addFireball(col, y);
+				addFireball(col, y + camTarget);
 			}
 		});
 	}

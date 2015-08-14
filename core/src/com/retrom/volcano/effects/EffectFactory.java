@@ -59,11 +59,6 @@ public class EffectFactory {
 		return $;
 	}
 
-	public static Effect fireballStartEffect(Vector2 position) {
-		FiniteAnimationEffect $ = new FiniteAnimationEffect(Assets.fireballStartEffect, position);
-		return $;
-	}
-	
 	public static Effect coinCrushParticle(Collectable.Type type, Vector2 position) {
 		switch (type) {
 		case COIN_1_1:
