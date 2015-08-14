@@ -1,9 +1,7 @@
 package com.retrom.volcano.game;
 
-import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
 
 import com.retrom.volcano.game.objects.Wall;
@@ -68,7 +66,7 @@ public class Background {
 	public static final float BASE = -3 * Wall.SIZE;
 	
 	// The minimal y value from which holes start to appear on walls.
-	private static final float HOLE_MIN_HEIGHT = 400f;
+	private static final float HOLE_MIN_HEIGHT = 900f;
 	
 	public Deque<Element> leftPillar = new LinkedList<Element>();
 	private float leftHeight = 0f;
@@ -131,7 +129,7 @@ public class Background {
 
 	private float addToPillar(Deque<Element> pillar, Deque<Float> holeList, float height) {
 		float heightAdded = 0f;
-		if (height >= HOLE_MIN_HEIGHT && rand.nextInt(2) == 0) {
+		if (height >= HOLE_MIN_HEIGHT && rand.nextInt(10) == 0) {
 //			pillar.addLast(Element.PILLAR_HOLE_BG);
 			pillar.addLast(Element.PILLAR_HOLE);
 			heightAdded += Element.PILLAR_HOLE.height();

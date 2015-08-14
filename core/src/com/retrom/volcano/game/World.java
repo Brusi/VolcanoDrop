@@ -228,14 +228,14 @@ public class World {
 	
 	private void checkSpitters() {
 		for (float hole : background.leftHoleList) {
-			if (player.position.y > hole + 40 && hole > leftHighestSpitter) {
+			if (camTarget > hole + 40 && hole > leftHighestSpitter) {
 				leftHighestSpitter = hole;
 				addSpitter(hole + 30, Spitter.LEFT);
 			}
 		}
 		
 		for (float hole : background.rightHoleList) {
-			if (player.position.y > hole + 40 && hole > rightHighestSpitter) {
+			if (camTarget > hole + 40 && hole > rightHighestSpitter) {
 				rightHighestSpitter = hole;
 				addSpitter(hole + 30, Spitter.RIGHT);
 			}
