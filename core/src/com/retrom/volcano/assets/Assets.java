@@ -81,6 +81,9 @@ public class Assets {
 	public static Array<Sprite> coin5_3_land;
 	public static Sprite coin5_4;
 	public static Array<Sprite> coin5_4_land;
+	
+	public static Sprite powerupMagnet;
+	public static Sprite powerupSlomo;
 
 	//// Effects
 	// Score numbers:
@@ -144,11 +147,6 @@ public class Assets {
 	
 	public static Array<Sprite> topFireballLoop;
 	
-	public static TextureRegion player;
-	
-	public static TextureRegion powerupMagnet;
-
-	
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
 	}
@@ -156,9 +154,6 @@ public class Assets {
 	public static void load() {
 //		font = new BitmapFont(Gdx.files.internal("data/font.fnt"), Gdx.files.internal("data/font.png"), false);
 		
-		player = new TextureRegion(loadTexture("player.png"));
-		powerupMagnet = new TextureRegion(loadTexture("powerupmagnet.png"));
-
 		TextureAtlas wallsSheet = new TextureAtlas("walls/walls.txt");
 		walls1 = wallsSheet.createSprites("x1");
 		walls2 = wallsSheet.createSprites("x2");
@@ -233,6 +228,9 @@ public class Assets {
 		coin5_2_land = treasure.createSprites("coin_5_2_land/coin_5_2_land");
 		coin5_3_land = treasure.createSprites("coin_5_3_land/coin_5_3_land");
 		coin5_4_land = treasure.createSprites("coin_5_4_land/coin_5_4_land");
+		
+		powerupMagnet = treasure.createSprite("powerup_magnet");
+		powerupSlomo = treasure.createSprite("powerup_time");
 		
 		bronzeCoinBreak = treasure.createSprites("coins_bronze_break");
 		silverCoinBreak = treasure.createSprites("coins_silver_break");

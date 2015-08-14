@@ -33,6 +33,9 @@ public class SoundAssets {
 	public static Sound powerupMagnetLoop;
 	public static Sound powerupMagnetEnd;
 	
+	public static Sound powerupTimeStart;
+	public static Sound powerupTimeEnd;
+	
 	public static Sound playerDeathCrush;
 	public static Sound playerDeathBurn;
 	
@@ -93,6 +96,9 @@ public class SoundAssets {
 		powerupMagnetStart = newSound("powerups_magnet_start.wav");
 		powerupMagnetLoop = newSound("powerups_magnet_loop.wav");
 		powerupMagnetEnd = newSound("powerups_magnet_end.wav");
+		
+		powerupTimeStart = newSound("powerups_time_start.wav");
+		powerupTimeEnd = newSound("powerups_time_end.wav");
 		
 		// Player death:
 		playerDeathCrush = newSound("player_death_crushed.wav");

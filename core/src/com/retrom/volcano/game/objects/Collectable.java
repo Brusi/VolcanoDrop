@@ -34,7 +34,7 @@ public class Collectable extends DynamicGameObject {
 		COIN_4_1, COIN_4_2, COIN_4_3, 
 		COIN_5_1, COIN_5_2, COIN_5_3, COIN_5_4, 
 		
-		POWERUP_MAGNET;
+		POWERUP_MAGNET, POWERUP_SLOMO;
 	}
 	
 	public final Type type;
@@ -125,6 +125,6 @@ public class Collectable extends DynamicGameObject {
 	}
 
 	public boolean isPowerup() {
-		return type == Type.POWERUP_MAGNET; // TODO handle other types.
+		return type == Type.POWERUP_MAGNET || type == Type.POWERUP_SLOMO; 
 	}
 }

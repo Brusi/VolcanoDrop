@@ -572,6 +572,10 @@ public class World {
 			SoundAssets.playSound(SoundAssets.powerupMagnetStart);
 			SoundAssets.loopSound(SoundAssets.powerupMagnetLoop);
 			break;
+		case POWERUP_SLOMO:
+			slomoTime = 5f;
+			SoundAssets.playSound(SoundAssets.powerupMagnetStart);
+			break;
 		case COIN_1_1:
 		case COIN_1_2:
 			addScore(1);
@@ -636,8 +640,6 @@ public class World {
 			effects.add(new Score15GreenEffect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectDiamond);
 			addEffects.add(EffectFactory.greenDiamondCollectEffect(collectable.position));
-			break;
-		default:
 			break;
 		}
 	}

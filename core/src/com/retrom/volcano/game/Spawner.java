@@ -83,6 +83,8 @@ public class Spawner {
 			
 			
 			if (Math.random() < 0.1) {
+				type = Collectable.Type.POWERUP_SLOMO;
+			} else if (Math.random() < 0.1) {
 				type = Collectable.Type.POWERUP_MAGNET;
 			}
 			

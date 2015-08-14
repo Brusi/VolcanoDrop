@@ -334,18 +334,24 @@ public class WorldRenderer {
 
 				@Override
 				public Sprite visit(DiamondGlowEffect effect) {
+					Sprite s = null;
 					switch (effect.diamond.type) {
 					case COIN_5_2:
-						return Assets.diamondCyanGlow;
+						s = Assets.diamondCyanGlow;
+						break;
 					case COIN_5_3:
-						return Assets.diamondPurpleGlow;
+						s = Assets.diamondPurpleGlow;
+						break;
 					case COIN_5_4:
-						return Assets.diamondGreenGlow;
+						s = Assets.diamondGreenGlow;
+						break;
 					default:
 						Gdx.app.error("Error", "Diamond glow on a non-diamond collectable.");
 						break;
 					}
-					return null;
+					float tint = (float) (0.5 + (Math.sin(effect.stateTime() * 6) + 1) / 5);
+					s.setColor(tint, tint, tint, tint);
+					return s;
 				}
 
 				@Override
@@ -427,6 +433,7 @@ public class WorldRenderer {
 		case COIN_5_3: return Assets.coin5_3_land;
 		case COIN_5_4: return Assets.coin5_4_land;
 		case POWERUP_MAGNET:
+		case POWERUP_SLOMO:
 		}
 		return null;
 	}
@@ -449,6 +456,9 @@ public class WorldRenderer {
 		case COIN_5_3: return Assets.coin5_3;
 		case COIN_5_4: return Assets.coin5_4;
 		case POWERUP_MAGNET: return Assets.powerupMagnet;
+		case POWERUP_SLOMO: return Assets.powerupSlomo;
+		default:
+			break;
 		}
 		return null;
 	}
@@ -459,7 +469,6 @@ public class WorldRenderer {
 			if (coin.isPowerup() || coin.state() != Collectable.STATUS_IDLE) {
 				keyFrame = getCoinKeyFrame(coin.type);
 			} else {
-				
 				keyFrame = getFrameStopAtLastFrame(getCoinAnimation(coin.type), coin.stateTime());
 			}
 			

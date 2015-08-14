@@ -19,7 +19,8 @@ public class DiamondGlowEffect extends Effect {
 	
 	@Override
 	protected void childSpecificUpdating(float deltaTime) {
-		if (diamond.state() == Collectable.STATUS_CRUSHED || diamond.state() == Collectable.STATUS_TAKEN) {
+		if (diamond.state() == Collectable.STATUS_CRUSHED
+				|| diamond.state() == Collectable.STATUS_TAKEN) {
 			this.state_ = Effect.STATE_DONE;
 		}
 	}
