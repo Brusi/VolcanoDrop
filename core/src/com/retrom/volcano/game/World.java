@@ -86,13 +86,16 @@ public class World {
 	
 	private float magnetTime = 0f;
 	private float slomoTime = 0f;
+	private float shieldTime = 0f;
 
 	private List<Rectangle> obstacles_;
 
 	public float camTarget;
 
 	public Background background = new Background();
+	
 
+	final public List<Effect> addEffectsUnder = new ArrayList<Effect>();
 	final public List<Effect> effects = new ArrayList<Effect>();
 	final public List<Effect> addEffects = new ArrayList<Effect>();
 	final public List<Effect> screenEffects = new ArrayList<Effect>();
@@ -148,6 +151,9 @@ public class World {
 	}
 
 	private void updateCheats() {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
+			addCoin(0, Collectable.Type.POWERUP_MAGNET);
+		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
 			magnetTime += 1f;
 		}
@@ -160,7 +166,7 @@ public class World {
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-			listener_.restartGame();
+			finishGame();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.H)) {
 			addSpitter(400, false);
@@ -188,7 +194,7 @@ public class World {
 		if (slomoTime > 0) {
 			float slomoRatio;
 			if (slomoTime > 1) {
-				slomoRatio = 0.5f;
+				slomoRatio = 0.66f;
 			} else {
 				slomoRatio = 1f / (slomoTime+1);
 			}
@@ -315,6 +321,7 @@ public class World {
 	}
 
 	private void updateEffects(float deltaTime) {
+		updateEffectsList(deltaTime, addEffectsUnder);
 		updateEffectsList(deltaTime, effects);
 		updateEffectsList(deltaTime, addEffects);
 		updateEffectsList(deltaTime, screenEffects);
@@ -422,6 +429,9 @@ public class World {
 		collectables_.add(coin);
 		if (coin.type == Collectable.Type.COIN_5_1 || coin.type == Collectable.Type.COIN_5_2 || coin.type == Collectable.Type.COIN_5_3 || coin.type == Collectable.Type.COIN_5_4) {
 			addEffects.add(new DiamondGlowEffect(coin));
+		}
+		if (coin.isPowerup()) {
+			addEffects.add(EffectFactory.powerupBackGlow(coin.type, coin));
 		}
 	}
 	
@@ -670,7 +680,6 @@ public class World {
 					@Override
 					public void invoke() {
 						finishGame();
-						listener_.restartGame();
 					}
 				});
 			}
@@ -683,5 +692,6 @@ public class World {
 	
 	private void finishGame() {
 		SoundAssets.stopAllSounds();
+		listener_.restartGame();
 	}
 }

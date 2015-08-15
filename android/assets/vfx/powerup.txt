@@ -1,0 +1,53 @@
+powerup.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+powerup_magnet_ flare
+  rotate: false
+  xy: 2, 2
+  size: 153, 153
+  orig: 153, 153
+  offset: 0, 0
+  index: -1
+powerup_magnet_backglow
+  rotate: false
+  xy: 157, 2
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1
+powerup_magnet_glow
+  rotate: false
+  xy: 261, 2
+  size: 240, 240
+  orig: 240, 240
+  offset: 0, 0
+  index: -1
+powerup_shield_ flare
+  rotate: false
+  xy: 503, 2
+  size: 153, 153
+  orig: 153, 153
+  offset: 0, 0
+  index: -1
+powerup_shield_backglow
+  rotate: false
+  xy: 658, 2
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1
+powerup_timebend_ flare
+  rotate: false
+  xy: 762, 2
+  size: 153, 153
+  orig: 153, 153
+  offset: 0, 0
+  index: -1
+powerup_timebend_backglow
+  rotate: false
+  xy: 917, 2
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1

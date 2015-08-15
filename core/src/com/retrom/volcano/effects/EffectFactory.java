@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.game.objects.Collectable;
+import com.retrom.volcano.game.objects.Collectable.Type;
 
 public class EffectFactory {
 	
@@ -55,7 +56,6 @@ public class EffectFactory {
 
 	public static Effect fireballExpodeEffect(Vector2 position) {
 		FiniteAnimationEffect $ = new FiniteAnimationEffect(Assets.fireballExplodeEffect, position);
-		$.setNoRotation();
 		return $;
 	}
 
@@ -89,6 +89,19 @@ public class EffectFactory {
 			return new CoinBreakParticle(Assets.purpleDiamondBreak, position);
 		default:
 			Gdx.app.error("ERROR", "Unsupported collectable particle.");
+		}
+		return null;
+	}
+
+	public static Effect powerupBackGlow(Type type, Collectable c) {
+		switch (type) {
+		case POWERUP_MAGNET:
+			return new PowerupGlow(Assets.magnetBackGlow, c);
+		case POWERUP_SLOMO:
+			return new PowerupGlow(Assets.slomoBackGlow, c);
+		default:
+			Gdx.app.error("ERROR", "Type is not a powerup, no powerup back glow.");
+			break;
 		}
 		return null;
 	}

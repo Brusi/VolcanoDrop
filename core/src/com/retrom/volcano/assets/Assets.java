@@ -134,6 +134,9 @@ public class Assets {
 	public static Sprite diamondPurpleGlow;
 	public static Sprite tokenGlow;
 	
+	public static Sprite magnetBackGlow;
+	public static Sprite slomoBackGlow;
+	
 	// Enemies:
 	public static Sprite burningWall;
 	public static Array<Sprite> burningWallStart;
@@ -147,6 +150,8 @@ public class Assets {
 	public static Array<Sprite> spitter;
 	
 	public static Array<Sprite> topFireballLoop;
+
+	
 
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -206,29 +211,31 @@ public class Assets {
 		coin5_3 = coin5Arr.get(2);
 		coin5_4 = coin5Arr.get(3);
 		
-		coin1_1_land = treasure.createSprites("coin_1_1_land/coin_1_1_land");
-		coin1_2_land = treasure.createSprites("coin_1_2_land/coin_1_2_land");
+		coin1_1_land = treasure.createSprites("coin_1_1_land/coin1_1_land");
+		coin1_2_land = treasure.createSprites("coin_1_2_land/coin1_2_land");
+		System.out.println(coin1_1_land.size);
+
+
+		coin2_1_land = treasure.createSprites("coin_2_1_land/coin2_1_land");
+		coin2_2_land = treasure.createSprites("coin_2_2_land/coin2_2_land");
+		coin2_3_land = treasure.createSprites("coin_2_3_land/coin2_3_land");
 		
-		coin2_1_land = treasure.createSprites("coin_2_1_land/coin_2_1_land");
-		coin2_2_land = treasure.createSprites("coin_2_2_land/coin_2_2_land");
-		coin2_3_land = treasure.createSprites("coin_2_3_land/coin_2_3_land");
+		coin3_1_land = treasure.createSprites("coin_3_1_land/coin3_1_land");
+		coin3_2_land = treasure.createSprites("coin_3_2_land/coin3_2_land");
+		coin3_3_land = treasure.createSprites("coin_3_3_land/coin3_3_land");
 		
-		coin3_1_land = treasure.createSprites("coin_3_1_land/coin_3_1_land");
-		coin3_2_land = treasure.createSprites("coin_3_2_land/coin_3_2_land");
-		coin3_3_land = treasure.createSprites("coin_3_3_land/coin_3_3_land");
+		coin3_1_land = treasure.createSprites("coin_3_1_land/coin3_1_land");
+		coin3_2_land = treasure.createSprites("coin_3_2_land/coin3_2_land");
+		coin3_3_land = treasure.createSprites("coin_3_3_land/coin3_3_land");
 		
-		coin3_1_land = treasure.createSprites("coin_3_1_land/coin_3_1_land");
-		coin3_2_land = treasure.createSprites("coin_3_2_land/coin_3_2_land");
-		coin3_3_land = treasure.createSprites("coin_3_3_land/coin_3_3_land");
+		coin4_1_land = treasure.createSprites("coin_4_1_land/coin4_1_land");
+		coin4_2_land = treasure.createSprites("coin_4_2_land/coin4_2_land");
+		coin4_3_land = treasure.createSprites("coin_4_3_land/coin4_3_land");
 		
-		coin4_1_land = treasure.createSprites("coin_4_1_land/coin_4_1_land");
-		coin4_2_land = treasure.createSprites("coin_4_2_land/coin_4_2_land");
-		coin4_3_land = treasure.createSprites("coin_4_3_land/coin_4_3_land");
-		
-		coin5_1_land = treasure.createSprites("coin_5_1_land/coin_5_1_land");
-		coin5_2_land = treasure.createSprites("coin_5_2_land/coin_5_2_land");
-		coin5_3_land = treasure.createSprites("coin_5_3_land/coin_5_3_land");
-		coin5_4_land = treasure.createSprites("coin_5_4_land/coin_5_4_land");
+		coin5_1_land = treasure.createSprites("coin_5_1_land/coin5_1_land");
+		coin5_2_land = treasure.createSprites("coin_5_2_land/coin5_2_land");
+		coin5_3_land = treasure.createSprites("coin_5_3_land/coin5_3_land");
+		coin5_4_land = treasure.createSprites("coin_5_4_land/coin5_4_land");
 		
 		powerupMagnet = treasure.createSprite("powerup_magnet");
 		powerupSlomo = treasure.createSprite("powerup_time");
@@ -266,6 +273,10 @@ public class Assets {
 		diamondGreenGlow = vfxSheet.createSprite("diamond_green_glow");
 		diamondPurpleGlow = vfxSheet.createSprite("diamond_purple_glow");
 		tokenGlow = vfxSheet.createSprite("token_glow");
+		
+		TextureAtlas powerupSheet = new TextureAtlas("vfx/powerup.txt");
+		magnetBackGlow = powerupSheet.createSprite("powerup_magnet_backglow");
+		slomoBackGlow = powerupSheet.createSprite("powerup_timebend_backglow");
 		
 		greenDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_green1"); 
 		greenDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_green2"); 

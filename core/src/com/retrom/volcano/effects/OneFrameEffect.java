@@ -25,5 +25,4 @@ public class OneFrameEffect extends Effect {
 	public Sprite sprite() {
 		return sprite_;
 	}
-
 }

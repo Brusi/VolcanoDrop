@@ -40,6 +40,7 @@ import com.retrom.volcano.effects.FireballAnimationEffect;
 import com.retrom.volcano.effects.FireballStartEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.OneFrameEffect;
+import com.retrom.volcano.effects.PowerupGlow;
 import com.retrom.volcano.effects.Score10Effect;
 import com.retrom.volcano.effects.Score15GreenEffect;
 import com.retrom.volcano.effects.Score15PurpleEffect;
@@ -172,6 +173,9 @@ public class WorldRenderer {
 		batch.begin();
 		renderPillarBg();
 		renderWalls();
+		setBlendFuncAdd();
+		renderEffects(world.addEffectsUnder);
+		setBlendFuncNormal();
 		renderPlayer();
 		renderEnemies();
 		renderCoins();
@@ -359,6 +363,18 @@ public class WorldRenderer {
 					s.setColor(tint, tint, tint, tint);
 					effect.position_.y = effect.diamond.position.y + getBounceY(effect.diamond.stateTime());
 					effect.position_.x = effect.diamond.position.x;
+					return s;
+				}
+				
+				@Override
+				public Sprite visit(PowerupGlow effect) {
+					Sprite s = effect.sprite();
+					if (effect.c.state() == Collectable.STATUS_IDLE) {
+						effect.position_.y = effect.c.position.y + getBounceY(effect.c.stateTime());
+					} else {
+						effect.position_.y = effect.c.position.y;
+					}
+					effect.position_.x = effect.c.position.x;
 					return s;
 				}
 

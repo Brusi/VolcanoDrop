@@ -116,84 +116,84 @@ Relic_loop/Relic_loop
   index: 14
 Relic_loop/Relic_loop
   rotate: false
-  xy: 1202, 2
+  xy: 2, 97
   size: 73, 93
   orig: 73, 93
   offset: 0, 0
   index: 15
 Relic_loop/Relic_loop
   rotate: false
-  xy: 1277, 2
+  xy: 77, 97
   size: 73, 93
   orig: 73, 93
   offset: 0, 0
   index: 16
 Relic_loop/Relic_loop
   rotate: false
-  xy: 1352, 2
+  xy: 152, 97
   size: 73, 93
   orig: 73, 93
   offset: 0, 0
   index: 17
 Relic_loop/Relic_loop
   rotate: false
-  xy: 2, 97
+  xy: 227, 97
   size: 73, 93
   orig: 73, 93
   offset: 0, 0
   index: 18
 Relic_loop/Relic_loop
   rotate: false
-  xy: 77, 97
+  xy: 302, 97
   size: 73, 93
   orig: 73, 93
   offset: 0, 0
   index: 19
 Relic_loop/Relic_loop
   rotate: false
-  xy: 152, 97
+  xy: 377, 97
   size: 73, 93
   orig: 73, 93
   offset: 0, 0
   index: 20
 Relic_loop/Relic_loop
   rotate: false
-  xy: 227, 97
+  xy: 452, 97
   size: 73, 93
   orig: 73, 93
   offset: 0, 0
   index: 21
 Relic_loop/Relic_loop
   rotate: false
-  xy: 302, 97
+  xy: 527, 97
   size: 73, 93
   orig: 73, 93
   offset: 0, 0
   index: 22
 Relic_loop/Relic_loop
   rotate: false
-  xy: 377, 97
+  xy: 602, 97
   size: 73, 93
   orig: 73, 93
   offset: 0, 0
   index: 23
 Relic_loop/Relic_loop
   rotate: false
-  xy: 452, 97
+  xy: 677, 97
   size: 73, 93
   orig: 73, 93
   offset: 0, 0
   index: 24
 Relic_loop/Relic_loop
   rotate: false
-  xy: 527, 97
+  xy: 752, 97
   size: 73, 93
   orig: 73, 93
   offset: 0, 0
   index: 25
 Relic_loop/Relic_loop
   rotate: false
-  xy: 602, 97
+  xy: 827, 97
   size: 73, 93
   orig: 73, 93
   offset: 0, 0
@@ -221,3024 +221,3024 @@ Relic_loop/Relic_loop
   index: 29
 coin_1
   rotate: false
-  xy: 677, 97
+  xy: 902, 97
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: 1
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 709, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 902, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 0
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 741, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 902, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 1
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 773, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 902, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 2
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 805, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 902, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 3
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 837, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 902, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 4
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 869, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 934, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 5
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 901, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 966, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 6
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 933, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 998, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 7
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 965, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 1030, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 8
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 997, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 1062, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 9
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 1029, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 1094, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 10
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 1061, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 1126, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 11
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 1093, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 1158, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 12
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 1125, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 1190, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 13
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 1157, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 2, 192
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 14
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 1189, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 34, 192
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 15
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 1221, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 66, 192
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 16
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 1253, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 98, 192
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 17
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 1285, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 130, 192
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 18
-coin_1_1_land/coin_1_1_land
+coin_1_1_land/coin1_1_land
   rotate: false
-  xy: 1317, 97
-  size: 30, 38
-  orig: 30, 38
+  xy: 902, 97
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 19
 coin_1
   rotate: false
-  xy: 1349, 97
+  xy: 162, 192
   size: 30, 29
   orig: 30, 29
   offset: 0, 0
   index: 2
-coin_1_2_land/coin_1_2_land
-  rotate: false
-  xy: 1381, 97
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 0
-coin_1_2_land/coin_1_2_land
-  rotate: false
-  xy: 1413, 97
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 1
-coin_1_2_land/coin_1_2_land
-  rotate: false
-  xy: 2, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 2
-coin_1_2_land/coin_1_2_land
-  rotate: false
-  xy: 34, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 3
-coin_1_2_land/coin_1_2_land
-  rotate: false
-  xy: 66, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 4
-coin_1_2_land/coin_1_2_land
-  rotate: false
-  xy: 98, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 5
-coin_1_2_land/coin_1_2_land
-  rotate: false
-  xy: 130, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 6
-coin_1_2_land/coin_1_2_land
-  rotate: false
-  xy: 162, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 7
-coin_1_2_land/coin_1_2_land
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 194, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 8
-coin_1_2_land/coin_1_2_land
+  index: 0
+coin_1_2_land/coin1_2_land
+  rotate: false
+  xy: 194, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 1
+coin_1_2_land/coin1_2_land
+  rotate: false
+  xy: 194, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 2
+coin_1_2_land/coin1_2_land
+  rotate: false
+  xy: 194, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 3
+coin_1_2_land/coin1_2_land
+  rotate: false
+  xy: 194, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 4
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 226, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 9
-coin_1_2_land/coin_1_2_land
+  index: 5
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 258, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 10
-coin_1_2_land/coin_1_2_land
+  index: 6
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 290, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 11
-coin_1_2_land/coin_1_2_land
+  index: 7
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 322, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 12
-coin_1_2_land/coin_1_2_land
+  index: 8
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 354, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 13
-coin_1_2_land/coin_1_2_land
+  index: 9
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 386, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 14
-coin_1_2_land/coin_1_2_land
+  index: 10
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 418, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 15
-coin_1_2_land/coin_1_2_land
+  index: 11
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 450, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 16
-coin_1_2_land/coin_1_2_land
+  index: 12
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 482, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 17
-coin_1_2_land/coin_1_2_land
+  index: 13
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 514, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 18
-coin_1_2_land/coin_1_2_land
-  rotate: false
-  xy: 514, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 19
-coin_2
+  index: 14
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 546, 192
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
-  index: 1
-coin_2_1_land/coin_2_1_land
+  index: 15
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 578, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 0
-coin_2_1_land/coin_2_1_land
+  index: 16
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 610, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 1
-coin_2_1_land/coin_2_1_land
+  index: 17
+coin_1_2_land/coin1_2_land
   rotate: false
   xy: 642, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 2
-coin_2_1_land/coin_2_1_land
+  index: 18
+coin_1_2_land/coin1_2_land
+  rotate: false
+  xy: 642, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 19
+coin_2
   rotate: false
   xy: 674, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 1
+coin_2_1_land/coin2_1_land
+  rotate: false
+  xy: 674, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 0
+coin_2_1_land/coin2_1_land
+  rotate: false
+  xy: 674, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 1
+coin_2_1_land/coin2_1_land
+  rotate: false
+  xy: 674, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 2
+coin_2_1_land/coin2_1_land
+  rotate: false
+  xy: 674, 192
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 3
-coin_2_1_land/coin_2_1_land
+coin_2_1_land/coin2_1_land
+  rotate: false
+  xy: 674, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 4
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 706, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 4
-coin_2_1_land/coin_2_1_land
+  index: 5
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 738, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 5
-coin_2_1_land/coin_2_1_land
+  index: 6
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 770, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 6
-coin_2_1_land/coin_2_1_land
+  index: 7
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 802, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 7
-coin_2_1_land/coin_2_1_land
+  index: 8
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 834, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 8
-coin_2_1_land/coin_2_1_land
+  index: 9
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 866, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 9
-coin_2_1_land/coin_2_1_land
+  index: 10
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 898, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 10
-coin_2_1_land/coin_2_1_land
+  index: 11
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 930, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 11
-coin_2_1_land/coin_2_1_land
+  index: 12
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 962, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 12
-coin_2_1_land/coin_2_1_land
+  index: 13
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 994, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 13
-coin_2_1_land/coin_2_1_land
+  index: 14
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 1026, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 14
-coin_2_1_land/coin_2_1_land
+  index: 15
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 1058, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 15
-coin_2_1_land/coin_2_1_land
+  index: 16
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 1090, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 16
-coin_2_1_land/coin_2_1_land
+  index: 17
+coin_2_1_land/coin2_1_land
   rotate: false
   xy: 1122, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
-  index: 17
-coin_2_1_land/coin_2_1_land
+  index: 18
+coin_2_1_land/coin2_1_land
+  rotate: false
+  xy: 674, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 19
+coin_2
   rotate: false
   xy: 1154, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 29
+  orig: 30, 29
   offset: 0, 0
-  index: 18
-coin_2_1_land/coin_2_1_land
+  index: 2
+coin_2_2_land/coin2_2_land
   rotate: false
   xy: 1186, 192
-  size: 30, 38
-  orig: 30, 38
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 0
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 1186, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 1
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 1186, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 2
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 1186, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 3
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 1186, 192
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 4
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 2, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 5
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 34, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 6
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 66, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 7
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 98, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 8
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 130, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 9
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 162, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 10
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 194, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 11
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 226, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 12
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 258, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 13
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 290, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 14
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 322, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 15
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 354, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 16
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 386, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 17
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 418, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 18
+coin_2_2_land/coin2_2_land
+  rotate: false
+  xy: 450, 224
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 19
 coin_2
   rotate: false
-  xy: 1218, 192
-  size: 30, 29
-  orig: 30, 29
-  offset: 0, 0
-  index: 2
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 1250, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 0
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 1282, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 1
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 1314, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 2
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 1346, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 3
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 1378, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 4
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 1410, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 5
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 1442, 192
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 6
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 2, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 7
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 34, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 8
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 66, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 9
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 98, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 10
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 130, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 11
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 162, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 12
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 194, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 13
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 226, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 14
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 258, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 15
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 290, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 16
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 322, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 17
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 354, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 18
-coin_2_2_land/coin_2_2_land
-  rotate: false
-  xy: 386, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 19
-coin_2
-  rotate: false
-  xy: 418, 232
+  xy: 482, 224
   size: 46, 38
   orig: 46, 38
   offset: 0, 0
   index: 3
-coin_2_3_land/coin_2_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 466, 232
-  size: 46, 45
-  orig: 46, 45
+  xy: 530, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 0
-coin_2_3_land/coin_2_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 514, 232
-  size: 46, 45
-  orig: 46, 45
+  xy: 530, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 1
-coin_2_3_land/coin_2_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 562, 232
-  size: 46, 45
-  orig: 46, 45
+  xy: 530, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 2
-coin_2_3_land/coin_2_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 610, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 3
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 658, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 4
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 706, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 5
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 754, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 6
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 802, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 7
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 850, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 8
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 898, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 9
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 946, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 10
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 994, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 11
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 1042, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 12
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 1090, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 13
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 1138, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 14
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 1186, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 15
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 1234, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 16
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 1282, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 17
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 1330, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 18
-coin_2_3_land/coin_2_3_land
-  rotate: false
-  xy: 1330, 232
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 19
-coin_3
-  rotate: false
-  xy: 1378, 232
-  size: 30, 30
-  orig: 30, 30
-  offset: 0, 0
-  index: 1
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 1410, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 0
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 1442, 232
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 1
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 2, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 2
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 34, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 3
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 66, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 4
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 98, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 5
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 130, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 6
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 162, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 7
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 194, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 8
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 226, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 9
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 258, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 10
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 290, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 11
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 322, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 12
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 354, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 13
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 386, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 14
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 418, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 15
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 450, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 16
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 482, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 17
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 514, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 18
-coin_3_1_land/coin_3_1_land
-  rotate: false
-  xy: 546, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 19
-coin_3
-  rotate: false
-  xy: 578, 279
-  size: 30, 29
-  orig: 30, 29
-  offset: 0, 0
-  index: 2
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 610, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 0
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 642, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 1
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 674, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 2
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 706, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 3
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 738, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 4
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 770, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 5
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 802, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 6
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 834, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 7
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 866, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 8
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 898, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 9
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 930, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 10
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 962, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 11
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 994, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 12
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 1026, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 13
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 1058, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 14
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 1090, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 15
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 1122, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 16
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 1154, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 17
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 1186, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 18
-coin_3_2_land/coin_3_2_land
-  rotate: false
-  xy: 1218, 279
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 19
-coin_3
-  rotate: false
-  xy: 1250, 279
+  xy: 530, 224
   size: 46, 38
   orig: 46, 38
   offset: 0, 0
   index: 3
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 1298, 279
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 0
-coin_3_3_land/coin_3_3_land
-  rotate: false
-  xy: 1346, 279
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 1
-coin_3_3_land/coin_3_3_land
-  rotate: false
-  xy: 1394, 279
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 2
-coin_3_3_land/coin_3_3_land
-  rotate: false
-  xy: 2, 326
-  size: 46, 45
-  orig: 46, 45
-  offset: 0, 0
-  index: 3
-coin_3_3_land/coin_3_3_land
-  rotate: false
-  xy: 50, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 530, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 4
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 98, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 530, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 5
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 146, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 578, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 6
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 194, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 626, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 7
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 242, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 674, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 8
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 290, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 722, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 9
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 338, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 770, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 10
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 386, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 818, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 11
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 434, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 866, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 12
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 482, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 914, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 13
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 530, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 962, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 14
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 578, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 1010, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 15
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 578, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 1058, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 16
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 578, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 1106, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 17
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 578, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 530, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 18
-coin_3_3_land/coin_3_3_land
+coin_2_3_land/coin2_3_land
   rotate: false
-  xy: 578, 326
-  size: 46, 45
-  orig: 46, 45
+  xy: 530, 224
+  size: 46, 38
+  orig: 46, 38
   offset: 0, 0
   index: 19
-coin_4
+coin_3
   rotate: false
-  xy: 626, 326
+  xy: 1154, 224
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: 1
-coin_4_1_land/coin_4_1_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 658, 326
-  size: 30, 38
-  orig: 30, 38
+  xy: 1154, 224
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 0
-coin_4_1_land/coin_4_1_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 690, 326
-  size: 30, 38
-  orig: 30, 38
+  xy: 1154, 224
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 1
-coin_4_1_land/coin_4_1_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 722, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 2
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 754, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 3
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 786, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 4
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 818, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 5
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 850, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 6
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 882, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 7
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 914, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 8
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 946, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 9
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 978, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 10
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 1010, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 11
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 1042, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 12
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 1074, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 13
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 1106, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 14
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 1138, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 15
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 1170, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 16
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 1202, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 17
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 1234, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 18
-coin_4_1_land/coin_4_1_land
-  rotate: false
-  xy: 1266, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 19
-coin_4
-  rotate: false
-  xy: 1298, 326
+  xy: 1154, 224
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: 2
-coin_4_2_land/coin_4_2_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 1330, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 0
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 1362, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 1
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 1394, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 2
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 1426, 326
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 3
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 2, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 4
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 34, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 5
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 66, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 6
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 98, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 7
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 130, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 8
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 162, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 9
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 194, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 10
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 226, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 11
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 258, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 12
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 290, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 13
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 322, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 14
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 354, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 15
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 386, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 16
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 418, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 17
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 450, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 18
-coin_4_2_land/coin_4_2_land
-  rotate: false
-  xy: 482, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 19
-coin_4
-  rotate: false
-  xy: 514, 373
+  xy: 1154, 224
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: 3
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 546, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 0
-coin_4_3_land/coin_4_3_land
-  rotate: false
-  xy: 578, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 1
-coin_4_3_land/coin_4_3_land
-  rotate: false
-  xy: 610, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 2
-coin_4_3_land/coin_4_3_land
-  rotate: false
-  xy: 642, 373
-  size: 30, 38
-  orig: 30, 38
-  offset: 0, 0
-  index: 3
-coin_4_3_land/coin_4_3_land
-  rotate: false
-  xy: 674, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 1154, 224
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 4
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 706, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 1186, 224
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 5
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 738, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 2, 264
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 6
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 770, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 34, 264
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 7
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 802, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 66, 264
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 8
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 834, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 98, 264
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 9
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 866, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 130, 264
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 10
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 898, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 162, 264
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 11
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 930, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 194, 264
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 12
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 962, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 226, 264
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 13
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 994, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 258, 264
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 14
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 1026, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 290, 264
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 15
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 1058, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 322, 264
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 16
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 1090, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 354, 264
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 17
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 1122, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 386, 264
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 18
-coin_4_3_land/coin_4_3_land
+coin_3_1_land/coin3_1_land
   rotate: false
-  xy: 1154, 373
-  size: 30, 38
-  orig: 30, 38
+  xy: 1154, 224
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 19
+coin_3
+  rotate: false
+  xy: 418, 264
+  size: 30, 29
+  orig: 30, 29
+  offset: 0, 0
+  index: 2
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 450, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 0
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 450, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 1
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 450, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 2
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 450, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 3
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 450, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 4
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 482, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 5
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 514, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 6
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 546, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 7
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 578, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 8
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 610, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 9
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 642, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 10
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 674, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 11
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 706, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 12
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 738, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 13
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 770, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 14
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 802, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 15
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 834, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 16
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 866, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 17
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 898, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 18
+coin_3_2_land/coin3_2_land
+  rotate: false
+  xy: 930, 264
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 19
+coin_3
+  rotate: false
+  xy: 962, 264
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 3
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 1010, 264
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 0
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 1058, 264
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 1
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 1106, 264
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 2
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 1154, 264
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 3
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 2, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 4
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 50, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 5
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 98, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 6
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 146, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 7
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 194, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 8
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 242, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 9
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 290, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 10
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 338, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 11
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 338, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 12
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 338, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 13
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 338, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 14
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 338, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 15
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 338, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 16
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 338, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 17
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 338, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 18
+coin_3_3_land/coin3_3_land
+  rotate: false
+  xy: 338, 304
+  size: 46, 38
+  orig: 46, 38
+  offset: 0, 0
+  index: 19
+coin_4
+  rotate: false
+  xy: 386, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 1
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 386, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 0
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 386, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 1
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 386, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 2
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 386, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 3
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 386, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 4
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 418, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 5
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 450, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 6
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 482, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 7
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 514, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 8
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 546, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 9
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 578, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 10
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 610, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 11
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 642, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 12
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 674, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 13
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 706, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 14
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 738, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 15
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 770, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 16
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 802, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 17
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 834, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 18
+coin_4_1_land/coin4_1_land
+  rotate: false
+  xy: 386, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 19
+coin_4
+  rotate: false
+  xy: 866, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 2
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 866, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 0
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 866, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 1
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 866, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 2
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 866, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 3
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 866, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 4
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 898, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 5
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 930, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 6
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 962, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 7
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 994, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 8
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 1026, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 9
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 1058, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 10
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 1090, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 11
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 1122, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 12
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 1154, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 13
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 1186, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 14
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 2, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 15
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 34, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 16
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 66, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 17
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 98, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 18
+coin_4_2_land/coin4_2_land
+  rotate: false
+  xy: 866, 304
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 19
+coin_4
+  rotate: false
+  xy: 130, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 3
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 130, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 0
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 130, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 1
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 130, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 2
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 130, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 3
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 130, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 4
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 162, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 5
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 194, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 6
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 226, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 7
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 258, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 8
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 290, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 9
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 322, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 10
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 354, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 11
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 386, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 12
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 418, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 13
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 450, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 14
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 482, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 15
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 514, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 16
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 546, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 17
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 578, 344
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: 18
+coin_4_3_land/coin4_3_land
+  rotate: false
+  xy: 130, 344
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: 19
 coin_5
   rotate: false
-  xy: 1186, 373
+  xy: 610, 344
   size: 42, 42
   orig: 42, 42
   offset: 0, 0
   index: 1
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 1230, 373
-  size: 44, 51
-  orig: 44, 51
+  xy: 654, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 0
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 1276, 373
-  size: 44, 51
-  orig: 44, 51
+  xy: 654, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 1
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 1322, 373
-  size: 44, 51
-  orig: 44, 51
+  xy: 654, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 2
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 1368, 373
-  size: 44, 51
-  orig: 44, 51
+  xy: 654, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 3
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 1414, 373
-  size: 44, 51
-  orig: 44, 51
+  xy: 654, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 4
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 2, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 700, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 5
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 48, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 746, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 6
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 94, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 792, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 7
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 140, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 838, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 8
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 186, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 884, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 9
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 232, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 930, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 10
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 278, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 976, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 11
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 324, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 1022, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 12
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 370, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 1068, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 13
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 416, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 1114, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 14
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 462, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 1160, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 15
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 508, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 2, 388
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 16
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 554, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 48, 388
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 17
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 600, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 654, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 18
-coin_5_1_land/coin_5_1_land
+coin_5_1_land/coin5_1_land
   rotate: false
-  xy: 600, 426
-  size: 44, 51
-  orig: 44, 51
+  xy: 654, 344
+  size: 44, 42
+  orig: 44, 42
   offset: 0, 0
   index: 19
 coin_5
   rotate: false
-  xy: 646, 426
+  xy: 94, 388
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 2
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 696, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 144, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 0
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 742, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 144, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 1
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 788, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 144, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 2
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 834, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 144, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 3
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 880, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 144, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 4
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 926, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 144, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 5
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 972, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 194, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 6
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 1018, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 244, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 7
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 1064, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 294, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 8
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 1110, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 344, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 9
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 1156, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 394, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 10
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 1202, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 444, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 11
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 1248, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 494, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 12
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 1294, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 544, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 13
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 1340, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 594, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 14
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 1386, 426
-  size: 44, 45
-  orig: 44, 45
+  xy: 644, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 15
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 2, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 694, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 16
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 48, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 744, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 17
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 94, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 144, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 18
-coin_5_2_land/coin_5_2_land
+coin_5_2_land/coin5_2_land
   rotate: false
-  xy: 94, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 144, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 19
 coin_5
   rotate: false
-  xy: 140, 479
+  xy: 794, 388
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 3
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 190, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 844, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 0
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 236, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 844, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 1
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 282, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 844, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 2
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 328, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 844, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 3
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 374, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 844, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 4
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 420, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 844, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 5
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 466, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 894, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 6
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 512, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 944, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 7
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 558, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 994, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 8
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 604, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 1044, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 9
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 650, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 1094, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 10
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 696, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 1144, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 11
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 742, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 2, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 12
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 788, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 52, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 13
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 834, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 102, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 14
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 880, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 152, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 15
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 926, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 202, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 16
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 972, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 252, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 17
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 1018, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 844, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 18
-coin_5_3_land/coin_5_3_land
+coin_5_3_land/coin5_3_land
   rotate: false
-  xy: 1018, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 844, 388
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 19
 coin_5
   rotate: false
-  xy: 1064, 479
+  xy: 302, 438
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 4
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 1114, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 352, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 0
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 1160, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 352, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 1
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 1206, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 352, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 2
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 1252, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 352, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 3
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 1298, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 352, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 4
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 1344, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 352, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 5
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 1390, 479
-  size: 44, 45
-  orig: 44, 45
+  xy: 402, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 6
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 2, 529
-  size: 44, 45
-  orig: 44, 45
+  xy: 452, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 7
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 48, 529
-  size: 44, 45
-  orig: 44, 45
+  xy: 502, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 8
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 94, 529
-  size: 44, 45
-  orig: 44, 45
+  xy: 552, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 9
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 140, 529
-  size: 44, 45
-  orig: 44, 45
+  xy: 602, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 10
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 186, 529
-  size: 44, 45
-  orig: 44, 45
+  xy: 652, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 11
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 232, 529
-  size: 44, 45
-  orig: 44, 45
+  xy: 702, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 12
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 278, 529
-  size: 44, 45
-  orig: 44, 45
+  xy: 752, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 13
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 324, 529
-  size: 44, 45
-  orig: 44, 45
+  xy: 802, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 14
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 370, 529
-  size: 44, 45
-  orig: 44, 45
+  xy: 852, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 15
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 416, 529
-  size: 44, 45
-  orig: 44, 45
+  xy: 902, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 16
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 462, 529
-  size: 44, 45
-  orig: 44, 45
+  xy: 952, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 17
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 508, 529
-  size: 44, 45
-  orig: 44, 45
+  xy: 352, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 18
-coin_5_4_land/coin_5_4_land
+coin_5_4_land/coin5_4_land
   rotate: false
-  xy: 508, 529
-  size: 44, 45
-  orig: 44, 45
+  xy: 352, 438
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 19
 coins_bronze_break
   rotate: false
-  xy: 554, 529
+  xy: 1002, 438
   size: 15, 14
   orig: 15, 14
   offset: 0, 0
   index: 1
 coins_bronze_break
   rotate: false
-  xy: 571, 529
+  xy: 1019, 438
   size: 16, 25
   orig: 16, 25
   offset: 0, 0
   index: 2
 coins_diamonds_cyan_break
   rotate: false
-  xy: 589, 529
+  xy: 1037, 438
   size: 33, 32
   orig: 33, 32
   offset: 0, 0
   index: 1
 coins_diamonds_cyan_break
   rotate: false
-  xy: 624, 529
+  xy: 1072, 438
   size: 30, 29
   orig: 30, 29
   offset: 0, 0
   index: 2
 coins_diamonds_green_break
   rotate: false
-  xy: 656, 529
+  xy: 1104, 438
   size: 23, 28
   orig: 23, 28
   offset: 0, 0
   index: 1
 coins_diamonds_green_break
   rotate: false
-  xy: 681, 529
+  xy: 1129, 438
   size: 26, 28
   orig: 26, 28
   offset: 0, 0
   index: 2
 coins_diamonds_purple_break
   rotate: false
-  xy: 709, 529
+  xy: 1157, 438
   size: 28, 32
   orig: 28, 32
   offset: 0, 0
   index: 1
 coins_diamonds_purple_break
   rotate: false
-  xy: 739, 529
+  xy: 1187, 438
   size: 30, 28
   orig: 30, 28
   offset: 0, 0
   index: 2
 coins_gold_break
   rotate: false
-  xy: 771, 529
+  xy: 2, 488
   size: 20, 29
   orig: 20, 29
   offset: 0, 0
   index: 1
 coins_gold_break
   rotate: false
-  xy: 793, 529
+  xy: 24, 488
   size: 17, 19
   orig: 17, 19
   offset: 0, 0
   index: 2
 coins_silver_break
   rotate: false
-  xy: 812, 529
+  xy: 43, 488
   size: 17, 20
   orig: 17, 20
   offset: 0, 0
   index: 1
 coins_silver_break
   rotate: false
-  xy: 831, 529
+  xy: 62, 488
   size: 18, 19
   orig: 18, 19
   offset: 0, 0
   index: 2
 gold_sack
   rotate: false
-  xy: 851, 529
+  xy: 82, 488
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 1
 gold_sack
   rotate: false
-  xy: 942, 529
+  xy: 173, 488
   size: 74, 71
   orig: 74, 71
   offset: 0, 0
   index: 3
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1018, 529
+  xy: 249, 488
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 77
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1109, 529
+  xy: 340, 488
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 78
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1200, 529
+  xy: 431, 488
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 79
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1291, 529
+  xy: 522, 488
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 80
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1382, 529
+  xy: 613, 488
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 81
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 2, 602
+  xy: 704, 488
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 82
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 93, 602
+  xy: 795, 488
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 83
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 184, 602
+  xy: 886, 488
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 84
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 275, 602
+  xy: 977, 488
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 85
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 366, 602
+  xy: 1068, 488
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 86
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 457, 602
+  xy: 2, 561
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 87
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 548, 602
+  xy: 93, 561
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 88
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 639, 602
+  xy: 184, 561
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 89
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 730, 602
+  xy: 275, 561
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 90
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 821, 602
+  xy: 366, 561
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 91
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 912, 602
+  xy: 457, 561
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 92
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1003, 602
+  xy: 548, 561
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 93
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1094, 602
+  xy: 639, 561
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 94
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1185, 602
+  xy: 730, 561
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 95
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1276, 602
+  xy: 821, 561
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 96
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1367, 602
+  xy: 912, 561
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 97
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 2, 668
+  xy: 1003, 561
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 98
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 93, 668
+  xy: 1094, 561
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 99
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 184, 668
+  xy: 2, 627
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 100
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 275, 668
+  xy: 93, 627
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 101
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 366, 668
+  xy: 184, 627
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 102
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 457, 668
+  xy: 275, 627
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 103
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 548, 668
+  xy: 366, 627
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 104
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 639, 668
+  xy: 457, 627
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 105
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 730, 668
+  xy: 548, 627
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 106
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 821, 668
+  xy: 639, 627
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 107
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 912, 668
+  xy: 730, 627
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 108
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1003, 668
+  xy: 821, 627
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 109
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1094, 668
+  xy: 912, 627
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 110
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1185, 668
+  xy: 1003, 627
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 111
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1276, 668
+  xy: 1094, 627
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 112
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1367, 668
+  xy: 2, 693
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 113
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 2, 734
+  xy: 93, 693
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 114
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 93, 734
+  xy: 184, 693
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 115
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 184, 734
+  xy: 275, 693
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 116
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 275, 734
+  xy: 366, 693
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 117
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 366, 734
+  xy: 457, 693
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 118
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 457, 734
+  xy: 548, 693
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 119
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 548, 734
+  xy: 639, 693
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 120
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 639, 734
+  xy: 730, 693
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 121
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 730, 734
+  xy: 821, 693
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 122
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 821, 734
+  xy: 912, 693
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 123
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 912, 734
+  xy: 1003, 693
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 124
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1003, 734
+  xy: 1094, 693
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 125
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1094, 734
+  xy: 2, 759
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 126
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1185, 734
+  xy: 93, 759
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 127
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1276, 734
+  xy: 184, 759
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 128
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1367, 734
+  xy: 275, 759
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 129
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 2, 800
+  xy: 366, 759
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 130
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 93, 800
+  xy: 457, 759
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 131
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 184, 800
+  xy: 548, 759
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 132
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 275, 800
+  xy: 639, 759
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 133
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 366, 800
+  xy: 730, 759
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 134
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 457, 800
+  xy: 821, 759
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 135
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 548, 800
+  xy: 912, 759
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 136
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 639, 800
+  xy: 1003, 759
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 137
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 730, 800
+  xy: 1094, 759
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 138
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 821, 800
+  xy: 2, 825
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 139
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 912, 800
+  xy: 93, 825
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 140
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1003, 800
+  xy: 184, 825
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 141
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1094, 800
+  xy: 275, 825
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 142
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1185, 800
+  xy: 366, 825
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 143
 gold_sack_end/gold_sack_end
   rotate: false
-  xy: 1276, 800
+  xy: 457, 825
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 144
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 1367, 800
+  xy: 548, 825
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 0
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 2, 866
+  xy: 639, 825
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 1
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 93, 866
+  xy: 730, 825
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 2
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 184, 866
+  xy: 821, 825
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 3
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 275, 866
+  xy: 912, 825
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 4
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 366, 866
+  xy: 1003, 825
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 5
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 457, 866
+  xy: 1094, 825
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 6
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 548, 866
+  xy: 2, 891
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 7
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 639, 866
+  xy: 93, 891
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 8
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 730, 866
+  xy: 184, 891
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 9
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 821, 866
+  xy: 275, 891
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 10
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 912, 866
+  xy: 366, 891
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 11
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 1003, 866
+  xy: 457, 891
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 12
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 1094, 866
+  xy: 548, 891
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 13
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 1185, 866
+  xy: 639, 891
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 14
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 1276, 866
+  xy: 730, 891
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 15
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 1367, 866
+  xy: 821, 891
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 16
 gold_sack_landing/gold_sack_landing
   rotate: false
-  xy: 2, 932
+  xy: 912, 891
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 17
 gold_sack_pump/gold_sack_pump
   rotate: false
-  xy: 93, 932
+  xy: 1003, 891
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 0
 gold_sack_pump/gold_sack_pump
   rotate: false
-  xy: 184, 932
+  xy: 1094, 891
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 1
 gold_sack_pump/gold_sack_pump
   rotate: false
-  xy: 275, 932
+  xy: 2, 957
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 2
 gold_sack_pump/gold_sack_pump
   rotate: false
-  xy: 366, 932
+  xy: 93, 957
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 3
 gold_sack_pump/gold_sack_pump
   rotate: false
-  xy: 457, 932
+  xy: 184, 957
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 4
 gold_sack_pump/gold_sack_pump
   rotate: false
-  xy: 548, 932
+  xy: 275, 957
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 5
 gold_sack_pump/gold_sack_pump
   rotate: false
-  xy: 639, 932
+  xy: 366, 957
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 6
 gold_sack_pump/gold_sack_pump
   rotate: false
-  xy: 730, 932
+  xy: 457, 957
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 7
 gold_sack_pump/gold_sack_pump
   rotate: false
-  xy: 821, 932
+  xy: 548, 957
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 8
 gold_sack_pump/gold_sack_pump
   rotate: false
-  xy: 912, 932
+  xy: 639, 957
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 9
 gold_sack_pump/gold_sack_pump
   rotate: false
-  xy: 1003, 932
+  xy: 730, 957
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 10
 gold_sack_pump/gold_sack_pump
   rotate: false
-  xy: 1094, 932
+  xy: 821, 957
   size: 89, 64
   orig: 89, 64
   offset: 0, 0
   index: 11
 powerup_armor
   rotate: false
-  xy: 1185, 932
+  xy: 912, 957
   size: 51, 51
   orig: 51, 51
   offset: 0, 0
   index: -1
 powerup_freeze
   rotate: false
-  xy: 1238, 932
+  xy: 965, 957
   size: 51, 51
   orig: 51, 51
   offset: 0, 0
   index: -1
 powerup_life
   rotate: false
-  xy: 1291, 932
+  xy: 1018, 957
   size: 51, 51
   orig: 51, 51
   offset: 0, 0
   index: -1
 powerup_magnet
   rotate: false
-  xy: 1344, 932
+  xy: 1071, 957
   size: 51, 51
   orig: 51, 51
   offset: 0, 0
   index: -1
 powerup_time
   rotate: false
-  xy: 1397, 932
+  xy: 1124, 957
   size: 51, 51
   orig: 51, 51
   offset: 0, 0
