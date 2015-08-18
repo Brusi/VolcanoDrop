@@ -24,7 +24,13 @@ public class Background {
 		PILLAR_HOLE(76f),
 		PILLAR_HOLE_BG(0),
 		
-		BACKGROUND(213f);
+		BACKGROUND_BASE(191f),
+		BACKGROUND_WORLD1_1(191f, 0),
+		BACKGROUND_WORLD1_2(191f, 1),
+		BACKGROUND_WORLD1_3(191f, 2),
+		BACKGROUND_WORLD1_4(191f, 3),
+		BACKGROUND_WORLD1_5(191f, 4),
+		BACKGROUND_WORLD1_6(191f, 5);
 		
 		private float height_;
 		private int index_;
@@ -99,8 +105,15 @@ public class Background {
 		}
 		
 		while(bgHeight < y_ + HEIGHT) {
-			float heightAdded = Element.BACKGROUND.height_;
-			bgPillar.addLast(Element.BACKGROUND);
+			Element e;
+			if (Math.random() < 0.8) {
+				e = Element.BACKGROUND_BASE;
+			} else {
+				e = Element.values()[Element.BACKGROUND_BASE.ordinal() + 1 + rand.nextInt(6)];
+			}
+			
+			float heightAdded = e.height_;
+			bgPillar.addLast(e);
 			bgHeight += heightAdded;
 		}
 		

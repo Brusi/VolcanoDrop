@@ -71,8 +71,15 @@ public class Player extends DynamicGameObject {
 	}
 	
 	private void processInput() {
+		// PC controls
 		float xAccel = getXAccel();
 		velocity.x -= MAX_ACCEL * xAccel;
+		
+		// Phone controls
+		float accel = Gdx.input.getAccelerometerX();
+		if (Math.abs(accel) > 0.5) {
+			velocity.x = -200 * accel;
+		}
 		
 		if (grounded_ && pressedUp() ) {
 			grounded_ = false;

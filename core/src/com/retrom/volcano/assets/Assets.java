@@ -51,6 +51,8 @@ public class Assets {
 	public static Sprite background;
 	public static Sprite floor;
 	
+	public static Array<Sprite> bg_world1;
+	
 	public static Sprite coin1_1;
 	public static Array<Sprite> coin1_1_land;
 	public static Sprite coin1_2;
@@ -181,9 +183,11 @@ public class Assets {
 		pillars_end = environmentSheet.createSprite("pillars_end");
 		pillars_hole = environmentSheet.createSprite("pillars_hole_front");
 		pillars_hole_bg = environmentSheet.createSprite("pillars_hole_back");
-		background = environmentSheet.createSprite("bg");
 		floor = environmentSheet.createSprite("floor");
+		background = environmentSheet.createSprite("bg_base");
 
+		bg_world1 = environmentSheet.createSprites("bg_world1");
+		
 		TextureAtlas treasure = new TextureAtlas("treasure/treasure.txt");
 		
 		Array<Sprite> coin1Arr = treasure.createSprites("coin_1");

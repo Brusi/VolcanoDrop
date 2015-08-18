@@ -136,14 +136,22 @@ public class WorldRenderer {
 			case PILLAR_START:
 				keyFrame = Assets.pillars_start;
 				break;
-			case BACKGROUND:
-				keyFrame = Assets.background;
-				break;
 			case PILLAR_HOLE:
 				keyFrame = Assets.pillars_hole;
 				break;
 			case PILLAR_HOLE_BG:
 				keyFrame = Assets.pillars_hole_bg;
+				break;
+			case BACKGROUND_BASE:
+				keyFrame = Assets.background;
+				break;
+			case BACKGROUND_WORLD1_1:
+			case BACKGROUND_WORLD1_2:
+			case BACKGROUND_WORLD1_3:
+			case BACKGROUND_WORLD1_4:
+			case BACKGROUND_WORLD1_5:
+			case BACKGROUND_WORLD1_6:
+				keyFrame = Assets.bg_world1.get(e.index());
 				break;
 			default:
 				Gdx.app.log("ERROR", "Unhandled pillar type: " + e);
