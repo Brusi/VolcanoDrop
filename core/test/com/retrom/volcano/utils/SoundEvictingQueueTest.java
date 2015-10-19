@@ -11,6 +11,8 @@ import com.badlogic.gdx.audio.Sound;
 public class SoundEvictingQueueTest {
 	
 	SoundEvictingQueue q = new SoundEvictingQueue(40); 
+    
+    int test = 5;
 
 	@Test
 	public void forEachDoesNothingWhenEmpty() {
