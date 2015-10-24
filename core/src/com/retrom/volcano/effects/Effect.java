@@ -62,4 +62,8 @@ public abstract class Effect {
 	public float getScale() {
 		return 1f;
 	}
+	
+	public void destroy() {
+		state_ = STATE_DONE;
+	}
 }

@@ -30,23 +30,422 @@ powerup_shield_ flare
   orig: 153, 153
   offset: 0, 0
   index: -1
-powerup_shield_backglow
+powerup_shield_animated_glow_die
   rotate: false
   xy: 658, 2
+  size: 162, 214
+  orig: 162, 214
+  offset: 0, 0
+  index: 0
+powerup_shield_animated_glow_die
+  rotate: false
+  xy: 822, 2
+  size: 162, 214
+  orig: 162, 214
+  offset: 0, 0
+  index: 1
+powerup_shield_animated_glow_die
+  rotate: false
+  xy: 986, 2
+  size: 162, 214
+  orig: 162, 214
+  offset: 0, 0
+  index: 2
+powerup_shield_animated_glow_die
+  rotate: false
+  xy: 1150, 2
+  size: 162, 214
+  orig: 162, 214
+  offset: 0, 0
+  index: 3
+powerup_shield_animated_glow_die
+  rotate: false
+  xy: 1314, 2
+  size: 162, 214
+  orig: 162, 214
+  offset: 0, 0
+  index: 4
+powerup_shield_animated_glow_die
+  rotate: false
+  xy: 1478, 2
+  size: 162, 214
+  orig: 162, 214
+  offset: 0, 0
+  index: 5
+powerup_shield_animated_glow_die
+  rotate: false
+  xy: 1642, 2
+  size: 162, 214
+  orig: 162, 214
+  offset: 0, 0
+  index: 6
+powerup_shield_animated_glow_die
+  rotate: false
+  xy: 2, 244
+  size: 162, 214
+  orig: 162, 214
+  offset: 0, 0
+  index: 7
+powerup_shield_animated_glow_die
+  rotate: false
+  xy: 166, 244
+  size: 162, 214
+  orig: 162, 214
+  offset: 0, 0
+  index: 8
+powerup_shield_animated_glow_die
+  rotate: false
+  xy: 330, 244
+  size: 162, 214
+  orig: 162, 214
+  offset: 0, 0
+  index: 9
+powerup_shield_animated_glow_die
+  rotate: false
+  xy: 494, 244
+  size: 162, 214
+  orig: 162, 214
+  offset: 0, 0
+  index: 10
+powerup_shield_animated_glow_die
+  rotate: false
+  xy: 658, 244
+  size: 162, 214
+  orig: 162, 214
+  offset: 0, 0
+  index: 11
+powerup_shield_animated_glow_hit
+  rotate: false
+  xy: 822, 244
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 0
+powerup_shield_animated_glow_hit
+  rotate: false
+  xy: 952, 244
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 1
+powerup_shield_animated_glow_hit
+  rotate: false
+  xy: 1082, 244
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 2
+powerup_shield_animated_glow_hit
+  rotate: false
+  xy: 1212, 244
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 3
+powerup_shield_animated_glow_hit
+  rotate: false
+  xy: 1342, 244
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 4
+powerup_shield_animated_glow_hit
+  rotate: false
+  xy: 1472, 244
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 5
+powerup_shield_animated_glow_hit
+  rotate: false
+  xy: 1602, 244
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 6
+powerup_shield_animated_glow_hit
+  rotate: false
+  xy: 2, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 7
+powerup_shield_animated_glow_hit
+  rotate: false
+  xy: 132, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 8
+powerup_shield_animated_glow_hit
+  rotate: false
+  xy: 262, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 9
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 392, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 5
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 522, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 6
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 652, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 7
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 782, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 8
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 912, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 9
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 1042, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 10
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 1172, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 11
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 1302, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 12
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 1432, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 13
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 1562, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 14
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 1692, 460
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 15
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 2, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 16
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 132, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 17
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 262, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 18
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 392, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 19
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 522, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 20
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 652, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 21
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 782, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 22
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 912, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 23
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 1042, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 24
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 1172, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 25
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 1302, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 26
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 1432, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 27
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 1562, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 28
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 1692, 631
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 29
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 2, 802
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 30
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 132, 802
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 31
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 262, 802
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 32
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 392, 802
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 33
+powerup_shield_animated_glow_middle
+  rotate: false
+  xy: 522, 802
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 34
+powerup_shield_animated_glow_start
+  rotate: false
+  xy: 652, 802
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 0
+powerup_shield_animated_glow_start
+  rotate: false
+  xy: 782, 802
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 1
+powerup_shield_animated_glow_start
+  rotate: false
+  xy: 912, 802
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 2
+powerup_shield_animated_glow_start
+  rotate: false
+  xy: 1042, 802
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 3
+powerup_shield_animated_glow_start
+  rotate: false
+  xy: 1172, 802
+  size: 128, 169
+  orig: 128, 169
+  offset: 0, 0
+  index: 4
+powerup_shield_backglow
+  rotate: false
+  xy: 1302, 802
   size: 102, 102
   orig: 102, 102
   offset: 0, 0
   index: -1
 powerup_timebend_ flare
   rotate: false
-  xy: 762, 2
+  xy: 1406, 802
   size: 153, 153
   orig: 153, 153
   offset: 0, 0
   index: -1
 powerup_timebend_backglow
   rotate: false
-  xy: 917, 2
+  xy: 1561, 802
   size: 102, 102
   orig: 102, 102
   offset: 0, 0

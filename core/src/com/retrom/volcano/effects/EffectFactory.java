@@ -83,10 +83,14 @@ public class EffectFactory {
 		case COIN_5_4:
 			return new CoinBreakParticle(Assets.greenDiamondBreak, position);
 		case POWERUP_MAGNET:
-			// TODO: only temporary.
+			// TODO: change to actual powerup particle.
 			return new CoinBreakParticle(Assets.greenDiamondBreak, position);
 		case POWERUP_SLOMO:
+			// TODO: change to actual powerup particle.
 			return new CoinBreakParticle(Assets.purpleDiamondBreak, position);
+		case POWERUP_SHIELD:
+			// TODO: change to actual powerup particle.
+			return new CoinBreakParticle(Assets.silverCoinBreak, position);
 		default:
 			Gdx.app.error("ERROR", "Unsupported collectable particle.");
 		}
@@ -99,6 +103,8 @@ public class EffectFactory {
 			return new PowerupGlow(Assets.magnetBackGlow, c);
 		case POWERUP_SLOMO:
 			return new PowerupGlow(Assets.slomoBackGlow, c);
+		case POWERUP_SHIELD:
+			return new PowerupGlow(Assets.shieldBackGlow, c);
 		default:
 			Gdx.app.error("ERROR", "Type is not a powerup, no powerup back glow.");
 			break;

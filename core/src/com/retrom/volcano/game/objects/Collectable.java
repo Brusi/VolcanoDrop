@@ -11,7 +11,7 @@ public class Collectable extends DynamicGameObject {
 	
 	public static final float WIDTH = 30f;
 	public static final float HEIGHT = 40f;
-	private static final float GRAVITY_RATIO = 0.5f;
+	private static final float GRAVITY_RATIO = 0.3f;
 	private static final float MAGNETIZED_FORCE = 1200f;
 	
 	public static final int STATUS_FALLING = 1;
@@ -34,7 +34,7 @@ public class Collectable extends DynamicGameObject {
 		COIN_4_1, COIN_4_2, COIN_4_3, 
 		COIN_5_1, COIN_5_2, COIN_5_3, COIN_5_4, 
 		
-		POWERUP_MAGNET, POWERUP_SLOMO;
+		POWERUP_MAGNET, POWERUP_SLOMO, POWERUP_SHIELD;
 	}
 	
 	public final Type type;
@@ -125,6 +125,6 @@ public class Collectable extends DynamicGameObject {
 	}
 
 	public boolean isPowerup() {
-		return type == Type.POWERUP_MAGNET || type == Type.POWERUP_SLOMO; 
+		return type == Type.POWERUP_MAGNET || type == Type.POWERUP_SLOMO || type == Type.POWERUP_SHIELD; 
 	}
 }

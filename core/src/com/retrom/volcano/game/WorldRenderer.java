@@ -40,6 +40,7 @@ import com.retrom.volcano.effects.FireballAnimationEffect;
 import com.retrom.volcano.effects.FireballStartEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.OneFrameEffect;
+import com.retrom.volcano.effects.PlayerShieldEffect;
 import com.retrom.volcano.effects.PowerupGlow;
 import com.retrom.volcano.effects.Score10Effect;
 import com.retrom.volcano.effects.Score15GreenEffect;
@@ -393,6 +394,13 @@ public class WorldRenderer {
 					$.setY($.getY() + world.camTarget);
 					return $;
 				}
+
+				@Override
+				public Sprite visit(PlayerShieldEffect effect) {
+					System.out.println(Assets.playerShieldEffect.size);
+					Sprite s = getFrameLoop(Assets.playerShieldEffect, effect.stateTime());
+					return s;
+				}
 			});
 			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
 			s.setRotation(e.getRotation());
@@ -466,6 +474,7 @@ public class WorldRenderer {
 		case COIN_5_4: return Assets.coin5_4_land;
 		case POWERUP_MAGNET:
 		case POWERUP_SLOMO:
+		case POWERUP_SHIELD:
 		}
 		return null;
 	}
@@ -489,8 +498,7 @@ public class WorldRenderer {
 		case COIN_5_4: return Assets.coin5_4;
 		case POWERUP_MAGNET: return Assets.powerupMagnet;
 		case POWERUP_SLOMO: return Assets.powerupSlomo;
-		default:
-			break;
+		case POWERUP_SHIELD: return Assets.powerupShield;
 		}
 		return null;
 	}

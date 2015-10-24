@@ -86,6 +86,7 @@ public class Assets {
 	
 	public static Sprite powerupMagnet;
 	public static Sprite powerupSlomo;
+	public static Sprite powerupShield;
 
 	//// Effects
 	// Score numbers:
@@ -138,6 +139,7 @@ public class Assets {
 	
 	public static Sprite magnetBackGlow;
 	public static Sprite slomoBackGlow;
+	public static Sprite shieldBackGlow;
 	
 	// Enemies:
 	public static Sprite burningWall;
@@ -152,6 +154,8 @@ public class Assets {
 	public static Array<Sprite> spitter;
 	
 	public static Array<Sprite> topFireballLoop;
+
+	public static Array<Sprite> playerShieldEffect;
 
 	
 
@@ -243,6 +247,7 @@ public class Assets {
 		
 		powerupMagnet = treasure.createSprite("powerup_magnet");
 		powerupSlomo = treasure.createSprite("powerup_time");
+		powerupShield = treasure.createSprite("powerup_armor");
 		
 		bronzeCoinBreak = treasure.createSprites("coins_bronze_break");
 		silverCoinBreak = treasure.createSprites("coins_silver_break");
@@ -281,6 +286,9 @@ public class Assets {
 		TextureAtlas powerupSheet = new TextureAtlas("vfx/powerup.txt");
 		magnetBackGlow = powerupSheet.createSprite("powerup_magnet_backglow");
 		slomoBackGlow = powerupSheet.createSprite("powerup_timebend_backglow");
+		shieldBackGlow = powerupSheet.createSprite("powerup_shield_backglow");
+		
+		playerShieldEffect = powerupSheet.createSprites("powerup_shield_animated_glow_middle");
 		
 		greenDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_green1"); 
 		greenDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_green2"); 

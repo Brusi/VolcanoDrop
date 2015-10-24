@@ -18,5 +18,6 @@ public interface EffectVisitor<T> {
 	public T visit(FireballAnimationEffect fireballAnimationEffect);
 	public T visit(DiamondGlowEffect diamondGlowEffect);
 	public T visit(PowerupGlow effect);
+	public T visit(PlayerShieldEffect playerShieldEffect);
 
 }

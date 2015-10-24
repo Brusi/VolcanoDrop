@@ -59,6 +59,7 @@ public class Player extends DynamicGameObject {
 	static final boolean RIGHT = false;
 	
 	boolean side;
+	private boolean is_shield_active_;
 	
 	public Player (float x, float y) {
 		super(x, y, WIDTH, HEIGHT);
@@ -169,7 +170,7 @@ public class Player extends DynamicGameObject {
 		grounded_ = false;
 		for (Wall wall : activeWalls_) {
 			if (wall.bounds.overlaps(this.bounds)) {
-				if (wall instanceof BurningWall) {
+				if (wall instanceof BurningWall && !is_shield_active_) {
 					killByBurn();
 					return;
 				}
@@ -206,7 +207,7 @@ public class Player extends DynamicGameObject {
 		bounds.x += velocity.x * deltaTime;
 		for (Wall wall : activeWalls_) {
 			if (wall.bounds.overlaps(this.bounds)) {
-				if (wall instanceof BurningWall) {
+				if (wall instanceof BurningWall && !is_shield_active_) {
 					killByBurn();
 					return;
 				}
@@ -258,5 +259,9 @@ public class Player extends DynamicGameObject {
 
 	public boolean isDead() {
 		return state() == STATE_DEAD || state() == STATE_DIE; 
+	}
+
+	public void setShieldStatus(boolean is_shield_active) {
+		is_shield_active_ = is_shield_active;
 	}
 }

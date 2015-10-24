@@ -35,6 +35,7 @@ import com.retrom.volcano.effects.FireballGlow;
 import com.retrom.volcano.effects.FireballStartEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.FlameGlowEffect;
+import com.retrom.volcano.effects.PlayerShieldEffect;
 import com.retrom.volcano.effects.Score10Effect;
 import com.retrom.volcano.effects.Score15GreenEffect;
 import com.retrom.volcano.effects.Score15PurpleEffect;
@@ -84,9 +85,14 @@ public class World {
 	private final Spawner spawner_;
 	private final EventQueue worldEvents_ = new EventQueue();
 	
+	
+	// Powerup time counters.
 	private float magnetTime = 0f;
 	private float slomoTime = 0f;
 	private float shieldTime = 0f;
+	
+	// Special effect holders.
+	private Effect playerShieldEffect;
 
 	private List<Rectangle> obstacles_;
 
@@ -154,11 +160,17 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
 			addCoin(0, Collectable.Type.POWERUP_MAGNET);
 		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+			addCoin(0, Collectable.Type.POWERUP_SHIELD);
+		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
 			magnetTime += 1f;
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
 			slomoTime += 2f;
+		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+			shieldTime += 1f;
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
@@ -262,7 +274,9 @@ public class World {
 				@Override
 				public Void visit(Flame flame) {
 					if (flame.bounds.overlaps(player.bounds) && !player.isDead()) {
-						player.killByBurn();
+						if (shieldTime <= 0) {
+							player.killByBurn();
+						}
 					}
 					return null;
 				}
@@ -270,7 +284,9 @@ public class World {
 				@Override
 				public Void visit(TopFireball fireball) {
 					if (fireball.state() == Enemy.STATE_ACTIVE && fireball.bounds.overlaps(player.bounds) && !player.isDead()) {
-						player.killByBurn();
+						if (shieldTime <= 0) {
+							player.killByBurn();
+						}
 						fireball.explode();
 					} else if (fireball.state() == Enemy.STATE_ACTIVE) {
 						for (Rectangle obstacle : obstacles_) {
@@ -295,7 +311,9 @@ public class World {
 				public Void visit(SideFireball fireball) {
 					// TODO: combine with topFireball
 					if (fireball.state() == Enemy.STATE_ACTIVE && fireball.bounds.overlaps(player.bounds) && !player.isDead()) {
-						player.killByBurn();
+						if (shieldTime <= 0) {
+							player.killByBurn();
+						}
 						fireball.explode();
 					} else if (fireball.state() == Enemy.STATE_ACTIVE) {
 						for (Rectangle obstacle : obstacles_) {
@@ -359,6 +377,13 @@ public class World {
 		}
 		if (slomoTime > 0) {
 			slomoTime -= deltaTime;
+		}
+		if (shieldTime > 0) {
+			shieldTime -= deltaTime;
+			if (shieldTime <= 0) {
+				playerShieldEffect.destroy();
+				playerShieldEffect = null;
+			}
 		}
 	}
 
@@ -586,6 +611,13 @@ public class World {
 			slomoTime = 5f;
 			SoundAssets.playSound(SoundAssets.powerupMagnetStart);
 			break;
+		case POWERUP_SHIELD:
+			shieldTime = 5f;
+			if (playerShieldEffect == null) {
+				playerShieldEffect = new PlayerShieldEffect(player.position); 
+				addEffects.add(playerShieldEffect);
+			}
+			break;
 		case COIN_1_1:
 		case COIN_1_2:
 			addScore(1);
@@ -687,6 +719,7 @@ public class World {
 		
 		player.setObstacles(obstacles_);
 		player.setActiveWalls(activeWalls_);
+		player.setShieldStatus(shieldTime > 0);
 		player.update(deltaTime);
 	}
 	
