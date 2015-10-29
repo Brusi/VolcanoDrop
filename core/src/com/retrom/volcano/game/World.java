@@ -202,7 +202,7 @@ public class World {
 		}
 	}
 
-	public void update (float deltaTime) {
+	public void update(float deltaTime) {
 		if (slomoTime > 0) {
 			float slomoRatio;
 			if (slomoTime > 1) {
@@ -377,12 +377,16 @@ public class World {
 		}
 		if (slomoTime > 0) {
 			slomoTime -= deltaTime;
+			if (slomoTime <= 0) {
+				SoundAssets.playSound(SoundAssets.powerupTimeEnd);
+			}
 		}
 		if (shieldTime > 0) {
 			shieldTime -= deltaTime;
 			if (shieldTime <= 0) {
 				playerShieldEffect.destroy();
 				playerShieldEffect = null;
+				SoundAssets.playSound(SoundAssets.powerupShieldEnd);
 			}
 		}
 	}
@@ -609,13 +613,14 @@ public class World {
 			break;
 		case POWERUP_SLOMO:
 			slomoTime = 5f;
-			SoundAssets.playSound(SoundAssets.powerupMagnetStart);
+			SoundAssets.playSound(SoundAssets.powerupTimeStart);
 			break;
 		case POWERUP_SHIELD:
 			shieldTime = 5f;
 			if (playerShieldEffect == null) {
 				playerShieldEffect = new PlayerShieldEffect(player.position); 
 				addEffects.add(playerShieldEffect);
+				SoundAssets.playSound(SoundAssets.powerupShieldStart);
 			}
 			break;
 		case COIN_1_1:
