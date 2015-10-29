@@ -121,7 +121,21 @@ public class World {
 	
 	public World (WorldListener listener) {
 		this.listener_ = listener;
-		this.player = new Player(0, 100);
+		this.player = new Player(0, 100, new Player.HitRectHandler() {
+			
+			@Override
+			public void handle(Rectangle rect) {
+				if (shieldTime <= 0) {
+					player.killByCrush();
+					return;
+				}
+				for (Wall wall : activeWalls_) {
+					if (wall.bounds == rect) {
+						wall.setStatus(Wall.STATUS_EXPLODE);
+					}
+				}
+			}
+		});
 		this.spawner_ = new Spawner(floors_, activeWalls_, new Spawner.SpawnerHandler() {
 			
 			@Override
@@ -497,6 +511,12 @@ public class World {
 	private void updateWalls(float deltaTime) {
 		for (Wall wall : activeWalls_) {
 			wall.update(deltaTime);
+			
+			if (wall.status() == Wall.STATUS_EXPLODE) {
+				wall.setStatus(Wall.STATUS_GONE);
+				// TODO: add sound and particles.
+			}
+			
 			List<Rectangle> rects = new ArrayList<Rectangle>(floors_.getRects());
 			for (Rectangle rect : rects) {
 				if (wall.bounds.overlaps(rect)) {

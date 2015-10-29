@@ -27,6 +27,11 @@ import com.retrom.volcano.game.objects.DynamicGameObject;
 import com.retrom.volcano.game.objects.Wall;
 
 public class Player extends DynamicGameObject {
+	
+	interface HitRectHandler {
+		void handle(Rectangle rect);
+	}
+	
 	public static final int WIDTH = 36;
 	public static final int HEIGHT = 84;
 	
@@ -61,8 +66,11 @@ public class Player extends DynamicGameObject {
 	boolean side;
 	private boolean is_shield_active_;
 	
-	public Player (float x, float y) {
+	private final HitRectHandler hitRectHandler_;
+	
+	public Player (float x, float y, HitRectHandler handler) {
 		super(x, y, WIDTH, HEIGHT);
+		hitRectHandler_ = handler;
 		setState(STATE_IDLE);
 		stateTime = 0;
 	}
@@ -164,34 +172,29 @@ public class Player extends DynamicGameObject {
 			side = LEFT;
 		}
 		
-		bounds.y += velocity.y * deltaTime;
-		boolean wasGrounded = grounded_;
-		boolean touchedFromTop = false;
-		grounded_ = false;
-		for (Wall wall : activeWalls_) {
-			if (wall.bounds.overlaps(this.bounds)) {
-				if (wall instanceof BurningWall && !is_shield_active_) {
-					killByBurn();
-					return;
-				}
-			} 
-		}
+		// The rectangle the player hit from the top, in case it is needed to be crushed.
 		
+		boolean wasGrounded = grounded_;
+		Rectangle topRect = null;
+		grounded_ = false;
+		
+		bounds.y += velocity.y * deltaTime;
+		checkBurningWalls();
 		for (Rectangle rect : obstacles_) {
 			if (bounds.overlaps(rect)) {
 				if (bounds.y + bounds.height/ 2 > rect.y + rect.height / 2) {
 					bounds.y = rect.y + rect.height;
 					grounded_ = true;
-					if (touchedFromTop) {
-						killByCrash();
+					if (topRect != null) {
+						hitRectHandler_.handle(topRect);
 						return;
 					}
 				} else {
 					if (wasGrounded) {
-						killByCrash();
+						hitRectHandler_.handle(topRect);
 						return;
 					} else { 
-						touchedFromTop = true;
+						topRect = rect;
 						bounds.y = rect.y - bounds.height;
 					}
 				}
@@ -205,15 +208,7 @@ public class Player extends DynamicGameObject {
 		}
 		
 		bounds.x += velocity.x * deltaTime;
-		for (Wall wall : activeWalls_) {
-			if (wall.bounds.overlaps(this.bounds)) {
-				if (wall instanceof BurningWall && !is_shield_active_) {
-					killByBurn();
-					return;
-				}
-			} 
-		}
-		
+		checkBurningWalls();
 		for (Rectangle rect : obstacles_) {
 			if (bounds.overlaps(rect)) {
 				if (bounds.x + bounds.width/ 2 > rect.x + rect.width / 2 && velocity.x < 0) {
@@ -229,12 +224,23 @@ public class Player extends DynamicGameObject {
 		position.y = bounds.y + bounds.height / 2;
 	}
 
+	private void checkBurningWalls() {
+		for (Wall wall : activeWalls_) {
+			if (wall.bounds.overlaps(this.bounds)) {
+				if (wall instanceof BurningWall && !is_shield_active_) {
+					killByBurn();
+					return;
+				}
+			} 
+		}
+	}
+
 	public void killByBurn() {
 		setState(STATE_DIE);
 		deathType = DEATH_BY_BURN;
 	}
 
-	public void killByCrash() {
+	public void killByCrush() {
 		setState(STATE_DIE);
 		deathType = DEATH_BY_CRUSH;
 	}

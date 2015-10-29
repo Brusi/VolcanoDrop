@@ -32,6 +32,14 @@ public class BurningWallGlow extends OneFrameEffect {
 		return 0.75f;
 	}
 	
+
+	@Override
+	protected void childSpecificUpdating(float deltaTime) {
+		if (wall_.status() == Wall.STATUS_GONE) {
+			this.destroy();
+		}
+	}
+	
 	private float getGlowAlpha() {
 		if (wall_.status() == Wall.STATUS_ACTIVE) {
 			if (wall_.stateTime() < BurningWall.TIME_WITHOUT_BURN) {

@@ -2,9 +2,7 @@ package com.retrom.volcano.game.objects;
 
 import java.util.Random;
 
-import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.game.World;
-import com.retrom.volcano.game.WorldRenderer;
 
 public class Wall extends DynamicGameObject {
 	
@@ -15,6 +13,7 @@ public class Wall extends DynamicGameObject {
 	public static int STATUS_ACTIVE = 1;
 	public static int STATUS_INACTIVE = 2;
 	public static int STATUS_GONE = 3;
+	public static int STATUS_EXPLODE = 4;
 	
 	private int status_;
 	private float stateTime_;
