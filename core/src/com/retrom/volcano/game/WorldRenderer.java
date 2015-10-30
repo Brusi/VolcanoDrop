@@ -57,6 +57,7 @@ import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Enemy;
 import com.retrom.volcano.game.objects.Flame;
 import com.retrom.volcano.game.objects.FlamethrowerWall;
+import com.retrom.volcano.game.objects.GoldSack;
 import com.retrom.volcano.game.objects.SideFireball;
 import com.retrom.volcano.game.objects.Spitter;
 import com.retrom.volcano.game.objects.TopFireball;
@@ -187,6 +188,7 @@ public class WorldRenderer {
 		setBlendFuncNormal();
 		renderPlayer();
 		renderEnemies();
+		renderGoldSacks();
 		renderCoins();
 		renderFloor();
 		drawPillar(world.background.leftPillar, -PILLAR_POS, world.background.leftBaseY(), false);
@@ -517,6 +519,12 @@ public class WorldRenderer {
 				y += getBounceY(coin.stateTime());
 			}
 			drawCenter(keyFrame, coin.position.x, y);
+		}
+	}
+	
+	private void renderGoldSacks() {
+		for (GoldSack gs : world.goldSacks_) {
+			drawCenter(Assets.goldSackIdle, gs.position.x, gs.position.y);
 		}
 	}
 

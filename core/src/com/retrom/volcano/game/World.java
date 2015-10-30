@@ -52,6 +52,7 @@ import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Enemy;
 import com.retrom.volcano.game.objects.Flame;
 import com.retrom.volcano.game.objects.FlamethrowerWall;
+import com.retrom.volcano.game.objects.GoldSack;
 import com.retrom.volcano.game.objects.SideFireball;
 import com.retrom.volcano.game.objects.Spitter;
 import com.retrom.volcano.game.objects.TopFireball;
@@ -69,6 +70,7 @@ public class World {
 	public final List<Enemy> enemies_ = new ArrayList<Enemy>();
 	
 	public final List<Collectable> collectables_ = new ArrayList<Collectable>();
+	public final List<GoldSack> goldSacks_ = new ArrayList<GoldSack>();
 	
 	public int score = 0;
 	
@@ -113,7 +115,6 @@ public class World {
 
 	// Cheats:
 	private boolean godMode_ = false;
-
 	
 	public interface WorldListener {
 		public void restartGame();
@@ -122,7 +123,6 @@ public class World {
 	public World (WorldListener listener) {
 		this.listener_ = listener;
 		this.player = new Player(0, 100, new Player.HitRectHandler() {
-			
 			@Override
 			public void handle(Rectangle rect) {
 				if (shieldTime <= 0) {
@@ -167,10 +167,18 @@ public class World {
 			public void dropFireball(int col) {
 				prepareFireball(col);
 			}
+
+			@Override
+			public void dropSack(int col) {
+				addSack(col);
+			}
 		});
 	}
 
 	private void updateCheats() {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+			goldSacks_.add(new GoldSack(100, 100));
+		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
 			addCoin(0, Collectable.Type.POWERUP_MAGNET);
 		}
@@ -200,7 +208,6 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
 			addSpitter(400, true);
 		}
-		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
 			addSideFireball(0, 500, false);
 		}
@@ -249,6 +256,7 @@ public class World {
 		checkSpitters();
 		
 		updateCoins(deltaTime);
+		updateGoldSacks(deltaTime);
 		updateSpawner(deltaTime);
 		updatePowerups(deltaTime);
 		updateEffects(deltaTime);
@@ -263,7 +271,7 @@ public class World {
 			addCoin(50, Collectable.Type.COIN_3_1);
 		}
 	}
-	
+
 	private void checkSpitters() {
 		for (float hole : background.leftHoleList) {
 			if (camTarget > hole + 40 && hole > leftHighestSpitter) {
@@ -436,7 +444,7 @@ public class World {
 		addEffects.add(new FireballAnimationEffect(fireball, FireballAnimationEffect.DOWN));
 		addEffects.add(new FireballGlow(fireball, 0));
 	}
-	
+
 	public void addWall(int col) {
 		float wallY = topScreenY();
 		Wall wall = new WallSingle(col, wallY);
@@ -444,13 +452,13 @@ public class World {
 		activeWalls_.add(wall);
 	}
 
-	protected void addDualWall(int col) {
+	public void addDualWall(int col) {
 		float wallY = topScreenY();
 		Wall wall = new WallDual(col, wallY);
 		walls_.add(wall);
 		activeWalls_.add(wall);
 	}
-	
+
 	public void addBurningWall(int col) {
 		float wallY = topScreenY();
 		BurningWall wall = new BurningWall(col, wallY);
@@ -458,8 +466,8 @@ public class World {
 		activeWalls_.add(wall);
 		addEffects.add(new BurningWallGlow(wall));
 	}
-	
-	protected void addFlamethrower(int col) {
+
+	public void addFlamethrower(int col) {
 		float wallY = topScreenY();
 		FlamethrowerWall wall = new FlamethrowerWall(col, wallY);
 		walls_.add(wall);
@@ -476,6 +484,11 @@ public class World {
 		if (coin.isPowerup()) {
 			addEffects.add(EffectFactory.powerupBackGlow(coin.type, coin));
 		}
+	}
+	
+	public void addSack(int col) {
+		float yval = topScreenY();
+		goldSacks_.add(new GoldSack(Utils.xOfCol(col), yval));
 	}
 	
 	public void addSpitter(final float y, final boolean side) {
@@ -506,6 +519,32 @@ public class World {
 	private void updateSpawner(float deltaTime) {
 		spawner_.update(deltaTime);
 		
+	}
+	
+	private void updateGoldSacks(float deltaTime) {
+		sackloop:
+		for (GoldSack sack : goldSacks_) {
+			sack.update(deltaTime);
+			List<Rectangle> rects = new ArrayList<Rectangle>(floors_.getRects());
+			for (Rectangle rect : rects) {
+				if (sack.bounds.overlaps(rect)) {
+					if (sack.state() == GoldSack.STATE_GROUND) {
+						sack.setState(GoldSack.STATE_DONE);
+						continue sackloop;
+					}
+					sack.setState(GoldSack.STATE_GROUND);
+					sack.bounds.y = rect.y+rect.height + sack.bounds.height / 2;
+					sack.bounds.getCenter(sack.position);
+				}
+			}
+		}
+		// Remove done sacks
+		for (Iterator<GoldSack> it = goldSacks_.iterator(); it.hasNext();) {
+			GoldSack sack = it.next();
+			if (sack.state() == GoldSack.STATE_DONE) {
+				it.remove();
+			}
+		}
 	}
 
 	private void updateWalls(float deltaTime) {

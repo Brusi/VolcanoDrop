@@ -15,6 +15,7 @@ public class Spawner {
 		public void dropBurningWall(int col);
 		public void dropFlamethrower(int col);
 		public void dropFireball(int col);
+		public void dropSack(int col);
 	}
 	
 	private final SpawnerHandler handler_;
@@ -36,6 +37,7 @@ public class Spawner {
 	// Expected time between coins.
 	private static final float AVG_COIN_TIME = 1f;
 	private static final float AVG_FIREBALL_TIME = 7f;
+	private static final float AVG_SACK_TIME = 6;
 	
 	private float timeCount = 0;
 	private float timeRemaining = TIME_BETWEEN_WALLS;
@@ -74,6 +76,11 @@ public class Spawner {
 					handler_.dropWall(col);
 				}
 			}
+		}
+		
+		if (Math.random() < deltaTime / AVG_SACK_TIME) {
+			int col = randomColumn();
+			handler_.dropSack(col);
 		}
 		
 		if (Math.random() < deltaTime / AVG_COIN_TIME) {

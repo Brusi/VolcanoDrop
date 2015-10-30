@@ -87,6 +87,8 @@ public class Assets {
 	public static Sprite coin5_4;
 	public static Array<Sprite> coin5_4_land;
 	
+	public static TextureRegion goldSackIdle;
+	
 	public static Sprite powerupMagnet;
 	public static Sprite powerupSlomo;
 	public static Sprite powerupShield;
@@ -248,6 +250,9 @@ public class Assets {
 		coin5_2_land = treasure.createSprites("coin_5_2_land/coin5_2_land");
 		coin5_3_land = treasure.createSprites("coin_5_3_land/coin5_3_land");
 		coin5_4_land = treasure.createSprites("coin_5_4_land/coin5_4_land");
+		
+		Array<Sprite> gold_sack_sprites = treasure.createSprites("gold_sack");
+		goldSackIdle = gold_sack_sprites.first();
 		
 		powerupMagnet = treasure.createSprite("powerup_magnet");
 		powerupSlomo = treasure.createSprite("powerup_time");
