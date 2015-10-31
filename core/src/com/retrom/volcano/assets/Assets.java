@@ -87,7 +87,11 @@ public class Assets {
 	public static Sprite coin5_4;
 	public static Array<Sprite> coin5_4_land;
 	
-	public static TextureRegion goldSackIdle;
+	public static Sprite goldSackIdle;
+	public static Sprite goldSackFalling;
+	public static Array<Sprite> goldSackLand;
+	public static Array<Sprite> goldSackPump;
+	public static Array<Sprite> goldSackEnd;
 	
 	public static Sprite powerupMagnet;
 	public static Sprite powerupSlomo;
@@ -141,6 +145,9 @@ public class Assets {
 	public static Sprite diamondGreenGlow;
 	public static Sprite diamondPurpleGlow;
 	public static Sprite tokenGlow;
+	
+	public static Sprite coinFlare;
+	public static Sprite sackFlare;
 	
 	public static Sprite magnetBackGlow;
 	public static Sprite slomoBackGlow;
@@ -252,7 +259,11 @@ public class Assets {
 		coin5_4_land = treasure.createSprites("coin_5_4_land/coin5_4_land");
 		
 		Array<Sprite> gold_sack_sprites = treasure.createSprites("gold_sack");
-		goldSackIdle = gold_sack_sprites.first();
+		goldSackIdle = gold_sack_sprites.get(0);
+		goldSackFalling = gold_sack_sprites.get(1);
+		goldSackLand = treasure.createSprites("gold_sack_landing/gold_sack_landing");
+		goldSackPump = treasure.createSprites("gold_sack_pump/gold_sack_pump");
+		goldSackEnd = treasure.createSprites("gold_sack_end/gold_sack_end");
 		
 		powerupMagnet = treasure.createSprite("powerup_magnet");
 		powerupSlomo = treasure.createSprite("powerup_time");
@@ -291,6 +302,10 @@ public class Assets {
 		diamondGreenGlow = vfxSheet.createSprite("diamond_green_glow");
 		diamondPurpleGlow = vfxSheet.createSprite("diamond_purple_glow");
 		tokenGlow = vfxSheet.createSprite("token_glow");
+		
+		Array<Sprite> flares = vfxSheet.createSprites("coin_flare");
+		coinFlare = flares.get(0);
+		sackFlare = flares.get(1);
 		
 		TextureAtlas powerupSheet = new TextureAtlas("vfx/powerup.txt");
 		magnetBackGlow = powerupSheet.createSprite("powerup_magnet_backglow");

@@ -5,6 +5,7 @@ import java.util.List;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.retrom.volcano.game.World;
+import com.retrom.volcano.game.objects.Collectable.Type;
 
 
 public class Collectable extends DynamicGameObject {
@@ -89,8 +90,20 @@ public class Collectable extends DynamicGameObject {
 				}
 			}
 		} else {
-			bounds.x += velocity.x * deltaTime;
-			bounds.y += velocity.y * deltaTime;
+			if (state() == STATUS_FALLING) {
+				bounds.x += velocity.x * deltaTime;
+				// TODO: eliminate duplication.
+				for (Rectangle rect : obstacles_) {
+					if (bounds.overlaps(rect)) {
+						if (bounds.x + bounds.width / 2 > rect.x + rect.width / 2) {
+							bounds.x = rect.x + rect.width;
+						} else
+							bounds.x = rect.x - bounds.width;
+						velocity.x = 0;
+					}
+				}
+				bounds.y += velocity.y * deltaTime;
+			}
 		}
 		
 		bounds.getCenter(position);

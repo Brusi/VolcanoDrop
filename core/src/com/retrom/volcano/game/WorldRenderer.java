@@ -524,7 +524,22 @@ public class WorldRenderer {
 	
 	private void renderGoldSacks() {
 		for (GoldSack gs : world.goldSacks_) {
-			drawCenter(Assets.goldSackIdle, gs.position.x, gs.position.y);
+			Sprite s = null;
+			switch (gs.state()) {
+			case GoldSack.STATE_FALLING:
+				s = Assets.goldSackFalling;
+				break;
+			case GoldSack.STATE_GROUND:
+				s = getFrameStopAtLastFrame(Assets.goldSackLand, gs.stateTime());
+				break;
+			case GoldSack.STATE_PUMP:
+				s = getFrameStopAtLastFrame(Assets.goldSackPump, gs.stateTime());
+				break;
+			case GoldSack.STATE_EMPTY:
+				s = getFrameStopAtLastFrame(Assets.goldSackEnd, gs.stateTime());
+				break;
+			}
+			drawCenter(s, gs.position.x, gs.position.y);
 		}
 	}
 

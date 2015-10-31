@@ -36,6 +36,7 @@ import com.retrom.volcano.effects.FireballStartEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.FlameGlowEffect;
 import com.retrom.volcano.effects.PlayerShieldEffect;
+import com.retrom.volcano.effects.SackFlare;
 import com.retrom.volcano.effects.Score10Effect;
 import com.retrom.volcano.effects.Score15GreenEffect;
 import com.retrom.volcano.effects.Score15PurpleEffect;
@@ -49,6 +50,7 @@ import com.retrom.volcano.effects.Score6Effect;
 import com.retrom.volcano.game.EventQueue.Event;
 import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.Collectable;
+import com.retrom.volcano.game.objects.Collectable.Type;
 import com.retrom.volcano.game.objects.Enemy;
 import com.retrom.volcano.game.objects.Flame;
 import com.retrom.volcano.game.objects.FlamethrowerWall;
@@ -169,15 +171,15 @@ public class World {
 			}
 
 			@Override
-			public void dropSack(int col) {
-				addSack(col);
+			public void dropSack(int col, int numCoins) {
+				addSack(col, numCoins);
 			}
 		});
 	}
 
 	private void updateCheats() {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-			goldSacks_.add(new GoldSack(100, 100));
+			goldSacks_.add(new GoldSack(100, 100, 5));
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
 			addCoin(0, Collectable.Type.POWERUP_MAGNET);
@@ -486,9 +488,9 @@ public class World {
 		}
 	}
 	
-	public void addSack(int col) {
+	public void addSack(int col, int numCoins) {
 		float yval = topScreenY();
-		goldSacks_.add(new GoldSack(Utils.xOfCol(col), yval));
+		goldSacks_.add(new GoldSack(Utils.xOfCol(col), yval, numCoins));
 	}
 	
 	public void addSpitter(final float y, final boolean side) {
@@ -518,24 +520,52 @@ public class World {
 	
 	private void updateSpawner(float deltaTime) {
 		spawner_.update(deltaTime);
-		
 	}
 	
 	private void updateGoldSacks(float deltaTime) {
+		System.out.println("" + (deltaTime * player.velocity.x)); 
+		
 		sackloop:
 		for (GoldSack sack : goldSacks_) {
 			sack.update(deltaTime);
 			List<Rectangle> rects = new ArrayList<Rectangle>(floors_.getRects());
 			for (Rectangle rect : rects) {
 				if (sack.bounds.overlaps(rect)) {
-					if (sack.state() == GoldSack.STATE_GROUND) {
+					if (sack.state() != GoldSack.STATE_FALLING) {
 						sack.setState(GoldSack.STATE_DONE);
 						continue sackloop;
 					}
 					sack.setState(GoldSack.STATE_GROUND);
 					sack.bounds.y = rect.y+rect.height + sack.bounds.height / 2;
 					sack.bounds.getCenter(sack.position);
+					SoundAssets.playSound(SoundAssets.coinSackStart);
 				}
+			}
+			if (sack.bounds.overlaps(player.bounds)) {
+				boolean shouldPumpNow = false;
+				if (sack.state() == GoldSack.STATE_GROUND) {
+					shouldPumpNow = true;
+				}
+				if (sack.hasCoinsLeft() && sack.state() == GoldSack.STATE_PUMP && deltaTime * Math.abs(player.velocity.len()) > Math.random() * 40 + 2) {
+					shouldPumpNow = true;
+				}
+				if (shouldPumpNow) {
+					sack.pump();
+					float COIN_X_SPEED = 250;
+					float COIN_Y_SPEED = 250;
+					Type type = GoldSack.randomSackCoin();
+					Collectable coin = new Collectable(sack.position.x, sack.position.y + 15, type);
+					coin.velocity.x = Utils.randomDir().x * COIN_X_SPEED;
+					coin.velocity.y = COIN_Y_SPEED;
+					collectables_.add(coin);
+					SoundAssets.playRandomSound(SoundAssets.coinSackHit);
+				}
+			}
+			if (sack.state() == GoldSack.STATE_EMPTY && sack.stateTime() > GoldSack.EMPTY_ANIMATION_TIME) {
+				sack.setState(GoldSack.STATE_DONE);
+			}
+			if (sack.shouldFlare()) {
+				addEffects.add(new SackFlare(sack.position));
 			}
 		}
 		// Remove done sacks
@@ -639,8 +669,10 @@ public class World {
 				}
 			}
 			if (player.isAlive() && c.bounds.overlaps(player.bounds)) {
-				c.setState(Collectable.STATUS_TAKEN);
-				handleCollectable(c);
+				if ((c.state() != Collectable.STATUS_FALLING && c.state() != Collectable.STATUS_MAGNETIZED) || c.stateTime() > 0.2) {
+					c.setState(Collectable.STATUS_TAKEN);
+					handleCollectable(c);
+				}
 			}
 			if (c.state() == Collectable.STATUS_CRUSHED) {
 				if (!coinCrushed) {

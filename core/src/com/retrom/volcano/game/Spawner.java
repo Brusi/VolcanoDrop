@@ -15,7 +15,7 @@ public class Spawner {
 		public void dropBurningWall(int col);
 		public void dropFlamethrower(int col);
 		public void dropFireball(int col);
-		public void dropSack(int col);
+		public void dropSack(int col, int numCoins);
 	}
 	
 	private final SpawnerHandler handler_;
@@ -80,7 +80,7 @@ public class Spawner {
 		
 		if (Math.random() < deltaTime / AVG_SACK_TIME) {
 			int col = randomColumn();
-			handler_.dropSack(col);
+			handler_.dropSack(col, randomSackCoins());
 		}
 		
 		if (Math.random() < deltaTime / AVG_COIN_TIME) {
@@ -103,6 +103,10 @@ public class Spawner {
 		if (Math.random() < deltaTime / AVG_FIREBALL_TIME) {
 			handler_.dropFireball(randomColumn());
 		}
+	}
+	
+	private int randomSackCoins() {
+		return rand.nextInt(4) + 2;
 	}
 
 	private int randomColumn() {

@@ -2,7 +2,7 @@ vfx.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-coin flare
+coin_flare
   rotate: false
   xy: 2, 2
   size: 57, 60
@@ -1521,7 +1521,7 @@ coin_collect_gold1
   orig: 64, 64
   offset: 0, 0
   index: 0
-coin flare
+coin_flare
   rotate: false
   xy: 464, 464
   size: 65, 69

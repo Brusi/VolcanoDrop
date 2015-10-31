@@ -26,6 +26,9 @@ public class SoundAssets {
 	public static Sound coinsCollectGoldMask;
 	public static Sound coinsCollectBigToken;
 	
+	public static Sound coinSackStart;
+	public static Sound[] coinSackHit;
+	
 	public static Sound coinCrushed;
 	public static Sound powerupCrushed;
 	
@@ -89,6 +92,9 @@ public class SoundAssets {
 		
 		coinsCollectBigToken = newSound("coins_collect_bigtoken.wav");
 		coinsCollectGoldMask = newSound("coins_collect_goldmask.wav");
+		
+		coinSackStart = newSound("coins_sack_start.wav");
+		coinSackHit = new Sound[] { newSound("coins_sack_hit_1.wav"), newSound("coins_sack_hit_2.wav") };
 		
 		coinCrushed = newSound("coins_crushed.wav");
 		powerupCrushed = newSound("powerups_crushed.wav");
