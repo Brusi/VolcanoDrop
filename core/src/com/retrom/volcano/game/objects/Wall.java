@@ -16,7 +16,7 @@ public class Wall extends DynamicGameObject {
 	public static int STATUS_EXPLODE = 4;
 	
 	private int status_;
-	private float stateTime_;
+	protected float stateTime_;
 	
 	public final int graphic_;
 	

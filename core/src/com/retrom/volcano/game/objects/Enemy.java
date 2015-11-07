@@ -6,7 +6,7 @@ public abstract class Enemy extends DynamicGameObject {
 	public static final int STATE_DONE = 2;
 	
 	protected int state_ = STATE_ACTIVE;
-	private float stateTime_;
+	protected float stateTime_;
 
 	public Enemy(float x, float y, float width, float height) {
 		super(x, y, width, height);

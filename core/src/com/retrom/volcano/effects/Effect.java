@@ -66,4 +66,8 @@ public abstract class Effect {
 	public void destroy() {
 		state_ = STATE_DONE;
 	}
+
+	public void setStateTime(float stateTime) {
+		stateTime_ = stateTime;
+	}
 }

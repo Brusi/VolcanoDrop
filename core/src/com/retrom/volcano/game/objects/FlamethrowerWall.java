@@ -1,8 +1,12 @@
 package com.retrom.volcano.game.objects;
 
+import com.badlogic.gdx.Gdx;
+
 public class FlamethrowerWall extends Wall {
 	
-	public boolean flameAdded = false;
+	public static final float TIME_UNTIL_FLAME_STARTS = 1.1f;
+	public Flame flame_;
+	public boolean wasTurnedOff = false;
 
 	
 	private static float xOfCol(int col) {
@@ -11,5 +15,39 @@ public class FlamethrowerWall extends Wall {
 	
 	public FlamethrowerWall(int col, float y) {
 		super(xOfCol(col), y, Wall.SIZE, Wall.SIZE, col, -1);
+	}
+
+	public void turnOff() {
+		if (this.flame_ != null) {
+			this.stateTime_ = Math.max(stateTime_, TIME_UNTIL_FLAME_STARTS + Flame.DURATION - Flame.OFF_ANIM_TIME);
+			this.flame_.turnOff();
+		} else {
+			this.stateTime_ = Math.max(stateTime_, TIME_UNTIL_FLAME_STARTS + Flame.DURATION - 0.15f);
+		}
+		wasTurnedOff = true;
+	}
+	
+	public Flame flame() {
+		return flame_;
+	}
+
+	public void addFlame(Flame flame) {
+		flame_ = flame;
+	}
+	
+	public boolean shouldAddFlame() {
+		Gdx.app.log("DEBUG","turned off = " + wasTurnedOff);
+		if (wasTurnedOff)
+			return false;
+		if (this.status() != Wall.STATUS_INACTIVE) {
+			return false;
+		}
+		if (flame() != null) {
+			return false;
+		}
+		if (stateTime() < FlamethrowerWall.TIME_UNTIL_FLAME_STARTS) {
+			return false;
+		}
+		return true;
 	}
 }

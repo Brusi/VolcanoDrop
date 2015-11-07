@@ -17,6 +17,7 @@
 package com.retrom.volcano.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
@@ -590,6 +591,8 @@ public class World {
 			List<Rectangle> rects = new ArrayList<Rectangle>(floors_.getRects());
 			for (Rectangle rect : rects) {
 				if (wall.bounds.overlaps(rect)) {
+					turnOffFlameThrower(wall);
+					
 					wall.bounds.y = rect.y+rect.height;
 					wall.bounds.getCenter(wall.position);
 					wall.setStatus(Wall.STATUS_INACTIVE);
@@ -623,11 +626,14 @@ public class World {
 			
 			if (wall instanceof FlamethrowerWall) {
 				FlamethrowerWall f = (FlamethrowerWall) wall;
-				if (wall.status() == Wall.STATUS_INACTIVE && !f.flameAdded && wall.stateTime() > 1.1) {
-					f.flameAdded = true;
-					addEffects.add(new FlameEffect(new Vector2(new Vector2(wall.position.x, wall.position.y + 96))));
-					addEffects.add(new FlameGlowEffect(new Vector2(new Vector2(wall.position.x, wall.position.y + Wall.SIZE/2))));
-					enemies_.add(new Flame(wall.position.x, wall.position.y + 96));
+				if (f.shouldAddFlame()) {
+					Effect flameEffect = new FlameEffect(new Vector2(new Vector2(wall.position.x, wall.position.y + 96)));
+					Effect flameGlowEffect = new FlameGlowEffect(new Vector2(new Vector2(wall.position.x, wall.position.y + Wall.SIZE/2)));
+					addEffects.add(flameEffect);
+					addEffects.add(flameGlowEffect);
+					Flame flame = new Flame(wall.position.x, wall.position.y + 96, Arrays.asList(flameEffect, flameGlowEffect));
+					enemies_.add(flame);
+					f.addFlame(flame);
 				}
 			}
 			
@@ -642,6 +648,29 @@ public class World {
 		
 	}
 	
+	private void turnOffFlameThrower(Wall coveringWall) {
+		for (Wall wall : walls_) {
+			if (!(wall instanceof FlamethrowerWall)) {
+				continue;
+			}
+			// Do not turn off self.
+			if (wall == coveringWall) {
+				continue;
+			}
+			
+			FlamethrowerWall f = (FlamethrowerWall)wall;
+			
+			if (f.position.y >= coveringWall.position.y - Wall.SIZE * 1.1f 
+					&& f.position.y <= coveringWall.position.y
+					&& f.position.x >= coveringWall.position.x - Wall.SIZE * 0.9f
+					&& f.position.x <= coveringWall.position.x + Wall.SIZE * 0.9f) {
+
+				Gdx.app.log("DEBUG", "TURNING OFF FLAME!");
+				f.turnOff();
+			}
+		}
+	}
+
 	private void updateCoins(float deltaTime) {
 		boolean coinCrushed = false;
 		for (Collectable c : collectables_) {
