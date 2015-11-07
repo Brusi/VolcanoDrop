@@ -5,16 +5,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.ui.GameUiRenderer;
 import com.retrom.ui.Hub;
-import com.retrom.volcano.assets.Assets;
-import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.game.World;
 import com.retrom.volcano.game.World.WorldListener;
 import com.retrom.volcano.game.WorldRenderer;
-import com.retrom.volcano.utils.BatchUtils;
 
 public class GameScreen extends ScreenAdapter implements Screen {
 	
@@ -54,6 +50,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		delta = Math.min(1/30f, delta);
 		if (!isPaused_) {
 			world_.update(delta);
+			hub_.setScore(world_.score);
 			hub_.update(delta);
 		}
 		

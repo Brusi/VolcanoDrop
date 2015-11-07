@@ -20,6 +20,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -173,6 +174,9 @@ public class Assets {
 	public static Sprite scoreIcon;
 	public static Sprite pauseButton;
 	public static Sprite pauseButtonClicked;
+	
+	// Fonts
+	public static BitmapFont scoreFont;
 
 	
 
@@ -352,6 +356,8 @@ public class Assets {
 		scoreIcon =  guiSheet.createSprite("gui_score_gold_icon");
 		pauseButton= guiSheet.createSprite("GUI_buttons_pause");
 		pauseButtonClicked = guiSheet.createSprite("GUI_buttons_pause_click");
+		
+		scoreFont = new BitmapFont(Gdx.files.internal("ui/font/volcano_score.fnt"), false);
 		
 		
 	}

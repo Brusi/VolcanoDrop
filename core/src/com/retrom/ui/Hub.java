@@ -1,8 +1,14 @@
 package com.retrom.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.utils.Align;
 import com.retrom.volcano.assets.Assets;
 
 public class Hub {
@@ -13,7 +19,11 @@ public class Hub {
 	
 	private int score_;
 
+	private Label _score_text;
+
+
 	public Hub() {
+		_score_text = new Label("0", new LabelStyle(Assets.scoreFont, Color.WHITE));
 	}
 	
 	public void update(float deltaTime) {
@@ -33,9 +43,28 @@ public class Hub {
 		float COIN_Y_POS = cam.viewportHeight / 2 - Assets.scoreIcon.getHeight() - PADDING; 
 		batch.draw(Assets.scoreIcon, COIN_X_POS, COIN_Y_POS);
 		
+		_score_text.setPosition(COIN_X_POS + 50, COIN_Y_POS + 8);
+		
 		float PAUSE_X_POS = cam.viewportWidth / 2 - Assets.pauseButton.getWidth();
 		float PAUSE_Y_POS = cam.viewportHeight / 2 - Assets.pauseButton.getHeight();
 		Sprite buttonSprite = isPaused ? Assets.pauseButtonClicked : Assets.pauseButton; 
 		batch.draw(buttonSprite, PAUSE_X_POS, PAUSE_Y_POS);
+		
+		updateScoreText();
+		
+		_score_text.draw(batch, 1);
+		
+	}
+	
+	private void updateScoreText() {
+		_score_text.setText("" + score_);
+		float scale = 1f;
+		if (stateTime_ < 0.2f) {
+			scale = 1f + 2f * (0.2f - stateTime_);
+		}
+		
+		Assets.scoreFont.getData().setScale(scale);
+		LabelStyle style = new LabelStyle(Assets.scoreFont, Color.WHITE);
+		_score_text.setStyle(style);
 	}
 }
