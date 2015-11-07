@@ -125,7 +125,7 @@ public class World {
 	
 	public World (WorldListener listener) {
 		this.listener_ = listener;
-		this.player = new Player(0, 100, new Player.HitRectHandler() {
+		this.player = new Player(0, 200, new Player.HitRectHandler() {
 			@Override
 			public void handle(Rectangle rect) {
 				if (shieldTime <= 0) {
