@@ -392,6 +392,9 @@ public class World {
 			magnetTime -= deltaTime;
 			if (magnetTime <= 0) {
 				for (Collectable c : collectables_) {
+					if (c.isPowerup()) {
+						continue;
+					}
 					c.setState(Collectable.STATUS_FALLING);
 					c.velocity.x = c.velocity.y = 0;
 				}
