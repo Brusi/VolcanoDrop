@@ -213,7 +213,7 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
 			addSideFireball(0, 500, false);
 		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
 			prepareFireball((int) Math.floor(Math.random() * 6));
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
@@ -523,8 +523,6 @@ public class World {
 	}
 	
 	private void updateGoldSacks(float deltaTime) {
-		System.out.println("" + (deltaTime * player.velocity.x)); 
-		
 		sackloop:
 		for (GoldSack sack : goldSacks_) {
 			sack.update(deltaTime);
@@ -644,20 +642,22 @@ public class World {
 	private void updateCoins(float deltaTime) {
 		boolean coinCrushed = false;
 		for (Collectable c : collectables_) {
-			if (magnetTime > 0) {
+			if (magnetTime > 0 && !c.isPowerup()) {
 				if (c.state() == Collectable.STATUS_FALLING
 						|| c.state() == Collectable.STATUS_IDLE
 						|| c.state() == Collectable.STATUS_MAGNETIZED) {
 					c.magnetTo(player.position, deltaTime);
 				}
 			}
-			
+
 			c.setObstacles(obstacles_);
 			c.update(deltaTime);
 			for (Rectangle rect : floors_.getRects()) {
 				if (c.bounds.overlaps(rect)) {
 					if (c.state() == Collectable.STATUS_IDLE
-							|| rect.contains(c.bounds) || c.state() == Collectable.STATUS_MAGNETIZED && rect.contains(c.position)) {
+							|| rect.contains(c.bounds)
+							|| c.state() == Collectable.STATUS_MAGNETIZED
+							&& rect.contains(c.position)) {
 						c.setState(Collectable.STATUS_CRUSHED);
 					} else if (c.state() == Collectable.STATUS_FALLING) {
 						c.setState(Collectable.STATUS_IDLE);

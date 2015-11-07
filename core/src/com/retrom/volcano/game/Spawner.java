@@ -1,13 +1,19 @@
 package com.retrom.volcano.game;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
 
 public class Spawner {
 	
+	private static final int NUMBER_OF_COLUMNS = 6;
+
 	public interface SpawnerHandler {
 		public void dropWall(int col);
 		public void dropCoin(float x, Collectable.Type type);
@@ -23,7 +29,9 @@ public class Spawner {
 	private static final Random rand = new Random();
 	private final List<Wall> activeWalls;
 	
-
+	// A list of time remaining until a column is free to drop blocks on.
+	private final float[] sackSilenceTime_ = new float[NUMBER_OF_COLUMNS];
+	
 	
 	Spawner(ActiveFloors floors, List<Wall> activeWalls, SpawnerHandler handler) {
 		this.activeWalls = activeWalls;
@@ -37,7 +45,10 @@ public class Spawner {
 	// Expected time between coins.
 	private static final float AVG_COIN_TIME = 1f;
 	private static final float AVG_FIREBALL_TIME = 7f;
-	private static final float AVG_SACK_TIME = 6;
+	private static final float AVG_SACK_TIME = 5f;
+	
+	private static final Float SACK_WALL_SILENCE_TIME = 1f;
+	private static final Float SACK_SACK_SILENCE_TIME = 1f;
 	
 	private float timeCount = 0;
 	private float timeRemaining = TIME_BETWEEN_WALLS;
@@ -46,10 +57,25 @@ public class Spawner {
 		timeCount += deltaTime;
 		timeRemaining -= deltaTime;
 		
+		for (int col = 0; col < sackSilenceTime_.length; ++col) {
+			if (sackSilenceTime_[col] > 0) {
+				sackSilenceTime_[col] -= deltaTime;
+			} else {
+				sackSilenceTime_[col] = 0;
+			}
+		}
+
 		if (timeRemaining < 0) {
 			timeRemaining += TIME_BETWEEN_WALLS;
 			
-			List<Integer> candidates = floors_.getNextPossibleCols();
+			List<Integer> candidates = new ArrayList<Integer>(floors_.getNextPossibleCols());
+			for (int col = 0; col < sackSilenceTime_.length; ++col) {
+				if (sackSilenceTime_[col] > SACK_SACK_SILENCE_TIME - SACK_WALL_SILENCE_TIME) {
+					if (candidates.contains(col)) {
+						candidates.remove(candidates.indexOf(col));
+					}
+				} 
+			}
 			
 			boolean dualDropped = false;
 			if (rand.nextInt(4) == 0) {
@@ -65,22 +91,27 @@ public class Spawner {
 				}
 			}
 			if (!dualDropped) {
-				Integer col = candidates.get(rand.nextInt(candidates.size()));
-				if (rand.nextInt(3) == 0) {
-					if (rand.nextBoolean()) {
-						handler_.dropBurningWall(col);
+				Integer col = candidates.isEmpty() ? -1 : candidates.get(rand.nextInt(candidates.size()));
+				if (col >= 0) {
+					if (rand.nextInt(3) == 0) {
+						if (rand.nextBoolean()) {
+							handler_.dropBurningWall(col);
+						} else {
+							handler_.dropFlamethrower(col);
+						}
 					} else {
-						handler_.dropFlamethrower(col);
+						handler_.dropWall(col);
 					}
-				} else {
-					handler_.dropWall(col);
 				}
 			}
 		}
 		
 		if (Math.random() < deltaTime / AVG_SACK_TIME) {
 			int col = randomColumn();
-			handler_.dropSack(col, randomSackCoins());
+			if (sackSilenceTime_[col] <= 0) {
+				handler_.dropSack(col, randomSackCoins());
+				sackSilenceTime_[col] = SACK_SACK_SILENCE_TIME;
+			}
 		}
 		
 		if (Math.random() < deltaTime / AVG_COIN_TIME) {
@@ -106,11 +137,11 @@ public class Spawner {
 	}
 	
 	private int randomSackCoins() {
-		return rand.nextInt(4) + 2;
+		return rand.nextInt(10) + 4;
 	}
 
 	private int randomColumn() {
-		return rand.nextInt(6);
+		return rand.nextInt(NUMBER_OF_COLUMNS);
 	}
 
 	private boolean isClearForDualWall(int col) {

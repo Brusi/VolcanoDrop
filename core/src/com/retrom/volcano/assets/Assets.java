@@ -234,7 +234,6 @@ public class Assets {
 		
 		coin1_1_land = treasure.createSprites("coin_1_1_land/coin1_1_land");
 		coin1_2_land = treasure.createSprites("coin_1_2_land/coin1_2_land");
-		System.out.println(coin1_1_land.size);
 
 
 		coin2_1_land = treasure.createSprites("coin_2_1_land/coin2_1_land");
