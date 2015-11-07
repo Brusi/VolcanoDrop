@@ -14,6 +14,9 @@ import com.retrom.volcano.assets.Assets;
 public class Hub {
 	
 	private static final float PADDING = 20;
+	
+	private static final float POP_TIME = 0.2f;
+	private static final float POP_ADDED_SCALE = 0.3f;
 
 	float stateTime_ = 0;
 	
@@ -59,8 +62,8 @@ public class Hub {
 	private void updateScoreText() {
 		_score_text.setText("" + score_);
 		float scale = 1f;
-		if (stateTime_ < 0.2f) {
-			scale = 1f + 2f * (0.2f - stateTime_);
+		if (stateTime_ < POP_TIME) {
+			scale = 1f + POP_ADDED_SCALE * (POP_TIME - stateTime_) / POP_TIME;
 		}
 		
 		Assets.scoreFont.getData().setScale(scale);
