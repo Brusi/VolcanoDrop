@@ -91,15 +91,17 @@ public class Collectable extends DynamicGameObject {
 			}
 		} else {
 			if (state() == STATUS_FALLING) {
-				bounds.x += velocity.x * deltaTime;
-				// TODO: eliminate duplication.
-				for (Rectangle rect : obstacles_) {
-					if (bounds.overlaps(rect)) {
-						if (bounds.x + bounds.width / 2 > rect.x + rect.width / 2) {
-							bounds.x = rect.x + rect.width;
-						} else
-							bounds.x = rect.x - bounds.width;
-						velocity.x = 0;
+				if (velocity.x != 0) {
+					bounds.x += velocity.x * deltaTime;
+					// TODO: eliminate duplication.
+					for (Rectangle rect : obstacles_) {
+						if (bounds.overlaps(rect)) {
+							if (bounds.x + bounds.width / 2 > rect.x + rect.width / 2) {
+								bounds.x = rect.x + rect.width;
+							} else
+								bounds.x = rect.x - bounds.width;
+							velocity.x = 0;
+						}
 					}
 				}
 				bounds.y += velocity.y * deltaTime;
