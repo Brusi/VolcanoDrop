@@ -1,5 +1,6 @@
 package com.retrom.volcano.game.objects;
 
+import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.game.World;
 
 public class GoldSack extends DynamicGameObject {
@@ -55,10 +56,11 @@ public class GoldSack extends DynamicGameObject {
 		
 		if (state_ == STATE_GROUND && coinsLeft <= 0) {
 			setState(STATE_EMPTY);
+			SoundAssets.playSound(SoundAssets.coinSackEnd);
 			return;
 		}
 		
-		if ((state_ == STATE_GROUND || state_ == STATE_PUMP) && stateTime() > 0.8f) {
+		if (state_ == STATE_GROUND  && stateTime() > 0.8f || state_ == STATE_PUMP) {
 			timeToLastFlare -= deltaTime;
 			if (timeToLastFlare < 0) {
 				shouldFlare_ = true;

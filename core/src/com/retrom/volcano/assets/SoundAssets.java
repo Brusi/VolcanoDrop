@@ -28,6 +28,7 @@ public class SoundAssets {
 	
 	public static Sound coinSackStart;
 	public static Sound[] coinSackHit;
+	public static Sound coinSackEnd;
 	
 	public static Sound coinCrushed;
 	public static Sound powerupCrushed;
@@ -95,6 +96,7 @@ public class SoundAssets {
 		
 		coinSackStart = newSound("coins_sack_start.wav");
 		coinSackHit = new Sound[] { newSound("coins_sack_hit_1.wav"), newSound("coins_sack_hit_2.wav") };
+		coinSackEnd = newSound("coins_sack_end.wav");
 		
 		coinCrushed = newSound("coins_crushed.wav");
 		powerupCrushed = newSound("powerups_crushed.wav");
