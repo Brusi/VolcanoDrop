@@ -2,20 +2,31 @@ package com.retrom.volcano.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.retrom.ui.GameUiRenderer;
+import com.retrom.ui.Hub;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.game.World;
 import com.retrom.volcano.game.World.WorldListener;
 import com.retrom.volcano.game.WorldRenderer;
+import com.retrom.volcano.utils.BatchUtils;
 
 public class GameScreen extends ScreenAdapter implements Screen {
 	
-	World world_;
-	WorldRenderer renderer_;
+	SpriteBatch batch_ = new SpriteBatch();
 	
+	World world_;
+	WorldRenderer worldRenderer_;
+	
+	Hub hub_;
+	
+	private GameUiRenderer uiRenderer_;
+
 	boolean isPaused_ = false;
 	
 	@Override
@@ -27,8 +38,15 @@ public class GameScreen extends ScreenAdapter implements Screen {
 				((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen());
 			}
 		});
-		// TODO: switch to global batch
-		renderer_ = new WorldRenderer(new SpriteBatch(), world_);
+		
+		hub_ = new Hub();
+		
+		worldRenderer_ = new WorldRenderer(batch_, world_);
+		uiRenderer_ = new GameUiRenderer(hub_);
+	}
+
+	private void togglePause() {
+		isPaused_ = !isPaused_;
 	}
 
 	@Override
@@ -36,8 +54,28 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		delta = Math.min(1/30f, delta);
 		if (!isPaused_) {
 			world_.update(delta);
+			hub_.update(delta);
 		}
-		renderer_.render(delta);
+		
+		worldRenderer_.render(delta, isPaused_);
+		uiRenderer_.render(isPaused_);
+		
+		checkPause();
+	}
+	
+	private boolean isPauseAreaTouched() {
+		if (!Gdx.input.justTouched()) {
+			return false;
+		}
+		float x = Gdx.input.getX();
+		float y = Gdx.input.getY();
+		return x > Gdx.graphics.getWidth() * 3f / 4f && y < Gdx.graphics.getWidth() / 4f;  
+	}
+	
+	private void checkPause() {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.P) || isPauseAreaTouched()) {
+			togglePause();
+		}
 	}
 
 	@Override

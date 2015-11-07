@@ -1,0 +1,25 @@
+gui.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+GUI_buttons_pause
+  rotate: false
+  xy: 2, 2
+  size: 166, 171
+  orig: 166, 171
+  offset: 0, 0
+  index: -1
+GUI_buttons_pause_click
+  rotate: false
+  xy: 170, 2
+  size: 166, 171
+  orig: 166, 171
+  offset: 0, 0
+  index: -1
+gui_score_gold_icon
+  rotate: false
+  xy: 338, 2
+  size: 42, 42
+  orig: 42, 42
+  offset: 0, 0
+  index: -1

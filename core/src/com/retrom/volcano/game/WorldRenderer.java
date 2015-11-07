@@ -20,15 +20,12 @@ import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 
-import javafx.print.Collation;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
@@ -62,10 +59,11 @@ import com.retrom.volcano.game.objects.SideFireball;
 import com.retrom.volcano.game.objects.Spitter;
 import com.retrom.volcano.game.objects.TopFireball;
 import com.retrom.volcano.game.objects.Wall;
+import com.retrom.volcano.utils.BatchUtils;
 
 public class WorldRenderer {
-	static final float FRUSTUM_WIDTH = 640;
-	static final float FRUSTUM_HEIGHT = FRUSTUM_WIDTH / Gdx.graphics.getWidth() * Gdx.graphics.getHeight();
+	static final public float FRUSTUM_WIDTH = 640;
+	static final public float FRUSTUM_HEIGHT = FRUSTUM_WIDTH / Gdx.graphics.getWidth() * Gdx.graphics.getHeight();
 	
 	public static final float FPS = 30f;
 	public static final float FRAME_TIME = 1 / FPS;
@@ -90,18 +88,20 @@ public class WorldRenderer {
 	
 	public static final float CAM_SPEED = 40f;
 	
-	public void render(float deltaTime) {
+	public void render(float deltaTime, boolean isPaused) {
 		Gdx.graphics.getGL20().glClearColor(0, 0, 0, 1);
 		Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-		cam_target = world.camTarget;
-		if (cam_position < cam_target) {
-			cam_position += (cam_target - cam_position) * deltaTime / 2;
+		if (!isPaused) {
+			cam_target = world.camTarget;
+			if (cam_position < cam_target) {
+				cam_position += (cam_target - cam_position) * deltaTime / 2;
+			}
+
+			cam.position.y = snapToPixels(cam_position);
+			cam.update();
+			batch.setProjectionMatrix(cam.combined);
 		}
-		
-		cam.position.y = snapToPixels(cam_position);
-		cam.update();
-		batch.setProjectionMatrix(cam.combined);
 		
 		renderBackground();
 		renderObjects();
@@ -165,27 +165,16 @@ public class WorldRenderer {
 		}
 	}
 	
-	private void setBlendFuncNormal() {
-		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-	}
-	
-	private void setBlendFuncAdd() {
-		batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE);
-	}
-
-	private void setBlendFuncScreen() {
-		batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_COLOR);
-	}
-	
 	public void renderObjects () {
 		batch.enableBlending();
-		setBlendFuncNormal();
+		BatchUtils.setBlendFuncNormal(batch);
 		batch.begin();
 		renderPillarBg();
 		renderWalls();
-		setBlendFuncAdd();
+		BatchUtils.setBlendFuncAdd(batch);
 		renderEffects(world.addEffectsUnder);
-		setBlendFuncNormal();
+		BatchUtils.setBlendFuncNormal(batch);
+		
 		renderPlayer();
 		renderEnemies();
 		renderGoldSacks();
@@ -195,9 +184,9 @@ public class WorldRenderer {
 		drawPillar(world.background.rightPillar, PILLAR_POS, world.background.rightBaseY(), true);
 		
 		renderEffects(world.effects);
-		setBlendFuncScreen();
+		BatchUtils.setBlendFuncScreen(batch);
 		renderEffects(world.screenEffects);
-		setBlendFuncAdd();
+		BatchUtils.setBlendFuncAdd(batch);
 		renderEffects(world.addEffects);
 		batch.end();
 	}
@@ -399,7 +388,6 @@ public class WorldRenderer {
 
 				@Override
 				public Sprite visit(PlayerShieldEffect effect) {
-					System.out.println(Assets.playerShieldEffect.size);
 					Sprite s = getFrameLoop(Assets.playerShieldEffect, effect.stateTime());
 					return s;
 				}

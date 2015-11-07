@@ -168,6 +168,11 @@ public class Assets {
 	public static Array<Sprite> topFireballLoop;
 
 	public static Array<Sprite> playerShieldEffect;
+	
+	// Gui
+	public static Sprite scoreIcon;
+	public static Sprite pauseButton;
+	public static Sprite pauseButtonClicked;
 
 	
 
@@ -341,5 +346,13 @@ public class Assets {
 		
 		TextureAtlas enemiesAddSheet2 = new TextureAtlas("enemies/enemies_add_2.txt");
 		fireballStartEffect = enemiesAddSheet2.createSprites("fireball_start");
+		
+		// Gui
+		TextureAtlas guiSheet = new TextureAtlas("ui/gui.txt");
+		scoreIcon =  guiSheet.createSprite("gui_score_gold_icon");
+		pauseButton= guiSheet.createSprite("GUI_buttons_pause");
+		pauseButtonClicked = guiSheet.createSprite("GUI_buttons_pause_click");
+		
+		
 	}
 }
