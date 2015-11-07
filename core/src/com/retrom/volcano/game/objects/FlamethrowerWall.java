@@ -1,7 +1,5 @@
 package com.retrom.volcano.game.objects;
 
-import com.badlogic.gdx.Gdx;
-
 public class FlamethrowerWall extends Wall {
 	
 	public static final float TIME_UNTIL_FLAME_STARTS = 1.1f;
@@ -36,7 +34,6 @@ public class FlamethrowerWall extends Wall {
 	}
 	
 	public boolean shouldAddFlame() {
-		Gdx.app.log("DEBUG","turned off = " + wasTurnedOff);
 		if (wasTurnedOff)
 			return false;
 		if (this.status() != Wall.STATUS_INACTIVE) {

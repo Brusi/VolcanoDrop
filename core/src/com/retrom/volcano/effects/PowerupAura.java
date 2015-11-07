@@ -31,11 +31,5 @@ public class PowerupAura extends OneFrameEffect {
 	public float getScale() {
 		float tint = (float) (0.8 + (Math.sin(stateTime() * 3) + 1) / 10);
 		return tint;
-//		float loopTime = stateTime() % 3;
-//		if (loopTime < 1.5) {
-//			return 1 - loopTime / 2;
-//		} else {
-//			return loopTime;
-//		}
 	};
 }

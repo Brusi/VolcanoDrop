@@ -489,6 +489,7 @@ public class World {
 		}
 		if (coin.isPowerup()) {
 			addEffects.add(EffectFactory.powerupBackGlow(coin.type, coin));
+			addEffectsUnder.add(EffectFactory.powerupAura(coin.type, coin));
 		}
 	}
 	

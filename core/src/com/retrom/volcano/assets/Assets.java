@@ -189,8 +189,6 @@ public class Assets {
 	}
 
 	public static void load() {
-//		font = new BitmapFont(Gdx.files.internal("data/font.fnt"), Gdx.files.internal("data/font.png"), false);
-		
 		TextureAtlas wallsSheet = new TextureAtlas("walls/walls.txt");
 		walls1 = wallsSheet.createSprites("x1");
 		walls2 = wallsSheet.createSprites("x2");
