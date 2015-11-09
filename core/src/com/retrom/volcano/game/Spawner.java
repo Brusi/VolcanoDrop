@@ -28,6 +28,7 @@ public class Spawner {
 	private final ActiveFloors floors_;
 	private static final Random rand = new Random();
 	private final List<Wall> activeWalls;
+	private final EventQueue queue = new EventQueue();
 	
 	// A list of time remaining until a column is free to drop blocks on.
 	private final float[] sackSilenceTime_ = new float[NUMBER_OF_COLUMNS];
@@ -55,7 +56,11 @@ public class Spawner {
 	
 	public void update(float deltaTime) {
 		timeCount += deltaTime;
-		timeRemaining -= deltaTime;
+		
+		if (queue.isEmpty()) {
+			timeRemaining -= deltaTime;
+		}
+		queue.update(deltaTime);
 		
 		for (int col = 0; col < sackSilenceTime_.length; ++col) {
 			if (sackSilenceTime_[col] > 0) {
@@ -67,40 +72,35 @@ public class Spawner {
 
 		if (timeRemaining < 0) {
 			timeRemaining += TIME_BETWEEN_WALLS;
-			
-			List<Integer> candidates = new ArrayList<Integer>(floors_.getNextPossibleCols());
-			for (int col = 0; col < sackSilenceTime_.length; ++col) {
-				if (sackSilenceTime_[col] > SACK_SACK_SILENCE_TIME - SACK_WALL_SILENCE_TIME) {
-					if (candidates.contains(col)) {
-						candidates.remove(candidates.indexOf(col));
-					}
-				} 
-			}
-			
-			boolean dualDropped = false;
-			if (rand.nextInt(4) == 0) {
-				List<Integer> dualCandidates = floors_.getNextPossibleDualCols();
-				int col = dualCandidates.isEmpty() ? -1 : dualCandidates.get(rand.nextInt(dualCandidates.size()));
-				
-				boolean isClear = isClearForDualWall(col);
-				
-				if (col >= 0 &&  isClear && candidates.contains(col) && candidates.contains(col+1)) {
-					System.out.println("Dropping at " + col);
-					dualDropped = true;
-					handler_.dropDualWall(col);
-				}
-			}
-			if (!dualDropped) {
-				Integer col = candidates.isEmpty() ? -1 : candidates.get(rand.nextInt(candidates.size()));
-				if (col >= 0) {
-					if (rand.nextInt(3) == 0) {
-						if (rand.nextBoolean()) {
-							handler_.dropBurningWall(col);
-						} else {
-							handler_.dropFlamethrower(col);
+			if (rand.nextInt(5) == 0) {
+				sideToSideSequence();
+			} else {
+				List<Integer> candidates = new ArrayList<Integer>(floors_.getNextPossibleCols());
+				for (int col = 0; col < sackSilenceTime_.length; ++col) {
+					if (sackSilenceTime_[col] > SACK_SACK_SILENCE_TIME - SACK_WALL_SILENCE_TIME) {
+						if (candidates.contains(col)) {
+							candidates.remove(candidates.indexOf(col));
 						}
-					} else {
-						handler_.dropWall(col);
+					} 
+				}
+				
+				boolean dualDropped = false;
+				if (rand.nextInt(4) == 0) {
+					List<Integer> dualCandidates = floors_.getNextPossibleDualCols();
+					int col = dualCandidates.isEmpty() ? -1 : dualCandidates.get(rand.nextInt(dualCandidates.size()));
+					
+					boolean isClear = isClearForDualWall(col);
+					
+					if (col >= 0 &&  isClear && candidates.contains(col) && candidates.contains(col+1)) {
+						System.out.println("Dropping at " + col);
+						dualDropped = true;
+						handler_.dropDualWall(col);
+					}
+				}
+				if (!dualDropped) {
+					Integer col = candidates.isEmpty() ? -1 : candidates.get(rand.nextInt(candidates.size()));
+					if (col >= 0) {
+						DropSingleRandomTypeWall(col);
 					}
 				}
 			}
@@ -135,7 +135,35 @@ public class Spawner {
 			handler_.dropFireball(randomColumn());
 		}
 	}
+
+	private void DropSingleRandomTypeWall(Integer col) {
+		if (rand.nextInt(3) == 0) {
+			if (rand.nextBoolean()) {
+				handler_.dropBurningWall(col);
+			} else {
+				handler_.dropFlamethrower(col);
+			}
+		} else {
+			handler_.dropWall(col);
+		}
+	}
 	
+	private void sideToSideSequence() {
+		boolean leftToRight = rand.nextBoolean();
+		
+		for (int i = 0; i < 6; i++) {
+			final int col = leftToRight ? i : 5 - i;
+			EventQueue.Event event = new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					DropSingleRandomTypeWall(col);
+				}
+			};
+			final float time = i * 0.5f;
+			queue.addEventFromNow(time, event);
+		}
+	}
+
 	private int randomSackCoins() {
 		return rand.nextInt(10) + 4;
 	}
