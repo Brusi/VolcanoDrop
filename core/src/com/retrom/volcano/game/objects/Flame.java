@@ -30,7 +30,7 @@ public class Flame extends Enemy {
 	public void turnOff() {
 		stateTime_ = DURATION - OFF_ANIM_TIME;
 		for (Effect effect : associatedEffects_) {
-			effect.setStateTime(stateTime_);
+			effect.advanceStateTime(stateTime_);
 		}
 	}
 }

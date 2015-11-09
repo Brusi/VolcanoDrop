@@ -67,7 +67,7 @@ public abstract class Effect {
 		state_ = STATE_DONE;
 	}
 
-	public void setStateTime(float stateTime) {
-		stateTime_ = stateTime;
+	public void advanceStateTime(float stateTime) {
+		stateTime_ = Math.max(stateTime_, stateTime);
 	}
 }
