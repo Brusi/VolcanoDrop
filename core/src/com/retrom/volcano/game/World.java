@@ -674,6 +674,7 @@ public class World {
 
 	private void updateCoins(float deltaTime) {
 		boolean coinCrushed = false;
+		boolean powerupCrushed = false;
 		for (Collectable c : collectables_) {
 			if (magnetTime > 0 && !c.isPowerup()) {
 				if (c.state() == Collectable.STATUS_FALLING
@@ -708,14 +709,22 @@ public class World {
 				}
 			}
 			if (c.state() == Collectable.STATUS_CRUSHED) {
-				if (!coinCrushed) {
-					SoundAssets.playSound(SoundAssets.coinCrushed);
-					coinCrushed = true;
+				if (c.isPowerup()) {
+					if (!powerupCrushed) {
+						SoundAssets.playSound(SoundAssets.powerupCrushed);
+						powerupCrushed = true;
+					}
+					addEffects.add(EffectFactory.powerupCrushedEffect(c.type, c.position));
+				} else {
+					if (!coinCrushed) {
+						SoundAssets.playSound(SoundAssets.coinCrushed);
+						coinCrushed = true;
+					}
+					effects.add(EffectFactory.coinCrushParticle(c.type, c.position));
+					effects.add(EffectFactory.coinCrushParticle(c.type, c.position));
+					effects.add(EffectFactory.coinCrushParticle(c.type, c.position));
+					screenEffects.add(EffectFactory.coinCrushedEffect(c.position));
 				}
-				effects.add(EffectFactory.coinCrushParticle(c.type, c.position));
-				effects.add(EffectFactory.coinCrushParticle(c.type, c.position));
-				effects.add(EffectFactory.coinCrushParticle(c.type, c.position));
-				screenEffects.add(EffectFactory.coinCrushedEffect(c.position));
 			}
 		}
 		

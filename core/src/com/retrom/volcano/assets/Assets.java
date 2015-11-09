@@ -150,6 +150,10 @@ public class Assets {
 	public static Sprite coinFlare;
 	public static Sprite sackFlare;
 	
+	public static Array<Sprite> powerupMagnetCrushEffect;
+	public static Array<Sprite> powerupSlomoCrushEffect;
+	public static Array<Sprite> powerupShieldCrushEffect;
+	
 	public static Sprite magnetBackGlow;
 	public static Sprite slomoBackGlow;
 	public static Sprite shieldBackGlow;
@@ -298,9 +302,10 @@ public class Assets {
 		scoreNum15teal = scoreNumsSheet.createSprite("gui_score_+15teal");
 		scoreNum25 = scoreNumsSheet.createSprite("gui_score_+25");
 		
+		TextureAtlas playerVfxSheet = new TextureAtlas("vfx/playervfx.txt");
+		playerExplode = playerVfxSheet.createSprites("player_die_explotion");
 		
 		TextureAtlas vfxSheet = new TextureAtlas("vfx/vfx.txt");
-		playerExplode = vfxSheet.createSprites("player_die_explotion");
 		bronzeCollectEffect1 = vfxSheet.createSprites("coin_collect_bronze1");
 		bronzeCollectEffect2 = vfxSheet.createSprites("coin_collect_bronze2"); 
 		silverCollectEffect1 = vfxSheet.createSprites("coin_collect_silver1"); 
@@ -316,6 +321,10 @@ public class Assets {
 		Array<Sprite> flares = vfxSheet.createSprites("coin_flare");
 		coinFlare = flares.get(0);
 		sackFlare = flares.get(1);
+		
+		powerupMagnetCrushEffect = vfxSheet.createSprites("magnet_crushed");
+		powerupSlomoCrushEffect = vfxSheet.createSprites("timebend_crushed");
+		powerupShieldCrushEffect = vfxSheet.createSprites("shield_crushed");
 		
 		TextureAtlas powerupSheet = new TextureAtlas("vfx/powerup.txt");
 		magnetBackGlow = powerupSheet.createSprite("powerup_magnet_backglow");

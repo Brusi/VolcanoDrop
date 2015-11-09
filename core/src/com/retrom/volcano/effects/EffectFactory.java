@@ -53,6 +53,20 @@ public class EffectFactory {
 		$.setRandomScale(0.75f, 1f);
 		return $;
 	}
+	
+	public static Effect powerupCrushedEffect(Collectable.Type type, Vector2 position) {
+		switch (type) {
+		case POWERUP_MAGNET:
+			return new FiniteAnimationEffect(Assets.powerupMagnetCrushEffect, position);
+		case POWERUP_SLOMO:
+			return new FiniteAnimationEffect(Assets.powerupSlomoCrushEffect, position);
+		case POWERUP_SHIELD:
+			return new FiniteAnimationEffect(Assets.powerupShieldCrushEffect, position);
+		default:
+			Gdx.app.log("ERROR", "Type is not a powerup.");
+			return null;
+		}
+	}
 
 	public static Effect fireballExpodeEffect(Vector2 position) {
 		FiniteAnimationEffect $ = new FiniteAnimationEffect(Assets.fireballExplodeEffect, position);
