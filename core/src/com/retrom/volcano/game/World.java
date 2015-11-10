@@ -26,6 +26,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.effects.BurningWallGlow;
 import com.retrom.volcano.effects.DiamondGlowEffect;
@@ -100,8 +101,10 @@ public class World {
 	private float slomoTime = 0f;
 	private float shieldTime = 0f;
 	
+	private static final float TOTAL_SHIELD_TIME = 5f;
+	
 	// Special effect holders.
-	private Effect playerShieldEffect;
+	private PlayerShieldEffect playerShieldEffect;
 
 	private List<Rectangle> obstacles_;
 
@@ -326,6 +329,8 @@ public class World {
 					if (fireball.state() == Enemy.STATE_ACTIVE && fireball.bounds.overlaps(player.bounds) && !player.isDead()) {
 						if (shieldTime <= 0) {
 							player.killByBurn();
+						} else {
+							playerShieldEffect.hit();
 						}
 						fireball.explode();
 					} else if (fireball.state() == Enemy.STATE_ACTIVE) {
@@ -353,6 +358,8 @@ public class World {
 					if (fireball.state() == Enemy.STATE_ACTIVE && fireball.bounds.overlaps(player.bounds) && !player.isDead()) {
 						if (shieldTime <= 0) {
 							player.killByBurn();
+						} else {
+							playerShieldEffect.hit();
 						}
 						fireball.explode();
 					} else if (fireball.state() == Enemy.STATE_ACTIVE) {
@@ -432,10 +439,15 @@ public class World {
 		}
 		if (shieldTime > 0) {
 			shieldTime -= deltaTime;
+			if (shieldTime <= 0.4) {
+				if (playerShieldEffect.shieldState() != PlayerShieldEffect.ShieldState.DIE) {
+					playerShieldEffect.die();
+					SoundAssets.playSound(SoundAssets.powerupShieldEnd);
+				}
+			}
 			if (shieldTime <= 0) {
 				playerShieldEffect.destroy();
 				playerShieldEffect = null;
-				SoundAssets.playSound(SoundAssets.powerupShieldEnd);
 			}
 		}
 	}
@@ -812,7 +824,10 @@ public class World {
 					
 					if (playerShieldEffect == null) {
 						playerShieldEffect = new PlayerShieldEffect(player.position); 
+						pauseEffects.add(playerShieldEffect);
 						addEffects.add(playerShieldEffect);
+					} else {
+						playerShieldEffect.renew();
 					}
 				}
 			});
@@ -820,7 +835,7 @@ public class World {
 				@Override
 				public void invoke() {
 					SoundAssets.resumeAllSounds();
-					shieldTime = 5f;
+					shieldTime = TOTAL_SHIELD_TIME;
 				}
 			});
 			break;

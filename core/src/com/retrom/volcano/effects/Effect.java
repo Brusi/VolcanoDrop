@@ -9,7 +9,7 @@ public abstract class Effect {
 	public Vector2 position_;
 	public Vector2 velocity_;
 	
-	private float stateTime_ = 0;
+	protected float stateTime_ = 0;
 	protected int state_;
 	
 	private final float duration_;

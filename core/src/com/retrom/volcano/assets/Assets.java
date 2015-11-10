@@ -180,7 +180,11 @@ public class Assets {
 	
 	public static Array<Sprite> topFireballLoop;
 
+	public static Array<Sprite> playerShieldEffectStart;
 	public static Array<Sprite> playerShieldEffect;
+	public static Array<Sprite> playerShieldEffectHit;
+	public static Array<Sprite> playerShieldEffectEnd;
+	
 	
 	// Gui
 	public static Sprite scoreIcon;
@@ -343,7 +347,10 @@ public class Assets {
 		slomoAura= powerupSheet.createSprite("powerup_timebend_aura");
 		shieldAura= powerupSheet.createSprite("powerup_shield_aura");
 		
+		playerShieldEffectStart = powerupSheet.createSprites("powerup_shield_animated_glow_start");
 		playerShieldEffect = powerupSheet.createSprites("powerup_shield_animated_glow_middle");
+		playerShieldEffectHit = powerupSheet.createSprites("powerup_shield_animated_glow_hit");
+		playerShieldEffectEnd = powerupSheet.createSprites("powerup_shield_animated_glow_die");
 		
 		greenDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_green1"); 
 		greenDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_green2"); 
