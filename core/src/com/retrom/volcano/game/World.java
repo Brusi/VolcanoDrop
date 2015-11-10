@@ -301,6 +301,8 @@ public class World {
 					if (flame.bounds.overlaps(player.bounds) && !player.isDead()) {
 						if (shieldTime <= 0) {
 							player.killByBurn();
+						} else {
+							player.velocity.y += 56 - (player.position.y - flame.position.y);
 						}
 					}
 					return null;
