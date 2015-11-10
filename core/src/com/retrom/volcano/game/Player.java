@@ -139,7 +139,7 @@ public class Player extends DynamicGameObject {
 		}
 
 		if (grounded_) {
-			if (Math.abs(velocity.x) > 50) {
+			if (state_ != STATE_LANDING && Math.abs(velocity.x) > 50) {
 				setState(STATE_RUNNING);
 			} else if (state_ != STATE_LANDING || stateTime > 1/30f * 9) {
 				setState(STATE_IDLE);
@@ -269,5 +269,9 @@ public class Player extends DynamicGameObject {
 
 	public void setShieldStatus(boolean is_shield_active) {
 		is_shield_active_ = is_shield_active;
+	}
+
+	public void landAnimation() {
+		setState(STATE_LANDING);
 	}
 }

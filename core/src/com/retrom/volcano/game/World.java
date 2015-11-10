@@ -142,6 +142,9 @@ public class World {
 				for (Wall wall : activeWalls_) {
 					if (wall.bounds == rect) {
 						wall.setStatus(Wall.STATUS_EXPLODE);
+						playerShieldEffect.hit();
+						SoundAssets.playSound(SoundAssets.powerupShieldHit);
+						player.landAnimation();
 					}
 				}
 			}

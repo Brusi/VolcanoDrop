@@ -40,6 +40,7 @@ public class SoundAssets {
 	public static Sound powerupTimeStart;
 	public static Sound powerupTimeEnd;
 	public static Sound powerupShieldStart;
+	public static Sound powerupShieldHit;
 	public static Sound powerupShieldEnd;
 	
 	public static Sound playerDeathCrush;
@@ -111,6 +112,7 @@ public class SoundAssets {
 		powerupTimeEnd = newSound("powerups_time_end.wav");
 		
 		powerupShieldStart = newSound("powerups_shield_start.wav");
+		powerupShieldHit = newSound("powerups_shield_hit.wav");
 		powerupShieldEnd = newSound("powerups_shield_end.wav");
 		
 		// Player death:
