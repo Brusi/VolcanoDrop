@@ -140,4 +140,19 @@ public class EffectFactory {
 		}
 		return null;
 	}
+
+	public static Effect powerupAppearEffect(Type type, Vector2 position) {
+		switch (type) {
+		case POWERUP_MAGNET:
+			return new FiniteAnimationEffect(Assets.powerupMagnetAppearSpark, position);
+		case POWERUP_SLOMO:
+			return new FiniteAnimationEffect(Assets.powerupSlomoAppearSpark, position);
+		case POWERUP_SHIELD:
+			return new FiniteAnimationEffect(Assets.powerupShieldAppearSpark, position);
+		default:
+			Gdx.app.error("ERROR", "Type is not a powerup, no appear effect.");
+			break;
+		}
+		return null;
+	}
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.retrom.volcano.game.Settings;
+import com.retrom.volcano.game.objects.Collectable.Type;
 import com.retrom.volcano.utils.SoundEvictingQueue;
 
 public class SoundAssets {
@@ -179,5 +180,23 @@ public class SoundAssets {
 	public static void restart() {
 		stopAllSounds();
 		pitch = 1;
+	}
+
+	public static void pauseAllSounds() {
+		currentlyPlaying.forEach(new SoundEvictingQueue.Consumer() {
+			@Override
+			public void accept(Sound s, long id) {
+				s.pause();
+			}
+		});
+	}
+
+	public static void resumeAllSounds() {
+		currentlyPlaying.forEach(new SoundEvictingQueue.Consumer() {
+			@Override
+			public void accept(Sound s, long id) {
+				s.resume();
+			}
+		});
 	}
 }

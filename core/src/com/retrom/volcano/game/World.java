@@ -90,6 +90,10 @@ public class World {
 	private final Spawner spawner_;
 	private final EventQueue worldEvents_ = new EventQueue();
 	
+	// Pause effect objects.
+	private final EventQueue pauseEffectEvents = new EventQueue();
+	final public List<Effect> pauseEffects = new ArrayList<Effect>();
+	
 	
 	// Powerup time counters.
 	private float magnetTime = 0f;
@@ -227,6 +231,15 @@ public class World {
 	}
 
 	public void update(float deltaTime) {
+		if (!pauseEffectEvents.isEmpty()) {
+			pauseEffectEvents.update(deltaTime);
+			updateEffectsList(deltaTime, pauseEffects);
+			return;
+		}
+		step(deltaTime);
+	}
+	
+	public void step(float deltaTime) {
 		if (slomoTime > 0) {
 			float slomoRatio;
 			if (slomoTime > 1) {
@@ -380,6 +393,12 @@ public class World {
 			Effect e = it.next();
 			if (e.state() == Effect.STATE_DONE) {
 				it.remove();
+				if (l != pauseEffects) {
+					pauseEffects.remove(e);
+				}
+				if (l != addEffects) {
+					addEffects.remove(e);
+				}
 			}
 		}
 	}
@@ -740,23 +759,70 @@ public class World {
 	}
 
 	private void handleCollectable(Collectable collectable) {
-		switch (collectable.type) {
+		final Collectable.Type type = collectable.type; 
+		switch (type) {
 		case POWERUP_MAGNET:
-			magnetTime = 5f;
-			SoundAssets.playSound(SoundAssets.powerupMagnetStart);
-			SoundAssets.loopSound(SoundAssets.powerupMagnetLoop);
+			SoundAssets.pauseAllSounds();
+			pauseEffectEvents.addEventFromNow(0.5f, new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					SoundAssets.playSound(SoundAssets.powerupMagnetStart);
+					Effect e = EffectFactory.powerupAppearEffect(type, player.position);
+					pauseEffects.add(e);
+					addEffects.add(e);
+				}
+			});
+			pauseEffectEvents.addEventFromNow(1.5f, new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					SoundAssets.resumeAllSounds();
+					SoundAssets.stopSound(SoundAssets.powerupMagnetLoop);
+					SoundAssets.loopSound(SoundAssets.powerupMagnetLoop);
+					magnetTime = 5f;
+				}
+			});
 			break;
 		case POWERUP_SLOMO:
-			slomoTime = 5f;
-			SoundAssets.playSound(SoundAssets.powerupTimeStart);
+			SoundAssets.pauseAllSounds();
+			pauseEffectEvents.addEventFromNow(0.5f, new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					SoundAssets.playSound(SoundAssets.powerupTimeStart);
+					Effect e = EffectFactory.powerupAppearEffect(type, player.position);
+					pauseEffects.add(e);
+					addEffects.add(e);
+				}
+			});
+			pauseEffectEvents.addEventFromNow(2f, new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					SoundAssets.resumeAllSounds();
+					slomoTime = 5f;
+				}
+			});
 			break;
 		case POWERUP_SHIELD:
-			shieldTime = 5f;
-			if (playerShieldEffect == null) {
-				playerShieldEffect = new PlayerShieldEffect(player.position); 
-				addEffects.add(playerShieldEffect);
-				SoundAssets.playSound(SoundAssets.powerupShieldStart);
-			}
+			pauseEffectEvents.addEventFromNow(0.5f, new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					SoundAssets.playSound(SoundAssets.powerupShieldStart);
+					Effect e = EffectFactory.powerupAppearEffect(type, player.position);
+					pauseEffects.add(e);
+					addEffects.add(e);
+					
+					if (playerShieldEffect == null) {
+						playerShieldEffect = new PlayerShieldEffect(player.position); 
+						addEffects.add(playerShieldEffect);
+					}
+				}
+			});
+			pauseEffectEvents.addEventFromNow(1.5f, new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					SoundAssets.resumeAllSounds();
+					shieldTime = 5f;
+				}
+			});
 			break;
 		case COIN_1_1:
 		case COIN_1_2:
