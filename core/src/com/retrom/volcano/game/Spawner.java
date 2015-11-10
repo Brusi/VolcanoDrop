@@ -139,14 +139,12 @@ public class Spawner {
 	private void DropSingleRandomTypeWall(Integer col) {
 		if (rand.nextInt(3) == 0) {
 			if (rand.nextBoolean()) {
-//				handler_.dropBurningWall(col);
-				handler_.dropFlamethrower(col);
+				handler_.dropBurningWall(col);
 			} else {
 				handler_.dropFlamethrower(col);
 			}
 		} else {
-			handler_.dropFlamethrower(col);
-//			handler_.dropWall(col);
+			handler_.dropWall(col);
 		}
 	}
 	
