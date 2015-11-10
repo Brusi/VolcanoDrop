@@ -388,7 +388,21 @@ public class WorldRenderer {
 
 				@Override
 				public Sprite visit(PlayerShieldEffect effect) {
-					Sprite s = getFrameLoop(Assets.playerShieldEffect, effect.stateTime());
+					Sprite s = null;
+					switch (effect.shieldState()) {
+					case START:
+						s = getFrameLoopOnSecondAnim(Assets.playerShieldEffectStart, Assets.playerShieldEffect, effect. stateTime());
+						break;
+					case MIDDLE:
+						s = getFrameLoop(Assets.playerShieldEffect, effect.stateTime());
+						break;
+					case DIE:
+						s = getFrameStopAtLastFrame(Assets.playerShieldEffectEnd, effect.stateTime());
+						break;
+					case HIT:
+						s = getFrameLoopOnSecondAnim(Assets.playerShieldEffectHit, Assets.playerShieldEffect, effect. stateTime());
+						break;
+					}
 					return s;
 				}
 			});
@@ -586,6 +600,16 @@ public class WorldRenderer {
 			Gdx.app.log("ERROR", "Player is in invalid state: " + world.player.state());
 		}
 		drawCenter(keyFrame, world.player.position);
+	}
+	
+	private Sprite getFrameLoopOnSecondAnim(Array<Sprite> startAnim,
+			Array<Sprite> loopAnim, float stateTime) {
+		float startAnimTime = FRAME_TIME * startAnim.size;
+		if (stateTime < startAnimTime) {
+			return getFrameStopAtLastFrame(startAnim, stateTime); 
+		} else {
+			return getFrameLoop(loopAnim, stateTime - startAnimTime);
+		}
 	}
 	
 	private Sprite getFrameLoop(Array<Sprite> anim, float stateTime) {
