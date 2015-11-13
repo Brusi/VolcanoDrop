@@ -119,7 +119,6 @@ public class WorldRenderer {
 			return;
 		}
 		float alpha = Math.min(Math.min(1, world.slomoTime), Math.min(1, world.pauseEffectStateTime_)) / 4;
-		System.out.println("pauseEffectStateTime_="+world.pauseEffectStateTime_);
 		
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 	    Gdx.gl.glEnable(GL20.GL_BLEND);

@@ -345,17 +345,12 @@ public class Assets {
 		slomoAura = powerupSheet.createSprite("powerup_timebend_aura");
 		shieldAura = powerupSheet.createSprite("powerup_shield_aura");
 		
-		System.out.println("" + magnetAura);
-		System.out.println("" + slomoAura) ;
-		System.out.println("" + shieldAura); 
-		
 		playerShieldEffectStart = powerupSheet.createSprites("powerup_shield_animated_glow_start");
 		playerShieldEffect = powerupSheet.createSprites("powerup_shield_animated_glow_middle");
 		playerShieldEffectHit = powerupSheet.createSprites("powerup_shield_animated_glow_hit");
 		playerShieldEffectEnd = powerupSheet.createSprites("powerup_shield_animated_glow_die");
 		
 		playerSlomoEffect = powerupSheet.createSprites("powerup_timebend_animated_glow_die");
-		Gdx.app.log("INFO", "size="+playerSlomoEffect.size);
 		
 		greenDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_green1"); 
 		greenDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_green2"); 
