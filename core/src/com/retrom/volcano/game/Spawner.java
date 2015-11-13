@@ -70,8 +70,12 @@ public class Spawner {
 
 		if (timeRemaining < 0) {
 			timeRemaining += TIME_BETWEEN_WALLS;
-			if (rand.nextInt(5) == 0) {
-				sideToSideSequence();
+			if (rand.nextInt(2) == 0) {
+				if (rand.nextInt(2) == 0) {
+					barsSequence();
+				} else {
+					sideToSideSequence();
+				}
 			} else {
 				List<Integer> candidates = new ArrayList<Integer>(floors_.getNextPossibleCols());
 				for (int col = 0; col < sackSilenceTime_.length; ++col) {
@@ -159,6 +163,20 @@ public class Spawner {
 			};
 			final float time = i * 0.5f;
 			queue.addEventFromNow(time, event);
+		}
+	}
+	
+	private void barsSequence() {
+		int odd = rand.nextInt(2);
+		for (int i = 0; i < 6; i+=2) {
+			final int col = i + odd;
+			EventQueue.Event event = new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					DropSingleRandomTypeWall(col);
+				}
+			};
+			queue.addEventFromNow(2.0f, event);
 		}
 	}
 

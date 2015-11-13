@@ -26,6 +26,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
@@ -72,12 +74,14 @@ public class WorldRenderer {
 	
 	private static final float PILLAR_POS = FRUSTUM_WIDTH / 2 - 40;
 	
+	
 	World world;
 	SpriteBatch batch;
 	
 	OrthographicCamera cam;
 	private float cam_target;
 	private float cam_position;
+	private ShapeRenderer shapeRenderer = new ShapeRenderer();
 
 	public WorldRenderer (SpriteBatch batch, World world) {
 		this.world = world;
@@ -87,6 +91,8 @@ public class WorldRenderer {
 	}
 	
 	public static final float CAM_SPEED = 40f;
+	private static final Sprite EMPTY_SPRITE = new Sprite();
+	
 	
 	public void render(float deltaTime, boolean isPaused) {
 		Gdx.graphics.getGL20().glClearColor(0, 0, 0, 1);
@@ -105,6 +111,24 @@ public class WorldRenderer {
 		
 		renderBackground();
 		renderObjects();
+		renderOverlay();
+	}
+
+	private void renderOverlay() {
+		if (world.slomoTime <= 0) {
+			return;
+		}
+		float alpha = Math.min(Math.min(1, world.slomoTime), Math.min(1, world.pauseEffectStateTime_)) / 4;
+		System.out.println("pauseEffectStateTime_="+world.pauseEffectStateTime_);
+		
+		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+	    Gdx.gl.glEnable(GL20.GL_BLEND);
+		shapeRenderer.setProjectionMatrix(cam.combined);
+		shapeRenderer.begin(ShapeType.Filled);
+		shapeRenderer.setColor(1, 0, 1, alpha);
+		shapeRenderer.rect(- FRUSTUM_WIDTH / 2, - FRUSTUM_HEIGHT + world.camTarget, FRUSTUM_WIDTH, FRUSTUM_HEIGHT * 2);
+		shapeRenderer.end();
+		return;
 	}
 
 	private static float snapToPixels(float cam_position) {

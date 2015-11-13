@@ -26,7 +26,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.effects.BurningWallGlow;
 import com.retrom.volcano.effects.DiamondGlowEffect;
@@ -92,16 +91,19 @@ public class World {
 	private final EventQueue worldEvents_ = new EventQueue();
 	
 	// Pause effect objects.
-	private final EventQueue pauseEffectEvents = new EventQueue();
+	final EventQueue pauseEffectEvents = new EventQueue();
 	final public List<Effect> pauseEffects = new ArrayList<Effect>();
+	float pauseEffectStateTime_;
 	
 	
 	// Powerup time counters.
-	private float magnetTime = 0f;
-	private float slomoTime = 0f;
-	private float shieldTime = 0f;
+	float magnetTime = 0f;
+	float slomoTime = 0f;
+	float shieldTime = 0f;
 	
-	private static final float TOTAL_SHIELD_TIME = 5f;
+	static final float TOTAL_SHIELD_TIME = 5f;
+	static final float TOTAL_SLOMO_TIME = 5f;
+	static final float TOTAL_MAGNET_TIME = 5f;
 	
 	// Special effect holders.
 	private PlayerShieldEffect playerShieldEffect;
@@ -125,7 +127,7 @@ public class World {
 
 	// Cheats:
 	private boolean godMode_ = false;
-	
+
 	public interface WorldListener {
 		public void restartGame();
 	}
@@ -201,6 +203,9 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
 			magnetTime += 1f;
 		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+			addCoin(0, Collectable.Type.POWERUP_SLOMO);
+		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
 			slomoTime += 2f;
 		}
@@ -240,6 +245,7 @@ public class World {
 		if (!pauseEffectEvents.isEmpty()) {
 			pauseEffectEvents.update(deltaTime);
 			updateEffectsList(deltaTime, pauseEffects);
+			pauseEffectStateTime_ += deltaTime;
 			return;
 		}
 		step(deltaTime);
@@ -438,6 +444,9 @@ public class World {
 			slomoTime -= deltaTime;
 			if (slomoTime <= 0) {
 				SoundAssets.playSound(SoundAssets.powerupTimeEnd);
+				pauseEffects.add(EffectFactory.powerupAppearEffect(Collectable.Type.POWERUP_SLOMO, player.position));
+				addEffects.add(EffectFactory.powerupAppearEffect(Collectable.Type.POWERUP_SLOMO, player.position));
+				pauseEffectStateTime_ = 0;
 			}
 		}
 		if (shieldTime > 0) {
@@ -778,10 +787,33 @@ public class World {
 		switch (type) {
 		case POWERUP_MAGNET:
 			SoundAssets.pauseAllSounds();
-			pauseEffectEvents.addEventFromNow(0.5f, new EventQueue.Event() {
+			SoundAssets.setPitch(1f);
+			pauseEffectEvents.addEventFromNow(0.0f, new EventQueue.Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.playSound(SoundAssets.powerupMagnetStart);
+					Effect e = EffectFactory.powerupAppearEffect(type, player.position);
+					pauseEffects.add(e);
+					addEffects.add(e);
+				}
+			});
+			pauseEffectEvents.addEventFromNow(1.0f, new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					SoundAssets.resumeAllSounds();
+					SoundAssets.stopSound(SoundAssets.powerupMagnetLoop);
+					SoundAssets.loopSound(SoundAssets.powerupMagnetLoop);
+					magnetTime = TOTAL_MAGNET_TIME;
+				}
+			});
+			break;
+		case POWERUP_SLOMO:
+			slomoTime = TOTAL_SLOMO_TIME;
+			SoundAssets.pauseAllSounds();
+			pauseEffectEvents.addEventFromNow(0.0f, new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					SoundAssets.playSound(SoundAssets.powerupTimeStart);
 					Effect e = EffectFactory.powerupAppearEffect(type, player.position);
 					pauseEffects.add(e);
 					addEffects.add(e);
@@ -791,33 +823,11 @@ public class World {
 				@Override
 				public void invoke() {
 					SoundAssets.resumeAllSounds();
-					SoundAssets.stopSound(SoundAssets.powerupMagnetLoop);
-					SoundAssets.loopSound(SoundAssets.powerupMagnetLoop);
-					magnetTime = 5f;
-				}
-			});
-			break;
-		case POWERUP_SLOMO:
-			SoundAssets.pauseAllSounds();
-			pauseEffectEvents.addEventFromNow(0.5f, new EventQueue.Event() {
-				@Override
-				public void invoke() {
-					SoundAssets.playSound(SoundAssets.powerupTimeStart);
-					Effect e = EffectFactory.powerupAppearEffect(type, player.position);
-					pauseEffects.add(e);
-					addEffects.add(e);
-				}
-			});
-			pauseEffectEvents.addEventFromNow(2f, new EventQueue.Event() {
-				@Override
-				public void invoke() {
-					SoundAssets.resumeAllSounds();
-					slomoTime = 5f;
 				}
 			});
 			break;
 		case POWERUP_SHIELD:
-			pauseEffectEvents.addEventFromNow(0.5f, new EventQueue.Event() {
+			pauseEffectEvents.addEventFromNow(0.0f, new EventQueue.Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.playSound(SoundAssets.powerupShieldStart);
@@ -834,7 +844,7 @@ public class World {
 					}
 				}
 			});
-			pauseEffectEvents.addEventFromNow(1.5f, new EventQueue.Event() {
+			pauseEffectEvents.addEventFromNow(1.0f, new EventQueue.Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.resumeAllSounds();
