@@ -54,6 +54,10 @@ public class EffectFactory {
 		return $;
 	}
 	
+	public static Effect playerSlomoEffect(Vector2 position) {
+		return new FiniteAnimationEffect(Assets.playerSlomoEffect, position);
+	}
+	
 	public static Effect powerupCrushedEffect(Collectable.Type type, Vector2 position) {
 		switch (type) {
 		case POWERUP_MAGNET:

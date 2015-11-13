@@ -17,15 +17,12 @@
 package com.retrom.volcano.assets;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-import com.retrom.volcano.game.Settings;
 
 public class Assets {
 	public static TextureRegion backgroundRegion;
@@ -185,6 +182,7 @@ public class Assets {
 	public static Array<Sprite> playerShieldEffectHit;
 	public static Array<Sprite> playerShieldEffectEnd;
 	
+	public static Array<Sprite> playerSlomoEffect;
 	
 	// Gui
 	public static Sprite scoreIcon;
@@ -344,13 +342,20 @@ public class Assets {
 		shieldBackGlow = powerupSheet.createSprite("powerup_shield_backglow");
 		
 		magnetAura = powerupSheet.createSprite("powerup_magnet_aura");
-		slomoAura= powerupSheet.createSprite("powerup_timebend_aura");
-		shieldAura= powerupSheet.createSprite("powerup_shield_aura");
+		slomoAura = powerupSheet.createSprite("powerup_timebend_aura");
+		shieldAura = powerupSheet.createSprite("powerup_shield_aura");
+		
+		System.out.println("" + magnetAura);
+		System.out.println("" + slomoAura) ;
+		System.out.println("" + shieldAura); 
 		
 		playerShieldEffectStart = powerupSheet.createSprites("powerup_shield_animated_glow_start");
 		playerShieldEffect = powerupSheet.createSprites("powerup_shield_animated_glow_middle");
 		playerShieldEffectHit = powerupSheet.createSprites("powerup_shield_animated_glow_hit");
 		playerShieldEffectEnd = powerupSheet.createSprites("powerup_shield_animated_glow_die");
+		
+		playerSlomoEffect = powerupSheet.createSprites("powerup_timebend_animated_glow_die");
+		Gdx.app.log("INFO", "size="+playerSlomoEffect.size);
 		
 		greenDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_green1"); 
 		greenDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_green2"); 

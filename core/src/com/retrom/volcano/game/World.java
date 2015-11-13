@@ -814,9 +814,13 @@ public class World {
 				@Override
 				public void invoke() {
 					SoundAssets.playSound(SoundAssets.powerupTimeStart);
-					Effect e = EffectFactory.powerupAppearEffect(type, player.position);
-					pauseEffects.add(e);
-					addEffects.add(e);
+					Effect e1 = EffectFactory.powerupAppearEffect(type, player.position);
+					pauseEffects.add(e1);
+					addEffects.add(e1);
+					
+					Effect e2 = EffectFactory.playerSlomoEffect(player.position);
+					pauseEffects.add(e2);
+					addEffects.add(e2);
 				}
 			});
 			pauseEffectEvents.addEventFromNow(1.5f, new EventQueue.Event() {
