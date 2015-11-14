@@ -163,4 +163,8 @@ public class EffectFactory {
 	public static Effect powerupSlomoDisappearEffect(Vector2 position) {
 		return new FiniteAnimationEffect(Assets.powerupSlomoAppearSparkReversed, position);
 	}
+	
+	public static Effect playerMagnetGlow(Vector2 position) {
+		return new OneFrameEffect(Assets.playerMagnetGlow, 6000f, position);
+	}
 }

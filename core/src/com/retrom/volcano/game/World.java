@@ -36,6 +36,7 @@ import com.retrom.volcano.effects.FireballGlow;
 import com.retrom.volcano.effects.FireballStartEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.FlameGlowEffect;
+import com.retrom.volcano.effects.PlayerMagnetEffect;
 import com.retrom.volcano.effects.PlayerShieldEffect;
 import com.retrom.volcano.effects.SackFlare;
 import com.retrom.volcano.effects.Score10Effect;
@@ -107,6 +108,7 @@ public class World {
 	
 	// Special effect holders.
 	private PlayerShieldEffect playerShieldEffect;
+	private final List<Effect> magnetEffects = new ArrayList<Effect>();
 
 	private List<Rectangle> obstacles_;
 
@@ -415,6 +417,7 @@ public class World {
 				if (l != addEffects) {
 					addEffects.remove(e);
 				}
+				magnetEffects.remove(e);
 			}
 		}
 	}
@@ -438,6 +441,9 @@ public class World {
 				}
 				SoundAssets.stopSound(SoundAssets.powerupMagnetLoop);
 				SoundAssets.playSound(SoundAssets.powerupMagnetEnd);
+				for (Effect e : magnetEffects) {
+					e.destroy();
+				}
 			}
 		}
 		if (slomoTime > 0) {
@@ -796,6 +802,17 @@ public class World {
 					Effect e = EffectFactory.powerupAppearEffect(type, player.position);
 					pauseEffects.add(e);
 					addEffects.add(e);
+					if (magnetTime <= 0) {
+						Effect e1 = new PlayerMagnetEffect(player.position);
+						addEffectsUnder.add(e1);
+						pauseEffects.add(e1);
+						magnetEffects.add(e1);
+
+						Effect e2 = EffectFactory.playerMagnetGlow(player.position);
+						addEffectsUnder.add(e2);
+						magnetEffects.add(e2);
+					}
+					magnetTime = TOTAL_MAGNET_TIME;
 				}
 			});
 			pauseEffectEvents.addEventFromNow(1.0f, new EventQueue.Event() {
@@ -804,7 +821,6 @@ public class World {
 					SoundAssets.resumeAllSounds();
 					SoundAssets.stopSound(SoundAssets.powerupMagnetLoop);
 					SoundAssets.loopSound(SoundAssets.powerupMagnetLoop);
-					magnetTime = TOTAL_MAGNET_TIME;
 				}
 			});
 			break;

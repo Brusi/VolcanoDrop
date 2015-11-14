@@ -186,6 +186,9 @@ public class Assets {
 	
 	public static Array<Sprite> playerSlomoEffect;
 	
+	public static Array<Sprite> playerMagnetEffect;
+	public static Sprite playerMagnetGlow;
+	
 	// Gui
 	public static Sprite scoreIcon;
 	public static Sprite pauseButton;
@@ -356,6 +359,10 @@ public class Assets {
 		playerShieldEffectEnd = powerupSheet.createSprites("powerup_shield_animated_glow_die");
 		
 		playerSlomoEffect = powerupSheet.createSprites("powerup_timebend_animated_glow_die");
+		
+		TextureAtlas powerupMagnetSheet = new TextureAtlas("vfx/magnet.txt");
+		playerMagnetEffect = powerupMagnetSheet.createSprites("powerup_magnet_animated_glow");
+		playerMagnetGlow = powerupSheet.createSprite("powerup_magnet_glow");
 		
 		greenDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_green1"); 
 		greenDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_green2"); 

@@ -39,6 +39,7 @@ import com.retrom.volcano.effects.FireballAnimationEffect;
 import com.retrom.volcano.effects.FireballStartEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.OneFrameEffect;
+import com.retrom.volcano.effects.PlayerMagnetEffect;
 import com.retrom.volcano.effects.PlayerShieldEffect;
 import com.retrom.volcano.effects.PowerupGlow;
 import com.retrom.volcano.effects.Score10Effect;
@@ -427,6 +428,11 @@ public class WorldRenderer {
 						break;
 					}
 					return s;
+				}
+
+				@Override
+				public Sprite visit(PlayerMagnetEffect effect) {
+					return getFrameLoop(Assets.playerMagnetEffect, effect.stateTime());
 				}
 			});
 			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);

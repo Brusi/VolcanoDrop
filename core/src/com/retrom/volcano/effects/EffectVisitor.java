@@ -19,5 +19,6 @@ public interface EffectVisitor<T> {
 	public T visit(DiamondGlowEffect diamondGlowEffect);
 	public T visit(PowerupGlow effect);
 	public T visit(PlayerShieldEffect playerShieldEffect);
+	public T visit(PlayerMagnetEffect playerMagnetEffect);
 
 }
