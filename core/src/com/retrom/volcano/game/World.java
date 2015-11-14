@@ -78,7 +78,6 @@ public class World {
 	
 	public int score = 0;
 	
-	
 	public static final Vector2 gravity = new Vector2(0, -2200);
 	public static final float WIDTH = 640f;
 	
@@ -113,6 +112,8 @@ public class World {
 	private List<Rectangle> obstacles_;
 
 	public float camTarget;
+	boolean quakeOn;
+	float quakeX;
 
 	public Background background = new Background();
 	
@@ -241,6 +242,21 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
 			godMode_ = !godMode_;
 		}
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+			startQuake();
+		}
+	}
+
+	private void startQuake() {
+		quakeOn = true;
+		SoundAssets.playRandomSound(SoundAssets.quake);
+		worldEvents_.addEventFromNow(2.6f, new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				quakeOn = false;
+			}
+		});
 	}
 
 	public void update(float deltaTime) {
@@ -267,6 +283,8 @@ public class World {
 		} else {
 			SoundAssets.setPitch(1f);
 		}
+		
+		updateQuake(deltaTime);
 		
 		updateCheats();
 		worldEvents_.update(deltaTime);
@@ -300,6 +318,13 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
 			addCoin(50, Collectable.Type.COIN_3_1);
 		}
+	}
+
+	private void updateQuake(float deltaTime) {
+		if (quakeOn) {
+			quakeX += (Math.random() * 500 - 250) * deltaTime;
+		}
+		quakeX *= (float) Math.pow(0.1, deltaTime);
 	}
 
 	private void checkSpitters() {
@@ -803,6 +828,15 @@ public class World {
 					Effect e = EffectFactory.powerupAppearEffect(type, player.position);
 					pauseEffects.add(e);
 					addEffects.add(e);
+				}
+			});
+			pauseEffectEvents.addEventFromNow(0.3f, new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					SoundAssets.resumeAllSounds();
+					SoundAssets.stopSound(SoundAssets.powerupMagnetLoop);
+					SoundAssets.loopSound(SoundAssets.powerupMagnetLoop);
+					
 					if (magnetTime <= 0) {
 						Effect e1 = new PlayerMagnetEffect(player.position);
 						addEffectsUnder.add(e1);
@@ -816,14 +850,6 @@ public class World {
 					magnetTime = TOTAL_MAGNET_TIME;
 				}
 			});
-			pauseEffectEvents.addEventFromNow(1.0f, new EventQueue.Event() {
-				@Override
-				public void invoke() {
-					SoundAssets.resumeAllSounds();
-					SoundAssets.stopSound(SoundAssets.powerupMagnetLoop);
-					SoundAssets.loopSound(SoundAssets.powerupMagnetLoop);
-				}
-			});
 			break;
 		case POWERUP_SLOMO:
 			slomoTime = TOTAL_SLOMO_TIME;
@@ -835,16 +861,15 @@ public class World {
 					Effect e1 = EffectFactory.powerupAppearEffect(type, player.position);
 					pauseEffects.add(e1);
 					addEffects.add(e1);
-					
-					Effect e2 = EffectFactory.playerSlomoEffect(player.position);
-					pauseEffects.add(e2);
-					addEffects.add(e2);
 				}
 			});
-			pauseEffectEvents.addEventFromNow(1.5f, new EventQueue.Event() {
+			pauseEffectEvents.addEventFromNow(0.3f, new EventQueue.Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.resumeAllSounds();
+					Effect e2 = EffectFactory.playerSlomoEffect(player.position);
+					pauseEffects.add(e2);
+					addEffects.add(e2);
 				}
 			});
 			break;
@@ -856,7 +881,13 @@ public class World {
 					Effect e = EffectFactory.powerupAppearEffect(type, player.position);
 					pauseEffects.add(e);
 					addEffects.add(e);
-					
+				}
+			});
+			pauseEffectEvents.addEventFromNow(0.3f, new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					SoundAssets.resumeAllSounds();
+					shieldTime = TOTAL_SHIELD_TIME;
 					if (playerShieldEffect == null) {
 						playerShieldEffect = new PlayerShieldEffect(player.position); 
 						pauseEffects.add(playerShieldEffect);
@@ -864,13 +895,6 @@ public class World {
 					} else {
 						playerShieldEffect.renew();
 					}
-				}
-			});
-			pauseEffectEvents.addEventFromNow(1.0f, new EventQueue.Event() {
-				@Override
-				public void invoke() {
-					SoundAssets.resumeAllSounds();
-					shieldTime = TOTAL_SHIELD_TIME;
 				}
 			});
 			break;

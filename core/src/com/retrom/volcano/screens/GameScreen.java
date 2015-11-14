@@ -5,9 +5,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.ui.GameUiRenderer;
 import com.retrom.ui.Hub;
+import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.game.World;
 import com.retrom.volcano.game.World.WorldListener;
 import com.retrom.volcano.game.WorldRenderer;
@@ -42,7 +45,11 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	}
 
 	private void togglePause() {
-		isPaused_ = !isPaused_;
+		if (!isPaused_) {
+			pause();
+		} else {
+			resume();
+		}
 	}
 
 	@Override
@@ -82,12 +89,14 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	@Override
 	public void pause() {
 		isPaused_ = true;
+		SoundAssets.pauseAllSounds();
 	}
 
 	@Override
 	public void resume() 
 	{
 		isPaused_ = false;
+		SoundAssets.resumeAllSounds();
 	}
 
 	@Override

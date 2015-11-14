@@ -19,6 +19,8 @@ public class SoundAssets {
 	public static Sound[] wallHit;
 	public static Sound[] wallDualHit;
 	
+	public static Sound[] quake;
+	
 	public static Sound[] coinsCollectBronze;
 	public static Sound[] coinsCollectSilver;
 	public static Sound[] coinsCollectGold;
@@ -71,6 +73,8 @@ public class SoundAssets {
 		
 		wallHit = new Sound[] {newSound("x1_rock_hit_1.wav"), newSound("x1_rock_hit_2.wav"), newSound("x1_rock_hit_3.wav"), newSound("x1_rock_hit_3.wav")};
 		wallDualHit = new Sound[] {newSound("x2_rock_hit_1.wav"), newSound("x2_rock_hit_2.wav")};
+		
+		quake = new Sound[] {newSound("quake_1.wav"), newSound("quake_2.wav")};
 		
 		// Coins:
 		coinsCollectBronze = new Sound[] {

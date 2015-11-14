@@ -92,7 +92,6 @@ public class WorldRenderer {
 	}
 	
 	public static final float CAM_SPEED = 40f;
-	private static final Sprite EMPTY_SPRITE = new Sprite();
 	
 	
 	public void render(float deltaTime, boolean isPaused) {
@@ -106,6 +105,7 @@ public class WorldRenderer {
 			}
 
 			cam.position.y = snapToPixels(cam_position);
+			cam.position.x = world.quakeX;
 			cam.update();
 			batch.setProjectionMatrix(cam.combined);
 		}
