@@ -12,9 +12,15 @@ public class FiniteAnimationEffect extends Effect {
 	private float scale_ = 1f;
 
 	public FiniteAnimationEffect(Array<Sprite> animation_, Vector2 position) {
+		this(animation_, position, true);
+	}
+	
+	public FiniteAnimationEffect(Array<Sprite> animation_, Vector2 position, boolean randomRotate) {
 		super(getDuration(animation_), position);
 		this.animation_ = animation_;
-		setRandomRotation();
+		if (randomRotate) {
+			setRandomRotation();
+		}
 	}
 	
 	private static float getDuration(Array<Sprite> animation) {

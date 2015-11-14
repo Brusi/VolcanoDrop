@@ -188,6 +188,7 @@ public class Assets {
 	
 	public static Array<Sprite> playerMagnetEffect;
 	public static Sprite playerMagnetGlow;
+	public static Array<Sprite> playerMagnetGlowDie;
 	
 	// Gui
 	public static Sprite scoreIcon;
@@ -363,6 +364,8 @@ public class Assets {
 		TextureAtlas powerupMagnetSheet = new TextureAtlas("vfx/magnet.txt");
 		playerMagnetEffect = powerupMagnetSheet.createSprites("powerup_magnet_animated_glow");
 		playerMagnetGlow = powerupSheet.createSprite("powerup_magnet_glow");
+		playerMagnetGlowDie = powerupMagnetSheet.createSprites("powerup_magnet_animated_glow_die");
+		System.out.println("playerMagnetGlowDie.size="+playerMagnetGlowDie.size);
 		
 		greenDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_green1"); 
 		greenDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_green2"); 

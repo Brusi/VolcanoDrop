@@ -444,6 +444,7 @@ public class World {
 				for (Effect e : magnetEffects) {
 					e.destroy();
 				}
+				addEffects.add(EffectFactory.playerMagnetGlowDie(player.position));
 			}
 		}
 		if (slomoTime > 0) {
