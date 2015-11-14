@@ -949,6 +949,7 @@ public class World {
 
 	private void updatePlayer (float deltaTime) {
 		if (player.state() == Player.STATE_DIE) {
+			endEffects();
 			if (godMode_) {
 				player.revive();
 				player.bounds.y = topScreenY();
@@ -979,6 +980,14 @@ public class World {
 		player.update(deltaTime);
 	}
 	
+	private void endEffects() {
+		float epsilon = 1e-10f;
+		magnetTime = Math.min(magnetTime, epsilon);
+		slomoTime = Math.min(slomoTime, epsilon);
+		shieldTime = Math.min(shieldTime, epsilon);
+		
+	}
+
 	private void finishGame() {
 		SoundAssets.stopAllSounds();
 		listener_.restartGame();
