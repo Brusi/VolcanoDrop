@@ -155,6 +155,8 @@ public class Assets {
 	public static Array<Sprite> powerupSlomoAppearSpark;
 	public static Array<Sprite> powerupShieldAppearSpark;
 	
+	public static Array<Sprite> powerupSlomoAppearSparkReversed;
+	
 	public static Sprite magnetBackGlow;
 	public static Sprite slomoBackGlow;
 	public static Sprite shieldBackGlow;
@@ -335,6 +337,9 @@ public class Assets {
 		powerupMagnetAppearSpark = vfxSheet.createSprites("powerup_magnet_appearance_spark");
 		powerupSlomoAppearSpark = vfxSheet.createSprites("powerup_timebend_appearance_spark");
 		powerupShieldAppearSpark = vfxSheet.createSprites("powerup_shield_appearance_spark");
+		
+		powerupSlomoAppearSparkReversed = new Array<Sprite>(powerupSlomoAppearSpark);
+		powerupSlomoAppearSparkReversed.reverse();
 		
 		TextureAtlas powerupSheet = new TextureAtlas("vfx/powerup.txt");
 		magnetBackGlow = powerupSheet.createSprite("powerup_magnet_backglow");

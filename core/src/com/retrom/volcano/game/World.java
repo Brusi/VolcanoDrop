@@ -327,7 +327,7 @@ public class World {
 						if (shieldTime <= 0) {
 							player.killByBurn();
 						} else {
-							player.velocity.y += 56 - (player.position.y - flame.position.y);
+							player.velocity.y += (56 - (player.position.y - flame.position.y)) * 2;
 						}
 					}
 					return null;
@@ -444,8 +444,9 @@ public class World {
 			slomoTime -= deltaTime;
 			if (slomoTime <= 0) {
 				SoundAssets.playSound(SoundAssets.powerupTimeEnd);
-				pauseEffects.add(EffectFactory.powerupAppearEffect(Collectable.Type.POWERUP_SLOMO, player.position));
-				addEffects.add(EffectFactory.powerupAppearEffect(Collectable.Type.POWERUP_SLOMO, player.position));
+				Effect e = EffectFactory.powerupSlomoDisappearEffect(player.position);
+				pauseEffects.add(e);
+				addEffects.add(e);
 				pauseEffectStateTime_ = 0;
 			}
 		}

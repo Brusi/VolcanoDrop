@@ -159,4 +159,8 @@ public class EffectFactory {
 		}
 		return null;
 	}
+	
+	public static Effect powerupSlomoDisappearEffect(Vector2 position) {
+		return new FiniteAnimationEffect(Assets.powerupSlomoAppearSparkReversed, position);
+	}
 }
