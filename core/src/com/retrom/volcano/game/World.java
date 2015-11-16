@@ -151,6 +151,7 @@ public class World {
 						playerShieldEffect.hit();
 						SoundAssets.playSound(SoundAssets.powerupShieldHit);
 						player.landAnimation();
+						addDust(wall.position.x, wall.position.y);
 					}
 				}
 			}
@@ -705,6 +706,8 @@ public class World {
 			for (Rectangle rect : rects) {
 				if (wall.bounds.overlaps(rect)) {
 					turnOffFlameThrower(wall);
+					
+					addDust(wall.position.x, wall.position.y - Wall.SIZE / 3);
 					
 					wall.bounds.y = rect.y+rect.height;
 					wall.bounds.getCenter(wall.position);
