@@ -33,6 +33,9 @@ public class DustEffect extends Particle {
 	}
 	
 	public float getTint() {
+		if (stateTime() < 0.2f) {
+			return stateTime() / 0.2f;
+		}
 		return Math.min(1, (DURATION - stateTime()) * 2 / DURATION);
 	}
 	
