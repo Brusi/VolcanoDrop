@@ -52,7 +52,13 @@ public class Spawner {
 	private float timeCount = 0;
 	private float timeRemaining = TIME_BETWEEN_WALLS;
 	
+	// Enable/disable for debug.
+	public boolean enabled = true;
+	
 	public void update(float deltaTime) {
+		if (!enabled) {
+			return;
+		}
 		timeCount += deltaTime;
 		
 		if (queue.isEmpty()) {

@@ -350,6 +350,8 @@ public class WorldRenderer {
 				@Override
 				public Sprite visit(OneFrameEffect effect) {
 					Sprite s = effect.sprite();
+					float tint = effect.getTint();
+					s.setColor(tint, tint, tint, tint);
 					return s;
 				}
 

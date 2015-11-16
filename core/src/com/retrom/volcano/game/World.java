@@ -29,6 +29,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.effects.BurningWallGlow;
 import com.retrom.volcano.effects.DiamondGlowEffect;
+import com.retrom.volcano.effects.DustEffect;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectFactory;
 import com.retrom.volcano.effects.FireballAnimationEffect;
@@ -246,17 +247,38 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
 			startQuake();
 		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.U)) {
+			screenEffects.add(new DustEffect(new Vector2(100,100)));
+		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
+			spawner_.enabled = !spawner_.enabled;
+		}
 	}
 
 	private void startQuake() {
 		quakeOn = true;
 		SoundAssets.playRandomSound(SoundAssets.quake);
-		worldEvents_.addEventFromNow(2.6f, new EventQueue.Event() {
+		float QUAKE_DURATION = 2.6f;
+		worldEvents_.addEventFromNow(QUAKE_DURATION, new EventQueue.Event() {
 			@Override
 			public void invoke() {
 				quakeOn = false;
 			}
 		});
+		int NUM_DUST = 10;
+		for (int i=0; i < NUM_DUST; ++i) {
+			worldEvents_.addEventFromNow((float)(QUAKE_DURATION * Math.random()), new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					float ypos = Utils.randomRange(camTarget - WorldRenderer.FRUSTUM_HEIGHT / 2, WorldRenderer.FRUSTUM_HEIGHT);
+					float xpos = WorldRenderer.FRUSTUM_WIDTH / 2 - Wall.SIZE + Utils.random2Range(10);
+					if (Utils.randomBool()) {
+						xpos *= -1;
+					}
+					screenEffects.add(new DustEffect(new Vector2(xpos, ypos)));
+				}
+			});
+		}
 	}
 
 	public void update(float deltaTime) {

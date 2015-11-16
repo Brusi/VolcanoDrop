@@ -1,6 +1,5 @@
 package com.retrom.volcano.effects;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.game.objects.Enemy;
 
@@ -37,23 +36,12 @@ public class FireballGlow extends OneFrameEffect {
 	}
 	
 	@Override
-	public Sprite sprite() {
-		Sprite $ = super.sprite();
-		setTint($, getGlowAlpha());
-		return $;
-	}
-
-	private void setTint(Sprite $, float glowAlpha) {
-		$.setColor(glowAlpha, glowAlpha, glowAlpha, glowAlpha);
-		
-	}
-	
-	@Override
 	public float getScale() {
 		return 0.5f;
 	}
 	
-	private float getGlowAlpha() {
+	@Override
+	public float getTint() {
 		if (fireball_.state() == Effect.STATE_DONE) {
 			return 0;
 		}

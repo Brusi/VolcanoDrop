@@ -63,6 +63,10 @@ public abstract class Effect {
 		return 1f;
 	}
 	
+	public float getTint() {
+		return 1f;
+	}
+	
 	public void destroy() {
 		state_ = STATE_DONE;
 	}

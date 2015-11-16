@@ -13,22 +13,12 @@ public class FlameGlowEffect extends OneFrameEffect {
 	}
 	
 	@Override
-	public Sprite sprite() {
-		Sprite $ = super.sprite();
-		setTint($, getGlowAlpha());
-		return $;
-	}
-
-	private void setTint(Sprite $, float glowAlpha) {
-		$.setColor(glowAlpha, glowAlpha, glowAlpha, glowAlpha);
-	}
-	
-	@Override
 	public float getScale() {
 		return 0.75f;
 	}
-
-	private float getGlowAlpha() {
+	
+	@Override
+	public float getTint() {
 		if (stateTime() < 0.4f) {
 			return stateTime() / 0.4f;
 		}

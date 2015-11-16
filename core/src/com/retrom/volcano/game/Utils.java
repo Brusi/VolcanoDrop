@@ -26,4 +26,19 @@ public class Utils {
 		vec.y = Math.abs(vec.y);
 		return vec;
 	}
+	
+	// Returns a random float between -limit and +limit.
+	public static float random2Range(float limit) {
+		return randomRange(-limit, limit); 
+	}
+	
+	// Returns a random float between bottom and top.
+	public static float randomRange(float bottom, float top) {
+		return (float) (bottom + Math.random() * (top - bottom)); 
+	}
+	
+	// Returns a random boolean.
+	public static boolean randomBool() {
+		return Math.random() > 0.5;
+	}
 }

@@ -135,6 +135,8 @@ public class Assets {
 	public static Array<Sprite> coinCrushedEffect;
 	public static Array<Sprite> fireballExplodeEffect;
 	public static Array<Sprite> fireballStartEffect;
+	public static Array<Sprite> dust;
+	public static Array<Sprite> smoke;
 	
 	// Glow:
 	public static Sprite burningWallGlow;
@@ -374,6 +376,9 @@ public class Assets {
 		purpleDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_purple1"); 
 		purpleDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_purple2"); 
 		coinCrushedEffect = vfxSheet.createSprites("loot_crushed_puff");
+		
+		dust = vfxSheet.createSprites("dust");
+		smoke = vfxSheet.createSprites("smoke");
 		
 		burningWallGlow = vfxSheet.createSprite("fire_glow");
 		
