@@ -621,6 +621,18 @@ public class World {
 		worldEvents_.addEventFromNow(4.6f, shootFireEvent);
 		
 		SoundAssets.playSound(SoundAssets.spitterSequence);
+		
+		final float dustX = x * 1.1f;
+		EventQueue.Event dustEvent = new Event() {
+			@Override
+			public void invoke() {
+				addDust(dustX, y);
+			}
+		};
+		worldEvents_.addEventFromNow(0.4f, dustEvent);
+		worldEvents_.addEventFromNow(0.6f, dustEvent);
+		worldEvents_.addEventFromNow(6f, dustEvent);
+		worldEvents_.addEventFromNow(6.2f, dustEvent);
 	}
 	
 	private void updateSpawner(float deltaTime) {
@@ -708,7 +720,6 @@ public class World {
 						floors_.addToColumn(wall.col());
 						SoundAssets.playRandomSound(SoundAssets.wallHit);
 					}
-					
 				}
 			}
 		}
@@ -749,6 +760,10 @@ public class World {
 		
 	}
 	
+	private void addDust(float x, float y) {
+		screenEffects.add(new DustEffect(x, y));
+	}
+
 	private void turnOffFlameThrower(Wall coveringWall) {
 		for (Wall wall : walls_) {
 			if (!(wall instanceof FlamethrowerWall)) {

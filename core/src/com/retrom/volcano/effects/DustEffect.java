@@ -12,11 +12,14 @@ public class DustEffect extends Particle {
 	private float rotation;
 	private float rotationVel;
 	
-
 	public DustEffect(Vector2 position) {
+		this(position.x, position.y);
+	}
+	
+	public DustEffect(float x, float y) {
 		super(Math.random() > 0.5 ? Assets.dust.get(0) : Assets.dust.get(1),
 				DURATION,
-				position.cpy(), 
+				new Vector2(x, y), 
 				DOWNVEL);
 		
 		scale = (float) (Math.random() * 1 + 1);
