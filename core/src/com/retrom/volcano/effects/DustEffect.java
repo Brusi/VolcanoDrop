@@ -32,6 +32,7 @@ public class DustEffect extends Particle {
 		return scale;
 	}
 	
+	@Override
 	public float getTint() {
 		if (stateTime() < 0.2f) {
 			return stateTime() / 0.2f;
