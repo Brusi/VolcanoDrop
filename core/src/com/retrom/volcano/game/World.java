@@ -38,6 +38,7 @@ import com.retrom.volcano.effects.FireballStartEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.FlameGlowEffect;
 import com.retrom.volcano.effects.PlayerMagnetEffect;
+import com.retrom.volcano.effects.PlayerMagnetGlow;
 import com.retrom.volcano.effects.PlayerShieldEffect;
 import com.retrom.volcano.effects.SackFlare;
 import com.retrom.volcano.effects.Score10Effect;
@@ -92,6 +93,7 @@ public class World {
 	private final EventQueue worldEvents_ = new EventQueue();
 	
 	// Pause effect objects.
+	static final float PAUSE_EFFECT_DURATION = 0.3f;
 	final EventQueue pauseEffectEvents = new EventQueue();
 	final public List<Effect> pauseEffects = new ArrayList<Effect>();
 	float pauseEffectStateTime_;
@@ -108,6 +110,9 @@ public class World {
 	
 	// Special effect holders.
 	private PlayerShieldEffect playerShieldEffect;
+	private PlayerMagnetEffect playerMagnetEffect;
+	private PlayerMagnetGlow playerMagnetGlow;
+	
 	private final List<Effect> magnetEffects = new ArrayList<Effect>();
 
 	private List<Rectangle> obstacles_;
@@ -283,6 +288,10 @@ public class World {
 	}
 
 	public void update(float deltaTime) {
+		if (Gdx.input.isKeyPressed(Input.Keys.TAB)) {
+			deltaTime /= 10;
+		}
+		
 		if (!pauseEffectEvents.isEmpty()) {
 			pauseEffectEvents.update(deltaTime);
 			updateEffectsList(deltaTime, pauseEffects);
@@ -861,6 +870,18 @@ public class World {
 		case POWERUP_MAGNET:
 			SoundAssets.pauseAllSounds();
 			SoundAssets.setPitch(1f);
+			
+			if (magnetTime <= 0) {
+				playerMagnetEffect = new PlayerMagnetEffect(player.position);
+				addEffectsUnder.add(playerMagnetEffect);
+				pauseEffects.add(playerMagnetEffect);
+				magnetEffects.add(playerMagnetEffect);
+
+				playerMagnetGlow = new PlayerMagnetGlow(player.position);
+				addEffectsUnder.add(playerMagnetGlow);
+				magnetEffects.add(playerMagnetGlow);
+			}
+			
 			pauseEffectEvents.addEventFromNow(0.0f, new EventQueue.Event() {
 				@Override
 				public void invoke() {
@@ -870,23 +891,13 @@ public class World {
 					addEffects.add(e);
 				}
 			});
-			pauseEffectEvents.addEventFromNow(0.3f, new EventQueue.Event() {
+			pauseEffectEvents.addEventFromNow(PAUSE_EFFECT_DURATION, new EventQueue.Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.resumeAllSounds();
 					SoundAssets.stopSound(SoundAssets.powerupMagnetLoop);
 					SoundAssets.loopSound(SoundAssets.powerupMagnetLoop);
 					
-					if (magnetTime <= 0) {
-						Effect e1 = new PlayerMagnetEffect(player.position);
-						addEffectsUnder.add(e1);
-						pauseEffects.add(e1);
-						magnetEffects.add(e1);
-
-						Effect e2 = EffectFactory.playerMagnetGlow(player.position);
-						addEffectsUnder.add(e2);
-						magnetEffects.add(e2);
-					}
 					magnetTime = TOTAL_MAGNET_TIME;
 				}
 			});
@@ -903,7 +914,7 @@ public class World {
 					addEffects.add(e1);
 				}
 			});
-			pauseEffectEvents.addEventFromNow(0.3f, new EventQueue.Event() {
+			pauseEffectEvents.addEventFromNow(PAUSE_EFFECT_DURATION, new EventQueue.Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.resumeAllSounds();
@@ -914,7 +925,7 @@ public class World {
 			});
 			break;
 		case POWERUP_SHIELD:
-			pauseEffectEvents.addEventFromNow(0.0f, new EventQueue.Event() {
+			pauseEffectEvents.addEventFromNow(0, new EventQueue.Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.playSound(SoundAssets.powerupShieldStart);
@@ -923,7 +934,7 @@ public class World {
 					addEffects.add(e);
 				}
 			});
-			pauseEffectEvents.addEventFromNow(0.3f, new EventQueue.Event() {
+			pauseEffectEvents.addEventFromNow(PAUSE_EFFECT_DURATION, new EventQueue.Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.resumeAllSounds();
