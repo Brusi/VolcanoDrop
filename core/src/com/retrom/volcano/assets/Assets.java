@@ -157,6 +157,7 @@ public class Assets {
 	public static Array<Sprite> powerupSlomoAppearSpark;
 	public static Array<Sprite> powerupShieldAppearSpark;
 	
+	public static Array<Sprite> powerupMagnetAppearSparkReversed;
 	public static Array<Sprite> powerupSlomoAppearSparkReversed;
 	
 	public static Sprite magnetBackGlow;
@@ -347,6 +348,9 @@ public class Assets {
 		powerupSlomoAppearSparkReversed = new Array<Sprite>(powerupSlomoAppearSpark);
 		powerupSlomoAppearSparkReversed.reverse();
 		
+		powerupMagnetAppearSparkReversed = new Array<Sprite>(powerupMagnetAppearSpark);
+		powerupMagnetAppearSparkReversed.reverse();
+		
 		TextureAtlas powerupSheet = new TextureAtlas("vfx/powerup.txt");
 		magnetBackGlow = powerupSheet.createSprite("powerup_magnet_backglow");
 		slomoBackGlow = powerupSheet.createSprite("powerup_timebend_backglow");
@@ -367,7 +371,6 @@ public class Assets {
 		playerMagnetEffect = powerupMagnetSheet.createSprites("powerup_magnet_animated_glow");
 		playerMagnetGlow = powerupSheet.createSprite("powerup_magnet_glow");
 		playerMagnetGlowDie = powerupMagnetSheet.createSprites("powerup_magnet_animated_glow_die");
-		System.out.println("playerMagnetGlowDie.size="+playerMagnetGlowDie.size);
 		
 		greenDiamondCollectEffect1 = vfxSheet.createSprites("coin_collect_green1"); 
 		greenDiamondCollectEffect2 = vfxSheet.createSprites("coin_collect_green2"); 

@@ -3,6 +3,7 @@ package com.retrom.volcano.effects;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.retrom.volcano.game.Utils;
 import com.retrom.volcano.game.WorldRenderer;
 
 public class FiniteAnimationEffect extends Effect {
@@ -36,9 +37,12 @@ public class FiniteAnimationEffect extends Effect {
 	}
 	
 	public void setRandomScale(float minScale, float maxScale) {
-		scale_ = (float) Math.random() * (maxScale - minScale) + minScale; 
+		scale_ = Utils.randomRange(minScale, maxScale); 
 	}
-
+	
+	public void setScale(float scale) {
+		scale_ = scale; 
+	}
 	
 	@Override
 	public <T> T accept(EffectVisitor<T> v) {

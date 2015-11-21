@@ -28,6 +28,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.effects.BurningWallGlow;
+import com.retrom.volcano.effects.CoinMagnetGlowEffect;
+import com.retrom.volcano.effects.CoinMagnetStartEffect;
 import com.retrom.volcano.effects.DiamondGlowEffect;
 import com.retrom.volcano.effects.DustEffect;
 import com.retrom.volcano.effects.Effect;
@@ -112,6 +114,8 @@ public class World {
 	private PlayerShieldEffect playerShieldEffect;
 	private PlayerMagnetEffect playerMagnetEffect;
 	private PlayerMagnetGlow playerMagnetGlow;
+	
+	private List<CoinMagnetGlowEffect> coinMagnetGlows = new ArrayList<CoinMagnetGlowEffect>();
 	
 	private final List<Effect> magnetEffects = new ArrayList<Effect>();
 
@@ -495,7 +499,13 @@ public class World {
 					}
 					c.setState(Collectable.STATUS_FALLING);
 					c.velocity.x = c.velocity.y = 0;
+					addEffects.add(CoinMagnetStartEffect.createReversed(c.position));
 				}
+				for (CoinMagnetGlowEffect e : coinMagnetGlows) {
+					e.endAnim();
+				}
+				coinMagnetGlows.clear();
+				
 				SoundAssets.stopSound(SoundAssets.powerupMagnetLoop);
 				SoundAssets.playSound(SoundAssets.powerupMagnetEnd);
 				for (Effect e : magnetEffects) {
@@ -517,7 +527,7 @@ public class World {
 		if (shieldTime > 0) {
 			shieldTime -= deltaTime;
 			if (shieldTime <= 0.4) {
-				if (playerShieldEffect.shieldState() != PlayerShieldEffect.ShieldState.DIE) {
+				if (playerShieldEffect != null && playerShieldEffect.shieldState() != PlayerShieldEffect.ShieldState.DIE) {
 					playerShieldEffect.die();
 					SoundAssets.playSound(SoundAssets.powerupShieldEnd);
 				}
@@ -600,6 +610,10 @@ public class World {
 		if (coin.isPowerup()) {
 			addEffects.add(EffectFactory.powerupBackGlow(coin.type, coin));
 			addEffectsUnder.add(EffectFactory.powerupAura(coin.type, coin));
+		} else {
+			if (magnetTime > 0) {
+				addCoinMagnetGlowEffect(coin);
+			}
 		}
 	}
 	
@@ -684,6 +698,9 @@ public class World {
 					coin.velocity.y = COIN_Y_SPEED;
 					collectables_.add(coin);
 					SoundAssets.playRandomSound(SoundAssets.coinSackHit);
+					if (magnetTime > 0) {
+						addCoinMagnetGlowEffect(coin);
+					}
 				}
 			}
 			if (sack.state() == GoldSack.STATE_EMPTY && sack.stateTime() > GoldSack.EMPTY_ANIMATION_TIME) {
@@ -881,6 +898,17 @@ public class World {
 				addEffectsUnder.add(playerMagnetGlow);
 				magnetEffects.add(playerMagnetGlow);
 			}
+			for (Collectable coin : collectables_) {
+				if (coin.isPowerup()) {
+					continue;
+				}
+				{
+					Effect e = CoinMagnetStartEffect.create(coin.position);
+					addEffects.add(e);
+					pauseEffects.add(e);
+				}
+				addCoinMagnetGlowEffect(coin);
+			}
 			
 			pauseEffectEvents.addEventFromNow(0.0f, new EventQueue.Event() {
 				@Override
@@ -1014,6 +1042,15 @@ public class World {
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectDiamond);
 			addEffects.add(EffectFactory.greenDiamondCollectEffect(collectable.position));
 			break;
+		}
+	}
+
+	private void addCoinMagnetGlowEffect(Collectable coin) {
+		{
+			CoinMagnetGlowEffect e = new CoinMagnetGlowEffect(coin);
+			addEffectsUnder.add(e);
+			pauseEffects.add(e);
+			coinMagnetGlows.add(e);
 		}
 	}
 
