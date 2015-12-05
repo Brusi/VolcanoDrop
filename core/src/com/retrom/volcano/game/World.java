@@ -105,6 +105,7 @@ public class World {
 	float magnetTime = 0f;
 	float slomoTime = 0f;
 	float shieldTime = 0f;
+	boolean consecutiveSlomo = false;
 	
 	static final float TOTAL_SHIELD_TIME = 5f;
 	static final float TOTAL_SLOMO_TIME = 5f;
@@ -140,6 +141,8 @@ public class World {
 
 	// Cheats:
 	private boolean godMode_ = false;
+
+	private static float QUAKE_DURATION = 2.6f;
 
 	public interface WorldListener {
 		public void restartGame();
@@ -200,6 +203,13 @@ public class World {
 			@Override
 			public void dropSack(int col, int numCoins) {
 				addSack(col, numCoins);
+			}
+		});
+		
+		worldEvents_.addEventFromNow(2f, new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				startQuake();
 			}
 		});
 	}
@@ -267,8 +277,8 @@ public class World {
 
 	private void startQuake() {
 		quakeOn = true;
+		Gdx.input.vibrate((int)QUAKE_DURATION * 1000);
 		SoundAssets.playRandomSound(SoundAssets.quake);
-		float QUAKE_DURATION = 2.6f;
 		worldEvents_.addEventFromNow(QUAKE_DURATION, new EventQueue.Event() {
 			@Override
 			public void invoke() {
@@ -891,7 +901,6 @@ public class World {
 			if (magnetTime <= 0) {
 				playerMagnetEffect = new PlayerMagnetEffect(player.position);
 				addEffectsUnder.add(playerMagnetEffect);
-				pauseEffects.add(playerMagnetEffect);
 				magnetEffects.add(playerMagnetEffect);
 
 				playerMagnetGlow = new PlayerMagnetGlow(player.position);
@@ -931,6 +940,7 @@ public class World {
 			});
 			break;
 		case POWERUP_SLOMO:
+			consecutiveSlomo = slomoTime > 0;
 			slomoTime = TOTAL_SLOMO_TIME;
 			SoundAssets.pauseAllSounds();
 			pauseEffectEvents.addEventFromNow(0.0f, new EventQueue.Event() {
@@ -1067,6 +1077,7 @@ public class World {
 				player.bounds.y = topScreenY();
 				return;
 			} else {
+				Gdx.input.vibrate(500);
 				player.deathAcknoladged();
 				if (player.deathType == Player.DEATH_BY_BURN) {
 					SoundAssets.playSound(SoundAssets.playerDeathBurn);

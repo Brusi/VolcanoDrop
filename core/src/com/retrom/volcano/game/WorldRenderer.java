@@ -119,8 +119,11 @@ public class WorldRenderer {
 		if (world.slomoTime <= 0) {
 			return;
 		}
-		float alpha = Math.min(Math.min(1, world.slomoTime), world.pauseEffectStateTime_ / World.PAUSE_EFFECT_DURATION) * 0.25f;
-		
+		float alpha = world.consecutiveSlomo ? 1 :
+			Math.min( Math.min(1, world.slomoTime),
+			(World.TOTAL_SLOMO_TIME - world.slomoTime)/0.25f);
+		alpha *= 0.25f;
+
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 	    Gdx.gl.glEnable(GL20.GL_BLEND);
 		shapeRenderer.setProjectionMatrix(cam.combined);
