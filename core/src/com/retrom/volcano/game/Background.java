@@ -12,10 +12,10 @@ import com.retrom.volcano.game.objects.Wall;
  * @author Ori
  *
  */
-
-
-
 public class Background {
+	
+	private static final float BG_HEIGHT = 191;
+	
 	public enum Element {
 		PILLAR_1(76f, 0),
 		PILLAR_2(76f, 1),
@@ -27,20 +27,35 @@ public class Background {
 		PILLAR_HOLE(76f),
 		PILLAR_HOLE_BG(0),
 		
-		BACKGROUND_BASE(191f),
-		BACKGROUND_WORLD1_1(191f, 0),
-		BACKGROUND_WORLD1_2(191f, 1),
-		BACKGROUND_WORLD1_3(191f, 2),
-		BACKGROUND_WORLD1_4(191f, 3),
-		BACKGROUND_WORLD1_5(191f, 4),
-		BACKGROUND_WORLD1_6(191f, 5);
+		BACKGROUND_BASE(BG_HEIGHT),
+		
+		BACKGROUND_WORLD1_1(BG_HEIGHT, 0),
+		BACKGROUND_WORLD1_2(BG_HEIGHT, 1),
+		BACKGROUND_WORLD1_3(BG_HEIGHT, 2),
+		BACKGROUND_WORLD1_4(BG_HEIGHT, 3),
+		BACKGROUND_WORLD1_5(BG_HEIGHT, 4),
+		BACKGROUND_WORLD1_6(BG_HEIGHT, 5),
+		BACKGROUND_OVERLAY1_1(0, 0, true),
+		BACKGROUND_OVERLAY1_2(0, 1, true),
+		BACKGROUND_OVERLAY1_3(0, 2, true),
+		BACKGROUND_OVERLAY1_4(0, 3, true),
+		BACKGROUND_OVERLAY1_5(0, 4, true),
+		BACKGROUND_OVERLAY1_6(0, 5, true),
+		BACKGROUND_OVERLAY1_7(0, 6, true),
+		BACKGROUND_OVERLAY1_8(0, 7, true);
 		
 		private float height_;
 		private int index_;
+		private boolean is_overlay_;
 		
-		Element(float height, int index) {
+		Element(float height, int index, boolean is_overlay) {
 			height_ = height;
 			index_ = index;
+			is_overlay_ = is_overlay;
+		}
+		
+		Element(float height, int index) {
+			this(height, index, false);
 		}
 		
 		Element(float height) {
@@ -52,6 +67,10 @@ public class Background {
 		
 		public int index() {
 			return index_;
+		}
+		
+		public boolean is_overlay() {
+			return is_overlay_;
 		}
 		
 		public static Element pillar() {
@@ -89,11 +108,18 @@ public class Background {
 	public Deque<Float> leftHoleList = new LinkedList<Float>();
 	public Deque<Float> rightHoleList = new LinkedList<Float>();
 	
+	boolean last_bg_is_overlay_ = false;
 	
 	private float leftBaseY_ = BASE;
 	private float rightBaseY_ = BASE;
 	private float bgBaseY_ = BASE;
 	private float y_ = 0f;
+	
+	private void addElement(Element e) {
+		float heightAdded = e.height_;
+		bgPillar.addLast(e);
+		bgHeight += heightAdded;
+	}
 
 	public void setY(float y) {
 		y_ = y;
@@ -107,19 +133,10 @@ public class Background {
 			rightHeight += heightAdded;
 		}
 		
-		while(bgHeight < y_ + HEIGHT) {
-			Element e;
-			if (Math.random() < 0.8) {
-				e = Element.BACKGROUND_BASE;
-			} else {
-				e = Element.values()[Element.BACKGROUND_BASE.ordinal() + 1 + rand.nextInt(6)];
-			}
-			
-			float heightAdded = e.height_;
-			bgPillar.addLast(e);
-			bgHeight += heightAdded;
+		while (bgHeight < y_ + HEIGHT) {
+			AddOneBackground();
 		}
-		
+
 		// Remove from the bottom of the pillars.
 		if (y_ > leftBaseY_ + HEIGHT) {
 			leftBaseY_ = leftBaseY_ + leftPillar.getFirst().height();
@@ -140,6 +157,29 @@ public class Background {
 		if (leftHoleList.peek() != null && y_ > leftHoleList.peek() + HEIGHT) {
 			System.out.println("Hole removed!");
 			leftHoleList.removeFirst();
+		}
+	}
+
+	private void AddOneBackground() {
+		
+		boolean again = true;
+
+		// World 1:
+		while (again) {
+			again = false;
+			if (!last_bg_is_overlay_ || Math.random() < 0.5) {
+				int[] arr = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 };
+				Utils.shuffle(arr);
+				int num_overlays = rand.nextInt(5);
+				for (int i=0; i < num_overlays; i++) {
+					addElement(Element.values()[Element.BACKGROUND_OVERLAY1_1.ordinal() + arr[i]]);
+				}
+				addElement(Element.BACKGROUND_BASE);
+				last_bg_is_overlay_ = true;
+			} else {
+				addElement(Element.values()[Element.BACKGROUND_WORLD1_1.ordinal() + rand.nextInt(6)]);
+				last_bg_is_overlay_ = false;
+			}
 		}
 	}
 
