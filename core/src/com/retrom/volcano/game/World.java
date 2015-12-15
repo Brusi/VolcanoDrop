@@ -41,6 +41,7 @@ import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.FlameGlowEffect;
 import com.retrom.volcano.effects.PlayerMagnetEffect;
 import com.retrom.volcano.effects.PlayerMagnetGlow;
+import com.retrom.volcano.effects.PlayerOnionSkinEffect;
 import com.retrom.volcano.effects.PlayerShieldEffect;
 import com.retrom.volcano.effects.SackFlare;
 import com.retrom.volcano.effects.Score10Effect;
@@ -275,9 +276,13 @@ public class World {
 		}
 	}
 
+	private void AddOneOnionSkin() {
+		addEffectsUnder.add(new PlayerOnionSkinEffect(player.position.cpy(), player.state(), player.stateTime, player.side));
+	}
+
 	private void startQuake() {
 		quakeOn = true;
-		Gdx.input.vibrate((int)QUAKE_DURATION * 1000);
+//		Gdx.input.vibrate((int)QUAKE_DURATION * 1000);
 		SoundAssets.playRandomSound(SoundAssets.quake);
 		worldEvents_.addEventFromNow(QUAKE_DURATION, new EventQueue.Event() {
 			@Override
@@ -313,6 +318,11 @@ public class World {
 			return;
 		}
 		step(deltaTime);
+		if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
+			for (int i=0; i < 10; i++) {
+				step(deltaTime);
+			}
+		}
 	}
 	
 	public void step(float deltaTime) {
@@ -497,6 +507,20 @@ public class World {
 		camTarget = (floors_.getTotalBlocks()) * Wall.SIZE / 6f + WorldRenderer.FRUSTUM_HEIGHT / 3f;
 		background.setY(camTarget);
 		
+	}
+	
+	private void addOnionSkinEvent() {
+		final float PLAYER_ONION_SKIN_RATE = 0.05f; // Time between onion skin effects, in seconds.
+		final EventQueue.Event event = new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				AddOneOnionSkin();
+				if (slomoTime > PLAYER_ONION_SKIN_RATE) {
+					addOnionSkinEvent();
+				}
+			}
+		};
+		worldEvents_.addEventFromNow(PLAYER_ONION_SKIN_RATE, event);
 	}
 
 	private void updatePowerups(float deltaTime) {
@@ -941,6 +965,9 @@ public class World {
 			break;
 		case POWERUP_SLOMO:
 			consecutiveSlomo = slomoTime > 0;
+			if (!consecutiveSlomo) {
+				addOnionSkinEvent();
+			}
 			slomoTime = TOTAL_SLOMO_TIME;
 			SoundAssets.pauseAllSounds();
 			pauseEffectEvents.addEventFromNow(0.0f, new EventQueue.Event() {

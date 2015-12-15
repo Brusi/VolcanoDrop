@@ -40,6 +40,7 @@ import com.retrom.volcano.effects.FireballStartEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.OneFrameEffect;
 import com.retrom.volcano.effects.PlayerMagnetEffect;
+import com.retrom.volcano.effects.PlayerOnionSkinEffect;
 import com.retrom.volcano.effects.PlayerShieldEffect;
 import com.retrom.volcano.effects.PowerupGlow;
 import com.retrom.volcano.effects.Score10Effect;
@@ -122,7 +123,7 @@ public class WorldRenderer {
 		float alpha = world.consecutiveSlomo ? 1 :
 			Math.min( Math.min(1, world.slomoTime),
 			(World.TOTAL_SLOMO_TIME - world.slomoTime)/0.25f);
-		alpha *= 0.25f;
+		alpha *= 0.30f;
 
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 	    Gdx.gl.glEnable(GL20.GL_BLEND);
@@ -139,10 +140,22 @@ public class WorldRenderer {
 	}
 
 	public void renderBackground () {
-		batch.disableBlending();
+		BatchUtils.setBlendFuncNormal(batch);
+		batch.enableBlending();
 		batch.begin();
 		drawPillar(world.background.bgPillar, 0, world.background.bgBaseY(), false);
 		batch.end();
+	}
+	
+	static class DrawTask {
+		public final Sprite keyFrame;
+		public final float x;
+		public final float y;
+		public DrawTask(Sprite keyFrame, float x, float y) {
+			this.keyFrame = keyFrame;
+			this.x = x;
+			this.y = y;
+		}
 	}
 	
 	public void drawPillar(Deque<Background.Element> pillar, float x, float y, boolean flip) {
@@ -442,6 +455,14 @@ public class WorldRenderer {
 					s.setColor(tint, tint, tint, tint);
 					return s; 
 				}
+				@Override
+				public Sprite visit(PlayerOnionSkinEffect effect) {
+					Sprite s = getPlayerFrame(effect.playerState,
+							effect.playerStateTime, effect.playerSide);
+					float tint = effect.getTint();
+					s.setColor(tint, tint, tint, tint);
+					return s;
+				}
 			});
 			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
 			s.setRotation(e.getRotation());
@@ -599,44 +620,51 @@ public class WorldRenderer {
 	}
 
 	private void renderPlayer () {
+		Player player = world.player;
+		Sprite keyFrame = getPlayerFrame(player.state(), player.stateTime, player.side);
+		keyFrame.setColor(1,1,1,1);
+		drawCenter(keyFrame, player.position);
+	}
+	
+	private Sprite getPlayerFrame(int state, float stateTime, boolean side) {
 		Sprite keyFrame = null;
-		switch (world.player.state()) {
+		switch (state) {
 		case Player.STATE_IDLE:
-			keyFrame = getFrameLoop(Assets.playerIdle, world.player.stateTime);
-			keyFrame.setFlip(world.player.side, false);
+			keyFrame = getFrameLoop(Assets.playerIdle, stateTime);
+			keyFrame.setFlip(side, false);
 			break;
 		case Player.STATE_RUNNING:
 			float startTime = FRAME_TIME * Assets.playerRunStart.size / 3;
-			if (world.player.stateTime < startTime * Assets.playerRunStart.size) {
-				keyFrame = getFrameLoop(Assets.playerRunStart, world.player.stateTime); 
+			if (stateTime < startTime * Assets.playerRunStart.size) {
+				keyFrame = getFrameLoop(Assets.playerRunStart, stateTime); 
 			} else {
-				keyFrame = getFrameLoop(Assets.playerRun, world.player.stateTime - startTime);
+				keyFrame = getFrameLoop(Assets.playerRun, stateTime - startTime);
 			}
-			keyFrame.setFlip(world.player.side, false);
+			keyFrame.setFlip(side, false);
 			break;
 		case Player.STATE_JUMPING:
-			keyFrame = getFrameLoop(Assets.playerJump, world.player.stateTime);
-			keyFrame.setFlip(world.player.side, false);
+			keyFrame = getFrameLoop(Assets.playerJump, stateTime);
+			keyFrame.setFlip(side, false);
 			break;
 		case Player.STATE_LANDING:
-			keyFrame = getFrameStopAtLastFrame(Assets.playerLand, world.player.stateTime);
-			keyFrame.setFlip(world.player.side, false);
+			keyFrame = getFrameStopAtLastFrame(Assets.playerLand, stateTime);
+			keyFrame.setFlip(side, false);
 			break;
 		case Player.STATE_DIE:
 		case Player.STATE_DEAD:
 			if (world.player.deathType == Player.DEATH_BY_BURN) {
-				keyFrame = getFrameDisappearAfterLastFrame(Assets.playerBurn, world.player.stateTime);
+				keyFrame = getFrameDisappearAfterLastFrame(Assets.playerBurn, stateTime);
 			} else if (world.player.deathType == Player.DEATH_BY_CRUSH) {
-				keyFrame = getFrameDisappearAfterLastFrame(Assets.playerSquash, world.player.stateTime);
+				keyFrame = getFrameDisappearAfterLastFrame(Assets.playerSquash, stateTime);
 			} else {
 				Gdx.app.log("ERROR", "Player is in death type: " + world.player.deathType);
 			}
-			keyFrame.setFlip(world.player.side, false);
+			keyFrame.setFlip(side, false);
 			break;
 		default:
-			Gdx.app.log("ERROR", "Player is in invalid state: " + world.player.state());
+			Gdx.app.log("ERROR", "Player is in invalid state: " + state);
 		}
-		drawCenter(keyFrame, world.player.position);
+		return keyFrame;
 	}
 	
 	private Sprite getFrameLoopOnSecondAnim(Array<Sprite> startAnim,

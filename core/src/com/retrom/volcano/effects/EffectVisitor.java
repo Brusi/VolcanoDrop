@@ -20,5 +20,6 @@ public interface EffectVisitor<T> {
 	public T visit(PowerupGlow effect);
 	public T visit(PlayerShieldEffect playerShieldEffect);
 	public T visit(PlayerMagnetEffect playerMagnetEffect);
+	public T visit(PlayerOnionSkinEffect playerOnionSkinEffect);
 
 }
