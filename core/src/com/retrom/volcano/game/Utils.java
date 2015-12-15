@@ -41,4 +41,19 @@ public class Utils {
 	public static boolean randomBool() {
 		return Math.random() > 0.5;
 	}
+	
+	public static int randomInt(int x) {
+		return (int) Math.floor(Math.random() * x);
+	}
+	
+	public static void shuffle(int[] arr) {
+		for (int i = 0; i < arr.length; i++) {
+			int j = randomInt(arr.length);
+			{
+				int temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+	}
 }
