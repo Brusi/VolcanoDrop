@@ -12,6 +12,9 @@ import com.retrom.volcano.game.objects.Wall;
  * @author Ori
  *
  */
+
+
+
 public class Background {
 	public enum Element {
 		PILLAR_1(76f, 0),

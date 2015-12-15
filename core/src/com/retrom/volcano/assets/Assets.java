@@ -25,8 +25,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
 public class Assets {
-	public static TextureRegion backgroundRegion;
-	
 	public static Array<Sprite> walls1;
 	public static Array<Sprite> walls2;
 	public static Array<Sprite> wallParticles;
@@ -53,6 +51,7 @@ public class Assets {
 	public static Sprite floor;
 	
 	public static Array<Sprite> bg_world1;
+	public static Array<Sprite> bg_overlay_world1;
 	
 	public static Sprite coin1_1;
 	public static Array<Sprite> coin1_1_land;
@@ -234,6 +233,7 @@ public class Assets {
 		background = environmentSheet.createSprite("bg_base");
 
 		bg_world1 = environmentSheet.createSprites("bg_world1");
+		bg_overlay_world1 = environmentSheet.createSprites("bg_world1_base_1");
 		
 		TextureAtlas treasure = new TextureAtlas("treasure/treasure.txt");
 		

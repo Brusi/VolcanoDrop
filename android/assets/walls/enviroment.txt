@@ -1,4 +1,5 @@
 enviroment.png
+size: 2048, 2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -9,14 +10,14 @@ background_entrance pillar
   orig: 86, 152
   offset: 0, 0
   index: -1
-bg
+bg_base
   rotate: false
   xy: 90, 2
-  size: 640, 213
-  orig: 640, 213
+  size: 640, 210
+  orig: 640, 210
   offset: 0, 0
   index: 1
-bg_base
+bg_world1
   rotate: false
   xy: 732, 2
   size: 640, 210
@@ -29,206 +30,255 @@ bg_world1
   size: 640, 210
   orig: 640, 210
   offset: 0, 0
-  index: 1
-bg_world1
-  rotate: false
-  xy: 2, 217
-  size: 640, 210
-  orig: 640, 210
-  offset: 0, 0
   index: 2
 bg_world1
   rotate: false
-  xy: 644, 217
+  xy: 2, 214
   size: 640, 210
   orig: 640, 210
   offset: 0, 0
   index: 3
 bg_world1
   rotate: false
-  xy: 1286, 217
+  xy: 644, 214
   size: 640, 210
   orig: 640, 210
   offset: 0, 0
   index: 4
 bg_world1
   rotate: false
-  xy: 2, 429
+  xy: 1286, 214
   size: 640, 210
   orig: 640, 210
   offset: 0, 0
   index: 5
 bg_world1
   rotate: false
-  xy: 644, 429
+  xy: 2, 426
   size: 640, 210
   orig: 640, 210
   offset: 0, 0
   index: 6
+bg_world1_base_1
+  rotate: false
+  xy: 644, 426
+  size: 640, 210
+  orig: 640, 210
+  offset: 0, 0
+  index: 1
+bg_world1_base_1
+  rotate: false
+  xy: 1286, 426
+  size: 640, 210
+  orig: 640, 210
+  offset: 0, 0
+  index: 2
+bg_world1_base_1
+  rotate: false
+  xy: 2, 638
+  size: 640, 210
+  orig: 640, 210
+  offset: 0, 0
+  index: 3
+bg_world1_base_1
+  rotate: false
+  xy: 644, 638
+  size: 640, 210
+  orig: 640, 210
+  offset: 0, 0
+  index: 4
+bg_world1_base_1
+  rotate: false
+  xy: 1286, 638
+  size: 640, 210
+  orig: 640, 210
+  offset: 0, 0
+  index: 5
+bg_world1_base_1
+  rotate: false
+  xy: 2, 850
+  size: 640, 210
+  orig: 640, 210
+  offset: 0, 0
+  index: 6
+bg_world1_base_1
+  rotate: false
+  xy: 644, 850
+  size: 640, 210
+  orig: 640, 210
+  offset: 0, 0
+  index: 7
+bg_world1_base_1
+  rotate: false
+  xy: 1286, 850
+  size: 640, 210
+  orig: 640, 210
+  offset: 0, 0
+  index: 8
 bg_world2
   rotate: false
-  xy: 1286, 429
+  xy: 2, 1062
   size: 640, 210
   orig: 640, 210
   offset: 0, 0
   index: 1
 bg_world2
   rotate: false
-  xy: 2, 641
+  xy: 644, 1062
   size: 640, 210
   orig: 640, 210
   offset: 0, 0
   index: 2
 bg_world2
   rotate: false
-  xy: 644, 641
+  xy: 1286, 1062
   size: 640, 210
   orig: 640, 210
   offset: 0, 0
   index: 3
 bg_world2
   rotate: false
-  xy: 1286, 641
+  xy: 2, 1274
   size: 640, 210
   orig: 640, 210
   offset: 0, 0
   index: 4
 bg_world2
   rotate: false
-  xy: 2, 853
+  xy: 644, 1274
   size: 640, 210
   orig: 640, 210
   offset: 0, 0
   index: 5
 bg_world2
   rotate: false
-  xy: 644, 853
+  xy: 1286, 1274
   size: 640, 210
   orig: 640, 210
   offset: 0, 0
   index: 6
 bg_world3
   rotate: false
-  xy: 1286, 853
+  xy: 2, 1486
   size: 640, 210
   orig: 640, 210
   offset: 0, 0
   index: 1
 bg_world3
   rotate: false
-  xy: 2, 1065
+  xy: 644, 1486
   size: 640, 210
   orig: 640, 210
   offset: 0, 0
   index: 2
 floor
   rotate: false
-  xy: 644, 1065
+  xy: 1286, 1486
   size: 492, 94
   orig: 492, 94
   offset: 0, 0
   index: 1
 gargol
   rotate: false
-  xy: 1138, 1065
+  xy: 1780, 1486
   size: 92, 77
   orig: 92, 77
   offset: 0, 0
   index: 1
 pillars
   rotate: false
-  xy: 1232, 1065
+  xy: 1874, 1486
   size: 70, 76
   orig: 70, 76
   offset: 0, 0
   index: 1
 pillars
   rotate: false
-  xy: 1304, 1065
+  xy: 1946, 1486
   size: 70, 76
   orig: 70, 76
   offset: 0, 0
   index: 2
 pillars
   rotate: false
-  xy: 1376, 1065
+  xy: 2, 1698
   size: 70, 76
   orig: 70, 76
   offset: 0, 0
   index: 3
 pillars_big
   rotate: false
-  xy: 1448, 1065
+  xy: 74, 1698
   size: 76, 111
   orig: 76, 111
   offset: 0, 0
   index: 1
 pillars_big
   rotate: false
-  xy: 1526, 1065
+  xy: 152, 1698
   size: 76, 111
   orig: 76, 111
   offset: 0, 0
   index: 2
 pillars_end
   rotate: false
-  xy: 1604, 1065
+  xy: 230, 1698
   size: 70, 76
   orig: 70, 76
   offset: 0, 0
   index: -1
 pillars_entrance_start
   rotate: false
-  xy: 1676, 1065
+  xy: 302, 1698
   size: 101, 89
   orig: 101, 89
   offset: 0, 0
   index: -1
 pillars_hole_back
   rotate: false
-  xy: 1779, 1065
+  xy: 405, 1698
   size: 70, 76
   orig: 70, 76
   offset: 0, 0
   index: -1
 pillars_hole_front
   rotate: false
-  xy: 1851, 1065
+  xy: 477, 1698
   size: 70, 76
   orig: 70, 76
   offset: 0, 0
   index: -1
 pillars_start
   rotate: false
-  xy: 1923, 1065
+  xy: 549, 1698
   size: 70, 76
   orig: 70, 76
   offset: 0, 0
   index: -1
 relic_background
   rotate: false
-  xy: 2, 1277
+  xy: 621, 1698
   size: 244, 62
   orig: 244, 62
   offset: 0, 0
   index: -1
 relic_stand
   rotate: false
-  xy: 248, 1277
+  xy: 867, 1698
   size: 170, 118
   orig: 170, 118
   offset: 0, 0
   index: -1
 relic_stand_glow
   rotate: false
-  xy: 420, 1277
+  xy: 1039, 1698
   size: 170, 118
   orig: 170, 118
   offset: 0, 0
   index: -1
 tourch1
   rotate: false
-  xy: 592, 1277
+  xy: 1211, 1698
   size: 60, 116
   orig: 60, 116
   offset: 0, 0

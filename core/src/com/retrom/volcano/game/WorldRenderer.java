@@ -18,7 +18,11 @@ package com.retrom.volcano.game;
 
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
+
+import javax.swing.event.ListSelectionEvent;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -159,6 +163,11 @@ public class WorldRenderer {
 	}
 	
 	public void drawPillar(Deque<Background.Element> pillar, float x, float y, boolean flip) {
+		
+
+		
+		LinkedList<DrawTask> drawTasks = new LinkedList<DrawTask>();
+		
 		for (Background.Element e : pillar) {
 			Sprite keyFrame = null;
 			switch (e) {
@@ -186,6 +195,7 @@ public class WorldRenderer {
 				break;
 			case BACKGROUND_BASE:
 				keyFrame = Assets.background;
+				keyFrame.rotate(30f);
 				break;
 			case BACKGROUND_WORLD1_1:
 			case BACKGROUND_WORLD1_2:
@@ -195,13 +205,26 @@ public class WorldRenderer {
 			case BACKGROUND_WORLD1_6:
 				keyFrame = Assets.bg_world1.get(e.index());
 				break;
+			case BACKGROUND_OVERLAY1_1:
+			case BACKGROUND_OVERLAY1_2:
+			case BACKGROUND_OVERLAY1_3:
+			case BACKGROUND_OVERLAY1_4:
+			case BACKGROUND_OVERLAY1_5:
+			case BACKGROUND_OVERLAY1_6:
+			case BACKGROUND_OVERLAY1_7:
+			case BACKGROUND_OVERLAY1_8:
+				keyFrame = Assets.bg_overlay_world1.get(e.index());
+				break;
 			default:
 				Gdx.app.log("ERROR", "Unhandled pillar type: " + e);
 				break;
 			}
 			keyFrame.setFlip(flip, false);
-			drawCenterBottom(keyFrame, x, y);
+			drawTasks.addFirst(new DrawTask(keyFrame, x, y));
 			y += e.height();
+		}
+		for (DrawTask task : drawTasks) {
+			drawCenterBottom(task.keyFrame, task.x, task.y);
 		}
 	}
 	
@@ -455,6 +478,7 @@ public class WorldRenderer {
 					s.setColor(tint, tint, tint, tint);
 					return s; 
 				}
+
 				@Override
 				public Sprite visit(PlayerOnionSkinEffect effect) {
 					Sprite s = getPlayerFrame(effect.playerState,
