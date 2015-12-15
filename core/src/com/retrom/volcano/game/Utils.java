@@ -46,7 +46,7 @@ public class Utils {
 		return (int) Math.floor(Math.random() * x);
 	}
 	
-	public static void shuffle(int[] arr) {
+	public static void shuffleArr(int[] arr) {
 		for (int i = 0; i < arr.length; i++) {
 			int j = randomInt(arr.length);
 			{
@@ -55,5 +55,20 @@ public class Utils {
 				arr[j] = temp;
 			}
 		}
+	}
+	
+	// Returns an array { 0, 1, 2, ..., length }
+	public static int[] rangeArr(int length) {
+		int[] arr = new int[length];
+		for (int i=0; i < arr.length; i++) {
+			arr[i] = i;
+		}
+		return arr;
+	}
+	
+	public static int[] shuffledRangeArr(int length) {
+		int[] arr = rangeArr(length);
+		shuffleArr(arr);
+		return arr;
 	}
 }

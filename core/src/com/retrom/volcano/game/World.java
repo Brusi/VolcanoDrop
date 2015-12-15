@@ -144,6 +144,8 @@ public class World {
 	private boolean godMode_ = false;
 
 	private static float QUAKE_DURATION = 2.6f;
+	
+	private float gameTime = 0;
 
 	public interface WorldListener {
 		public void restartGame();
@@ -338,6 +340,13 @@ public class World {
 			SoundAssets.setPitch(slomoRatio);
 		} else {
 			SoundAssets.setPitch(1f);
+		}
+		
+		gameTime += deltaTime;
+		if (gameTime > 1 && gameTime < 60) {
+			background.level = 2;
+		} else if (gameTime >= 60){
+			background.level = 3;
 		}
 		
 		updateQuake(deltaTime);

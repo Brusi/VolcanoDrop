@@ -53,6 +53,11 @@ public class Assets {
 	public static Array<Sprite> bg_world1;
 	public static Array<Sprite> bg_overlay_world1;
 	
+	public static Array<Sprite> bg_world2;
+	public static Array<Sprite> bg_overlay_world2;
+	
+	public static Array<Sprite> bg_world3;
+	
 	public static Sprite coin1_1;
 	public static Array<Sprite> coin1_1_land;
 	public static Sprite coin1_2;
@@ -234,6 +239,15 @@ public class Assets {
 
 		bg_world1 = environmentSheet.createSprites("bg_world1");
 		bg_overlay_world1 = environmentSheet.createSprites("bg_world1_base_1");
+		
+		TextureAtlas environmentSheet2 = new TextureAtlas("walls/enviroment2.txt");
+		bg_world2 = environmentSheet2.createSprites("bg_world2");
+		bg_overlay_world2 = environmentSheet2.createSprites("bg_world2_base_1");
+		System.out.println(bg_world2);
+		System.out.println(bg_overlay_world2);
+		
+		bg_world3 = environmentSheet2.createSprites("bg_world3");
+		
 		
 		TextureAtlas treasure = new TextureAtlas("treasure/treasure.txt");
 		

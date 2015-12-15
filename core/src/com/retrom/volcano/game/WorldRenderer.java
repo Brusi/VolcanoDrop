@@ -215,6 +215,27 @@ public class WorldRenderer {
 			case BACKGROUND_OVERLAY1_8:
 				keyFrame = Assets.bg_overlay_world1.get(e.index());
 				break;
+			case BACKGROUND_WORLD2_1:
+			case BACKGROUND_WORLD2_2:
+			case BACKGROUND_WORLD2_3:
+			case BACKGROUND_WORLD2_4:
+			case BACKGROUND_WORLD2_5:
+			case BACKGROUND_WORLD2_6:
+				keyFrame = Assets.bg_world2.get(e.index());
+				break;
+			case BACKGROUND_OVERLAY2_1:
+			case BACKGROUND_OVERLAY2_2:
+			case BACKGROUND_OVERLAY2_3:
+			case BACKGROUND_OVERLAY2_4:
+			case BACKGROUND_OVERLAY2_5:
+			case BACKGROUND_OVERLAY2_6:
+			case BACKGROUND_OVERLAY2_7:
+			case BACKGROUND_OVERLAY2_8:
+				keyFrame = Assets.bg_overlay_world2.get(e.index());
+				break;
+			case BACKGROUND_WORLD3_1:
+			case BACKGROUND_WORLD3_2:
+				keyFrame = Assets.bg_world3.get(e.index());
 			default:
 				Gdx.app.log("ERROR", "Unhandled pillar type: " + e);
 				break;
