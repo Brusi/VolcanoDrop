@@ -27,6 +27,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.retrom.volcano.assets.SoundAssets;
+import com.retrom.volcano.effects.BurnParticle;
 import com.retrom.volcano.effects.BurningWallGlow;
 import com.retrom.volcano.effects.CoinMagnetGlowEffect;
 import com.retrom.volcano.effects.CoinMagnetStartEffect;
@@ -181,7 +182,7 @@ public class World {
 
 			@Override
 			public void dropCoin(float x, Collectable.Type type) {
-				addCoin(x, type);
+				dropCoinFromCeiling(x, type);
 			}
 
 			@Override
@@ -223,23 +224,23 @@ public class World {
 			goldSacks_.add(new GoldSack(100, 100, 5));
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
-			addCoin(0, Collectable.Type.POWERUP_MAGNET);
+			dropCoinFromCeiling(0, Collectable.Type.POWERUP_MAGNET);
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-			addCoin(0, Collectable.Type.POWERUP_SHIELD);
+			dropCoinFromCeiling(0, Collectable.Type.POWERUP_SHIELD);
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
 			magnetTime += 1f;
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-			addCoin(0, Collectable.Type.POWERUP_SLOMO);
+			dropCoinFromCeiling(0, Collectable.Type.POWERUP_SLOMO);
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
 			addSmoke(100, 100);
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-			addCoin((float) (Math.random() * 200), Collectable.Type.COIN_5_1);
+			dropCoinFromCeiling((float) (Math.random() * 200), Collectable.Type.COIN_5_1);
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
@@ -277,10 +278,22 @@ public class World {
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
 			addFlamethrower(3);
-			addFlamethrower(2);
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
-			addWall(3);
+			addBurnParticles(100, 100);
+		}
+	}
+
+	private void addBurnParticle(float base_x, float base_y) {
+		Vector2 dir = Utils.randomDir();
+		float x = base_x + dir.x * Utils.randomRange(10, 35);
+		float y = base_y + dir.y * Utils.randomRange(10, 35);
+		addEffectsUnder.add(new BurnParticle(x, y));
+	}
+	
+	private void addBurnParticles(float base_x, float base_y) {
+		for (int i=0; i < 10; i++) {
+			addBurnParticle(base_x, base_y);
 		}
 	}
 
@@ -385,10 +398,6 @@ public class World {
 		
 		leftWall_.y = player.bounds.y - leftWall_.height/2;
 		rightWall_.y = player.bounds.y - rightWall_.height/2;
-		
-		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
-			addCoin(50, Collectable.Type.COIN_3_1);
-		}
 	}
 
 	private void updateQuake(float deltaTime) {
@@ -415,7 +424,7 @@ public class World {
 		
 	}
 
-	private void updateEnemies(float deltaTime) {
+	private void updateEnemies(final float deltaTime) {
 		for (Enemy e : enemies_) {
 			e.update(deltaTime);
 			e.accept(new Enemy.Visitor<Void>() {
@@ -423,9 +432,14 @@ public class World {
 				public Void visit(Flame flame) {
 					if (flame.bounds.overlaps(player.bounds) && !player.isDead()) {
 						if (shieldTime <= 0) {
-							player.killByBurn();
+							if (flame.stateTime() > 0.3) {
+								player.killByBurn();
+							}
 						} else {
-							player.velocity.y += (56 - (player.position.y - flame.position.y)) * 2;
+							player.velocity.y += (56 - (player.position.y - flame.position.y)) * 2 * 60 * deltaTime;
+							if (Math.random() < deltaTime * 8) {
+								addSingleSmoke(player.position.x, player.position.y);
+							}
 						}
 					}
 					return null;
@@ -636,7 +650,7 @@ public class World {
 
 	public void addBurningWall(int col) {
 		float wallY = topScreenY();
-		BurningWall wall = new BurningWall(col, wallY);
+		final BurningWall wall = new BurningWall(col, wallY);
 		walls_.add(wall);
 		activeWalls_.add(wall);
 		addEffects.add(new BurningWallGlow(wall));
@@ -649,9 +663,13 @@ public class World {
 		activeWalls_.add(wall);
 	}
 	
-	public void addCoin(float x, Collectable.Type type) {
+	public void dropCoinFromCeiling(float x, Collectable.Type type) {
 		float yval = topScreenY();
-		Collectable coin = new Collectable(x, yval, type);
+		createCoin(x, yval, type);
+	}
+	
+	public Collectable createCoin(float x, float y, Collectable.Type type) {
+		Collectable coin = new Collectable(x, y, type);
 		collectables_.add(coin);
 		if (coin.type == Collectable.Type.COIN_5_1 || coin.type == Collectable.Type.COIN_5_2 || coin.type == Collectable.Type.COIN_5_3 || coin.type == Collectable.Type.COIN_5_4) {
 			addEffects.add(new DiamondGlowEffect(coin));
@@ -664,6 +682,7 @@ public class World {
 				addCoinMagnetGlowEffect(coin);
 			}
 		}
+		return coin;
 	}
 	
 	public void addSack(int col, int numCoins) {
@@ -742,10 +761,9 @@ public class World {
 					float COIN_X_SPEED = 250;
 					float COIN_Y_SPEED = 250;
 					Type type = GoldSack.randomSackCoin();
-					Collectable coin = new Collectable(sack.position.x, sack.position.y + 15, type);
+					Collectable coin = createCoin(sack.position.x, sack.position.y + 15, type) ;
 					coin.velocity.x = Utils.randomDir().x * COIN_X_SPEED;
 					coin.velocity.y = COIN_Y_SPEED;
-					collectables_.add(coin);
 					SoundAssets.playRandomSound(SoundAssets.coinSackHit);
 					if (magnetTime > 0) {
 						addCoinMagnetGlowEffect(coin);
@@ -835,6 +853,9 @@ public class World {
 					Flame flame = new Flame(wall.position.x, wall.position.y + 96, Arrays.asList(flameEffect, flameGlowEffect));
 					enemies_.add(flame);
 					f.addFlame(flame);
+					for (int i=0; i < 5; i++) {
+						effects.add(EffectFactory.flameBreakParticle(wall.position));
+					}
 				}
 			}
 			
@@ -853,13 +874,17 @@ public class World {
 		screenEffects.add(new DustEffect(x, y));
 	}
 	
+	private void addSingleSmoke(final float x, final float y) {
+		screenEffects.add(new SmokeEffect(x, y));
+	}
+	
 	private void addSmoke(final float x, final float y) {
 		for (int i=0; i < 4; i++) {
 			final float time = i * 0.4f;
 			worldEvents_.addEventFromNow(time, new Event() {
 				@Override
 				public void invoke() {
-					screenEffects.add(new SmokeEffect(x, y));
+					addSingleSmoke(x, y);
 				}
 			});
 		}
@@ -1149,6 +1174,7 @@ public class World {
 				if (player.deathType == Player.DEATH_BY_BURN) {
 					SoundAssets.playSound(SoundAssets.playerDeathBurn);
 					addEffects.add(EffectFactory.playerExplodeEffect(player.position));
+					addBurnParticles(player.position.x, player.position.y);
 				} else if (player.deathType == Player.DEATH_BY_CRUSH) {
 					addEffects.add(EffectFactory.playerExplodeEffect(new Vector2(player.position.x, player.position.y - player.bounds.height/2)));
 					SoundAssets.playSound(SoundAssets.playerDeathCrush);

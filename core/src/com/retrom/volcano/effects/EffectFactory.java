@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Collectable.Type;
+import com.retrom.volcano.game.objects.Wall;
 
 public class EffectFactory {
 	
@@ -79,6 +80,11 @@ public class EffectFactory {
 	
 	public static Effect wallBreakParticle(Vector2 position) {
 		return new WallBreakParticle(Assets.wallParticles, position);
+	}
+	public static Effect flameBreakParticle(Vector2 position) {
+		Vector2 effect_position = position.cpy();
+		effect_position.y += Wall.SIZE / 2;
+		return new FlameBreakParticle(Assets.wallParticles, effect_position);
 	}
 	public static Effect wallExplodeEffect(Vector2 position) {
 		return new FiniteAnimationEffect(Assets.wallExplode, position);

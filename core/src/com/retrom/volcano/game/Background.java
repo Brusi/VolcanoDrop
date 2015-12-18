@@ -4,6 +4,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Random;
 
+import com.badlogic.gdx.Gdx;
 import com.retrom.volcano.game.objects.Wall;
 
 /**
@@ -217,7 +218,16 @@ public class Background {
 			addElement(Element.BACKGROUND_BASE);
 			last_bg_is_overlay_ = true;
 		} else {
-			addElement(Element.values()[first_bg_ordinal + rand.nextInt(num_bg)]);
+			int count = 0;  // Counter to prevent infinite loop.
+			Element e = null;
+			while (e == null || bgPillar.contains(e)) {
+				if (count++ >= 10) {
+					Gdx.app.log("INFO", "Aborting unique background loop.");
+					break;
+				}
+				e = Element.values()[first_bg_ordinal + rand.nextInt(num_bg)];
+			}
+			addElement(e);
 			last_bg_is_overlay_ = false;
 		}
 	}

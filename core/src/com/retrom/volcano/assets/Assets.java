@@ -143,6 +143,7 @@ public class Assets {
 	public static Array<Sprite> fireballStartEffect;
 	public static Array<Sprite> dust;
 	public static Array<Sprite> smoke;
+	public static Array<Sprite> burnParticle;
 	
 	// Glow:
 	public static Sprite burningWallGlow;
@@ -206,8 +207,6 @@ public class Assets {
 	
 	// Fonts
 	public static BitmapFont scoreFont;
-
-	
 
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -419,6 +418,7 @@ public class Assets {
 		
 		dust = vfxSheet.createSprites("dust");
 		smoke = vfxSheet.createSprites("smoke");
+		burnParticle = vfxSheet.createSprites("particles_burnpiece");
 		
 		burningWallGlow = vfxSheet.createSprite("fire_glow");
 		

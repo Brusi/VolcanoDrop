@@ -16,7 +16,7 @@ public class BurningWallGlow extends OneFrameEffect {
 	
 	@Override
 	public float getScale() {
-		return 0.75f;
+		return 1f;
 	}
 	
 
