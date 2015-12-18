@@ -67,7 +67,7 @@ public class SoundAssets {
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/gameplay.mp3"));
 		music.setLooping(true);
 		music.setVolume(0.5f);
-		if (Settings.soundEnabled) music.play();
+//		if (Settings.soundEnabled) music.play();
 		
 		playerJump = new Sound[] {newSound("player_jump_0a.wav"), newSound("player_jump_0b.wav")};
 		playerJumpIntense = new Sound[] {newSound("player_jump_1.wav"), newSound("player_jump_2.wav"), newSound("player_jump_3.wav"), newSound("player_jump_4.wav")};
@@ -136,12 +136,13 @@ public class SoundAssets {
 		spitterSequence = newSound("wallspitter_sequence.wav");
 	}
 	
-	public static void playSound (Sound sound) {
+	public static long playSound (Sound sound) {
 		if (!Settings.soundEnabled)
-			return;
+			return 0;
 		long id = sound.play(1);
 		currentlyPlaying.add(sound, id);
 		sound.setPitch(id, pitch);
+		return id;
 	}
 	
 	public static void playRandomSound(Sound[] sounds) {

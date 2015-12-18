@@ -237,9 +237,6 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
 			addSmoke(100, 100);
 		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
-			shieldTime += 1f;
-		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
 			addCoin((float) (Math.random() * 200), Collectable.Type.COIN_5_1);
@@ -276,6 +273,14 @@ public class World {
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
 			spawner_.enabled = !spawner_.enabled;
+		}
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
+			addFlamethrower(3);
+			addFlamethrower(2);
+		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+			addWall(3);
 		}
 	}
 
@@ -789,7 +794,6 @@ public class World {
 				if (wall.bounds.overlaps(rect)) {
 					turnOffFlameThrower(wall);
 					
-					
 					addDust(wall.position.x, wall.position.y - Wall.SIZE / 3);
 					
 					wall.bounds.y = rect.y+rect.height;
@@ -801,7 +805,6 @@ public class World {
 						SoundAssets.playRandomSound(SoundAssets.wallDualHit);
 					} else if (wall instanceof FlamethrowerWall){
 						floors_.addToColumn(wall.col());
-						SoundAssets.playSound(SoundAssets.flamethrowerStart);
 					} else {
 						floors_.addToColumn(wall.col());
 						SoundAssets.playRandomSound(SoundAssets.wallHit);
@@ -967,17 +970,17 @@ public class World {
 				playerMagnetGlow = new PlayerMagnetGlow(player.position);
 				addEffectsUnder.add(playerMagnetGlow);
 				magnetEffects.add(playerMagnetGlow);
-			}
-			for (Collectable coin : collectables_) {
-				if (coin.isPowerup()) {
-					continue;
+				for (Collectable coin : collectables_) {
+					if (coin.isPowerup()) {
+						continue;
+					}
+					{
+						Effect e = CoinMagnetStartEffect.create(coin.position);
+						addEffects.add(e);
+						pauseEffects.add(e);
+					}
+					addCoinMagnetGlowEffect(coin);
 				}
-				{
-					Effect e = CoinMagnetStartEffect.create(coin.position);
-					addEffects.add(e);
-					pauseEffects.add(e);
-				}
-				addCoinMagnetGlowEffect(coin);
 			}
 			
 			pauseEffectEvents.addEventFromNow(0.0f, new EventQueue.Event() {

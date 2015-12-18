@@ -1,10 +1,14 @@
 package com.retrom.volcano.game.objects;
 
+import com.retrom.volcano.assets.SoundAssets;
+
 public class FlamethrowerWall extends Wall {
 	
 	public static final float TIME_UNTIL_FLAME_STARTS = 1.1f;
 	public Flame flame_;
 	public boolean wasTurnedOff = false;
+	
+	long soundId;
 
 	
 	private static float xOfCol(int col) {
@@ -30,6 +34,8 @@ public class FlamethrowerWall extends Wall {
 		} else {
 			this.stateTime_ = Math.max(stateTime_, TIME_UNTIL_FLAME_STARTS + Flame.DURATION - 0.15f);
 		}
+		SoundAssets.flamethrowerStart.stop(soundId);
+		SoundAssets.playSound(SoundAssets.flamethrowerEnd);
 	}
 	
 	public Flame flame() {
@@ -53,5 +59,13 @@ public class FlamethrowerWall extends Wall {
 			return false;
 		}
 		return true;
+	}
+	
+	@Override
+	public void setStatus(int status) {
+		super.setStatus(status);
+		if (status() == Wall.STATUS_INACTIVE) {
+			soundId = SoundAssets.playSound(SoundAssets.flamethrowerStart);
+		}
 	}
 }
