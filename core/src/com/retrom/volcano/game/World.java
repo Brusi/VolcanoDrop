@@ -54,6 +54,7 @@ import com.retrom.volcano.effects.Score3Effect;
 import com.retrom.volcano.effects.Score4Effect;
 import com.retrom.volcano.effects.Score5Effect;
 import com.retrom.volcano.effects.Score6Effect;
+import com.retrom.volcano.effects.SmokeEffect;
 import com.retrom.volcano.game.EventQueue.Event;
 import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.Collectable;
@@ -234,7 +235,7 @@ public class World {
 			addCoin(0, Collectable.Type.POWERUP_SLOMO);
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-			slomoTime += 2f;
+			addSmoke(100, 100);
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
 			shieldTime += 1f;
@@ -768,13 +769,26 @@ public class World {
 			
 			if (wall.status() == Wall.STATUS_EXPLODE) {
 				wall.setStatus(Wall.STATUS_GONE);
-				// TODO: add sound and particles.
+				if (wall.isDual()) {
+					for (int i = 0; i < 16; i++) {
+						effects.add(EffectFactory
+								.wallBreakParticle(wall.position.cpy()));
+					}
+				} else {
+					for (int i = 0; i < 8; i++) {
+						effects.add(EffectFactory.wallBreakParticle(wall.position
+								.cpy()));
+					}
+				}
+//				addDust(wall.position.x, wall.position.y - Wall.SIZE / 3);
+				effects.add(EffectFactory.wallExplodeEffect(wall.position.cpy()));
 			}
 			
 			List<Rectangle> rects = new ArrayList<Rectangle>(floors_.getRects());
 			for (Rectangle rect : rects) {
 				if (wall.bounds.overlaps(rect)) {
 					turnOffFlameThrower(wall);
+					
 					
 					addDust(wall.position.x, wall.position.y - Wall.SIZE / 3);
 					
@@ -835,6 +849,18 @@ public class World {
 	private void addDust(float x, float y) {
 		screenEffects.add(new DustEffect(x, y));
 	}
+	
+	private void addSmoke(final float x, final float y) {
+		for (int i=0; i < 4; i++) {
+			final float time = i * 0.4f;
+			worldEvents_.addEventFromNow(time, new Event() {
+				@Override
+				public void invoke() {
+					screenEffects.add(new SmokeEffect(x, y));
+				}
+			});
+		}
+	}
 
 	private void turnOffFlameThrower(Wall coveringWall) {
 		for (Wall wall : walls_) {
@@ -846,14 +872,16 @@ public class World {
 				continue;
 			}
 			
-			FlamethrowerWall f = (FlamethrowerWall)wall;
+			final FlamethrowerWall f = (FlamethrowerWall)wall;
 			
 			if (f.position.y >= coveringWall.position.y - Wall.SIZE * 1.1f 
 					&& f.position.y <= coveringWall.position.y
 					&& f.position.x >= coveringWall.position.x - Wall.SIZE * 0.9f
 					&& f.position.x <= coveringWall.position.x + Wall.SIZE * 0.9f) {
 
-				Gdx.app.log("DEBUG", "TURNING OFF FLAME!");
+				if (f.isFlameOn()) {
+					addSmoke(f.position.x, f.position.y + Wall.SIZE / 2);
+				}
 				f.turnOff();
 			}
 		}
