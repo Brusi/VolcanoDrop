@@ -14,15 +14,22 @@ public class FlamethrowerWall extends Wall {
 	public FlamethrowerWall(int col, float y) {
 		super(xOfCol(col), y, Wall.SIZE, Wall.SIZE, col, -1);
 	}
+	
+	public boolean isFlameOn() {
+		System.out.println("stateTime_=" + stateTime_ );
+		System.out.println("TIME=" + (TIME_UNTIL_FLAME_STARTS + Flame.DURATION - Flame.OFF_ANIM_TIME));
+		
+		return this.flame_ != null && stateTime_ < TIME_UNTIL_FLAME_STARTS + Flame.DURATION - Flame.OFF_ANIM_TIME;
+	}
 
 	public void turnOff() {
+		wasTurnedOff = true;
 		if (this.flame_ != null) {
 			this.stateTime_ = Math.max(stateTime_, TIME_UNTIL_FLAME_STARTS + Flame.DURATION - Flame.OFF_ANIM_TIME);
 			this.flame_.turnOff();
 		} else {
 			this.stateTime_ = Math.max(stateTime_, TIME_UNTIL_FLAME_STARTS + Flame.DURATION - 0.15f);
 		}
-		wasTurnedOff = true;
 	}
 	
 	public Flame flame() {

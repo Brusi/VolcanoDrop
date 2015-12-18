@@ -51,6 +51,7 @@ public class SoundAssets {
 	public static Sound burningWallStart;
 	public static Sound burningWallEnd;
 	public static Sound flamethrowerStart;
+	public static Sound flamethrowerEnd;
 	
 	public static Sound fireballStart;
 	public static Sound fireballEnd;
@@ -66,7 +67,7 @@ public class SoundAssets {
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/gameplay.mp3"));
 		music.setLooping(true);
 		music.setVolume(0.5f);
-//		if (Settings.soundEnabled) music.play();
+		if (Settings.soundEnabled) music.play();
 		
 		playerJump = new Sound[] {newSound("player_jump_0a.wav"), newSound("player_jump_0b.wav")};
 		playerJumpIntense = new Sound[] {newSound("player_jump_1.wav"), newSound("player_jump_2.wav"), newSound("player_jump_3.wav"), newSound("player_jump_4.wav")};
@@ -127,6 +128,7 @@ public class SoundAssets {
 		burningWallStart = newSound("burner_rock_start.wav");
 		burningWallEnd = newSound("burner_rock_end.wav");
 		flamethrowerStart = newSound("flamethrower_rock_start.wav");
+		flamethrowerEnd = newSound("flamethrower_rock_end.wav");
 		
 		fireballStart = newSound("fireball_start.wav");
 		fireballEnd = newSound("fireball_end.wav");

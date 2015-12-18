@@ -76,12 +76,8 @@ public class Spawner {
 
 		if (timeRemaining < 0) {
 			timeRemaining += TIME_BETWEEN_WALLS;
-			if (rand.nextInt(2) == 0) {
-				if (rand.nextInt(2) == 0) {
-					barsSequence();
-				} else {
-					sideToSideSequence();
-				}
+			if (rand.nextInt(4) == 0) {
+				sideToSideSequence();
 			} else {
 				List<Integer> candidates = new ArrayList<Integer>(floors_.getNextPossibleCols());
 				for (int col = 0; col < sackSilenceTime_.length; ++col) {

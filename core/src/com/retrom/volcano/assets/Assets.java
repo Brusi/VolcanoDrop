@@ -136,6 +136,8 @@ public class Assets {
 	
 	// vfx:
 	public static Array<Sprite> playerExplode;
+	public static Array<Sprite> wallExplode;
+	
 	public static Array<Sprite> coinCrushedEffect;
 	public static Array<Sprite> fireballExplodeEffect;
 	public static Array<Sprite> fireballStartEffect;
@@ -210,6 +212,17 @@ public class Assets {
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
 	}
+	
+	public static void setFilterNearest(Array<Sprite> sprites) {
+		for (Sprite sprite : sprites) {
+			setFilterNearest(sprite);
+		}
+	}
+	
+	public static void setFilterNearest(Sprite sprite) {
+		sprite.getTexture().setFilter(Texture.TextureFilter.Nearest,
+				Texture.TextureFilter.Nearest);
+	}
 
 	public static void load() {
 		TextureAtlas wallsSheet = new TextureAtlas("walls/walls.txt");
@@ -229,25 +242,34 @@ public class Assets {
 
 		TextureAtlas environmentSheet = new TextureAtlas("walls/enviroment.txt");
 		pillars = environmentSheet.createSprites("pillars");
+		setFilterNearest(pillars);
 		pillars_big = environmentSheet.createSprites("pillars_big");
+		setFilterNearest(pillars_big);
 		pillars_start = environmentSheet.createSprite("pillars_start");
+		setFilterNearest(pillars_start);
 		pillars_end = environmentSheet.createSprite("pillars_end");
+		setFilterNearest(pillars_end);
 		pillars_hole = environmentSheet.createSprite("pillars_hole_front");
+		setFilterNearest(pillars_hole);
 		pillars_hole_bg = environmentSheet.createSprite("pillars_hole_back");
+		setFilterNearest(pillars_hole_bg);
 		floor = environmentSheet.createSprite("floor");
+		setFilterNearest(floor);
 		background = environmentSheet.createSprite("bg_base");
-
+		setFilterNearest(background);
+		
 		bg_world1 = environmentSheet.createSprites("bg_world1");
+		setFilterNearest(bg_world1);
 		bg_overlay_world1 = environmentSheet.createSprites("bg_world1_base_1");
+		setFilterNearest(bg_overlay_world1);
 		
 		TextureAtlas environmentSheet2 = new TextureAtlas("walls/enviroment2.txt");
 		bg_world2 = environmentSheet2.createSprites("bg_world2");
+		setFilterNearest(bg_world2);
 		bg_overlay_world2 = environmentSheet2.createSprites("bg_world2_base_1");
-		System.out.println(bg_world2);
-		System.out.println(bg_overlay_world2);
-		
+		setFilterNearest(bg_overlay_world2);
 		bg_world3 = environmentSheet2.createSprites("bg_world3");
-		
+		setFilterNearest(bg_world3);
 		
 		TextureAtlas treasure = new TextureAtlas("treasure/treasure.txt");
 		
@@ -333,6 +355,7 @@ public class Assets {
 		
 		TextureAtlas playerVfxSheet = new TextureAtlas("vfx/playervfx.txt");
 		playerExplode = playerVfxSheet.createSprites("player_die_explotion");
+		wallExplode = playerVfxSheet.createSprites("StoneBreak_puff");
 		
 		TextureAtlas vfxSheet = new TextureAtlas("vfx/vfx.txt");
 		bronzeCollectEffect1 = vfxSheet.createSprites("coin_collect_bronze1");

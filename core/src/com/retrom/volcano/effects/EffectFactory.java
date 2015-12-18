@@ -76,6 +76,14 @@ public class EffectFactory {
 		FiniteAnimationEffect $ = new FiniteAnimationEffect(Assets.fireballExplodeEffect, position);
 		return $;
 	}
+	
+	public static Effect wallBreakParticle(Vector2 position) {
+		return new WallBreakParticle(Assets.wallParticles, position);
+	}
+	public static Effect wallExplodeEffect(Vector2 position) {
+		return new FiniteAnimationEffect(Assets.wallExplode, position);
+	}
+	
 
 	public static Effect coinCrushParticle(Collectable.Type type, Vector2 position) {
 		switch (type) {

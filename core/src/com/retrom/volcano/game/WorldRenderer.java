@@ -25,8 +25,11 @@ import java.util.ListIterator;
 import javax.swing.event.ListSelectionEvent;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Pixmap.Filter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -94,6 +97,7 @@ public class WorldRenderer {
 		this.cam = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 		cam_position = this.cam.position.y = FRUSTUM_HEIGHT / 3f;
 		this.batch = batch;
+		System.out.println("FRUSTUM_HEIGHT=" + FRUSTUM_HEIGHT);
 	}
 	
 	public static final float CAM_SPEED = 40f;
@@ -109,7 +113,8 @@ public class WorldRenderer {
 				cam_position += (cam_target - cam_position) * deltaTime / 2;
 			}
 
-			cam.position.y = snapToPixels(cam_position);
+			cam.position.y = snapToY(cam_position);
+			
 			cam.position.x = world.quakeX;
 			cam.update();
 			batch.setProjectionMatrix(cam.combined);
@@ -118,7 +123,11 @@ public class WorldRenderer {
 		renderBackground();
 		renderObjects();
 		renderOverlay();
+		if (Gdx.input.isKeyJustPressed(Input.Keys.PLUS)) {
+			offset += 1;
+		}
 	}
+	public float offset = 0;
 
 	private void renderOverlay() {
 		if (world.slomoTime <= 0) {
@@ -163,9 +172,6 @@ public class WorldRenderer {
 	}
 	
 	public void drawPillar(Deque<Background.Element> pillar, float x, float y, boolean flip) {
-		
-
-		
 		LinkedList<DrawTask> drawTasks = new LinkedList<DrawTask>();
 		
 		for (Background.Element e : pillar) {
@@ -264,6 +270,7 @@ public class WorldRenderer {
 		renderGoldSacks();
 		renderCoins();
 		renderFloor();
+		
 		drawPillar(world.background.leftPillar, -PILLAR_POS, world.background.leftBaseY(), false);
 		drawPillar(world.background.rightPillar, PILLAR_POS, world.background.rightBaseY(), true);
 		
@@ -412,6 +419,7 @@ public class WorldRenderer {
 					Sprite s = effect.sprite();
 					float tint = effect.getTint();
 					s.setColor(tint, tint, tint, tint);
+					s.setFlip(effect.getFlip(), false);
 					return s;
 				}
 
@@ -466,7 +474,7 @@ public class WorldRenderer {
 
 				@Override
 				public Sprite visit(FireballStartEffect effect) {
-					effect.position_.y = effect.originalY + cam_position; 
+					effect.position_.y = effect.originalY + cam.position.y; 
 					Sprite $ = getFrameStopAtLastFrame(effect.getAnimation(), effect.stateTime());
 					$.setY($.getY() + world.camTarget);
 					return $;
@@ -512,6 +520,7 @@ public class WorldRenderer {
 			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
 			s.setRotation(e.getRotation());
 			s.setScale(e.getScale());
+			s.setY(snapToY(s.getY()));
 			s.draw(batch);
 		}
 	}
@@ -749,6 +758,14 @@ public class WorldRenderer {
 	}
 	
 	private void drawCenter(TextureRegion keyFrame, float x, float y) {
+		y = snapToY(y);
 		batch.draw(keyFrame, x - keyFrame.getRegionWidth()/2, y - keyFrame.getRegionHeight()/2);
+	}
+	
+	public float snapToY(float y) {
+		double fraction = FRUSTUM_WIDTH / Gdx.graphics.getWidth();
+		float newy = (float) (Math.floor(y / fraction) * fraction);
+		return newy;
+		
 	}
 }

@@ -108,7 +108,7 @@ public class Background {
 	
 	private static final Random rand = new Random();
 	
-	public static final float HEIGHT = 1000f; 
+	public static final float HEIGHT = 800f; 
 	public static final float BASE = -3 * Wall.SIZE;
 	
 	// The minimal y value from which holes start to appear on walls.

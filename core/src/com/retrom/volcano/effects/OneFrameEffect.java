@@ -25,4 +25,8 @@ public class OneFrameEffect extends Effect {
 	public Sprite sprite() {
 		return sprite_;
 	}
+	
+	public boolean getFlip() {
+		return false;
+	}
 }

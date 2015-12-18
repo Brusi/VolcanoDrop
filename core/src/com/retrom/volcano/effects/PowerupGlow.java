@@ -19,7 +19,7 @@ public class PowerupGlow extends OneFrameEffect {
 	
 	@Override
 	protected void childSpecificUpdating(float deltaTime) {
-		rotation += deltaTime * 80;
+		rotation += deltaTime * 120;
 		if (c.state() == Collectable.STATUS_CRUSHED
 				|| c.state() == Collectable.STATUS_TAKEN) {
 			this.state_ = Effect.STATE_DONE;
