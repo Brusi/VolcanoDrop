@@ -127,6 +127,7 @@ public class World {
 
 	public float camTarget;
 	boolean quakeOn;
+	float quakeShakeFactor;
 	float quakeX;
 
 	public Background background = new Background();
@@ -154,6 +155,8 @@ public class World {
 	}
 	
 	public World (WorldListener listener) {
+		SoundAssets.startMusic();
+		
 		this.listener_ = listener;
 		this.player = new Player(0, 200, new Player.HitRectHandler() {
 			@Override
@@ -209,14 +212,23 @@ public class World {
 			public void dropSack(int col, int numCoins) {
 				addSack(col, numCoins);
 			}
-		});
-		
-		worldEvents_.addEventFromNow(2f, new EventQueue.Event() {
+
 			@Override
-			public void invoke() {
-				startQuake();
+			public void quake(boolean big) {
+				if (big) {
+					startQuake();
+				} else {
+					startSmallQuake();
+				}
 			}
 		});
+		
+//		worldEvents_.addEventFromNow(2f, new EventQueue.Event() {
+//			@Override
+//			public void invoke() {
+//				startQuake();
+//			}
+//		});
 	}
 
 	private void updateCheats() {
@@ -235,10 +247,6 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
 			dropCoinFromCeiling(0, Collectable.Type.POWERUP_SLOMO);
 		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-			addSmoke(100, 100);
-		}
-		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
 			dropCoinFromCeiling((float) (Math.random() * 200), Collectable.Type.COIN_5_1);
 		}
@@ -267,7 +275,7 @@ public class World {
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
-			startQuake();
+			startSmallQuake();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.U)) {
 			screenEffects.add(new DustEffect(new Vector2(100,100)));
@@ -301,19 +309,20 @@ public class World {
 		addEffectsUnder.add(new PlayerOnionSkinEffect(player.position.cpy(), player.state(), player.stateTime, player.side));
 	}
 
-	private void startQuake() {
+	private void startQuakeWithParams(float duration, float shakeFactor) {
 		quakeOn = true;
+		quakeShakeFactor = shakeFactor;
 //		Gdx.input.vibrate((int)QUAKE_DURATION * 1000);
-		SoundAssets.playRandomSound(SoundAssets.quake);
-		worldEvents_.addEventFromNow(QUAKE_DURATION, new EventQueue.Event() {
+		worldEvents_.addEventFromNow(duration, new EventQueue.Event() {
 			@Override
 			public void invoke() {
 				quakeOn = false;
 			}
 		});
-		int NUM_DUST = 10;
+		int NUM_DUST = Math.round(12 * duration / QUAKE_DURATION);
+		System.out.println("NUM_DUST =" + NUM_DUST );
 		for (int i=0; i < NUM_DUST; ++i) {
-			worldEvents_.addEventFromNow((float)(QUAKE_DURATION * Math.random()), new EventQueue.Event() {
+			worldEvents_.addEventFromNow((float)(duration * Math.random()), new EventQueue.Event() {
 				@Override
 				public void invoke() {
 					float ypos = Utils.randomRange(camTarget - WorldRenderer.FRUSTUM_HEIGHT / 2, WorldRenderer.FRUSTUM_HEIGHT);
@@ -325,6 +334,16 @@ public class World {
 				}
 			});
 		}
+	}
+	
+	private void startQuake() {
+		SoundAssets.playRandomSound(SoundAssets.quake);
+		startQuakeWithParams(QUAKE_DURATION, 1);
+	}
+	
+	private void startSmallQuake() {
+		SoundAssets.playRandomSound(SoundAssets.quakeSmall);
+		startQuakeWithParams(QUAKE_DURATION / 3, 0.5f);
 	}
 
 	public void update(float deltaTime) {
@@ -343,6 +362,10 @@ public class World {
 			for (int i=0; i < 10; i++) {
 				step(deltaTime);
 			}
+		}
+		
+		if (Math.random() < deltaTime) {
+			System.out.println("height/time ratio:" + (camTarget / gameTime));
 		}
 	}
 	
@@ -402,7 +425,7 @@ public class World {
 
 	private void updateQuake(float deltaTime) {
 		if (quakeOn) {
-			quakeX += (Math.random() * 500 - 250) * deltaTime;
+			quakeX += (Math.random() * 500 - 250) * deltaTime * quakeShakeFactor;
 		}
 		quakeX *= (float) Math.pow(0.1, deltaTime);
 	}
@@ -581,6 +604,7 @@ public class World {
 			slomoTime -= deltaTime;
 			if (slomoTime <= 0) {
 				SoundAssets.playSound(SoundAssets.powerupTimeEnd);
+				SoundAssets.resumeMusicAt(gameTime);
 				Effect e = EffectFactory.powerupSlomoDisappearEffect(player.position);
 				pauseEffects.add(e);
 				addEffects.add(e);
@@ -859,7 +883,7 @@ public class World {
 				}
 			}
 			
-			if (wall.position.y < camTarget - 8*Wall.SIZE) {
+			if (wall.position.y < camTarget - 9*Wall.SIZE) {
 				wall.setStatus(Wall.STATUS_GONE);
 			}
 			
@@ -1035,6 +1059,7 @@ public class World {
 			}
 			slomoTime = TOTAL_SLOMO_TIME;
 			SoundAssets.pauseAllSounds();
+			SoundAssets.pauseMusic();
 			pauseEffectEvents.addEventFromNow(0.0f, new EventQueue.Event() {
 				@Override
 				public void invoke() {
@@ -1055,6 +1080,7 @@ public class World {
 			});
 			break;
 		case POWERUP_SHIELD:
+			SoundAssets.pauseAllSounds();
 			pauseEffectEvents.addEventFromNow(0, new EventQueue.Event() {
 				@Override
 				public void invoke() {
@@ -1175,6 +1201,7 @@ public class World {
 					SoundAssets.playSound(SoundAssets.playerDeathBurn);
 					addEffects.add(EffectFactory.playerExplodeEffect(player.position));
 					addBurnParticles(player.position.x, player.position.y);
+					addSingleSmoke(player.position.x, player.position.y);
 				} else if (player.deathType == Player.DEATH_BY_CRUSH) {
 					addEffects.add(EffectFactory.playerExplodeEffect(new Vector2(player.position.x, player.position.y - player.bounds.height/2)));
 					SoundAssets.playSound(SoundAssets.playerDeathCrush);
