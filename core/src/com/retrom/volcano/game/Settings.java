@@ -18,6 +18,7 @@ package com.retrom.volcano.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.retrom.volcano.assets.SoundAssets;
 
 public class Settings {
 	public static boolean soundEnabled = true;
@@ -59,6 +60,17 @@ public class Settings {
 				highscores[i] = score;
 				break;
 			}
+		}
+	}
+	
+	public static void toggleSound() {
+		if (soundEnabled) {
+			soundEnabled = false;
+			SoundAssets.stopAllSounds();
+			SoundAssets.pauseMusic();
+		} else {
+			soundEnabled = true;
+			SoundAssets.resumeMusic();
 		}
 	}
 }

@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.ui.GameUiRenderer;
 import com.retrom.ui.Hub;
 import com.retrom.volcano.assets.SoundAssets;
+import com.retrom.volcano.game.Settings;
 import com.retrom.volcano.game.World;
 import com.retrom.volcano.game.World.WorldListener;
 import com.retrom.volcano.game.WorldRenderer;
@@ -80,6 +81,10 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.P) || isPauseAreaTouched()) {
 			togglePause();
 		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+			Settings.toggleSound();
+		}
+		
 	}
 
 	@Override

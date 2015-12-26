@@ -12,6 +12,7 @@ import com.retrom.volcano.utils.SoundEvictingQueue;
 public class SoundAssets {
 	
 	public static Music music;
+	public static long musicid;
 	
 	public static Sound[] playerJump;
 	public static Sound[] playerJumpIntense;
@@ -20,6 +21,7 @@ public class SoundAssets {
 	public static Sound[] wallDualHit;
 	
 	public static Sound[] quake;
+	public static Sound[] quakeSmall;
 	
 	public static Sound[] coinsCollectBronze;
 	public static Sound[] coinsCollectSilver;
@@ -76,6 +78,7 @@ public class SoundAssets {
 		wallDualHit = new Sound[] {newSound("x2_rock_hit_1.wav"), newSound("x2_rock_hit_2.wav")};
 		
 		quake = new Sound[] {newSound("quake_1.wav"), newSound("quake_2.wav")};
+		quakeSmall = new Sound[] {newSound("quake_small_1.wav"), newSound("quake_small_2.wav")};
 		
 		// Coins:
 		coinsCollectBronze = new Sound[] {
@@ -207,5 +210,32 @@ public class SoundAssets {
 				s.resume();
 			}
 		});
+	}
+	
+	public static void startMusic() {
+		if (!Settings.soundEnabled) {
+			return;
+		}
+		music.stop();
+		music.play();
+	}
+
+	public static void pauseMusic() {
+		music.pause();
+	}
+	
+	public static void resumeMusic() {
+		if (!Settings.soundEnabled) {
+			return;
+		}
+		music.play();
+	}
+	
+	public static void resumeMusicAt(float position) {
+		if (!Settings.soundEnabled) {
+			return;
+		}
+		music.setPosition(position);
+		music.play();
 	}
 }
