@@ -133,9 +133,9 @@ public class WorldRenderer {
 		if (world.slomoTime <= 0) {
 			return;
 		}
-		float alpha = world.consecutiveSlomo ? 1 :
+		float alpha = 
 			Math.min( Math.min(1, world.slomoTime),
-			(World.TOTAL_SLOMO_TIME - world.slomoTime)/0.25f);
+			(world.consecutiveSlomo ? 1 : (World.TOTAL_SLOMO_TIME - world.slomoTime))/0.25f);
 		alpha *= 0.30f;
 
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
