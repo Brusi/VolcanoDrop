@@ -205,6 +205,15 @@ public class Assets {
 	public static Sprite pauseButton;
 	public static Sprite pauseButtonClicked;
 	
+	// On screen control
+	public static Sprite leftRightControl;
+	public static Sprite jumpControl;
+	
+	public static Sprite leftControlOn;
+	public static Sprite rightControlOn;
+	public static Sprite jumpControlOn;
+	
+	
 	// Fonts
 	public static BitmapFont scoreFont;
 
@@ -446,6 +455,13 @@ public class Assets {
 		scoreIcon =  guiSheet.createSprite("gui_score_gold_icon");
 		pauseButton= guiSheet.createSprite("GUI_buttons_pause");
 		pauseButtonClicked = guiSheet.createSprite("GUI_buttons_pause_click");
+		
+		leftRightControl = guiSheet.createSprite("GUI_MovementControls_LeftRight_body");
+		jumpControl = guiSheet.createSprite("GUI_MovementControls_Jump_body");
+		
+		leftControlOn = guiSheet.createSprite("GUI_MovementControls_LeftRight_left_click");
+		rightControlOn = guiSheet.createSprite("GUI_MovementControls_LeftRight_right_click");
+		jumpControlOn = guiSheet.createSprite("GUI_MovementControls_Jump_up_click");
 		
 		scoreFont = new BitmapFont(Gdx.files.internal("ui/font/volcano_score.fnt"), false);
 		

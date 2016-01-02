@@ -1,8 +1,10 @@
-package com.retrom.ui;
+package com.retrom.volcano.ui;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.retrom.volcano.assets.Assets;
+import com.retrom.volcano.control.ControlManager;
 import com.retrom.volcano.game.WorldRenderer;
 
 public class GameUiRenderer {
@@ -24,7 +26,12 @@ public class GameUiRenderer {
 	public void render(boolean isPaused) {
 		batch_.begin();
 		renderScore(isPaused);
+		renderControls();
 		batch_.end();
+	}
+
+	private void renderControls() {
+		ControlManager.getControl().render(batch_);
 	}
 
 	private void renderScore(boolean isPaused) {

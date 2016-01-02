@@ -8,13 +8,15 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.retrom.ui.GameUiRenderer;
-import com.retrom.ui.Hub;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.game.Settings;
 import com.retrom.volcano.game.World;
 import com.retrom.volcano.game.World.WorldListener;
 import com.retrom.volcano.game.WorldRenderer;
+import com.retrom.volcano.ui.GameUiRenderer;
+import com.retrom.volcano.ui.Hub;
+import com.retrom.volcano.ui.MaskTest1;
+import com.retrom.volcano.utils.TouchToPoint;
 
 public class GameScreen extends ScreenAdapter implements Screen {
 	
@@ -28,9 +30,13 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	private GameUiRenderer uiRenderer_;
 
 	boolean isPaused_ = false;
+
+	private MaskTest1 maskTest;
 	
 	@Override
 	public void show() {
+//		mt();
+		
 		world_ = new World(new WorldListener() {
 
 			@Override
@@ -68,17 +74,8 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		checkPause();
 	}
 	
-	private boolean isPauseAreaTouched() {
-		if (!Gdx.input.justTouched()) {
-			return false;
-		}
-		float x = Gdx.input.getX();
-		float y = Gdx.input.getY();
-		return x > Gdx.graphics.getWidth() * 3f / 4f && y < Gdx.graphics.getWidth() / 4f;  
-	}
-	
 	private void checkPause() {
-		if (Gdx.input.isKeyJustPressed(Input.Keys.P) || isPauseAreaTouched()) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.P) || hub_.isPauseAreaTouched()) {
 			togglePause();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {

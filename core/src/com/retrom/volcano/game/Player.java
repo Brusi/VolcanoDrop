@@ -22,6 +22,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.retrom.volcano.assets.SoundAssets;
+import com.retrom.volcano.control.AbstractControl;
+import com.retrom.volcano.control.ControlManager;
 import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.DynamicGameObject;
 import com.retrom.volcano.game.objects.Wall;
@@ -45,7 +47,7 @@ public class Player extends DynamicGameObject {
 	public static final int DEATH_BY_CRUSH = 1;
 	public static final int DEATH_BY_BURN = 2;
 	
-	public static final float MAX_ACCEL = 20f;
+	protected static final float X_ANALOG_ACCEL = 90f * 60f;
 	public static final float FRICTION_RATE = 0.001797f;
 	private static final float JUMP_VEL = 900;
 	
@@ -79,18 +81,23 @@ public class Player extends DynamicGameObject {
 		obstacles_ = obstacles;
 	}
 	
-	private void processInput() {
-		// PC controls
-		float xAccel = getXAccel();
-		velocity.x -= MAX_ACCEL * xAccel;
+	private void processInput(float deltaTime) {
+		AbstractControl control = ControlManager.getControl();
 		
-		// Phone controls
-		float accel = Gdx.input.getAccelerometerX();
-		if (Math.abs(accel) > 0.5) {
-			velocity.x = -200 * accel;
+		// PC controls
+		if (control.isAnalog()) {
+			velocity.x = control.getAnalogXVel();
+		} else {
+			velocity.x += control.getDigitalXDir() * X_ANALOG_ACCEL * deltaTime;
 		}
 		
-		if (grounded_ && pressedUp() ) {
+//		// Phone controls
+//		float accel = Gdx.input.getAccelerometerX();
+//		if (Math.abs(accel) > 0.5) {
+//			velocity.x = -200 * accel;
+//		}
+		
+		if (grounded_ && control.isJumpPressed()) {
 			grounded_ = false;
 			velocity.y = JUMP_VEL;
 			if (timeSinceLanding > 0.1f) {
@@ -101,33 +108,13 @@ public class Player extends DynamicGameObject {
 		}
 	}
 	
-	private boolean pressedUp() {
-		return Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.justTouched();  
-	}
-
-	private float getXAccel() {
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			return 4f;
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			return -4f;
-		}
-		
-		float accel = Gdx.input.getAccelerometerX();
-		if (Math.abs(accel) < 0.5) {
-			return 0;
-		}
-//		return (float) (Math.sin((accel - Math.signum(accel)) / 9 *Math.PI) * 10);
-		return Math.signum(accel) * (Math.abs(accel) - 0.5f);
-	}
-
 	public void update (float deltaTime) {
 		stateTime += deltaTime;
 		timeSinceLanding += deltaTime;
 		if (state_ == STATE_DIE || state_ == STATE_DEAD) {
 			return;
 		}
-		processInput();
+		processInput(deltaTime);
 		tryMove(deltaTime);
 		
 		updateState(deltaTime);

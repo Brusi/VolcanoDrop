@@ -1,24 +1,60 @@
 gui.png
+size: 940, 175
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-GUI_buttons_pause
+GUI_MovementControls_Jump_body
   rotate: false
   xy: 2, 2
+  size: 103, 103
+  orig: 103, 103
+  offset: 0, 0
+  index: -1
+GUI_MovementControls_Jump_up_click
+  rotate: false
+  xy: 107, 2
+  size: 73, 73
+  orig: 73, 73
+  offset: 0, 0
+  index: -1
+GUI_MovementControls_LeftRight_body
+  rotate: false
+  xy: 182, 2
+  size: 206, 116
+  orig: 206, 116
+  offset: 0, 0
+  index: -1
+GUI_MovementControls_LeftRight_left_click
+  rotate: false
+  xy: 390, 2
+  size: 83, 74
+  orig: 83, 74
+  offset: 0, 0
+  index: -1
+GUI_MovementControls_LeftRight_right_click
+  rotate: false
+  xy: 475, 2
+  size: 83, 74
+  orig: 83, 74
+  offset: 0, 0
+  index: -1
+GUI_buttons_pause
+  rotate: false
+  xy: 560, 2
   size: 166, 171
   orig: 166, 171
   offset: 0, 0
   index: -1
 GUI_buttons_pause_click
   rotate: false
-  xy: 170, 2
+  xy: 728, 2
   size: 166, 171
   orig: 166, 171
   offset: 0, 0
   index: -1
 gui_score_gold_icon
   rotate: false
-  xy: 338, 2
+  xy: 896, 2
   size: 42, 42
   orig: 42, 42
   offset: 0, 0
