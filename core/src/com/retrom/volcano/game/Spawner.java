@@ -5,8 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import sun.awt.AWTAccessor.EventQueueAccessor;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.retrom.volcano.game.EventQueue.Event;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
 
@@ -41,6 +44,7 @@ public class Spawner {
 		this.activeWalls = activeWalls;
 		handler_ = handler;
 		this.floors_ = floors;
+		initEvents();
 	}
 	
 	// Fixed time between walls in seconds.
@@ -55,10 +59,14 @@ public class Spawner {
 	private static final Float SACK_SACK_SILENCE_TIME = 1f;
 	
 	private float timeCount = 0;
-	private float timeRemaining = TIME_BETWEEN_WALLS;
 	
 	// Enable/disable for debug.
 	public boolean enabled = true;
+	
+	// Events.
+	private EventQueue.Event NOP;
+	private EventQueue.Event QUAKE;
+	private EventQueue.Event QUAKE_SMALL;
 	
 	public void update(float deltaTime) {
 		if (!enabled) {
@@ -66,14 +74,25 @@ public class Spawner {
 		}
 		timeCount += deltaTime;
 		
-		updateLevel();
+		
 		updateHetkeys();
+		updateSackSilence(deltaTime);
 		
-		if (queue.isEmpty()) {
-			timeRemaining -= deltaTime;
-		}
+		
 		queue.update(deltaTime);
-		
+		if (queue.isEmpty()) {
+			updateLevel();
+		}
+		if (queue.isEmpty()) {
+			dropWalls();
+		}
+//		dropCoins(deltaTime);
+
+//		dropSackAtRate(deltaTime, AVG_SACK_TIME);
+//		dropFireballAtRate(deltaTime, AVG_FIREBALL_TIME);
+	}
+
+	private void updateSackSilence(float deltaTime) {
 		for (int col = 0; col < sackSilenceTime_.length; ++col) {
 			if (sackSilenceTime_[col] > 0) {
 				sackSilenceTime_[col] -= deltaTime;
@@ -81,15 +100,6 @@ public class Spawner {
 				sackSilenceTime_[col] = 0;
 			}
 		}
-		
-		if (timeRemaining < 0) {
-			dropWalls();
-		}
-		
-//		dropCoins(deltaTime);
-
-//		dropSackAtRate(deltaTime, AVG_SACK_TIME);
-//		dropFireballAtRate(deltaTime, AVG_FIREBALL_TIME);
 	}
 
 	private void dropCoins(float deltaTime) {
@@ -135,6 +145,18 @@ public class Spawner {
 		switch (level_) {
 		case 1: handler_.quake(true); break;
 		case 3: dropBasicSequence(); handler_.quake(true); break;
+		case 4:
+			List<Integer> candidates = getWallCandidates();
+			int col;
+			if (!candidates.isEmpty()) {
+				col = candidates.get(rand.nextInt(candidates.size()));
+			} else {
+				col = randomColumn();
+			}
+			handler_.dropBurningWall(col);
+			queue.addEventFromNow(4f, NOP);
+			handler_.quake(true);
+			break;
 		}
 	}
 
@@ -186,25 +208,25 @@ public class Spawner {
 	private void dropWalls() {
 		List<Integer> candidates = getWallCandidates();
 		if (candidates.isEmpty()) {
-			timeRemaining += 1f;
+			queue.addEventFromNow(TIME_BETWEEN_WALLS, NOP);
 			return;
 		}
 		
 		if (level_ == 0) {
-			timeRemaining += TIME_BETWEEN_WALLS * 1.5f;
 			dropOneBasicWall(candidates);
+			queue.addEventFromNow(TIME_BETWEEN_WALLS * 1.5f, NOP);
 		} else if (level_ == 1) {
-			timeRemaining += TIME_BETWEEN_WALLS;
 			dropOneBasicWall(candidates);
+			queue.addEventFromNow(TIME_BETWEEN_WALLS, NOP);
 		} else if (level_ == 2) {
-			timeRemaining += TIME_BETWEEN_WALLS;
 			dropWallOrDual(candidates);
+			queue.addEventFromNow(TIME_BETWEEN_WALLS, NOP);
 		} else if (level_ == 3 || level_ == 4){
 			if (rand.nextInt(6) == 0) {
 				dropBasicSequence();
 			} else {
-				timeRemaining += TIME_BETWEEN_WALLS;
 				dropWallOrDual(candidates);
+				queue.addEventFromNow(TIME_BETWEEN_WALLS, NOP);
 			}
 		}
 	}
@@ -273,14 +295,22 @@ public class Spawner {
 	}
 
 	private void dropSingleRandomTypeWall(Integer col) {
-		if (rand.nextInt(3) == 0) {
-			if (rand.nextBoolean()) {
+		if (level_ < 7) {
+			if (rand.nextInt(4) == 0) {
 				handler_.dropBurningWall(col);
 			} else {
-				handler_.dropFlamethrower(col);
+				handler_.dropWall(col);
 			}
 		} else {
-			handler_.dropWall(col);
+			if (rand.nextInt(3) == 0) {
+				if (rand.nextBoolean()) {
+					handler_.dropBurningWall(col);
+				} else {
+					handler_.dropFlamethrower(col);
+				}
+			} else {
+				handler_.dropWall(col);
+			}
 		}
 	}
 	
@@ -310,6 +340,36 @@ public class Spawner {
 		return Collectable.Type.values()[index];
 	}
 	
+	// ########## Events ##########
+	
+	private void initEvents() {
+		NOP = new EventQueue.Event() {
+			@Override
+			public void invoke() {}
+		};
+		QUAKE = new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				handler_.quake(true);
+			}
+		};
+		QUAKE_SMALL = new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				handler_.quake(false);
+			}
+		}; 
+	}
+	
+	EventQueue.Event dropWallEvent(final int col) {
+		return new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				handler_.dropWall(col);
+			}
+		};
+	}
+	
 	// ########## Sequences ##########
 	
 	private void sideToSideSequence() {
@@ -329,8 +389,6 @@ public class Spawner {
 	}
 	
 	private void sideToSideSequenceWithEdgeHole() {
-		timeRemaining = 2f;
-		
 		boolean leftToRight = rand.nextBoolean();
 		
 		for (int i = 0; i < 5; i++) {
@@ -344,11 +402,10 @@ public class Spawner {
 			final float time = i * 0.15f;
 			queue.addEventFromNow(time, event);
 		}
+		queue.addEventFromNow(2, NOP);
 	}
 	
 	private void sideToSideSequenceWithMiddleHole() {
-		timeRemaining = 2f;
-		
 		boolean leftToRight = rand.nextBoolean();
 		int hole_col = randomNonEdgeColumn();
 		for (int i = 0; i < 6; i++) {
@@ -365,11 +422,10 @@ public class Spawner {
 			final float time = i * 0.15f;
 			queue.addEventFromNow(time, event);
 		}
+		queue.addEventFromNow(2, NOP);
 	}
 	
 	private void seq3and3() {
-		timeRemaining = 2f;
-		
 		boolean leftToRight = rand.nextBoolean();
 		float time = 0;
 		for (int times=0; times < 2; times++) {
@@ -386,11 +442,10 @@ public class Spawner {
 			}
 			leftToRight = !leftToRight;
 		}
+		queue.addEventFromNow(2, NOP);
 	}
 	
 	private void barsSequence() {
-		timeRemaining = 2f;
-		
 		boolean leftToRight = rand.nextBoolean();
 		int odd = rand.nextInt(2);
 		for (int times = 0; times < 2; times++) {
@@ -408,20 +463,10 @@ public class Spawner {
 			}
 			odd = 1 - odd;
 		}
-	}
-	
-	EventQueue.Event dropWallEvent(final int col) {
-		return new EventQueue.Event() {
-			@Override
-			public void invoke() {
-				handler_.dropWall(col);
-			}
-		};
+		queue.addEventFromNow(TIME_BETWEEN_WALLS * 2, NOP);
 	}
 	
 	private void seq3pairs() {
-		timeRemaining = 1f;
-		
 		float diff = 0.5f;
 		
 		final float leftToRight = rand.nextInt(2);
@@ -433,11 +478,10 @@ public class Spawner {
 		
 		queue.addEventFromNow((1 + leftToRight) * diff, dropWallEvent(4));
 		queue.addEventFromNow((1 + leftToRight) * diff, dropWallEvent(5));
+		queue.addEventFromNow(3, NOP);
 	}
 	
 	private void seq5dice() {
-		timeRemaining = 1f;
-		
 		queue.addEventFromNow(0, dropWallEvent(0));
 		queue.addEventFromNow(0, dropWallEvent(1));
 		queue.addEventFromNow(0, dropWallEvent(4));
@@ -450,10 +494,11 @@ public class Spawner {
 		queue.addEventFromNow(1.4f, dropWallEvent(1));
 		queue.addEventFromNow(1.4f, dropWallEvent(4));
 		queue.addEventFromNow(1.4f, dropWallEvent(5));
+		
+		queue.addEventFromNow(2f, NOP);
 	}
 	
 	private void seqV() {
-		timeRemaining = 1f;
 		float diff = 0.5f;
 		
 		queue.addEventFromNow(0, dropWallEvent(2));
@@ -463,10 +508,11 @@ public class Spawner {
 		queue.addEventFromNow(1 * diff, dropWallEvent(4));
 		queue.addEventFromNow(2 * diff, dropWallEvent(0));
 		queue.addEventFromNow(2 * diff, dropWallEvent(5));
+		
+		queue.addEventFromNow(3 * diff, NOP);
 	}
 	
 	private void seqHat() {
-		timeRemaining = 1f;
 		float diff = 0.5f;
 		
 		queue.addEventFromNow(2 * diff, dropWallEvent(2));
@@ -475,5 +521,7 @@ public class Spawner {
 		queue.addEventFromNow(1 * diff, dropWallEvent(4));
 		queue.addEventFromNow(0 * diff, dropWallEvent(0));
 		queue.addEventFromNow(0 * diff, dropWallEvent(5));
+		
+		queue.addEventFromNow(4 * diff, NOP);
 	}
 }
