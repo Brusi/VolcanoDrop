@@ -158,6 +158,21 @@ public class EffectFactory {
 		}
 		return null;
 	}
+	
+	public static Effect powerupFlare(Type type, Collectable c) {
+		switch (type) {
+		case POWERUP_MAGNET:
+			return new PowerupFlare(Assets.magnetFlare, c);
+		case POWERUP_SLOMO:
+			return new PowerupFlare(Assets.slomoFlare, c);
+		case POWERUP_SHIELD:
+			return new PowerupFlare(Assets.shieldFlare, c);
+		default:
+			Gdx.app.error("ERROR", "Type is not a powerup, no powerup back glow.");
+			break;
+		}
+		return null;
+	}
 
 	public static Effect powerupAppearEffect(Type type, Vector2 position) {
 		switch (type) {

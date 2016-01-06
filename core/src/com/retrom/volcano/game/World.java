@@ -55,6 +55,7 @@ import com.retrom.volcano.effects.Score3Effect;
 import com.retrom.volcano.effects.Score4Effect;
 import com.retrom.volcano.effects.Score5Effect;
 import com.retrom.volcano.effects.Score6Effect;
+import com.retrom.volcano.effects.ShieldFlare;
 import com.retrom.volcano.effects.SmokeEffect;
 import com.retrom.volcano.game.EventQueue.Event;
 import com.retrom.volcano.game.objects.BurningWall;
@@ -362,10 +363,6 @@ public class World {
 			for (int i=0; i < 10; i++) {
 				step(deltaTime);
 			}
-		}
-		
-		if (Math.random() < deltaTime) {
-			System.out.println("height/time ratio:" + (camTarget / gameTime));
 		}
 	}
 	
@@ -701,6 +698,7 @@ public class World {
 		if (coin.isPowerup()) {
 			addEffects.add(EffectFactory.powerupBackGlow(coin.type, coin));
 			addEffectsUnder.add(EffectFactory.powerupAura(coin.type, coin));
+			addEffects.add(EffectFactory.powerupFlare(coin.type, coin));
 		} else {
 			if (magnetTime > 0) {
 				addCoinMagnetGlowEffect(coin);
@@ -1099,6 +1097,8 @@ public class World {
 						playerShieldEffect = new PlayerShieldEffect(player.position); 
 						pauseEffects.add(playerShieldEffect);
 						addEffects.add(playerShieldEffect);
+						
+						addEffects.add(new ShieldFlare(playerShieldEffect));
 					} else {
 						playerShieldEffect.renew();
 					}

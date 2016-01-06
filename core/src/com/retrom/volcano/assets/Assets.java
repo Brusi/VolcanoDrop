@@ -175,6 +175,10 @@ public class Assets {
 	public static Sprite slomoAura;
 	public static Sprite shieldAura;
 	
+	public static Sprite magnetFlare;
+	public static Sprite slomoFlare;
+	public static Sprite shieldFlare;
+	
 	// Enemies:
 	public static Sprite burningWall;
 	public static Array<Sprite> burningWallStart;
@@ -404,6 +408,10 @@ public class Assets {
 		magnetAura = powerupSheet.createSprite("powerup_magnet_aura");
 		slomoAura = powerupSheet.createSprite("powerup_timebend_aura");
 		shieldAura = powerupSheet.createSprite("powerup_shield_aura");
+		
+		magnetFlare = powerupSheet.createSprite("powerup_magnet_ flare");
+		slomoFlare = powerupSheet.createSprite("powerup_timebend_ flare");
+		shieldFlare = powerupSheet.createSprite("powerup_shield_ flare");
 		
 		playerShieldEffectStart = powerupSheet.createSprites("powerup_shield_animated_glow_start");
 		playerShieldEffect = powerupSheet.createSprites("powerup_shield_animated_glow_middle");
