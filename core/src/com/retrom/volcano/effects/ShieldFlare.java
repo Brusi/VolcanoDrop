@@ -34,12 +34,13 @@ public class ShieldFlare extends OneFrameEffect {
 		switch(shieldEffect.shieldState()) {
 		case DIE:
 			return Math.min(1, 1 - shieldEffect.stateTime() * 2.5f);
-		case HIT:
-			return 1;
-		case MIDDLE:
-			return 1;
 		case START:
-			return Math.min(1, shieldEffect.stateTime() * 7.5f);
+			if (stateTime_ <= 0.4f) { 
+				return Math.min(1, shieldEffect.stateTime() * 7.5f);
+			}
+		case HIT:
+		case MIDDLE:
+			return (float) ((Math.sin(this.stateTime() * 4) + 1) / 2 * 0.3 + 0.7);
 		default:
 			return 1;
 		}
