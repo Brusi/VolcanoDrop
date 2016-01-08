@@ -15,7 +15,7 @@ import com.retrom.volcano.game.World.WorldListener;
 import com.retrom.volcano.game.WorldRenderer;
 import com.retrom.volcano.ui.GameUiRenderer;
 import com.retrom.volcano.ui.Hub;
-import com.retrom.volcano.ui.MaskTest1;
+import com.retrom.volcano.ui.PowerupUiRenderer;
 import com.retrom.volcano.utils.TouchToPoint;
 
 public class GameScreen extends ScreenAdapter implements Screen {
@@ -31,12 +31,8 @@ public class GameScreen extends ScreenAdapter implements Screen {
 
 	boolean isPaused_ = false;
 
-	private MaskTest1 maskTest;
-	
 	@Override
 	public void show() {
-//		mt();
-		
 		world_ = new World(new WorldListener() {
 
 			@Override
@@ -48,7 +44,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		hub_ = new Hub();
 		
 		worldRenderer_ = new WorldRenderer(batch_, world_);
-		uiRenderer_ = new GameUiRenderer(hub_);
+		uiRenderer_ = new GameUiRenderer(hub_, world_);
 	}
 
 	private void togglePause() {
@@ -69,7 +65,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		}
 		
 		worldRenderer_.render(delta, isPaused_);
-		uiRenderer_.render(isPaused_);
+		uiRenderer_.render(delta, isPaused_);
 		
 		checkPause();
 	}
@@ -92,6 +88,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	public void pause() {
 		isPaused_ = true;
 		SoundAssets.pauseAllSounds();
+		world_.pause();
 	}
 
 	@Override
@@ -99,6 +96,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	{
 		isPaused_ = false;
 		SoundAssets.resumeAllSounds();
+		world_.unpause();
 	}
 
 	@Override

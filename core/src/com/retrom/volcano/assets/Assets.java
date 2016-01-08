@@ -209,6 +209,14 @@ public class Assets {
 	public static Sprite pauseButton;
 	public static Sprite pauseButtonClicked;
 	
+	// Powerup ui
+	public static Sprite magnetGui;
+	public static Sprite slomoGui;
+	public static Sprite shieldGui;
+	public static Sprite magnetGuiOn;
+	public static Sprite slomoGuiOn;
+	public static Sprite shieldGuiOn;
+	
 	// On screen control
 	public static Sprite leftRightControl;
 	public static Sprite jumpControl;
@@ -463,6 +471,15 @@ public class Assets {
 		scoreIcon =  guiSheet.createSprite("gui_score_gold_icon");
 		pauseButton= guiSheet.createSprite("GUI_buttons_pause");
 		pauseButtonClicked = guiSheet.createSprite("GUI_buttons_pause_click");
+		
+		magnetGui = guiSheet.createSprite("gui_powerups_magnet");
+		magnetGuiOn = guiSheet.createSprite("gui_powerups_magnet_on");
+		slomoGui = guiSheet.createSprite("gui_powerups_timebend");
+		slomoGuiOn = guiSheet.createSprite("gui_powerups_timebend_on");
+		shieldGui = guiSheet.createSprite("gui_powerups_shield");
+		shieldGuiOn = guiSheet.createSprite("gui_powerups_shield_on");
+		
+		
 		
 		leftRightControl = guiSheet.createSprite("GUI_MovementControls_LeftRight_body");
 		jumpControl = guiSheet.createSprite("GUI_MovementControls_Jump_body");

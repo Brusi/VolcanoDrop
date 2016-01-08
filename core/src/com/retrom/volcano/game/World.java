@@ -99,7 +99,7 @@ public class World {
 	private final EventQueue worldEvents_ = new EventQueue();
 	
 	// Pause effect objects.
-	static final float PAUSE_EFFECT_DURATION = 0.3f;
+	public static final float PAUSE_EFFECT_DURATION = 0.3f;
 	final EventQueue pauseEffectEvents = new EventQueue();
 	final public List<Effect> pauseEffects = new ArrayList<Effect>();
 	float pauseEffectStateTime_;
@@ -114,6 +114,7 @@ public class World {
 	static final float TOTAL_SHIELD_TIME = 5f;
 	static final float TOTAL_SLOMO_TIME = 5f;
 	static final float TOTAL_MAGNET_TIME = 5f;
+	static final public float POWERUP_APPEAR_TIME = 1f;
 	
 	// Special effect holders.
 	private PlayerShieldEffect playerShieldEffect;
@@ -1008,7 +1009,6 @@ public class World {
 		case POWERUP_MAGNET:
 			SoundAssets.pauseAllSounds();
 			SoundAssets.setPitch(1f);
-			
 			if (magnetTime <= 0) {
 				playerMagnetEffect = new PlayerMagnetEffect(player.position);
 				addEffectsUnder.add(playerMagnetEffect);
@@ -1029,6 +1029,7 @@ public class World {
 					addCoinMagnetGlowEffect(coin);
 				}
 			}
+			magnetTime = TOTAL_MAGNET_TIME;
 			
 			pauseEffectEvents.addEventFromNow(0.0f, new EventQueue.Event() {
 				@Override
@@ -1045,8 +1046,6 @@ public class World {
 					SoundAssets.resumeAllSounds();
 					SoundAssets.stopSound(SoundAssets.powerupMagnetLoop);
 					SoundAssets.loopSound(SoundAssets.powerupMagnetLoop);
-					
-					magnetTime = TOTAL_MAGNET_TIME;
 				}
 			});
 			break;
@@ -1079,6 +1078,7 @@ public class World {
 			break;
 		case POWERUP_SHIELD:
 			SoundAssets.pauseAllSounds();
+			shieldTime = TOTAL_SHIELD_TIME;
 			pauseEffectEvents.addEventFromNow(0, new EventQueue.Event() {
 				@Override
 				public void invoke() {
@@ -1092,7 +1092,6 @@ public class World {
 				@Override
 				public void invoke() {
 					SoundAssets.resumeAllSounds();
-					shieldTime = TOTAL_SHIELD_TIME;
 					if (playerShieldEffect == null) {
 						playerShieldEffect = new PlayerShieldEffect(player.position); 
 						pauseEffects.add(playerShieldEffect);
@@ -1234,5 +1233,25 @@ public class World {
 	private void finishGame() {
 		SoundAssets.stopAllSounds();
 		listener_.restartGame();
+	}
+	
+	public void pause() {
+		SoundAssets.pauseMusic();
+	}
+	
+	public void unpause() {
+		SoundAssets.resumeMusicAt(gameTime);
+	}
+
+	public float magnetRatio() {
+		return magnetTime / TOTAL_MAGNET_TIME;
+	}
+	
+	public float slomoRatio() {
+		return slomoTime / TOTAL_SLOMO_TIME;
+	}
+	
+	public float shieldRatio() {
+		return shieldTime / TOTAL_SHIELD_TIME;
 	}
 }
