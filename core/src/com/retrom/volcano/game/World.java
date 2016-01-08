@@ -349,10 +349,6 @@ public class World {
 	}
 
 	public void update(float deltaTime) {
-		if (Gdx.input.isKeyPressed(Input.Keys.TAB)) {
-			deltaTime /= 10;
-		}
-		
 		if (!pauseEffectEvents.isEmpty()) {
 			pauseEffectEvents.update(deltaTime);
 			updateEffectsList(deltaTime, pauseEffects);
@@ -360,11 +356,6 @@ public class World {
 			return;
 		}
 		step(deltaTime);
-		if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
-			for (int i=0; i < 10; i++) {
-				step(deltaTime);
-			}
-		}
 	}
 	
 	public void step(float deltaTime) {

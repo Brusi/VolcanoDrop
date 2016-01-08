@@ -57,6 +57,18 @@ public class GameScreen extends ScreenAdapter implements Screen {
 
 	@Override
 	public void render(float delta) {
+		if (Gdx.input.isKeyPressed(Input.Keys.TAB)) {
+			delta /= 10f;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
+			for (int i=0; i < 10; i++) {
+				update(delta);
+			}
+		}
+		update(delta);
+	}
+
+	private void update(float delta) {
 		delta = Math.min(1/30f, delta);
 		if (!isPaused_) {
 			world_.update(delta);
