@@ -52,8 +52,8 @@ public class Spawner {
 	
 	// Expected time between coins.
 	private static final float AVG_COIN_TIME = 1f;
-	private static final float AVG_FIREBALL_TIME = 7f;
-	private static final float AVG_SACK_TIME = 5f;
+	private static final float AVG_FIREBALL_TIME = 12f;
+	private static final float AVG_SACK_TIME = 12f;
 	
 	private static final Float SACK_WALL_SILENCE_TIME = 1f;
 	private static final Float SACK_SACK_SILENCE_TIME = 1f;
@@ -86,10 +86,10 @@ public class Spawner {
 		if (queue.isEmpty()) {
 			dropWalls();
 		}
-//		dropCoins(deltaTime);
+		dropCoins(deltaTime);
 
-//		dropSackAtRate(deltaTime, AVG_SACK_TIME);
-//		dropFireballAtRate(deltaTime, AVG_FIREBALL_TIME);
+		dropSackAtRate(deltaTime, AVG_SACK_TIME);
+		dropFireballAtRate(deltaTime, AVG_FIREBALL_TIME);
 	}
 
 	private void updateSackSilence(float deltaTime) {
@@ -122,16 +122,19 @@ public class Spawner {
 	}
 
 	private void updateLevel() {
-		if (timeCount < 7) {
-			setLevel(0);
-		} else if (timeCount < 14) {
-			setLevel(1);
-		} else if (timeCount < 21){
-			setLevel(2);
-		} else if (timeCount < 35){
-			setLevel(3);
-		} else {
-			setLevel(4);
+		float[] timesArray = {
+				7, 14, 21,
+				35, 48, 60 + 16,
+				60 + 30, 60 + 43, 60 + 57,
+				120 + 10, 120 + 24,
+				120 + 37, 120 + 51,
+				180 + 33, 180 + 47 };
+		
+		for (int i=0; i < timesArray.length; i++) {
+			if (timeCount < timesArray[i]) {
+				setLevel(i);
+				return;
+			}
 		}
 	}
 	
@@ -154,7 +157,7 @@ public class Spawner {
 				col = randomColumn();
 			}
 			handler_.dropBurningWall(col);
-			queue.addEventFromNow(4f, NOP);
+			queue.addEventFromNow(1f, NOP);
 			handler_.quake(true);
 			break;
 		}
@@ -221,14 +224,14 @@ public class Spawner {
 		} else if (level_ == 2) {
 			dropWallOrDual(candidates);
 			queue.addEventFromNow(TIME_BETWEEN_WALLS, NOP);
-		} else if (level_ == 3 || level_ == 4){
+		} else if (level_ == 3 || level_ >= 4){
 			if (rand.nextInt(6) == 0) {
 				dropBasicSequence();
 			} else {
 				dropWallOrDual(candidates);
 				queue.addEventFromNow(TIME_BETWEEN_WALLS, NOP);
 			}
-		}
+		} 
 	}
 
 	private void dropBasicSequence() {
@@ -440,6 +443,7 @@ public class Spawner {
 				queue.addEventFromNow(time, event);
 				time += 0.15f;
 			}
+			time += 0.3f;
 			leftToRight = !leftToRight;
 		}
 		queue.addEventFromNow(2, NOP);
@@ -487,15 +491,15 @@ public class Spawner {
 		queue.addEventFromNow(0, dropWallEvent(4));
 		queue.addEventFromNow(0, dropWallEvent(5));
 		
-		queue.addEventFromNow(0.7f, dropWallEvent(2));
-		queue.addEventFromNow(0.7f, dropWallEvent(3));
+		queue.addEventFromNow(0.8f, dropWallEvent(2));
+		queue.addEventFromNow(0.8f, dropWallEvent(3));
 		
-		queue.addEventFromNow(1.4f, dropWallEvent(0));
-		queue.addEventFromNow(1.4f, dropWallEvent(1));
-		queue.addEventFromNow(1.4f, dropWallEvent(4));
-		queue.addEventFromNow(1.4f, dropWallEvent(5));
+		queue.addEventFromNow(1.6f, dropWallEvent(0));
+		queue.addEventFromNow(1.6f, dropWallEvent(1));
+		queue.addEventFromNow(1.6f, dropWallEvent(4));
+		queue.addEventFromNow(1.6f, dropWallEvent(5));
 		
-		queue.addEventFromNow(2f, NOP);
+		queue.addEventFromNow(2.6f, NOP);
 	}
 	
 	private void seqV() {
@@ -509,7 +513,7 @@ public class Spawner {
 		queue.addEventFromNow(2 * diff, dropWallEvent(0));
 		queue.addEventFromNow(2 * diff, dropWallEvent(5));
 		
-		queue.addEventFromNow(3 * diff, NOP);
+		queue.addEventFromNow(4 * diff, NOP);
 	}
 	
 	private void seqHat() {
