@@ -27,7 +27,8 @@ public class PowerupUiRenderer {
 	}
 	abstract class PowerupUnit {
 		private final float y = WorldRenderer.FRUSTUM_HEIGHT / 2 - 55f;
-		private final float x;
+		private float x;
+		private float tgtX;
 		
 		private float ratio;
 		
@@ -40,14 +41,24 @@ public class PowerupUiRenderer {
 			stateTime = 0;
 		}
 		
+		public void setPosition(int position) {
+			tgtX = CENTER + (position - 2) * SPACING / 2;
+		}
+		
 		public void update(float deltaTime) {
 			stateTime += deltaTime;
 			if (state == UnitState.START && stateTime > World.PAUSE_EFFECT_DURATION) {
 				setState(UnitState.MIDDLE);
 			}
+			if (state == UnitState.END && getScale(stateTime) == 0) {
+				setState(UnitState.NONE);
+			}
 			if (state == UnitState.MIDDLE && ratio < 0) {
 				setState(UnitState.END);
 			}
+			
+			float vel = (tgtX - x) * 10f;
+			x += vel * deltaTime;
 		}
 		
 		PowerupUnit(float x) {
@@ -64,7 +75,13 @@ public class PowerupUiRenderer {
 				}
 			}
 			if (state == UnitState.END) {
-				return Math.max(0, 1 - stateTime * 4);
+				float st = 1f/4 - stateTime;
+				if (st < 1f / 8) {
+					return Math.max(0, 8 * st * 1.2f);
+				} else if (st < 1f / 4) {
+					return (1 - (st - 1f / 8) / (1f / 8)) * 0.2f + 1f; 
+				}
+				return 0;
 			}
 			return 1f;
 		}
@@ -247,14 +264,52 @@ public class PowerupUiRenderer {
 		}
 		
 		Gdx.gl.glDepthFunc(GL20.GL_ALWAYS);
+		
+		updatePositions(units);
 	}
 	
+	private void updatePositions(PowerupUnit[] units) {
+		int numUnits = 0;
+		for (PowerupUnit unit : units) {
+			if (unit.state != UnitState.NONE) {
+				numUnits++;
+			}
+		}
+		int currentPos;
+		switch (numUnits) {
+		case 1:
+			for (PowerupUnit unit : units) {
+				if (unit.state != UnitState.NONE) {
+					unit.setPosition(2);
+				}
+			}
+			break;
+		case 2:
+			currentPos = 1;
+			for (PowerupUnit unit : units) {
+				if (unit.state != UnitState.NONE) {
+					unit.setPosition(currentPos);
+					currentPos = 3;
+				}
+			}
+			break;
+		case 3:
+			currentPos = 0;
+			for (PowerupUnit unit : units) {
+				if (unit.state != UnitState.NONE) {
+					unit.setPosition(currentPos);
+					currentPos += 2;
+				}
+			}
+		}
+	}
+
 	public void dispose() {
 		batch.dispose();
 		shapes.dispose();
 	}
 
-	static public void setUnitRatio(PowerupUnit unit, float ratio) {
+	public void setUnitRatio(PowerupUnit unit, float ratio) {
 		unit.setRatio(ratio);
 	}
 	
