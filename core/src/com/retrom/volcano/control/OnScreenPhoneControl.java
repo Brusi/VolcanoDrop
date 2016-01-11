@@ -13,20 +13,27 @@ import com.retrom.volcano.utils.TouchToPoint;
 public class OnScreenPhoneControl extends AbstractControl {
 
 	private boolean upWasTouched = false;
+	private boolean leftWasTouched = false;
+	private boolean rightWasTouched = false;
+	// TODO: little vibration when touching left&right.
 	
-	private static final float SIDE_CONTROL_WIDTH = 206;
-	private static final float SIDE_CONTROL_HEIGHT = 116;
-	private static final float JUMP_RECT_SIZE = 103;
+	private static final float SIDE_CONTROL_WIDTH = 244;
+	private static final float SIDE_CONTROL_HEIGHT = 140;
+	private static final float JUMP_RECT_SIZE = 140;
 	final Rectangle leftRect = new Rectangle(
-			-WorldRenderer.FRUSTUM_WIDTH / 2 + 13,
-			-WorldRenderer.FRUSTUM_HEIGHT / 2 + 9, SIDE_CONTROL_WIDTH / 2,
+			-WorldRenderer.FRUSTUM_WIDTH / 2,
+			-WorldRenderer.FRUSTUM_HEIGHT / 2,
+			SIDE_CONTROL_WIDTH / 2,
 			SIDE_CONTROL_HEIGHT);
-	final Rectangle rightRect = new Rectangle(-WorldRenderer.FRUSTUM_WIDTH / 2
-			+ 13 + SIDE_CONTROL_WIDTH / 2,
-			-WorldRenderer.FRUSTUM_HEIGHT / 2 + 9, SIDE_CONTROL_WIDTH / 2,
+	final Rectangle rightRect = new Rectangle(
+			-WorldRenderer.FRUSTUM_WIDTH / 2 + SIDE_CONTROL_WIDTH / 2,
+			-WorldRenderer.FRUSTUM_HEIGHT / 2,
+			SIDE_CONTROL_WIDTH / 2,
 			SIDE_CONTROL_HEIGHT);
-	final Rectangle jumpRect = new Rectangle(WorldRenderer.FRUSTUM_WIDTH / 2
-			- 26 - JUMP_RECT_SIZE, -WorldRenderer.FRUSTUM_HEIGHT / 2 + 13,
+	
+	final Rectangle jumpRect = new Rectangle(
+			WorldRenderer.FRUSTUM_WIDTH / 2 - JUMP_RECT_SIZE,
+			-WorldRenderer.FRUSTUM_HEIGHT / 2,
 			JUMP_RECT_SIZE, JUMP_RECT_SIZE);
 	
 	final TouchToPoint ttp = TouchToPoint.create();
@@ -38,6 +45,8 @@ public class OnScreenPhoneControl extends AbstractControl {
 	
 	@Override
 	public float getDigitalXDir() {
+		vibrateSides();
+		
 		if (leftTouched() && rightTouched()) {
 			return 0;
 		}
@@ -50,9 +59,20 @@ public class OnScreenPhoneControl extends AbstractControl {
 		return 0;
 	}
 	
+	private void vibrateSides() {
+		if (leftNewTouch() || rightNewTouch()) {
+			Gdx.input.vibrate(20);
+		}
+		
+	}
+
 	@Override
 	public boolean isJumpPressed() {
-		return upNewTouch();
+		boolean newTouch = upNewTouch();
+		if (newTouch) {
+			Gdx.input.vibrate(20);
+		}
+		return newTouch;
 	}
 	
 	private boolean touchInRect(int i, Rectangle rect) {
@@ -96,6 +116,26 @@ public class OnScreenPhoneControl extends AbstractControl {
 		return $;
 	}
 	
+	private boolean leftNewTouch() {
+		boolean leftTouchedNow = leftTouched();
+		boolean $ = false;
+		if (!leftWasTouched && leftTouchedNow) {
+			$ = true;
+		}
+		leftWasTouched = leftTouchedNow;
+		return $;
+	}
+	
+	private boolean rightNewTouch() {
+		boolean rightTouchedNow = rightTouched();
+		boolean $ = false;
+		if (!rightWasTouched && rightTouchedNow) {
+			$ = true;
+		}
+		rightWasTouched = rightTouchedNow;
+		return $;
+	}
+	
 	private boolean upTouched() {
 		return isRectTouched(jumpRect);
 	}
@@ -105,25 +145,38 @@ public class OnScreenPhoneControl extends AbstractControl {
 	}
 	
 	static void drawAtCenterOfRect(SpriteBatch batch, Sprite sprite, Rectangle rect, float xOffset) {
-		batch.draw(sprite,
-				rect.x + rect.width / 2 - sprite.getWidth() / 2 + xOffset,
-				rect.y + rect.height / 2 - sprite.getHeight() / 2);
+		sprite.setScale(1.2f);
+		sprite.setPosition(rect.x + rect.width / 2 - sprite.getWidth() / 2 + xOffset, rect.y + rect.height / 2 - sprite.getHeight() / 2);
+		sprite.draw(batch);
+	}
+	
+	public void drawAtCenter(SpriteBatch batch, Sprite sprite, float x, float y) {
+		sprite.setPosition(x - sprite.getWidth() / 2,
+						   y - sprite.getHeight() / 2);
+		sprite.draw(batch);
 	}
 	
 	@Override
 	public void render(SpriteBatch batch) {
-		batch.draw(Assets.leftRightControl, leftRect.x, leftRect.y);
-		batch.draw(Assets.jumpControl, jumpRect.x, jumpRect.y);
+		{
+			Sprite s = Assets.leftRightControl;
+			s.setScale(1.2f);
+			drawAtCenter(batch, s, leftRect.x + leftRect.width, leftRect.y + leftRect.height / 2);
+		}
+		{
+			Sprite s = Assets.jumpControl;
+			s.setScale(1.2f);
+			drawAtCenter(batch, s, jumpRect.x + jumpRect.width / 2, leftRect.y + leftRect.height / 2);
+		}
 		
 		if (leftTouched()) {
 			drawAtCenterOfRect(batch, Assets.leftControlOn, leftRect, 11);
 		}
 		if (rightTouched()) {
-			drawAtCenterOfRect(batch, Assets.rightControlOn, rightRect, -11);
+			drawAtCenterOfRect(batch, Assets.rightControlOn, rightRect, -13);
 		}
 		if (upTouched()) {
 			drawAtCenterOfRect(batch, Assets.jumpControlOn, jumpRect);
 		}
-		
 	}
 }

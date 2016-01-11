@@ -32,7 +32,5 @@ public class ControlManager {
 		default:
 			break;
 		}
-		
-		currentControl = onScreen;
 	} 
 }
