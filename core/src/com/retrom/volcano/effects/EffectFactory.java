@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
+import com.retrom.volcano.game.Player;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Collectable.Type;
 import com.retrom.volcano.game.objects.Wall;
@@ -197,5 +198,11 @@ public class EffectFactory {
 		Vector2 pos = position.cpy();
 		pos.y += 20;
 		return new FiniteAnimationEffect(Assets.playerMagnetGlowDie, pos, false);
+	}
+	
+	public static Effect playerJumpPuff(Vector2 player_position) {
+		Vector2 pos = player_position.cpy();
+		pos.y -= 50f;
+		return new FiniteAnimationEffect(Assets.jumpPuff, pos, false);
 	}
 }

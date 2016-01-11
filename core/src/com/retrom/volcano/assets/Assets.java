@@ -144,6 +144,7 @@ public class Assets {
 	public static Array<Sprite> dust;
 	public static Array<Sprite> smoke;
 	public static Array<Sprite> burnParticle;
+	public static Array<Sprite> jumpPuff;
 	
 	// Glow:
 	public static Sprite burningWallGlow;
@@ -444,6 +445,7 @@ public class Assets {
 		dust = vfxSheet.createSprites("dust");
 		smoke = vfxSheet.createSprites("smoke");
 		burnParticle = vfxSheet.createSprites("particles_burnpiece");
+		jumpPuff = vfxSheet.createSprites("jump_puff");
 		
 		burningWallGlow = vfxSheet.createSprite("fire_glow");
 		
