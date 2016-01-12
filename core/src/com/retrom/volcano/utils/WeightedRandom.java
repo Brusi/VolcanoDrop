@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class FiniteRandomizer<T> {
+public class WeightedRandom<T> {
 	static private final float EPSILON = 1e-4f;
 	
 	private final List<Entry<T>> chanceList;
@@ -21,7 +21,7 @@ public class FiniteRandomizer<T> {
 		}
 	}
 	
-	static public class Builder<T> {
+	public static class Builder<T> {
 		private List<Entry<T>> chanceList = new ArrayList<Entry<T>>();
 		
 		private boolean hasSeed = false;
@@ -40,12 +40,12 @@ public class FiniteRandomizer<T> {
 			return this;
 		}
 		
-		public FiniteRandomizer<T> build() {
+		public WeightedRandom<T> build() {
 			verifyList(chanceList);
 			if (hasSeed) {
-				return new FiniteRandomizer<T>(chanceList, seed);
+				return new WeightedRandom<T>(chanceList, seed);
 			} else {
-				return new FiniteRandomizer<T>(chanceList);
+				return new WeightedRandom<T>(chanceList);
 			}
 		}
 
@@ -60,12 +60,12 @@ public class FiniteRandomizer<T> {
 		}
 	}
 	
-	private FiniteRandomizer(List<Entry<T>> chanceList, long seed) {
+	private WeightedRandom(List<Entry<T>> chanceList, long seed) {
 		this(chanceList);
 		random.setSeed(seed);
 	}
 	
-	private FiniteRandomizer(List<Entry<T>> chanceList) {
+	private WeightedRandom(List<Entry<T>> chanceList) {
 		this.chanceList = chanceList;
 	}
 	

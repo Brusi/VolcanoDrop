@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import sun.nio.cs.HistoricallyNamedCharset;
 
-public class FiniteRandomizerTest {
+public class WightedRandomTest {
 	
 	private static float EPSILON = 0.005f;
 
@@ -21,11 +21,11 @@ public class FiniteRandomizerTest {
 	}
 	
 	private float[] getRateOfChances(float[] chances, int totalRolls) {
-		FiniteRandomizer.Builder<Integer> builder = new FiniteRandomizer.Builder<Integer>();
+		WeightedRandom.Builder<Integer> builder = new WeightedRandom.Builder<Integer>();
 		for (int i=0; i < chances.length; i++) {
 			builder.add(chances[i], i);
 		}
-		FiniteRandomizer<Integer> r = builder.build();
+		WeightedRandom<Integer> r = builder.build();
 		
 		int[] histogram = new int[chances.length];
 		for (int i=0; i <  totalRolls; i++) {
@@ -53,15 +53,15 @@ public class FiniteRandomizerTest {
 	
 	@Test
 	public void testSeedChance() {
-		FiniteRandomizer.Builder<Integer> builder = new FiniteRandomizer.Builder<Integer>()
+		WeightedRandom.Builder<Integer> builder = new WeightedRandom.Builder<Integer>()
 				.add(0.1f, 0)
 				.add(0.2f, 1)
 				.add(0.3f, 2)
 				.add(0.4f, 3)
 				.setSeed(1234L);
 		
-		FiniteRandomizer<Integer> r1 = builder.build();
-		FiniteRandomizer<Integer> r2 = builder.build();
+		WeightedRandom<Integer> r1 = builder.build();
+		WeightedRandom<Integer> r2 = builder.build();
 		
 		int[] histogram = new int[4];
 		for (int i=0; i < 100000; i++) {
@@ -76,7 +76,7 @@ public class FiniteRandomizerTest {
 
 	@Test(expected = IllegalStateException.class)
 	public void chancesSumTooLow() {
-		new FiniteRandomizer.Builder<Integer>()
+		new WeightedRandom.Builder<Integer>()
 				.add(0.1f, 0)
 				.add(0.2f, 1)
 				.add(0.3f, 2)
@@ -86,7 +86,7 @@ public class FiniteRandomizerTest {
 
 	@Test(expected = IllegalStateException.class)
 	public void chancesSumTooHigh() {
-		new FiniteRandomizer.Builder<Integer>()
+		new WeightedRandom.Builder<Integer>()
 				.add(0.1f, 0)
 				.add(0.2f, 1)
 				.add(0.3f, 2)
