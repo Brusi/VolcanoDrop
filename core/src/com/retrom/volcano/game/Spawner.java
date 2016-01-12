@@ -10,8 +10,10 @@ import sun.awt.AWTAccessor.EventQueueAccessor;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.retrom.volcano.game.EventQueue.Event;
+import com.retrom.volcano.game.conf.CoinChancesConfiguration;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
+import com.retrom.volcano.utils.WeightedRandom;
 
 public class Spawner {
 	
@@ -104,18 +106,20 @@ public class Spawner {
 
 	private void dropCoins(float deltaTime) {
 		if (Math.random() < deltaTime / AVG_COIN_TIME) {
-			float coinX = (float) (Math.random() * (Wall.SIZE * 3 - 60) - Wall.SIZE * 3 + 30);
+//			float coinX = (float) (Math.random() * (Wall.SIZE * 3 - 60) - Wall.SIZE * 3 + 30);
+			float coinX = Utils.random2Range(Wall.SIZE * 3 - 30);
 			
 			Collectable.Type type = getCoinType();
+			if (type == null) return;
 			
 			
-			if (Math.random() < 0.1) {
-				type = Collectable.Type.POWERUP_SHIELD;
-			} if (Math.random() < 0.1) {
-				type = Collectable.Type.POWERUP_SLOMO;
-			} else if (Math.random() < 0.1) {
-				type = Collectable.Type.POWERUP_MAGNET;
-			}
+//			if (Math.random() < 0.1) {
+//				type = Collectable.Type.POWERUP_SHIELD;
+//			} if (Math.random() < 0.1) {
+//				type = Collectable.Type.POWERUP_SLOMO;
+//			} else if (Math.random() < 0.1) {
+//				type = Collectable.Type.POWERUP_MAGNET;
+//			}
 			
 			handler_.dropCoin(coinX, type);
 		}
@@ -456,8 +460,9 @@ public class Spawner {
 	}
 
 	private Collectable.Type getCoinType() {
-		int index = rand.nextInt(15);
-		return Collectable.Type.values()[index];
+		return CoinChancesConfiguration.getNextCoin(level_);
+//		int index = rand.nextInt(15);
+//		return Collectable.Type.values()[index];
 	}
 	
 	// ########## Events ##########
