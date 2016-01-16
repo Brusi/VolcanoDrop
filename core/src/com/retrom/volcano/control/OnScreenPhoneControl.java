@@ -75,6 +75,11 @@ public class OnScreenPhoneControl extends AbstractControl {
 		return newTouch;
 	}
 	
+	@Override
+	public boolean isJumpPressedContinuously() {
+		return upTouched();
+	}
+	
 	private boolean touchInRect(int i, Rectangle rect) {
 		Vector2 pnt = ttp.toPoint(Gdx.input.getX(i), Gdx.input.getY(i));
 		System.out.println("Checking point: " + pnt);

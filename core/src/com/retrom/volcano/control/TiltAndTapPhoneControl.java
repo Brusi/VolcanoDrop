@@ -22,4 +22,9 @@ public class TiltAndTapPhoneControl extends AbstractControl {
 	public boolean isJumpPressed() {
 		return Gdx.input.justTouched();
 	}
+	
+	@Override
+	public boolean isJumpPressedContinuously() {
+		return Gdx.input.isTouched();
+	}
 }

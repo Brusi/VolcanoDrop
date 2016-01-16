@@ -19,6 +19,7 @@ public abstract class AbstractControl {
 	}
 	
 	abstract public boolean isJumpPressed();
+	abstract public boolean isJumpPressedContinuously();
 	
 	public void render(SpriteBatch batch) {
 		// If controls needs rendering, they will override this.

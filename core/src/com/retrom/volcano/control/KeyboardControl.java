@@ -14,6 +14,10 @@ public class KeyboardControl extends AbstractControl {
 		return Gdx.input.isKeyJustPressed(Input.Keys.UP); 
 	}
 	
+	public boolean isJumpPressedContinuously() {
+		return Gdx.input.isKeyPressed(Input.Keys.UP);
+	}
+	
 	@Override
 	public float getDigitalXDir() {
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {

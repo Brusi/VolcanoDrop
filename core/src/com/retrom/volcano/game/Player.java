@@ -18,6 +18,8 @@ package com.retrom.volcano.game;
 
 import java.util.List;
 
+import sun.net.www.content.text.plain;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
@@ -47,9 +49,11 @@ public class Player extends DynamicGameObject {
 	public static final int DEATH_BY_CRUSH = 1;
 	public static final int DEATH_BY_BURN = 2;
 	
-	protected static final float X_ANALOG_ACCEL = 90f * 60f;
-	public static final float FRICTION_RATE = 0.001797f;
+	protected static final float X_ANALOG_ACCEL = 3400f;
+	public static final float FRICTION_RATE = 0.03f;
+	public static final float STOP_FRICTION_RATE = 0.06f;
 	private static final float JUMP_VEL = 900;
+	private static final float JUMP_PRESS_ACCELL = /*650*/ 0;
 	
 	private List<Rectangle> obstacles_;
 	private List<Wall> activeWalls_;
@@ -61,6 +65,7 @@ public class Player extends DynamicGameObject {
 	public int deathType;
 	
 	boolean grounded_ = true;
+	private boolean jumping_ = false;
 	
 	static final boolean LEFT = true; 
 	static final boolean RIGHT = false;
@@ -69,6 +74,9 @@ public class Player extends DynamicGameObject {
 	private boolean is_shield_active_;
 	
 	private final HitRectHandler hitRectHandler_;
+	
+	// X position after push; only if not pushed by two stones at once.
+	private Float newBoundsX = null;
 	
 	public Player (float x, float y, HitRectHandler handler) {
 		super(x, y, WIDTH, HEIGHT);
@@ -97,7 +105,9 @@ public class Player extends DynamicGameObject {
 //			velocity.x = -200 * accel;
 //		}
 		
-		if (grounded_ && control.isJumpPressed()) {
+		if (/*grounded_ && */control.isJumpPressed()) {
+			if (!grounded_)
+				jumping_ = true;
 			grounded_ = false;
 			velocity.y = JUMP_VEL;
 			if (timeSinceLanding > 0.1f) {
@@ -150,8 +160,19 @@ public class Player extends DynamicGameObject {
 	}
 
 	private void tryMove(float deltaTime) {
-		velocity.add(World.gravity.x * deltaTime, World.gravity.y * deltaTime);
-		velocity.x *= Math.pow(FRICTION_RATE, deltaTime);
+		AbstractControl control = ControlManager.getControl();
+		velocity.add(0, World.gravity.y * deltaTime);
+		if (!grounded_ && control.isJumpPressedContinuously()) {
+			velocity.add(0, JUMP_PRESS_ACCELL * deltaTime);
+		}
+		if (!control.isAnalog()) {
+			float friction_rate = FRICTION_RATE;
+			if (velocity.x > 0 && control.getDigitalXDir() <= 0
+		     || velocity.x < 0 && control.getDigitalXDir() >= 0) {
+				friction_rate /= 100;
+			}
+			velocity.x *= Math.pow(friction_rate, deltaTime);
+		}
 		
 		if (velocity.x > 0) {
 			side = RIGHT;
@@ -173,13 +194,16 @@ public class Player extends DynamicGameObject {
 					bounds.y = rect.y + rect.height;
 					grounded_ = true;
 					if (topRect != null) {
-						hitRectHandler_.handle(topRect);
-						return;
+						if (checkCrushDeath(obstacles_, topRect)) {
+							return;
+						}
 					}
 				} else {
 					if (wasGrounded) {
-						hitRectHandler_.handle(topRect);
-						return;
+						topRect = rect;
+						if (checkCrushDeath(obstacles_, topRect)) {
+							return;
+						}
 					} else { 
 						topRect = rect;
 						bounds.y = rect.y - bounds.height;
@@ -206,9 +230,42 @@ public class Player extends DynamicGameObject {
 				velocity.x = 0;
 			}
 		}
-		
+		if (newBoundsX != null && state_ != STATE_DEAD) {
+			bounds.x = newBoundsX;
+			newBoundsX = null;
+		}
 		position.x = bounds.x + bounds.width / 2;
 		position.y = bounds.y + bounds.height / 2;
+	}
+
+	private boolean checkCrushDeath(List<Rectangle> obstacles, Rectangle topRect) {
+		// 'Save' the player if is close to the edge of the crushing block.
+		final float ALLOWED_SPAN = bounds.width / 2;
+		if (position.x < topRect.x + ALLOWED_SPAN) {
+			for (Rectangle rect : obstacles) {
+				if (rect.y == topRect.y && rect.x == topRect.x - Wall.SIZE) {
+					hitRectHandler_.handle(topRect);
+					System.out.println("2 WALLS");
+					return true;
+				}
+			}
+			newBoundsX = topRect.x - bounds.width;
+			return false;
+		}
+		if (position.x > topRect.x + topRect.width - ALLOWED_SPAN) {
+			for (Rectangle rect : obstacles) {
+				if (rect.y == topRect.y && rect.x == topRect.x + Wall.SIZE) {
+					hitRectHandler_.handle(topRect);
+					System.out.println("2 WALLS");
+					return true;
+				}
+			}
+			newBoundsX = topRect.x + topRect.width;
+			return false;
+		}
+		
+		hitRectHandler_.handle(topRect);
+		return true;
 	}
 
 	private void checkBurningWalls() {
@@ -260,5 +317,11 @@ public class Player extends DynamicGameObject {
 
 	public void landAnimation() {
 		setState(STATE_LANDING);
+	}
+
+	public boolean getJumping() {
+		boolean $ = jumping_;
+		jumping_ = false;
+		return $;
 	}
 }

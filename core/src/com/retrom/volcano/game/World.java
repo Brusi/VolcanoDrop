@@ -321,8 +321,7 @@ public class World {
 				quakeOn = false;
 			}
 		});
-		int NUM_DUST = Math.round(12 * duration / QUAKE_DURATION);
-		System.out.println("NUM_DUST =" + NUM_DUST );
+		int NUM_DUST = Math.round(20 * duration / QUAKE_DURATION);
 		for (int i=0; i < NUM_DUST; ++i) {
 			worldEvents_.addEventFromNow((float)(duration * Math.random()), new EventQueue.Event() {
 				@Override
@@ -374,9 +373,9 @@ public class World {
 		}
 		
 		gameTime += deltaTime;
-		if (gameTime > 1 && gameTime < 60) {
+		if (gameTime > 5 && gameTime < 90) {
 			background.level = 2;
-		} else if (gameTime >= 60){
+		} else if (gameTime >= 90){
 			background.level = 3;
 		}
 		
@@ -1205,6 +1204,10 @@ public class World {
 					}
 				});
 			}
+		}
+		
+		if (player.getJumping()) {
+			screenEffects.add(EffectFactory.playerJumpPuff(player.position));
 		}
 		
 		player.setObstacles(obstacles_);
