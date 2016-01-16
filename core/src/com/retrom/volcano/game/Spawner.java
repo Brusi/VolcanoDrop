@@ -60,6 +60,10 @@ public class Spawner {
 	private static final Float SACK_WALL_SILENCE_TIME = 1f;
 	private static final Float SACK_SACK_SILENCE_TIME = 1f;
 	
+	// Cooldown between *start* of sequence until the next can happen.
+	private static final float SEQUENCE_COOLDOWN_TIME = 8f;
+	private float sequence_cooldown = 0;
+	
 	private float timeCount = 0;
 	
 	// Enable/disable for debug.
@@ -75,6 +79,9 @@ public class Spawner {
 			return;
 		}
 		timeCount += deltaTime;
+		if (sequence_cooldown > 0) {
+			sequence_cooldown -= deltaTime;
+		}
 		
 		
 		updateHetkeys();
@@ -127,15 +134,15 @@ public class Spawner {
 	
 	public float getTimeBetweenWalls() {
 		if (level_ < 6) {
-			return 1.0f * TIME_BETWEEN_WALLS;
+			return 1.2f * TIME_BETWEEN_WALLS;
 		} else if (level_ < 9) {
-			return 0.8f * TIME_BETWEEN_WALLS;
+			return 1f * TIME_BETWEEN_WALLS;
 		} else if (level_ < 11) {
-			return 0.7f * TIME_BETWEEN_WALLS;
+			return 0.9f * TIME_BETWEEN_WALLS;
 		} else if (level_ < 13) {
-			return 0.6f * TIME_BETWEEN_WALLS;
+			return 0.8f * TIME_BETWEEN_WALLS;
 		} else {
-			return 0.5f * TIME_BETWEEN_WALLS;
+			return 0.7f * TIME_BETWEEN_WALLS;
 		}
 	}
 
@@ -208,18 +215,22 @@ public class Spawner {
 
 	private void updateHetkeys() {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
-//			sideToSideSequenceWithEdgeHole();
-			seqBurningPair();
+			handler_.quake(false);
+			sideToSideSequenceWithEdgeHole();
+//			seqBurningPair();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
-			seqBurningClosingHole();
-//			sideToSideSequenceWithMiddleHole();
+			handler_.quake(false);
+			sideToSideSequenceWithMiddleHole();
+//			seqBurningClosingHole();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
+			handler_.quake(false);
 			seq3and3();
 //			seqFlamethrower2middle();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
+			handler_.quake(false);
 			if (rand.nextBoolean()) {
 				seqFlamethrowerHat();
 			} else {
@@ -228,20 +239,23 @@ public class Spawner {
 //			barsSequence();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)) {
-//			seq3pairs();
-			sideToSideThrower();
+			handler_.quake(false);
+			seq3pairs();
+//			sideToSideThrower();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_6)) {
-//			seq5dice();
-			sideToSideThrowerWithMiddleHole();
+			handler_.quake(false);
+			seq5dice();
+//			sideToSideThrowerWithMiddleHole();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_7)) {
-			seq3and3Thrower();
-//			if (rand.nextBoolean()) {
-//				seqV();
-//			} else {
-//				seqHat();
-//			}
+			handler_.quake(false);
+//			seq3and3Thrower();
+			if (rand.nextBoolean()) {
+				seqV();
+			} else {
+				seqHat();
+			}
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_8) || Gdx.input.getAccelerometerX() > 7 && queue.size() < 3) {
 //			seqBurning1();
@@ -290,14 +304,14 @@ public class Spawner {
 			dropWallOrDual(candidates);
 			queue.addEventFromNow(getTimeBetweenWalls(), NOP);
 		} else if (level_ == 3 || level_ == 4){
-			if (rand.nextInt(6) == 0) {
+			if (shouldDropSequence()) {
 				dropBasicSequence();
 			} else {
 				dropWallOrDual(candidates);
 				queue.addEventFromNow(getTimeBetweenWalls(), NOP);
 			}
 		} else if (level_ == 5) {
-			if (rand.nextInt(6) == 0) {
+			if (shouldDropSequence()) {
 				if (rand.nextBoolean()) {
 					dropBurningSequence();
 				} else {
@@ -308,14 +322,14 @@ public class Spawner {
 				queue.addEventFromNow(getTimeBetweenWalls(), NOP);
 			}			
 		} else if (level_ == 6 || level_ == 7) {
-			if (rand.nextInt(6) == 0) {
+			if (shouldDropSequence()) {
 				dropBurningSequence();
 			} else {
 				dropWallOrDual(candidates);
 				queue.addEventFromNow(getTimeBetweenWalls(), NOP);
 			}
 		} else if (level_ >= 8) {
-			if (rand.nextInt(6) == 0) {
+			if (shouldDropSequence()) {
 				if (rand.nextBoolean()) {
 					dropBurningSequence();
 				} else {
@@ -328,8 +342,19 @@ public class Spawner {
 		}
 	}
 
+	private boolean shouldDropSequence() {
+		if (sequence_cooldown > 0) {
+			System.out.println("cooldown still on.");
+		}
+		if (sequence_cooldown > 0  || rand.nextInt(5) != 0) {
+			return false;
+		}
+		return true;
+	}
+
 	private void dropBasicSequence() {
 		handler_.quake(false);
+		sequence_cooldown = SEQUENCE_COOLDOWN_TIME;
 		
 		int seqType = rand.nextInt(7);
 		switch (seqType) {
@@ -345,6 +370,7 @@ public class Spawner {
 	
 	private void dropBurningSequence() {
 		handler_.quake(false);
+		sequence_cooldown = SEQUENCE_COOLDOWN_TIME;
 		
 		int seqType = rand.nextInt(6);
 		switch (seqType) {
@@ -359,13 +385,15 @@ public class Spawner {
 	
 	private void dropFlamethrowerSequence() {
 		handler_.quake(false);
+		sequence_cooldown = SEQUENCE_COOLDOWN_TIME;
+		
 		int seqType = rand.nextInt(5);
 		switch (seqType) {
 			case 0: seqFlamethrower2middle(); break;
 			case 1: if (rand.nextBoolean()) seqFlamethrowerHat(); else seqFlamethrowerV(); break;
-			case 2: sideToSideThrower();
-			case 3: sideToSideThrowerWithMiddleHole();
-			case 4: seq3and3Thrower();
+			case 2: sideToSideThrower(); break;
+			case 3: sideToSideThrowerWithMiddleHole(); break;
+			case 4: seq3and3Thrower(); break;
 		}
 	}
 	
@@ -514,23 +542,6 @@ public class Spawner {
 	}
 	
 	// ########## Sequences ##########
-	
-	private void sideToSideSequence() {
-		boolean leftToRight = rand.nextBoolean();
-		
-		for (int i = 0; i < 6; i++) {
-			final int col = leftToRight ? i : 5 - i;
-			EventQueue.Event event = new EventQueue.Event() {
-				@Override
-				public void invoke() {
-					dropSingleRandomTypeWall(col);
-				}
-			};
-			final float time = i * 0.5f;
-			queue.addEventFromNow(time, event);
-		}
-	}
-	
 	private void sideToSideSequenceWithEdgeHole() {
 		boolean leftToRight = rand.nextBoolean();
 		
@@ -542,10 +553,10 @@ public class Spawner {
 					handler_.dropWall(col);
 				}
 			};
-			final float time = i * 0.15f;
+			final float time = i * 0.15f + 0.5f;
 			queue.addEventFromNow(time, event);
 		}
-		queue.addEventFromNow(2, NOP);
+		queue.addEventFromNow(2.5f, NOP);
 	}
 	
 	private void sideToSideSequenceWithMiddleHole() {
@@ -562,15 +573,15 @@ public class Spawner {
 					handler_.dropWall(col);
 				}
 			};
-			final float time = i * 0.15f;
+			final float time = i * 0.15f + 0.5f;
 			queue.addEventFromNow(time, event);
 		}
-		queue.addEventFromNow(2, NOP);
+		queue.addEventFromNow(2.5f, NOP);
 	}
 	
 	private void seq3and3() {
 		boolean leftToRight = rand.nextBoolean();
-		float time = 0;
+		float time = 0.5f;
 		for (int times=0; times < 2; times++) {
 			for (int i = 0; i < 3; i++) {
 				final int col = leftToRight ? i : 5 - i;
@@ -583,10 +594,10 @@ public class Spawner {
 				queue.addEventFromNow(time, event);
 				time += 0.15f;
 			}
-			time += 0.3f;
+			time += 0.5f;
 			leftToRight = !leftToRight;
 		}
-		queue.addEventFromNow(2, NOP);
+		queue.addEventFromNow(3f, NOP);
 	}
 	
 	private void barsSequence() {
@@ -607,66 +618,66 @@ public class Spawner {
 			}
 			odd = 1 - odd;
 		}
-		queue.addEventFromNow(getTimeBetweenWalls() * 2, NOP);
+		queue.addEventFromNow(2.5f, NOP);
 	}
 	
 	private void seq3pairs() {
-		float diff = 0.5f;
+		float diff = 0.7f;
 		
 		final float leftToRight = rand.nextInt(2);
-		queue.addEventFromNow(0, dropWallEvent(2));
-		queue.addEventFromNow(0, dropWallEvent(3));
+		queue.addEventFromNow(1 * diff, dropWallEvent(2));
+		queue.addEventFromNow(1 * diff, dropWallEvent(3));
 		
-		queue.addEventFromNow((2 - leftToRight) * diff, dropWallEvent(0));
-		queue.addEventFromNow((2 - leftToRight) * diff, dropWallEvent(1));
+		queue.addEventFromNow((3 - leftToRight) * diff, dropWallEvent(0));
+		queue.addEventFromNow((3 - leftToRight) * diff, dropWallEvent(1));
 		
-		queue.addEventFromNow((1 + leftToRight) * diff, dropWallEvent(4));
-		queue.addEventFromNow((1 + leftToRight) * diff, dropWallEvent(5));
-		queue.addEventFromNow(3, NOP);
+		queue.addEventFromNow((2 + leftToRight) * diff, dropWallEvent(4));
+		queue.addEventFromNow((2 + leftToRight) * diff, dropWallEvent(5));
+		queue.addEventFromNow(4, NOP);
 	}
 	
 	private void seq5dice() {
-		queue.addEventFromNow(0, dropWallEvent(0));
-		queue.addEventFromNow(0, dropWallEvent(1));
-		queue.addEventFromNow(0, dropWallEvent(4));
-		queue.addEventFromNow(0, dropWallEvent(5));
+		queue.addEventFromNow(0.5f, dropWallEvent(0));
+		queue.addEventFromNow(0.5f, dropWallEvent(1));
+		queue.addEventFromNow(0.5f, dropWallEvent(4));
+		queue.addEventFromNow(0.5f, dropWallEvent(5));
 		
-		queue.addEventFromNow(0.8f, dropWallEvent(2));
-		queue.addEventFromNow(0.8f, dropWallEvent(3));
+		queue.addEventFromNow(1.5f, dropWallEvent(2));
+		queue.addEventFromNow(1.5f, dropWallEvent(3));
 		
 //		queue.addEventFromNow(1.6f, dropWallEvent(0));
 //		queue.addEventFromNow(1.6f, dropWallEvent(1));
 //		queue.addEventFromNow(1.6f, dropWallEvent(4));
 //		queue.addEventFromNow(1.6f, dropWallEvent(5));
 //		
-		queue.addEventFromNow(2.6f, NOP);
+		queue.addEventFromNow(2.5f, NOP);
 	}
 	
 	private void seqV() {
 		float diff = 0.5f;
 		
-		queue.addEventFromNow(0, dropWallEvent(2));
-		queue.addEventFromNow(0, dropWallEvent(3));
+		queue.addEventFromNow(1 * diff, dropWallEvent(2));
+		queue.addEventFromNow(1 * diff, dropWallEvent(3));
 		
-		queue.addEventFromNow(1 * diff, dropWallEvent(1));
-		queue.addEventFromNow(1 * diff, dropWallEvent(4));
-		queue.addEventFromNow(2 * diff, dropWallEvent(0));
-		queue.addEventFromNow(2 * diff, dropWallEvent(5));
+		queue.addEventFromNow(2 * diff, dropWallEvent(1));
+		queue.addEventFromNow(2 * diff, dropWallEvent(4));
+		queue.addEventFromNow(3 * diff, dropWallEvent(0));
+		queue.addEventFromNow(3 * diff, dropWallEvent(5));
 		
-		queue.addEventFromNow(4 * diff, NOP);
+		queue.addEventFromNow(5 * diff, NOP);
 	}
 	
 	private void seqHat() {
 		float diff = 0.5f;
 		
-		queue.addEventFromNow(2 * diff, dropWallEvent(2));
-		queue.addEventFromNow(2 * diff, dropWallEvent(3));
-		queue.addEventFromNow(1 * diff, dropWallEvent(1));
-		queue.addEventFromNow(1 * diff, dropWallEvent(4));
-		queue.addEventFromNow(0 * diff, dropWallEvent(0));
-		queue.addEventFromNow(0 * diff, dropWallEvent(5));
+		queue.addEventFromNow(3 * diff, dropWallEvent(2));
+		queue.addEventFromNow(3 * diff, dropWallEvent(3));
+		queue.addEventFromNow(2 * diff, dropWallEvent(1));
+		queue.addEventFromNow(2 * diff, dropWallEvent(4));
+		queue.addEventFromNow(1 * diff, dropWallEvent(0));
+		queue.addEventFromNow(1 * diff, dropWallEvent(5));
 		
-		queue.addEventFromNow(4 * diff, NOP);
+		queue.addEventFromNow(5 * diff, NOP);
 	}
 	
 	private void seqBurning1() {
@@ -848,7 +859,7 @@ public class Spawner {
 			} else {
 				event = dropWallEvent(col);
 			}
-			final float time = i * 0.15f;
+			final float time = i * 0.15f + 0.5f;
 			queue.addEventFromNow(time, event);
 			
 			if (i == hole_col + 2 || i == hole_col - 2) {
@@ -860,7 +871,7 @@ public class Spawner {
 	
 	private void seq3and3Thrower() {
 		boolean leftToRight = rand.nextBoolean();
-		float time = 0;
+		float time = 0.5f;
 		for (int times=0; times < 2; times++) {
 			for (int i = 0; i < 3; i++) {
 				final int col = leftToRight ? i : 5 - i;
@@ -868,7 +879,7 @@ public class Spawner {
 				queue.addEventFromNow(time, event);
 				time += 0.15f;
 			}
-			time += 0.3f;
+			time += 0.5f;
 			leftToRight = !leftToRight;
 		}
 		queue.addEventFromNow(2, NOP);
