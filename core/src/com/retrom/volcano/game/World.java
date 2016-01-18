@@ -57,6 +57,8 @@ import com.retrom.volcano.effects.Score5Effect;
 import com.retrom.volcano.effects.Score6Effect;
 import com.retrom.volcano.effects.ShieldFlare;
 import com.retrom.volcano.effects.SmokeEffect;
+import com.retrom.volcano.effects.WarningExclEffect;
+import com.retrom.volcano.effects.WarningSkullEffect;
 import com.retrom.volcano.game.EventQueue.Event;
 import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.Collectable;
@@ -223,6 +225,11 @@ public class World {
 					startSmallQuake();
 				}
 			}
+
+			@Override
+			public void warning(int col, boolean sound) {
+				createWarning(col, sound);
+			}
 		});
 		
 //		worldEvents_.addEventFromNow(2f, new EventQueue.Event() {
@@ -287,7 +294,15 @@ public class World {
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
-			addFlamethrower(3);
+			final int col = (int)Math.floor(Math.random() * 6);
+			createWarning(col, true);
+			////////////////////////
+			worldEvents_.addEventFromNow(1f, new Event() {
+				@Override
+				public void invoke() {
+					addFlamethrower(col);
+				}
+			});
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
 			addBurnParticles(100, 100);
@@ -615,7 +630,8 @@ public class World {
 	}
 
 	private float topScreenY() {
-		return floors_.getTotalBlocks() / 6f * Wall.SIZE + 12*Wall.SIZE;
+		return camTarget + WorldRenderer.FRUSTUM_HEIGHT / 2; 
+//		return floors_.getTotalBlocks() / 6f * Wall.SIZE + 12*Wall.SIZE;
 	}
 	
 	private void prepareFireball(final int col) {
@@ -629,6 +645,18 @@ public class World {
 				addFireball(col, y + camTarget);
 			}
 		});
+	}
+	
+	private void createWarning(final int col, boolean sound) {
+		final float skull_y = topScreenY() - WarningSkullEffect.DISTANCE_FROM_TOP - camTarget;
+		effects.add(new WarningSkullEffect(new Vector2(Utils
+				.xOfCol(col), skull_y)));
+		final float excl_y = topScreenY() - WarningExclEffect.DISTANCE_FROM_TOP - camTarget;
+		effects.add(new WarningExclEffect(new Vector2(Utils
+				.xOfCol(col), excl_y)));
+		if (sound) {
+			SoundAssets.playSound(SoundAssets.warning);
+		}
 	}
 	
 	private void addSideFireball(float x, float y, boolean side) {
@@ -647,21 +675,21 @@ public class World {
 	}
 
 	public void addWall(int col) {
-		float wallY = topScreenY();
+		float wallY = topScreenY() + Wall.SIZE / 2;
 		Wall wall = new WallSingle(col, wallY);
 		walls_.add(wall);
 		activeWalls_.add(wall);
 	}
 
 	public void addDualWall(int col) {
-		float wallY = topScreenY();
+		float wallY = topScreenY() + Wall.SIZE / 2;
 		Wall wall = new WallDual(col, wallY);
 		walls_.add(wall);
 		activeWalls_.add(wall);
 	}
 
 	public void addBurningWall(int col) {
-		float wallY = topScreenY();
+		float wallY = topScreenY() + Wall.SIZE / 2;
 		final BurningWall wall = new BurningWall(col, wallY);
 		walls_.add(wall);
 		activeWalls_.add(wall);
@@ -669,7 +697,7 @@ public class World {
 	}
 
 	public void addFlamethrower(int col) {
-		float wallY = topScreenY();
+		float wallY = topScreenY() + Wall.SIZE / 2;
 		FlamethrowerWall wall = new FlamethrowerWall(col, wallY);
 		walls_.add(wall);
 		activeWalls_.add(wall);

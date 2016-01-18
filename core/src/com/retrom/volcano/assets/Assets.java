@@ -210,6 +210,10 @@ public class Assets {
 	public static Sprite pauseButton;
 	public static Sprite pauseButtonClicked;
 	
+	// On screen warnings
+	public static Sprite warningSkull;
+	public static Sprite warningExcl;
+	
 	// Powerup ui
 	public static Sprite magnetGui;
 	public static Sprite slomoGui;
@@ -473,6 +477,10 @@ public class Assets {
 		scoreIcon =  guiSheet.createSprite("gui_score_gold_icon");
 		pauseButton= guiSheet.createSprite("GUI_buttons_pause");
 		pauseButtonClicked = guiSheet.createSprite("GUI_buttons_pause_click");
+		
+		// Warnings
+		warningSkull = guiSheet.createSprite("GUI_warnings_skull");
+		warningExcl = guiSheet.createSprite("GUI_warnings_excmark");
 		
 		magnetGui = guiSheet.createSprite("gui_powerups_magnet");
 		magnetGuiOn = guiSheet.createSprite("gui_powerups_magnet_on");

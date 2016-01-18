@@ -1,5 +1,5 @@
 gui.png
-size: 1723, 176
+size: 1805, 176
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -52,51 +52,65 @@ GUI_buttons_pause_click
   orig: 166, 171
   offset: 0, 0
   index: -1
-gui_powerups_magnet
+GUI_warnings_excmark
   rotate: false
   xy: 896, 2
+  size: 14, 35
+  orig: 14, 35
+  offset: 0, 0
+  index: -1
+GUI_warnings_skull
+  rotate: false
+  xy: 912, 2
+  size: 64, 58
+  orig: 64, 58
+  offset: 0, 0
+  index: -1
+gui_powerups_magnet
+  rotate: false
+  xy: 978, 2
   size: 85, 85
   orig: 85, 85
   offset: 0, 0
   index: -1
 gui_powerups_magnet_on
   rotate: false
-  xy: 983, 2
+  xy: 1065, 2
   size: 172, 172
   orig: 172, 172
   offset: 0, 0
   index: -1
 gui_powerups_shield
   rotate: false
-  xy: 1157, 2
+  xy: 1239, 2
   size: 85, 85
   orig: 85, 85
   offset: 0, 0
   index: -1
 gui_powerups_shield_on
   rotate: false
-  xy: 1244, 2
+  xy: 1326, 2
   size: 172, 172
   orig: 172, 172
   offset: 0, 0
   index: -1
 gui_powerups_timebend
   rotate: false
-  xy: 1418, 2
+  xy: 1500, 2
   size: 85, 85
   orig: 85, 85
   offset: 0, 0
   index: -1
 gui_powerups_timebend_on
   rotate: false
-  xy: 1505, 2
+  xy: 1587, 2
   size: 172, 172
   orig: 172, 172
   offset: 0, 0
   index: -1
 gui_score_gold_icon
   rotate: false
-  xy: 1679, 2
+  xy: 1761, 2
   size: 42, 42
   orig: 42, 42
   offset: 0, 0

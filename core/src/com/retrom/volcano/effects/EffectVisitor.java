@@ -21,5 +21,6 @@ public interface EffectVisitor<T> {
 	public T visit(PlayerShieldEffect playerShieldEffect);
 	public T visit(PlayerMagnetEffect playerMagnetEffect);
 	public T visit(PlayerOnionSkinEffect playerOnionSkinEffect);
-
+	public T visit(WarningSkullEffect effect);
+	public T visit(WarningExclEffect effect);
 }

@@ -27,6 +27,7 @@ public class Spawner {
 		public void dropFlamethrower(int col);
 		public void dropFireball(int col);
 		public void dropSack(int col, int numCoins);
+		public void warning(int col, boolean sound);
 		public void quake(boolean big);
 	}
 	
@@ -47,6 +48,7 @@ public class Spawner {
 		handler_ = handler;
 		this.floors_ = floors;
 		initEvents();
+		queue.addEventFromNow(1, NOP);
 	}
 	
 	// Fixed time between walls in seconds.
@@ -120,13 +122,13 @@ public class Spawner {
 			if (type == null) return;
 			
 			
-//			if (Math.random() < 0.1) {
-//				type = Collectable.Type.POWERUP_SHIELD;
-//			} if (Math.random() < 0.1) {
-//				type = Collectable.Type.POWERUP_SLOMO;
-//			} else if (Math.random() < 0.1) {
-//				type = Collectable.Type.POWERUP_MAGNET;
-//			}
+			if (Math.random() < 0.05) {
+				type = Collectable.Type.POWERUP_SHIELD;
+			} if (Math.random() < 0.05) {
+				type = Collectable.Type.POWERUP_SLOMO;
+			} else if (Math.random() < 0.05) {
+				type = Collectable.Type.POWERUP_MAGNET;
+			}
 			
 			handler_.dropCoin(coinX, type);
 		}
@@ -226,8 +228,8 @@ public class Spawner {
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
 			handler_.quake(false);
-			seq3and3();
-//			seqFlamethrower2middle();
+//			seq3and3();
+			seqFlamethrower2middle();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
 			handler_.quake(false);
@@ -355,7 +357,7 @@ public class Spawner {
 	private void dropBasicSequence() {
 		handler_.quake(false);
 		sequence_cooldown = SEQUENCE_COOLDOWN_TIME;
-		
+		warningWithSound = true;
 		int seqType = rand.nextInt(7);
 		switch (seqType) {
 			case 0: sideToSideSequenceWithEdgeHole(); break;
@@ -371,22 +373,22 @@ public class Spawner {
 	private void dropBurningSequence() {
 		handler_.quake(false);
 		sequence_cooldown = SEQUENCE_COOLDOWN_TIME;
-		
-		int seqType = rand.nextInt(6);
+		warningWithSound = true;
+		int seqType = rand.nextInt(5);
 		switch (seqType) {
 			case 0: seqBurning1(); break;
 			case 1: seqBurning102(); break;
 			case 2: sideToSideBurning(); break;
 			case 3: seqBurningHole(); break;
-			case 4: seqBurningPair(); break;
-			case 5: seqBurningClosingHole(); break;
+//			case 4: seqBurningPair(); break;
+			case 4: seqBurningClosingHole(); break;
 		}
 	}
 	
 	private void dropFlamethrowerSequence() {
 		handler_.quake(false);
 		sequence_cooldown = SEQUENCE_COOLDOWN_TIME;
-		
+		warningWithSound = true;
 		int seqType = rand.nextInt(5);
 		switch (seqType) {
 			case 0: seqFlamethrower2middle(); break;
@@ -541,25 +543,70 @@ public class Spawner {
 		};
 	}
 	
+	EventQueue.Event warningEvent(final int col, final boolean first) {
+		return new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				handler_.warning(col, first);
+			}
+		};
+	}
+	
 	// ########## Sequences ##########
+	private boolean warningWithSound = false;
+	
+	private boolean getWithSound() {
+		boolean $ = warningWithSound;
+		warningWithSound = false;
+		return $;
+	}
+	
+	private void makeWarning(float time, int col) {
+		queue.addEventFromNow(time - 1, warningEvent(col, getWithSound()));
+	}
+	
+	// Drops wall with warning.
+	private void dropWallAt(float time, int col) {
+		makeWarning(time, col);
+		queue.addEventFromNow(time, dropWallEvent(col));
+	}
+	
+	// Drops burning wall with warning.
+	private void dropBurningWallAt(float time, int col) {
+		makeWarning(time, col);
+		queue.addEventFromNow(time, dropBurningWallEvent(col));
+	}
+	
+	// Drops burning wall with warning.
+	private void dropFlamethrowerAt(float time, int col) {
+		makeWarning(time, col);
+		queue.addEventFromNow(time, dropFlamethrowerEvent(col));
+	}
+	
+//	private void eventWithWarning(float time, EventQueue.Event event, boolean sound) {
+//		queue.addEventFromNow(time, event);
+//		queue.addEventFromNow(time, warningEvent(col, first));
+//	}
+	
+//	private void eventWithWarning(float time, EventQueue.Event event) {
+//		eventWithWarning(time, event, false);
+//	}
+	
 	private void sideToSideSequenceWithEdgeHole() {
+		warningWithSound = true;
+		
 		boolean leftToRight = rand.nextBoolean();
 		
 		for (int i = 0; i < 5; i++) {
 			final int col = leftToRight ? i : 5 - i;
-			EventQueue.Event event = new EventQueue.Event() {
-				@Override
-				public void invoke() {
-					handler_.dropWall(col);
-				}
-			};
-			final float time = i * 0.15f + 0.5f;
-			queue.addEventFromNow(time, event);
+			final float time = i * 0.15f + 1f;
+			dropWallAt(time, col);
 		}
-		queue.addEventFromNow(2.5f, NOP);
+		queue.addEventFromNow(3f, NOP);
 	}
 	
 	private void sideToSideSequenceWithMiddleHole() {
+		warningWithSound = true;
 		boolean leftToRight = rand.nextBoolean();
 		int hole_col = randomNonEdgeColumn();
 		for (int i = 0; i < 6; i++) {
@@ -567,31 +614,20 @@ public class Spawner {
 				continue;
 			}
 			final int col = leftToRight ? i : 5 - i;
-			EventQueue.Event event = new EventQueue.Event() {
-				@Override
-				public void invoke() {
-					handler_.dropWall(col);
-				}
-			};
-			final float time = i * 0.15f + 0.5f;
-			queue.addEventFromNow(time, event);
+			final float time = i * 0.15f + 1f;
+			dropWallAt(time, col);
 		}
-		queue.addEventFromNow(2.5f, NOP);
+		queue.addEventFromNow(3f, NOP);
 	}
 	
 	private void seq3and3() {
 		boolean leftToRight = rand.nextBoolean();
-		float time = 0.5f;
+		float time = 1;
 		for (int times=0; times < 2; times++) {
+			warningWithSound = true;
 			for (int i = 0; i < 3; i++) {
 				final int col = leftToRight ? i : 5 - i;
-				EventQueue.Event event = new EventQueue.Event() {
-					@Override
-					public void invoke() {
-						handler_.dropWall(col);
-					}
-				};
-				queue.addEventFromNow(time, event);
+				dropWallAt(time, col);
 				time += 0.15f;
 			}
 			time += 0.5f;
@@ -622,137 +658,176 @@ public class Spawner {
 	}
 	
 	private void seq3pairs() {
-		float diff = 0.7f;
+		float diff = 1f;
 		
 		final float leftToRight = rand.nextInt(2);
-		queue.addEventFromNow(1 * diff, dropWallEvent(2));
-		queue.addEventFromNow(1 * diff, dropWallEvent(3));
+		warningWithSound = true;
+		dropWallAt(1 * diff, 2);
+		dropWallAt(1 * diff, 3);
 		
-		queue.addEventFromNow((3 - leftToRight) * diff, dropWallEvent(0));
-		queue.addEventFromNow((3 - leftToRight) * diff, dropWallEvent(1));
+		warningWithSound = true;
+		dropWallAt((3 - leftToRight) * diff, 0);
+		dropWallAt((3 - leftToRight) * diff, 1);
 		
-		queue.addEventFromNow((2 + leftToRight) * diff, dropWallEvent(4));
-		queue.addEventFromNow((2 + leftToRight) * diff, dropWallEvent(5));
+		warningWithSound = true;
+		dropWallAt((2 + leftToRight) * diff, 4);
+		dropWallAt((2 + leftToRight) * diff, 5);
 		queue.addEventFromNow(4, NOP);
 	}
 	
 	private void seq5dice() {
-		queue.addEventFromNow(0.5f, dropWallEvent(0));
-		queue.addEventFromNow(0.5f, dropWallEvent(1));
-		queue.addEventFromNow(0.5f, dropWallEvent(4));
-		queue.addEventFromNow(0.5f, dropWallEvent(5));
+		warningWithSound = true;
+		dropWallAt(1, 0);
+		dropWallAt(1, 1);
+		dropWallAt(1, 4);
+		dropWallAt(1, 5);
+
+		warningWithSound = true;
+		dropWallAt(2, 2);
+		dropWallAt(2, 3);
 		
-		queue.addEventFromNow(1.5f, dropWallEvent(2));
-		queue.addEventFromNow(1.5f, dropWallEvent(3));
-		
-//		queue.addEventFromNow(1.6f, dropWallEvent(0));
-//		queue.addEventFromNow(1.6f, dropWallEvent(1));
-//		queue.addEventFromNow(1.6f, dropWallEvent(4));
-//		queue.addEventFromNow(1.6f, dropWallEvent(5));
-//		
-		queue.addEventFromNow(2.5f, NOP);
+		queue.addEventFromNow(3f, NOP);
 	}
 	
 	private void seqV() {
 		float diff = 0.5f;
 		
-		queue.addEventFromNow(1 * diff, dropWallEvent(2));
-		queue.addEventFromNow(1 * diff, dropWallEvent(3));
+		warningWithSound = true;
+		dropWallAt(0.5f + 1 * diff, 2);
+		dropWallAt(0.5f + 1 * diff, 3);
 		
-		queue.addEventFromNow(2 * diff, dropWallEvent(1));
-		queue.addEventFromNow(2 * diff, dropWallEvent(4));
-		queue.addEventFromNow(3 * diff, dropWallEvent(0));
-		queue.addEventFromNow(3 * diff, dropWallEvent(5));
+		warningWithSound = true;
+		dropWallAt(0.5f + 2 * diff, 1);
+		dropWallAt(0.5f + 2 * diff, 4);
 		
-		queue.addEventFromNow(5 * diff, NOP);
+		warningWithSound = true;
+		dropWallAt(0.5f + 3 * diff, 0);
+		dropWallAt(0.5f + 3 * diff, 5);
+		
+		queue.addEventFromNow(0.5f + 5 * diff, NOP);
 	}
 	
 	private void seqHat() {
 		float diff = 0.5f;
 		
-		queue.addEventFromNow(3 * diff, dropWallEvent(2));
-		queue.addEventFromNow(3 * diff, dropWallEvent(3));
-		queue.addEventFromNow(2 * diff, dropWallEvent(1));
-		queue.addEventFromNow(2 * diff, dropWallEvent(4));
-		queue.addEventFromNow(1 * diff, dropWallEvent(0));
-		queue.addEventFromNow(1 * diff, dropWallEvent(5));
+		warningWithSound = true;
+		dropWallAt(0.5f + 3 * diff, 2);
+		dropWallAt(0.5f + 3 * diff, 3);
+
+		warningWithSound = true;
+		dropWallAt(0.5f + 2 * diff, 1);
+		dropWallAt(0.5f + 2 * diff, 4);
 		
-		queue.addEventFromNow(5 * diff, NOP);
+		warningWithSound = true;
+		dropWallAt(0.5f + 1 * diff, 0);
+		dropWallAt(0.5f + 1 * diff, 5);
+		
+		queue.addEventFromNow(0.5f + 5 * diff, NOP);
 	}
 	
 	private void seqBurning1() {
 		final float diff = 0.5f;
 		if (rand.nextBoolean()) {
-			queue.addEventFromNow(0 * diff, dropBurningWallEvent(1));
-			queue.addEventFromNow(1 * diff, dropBurningWallEvent(5));
-			queue.addEventFromNow(2 * diff, dropBurningWallEvent(3));
-			queue.addEventFromNow(3 * diff, dropBurningWallEvent(0));
-			queue.addEventFromNow(4 * diff, dropBurningWallEvent(2));
-			queue.addEventFromNow(5 * diff, dropBurningWallEvent(4));
+			warningWithSound = true;
+			dropBurningWallAt(0 * diff + 1, 1);
+			warningWithSound = true;
+			dropBurningWallAt(1 * diff + 1, 5);
+			warningWithSound = true;
+			dropBurningWallAt(2 * diff + 1, 3);
+			warningWithSound = true;
+			dropBurningWallAt(3 * diff + 1, 0);
+			warningWithSound = true;
+			dropBurningWallAt(4 * diff + 1, 2);
+			warningWithSound = true;
+			dropBurningWallAt(5 * diff + 1, 4);
 		} else {
-			queue.addEventFromNow(0 * diff, dropBurningWallEvent(4));
-			queue.addEventFromNow(1 * diff, dropBurningWallEvent(0));
-			queue.addEventFromNow(2 * diff, dropBurningWallEvent(2));
-			queue.addEventFromNow(3 * diff, dropBurningWallEvent(5));
-			queue.addEventFromNow(4 * diff, dropBurningWallEvent(3));
-			queue.addEventFromNow(5 * diff, dropBurningWallEvent(1));
+			warningWithSound = true;
+			dropBurningWallAt(0 * diff + 1, 4);
+			warningWithSound = true;
+			dropBurningWallAt(1 * diff + 1, 0);
+			warningWithSound = true;
+			dropBurningWallAt(2 * diff + 1, 2);
+			warningWithSound = true;
+			dropBurningWallAt(3 * diff + 1, 5);
+			warningWithSound = true;
+			dropBurningWallAt(4 * diff + 1, 3);
+			warningWithSound = true;
+			dropBurningWallAt(5 * diff + 1, 1);
 		}
 		
-		queue.addEventFromNow(7 * diff, NOP);
+		queue.addEventFromNow(7 * diff + 1, NOP);
 	}
 	
 	private void seqBurning102() {
 		final float diff = 0.6f;
 		if (rand.nextBoolean()) {
-			queue.addEventFromNow(1 * diff, dropBurningWallEvent(1));
-			queue.addEventFromNow(1 * diff, dropBurningWallEvent(4));
-			queue.addEventFromNow(2 * diff, dropBurningWallEvent(0));
-			queue.addEventFromNow(2 * diff, dropBurningWallEvent(5));
-			queue.addEventFromNow(3 * diff, dropBurningWallEvent(2));
-			queue.addEventFromNow(3 * diff, dropBurningWallEvent(3));
+			warningWithSound = true;
+			dropBurningWallAt(0 * diff + 1, 1);
+			dropBurningWallAt(0 * diff + 1, 4);
+			warningWithSound = true;
+			dropBurningWallAt(1 * diff + 1, 0);
+			dropBurningWallAt(1 * diff + 1, 5);
+			warningWithSound = true;
+			dropBurningWallAt(2 * diff + 1, 2);
+			dropBurningWallAt(2 * diff + 1, 3);
 		} else {
-			queue.addEventFromNow(3 * diff, dropBurningWallEvent(1));
-			queue.addEventFromNow(3 * diff, dropBurningWallEvent(4));
-			queue.addEventFromNow(2 * diff, dropBurningWallEvent(0));
-			queue.addEventFromNow(2 * diff, dropBurningWallEvent(5));
-			queue.addEventFromNow(1 * diff, dropBurningWallEvent(2));
-			queue.addEventFromNow(1 * diff, dropBurningWallEvent(3));
+			warningWithSound = true;
+			dropBurningWallAt(2 * diff + 1, 1);
+			dropBurningWallAt(2 * diff + 1, 4);
+			warningWithSound = true;
+			dropBurningWallAt(1 * diff + 1, 0);
+			dropBurningWallAt(1 * diff + 1, 5);
+			warningWithSound = true;
+			dropBurningWallAt(0 * diff + 1, 2);
+			dropBurningWallAt(0 * diff + 1, 3);
 		}
-		queue.addEventFromNow(5 * diff, NOP);
+		queue.addEventFromNow(4 * diff + 1, NOP);
 	}
 	
 	private void sideToSideBurning() {
 		boolean leftToRight = rand.nextBoolean();
+		warningWithSound = true;
 		for (int i = 0; i < 5; i++) {
 			final int col = leftToRight ? i : 5 - i;
-			EventQueue.Event event = (i % 2 == 0) ? dropBurningWallEvent(col)
-					: dropWallEvent(col);
-			final float time = i * 0.15f;
-			queue.addEventFromNow(time, event);
-		}
-		queue.addEventFromNow(2, NOP);
-	}
-	
-	private void seqBurningHole() {
-		int hole = rand.nextInt(3) + 1;
-		
-		for (int i = 0; i < 6; i++) {
-			if (i == hole || i == hole +1) {
-				EventQueue.Event event = dropBurningWallEvent(i);
-				queue.addEventFromNow(2f, event);
-				continue;
-			}
-			EventQueue.Event event;
-			if (i == hole -1 || i == hole + 2) {
-				event = dropBurningWallEvent(i);
+			final float time = i * 0.15f + 1;
+			if (i % 2 == 0) {
+				dropBurningWallAt(time, col);
 			} else {
-				event = dropWallEvent(i);
+				dropWallAt(time, col);
 			}
-			queue.addEventFromNow(1f, event);
 		}
 		queue.addEventFromNow(3, NOP);
 	}
 	
+	private void seqBurningHole() {
+		boolean sound1 = true;
+		boolean sound2 = true;
+		
+		int hole = rand.nextInt(3) + 1;
+		
+		for (int i = 0; i < 6; i++) {
+			if (i == hole || i == hole +1) {
+				if (sound2) {
+					warningWithSound = true;
+					sound2 = false;
+				}
+				dropBurningWallAt(2f, i);
+				continue;
+			}
+			if (sound1) {
+				warningWithSound = true;
+				sound1 = false;
+			}
+			if (i == hole -1 || i == hole + 2) {
+				dropBurningWallAt(1f, i);
+			} else {
+				dropWallAt(1f, i);
+			}
+		}
+		queue.addEventFromNow(3, NOP);
+	}
+	
+	// Depracated?
 	private void seqBurningPair() {
 		final float diff = 0.9f;
 		final float delay = 0.2f;
@@ -781,24 +856,30 @@ public class Spawner {
 	
 	private void seqBurningClosingHole() {
 		final float diff = 0.2f;
-		queue.addEventFromNow(0 * diff, dropBurningWallEvent(0));
-		queue.addEventFromNow(0 * diff, dropBurningWallEvent(5));
+		warningWithSound = true;
+		dropBurningWallAt(0 * diff + 1, 0);
+		dropBurningWallAt(0 * diff + 1, 5);
 		
-		queue.addEventFromNow(1 * diff, dropBurningWallEvent(1));
-		queue.addEventFromNow(1 * diff, dropBurningWallEvent(4));
+		warningWithSound = true;
+		dropBurningWallAt(1 * diff + 1, 1);
+		dropBurningWallAt(1 * diff + 1, 4);
 		
-		queue.addEventFromNow(3 * diff, dropBurningWallEvent(2 + rand.nextInt(2)));
-		queue.addEventFromNow(8 * diff, NOP);
+		warningWithSound = true;
+		dropBurningWallAt(3 * diff + 1, 2 + rand.nextInt(2));
+		
+		queue.addEventFromNow(8 * diff + 1, NOP);
 	}
 	
 	private void seqFlamethrower2middle() {
-		queue.addEventFromNow(0, dropFlamethrowerEvent(2));
-		queue.addEventFromNow(0.1f, dropFlamethrowerEvent(3));
-		queue.addEventFromNow(0.5f, dropWallEvent(0));
-		queue.addEventFromNow(0.5f, dropWallEvent(5));
-		queue.addEventFromNow(0.7f, dropWallEvent(1));
-		queue.addEventFromNow(0.7f, dropWallEvent(4));
-		queue.addEventFromNow(2f, NOP);
+		warningWithSound = true;
+		dropFlamethrowerAt(1, 2);
+		dropFlamethrowerAt(1.1f, 3);
+		warningWithSound = true;
+		dropWallAt(1.5f, 0);
+		dropWallAt(1.5f, 5);
+		dropWallAt(1.7f, 1);
+		dropWallAt(1.7f, 4);
+		queue.addEventFromNow(3f, NOP);
 	}
 	
 	private void seqFlamethrowerHat() {

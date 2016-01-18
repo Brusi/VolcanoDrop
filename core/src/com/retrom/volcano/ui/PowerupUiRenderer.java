@@ -81,7 +81,7 @@ public class PowerupUiRenderer {
 				} else if (st < 1f / 4) {
 					return (1 - (st - 1f / 8) / (1f / 8)) * 0.2f + 1f; 
 				}
-				return 0;
+				return 1;
 			}
 			return 1f;
 		}

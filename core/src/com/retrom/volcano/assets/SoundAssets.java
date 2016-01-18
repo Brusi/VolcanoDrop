@@ -59,6 +59,8 @@ public class SoundAssets {
 	public static Sound fireballEnd;
 	public static Sound spitterSequence;
 	
+	public static Sound warning;
+	
 	private static Random rand = new Random();
 
 	
@@ -68,7 +70,7 @@ public class SoundAssets {
 	public static void load() {
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/gameplay.mp3"));
 		music.setLooping(true);
-		music.setVolume(0.5f);
+//		music.setVolume(0.5f);
 //		if (Settings.soundEnabled) music.play();
 		
 		playerJump = new Sound[] {newSound("player_jump_0a.wav"), newSound("player_jump_0b.wav")};
@@ -137,6 +139,8 @@ public class SoundAssets {
 		fireballEnd = newSound("fireball_end.wav");
 		
 		spitterSequence = newSound("wallspitter_sequence.wav");
+		
+		warning = newSound("warning.wav");
 	}
 	
 	public static long playSound (Sound sound) {

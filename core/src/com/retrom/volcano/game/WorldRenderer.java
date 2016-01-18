@@ -60,6 +60,8 @@ import com.retrom.volcano.effects.Score3Effect;
 import com.retrom.volcano.effects.Score4Effect;
 import com.retrom.volcano.effects.Score5Effect;
 import com.retrom.volcano.effects.Score6Effect;
+import com.retrom.volcano.effects.WarningExclEffect;
+import com.retrom.volcano.effects.WarningSkullEffect;
 import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Enemy;
@@ -243,7 +245,7 @@ public class WorldRenderer {
 			case BACKGROUND_WORLD3_2:
 				keyFrame = Assets.bg_world3.get(e.index());
 			default:
-				Gdx.app.log("ERROR", "Unhandled pillar type: " + e);
+//				Gdx.app.log("ERROR", "Unhandled pillar type: " + e);
 				break;
 			}
 			keyFrame.setFlip(flip, false);
@@ -479,6 +481,29 @@ public class WorldRenderer {
 					$.setY($.getY() + world.camTarget);
 					return $;
 				}
+				
+				@Override
+				public Sprite visit(WarningSkullEffect effect) {
+					effect.position_.y = effect.originalY + cam.position.y; 
+					Sprite s = effect.sprite();
+					float tint = effect.getTint();
+					s.setColor(tint, tint, tint, tint);
+					s.setY(s.getY() + world.camTarget);
+					return s;
+				}
+				
+				@Override
+				public Sprite visit(WarningExclEffect effect) {
+					// TODO: merge with WarningSkullEffect.
+					effect.position_.y = effect.originalY + cam.position.y; 
+					Sprite s = effect.sprite();
+					float tint = effect.getTint();
+					s.setColor(tint, tint, tint, tint);
+					s.setY(s.getY() + world.camTarget);
+					return s;
+				}
+				
+				
 
 				@Override
 				public Sprite visit(PlayerShieldEffect effect) {
