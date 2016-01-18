@@ -22,7 +22,7 @@ public class DustEffect extends Particle {
 				new Vector2(x, y), 
 				DOWNVEL);
 		
-		scale = (float) (Math.random() * 1 + 1);
+		setScale((float) (Math.random() * 1 + 1));
 		rotation = (float) (Math.random() * 360f);
 		rotationVel = (float) (Math.random() * 60 - 30);
 	}
@@ -48,5 +48,9 @@ public class DustEffect extends Particle {
 	@Override
 	protected void childSpecificUpdating(float deltaTime) {
 		rotation += rotationVel * deltaTime;
+	}
+
+	public void setScale(float scale) {
+		this.scale = scale;
 	}
 }

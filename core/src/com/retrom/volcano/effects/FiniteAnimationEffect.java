@@ -36,6 +36,10 @@ public class FiniteAnimationEffect extends Effect {
 		rotation_ = 0f;
 	}
 	
+	public void setConstantNoRotation(float rotation) {
+		rotation_ = rotation;
+	}
+	
 	public void setRandomScale(float minScale, float maxScale) {
 		scale_ = Utils.randomRange(minScale, maxScale); 
 	}

@@ -205,4 +205,20 @@ public class EffectFactory {
 		pos.y -= 50f;
 		return new FiniteAnimationEffect(Assets.jumpPuff, pos, false);
 	}
+	
+	public static Effect playerJumpPuffLeftWall(Vector2 player_position) {
+		Vector2 pos = player_position.cpy();
+		pos.y -= 50f;
+		FiniteAnimationEffect e = new FiniteAnimationEffect(Assets.jumpPuff, pos, false);
+		e.setConstantNoRotation(90);
+		return e;
+	}
+	
+	public static Effect playerJumpPuffRightWall(Vector2 player_position) {
+		Vector2 pos = player_position.cpy();
+		pos.y -= 50f;
+		FiniteAnimationEffect e = new FiniteAnimationEffect(Assets.jumpPuff, pos, false);
+		e.setConstantNoRotation(-90);
+		return e;
+	}
 }

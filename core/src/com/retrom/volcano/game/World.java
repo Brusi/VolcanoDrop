@@ -179,6 +179,26 @@ public class World {
 					}
 				}
 			}
+		}, new Player.JumpHandler() {
+			@Override
+			public void handle(SIDE side) {
+				switch (side) {
+				case DOUBLE:
+					screenEffects.add(EffectFactory.playerJumpPuff(player.position));
+					break;
+				case LEFT:
+					screenEffects.add(EffectFactory.playerJumpPuffLeftWall(player.position));
+					break;
+				case RIGHT:
+					screenEffects.add(EffectFactory.playerJumpPuffRightWall(player.position));
+					break;
+				case UP:
+//					screenEffects.add(EffectFactory.playerJumpPuff(player.position));
+					break;
+				default:
+					break;
+				}
+			}
 		});
 		this.spawner_ = new Spawner(floors_, activeWalls_, new Spawner.SpawnerHandler() {
 			
@@ -915,6 +935,12 @@ public class World {
 		screenEffects.add(new DustEffect(x, y));
 	}
 	
+	private void addSmallDust(float x, float y) {
+		DustEffect e = new DustEffect(x, y);
+		e.setScale(0.7f);
+		screenEffects.add(e);
+	}
+	
 	private void addSingleSmoke(final float x, final float y) {
 		screenEffects.add(new SmokeEffect(x, y));
 	}
@@ -1233,9 +1259,10 @@ public class World {
 				});
 			}
 		}
-		
-		if (player.getJumping()) {
-			screenEffects.add(EffectFactory.playerJumpPuff(player.position));
+		if (player.getGliding() != 0) {
+			if (Math.random() < deltaTime * (-player.velocity.y) / 10) {
+				addSmallDust(player.position.x + player.bounds.width / 2 * player.getGliding() , player.bounds.y);
+			}
 		}
 		
 		player.setObstacles(obstacles_);
