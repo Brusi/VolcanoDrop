@@ -760,7 +760,7 @@ public class WorldRenderer {
 		return anim.get((int) (stateTime * FPS) % anim.size);
 	}
 	
-	private Sprite getFrameStopAtLastFrame(Array<Sprite> anim, float stateTime) {
+	public static Sprite getFrameStopAtLastFrame(Array<Sprite> anim, float stateTime) {
 		int frameIndex = (int) (stateTime * FPS);
 		frameIndex = Math.min(frameIndex, anim.size-1);
 		return anim.get(frameIndex);

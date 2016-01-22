@@ -11,8 +11,10 @@ import com.retrom.volcano.utils.SoundEvictingQueue;
 
 public class SoundAssets {
 	
-	public static Music music;
+	public static Music gameMusic;
 	public static long musicid;
+	
+	public static Music shopMusic;
 	
 	public static Sound[] playerJump;
 	public static Sound[] playerJumpIntense;
@@ -61,17 +63,23 @@ public class SoundAssets {
 	
 	public static Sound warning;
 	
+	public static Sound shopClick;
+	
 	private static Random rand = new Random();
 
 	
 	private final static SoundEvictingQueue currentlyPlaying = new SoundEvictingQueue(40);
 	private static float pitch = 1f;
 	
+	
 	public static void load() {
-		music = Gdx.audio.newMusic(Gdx.files.internal("music/gameplay.mp3"));
-		music.setLooping(true);
+		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("music/gameplay.mp3"));
+		gameMusic.setLooping(true);
 //		music.setVolume(0.5f);
 //		if (Settings.soundEnabled) music.play();
+		
+		shopMusic = Gdx.audio.newMusic(Gdx.files.internal("music/shop.mp3"));
+		shopMusic.setLooping(true);
 		
 		playerJump = new Sound[] {newSound("player_jump_0a.wav"), newSound("player_jump_0b.wav")};
 		playerJumpIntense = new Sound[] {newSound("player_jump_1.wav"), newSound("player_jump_2.wav"), newSound("player_jump_3.wav"), newSound("player_jump_4.wav")};
@@ -141,6 +149,8 @@ public class SoundAssets {
 		spitterSequence = newSound("wallspitter_sequence.wav");
 		
 		warning = newSound("warning.wav");
+		
+		shopClick = newSound("menus_shop_click.wav");
 	}
 	
 	public static long playSound (Sound sound) {
@@ -220,26 +230,34 @@ public class SoundAssets {
 		if (!Settings.soundEnabled) {
 			return;
 		}
-		music.stop();
-		music.play();
+		gameMusic.stop();
+		gameMusic.play();
 	}
 
 	public static void pauseMusic() {
-		music.pause();
+		gameMusic.pause();
 	}
 	
 	public static void resumeMusic() {
 		if (!Settings.soundEnabled) {
 			return;
 		}
-		music.play();
+		gameMusic.play();
 	}
 	
 	public static void resumeMusicAt(float position) {
 		if (!Settings.soundEnabled) {
 			return;
 		}
-		music.setPosition(position);
-		music.play();
+		gameMusic.setPosition(position);
+		gameMusic.play();
+	}
+	
+	public static void startShopMusic() {
+		if (!Settings.soundEnabled) {
+			return;
+		}
+		gameMusic.stop();
+		shopMusic.play();
 	}
 }

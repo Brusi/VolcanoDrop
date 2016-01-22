@@ -230,9 +230,33 @@ public class Assets {
 	public static Sprite rightControlOn;
 	public static Sprite jumpControlOn;
 	
-	
 	// Fonts
 	public static BitmapFont scoreFont;
+	
+	// Shop
+	public static Sprite shopBg;
+	public static Sprite shopMenuBg;
+	public static Sprite shopMenuFg;
+	
+	public static Array<Sprite> shamanIdle;
+	public static Array<Sprite> shamanBuy;
+	public static Sprite shopFg;
+	public static Array<Sprite> shopFire;
+	
+	public static Sprite shopItemButtonBg;
+	public static Array<Sprite> shopItemButtonBuy;
+	public static Sprite shopItemButtonGoldSack;
+	public static Sprite shopItemButtonOwn;
+	
+	public static Sprite shopPrice1500;
+	public static Sprite shopPrice4500;
+	
+	// Shop items
+	public static Sprite shopItemAirStepIcon;
+	public static Sprite shopItemAirStepTitle;
+	
+	public static Sprite shopItemWallFootIcon;
+	public static Sprite shopItemWallFootTitle;
 
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -499,6 +523,31 @@ public class Assets {
 		jumpControlOn = guiSheet.createSprite("GUI_MovementControls_Jump_up_click");
 		
 		scoreFont = new BitmapFont(Gdx.files.internal("ui/font/volcano_score.fnt"), false);
+		
+		TextureAtlas shopBgSheet = new TextureAtlas("shop/shopbg.txt");
+		shopBg = shopBgSheet.createSprite("shopmenu_bg");
+		shopMenuBg = shopBgSheet.createSprite("shopmenu_menubox_bg");
+		shopMenuFg = shopBgSheet.createSprite("shopmenu_menubox");
+		
+		TextureAtlas shopSheet = new TextureAtlas("shop/shop.txt");
+		shamanIdle = shopSheet.createSprites("shopmenu_shaman_idle");
+		shamanBuy = shopSheet.createSprites("shopmenu_shaman_buy");
+		shopFg = shopSheet.createSprite("shopmenu_bg_foreground");
+		shopFire = shopSheet.createSprites("shopmenu_fireplace");
+		
+		shopItemButtonBg = shopSheet.createSprite("shopmenu_item_button");
+		shopItemButtonBuy = shopSheet.createSprites("shopmenu_item_button_buy");
+		shopItemButtonGoldSack = shopSheet.createSprite("shopmenu_item_button_goldsackicon");
+		shopItemButtonOwn = shopSheet.createSprite("shopmenu_item_button_ownicon");
+		
+		shopPrice1500 = shopSheet.createSprite("1500_price");
+		shopPrice4500 = shopSheet.createSprite("4500_price");
+		
+		shopItemAirStepIcon = shopSheet.createSprite("shopmenu_items_powers_airstep");
+		shopItemAirStepTitle = shopSheet.createSprite("shopmenu_items_powers_airstep_text");
+		
+		shopItemWallFootIcon = shopSheet.createSprite("shopmenu_items_powers_wallfoot");
+		shopItemWallFootTitle = shopSheet.createSprite("shopmenu_items_powers_wallfoot_text");
 		
 		
 	}

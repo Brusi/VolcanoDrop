@@ -1,0 +1,26 @@
+shopbg.png
+size: 2048, 1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+shopmenu_bg
+  rotate: false
+  xy: 0, 0
+  size: 640, 960
+  orig: 640, 960
+  offset: 0, 0
+  index: -1
+shopmenu_menubox
+  rotate: false
+  xy: 640, 0
+  size: 638, 607
+  orig: 638, 607
+  offset: 0, 0
+  index: -1
+shopmenu_menubox_bg
+  rotate: false
+  xy: 1278, 0
+  size: 638, 607
+  orig: 638, 607
+  offset: 0, 0
+  index: -1
