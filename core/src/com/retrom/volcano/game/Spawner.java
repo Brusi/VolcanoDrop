@@ -260,8 +260,8 @@ public class Spawner {
 			}
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_8) || Gdx.input.getAccelerometerX() > 7 && queue.size() < 3) {
-//			seqBurning1();
-			seqBurningClosingHole();
+			seqBurning1();
+//			seqBurningClosingHole();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_9) || Gdx.input.getAccelerometerX() < -7 && queue.size() < 3) {
 			seqBurning102();
@@ -726,7 +726,7 @@ public class Spawner {
 	}
 	
 	private void seqBurning1() {
-		final float diff = 0.5f;
+		final float diff = 0.6f;
 		if (rand.nextBoolean()) {
 			warningWithSound = true;
 			dropBurningWallAt(0 * diff + 1, 1);

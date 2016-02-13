@@ -1,5 +1,6 @@
 package com.retrom.volcano.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -71,6 +72,11 @@ public class ShopScreen extends ScreenAdapter implements Screen {
 		shaman.update(delta);
 		fire.update(delta);
 		shopMenu.update(delta);
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.HOME)) {
+			Game x = ((Game)(Gdx.app.getApplicationListener()));
+			x.setScreen(new GameScreen());
+		}
 	}
 	
 	@Override

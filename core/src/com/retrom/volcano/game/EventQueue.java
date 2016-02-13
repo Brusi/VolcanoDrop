@@ -64,4 +64,8 @@ public class EventQueue {
 		List<Event> l = events_.get(timing);
 		l.add(event);
 	}
+
+	public int size() {
+		return events_.size();
+	}
 }

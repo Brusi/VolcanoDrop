@@ -937,7 +937,7 @@ public class World {
 	
 	private void addSmallDust(float x, float y) {
 		DustEffect e = new DustEffect(x, y);
-		e.setScale(0.7f);
+		e.setScale(Utils.randomRange(0.4f, 1f));
 		screenEffects.add(e);
 	}
 	

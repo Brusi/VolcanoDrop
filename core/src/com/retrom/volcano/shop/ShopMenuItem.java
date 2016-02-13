@@ -8,9 +8,10 @@ import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.data.ShopEntry;
 import com.retrom.volcano.game.WorldRenderer;
+import com.retrom.volcano.menus.MenuButton;
 import com.retrom.volcano.utils.TouchToPoint;
 
-public class ShopMenuItem {
+public class ShopMenuItem extends MenuButton {
 	
 	private enum State {
 		CAN_BUY,
@@ -35,24 +36,13 @@ public class ShopMenuItem {
 	private final Sprite icon;
 	private final Sprite title;
 	private final ShopEntry entry;
-	private final Action action;
 	
-	private Rectangle buttonRect;
-	
-	private static final TouchToPoint ttp = TouchToPoint.create();
-	
-	public interface Action {
-		public void act();
-	}
-	
-	public ShopMenuItem(int indexInMenu, Sprite icon, Sprite title, ShopEntry entry, Action action) {
+	public ShopMenuItem(int indexInMenu, Sprite icon, Sprite title, ShopEntry entry, MenuButton.Action action) {
+		super(new Rectangle(iconWidth - RECT_HEIGHT / 2, 0, RECT_HEIGHT, RECT_HEIGHT), action);
 		this.indexInMenu_ = indexInMenu;
 		this.icon = icon;
 		this.title = title;
 		this.entry = entry;
-		this.action = action;
-		
-		buttonRect = new Rectangle(iconWidth - RECT_HEIGHT / 2, 0, RECT_HEIGHT, RECT_HEIGHT);
 		
 		initState();
 		System.out.println("state="+state);
@@ -83,7 +73,7 @@ public class ShopMenuItem {
 
 	public void update(float deltaTime) {
 		stateTime += deltaTime;
-		buttonRect.y = getY() - RECT_HEIGHT / 2;
+		rect.y = getY() - RECT_HEIGHT / 2;
 		
 		if (state == State.BUYING && stateTime >= 1) {
 			state = State.OWN;
@@ -91,11 +81,8 @@ public class ShopMenuItem {
 		
 		
 		if (state == State.CAN_BUY) {
-			if (Gdx.input.isButtonPressed(0)) {
-				if (buttonRect.contains(ttp.toPoint(Gdx.input.getX(), Gdx.input.getY()))) {
-					buy();
-					action.act();
-				}
+			if (checkClick()) {
+				buy();
 			}
 		}
 	}
@@ -111,7 +98,7 @@ public class ShopMenuItem {
 		icon.draw(batch);
 		
 		title.setY(y - title.getHeight() / 2);
-		title.setX(0 - title.getWidth() / 2);
+		title.setX(0 - 160);
 		title.draw(batch);
 		
 		if (state == State.CAN_BUY) {

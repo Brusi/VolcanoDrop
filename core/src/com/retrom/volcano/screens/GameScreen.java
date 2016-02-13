@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.assets.SoundAssets;
+import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.game.Settings;
 import com.retrom.volcano.game.World;
 import com.retrom.volcano.game.World.WorldListener;
@@ -37,6 +38,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 
 			@Override
 			public void restartGame() {
+				finalizeGame();
 				((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen());
 			}
 		});
@@ -80,8 +82,22 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		uiRenderer_.render(delta, isPaused_);
 		
 		checkPause();
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.HOME)) {
+			goToShop();
+		}
 	}
 	
+	private void goToShop() {
+		finalizeGame();
+		((Game)(Gdx.app.getApplicationListener())).setScreen(new ShopScreen());
+	}
+	
+	private void finalizeGame() {
+		ShopData.addGold(world_.score);
+		world_.score = 0;
+	}
+
 	private void checkPause() {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.P) || hub_.isPauseAreaTouched()) {
 			togglePause();

@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.data.ShopEntry;
-import com.retrom.volcano.shop.ShopMenuItem.Action;
+import com.retrom.volcano.menus.MenuButton.Action;
 
 public class ShopMenu {
 

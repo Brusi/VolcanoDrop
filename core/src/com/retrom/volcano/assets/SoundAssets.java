@@ -227,6 +227,7 @@ public class SoundAssets {
 	}
 	
 	public static void startMusic() {
+		shopMusic.stop();
 		if (!Settings.soundEnabled) {
 			return;
 		}

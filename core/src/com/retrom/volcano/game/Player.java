@@ -26,6 +26,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.control.AbstractControl;
 import com.retrom.volcano.control.ControlManager;
+import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.game.Player.JumpHandler.SIDE;
 import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.DynamicGameObject;
@@ -81,6 +82,7 @@ public class Player extends DynamicGameObject {
 	public int deathType;
 	
 	boolean grounded_ = true;
+	boolean airJump_ = false;
 	public int wallGlide = 0;
 	
 	static final boolean LEFT = true; 
@@ -124,22 +126,36 @@ public class Player extends DynamicGameObject {
 //		}
 		
 		// TODO: activate double jump on store.
-		if (grounded_ && control.isJumpPressed()) {
+		if ((grounded_  || canAirJump()) && control.isJumpPressed()) {
+			if (!grounded_) {
+				airJump_ = true;
+			}
 			jumpHandler_.handle(grounded_ ? SIDE.UP : SIDE.DOUBLE);
 			grounded_ = false;
+			resetState(STATE_JUMPING);
 			velocity.y = JUMP_VEL;
 			if (timeSinceLanding > 0.1f) {
 				SoundAssets.playRandomSound(SoundAssets.playerJump);
 			} else {
 				SoundAssets.playRandomSound(SoundAssets.playerJumpIntense);
 			}
-		}
-		if (timeSinceWallTouch < WALLJUMP_ALLOWED_DELAY && wallGlide != 0
-				&& control.isJumpPressed()) {
+		} else if (canWallJump() && control.isJumpPressed()) {
+			System.out.println("!grounded");
 			velocity.y = WALL_JUMP_Y_VEL;
 			jumpHandler_.handle(wallGlide == 1 ? SIDE.LEFT : SIDE.RIGHT);
+			resetState(STATE_JUMPING);
 			velocity.x = -WALL_JUMP_X_VEL * wallGlide;
+			wallGlide = 0;
 		}
+	}
+
+	private boolean canWallJump() {
+		return !grounded_ && timeSinceWallTouch < WALLJUMP_ALLOWED_DELAY
+				&& wallGlide != 0;
+	}
+
+	private boolean canAirJump() {
+		return ShopData.airStep.isOwn() && !airJump_ && !canWallJump();
 	}
 	
 	public void update (float deltaTime) {
@@ -175,6 +191,10 @@ public class Player extends DynamicGameObject {
 		if (state_ == state) {
 			return;
 		}
+		resetState(state);
+	}
+	
+	private void resetState(int state) {
 		state_ = state;
 		stateTime = 0;
 	}
@@ -219,6 +239,7 @@ public class Player extends DynamicGameObject {
 				if (bounds.y + bounds.height/ 2 > rect.y + rect.height / 2) {
 					bounds.y = rect.y + rect.height;
 					grounded_ = true;
+					airJump_ = false;
 					if (topRect != null) {
 						if (checkCrushDeath(obstacles_, topRect)) {
 							return;
@@ -244,7 +265,6 @@ public class Player extends DynamicGameObject {
 			timeSinceLanding = 0;
 		}
 		
-//		wallGlide = 0;
 		bounds.x += velocity.x * deltaTime;
 		checkBurningWalls();
 		for (Rectangle rect : obstacles_) {
@@ -254,9 +274,10 @@ public class Player extends DynamicGameObject {
 				} else if (bounds.x + bounds.width/ 2 < rect.x + rect.width / 2 && velocity.x > 0) {
 					bounds.x = rect.x - bounds.width;
 				}
-				if (!grounded_) {
+				if (!grounded_ && ShopData.wallFoot.isOwn()) {
 					// Glides on wall
 					wallGlide = Math.round(Math.signum(velocity.x));
+					airJump_ = false;
 					timeSinceWallTouch = 0;
 					if (velocity.y < 0) {
 						velocity.y *= Math.pow(WALLGLIDE_FRICTION_RATE, deltaTime);
