@@ -45,12 +45,9 @@ public class ShopMenuItem extends MenuButton {
 		this.entry = entry;
 		
 		initState();
-		System.out.println("state="+state);
-		System.out.println("gold="+ShopData.getGold());
 	}
 	
 	public void initState() {
-		System.out.println("entry.isOwn="+entry.isOwn());
 		if (entry.isOwn()) {
 			state = State.OWN;
 			return;
@@ -78,7 +75,6 @@ public class ShopMenuItem extends MenuButton {
 		if (state == State.BUYING && stateTime >= 1) {
 			state = State.OWN;
 		}
-		
 		
 		if (state == State.CAN_BUY) {
 			if (checkClick()) {

@@ -535,429 +535,450 @@ shopmenu_items_powers_wallfoot_text
   orig: 238, 92
   offset: 0, 0
   index: -1
-shopmenu_shaman_buy
+shopmenu_maintitles_blessings
   rotate: false
   xy: 1487, 602
+  size: 373, 124
+  orig: 373, 124
+  offset: 0, 0
+  index: -1
+shopmenu_maintitles_costume
+  rotate: false
+  xy: 0, 726
+  size: 373, 124
+  orig: 373, 124
+  offset: 0, 0
+  index: -1
+shopmenu_maintitles_powers
+  rotate: false
+  xy: 373, 726
+  size: 373, 124
+  orig: 373, 124
+  offset: 0, 0
+  index: -1
+shopmenu_shaman_buy
+  rotate: false
+  xy: 746, 726
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 0
 shopmenu_shaman_buy
   rotate: false
-  xy: 1611, 602
+  xy: 870, 726
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 1
 shopmenu_shaman_buy
   rotate: false
-  xy: 1735, 602
+  xy: 994, 726
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 2
 shopmenu_shaman_buy
   rotate: false
-  xy: 1859, 602
+  xy: 1118, 726
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 3
 shopmenu_shaman_buy
   rotate: false
-  xy: 0, 783
+  xy: 1242, 726
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 4
 shopmenu_shaman_buy
   rotate: false
-  xy: 124, 783
+  xy: 1366, 726
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 5
 shopmenu_shaman_buy
   rotate: false
-  xy: 248, 783
+  xy: 1490, 726
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 6
 shopmenu_shaman_buy
   rotate: false
-  xy: 372, 783
+  xy: 1614, 726
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 7
 shopmenu_shaman_buy
   rotate: false
-  xy: 496, 783
+  xy: 1738, 726
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 8
 shopmenu_shaman_buy
   rotate: false
-  xy: 620, 783
+  xy: 1862, 726
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 9
 shopmenu_shaman_buy
   rotate: false
-  xy: 744, 783
+  xy: 0, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 10
 shopmenu_shaman_buy
   rotate: false
-  xy: 868, 783
+  xy: 124, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 11
 shopmenu_shaman_buy
   rotate: false
-  xy: 992, 783
+  xy: 248, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 12
 shopmenu_shaman_buy
   rotate: false
-  xy: 1116, 783
+  xy: 372, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 13
 shopmenu_shaman_buy
   rotate: false
-  xy: 1240, 783
+  xy: 496, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 14
 shopmenu_shaman_buy
   rotate: false
-  xy: 1364, 783
+  xy: 620, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 15
 shopmenu_shaman_buy
   rotate: false
-  xy: 1488, 783
+  xy: 744, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 16
 shopmenu_shaman_buy
   rotate: false
-  xy: 1612, 783
+  xy: 868, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 17
 shopmenu_shaman_buy
   rotate: false
-  xy: 1736, 783
+  xy: 992, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 18
 shopmenu_shaman_buy
   rotate: false
-  xy: 1860, 783
+  xy: 1116, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 19
 shopmenu_shaman_buy
   rotate: false
-  xy: 0, 964
+  xy: 1240, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 20
 shopmenu_shaman_buy
   rotate: false
-  xy: 124, 964
+  xy: 1364, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 21
 shopmenu_shaman_buy
   rotate: false
-  xy: 248, 964
+  xy: 1488, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 22
 shopmenu_shaman_buy
   rotate: false
-  xy: 372, 964
+  xy: 1612, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 23
 shopmenu_shaman_buy
   rotate: false
-  xy: 496, 964
+  xy: 1736, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 24
 shopmenu_shaman_buy
   rotate: false
-  xy: 620, 964
+  xy: 1860, 907
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 25
 shopmenu_shaman_buy
   rotate: false
-  xy: 744, 964
+  xy: 0, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 26
 shopmenu_shaman_buy
   rotate: false
-  xy: 868, 964
+  xy: 124, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 27
 shopmenu_shaman_buy
   rotate: false
-  xy: 992, 964
+  xy: 248, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 28
 shopmenu_shaman_buy
   rotate: false
-  xy: 1116, 964
+  xy: 372, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 29
 shopmenu_shaman_idle
   rotate: false
-  xy: 1240, 964
+  xy: 496, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 0
 shopmenu_shaman_idle
   rotate: false
-  xy: 1364, 964
+  xy: 620, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 1
 shopmenu_shaman_idle
   rotate: false
-  xy: 1488, 964
+  xy: 744, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 2
 shopmenu_shaman_idle
   rotate: false
-  xy: 1612, 964
+  xy: 868, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 3
 shopmenu_shaman_idle
   rotate: false
-  xy: 1736, 964
+  xy: 992, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 4
 shopmenu_shaman_idle
   rotate: false
-  xy: 1860, 964
+  xy: 1116, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 5
 shopmenu_shaman_idle
   rotate: false
-  xy: 0, 1145
+  xy: 1240, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 6
 shopmenu_shaman_idle
   rotate: false
-  xy: 124, 1145
+  xy: 1364, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 7
 shopmenu_shaman_idle
   rotate: false
-  xy: 248, 1145
+  xy: 1488, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 8
 shopmenu_shaman_idle
   rotate: false
-  xy: 372, 1145
+  xy: 1612, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 9
 shopmenu_shaman_idle
   rotate: false
-  xy: 496, 1145
+  xy: 1736, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 10
 shopmenu_shaman_idle
   rotate: false
-  xy: 620, 1145
+  xy: 1860, 1088
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 11
 shopmenu_shaman_idle
   rotate: false
-  xy: 744, 1145
+  xy: 0, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 12
 shopmenu_shaman_idle
   rotate: false
-  xy: 868, 1145
+  xy: 124, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 13
 shopmenu_shaman_idle
   rotate: false
-  xy: 992, 1145
+  xy: 248, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 14
 shopmenu_shaman_idle
   rotate: false
-  xy: 1116, 1145
+  xy: 372, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 15
 shopmenu_shaman_idle
   rotate: false
-  xy: 1240, 1145
+  xy: 496, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 16
 shopmenu_shaman_idle
   rotate: false
-  xy: 1364, 1145
+  xy: 620, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 17
 shopmenu_shaman_idle
   rotate: false
-  xy: 1488, 1145
+  xy: 744, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 18
 shopmenu_shaman_idle
   rotate: false
-  xy: 1612, 1145
+  xy: 868, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 19
 shopmenu_shaman_idle
   rotate: false
-  xy: 1736, 1145
+  xy: 992, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 20
 shopmenu_shaman_idle
   rotate: false
-  xy: 1860, 1145
+  xy: 1116, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 21
 shopmenu_shaman_idle
   rotate: false
-  xy: 0, 1326
+  xy: 1240, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 22
 shopmenu_shaman_idle
   rotate: false
-  xy: 124, 1326
+  xy: 1364, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 23
 shopmenu_shaman_idle
   rotate: false
-  xy: 248, 1326
+  xy: 1488, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 24
 shopmenu_shaman_idle
   rotate: false
-  xy: 372, 1326
+  xy: 1612, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 25
 shopmenu_shaman_idle
   rotate: false
-  xy: 496, 1326
+  xy: 1736, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 26
 shopmenu_shaman_idle
   rotate: false
-  xy: 620, 1326
+  xy: 1860, 1269
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 27
 shopmenu_shaman_idle
   rotate: false
-  xy: 744, 1326
+  xy: 0, 1450
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 28
 shopmenu_shaman_idle
   rotate: false
-  xy: 868, 1326
+  xy: 124, 1450
   size: 124, 181
   orig: 124, 181
   offset: 0, 0
   index: 29
 shopmenu_stockitemsnumber
   rotate: false
-  xy: 992, 1326
+  xy: 248, 1450
   size: 113, 113
   orig: 113, 113
   offset: 0, 0

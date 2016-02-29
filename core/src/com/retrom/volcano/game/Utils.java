@@ -1,5 +1,7 @@
 package com.retrom.volcano.game;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.retrom.volcano.game.objects.Wall;
 
@@ -75,5 +77,9 @@ public class Utils {
 		int[] arr = rangeArr(length);
 		shuffleArr(arr);
 		return arr;
+	}
+	
+	public static void drawCenter(Batch batch, TextureRegion keyFrame, float x, float y) {
+		batch.draw(keyFrame, x - keyFrame.getRegionWidth()/2, y - keyFrame.getRegionHeight()/2);
 	}
 }

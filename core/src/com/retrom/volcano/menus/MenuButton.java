@@ -34,7 +34,9 @@ public abstract class MenuButton {
 		return false;
 	}
 	
-	public void render(Batch batch) {};
+	public void render(Batch batch) {
+		// A button does not have to be visible :)
+	};
 	
 	
 }

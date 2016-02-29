@@ -782,12 +782,12 @@ public class WorldRenderer {
 		drawCenter(keyFrame, position.x, position.y);
 	}
 	
-	private void drawCenter(TextureRegion keyFrame, float x, float y) {
+	private  void drawCenter(TextureRegion keyFrame, float x, float y) {
 		y = snapToY(y);
 		batch.draw(keyFrame, x - keyFrame.getRegionWidth()/2, y - keyFrame.getRegionHeight()/2);
 	}
 	
-	public float snapToY(float y) {
+	public static float snapToY(float y) {
 		double fraction = FRUSTUM_WIDTH / Gdx.graphics.getWidth();
 		float newy = (float) (Math.floor(y / fraction) * fraction);
 		return newy;

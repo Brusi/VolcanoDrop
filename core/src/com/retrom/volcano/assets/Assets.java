@@ -251,6 +251,11 @@ public class Assets {
 	public static Sprite shopPrice1500;
 	public static Sprite shopPrice4500;
 	
+	// Main shop menu items
+	public static Sprite mainShopPowers;
+	public static Sprite mainShopBlessings;
+	public static Sprite mainShopCostume;
+	
 	// Shop items
 	public static Sprite shopItemAirStepIcon;
 	public static Sprite shopItemAirStepTitle;
@@ -542,6 +547,10 @@ public class Assets {
 		
 		shopPrice1500 = shopSheet.createSprite("1500_price");
 		shopPrice4500 = shopSheet.createSprite("4500_price");
+		
+		mainShopPowers = shopSheet.createSprite("shopmenu_maintitles_powers");
+		mainShopBlessings = shopSheet.createSprite("shopmenu_maintitles_blessings");
+		mainShopCostume = shopSheet.createSprite("shopmenu_maintitles_costume");
 		
 		shopItemAirStepIcon = shopSheet.createSprite("shopmenu_items_powers_airstep");
 		shopItemAirStepTitle = shopSheet.createSprite("shopmenu_items_powers_airstep_text");
