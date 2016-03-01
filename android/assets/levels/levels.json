@@ -1,0 +1,30 @@
+{
+levels: [
+	{
+		start_time: 0
+		time_between_walls: 2
+		groups: [
+			{
+				chance: 1
+				single: true
+				sequences: [wall_not_dual]
+			}
+		]
+	}
+	{
+		start_time: 7
+		time_between_walls: 1.2
+		groups: [
+			{
+				chance: 0.8
+				single: true
+				sequences: [wall]
+			}
+			{
+				chance: 0.2
+				sequences: [side_to_side, 3_and_3]
+			}
+		]
+	}
+]
+}
