@@ -13,6 +13,28 @@ levels: [
 	}
 	{
 		start_time: 7
+		time_between_walls: 1.5
+		groups: [
+			{
+				chance: 1
+				single: true
+				sequences: [wall_not_dual]
+			}
+		]
+	}
+	{
+		start_time: 14
+		time_between_walls: 1.5
+		groups: [
+			{
+				chance: 1
+				single: true
+				sequences: [wall]
+			}
+		]
+	}
+	{
+		start_time: 21
 		time_between_walls: 1.2
 		groups: [
 			{
@@ -22,7 +44,27 @@ levels: [
 			}
 			{
 				chance: 0.2
-				sequences: [side_to_side, 3_and_3]
+				sequences: [side_to_side, 3_and_3, 3_pairs, vee, hat, side_to_side_hole]
+			}
+		]
+	}
+	{
+		start_time: 35
+		time_between_walls: 1.2
+		groups: [
+			{
+				chance: 0.27
+				single: true
+				sequences: [wall]
+			}
+			{
+				chance: 0.53
+				single: true
+				sequences: [burn]
+			}
+			{
+				chance: 0.2
+				sequences: [side_to_side, 3_and_3, 3_pairs, vee, hat, side_to_side_hole]
 			}
 		]
 	}

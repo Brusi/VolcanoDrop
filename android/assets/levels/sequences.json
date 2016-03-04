@@ -2,32 +2,26 @@
 sequences: [
 	{
 		name: wall_not_dual
-		hotkey: Z
 		seq: [{type: WALL_NOT_DUAL}]
 	}
 	{
 		name: wall
-		hotkey: 1
 		seq: [{type: WALL_OR_DUAL}]
 	}
 	{
 		name: burn
-		hotkey: 4
 		seq: [{type: SINGLE_BURN}]
 	}
 	{
 		name: flame
-		hotkey: 5
 		seq: [{type: SINGLE_FLAME}]
 	}
 	{
 		name: fireball
-		hotkey: 6
 		seq: [{type: SINGLE_FIREBALL}]
 	}
 	{
 		name: side_to_side
-		hotkey: 2
 		seq: [{type: WALL, time: 1.15, col: 0}
 			  {type: WALL, time: 1.30, col: 1}
 		      {type: WALL, time: 1.45, col: 2}
@@ -36,8 +30,17 @@ sequences: [
 		      {type: NOP,  time: 3}]
 	}
 	{
+		name: side_to_side_hole
+		hotkey: 1
+		seq: [{type: WALL, time: 1.15, col: 0}
+			  {type: WALL, time: 1.30, col: 1}
+		      {type: WALL, time: 1.45, col: 2}
+		      {type: WALL, time: 1.60, col: 3}
+		      {type: WALL, time: 1.90, col: 5}
+		      {type: NOP,  time: 3}]
+	}
+	{
 		name: 3_and_3
-		hotkey: 3
 		seq: [{type: WALL, time: 1.00, col: 0}
 		      {type: WALL, time: 1.15, col: 1}
 			  {type: WALL, time: 1.30, col: 2}
@@ -47,6 +50,19 @@ sequences: [
 		      {type: NOP,  time: 3}]
 	}
 	{
+		name: 3_pairs
+		seq: [{type: WALL, time: 1.00, col: 2}
+		      {type: WALL, time: 1.00, col: 3}
+			  {type: WALL, time: 2.00, col: 0}
+		      {type: WALL, time: 2.00, col: 1}
+		      {type: WALL, time: 3.00, col: 4}
+		      {type: WALL, time: 3.00, col: 5}
+		      {type: NOP,  time: 4}]
+	}
+	
+	
+	
+	{
 		name: side_to_side_burn
 		hotkey: 7
 		seq: [{type: BURN, time: 1.15, col: 0}
@@ -54,6 +70,28 @@ sequences: [
 		      {type: BURN, time: 1.45, col: 2}
 		      {type: WALL, time: 1.60, col: 3}
 		      {type: BURN, time: 1.75, col: 4}
+		      {type: NOP,  time: 3}]
+	}
+	{
+		name: vee
+		hotkey: 9
+		seq: [{type: WALL, time: 2.0, col: 0}
+			  {type: WALL, time: 2.0, col: 5}
+		      {type: WALL, time: 1.5, col: 1}
+		      {type: WALL, time: 1.5, col: 4}
+		      {type: WALL, time: 1, col: 2}
+		      {type: WALL, time: 1, col: 3}
+		      {type: NOP,  time: 3}]
+	}
+	{
+		name: hat
+		hotkey: 8
+		seq: [{type: WALL, time: 1.0, col: 0}
+			  {type: WALL, time: 1.0, col: 5}
+		      {type: WALL, time: 1.5, col: 1}
+		      {type: WALL, time: 1.5, col: 4}
+		      {type: WALL, time: 2, col: 2}
+		      {type: WALL, time: 2, col: 3}
 		      {type: NOP,  time: 3}]
 	}
 ]

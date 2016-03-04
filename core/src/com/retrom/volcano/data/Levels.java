@@ -31,13 +31,33 @@ public class Levels {
 		public List<ProbabilityGroup> groups;
 		
 		public WeightedRandom<ProbabilityGroup> wr;
+		public WeightedRandom<ProbabilityGroup> nswr;
 		
 		public void index() {
-			WeightedRandom.Builder<ProbabilityGroup> builder = new WeightedRandom.Builder<ProbabilityGroup>();
-			for (ProbabilityGroup pg : groups) {
-				builder.add(pg.chance, pg);
+			{
+				WeightedRandom.Builder<ProbabilityGroup> builder = new WeightedRandom.Builder<ProbabilityGroup>();
+				for (ProbabilityGroup pg : groups) {
+					builder.add(pg.chance, pg);
+				}
+				wr = builder.build();
 			}
-			wr = builder.build();
+			
+			float non_sequence_total_prob = 0;
+			for (ProbabilityGroup pg : groups) {
+				if (pg.single) {
+					non_sequence_total_prob += pg.chance;
+				}
+			}
+			
+			if (non_sequence_total_prob != 0) {
+				WeightedRandom.Builder<ProbabilityGroup> builder = new WeightedRandom.Builder<ProbabilityGroup>();
+				for (ProbabilityGroup pg : groups) {
+					if (pg.single) {
+						builder.add(pg.chance / non_sequence_total_prob, pg);
+					}
+				}				
+				nswr = builder.build();
+			}
 		}
 	}
 	
