@@ -137,6 +137,7 @@ public class Assets {
 	// vfx:
 	public static Array<Sprite> playerExplode;
 	public static Array<Sprite> wallExplode;
+	public static Array<Sprite> doubleJumpEffect;
 	
 	public static Array<Sprite> coinCrushedEffect;
 	public static Array<Sprite> fireballExplodeEffect;
@@ -410,6 +411,9 @@ public class Assets {
 		TextureAtlas playerVfxSheet = new TextureAtlas("vfx/playervfx.txt");
 		playerExplode = playerVfxSheet.createSprites("player_die_explotion");
 		wallExplode = playerVfxSheet.createSprites("StoneBreak_puff");
+		
+		TextureAtlas playerVfxSheet2 = new TextureAtlas("vfx/playervfx2.txt");
+		doubleJumpEffect = playerVfxSheet2.createSprites("double_jump_puff");
 		
 		TextureAtlas vfxSheet = new TextureAtlas("vfx/vfx.txt");
 		bronzeCollectEffect1 = vfxSheet.createSprites("coin_collect_bronze1");

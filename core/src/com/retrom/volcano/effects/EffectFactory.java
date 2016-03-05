@@ -202,8 +202,7 @@ public class EffectFactory {
 	
 	public static Effect playerJumpPuff(Vector2 player_position) {
 		Vector2 pos = player_position.cpy();
-		pos.y -= 50f;
-		return new FiniteAnimationEffect(Assets.jumpPuff, pos, false);
+		return new FiniteAnimationEffect(Assets.doubleJumpEffect, pos, false);
 	}
 	
 	public static Effect playerJumpPuffLeftWall(Vector2 player_position) {
