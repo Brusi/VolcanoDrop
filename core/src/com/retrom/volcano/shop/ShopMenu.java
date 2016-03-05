@@ -1,10 +1,12 @@
 package com.retrom.volcano.shop;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.data.ShopData;
+import com.retrom.volcano.screens.GameScreen;
 
 public class ShopMenu {
 
@@ -13,15 +15,42 @@ public class ShopMenu {
 	GraphicObject menuBg = new StaticGraphicObject(Assets.shopMenuBg, 0, menuFinalYPos);
 	GraphicObject menuFg = new StaticGraphicObject(Assets.shopMenuFg, 0, menuFinalYPos);
 	
+	enum Command {
+		BACK, POWERS, BLESSINGS, COSTUMES, BUY,
+	}
 	
-	ItemsListShopMenuContent.BuyListener bl = new ItemsListShopMenuContent.BuyListener() {
+	public interface Listener {
+		public void act(Command cmd);
+	}
+	
+	private Listener listener = new Listener() {
 		@Override
-		public void buy() {
-			buy = true;
+		public void act(Command cmd) {
+			switch (cmd) {
+			case BACK:
+				if (content == mainContent) {
+					Game x = ((Game)(Gdx.app.getApplicationListener()));
+					x.setScreen(new GameScreen());
+				} else {
+					content = mainContent;
+				}
+				break;
+			case BLESSINGS:
+				break;
+			case COSTUMES:
+				break;
+			case POWERS:
+				content = powersContent;
+				break;
+			case BUY:
+				buy = true;
+				break;
+			}
 		}
-	}; 
+	};
 	
-	private ShopMenuContent powersContent = new PowersShopMenuContent(bl);
+	private ShopMenuContent mainContent = new MainShopContent(listener);
+	private ShopMenuContent powersContent = new PowersShopMenuContent(listener);
 	
 	private ShopMenuContent content;
 			
@@ -31,7 +60,8 @@ public class ShopMenu {
 	private GoldCounter goldCounter = new GoldCounter();
 	
 	public ShopMenu() {
-		content = powersContent;
+		content = mainContent; 
+//				powersContent;
 	}
 	
 	public void update(float deltaTime) {

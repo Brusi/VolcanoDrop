@@ -16,6 +16,8 @@
 
 package com.retrom.volcano.assets;
 
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -23,6 +25,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.retrom.volcano.game.Utils;
+import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
 public class Assets {
 	public static Array<Sprite> walls1;
@@ -255,14 +259,22 @@ public class Assets {
 	// Main shop menu items
 	public static Sprite mainShopPowers;
 	public static Sprite mainShopBlessings;
-	public static Sprite mainShopCostume;
+	public static Sprite mainShopCostumes;
+	
+	public static Sprite mainShopBg;
+	
+	public static Sprite shopBack;
+	public static Sprite shopBackClick;
 	
 	// Shop items
+	public static Map<Integer, Sprite> prices;
+	
 	public static Sprite shopItemAirStepIcon;
 	public static Sprite shopItemAirStepTitle;
 	
 	public static Sprite shopItemWallFootIcon;
 	public static Sprite shopItemWallFootTitle;
+	
 
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -554,13 +566,19 @@ public class Assets {
 		
 		mainShopPowers = shopSheet.createSprite("shopmenu_maintitles_powers");
 		mainShopBlessings = shopSheet.createSprite("shopmenu_maintitles_blessings");
-		mainShopCostume = shopSheet.createSprite("shopmenu_maintitles_costume");
+		mainShopCostumes = shopSheet.createSprite("shopmenu_maintitles_costume");
+		mainShopBg = shopSheet.createSprite("shopmenu_maintitles_buttonbg");
 		
 		shopItemAirStepIcon = shopSheet.createSprite("shopmenu_items_powers_airstep");
 		shopItemAirStepTitle = shopSheet.createSprite("shopmenu_items_powers_airstep_text");
 		
 		shopItemWallFootIcon = shopSheet.createSprite("shopmenu_items_powers_wallfoot");
 		shopItemWallFootTitle = shopSheet.createSprite("shopmenu_items_powers_wallfoot_text");
+		
+		shopBack = shopSheet.createSprite("shopmenu_buttons_back");
+		shopBackClick = shopSheet.createSprite("shopmenu_buttons_back_click");
+		
+		prices = Utils.createSpritesIndexMap(shopSheet, "shopmenu_items_cost");
 		
 		
 	}

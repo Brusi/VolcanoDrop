@@ -28,7 +28,7 @@ public class Hub {
 	
 	private final TouchToPoint ttp = TouchToPoint.create();
 
-	final private Rectangle pauseRect;
+	private final Rectangle pauseRect;
 
 	public Hub() {
 		_score_text = new Label("0", new LabelStyle(Assets.scoreFont, Color.WHITE));

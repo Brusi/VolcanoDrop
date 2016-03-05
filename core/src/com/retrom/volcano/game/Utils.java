@@ -1,8 +1,15 @@
 package com.retrom.volcano.game;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.retrom.volcano.data.ShopData;
+import com.retrom.volcano.data.ShopEntry;
 import com.retrom.volcano.game.objects.Wall;
 
 public class Utils {
@@ -79,7 +86,20 @@ public class Utils {
 		return arr;
 	}
 	
-	public static void drawCenter(Batch batch, TextureRegion keyFrame, float x, float y) {
-		batch.draw(keyFrame, x - keyFrame.getRegionWidth()/2, y - keyFrame.getRegionHeight()/2);
+	public static void drawCenter(Batch batch, Sprite sprite, float x, float y) {
+		sprite.setPosition(x - sprite.getRegionWidth()/2, y - sprite.getRegionHeight()/2);
+		sprite.draw(batch);
+	}
+
+	public static Map<Integer, Sprite> createSpritesIndexMap(
+			TextureAtlas sheet, String name) {
+		Map<Integer, Sprite> prices = new HashMap<Integer, Sprite>();
+		for (ShopEntry entry : ShopData.allShopEntries) {
+			Sprite s = sheet.createSprite(name, entry.price);
+			if (s != null) {
+				prices.put(entry.price, s);
+			}
+		}
+		return prices;
 	}
 }

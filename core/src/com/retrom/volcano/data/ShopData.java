@@ -22,7 +22,7 @@ public class ShopData {
 	
 	public static void init() {
 		airStep = createAndRegister("powers_airstep", 1500);
-		wallFoot = createAndRegister("powers_wallfoot", 1500);
+		wallFoot = createAndRegister("powers_wallfoot", 3000);
 		
 		load();
 	}

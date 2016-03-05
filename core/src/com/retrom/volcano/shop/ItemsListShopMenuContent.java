@@ -9,19 +9,22 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.data.ShopEntry;
+import com.retrom.volcano.menus.BackMenuButton;
+import com.retrom.volcano.menus.MenuButton;
 import com.retrom.volcano.menus.MenuButton.Action;
 
 public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 	
-	private BuyListener bl;
+	private ShopMenu.Listener listener_;
 
 	public interface BuyListener {
 		public void buy();
 	}
 	
-	ItemsListShopMenuContent(BuyListener bl) {
-		this.bl = bl;
+	ItemsListShopMenuContent(ShopMenu.Listener listener) {
+		this.listener_ = listener;
 		initItems();
+		addBackButton();
 		refresh();
 	}
 	
@@ -30,12 +33,14 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 	List<ShopMenuItem> items = new ArrayList<ShopMenuItem>();
 	private float scrollY = 0;
 	private int runningIndex = 0;
+	private BackMenuButton back;
 	
 	@Override
 	public void update(float deltaTime) {
 		for (ShopMenuItem item : items) {
 			item.update(deltaTime);
 		}
+		back.checkClick();
 	}
 
 	@Override
@@ -51,6 +56,7 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 		if (Gdx.input.isKeyPressed(Input.Keys.S)) {
 			scrollY -= 1;
 		}
+		back.render(batch);
 	}
 
 	@Override
@@ -68,13 +74,23 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 				ShopData.buyFromShop(entry);
 				System.out.println("buy");
 				
-				bl.buy();
+				listener_.act(ShopMenu.Command.BUY);
 				for (ShopMenuItem item : items) {
 					item.updateState();
 				}
 			}
 		};
 		items.add(new ShopMenuItem(runningIndex++, icon, title, entry, action));
+	}
+	
+	private void addBackButton() {
+		back = new BackMenuButton(BackMenuButton.DEFAULT_X, BackMenuButton.DEFAULT_Y,
+				new MenuButton.Action() {
+					@Override
+					public void act() {
+						listener_.act(ShopMenu.Command.BACK);
+					}
+				});
 	}
 
 }

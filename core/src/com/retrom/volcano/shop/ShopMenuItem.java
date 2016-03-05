@@ -110,7 +110,7 @@ public class ShopMenuItem extends MenuButton {
 		}
 		
 		if (state != State.BUYING && state != State.OWN) {
-			Sprite price = Assets.shopPrice1500;
+			Sprite price = Assets.prices.get(entry.price);
 			price.setY(y - 27);
 			price.setX(iconWidth - price.getWidth() / 2 - 7);
 			price.draw(batch);

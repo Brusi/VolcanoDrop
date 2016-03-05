@@ -19,11 +19,11 @@ public class Volcano extends Game {
 	@Override
 	public void create () {
 		// TODO: preload levels and sequences.
-		Assets.load();
 		SoundAssets.load();
 		ControlManager.init();
 		CoinChancesConfiguration.init();
 		ShopData.init();
+		Assets.load();
 		setScreen(new GameScreen());
 //		setScreen(new ShopScreen());
 	}

@@ -65,7 +65,7 @@ public class Spawner {
 	
 	// Cooldown between *start* of sequence until the next can happen.
 	private static final float SEQUENCE_COOLDOWN_TIME = 8f;
-	private static final float SOUND_COOLDOWN_TIME = 1f;
+	private static final float SOUND_COOLDOWN_TIME = 0.5f;
 	private float sequence_cooldown = 0;
 	
 	private float timeCount = 0;

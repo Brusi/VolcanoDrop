@@ -3,6 +3,7 @@ package com.retrom.volcano.shop;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.game.Utils;
 import com.retrom.volcano.menus.MenuButton;
 
@@ -19,6 +20,15 @@ public class MainShopMenuButton extends MenuButton {
 	
 	@Override
 	public void render(Batch batch) {
+		if (isPressed()) {
+			Assets.mainShopBg.setScale(0.9f);
+			sprite.setScale(0.95f);
+		} else {
+			Assets.mainShopBg.setScale(1f);
+			sprite.setScale(1f);
+		}
+		
+		Utils.drawCenter(batch, Assets.mainShopBg, 0, rect.y + rect.height / 2);
 		Utils.drawCenter(batch, sprite,
 				rect.x + rect.width / 2,
 				rect.y + rect.height / 2);
