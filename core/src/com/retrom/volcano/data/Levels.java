@@ -21,19 +21,30 @@ public class Levels {
 		// 1. Not be silenced in sequence silence (after a sequence).
 		// 2. Have the level-specific cooldown time.
 		public boolean single;
+		
+		// Play this group on the start of the level.
+		public boolean on_level_start;
 	}
 	
 	static public class LevelDefinition {
 		// Starting time of the level;
+		public int number;
 		public float start_time;
 		public float time_between_walls;
 		// List of level sequence groups and their probabilities.
 		public List<ProbabilityGroup> groups;
+		public ProbabilityGroup level_start_group;
 		
 		public WeightedRandom<ProbabilityGroup> wr;
 		public WeightedRandom<ProbabilityGroup> nswr;
 		
 		public void index() {
+			for (ProbabilityGroup pg : groups) {
+				if (pg.on_level_start) {
+					level_start_group = pg;
+				}
+			}
+			
 			{
 				WeightedRandom.Builder<ProbabilityGroup> builder = new WeightedRandom.Builder<ProbabilityGroup>();
 				for (ProbabilityGroup pg : groups) {
