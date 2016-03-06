@@ -14,6 +14,8 @@ public class PowersShopMenuContent extends ItemsListShopMenuContent {
 	protected void initItems() {
 		addMenuItem(Assets.shopItemAirStepIcon, Assets.shopItemAirStepTitle, ShopData.airStep);
 		addMenuItem(Assets.shopItemWallFootIcon, Assets.shopItemWallFootTitle, ShopData.wallFoot);
+		addMenuItem(Assets.shopItemChargeIcon, Assets.shopItemChargeTitle, ShopData.charge);
+		addMenuItem(Assets.shopItemCheetahrIcon, Assets.shopItemCheetahrTitle, ShopData.cheetahr);
 	}
 
 }

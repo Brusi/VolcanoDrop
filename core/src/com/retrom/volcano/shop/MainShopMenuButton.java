@@ -10,7 +10,7 @@ import com.retrom.volcano.menus.MenuButton;
 public class MainShopMenuButton extends MenuButton {
 	
 	private static final float WIDTH = 455;
-	private static final float HEIGHT = 120;
+	private static final float HEIGHT = 100;
 	
 	private Sprite sprite;
 	public MainShopMenuButton(float y, Action action, Sprite sprite) {

@@ -28,10 +28,15 @@ public abstract class MenuButton {
 	
 	// Check if button is clicked, if it does, invoke action and return true.
 	public boolean checkClick() {
-		if (Gdx.input.isButtonPressed(0)) {
+		if (Gdx.input.justTouched()) {
 			if (rect.contains(ttp.toPoint(Gdx.input.getX(), Gdx.input.getY()))) {
 				pressed = true;
 			} else {
+				pressed = false;
+			}
+		}
+		if (Gdx.input.isTouched()) {
+			if (!rect.contains(ttp.toPoint(Gdx.input.getX(), Gdx.input.getY()))) {
 				pressed = false;
 			}
 		} else {

@@ -275,6 +275,15 @@ public class Assets {
 	public static Sprite shopItemWallFootIcon;
 	public static Sprite shopItemWallFootTitle;
 	
+	public static Sprite shopItemChargeIcon;
+	public static Sprite shopItemChargeTitle;
+	
+	public static Sprite shopItemCheetahrIcon;
+	public static Sprite shopItemCheetahrTitle;
+	
+	public static Sprite shopItemFroggerIcon;
+	public static Sprite shopItemFroggerTitle;
+	
 
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -569,16 +578,24 @@ public class Assets {
 		mainShopCostumes = shopSheet.createSprite("shopmenu_maintitles_costume");
 		mainShopBg = shopSheet.createSprite("shopmenu_maintitles_buttonbg");
 		
-		shopItemAirStepIcon = shopSheet.createSprite("shopmenu_items_powers_airstep");
-		shopItemAirStepTitle = shopSheet.createSprite("shopmenu_items_powers_airstep_text");
-		
-		shopItemWallFootIcon = shopSheet.createSprite("shopmenu_items_powers_wallfoot");
-		shopItemWallFootTitle = shopSheet.createSprite("shopmenu_items_powers_wallfoot_text");
-		
 		shopBack = shopSheet.createSprite("shopmenu_buttons_back");
 		shopBackClick = shopSheet.createSprite("shopmenu_buttons_back_click");
 		
 		prices = Utils.createSpritesIndexMap(shopSheet, "shopmenu_items_cost");
+		
+		TextureAtlas shopItemsSheet = new TextureAtlas("shop/shopitems.txt");
+		shopItemAirStepIcon = shopItemsSheet.createSprite("shopmenu_items_powers_airstep");
+		shopItemAirStepTitle = shopItemsSheet.createSprite("shopmenu_items_powers_airstep_text");
+		
+		shopItemWallFootIcon = shopItemsSheet.createSprite("shopmenu_items_powers_wallfoot");
+		shopItemWallFootTitle = shopItemsSheet.createSprite("shopmenu_items_powers_wallfoot_text");
+		
+		shopItemChargeIcon = shopItemsSheet.createSprite("shopmenu_items_powers_charge");
+		shopItemChargeTitle = shopItemsSheet.createSprite("shopmenu_items_powers_charge_text");
+		
+		shopItemCheetahrIcon = shopItemsSheet.createSprite("shopmenu_items_powers_cheetahr");
+		shopItemCheetahrTitle = shopItemsSheet.createSprite("shopmenu_items_powers_cheetahr_text");
+		
 		
 		
 	}

@@ -16,13 +16,21 @@ public class ShopData {
 	
 	public static ShopEntry airStep;
 	public static ShopEntry wallFoot;
+	public static ShopEntry charge;
+	public static ShopEntry cheetahr;
 	
 	private static final Preferences prefs = Gdx.app
 			.getPreferences(PREFS_NAME);
 	
 	public static void init() {
+		// Powers
 		airStep = createAndRegister("powers_airstep", 1500);
 		wallFoot = createAndRegister("powers_wallfoot", 3000);
+		charge = createAndRegister("powers_charge", 4500);
+		cheetahr = createAndRegister("powers_cheetahr", 5000);
+		
+		// Blessings
+		// TBD
 		
 		load();
 	}
