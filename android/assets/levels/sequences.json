@@ -30,6 +30,21 @@ sequences: [
 		      {type: NOP,  time: 3}]
 	}
 	{
+		name: side_to_sidex2
+		hotkey: 8
+		seq: [{type: WALL, time: 1.15, col: 0}
+			  {type: WALL, time: 1.30, col: 1}
+		      {type: WALL, time: 1.45, col: 2}
+		      {type: WALL, time: 1.60, col: 3}
+		      {type: WALL, time: 1.75, col: 4}
+			  {type: WALL, time: 3.15, col: 5}
+			  {type: WALL, time: 3.30, col: 4}
+		      {type: WALL, time: 3.45, col: 3}
+		      {type: WALL, time: 3.60, col: 2}
+		      {type: WALL, time: 3.75, col: 1}
+		      {type: NOP,  time: 6}]
+	}
+	{
 		name: side_to_side_hole
 		seq: [{type: WALL, time: 1.15, col: 0}
 			  {type: WALL, time: 1.30, col: 1}
@@ -79,6 +94,26 @@ sequences: [
 		      {type: NOP,  time: 3}]
 	}
 	{
+		name: wall_shower
+		seq: [{type: WALL, time: 1.0, col: 1}
+			  {type: WALL, time: 1.6, col: 5}
+		      {type: WALL, time: 2.2, col: 3}
+		      {type: WALL, time: 2.8, col: 0}
+		      {type: WALL, time: 3.4, col: 2}
+		      {type: WALL, time: 4.0, col: 4}
+		      {type: NOP,  time: 5}]
+	}
+	{
+		name: 3full_3hole
+		seq: [{type: WALL, time: 1, col: 0}
+		      {type: WALL, time: 1, col: 2}
+		      {type: WALL, time: 1, col: 4}
+			  {type: WALL, time: 2, col: 1}
+		      {type: WALL, time: 2, col: 3}
+		      {type: WALL, time: 2, col: 5}
+		      {type: NOP,  time: 3}]
+	}
+	{
 		name: burn_shower
 		seq: [{type: BURN, time: 1.0, col: 1}
 			  {type: BURN, time: 1.6, col: 5}
@@ -109,6 +144,16 @@ sequences: [
 		      {type: NOP,  time: 3.5}]
 	}
 	{
+		name: burn_3_and_3
+		seq: [{type: BURN, time: 1.0, col: 0}
+			  {type: BURN, time: 2.0, col: 1}
+		      {type: WALL, time: 1.0, col: 2}
+		      {type: WALL, time: 2.0, col: 3}
+		      {type: BURN, time: 1.0, col: 4}
+		      {type: BURN, time: 2.0, col: 5}
+		      {type: NOP,  time: 4}]
+	}
+	{
 		name: burn_side_to_side
 		seq: [{type: BURN, time: 1.15, col: 0}
 			  {type: WALL, time: 1.30, col: 1}
@@ -116,6 +161,20 @@ sequences: [
 		      {type: WALL, time: 1.60, col: 3}
 		      {type: BURN, time: 1.75, col: 4}
 		      {type: NOP,  time: 3}]
+	}
+	{
+		name: burn_side_to_sidex2
+		seq: [{type: BURN, time: 1.15, col: 0}
+			  {type: WALL, time: 1.30, col: 1}
+		      {type: BURN, time: 1.45, col: 2}
+		      {type: WALL, time: 1.60, col: 3}
+		      {type: BURN, time: 1.75, col: 4}
+			  {type: BURN, time: 2.75, col: 5}
+			  {type: WALL, time: 2.90, col: 4}
+		      {type: BURN, time: 3.05, col: 3}
+		      {type: WALL, time: 3.20, col: 2}
+		      {type: BURN, time: 3.35, col: 1}
+		      {type: NOP,  time: 5}]
 	}
 	{
 		name: burn_hole_1
@@ -128,6 +187,16 @@ sequences: [
 		      {type: NOP,  time: 3}]
 	}
 	{
+		name: burn_3_pairs
+		seq: [{type: BURN, time: 1.00, col: 2}
+		      {type: BURN, time: 1.00, col: 3}
+			  {type: BURN, time: 2.00, col: 0}
+		      {type: BURN, time: 2.00, col: 1}
+		      {type: BURN, time: 3.00, col: 4}
+		      {type: BURN, time: 3.00, col: 5}
+		      {type: NOP,  time: 4}]
+	}
+	{
 		name: burn_closing_hole
 		seq: [{type: BURN, time: 1.0, col: 0}
 			  {type: BURN, time: 1.0, col: 5}
@@ -135,6 +204,35 @@ sequences: [
 			  {type: BURN, time: 1.2, col: 4}
 			  {type: BURN, time: 1.6, col: 3}
 		      {type: NOP,  time: 3}]
+	}
+	{
+		name: flame_shower
+		hotkey: 5
+		seq: [{type: FLAME, time: 1.0, col: 1}
+			  {type: FLAME, time: 1.9, col: 5}
+		      {type: FLAME, time: 2.8, col: 3}
+		      {type: WALL, time: 3.7, col: 0}
+		      {type: FLAME, time: 4.6, col: 2}
+		      {type: WALL, time: 5.5, col: 4}
+		      {type: NOP,  time: 7}]
+	}
+	{
+		name: flame_2pillars
+		seq: [{type: FLAME, time: 1.0, col: 1}
+			  {type: FLAME, time: 1.0, col: 4}
+		      {type: NOP,  time: 4}]
+	}
+	{
+		name: flame_center_pillars
+		seq: [{type: FLAME, time: 1.0, col: 2}
+			  {type: FLAME, time: 1.5, col: 3}
+		      {type: NOP,  time: 4}]
+	}
+	{
+		name: flame_side_pillars
+		seq: [{type: FLAME, time: 1.0, col: 0}
+			  {type: FLAME, time: 1.0, col: 5}
+		      {type: NOP,  time: 4}]
 	}
 	{
 		name: flame_2_middle
@@ -148,7 +246,6 @@ sequences: [
 	}
 	{
 		name: flame_hat
-		hotkey: 7
 		seq: [{type: WALL, time: 2, col: 2}
 			  {type: WALL, time: 2, col: 3}
 			  {type: FLAME, time: 1.5, col: 1}
@@ -169,34 +266,82 @@ sequences: [
 	}
 	{
 		name: flame_side_to_side
-		seq: [{type: FLAME, time: 1.00, col: 5}
-			  {type: FLAME, time: 1.20, col: 0}
-			  {type: WALL,  time: 1.35, col: 1}
-			  {type: WALL,  time: 1.50, col: 2}
-			  {type: WALL,  time: 1.65, col: 3}
+		seq: [{type: FLAME, time: 1.20, col: 5}
+			  {type: FLAME, time: 1.00, col: 0}
+			  {type: WALL,  time: 1.20, col: 1}
+			  {type: WALL,  time: 1.40, col: 2}
+			  {type: WALL,  time: 1.60, col: 3}
 			  {type: WALL,  time: 1.80, col: 4}
 		      {type: NOP, time: 3}]
 	}
 	{
 		name: flame_3_and_3
-		hotkey: 4
 		seq: [{type: FLAME, time: 1.00, col: 0}
 			  {type: FLAME, time: 1.15, col: 1}
 			  {type: FLAME, time: 1.30, col: 2}
-			  {type: WALL,  time: 1.75, col: 5}
-			  {type: WALL,  time: 1.90, col: 4}
-			  {type: WALL,  time: 2.05, col: 3}
+			  {type: WALL,  time: 2.15, col: 5}
+			  {type: WALL,  time: 2.30, col: 4}
+			  {type: WALL,  time: 2.45, col: 3}
 		      {type: NOP, time: 3}]
 	}
 	{
 		name: fireball_side_to_side
-		hotkey: 1
 		seq: [{type: FIREBALL, time: 0.00, col: 0}
 			  {type: FIREBALL, time: 0.15, col: 1}
 			  {type: FIREBALL, time: 0.30, col: 2}
 			  {type: FIREBALL,  time: 0.45, col: 3}
 			  {type: FIREBALL,  time: 0.60, col: 4}
+		      {type: NOP, time: 3}]
+	}
+	{
+	    name: fireball_side_to_side_hole
+		seq: [{type: FIREBALL, time: 0.00, col: 0}
+			  {type: FIREBALL, time: 0.15, col: 1}
+			  {type: FIREBALL, time: 0.30, col: 3}
+			  {type: FIREBALL,  time: 0.45, col: 4}
+			  {type: FIREBALL,  time: 0.60, col: 5}
+		      {type: NOP, time: 3}]
+	}
+	{
+		name: fireball_pairs
+		seq: [{type: FIREBALL, time: 0.00, col: 0}
+			  {type: FIREBALL, time: 0.10, col: 1}
+			  {type: FIREBALL, time: 2.00, col: 2}
+			  {type: FIREBALL,  time: 2.10, col: 3}
+			  {type: FIREBALL,  time: 1.10, col: 4}
+			  {type: FIREBALL,  time: 1.00, col: 5}
 		      {type: NOP, time: 5}]
+	}
+	{
+		name: fireball_rain
+				hotkey: 4
+		seq: [{type: FIREBALL, time: 1.60, col: 0}
+			  {type: FIREBALL, time: 0.00, col: 1}
+			  {type: FIREBALL, time: 2.20, col: 2}
+			  {type: FIREBALL,  time: 0.60, col: 3}
+			  {type: FIREBALL,  time: 1.50, col: 4}
+			  {type: FIREBALL,  time: 2.80, col: 5}
+		      {type: NOP, time: 5}]
+	}
+	{
+		name: fireball_triples
+		seq: [{type: FIREBALL, time: 0.20, col: 0}
+			  {type: FIREBALL, time: 0.10, col: 1}
+			  {type: FIREBALL, time: 0.00, col: 2}
+			  {type: FIREBALL,  time: 2.00, col: 3}
+			  {type: FIREBALL,  time: 2.10, col: 4}
+			  {type: FIREBALL,  time: 2.20, col: 5}
+		      {type: NOP, time: 5}]
+	}
+	{
+		name: fireball_3_and_3
+		seq: [{type: FIREBALL, time: 0.00, col: 0}
+			  {type: FIREBALL, time: 1.30, col: 1}
+			  {type: FIREBALL, time: 0.00, col: 2}
+			  {type: FIREBALL,  time: 1.30, col: 3}
+			  {type: FIREBALL,  time: 0.00, col: 4}
+			  {type: FIREBALL,  time: 1.30, col: 5}
+		      {type: NOP, time: 3}]
 	}
 ]
 }

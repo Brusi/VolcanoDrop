@@ -15,7 +15,7 @@ levels: [
 	{
 		number: 1
 		start_time: 7
-		time_between_walls: 1.5
+		time_between_walls: 1.7
 		groups: [
 			{
 				chance: 1
@@ -41,14 +41,14 @@ levels: [
 		time_between_walls: 1.5
 		groups: [
 			{
-				chance: 0.8
+				chance: 0.7
 				single: true
 				sequences: [wall]
 			}
 			{
 				on_level_start: true
-				chance: 0.2
-				sequences: [side_to_side, 3_and_3, 3_pairs, vee, hat, side_to_side_hole]
+				chance: 0.3
+				sequences: [side_to_side, 3_pairs, side_to_side_hole, 3full_3hole, wall_shower]
 			}
 		]
 	}
@@ -57,19 +57,13 @@ levels: [
 		start_time: 35
 		groups: [
 			{
-				chance: 0.27
-				single: true
-				on_level_start: true
-				sequences: [burn]
-			}
-			{
-				chance: 0.53
+				chance: 0.5
 				single: true
 				sequences: [wall]
 			}
 			{
-				chance: 0.2
-				sequences: [side_to_side, 3_and_3, 3_pairs, vee, hat, side_to_side_hole]
+				chance: 0.5
+				sequences: [side_to_side, 3_pairs, side_to_side_hole, 3full_3hole, wall_shower]
 			}
 		]
 	}
@@ -78,48 +72,39 @@ levels: [
 		start_time: 48
 		groups: [
 			{
-				chance: 0.27
+				chance: 0.3
 				single: true
 				sequences: [burn]
 			}
 			{
-				chance: 0.53
+				chance: 0.3
 				single: true
 				sequences: [wall]
 			}
 			{
-				chance: 0.1
-				sequences: [side_to_side, 3_and_3, 3_pairs, vee, hat, side_to_side_hole]
-			}
-			{
-				chance: 0.1
-				on_level_start: true
-				sequences: [burn_shower, burn_102, burn_201, burn_side_to_side, burn_hole_1, burn_closing_hole]
+				chance: 0.4
+				sequences: [side_to_sidex2, 3_and_3, vee, hat, wall_shower]
 			}
 		]
 	}
 	{
 		number: 6
 		start_time: 76
-		time_between_walls: 1.2
+		time_between_walls: 1
 		groups: [
 			{
-				chance: 0.27
+				chance: 0.3
 				single: true
 				sequences: [burn]
 			}
 			{
-				chance: 0.53
+				chance: 0.3
 				single: true
 				sequences: [wall]
 			}
 			{
-				chance: 0.1
-				sequences: [side_to_side, 3_and_3, 3_pairs, vee, hat, side_to_side_hole]
-			}
-			{
-				chance: 0.1
-				sequences: [burn_shower, burn_102, burn_201, burn_side_to_side, burn_hole_1, burn_closing_hole]
+				chance: 0.4
+				sequences: [burn_shower, burn_side_to_side, burn_3_pairs, burn_hole_1]
 			}
 		]
 	}
@@ -128,28 +113,23 @@ levels: [
 		start_time: 90
 		groups: [
 			{
-				chance: 0.15
+				chance: 0.1
 				single: true
 				sequences: [burn]
 			}
 			{
-				chance: 0.15
-				single: true
-				on_level_start: true
-				sequences: [flame]
-			}
-			{
-				chance: 0.5
+				chance: 0.3
 				single: true
 				sequences: [wall]
 			}
 			{
-				chance: 0.1
-				sequences: [side_to_side, 3_and_3, 3_pairs, vee, hat, side_to_side_hole]
+				chance: 0.4
+				single: true
+				sequences: [flame_2pillars, flame_center_pillars, flame_side_pillars]
 			}
 			{
-				chance: 0.1
-				sequences: [burn_shower, burn_102, burn_201, burn_side_to_side, burn_hole_1, burn_closing_hole]
+				chance: 0.2
+				sequences: [burn_shower, burn_side_to_sidex2, burn_hole_1, burn_3_and_3]
 			}
 		]
 	}
@@ -163,43 +143,38 @@ levels: [
 				sequences: [burn]
 			}
 			{
-				chance: 0.15
+				chance: 0.30
 				single: true
 				sequences: [flame]
 			}
 			{
-				chance: 0.5
+				chance: 0.35
 				single: true
 				sequences: [wall]
 			}
 			{
-				chance: 0.1
-				on_level_start: true
-				sequences: [flame_2_middle, flame_hat, flame_vee, flame_side_to_side, flame_3_and_3]
-			}
-			{
-				chance: 0.1
-				sequences: [burn_shower, burn_102, burn_201, burn_side_to_side, burn_hole_1, burn_closing_hole]
+				chance: 0.2
+				sequences: [burn_shower, burn_102, burn_201, burn_hole_1, burn_closing_hole, burn_3_and_3]
 			}
 		]
 	}
 	{
 		number: 9
 		start_time: 117
-		time_between_walls: 1
+		time_between_walls: 0.8
 		groups: [
 			{
-				chance: 0.10
+				chance: 0.15
 				single: true
 				sequences: [fireball]
 			}
 			{
-				chance: 0.10
+				chance: 0.05
 				single: true
 				sequences: [flame]
 			}
 			{
-				chance: 0.10
+				chance: 0.00
 				single: true
 				sequences: [burn]
 			}
@@ -209,12 +184,12 @@ levels: [
 				sequences: [wall]
 			}
 			{
-				chance: 0.1
-				sequences: [flame_2_middle, flame_hat, flame_vee, flame_side_to_side, flame_3_and_3]
+				chance: 0.2
+				sequences: [flame_2_middle, flame_hat, flame_vee, flame_side_to_side, flame_shower, flame_3_and_3]
 			}
 			{
 				chance: 0.1
-				sequences: [burn_shower, burn_102, burn_201, burn_side_to_side, burn_hole_1, burn_closing_hole]
+				sequences: [burn_shower, burn_102, burn_201, burn_side_to_side, burn_hole_1, burn_closing_hole, burn_3_and_3]
 			}
 		]
 	}
@@ -223,37 +198,77 @@ levels: [
 		start_time: 130
 		groups: [
 			{
-				chance: 0.10
+				chance: 0.00
 				single: true
 				sequences: [fireball]
 			}
 			{
-				chance: 0.10
+				chance: 0.25
 				single: true
 				sequences: [flame]
 			}
 			{
-				chance: 0.10
+				chance: 0.05
 				single: true
 				sequences: [burn]
 			}
 			{
-				chance: 0.5
+				chance: 0.10
 				single: true
 				sequences: [wall]
 			}
 			{
-				chance: 0.05
-				sequences: [flame_2_middle, flame_hat, flame_vee, flame_side_to_side, flame_3_and_3]
-			}
-			{
-				chance: 0.05
-				sequences: [burn_shower, burn_102, burn_201, burn_side_to_side, burn_hole_1, burn_closing_hole]
-			}
-			{
 				chance: 0.1
+				sequences: [flame_2_middle, flame_hat, flame_vee, flame_side_to_side, flame_shower]
+			}
+			{
+				chance: 0.2
+				sequences: [burn_shower, burn_102, burn_201, burn_side_to_sidex2, burn_hole_1, burn_closing_hole, burn_3_and_3]
+			}
+			{
+				chance: 0.30
 				on_level_start: true
-				sequences: [fireball_side_to_side]
+				sequences: [fireball_side_to_side, fireball_side_to_side_hole, fireball_pairs, fireball_rain, fireball_triples, fireball_3_and_3]
+			}
+		]
+	}
+	{
+		number: 11
+		start_time: 144
+		time_between_walls: 0.5
+		groups: [
+			{
+				chance: 0.00
+				single: true
+				sequences: [fireball]
+			}
+			{
+				chance: 0.05
+				single: true
+				sequences: [flame]
+			}
+			{
+				chance: 0.05
+				single: true
+				sequences: [burn]
+			}
+			{
+				chance: 0.10
+				single: true
+				sequences: [wall]
+			}
+			{
+				chance: 0.15
+				sequences: [flame_2_middle, flame_hat, flame_vee, flame_side_to_side, flame_shower]
+			}
+			{
+				chance: 0.15
+				sequences: [burn_shower, burn_102, burn_201, burn_side_to_sidex2, burn_hole_1, burn_closing_hole, burn_3_and_3]
+			}
+			{
+				chance: 0.50
+				on_level_start: true
+				sequences: [fireball_side_to_side, fireball_side_to_side_hole, fireball_pairs, fireball_rain, fireball_triples, fireball_3_and_3]
 			}
 		]
 	}
