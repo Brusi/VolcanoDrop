@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.data.ShopEntry;
 import com.retrom.volcano.menus.BackMenuButton;
+import com.retrom.volcano.menus.ExitMenuButton;
 import com.retrom.volcano.menus.MenuButton;
 import com.retrom.volcano.menus.MenuButton.Action;
 
@@ -24,7 +25,6 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 	ItemsListShopMenuContent(ShopMenu.Listener listener) {
 		this.listener_ = listener;
 		initItems();
-		addBackButton();
 		refresh();
 	}
 	
@@ -32,15 +32,16 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 	
 	List<ShopMenuItem> items = new ArrayList<ShopMenuItem>();
 	private float scrollY = 0;
+	private float tgtY = 0;
 	private int runningIndex = 0;
-	private BackMenuButton back;
 	
 	@Override
 	public void update(float deltaTime) {
 		for (ShopMenuItem item : items) {
 			item.update(deltaTime);
 		}
-		back.checkClick();
+		float vel = (tgtY - scrollY) * 10f;
+		scrollY += vel * deltaTime;
 	}
 
 	@Override
@@ -50,13 +51,12 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 			item.render(batch);
 		}
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-			scrollY += 1;
+		if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+			tgtY += ShopMenuItem.ITEM_HEIGHT;
 		}
-		if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-			scrollY -= 1;
+		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+			tgtY -= ShopMenuItem.ITEM_HEIGHT;
 		}
-		back.render(batch);
 	}
 
 	@Override
@@ -82,15 +82,4 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 		};
 		items.add(new ShopMenuItem(runningIndex++, icon, title, entry, action));
 	}
-	
-	private void addBackButton() {
-		back = new BackMenuButton(BackMenuButton.DEFAULT_X, BackMenuButton.DEFAULT_Y,
-				new MenuButton.Action() {
-					@Override
-					public void act() {
-						listener_.act(ShopMenu.Command.BACK);
-					}
-				});
-	}
-
 }

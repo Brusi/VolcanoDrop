@@ -21,6 +21,8 @@ public abstract class MenuButton {
 	
 	private boolean pressed = false;
 	
+	private boolean visible = true;
+	
 	public MenuButton(Rectangle rect, Action action) {
 		this.rect = rect;
 		this.action = action;
@@ -28,6 +30,11 @@ public abstract class MenuButton {
 	
 	// Check if button is clicked, if it does, invoke action and return true.
 	public boolean checkClick() {
+		if (!visible) {
+			pressed = false; 
+			return false;
+		}
+		
 		if (Gdx.input.justTouched()) {
 			if (rect.contains(ttp.toPoint(Gdx.input.getX(), Gdx.input.getY()))) {
 				pressed = true;
@@ -56,4 +63,16 @@ public abstract class MenuButton {
 	public boolean isPressed() {
 		return pressed;
 	}
+	
+	public boolean isVisible() { return visible; }
+	public void show() { visible = true; } 
+	public void hide() { visible = false; }
+	
+	public float getX() {
+		return rect.x + rect.width / 2;
+	}
+	public float getY() {
+		return rect.y + rect.height / 2;
+	}
+	
 }

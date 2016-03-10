@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.assets.Assets;
-import com.retrom.volcano.menus.BackMenuButton;
+import com.retrom.volcano.menus.ExitMenuButton;
 import com.retrom.volcano.menus.MenuButton;
 import com.retrom.volcano.shop.ShopMenu.Listener;
 
@@ -31,11 +31,6 @@ public class MainShopContent implements ShopMenuContent {
 			@Override
 			public void act() { listener_.act(ShopMenu.Command.COSTUMES); }
 		}, Assets.mainShopCostumes));
-		
-		buttons.add(new BackMenuButton(BackMenuButton.DEFAULT_X, BackMenuButton.DEFAULT_Y, new MenuButton.Action() {
-			@Override
-			public void act() { listener_.act(ShopMenu.Command.BACK); }
-		}));
 	}
 
 	@Override

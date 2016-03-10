@@ -6,6 +6,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.data.ShopData;
+import com.retrom.volcano.menus.BackMenuButton;
+import com.retrom.volcano.menus.ExitMenuButton;
+import com.retrom.volcano.menus.MenuButton;
 import com.retrom.volcano.screens.GameScreen;
 
 public class ShopMenu {
@@ -15,8 +18,11 @@ public class ShopMenu {
 	GraphicObject menuBg = new StaticGraphicObject(Assets.shopMenuBg, 0, menuFinalYPos);
 	GraphicObject menuFg = new StaticGraphicObject(Assets.shopMenuFg, 0, menuFinalYPos);
 	
+	MenuButton exitButton;
+	MenuButton backButton;
+	
 	enum Command {
-		BACK, POWERS, BLESSINGS, COSTUMES, BUY,
+		EXIT, BACK, POWERS, BLESSINGS, COSTUMES, BUY;
 	}
 	
 	public interface Listener {
@@ -28,12 +34,8 @@ public class ShopMenu {
 		public void act(Command cmd) {
 			switch (cmd) {
 			case BACK:
-				if (content == mainContent) {
-					Game x = ((Game)(Gdx.app.getApplicationListener()));
-					x.setScreen(new GameScreen());
-				} else {
-					content = mainContent;
-				}
+				content = mainContent;
+				backButton.hide();
 				break;
 			case BLESSINGS:
 				break;
@@ -41,9 +43,16 @@ public class ShopMenu {
 				break;
 			case POWERS:
 				content = powersContent;
+				backButton.show();
 				break;
 			case BUY:
 				buy = true;
+				break;
+			case EXIT:
+				Game x = ((Game)(Gdx.app.getApplicationListener()));
+				x.setScreen(new GameScreen());
+				break;
+			default:
 				break;
 			}
 		}
@@ -60,10 +69,24 @@ public class ShopMenu {
 	private GoldCounter goldCounter = new GoldCounter();
 	
 	public ShopMenu() {
-		content = mainContent; 
-//				powersContent;
+		content = mainContent;
+		exitButton = new ExitMenuButton(ExitMenuButton.DEFAULT_X,
+				ExitMenuButton.DEFAULT_Y, new MenuButton.Action() {
+					@Override
+					public void act() {
+						listener.act(ShopMenu.Command.EXIT);
+					}
+				});
+		backButton = new BackMenuButton(BackMenuButton.DEFAULT_X,
+				BackMenuButton.DEFAULT_Y, new MenuButton.Action() {
+					@Override
+					public void act() {
+						listener.act(ShopMenu.Command.BACK);
+					}
+				});
+		backButton.hide();
 	}
-	
+
 	public void update(float deltaTime) {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
 			ShopData.reset();
@@ -76,6 +99,8 @@ public class ShopMenu {
 		
 		content.update(deltaTime);
 		goldCounter.update();
+		exitButton.checkClick();
+		backButton.checkClick();
 	}
 	
 	public void render(SpriteBatch batch) {
@@ -83,6 +108,8 @@ public class ShopMenu {
 		content.render(batch);
 		menuFg.render(batch);
 		goldCounter.render(batch);
+		exitButton.render(batch);
+		backButton.render(batch);
 	}
 	
 	public boolean getBuy() {

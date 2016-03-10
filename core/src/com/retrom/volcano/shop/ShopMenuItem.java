@@ -13,6 +13,8 @@ import com.retrom.volcano.utils.TouchToPoint;
 
 public class ShopMenuItem extends MenuButton {
 	
+	public static final float ITEM_HEIGHT = 100;
+	
 	private enum State {
 		CAN_BUY,
 		CANT_BUY,
@@ -24,7 +26,6 @@ public class ShopMenuItem extends MenuButton {
 	float stateTime;
 	
 	private static final float baseY = 290;
-	private static final float itemHeight = 100;
 	
 	private static final float iconWidth = 190;
 	
@@ -65,7 +66,7 @@ public class ShopMenuItem extends MenuButton {
 	}
 	
 	public float getY() {
-		return baseY + scrollY - indexInMenu_ * itemHeight;
+		return baseY + scrollY - indexInMenu_ * ITEM_HEIGHT;
 	}
 
 	public void update(float deltaTime) {
@@ -85,9 +86,13 @@ public class ShopMenuItem extends MenuButton {
 	
 	public void setScrollY(float scrollY) {
 		this.scrollY = scrollY;
+		if (getY() > 380 || getY() < -50) this.hide(); else this.show();
 	}
 	
 	public void render(Batch batch) {
+		if (!isVisible()) {
+			return;
+		}
 		float y = getY();
 		icon.setY(y - icon.getHeight() / 2);
 		icon.setX(-iconWidth - icon.getWidth() / 2);
