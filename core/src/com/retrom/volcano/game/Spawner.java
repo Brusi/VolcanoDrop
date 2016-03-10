@@ -9,10 +9,10 @@ import com.badlogic.gdx.Input.Keys;
 import com.retrom.volcano.data.Levels;
 import com.retrom.volcano.data.Levels.LevelDefinition;
 import com.retrom.volcano.data.Levels.ProbabilityGroup;
+import com.retrom.volcano.data.CoinChancesConfiguration;
 import com.retrom.volcano.data.Sequence;
 import com.retrom.volcano.data.SequenceLib;
 import com.retrom.volcano.data.SpawnerAction;
-import com.retrom.volcano.game.conf.CoinChancesConfiguration;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
 
@@ -46,9 +46,11 @@ public class Spawner {
 	
 	SequenceLib slib = SequenceLib.loadFromDefault();
 	Levels levels = Levels.loadFromDefault();
+	private List<Collectable> collectables;
 	
-	Spawner(ActiveFloors floors, List<Wall> activeWalls, SpawnerHandler handler) {
+	Spawner(ActiveFloors floors, List<Wall> activeWalls, List<Collectable> collectables, SpawnerHandler handler) {
 		this.activeWalls = activeWalls;
+		this.collectables = collectables;
 		handler_ = handler;
 		this.floors_ = floors;
 		initEvents();
@@ -96,13 +98,44 @@ public class Spawner {
 		if (queue.isEmpty()) {
 			updateLevel();
 		}
+		// Updating the level can change isEmpty status, so checking again.
 		if (queue.isEmpty()) {
-			dropWalls();
+			dropPowerupOrWalls();
 		}
 		dropCoins(deltaTime);
 
 		dropSackAtRate(deltaTime, AVG_SACK_TIME);
 //		dropFireballAtRate(deltaTime, AVG_FIREBALL_TIME);
+	}
+
+	// Drops powerup according to rules and chances.
+	// Returns true if a powerup was dropped.
+	private boolean tryDropPowerup() {
+		Collectable.Type powerup = currentLevelDef().powerup_wr.getNext();
+		if (powerup == null) {
+			return false;
+		}
+		// Do not drop another powerup of a kind if exists.
+		for (Collectable c : collectables) {
+			if (c.type == powerup) {
+				System.out.println("Powerup already exists: " + c.type);
+				return false;
+			}
+		}
+		
+		// Good to go!
+		handler_.dropCoin(randomCoinX(), powerup);
+		queue.addEventFromNow(getTimeBetweenWalls(), NOP);
+		return true;
+	}
+	
+	private void dropPowerupOrWalls() {
+		Collectable.Type powerup = currentLevelDef().powerup_wr.getNext();
+		if (tryDropPowerup()) {
+			return;
+		}
+		
+		dropWalls();
 	}
 
 	private void updateSackSilence(float deltaTime) {
@@ -119,22 +152,28 @@ public class Spawner {
 		if (level_ < 0) return;
 		if (Math.random() < deltaTime / AVG_COIN_TIME) {
 //			float coinX = (float) (Math.random() * (Wall.SIZE * 3 - 60) - Wall.SIZE * 3 + 30);
-			float coinX = Utils.random2Range(Wall.SIZE * 3 - 30);
+			float coinX = randomCoinX();
 			
-			Collectable.Type type = getCoinType();
+			Collectable.Type type = CoinChancesConfiguration
+					.CoinFromBase(currentLevelDef().coins_wr.getNext()); 
+					
 			if (type == null) return;
 			
 			
-			if (Math.random() < 0.05) {
-				type = Collectable.Type.POWERUP_SHIELD;
-			} if (Math.random() < 0.05) {
-				type = Collectable.Type.POWERUP_SLOMO;
-			} else if (Math.random() < 0.05) {
-				type = Collectable.Type.POWERUP_MAGNET;
-			}
+//			if (Math.random() < 0.05) {
+//				type = Collectable.Type.POWERUP_SHIELD;
+//			} if (Math.random() < 0.05) {
+//				type = Collectable.Type.POWERUP_SLOMO;
+//			} else if (Math.random() < 0.05) {
+//				type = Collectable.Type.POWERUP_MAGNET;
+//			}
 			
 			handler_.dropCoin(coinX, type);
 		}
+	}
+
+	private float randomCoinX() {
+		return Utils.random2Range(Wall.SIZE * 3 - 30);
 	}
 	
 	public float getTimeBetweenWalls() {
@@ -153,8 +192,6 @@ public class Spawner {
 		setLevel(levels.levels.size()-1);
 	}
 	
-	
-
 	private void setLevel(int level) {
 		if (level_ == level) {
 			return;
@@ -162,7 +199,7 @@ public class Spawner {
 		System.out.println("setting level " + level);
 		level_ = level;
 		
-		LevelDefinition ld = levels.levels.get(level_);
+		LevelDefinition ld = currentLevelDef();
 		{
 			float tbw = ld.time_between_walls;
 			if (tbw != 0) time_between_walls_ = tbw;
@@ -176,6 +213,10 @@ public class Spawner {
 		if (ld.level_start_group != null) {
 			dropGroup(ld.level_start_group);
 		}
+	}
+
+	private LevelDefinition currentLevelDef() {
+		return levels.levels.get(level_);
 	}
 
 	private void updateHotkeys() {
@@ -210,7 +251,7 @@ public class Spawner {
 		// Get the next sequence.
 		ProbabilityGroup group;
 
-		LevelDefinition levelDef = levels.levels.get(level_);
+		LevelDefinition levelDef = currentLevelDef();
 		if (sequence_cooldown > 0 && levelDef.nswr != null) {
 			group = levelDef.nswr.getNext();
 		} else {
@@ -272,10 +313,6 @@ public class Spawner {
 		return true;
 	}
 
-	private Collectable.Type getCoinType() {
-		return CoinChancesConfiguration.getNextCoin(level_);
-	}
-	
 	// ########## Events ##########
 	
 	private void initEvents() {

@@ -200,7 +200,7 @@ public class World {
 				}
 			}
 		});
-		this.spawner_ = new Spawner(floors_, activeWalls_, new Spawner.SpawnerHandler() {
+		this.spawner_ = new Spawner(floors_, activeWalls_, collectables_, new Spawner.SpawnerHandler() {
 			
 			@Override
 			public void dropWall(int col) {
@@ -277,7 +277,7 @@ public class World {
 			dropCoinFromCeiling(0, Collectable.Type.POWERUP_SLOMO);
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-			dropCoinFromCeiling((float) (Math.random() * 200), Collectable.Type.COIN_5_1);
+			dropCoinFromCeiling((float) (Math.random() * 200), Collectable.Type.TOKEN);
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
@@ -731,7 +731,7 @@ public class World {
 	public Collectable createCoin(float x, float y, Collectable.Type type) {
 		Collectable coin = new Collectable(x, y, type);
 		collectables_.add(coin);
-		if (coin.type == Collectable.Type.COIN_5_1 || coin.type == Collectable.Type.COIN_5_2 || coin.type == Collectable.Type.COIN_5_3 || coin.type == Collectable.Type.COIN_5_4) {
+		if (coin.type == Collectable.Type.TOKEN || coin.type == Collectable.Type.DIANOMD_BLUE || coin.type == Collectable.Type.DIAMOND_PURPLE || coin.type == Collectable.Type.DIAMOND_GREEN) {
 			addEffects.add(new DiamondGlowEffect(coin));
 		}
 		if (coin.isPowerup()) {
@@ -1148,66 +1148,66 @@ public class World {
 				}
 			});
 			break;
-		case COIN_1_1:
-		case COIN_1_2:
+		case BRONZE_1:
+		case BRONZE_2:
 			addScore(1);
 			effects.add(new Score1Effect(collectable.position.cpy()));
 			addEffects.add(EffectFactory.bronzeCollectEffect(collectable.position));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectBronze);
 			break;
-		case COIN_2_1:
-		case COIN_2_2:
+		case SILVER_1:
+		case SILVER_2:
 			addScore(3);
 			effects.add(new Score3Effect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectSilver);
 			addEffects.add(EffectFactory.silverCollectEffect(collectable.position));
 			break;
-		case COIN_2_3:
+		case SILVER_MASK:
 			addScore(4);
 			effects.add(new Score4Effect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectSilver);
 			addEffects.add(EffectFactory.silverCollectEffect(collectable.position));
 			break;
-		case COIN_3_1:
-		case COIN_3_2:
+		case GOLD_1:
+		case GOLD_2:
 			addScore(5);
 			effects.add(new Score5Effect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectGold);
 			addEffects.add(EffectFactory.goldCollectEffect(collectable.position));
 			break;
-		case COIN_3_3:
+		case GOLD_MASK:
 			addScore(10);
 			effects.add(new Score10Effect(collectable.position.cpy()));
 			SoundAssets.playSound(SoundAssets.coinsCollectGoldMask);
 			addEffects.add(EffectFactory.goldCollectEffect(collectable.position));
 			break;
-		case COIN_4_1:
-		case COIN_4_2:
-		case COIN_4_3:
+		case RING_GREEN:
+		case RING_PURPLE:
+		case RING_BLUE:
 			addScore(6);
 			effects.add(new Score6Effect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectRing);
 			addEffects.add(EffectFactory.goldCollectEffect(collectable.position));
 			break;
-		case COIN_5_1:
+		case TOKEN:
 			addScore(25);
 			effects.add(new Score25Effect(collectable.position.cpy()));
 			SoundAssets.playSound(SoundAssets.coinsCollectBigToken);
 			addEffects.add(EffectFactory.goldCollectEffect(collectable.position));
 			break;
-		case COIN_5_2:
+		case DIANOMD_BLUE:
 			addScore(15);
 			effects.add(new Score15TealEffect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectDiamond);
 			addEffects.add(EffectFactory.cyanDiamondCollectEffect(collectable.position));
 			break;
-		case COIN_5_3:
+		case DIAMOND_PURPLE:
 			addScore(15);
 			effects.add(new Score15PurpleEffect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectDiamond);
 			addEffects.add(EffectFactory.purpleDiamondCollectEffect(collectable.position));
 			break;
-		case COIN_5_4:
+		case DIAMOND_GREEN:
 			addScore(15);
 			effects.add(new Score15GreenEffect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectDiamond);

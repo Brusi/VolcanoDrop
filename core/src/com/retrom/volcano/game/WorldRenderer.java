@@ -439,16 +439,16 @@ public class WorldRenderer {
 				public Sprite visit(DiamondGlowEffect effect) {
 					Sprite s = null;
 					switch (effect.diamond.type) {
-					case COIN_5_1:
+					case TOKEN:
 						s = Assets.tokenGlow;
 						break;
-					case COIN_5_2:
+					case DIANOMD_BLUE:
 						s = Assets.diamondCyanGlow;
 						break;
-					case COIN_5_3:
+					case DIAMOND_PURPLE:
 						s = Assets.diamondPurpleGlow;
 						break;
-					case COIN_5_4:
+					case DIAMOND_GREEN:
 						s = Assets.diamondGreenGlow;
 						break;
 					default:
@@ -598,21 +598,21 @@ public class WorldRenderer {
 	
 	private Array<Sprite> getCoinAnimation(Collectable.Type type) {
 		switch(type) {
-		case COIN_1_1: return Assets.coin1_1_land;
-		case COIN_1_2: return Assets.coin1_2_land;
-		case COIN_2_1: return Assets.coin2_1_land;
-		case COIN_2_2: return Assets.coin2_2_land;
-		case COIN_2_3: return Assets.coin2_3_land;
-		case COIN_3_1: return Assets.coin3_1_land;
-		case COIN_3_2: return Assets.coin3_2_land;
-		case COIN_3_3: return Assets.coin3_3_land;
-		case COIN_4_1: return Assets.coin4_1_land;
-		case COIN_4_2: return Assets.coin4_2_land;
-		case COIN_4_3: return Assets.coin4_3_land;
-		case COIN_5_1: return Assets.coin5_1_land;
-		case COIN_5_2: return Assets.coin5_2_land;
-		case COIN_5_3: return Assets.coin5_3_land;
-		case COIN_5_4: return Assets.coin5_4_land;
+		case BRONZE_1: return Assets.coin1_1_land;
+		case BRONZE_2: return Assets.coin1_2_land;
+		case SILVER_1: return Assets.coin2_1_land;
+		case SILVER_2: return Assets.coin2_2_land;
+		case SILVER_MASK: return Assets.coin2_3_land;
+		case GOLD_1: return Assets.coin3_1_land;
+		case GOLD_2: return Assets.coin3_2_land;
+		case GOLD_MASK: return Assets.coin3_3_land;
+		case RING_GREEN: return Assets.coin4_1_land;
+		case RING_PURPLE: return Assets.coin4_2_land;
+		case RING_BLUE: return Assets.coin4_3_land;
+		case TOKEN: return Assets.coin5_1_land;
+		case DIANOMD_BLUE: return Assets.coin5_2_land;
+		case DIAMOND_PURPLE: return Assets.coin5_3_land;
+		case DIAMOND_GREEN: return Assets.coin5_4_land;
 		case POWERUP_MAGNET:
 		case POWERUP_SLOMO:
 		case POWERUP_SHIELD:
@@ -622,21 +622,21 @@ public class WorldRenderer {
 	
 	private TextureRegion getCoinKeyFrame(Collectable.Type type) {
 		switch(type) {
-		case COIN_1_1: return Assets.coin1_1;
-		case COIN_1_2: return Assets.coin1_2;
-		case COIN_2_1: return Assets.coin2_1;
-		case COIN_2_2: return Assets.coin2_2;
-		case COIN_2_3: return Assets.coin2_3;
-		case COIN_3_1: return Assets.coin3_1;
-		case COIN_3_2: return Assets.coin3_2;
-		case COIN_3_3: return Assets.coin3_3;
-		case COIN_4_1: return Assets.coin4_1;
-		case COIN_4_2: return Assets.coin4_2;
-		case COIN_4_3: return Assets.coin4_3;
-		case COIN_5_1: return Assets.coin5_1;
-		case COIN_5_2: return Assets.coin5_2;
-		case COIN_5_3: return Assets.coin5_3;
-		case COIN_5_4: return Assets.coin5_4;
+		case BRONZE_1: return Assets.coin1_1;
+		case BRONZE_2: return Assets.coin1_2;
+		case SILVER_1: return Assets.coin2_1;
+		case SILVER_2: return Assets.coin2_2;
+		case SILVER_MASK: return Assets.coin2_3;
+		case GOLD_1: return Assets.coin3_1;
+		case GOLD_2: return Assets.coin3_2;
+		case GOLD_MASK: return Assets.coin3_3;
+		case RING_GREEN: return Assets.coin4_1;
+		case RING_PURPLE: return Assets.coin4_2;
+		case RING_BLUE: return Assets.coin4_3;
+		case TOKEN: return Assets.coin5_1;
+		case DIANOMD_BLUE: return Assets.coin5_2;
+		case DIAMOND_PURPLE: return Assets.coin5_3;
+		case DIAMOND_GREEN: return Assets.coin5_4;
 		case POWERUP_MAGNET: return Assets.powerupMagnet;
 		case POWERUP_SLOMO: return Assets.powerupSlomo;
 		case POWERUP_SHIELD: return Assets.powerupShield;

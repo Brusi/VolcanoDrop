@@ -94,26 +94,26 @@ public class EffectFactory {
 
 	public static Effect coinCrushParticle(Collectable.Type type, Vector2 position) {
 		switch (type) {
-		case COIN_1_1:
-		case COIN_1_2:
+		case BRONZE_1:
+		case BRONZE_2:
 			return new CoinBreakParticle(Assets.bronzeCoinBreak, position);
-		case COIN_2_1:
-		case COIN_2_2:
-		case COIN_2_3:
+		case SILVER_1:
+		case SILVER_2:
+		case SILVER_MASK:
 			return new CoinBreakParticle(Assets.silverCoinBreak, position);
-		case COIN_3_1:
-		case COIN_3_2:
-		case COIN_3_3:
-		case COIN_4_1:
-		case COIN_4_2:
-		case COIN_4_3:
-		case COIN_5_1:
+		case GOLD_1:
+		case GOLD_2:
+		case GOLD_MASK:
+		case RING_GREEN:
+		case RING_PURPLE:
+		case RING_BLUE:
+		case TOKEN:
 			return new CoinBreakParticle(Assets.goldCoinBreak, position);
-		case COIN_5_2:
+		case DIANOMD_BLUE:
 			return new CoinBreakParticle(Assets.cyanDiamondBreak, position);
-		case COIN_5_3:
+		case DIAMOND_PURPLE:
 			return new CoinBreakParticle(Assets.purpleDiamondBreak, position);
-		case COIN_5_4:
+		case DIAMOND_GREEN:
 			return new CoinBreakParticle(Assets.greenDiamondBreak, position);
 		case POWERUP_MAGNET:
 			// TODO: change to actual powerup particle.

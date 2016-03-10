@@ -97,6 +97,6 @@ public class GoldSack extends DynamicGameObject {
 	
 	// TODO: replace with a better implementation and/or change loot chances.
 	static public Collectable.Type randomSackCoin() {
-		return Collectable.Type.values()[(int) Math.floor(Math.random() * Collectable.Type.COIN_5_4.ordinal())]; 
+		return Collectable.Type.values()[(int) Math.floor(Math.random() * Collectable.Type.DIAMOND_GREEN.ordinal())]; 
 	}
 }

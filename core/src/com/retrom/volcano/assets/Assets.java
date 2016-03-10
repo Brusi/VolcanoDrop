@@ -266,6 +266,9 @@ public class Assets {
 	public static Sprite shopBack;
 	public static Sprite shopBackClick;
 	
+	public static Sprite shopExit;
+	public static Sprite shopExitClick;
+	
 	// Shop items
 	public static Map<Integer, Sprite> prices;
 	
@@ -580,6 +583,9 @@ public class Assets {
 		
 		shopBack = shopSheet.createSprite("shopmenu_buttons_back");
 		shopBackClick = shopSheet.createSprite("shopmenu_buttons_back_click");
+		
+		shopExit = shopSheet.createSprite("shopmenu_buttons_exit");
+		shopExitClick = shopSheet.createSprite("shopmenu_buttons_exit_click");
 		
 		prices = Utils.createSpritesIndexMap(shopSheet, "shopmenu_items_cost");
 		

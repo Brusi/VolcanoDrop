@@ -6,7 +6,7 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
-
+import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.utils.WeightedRandom;
 
 public class Levels {
@@ -26,6 +26,16 @@ public class Levels {
 		public boolean on_level_start;
 	}
 	
+	static public class PowerupChance {
+		float chance;
+		Collectable.Type powerup; 
+	}
+	
+	static public class CoinChance {
+		float chance;
+		Collectable.BaseType coin; 
+	}
+	
 	static public class LevelDefinition {
 		// Starting time of the level;
 		public int number;
@@ -35,10 +45,20 @@ public class Levels {
 		public List<ProbabilityGroup> groups;
 		public ProbabilityGroup level_start_group;
 		
+		public List<PowerupChance> powerups;
+		public List<CoinChance> coins;
+		
+		// Auto generated.
 		public WeightedRandom<ProbabilityGroup> wr;
 		public WeightedRandom<ProbabilityGroup> nswr;
 		
+		public WeightedRandom<Collectable.Type> powerup_wr;
+		public WeightedRandom<Collectable.BaseType> coins_wr;
+		
 		public void index() {
+			indexPowerups();
+			indexCoins();
+			
 			for (ProbabilityGroup pg : groups) {
 				if (pg.on_level_start) {
 					level_start_group = pg;
@@ -69,6 +89,48 @@ public class Levels {
 				}				
 				nswr = builder.build();
 			}
+		}
+
+		private void indexCoins() {
+			WeightedRandom.Builder<Collectable.BaseType> builder = new WeightedRandom.Builder<Collectable.BaseType>();
+			if (coins == null) {
+				// If not defined, no powerups at all! :(
+				coins_wr = builder.add(1, null).build();
+				return;
+			}
+			float total_chance = 0;
+			for (CoinChance cc : coins) {
+				total_chance += cc.chance;
+				builder.add(cc.chance, cc.coin);
+			}
+			if (total_chance > 1) {
+				throw new RuntimeException("Powerup chances exceeds 1 !");
+			}
+			// Add null as default value.
+			builder.add(1 - total_chance, null);
+			
+			coins_wr = builder.build();
+		}
+
+		private void indexPowerups() {
+			WeightedRandom.Builder<Collectable.Type> builder = new WeightedRandom.Builder<Collectable.Type>();
+			if (powerups == null) {
+				// If not defined, no powerups at all! :(
+				powerup_wr = builder.add(1, null).build();
+				return;
+			}
+			float total_chance = 0;
+			for (PowerupChance pc : powerups) {
+				total_chance += pc.chance;
+				builder.add(pc.chance, pc.powerup);
+			}
+			if (total_chance > 1) {
+				throw new RuntimeException("Powerup chances exceeds 1 !");
+			}
+			// Add null as default value.
+			builder.add(1 - total_chance, null);
+			
+			powerup_wr = builder.build();
 		}
 	}
 	

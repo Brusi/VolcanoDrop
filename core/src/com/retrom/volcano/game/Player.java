@@ -140,7 +140,6 @@ public class Player extends DynamicGameObject {
 				SoundAssets.playRandomSound(SoundAssets.playerJumpIntense);
 			}
 		} else if (canWallJump() && control.isJumpPressed()) {
-			System.out.println("!grounded");
 			velocity.y = WALL_JUMP_Y_VEL;
 			jumpHandler_.handle(wallGlide == 1 ? SIDE.LEFT : SIDE.RIGHT);
 			resetState(STATE_JUMPING);
@@ -277,7 +276,7 @@ public class Player extends DynamicGameObject {
 				if (!grounded_ && ShopData.wallFoot.isOwn()) {
 					// Glides on wall
 					wallGlide = Math.round(Math.signum(velocity.x));
-					airJump_ = false;
+//					airJump_ = false;
 					timeSinceWallTouch = 0;
 					if (velocity.y < 0) {
 						velocity.y *= Math.pow(WALLGLIDE_FRICTION_RATE, deltaTime);

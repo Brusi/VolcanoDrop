@@ -29,13 +29,24 @@ public class Collectable extends DynamicGameObject {
 	private float stateTime_;
 	
 	public enum Type {
-		COIN_1_1, COIN_1_2,
-		COIN_2_1, COIN_2_2, COIN_2_3, 
-		COIN_3_1, COIN_3_2, COIN_3_3, 
-		COIN_4_1, COIN_4_2, COIN_4_3, 
-		COIN_5_1, COIN_5_2, COIN_5_3, COIN_5_4, 
+		BRONZE_1, BRONZE_2,
+		SILVER_1, SILVER_2, SILVER_MASK, 
+		GOLD_1, GOLD_2, GOLD_MASK, 
+		RING_GREEN, RING_PURPLE, RING_BLUE, 
+		TOKEN,
+		DIANOMD_BLUE, DIAMOND_PURPLE, DIAMOND_GREEN, 
 		
 		POWERUP_MAGNET, POWERUP_SLOMO, POWERUP_SHIELD;
+		
+		public static boolean isPowerup(Type type) {
+			return type == POWERUP_MAGNET
+					|| type == POWERUP_SHIELD
+					|| type == POWERUP_SLOMO;
+		}
+	}
+	
+	public enum BaseType {
+		BRONZE, SILVER, GOLD, RING, DIAMOND, TOKEN;
 	}
 	
 	public final Type type;

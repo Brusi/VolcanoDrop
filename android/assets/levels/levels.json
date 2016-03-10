@@ -11,6 +11,14 @@ levels: [
 				sequences: [wall_not_dual]
 			}
 		]
+        coins: [
+            { chance: 1, coin: BRONZE }
+        ]
+		powerups: [
+			{ powerup: POWERUP_MAGNET, chance: 0.3 }
+			{ powerup: POWERUP_SLOMO, chance: 0.3 }
+			{ powerup: POWERUP_SHIELD, chance: 0.3 }
+		]
 	}
 	{
 		number: 1
@@ -23,6 +31,14 @@ levels: [
 				sequences: [wall_not_dual]
 			}
 		]
+        coins: [
+            { chance: 1, coin: BRONZE }
+        ]
+		powerups: [
+			{ powerup: POWERUP_MAGNET, chance: 0.3 }
+			{ powerup: POWERUP_SLOMO, chance: 0.3 }
+			{ powerup: POWERUP_SHIELD, chance: 0.3 }
+		]
 	}
 	{
 		number: 2
@@ -33,6 +49,15 @@ levels: [
 				single: true
 				sequences: [wall]
 			}
+		]
+        coins: [
+            { chance: 0.65, coin: BRONZE }
+            { chance: 0.35, coin: SILVER }
+        ]
+		powerups: [
+			{ powerup: POWERUP_MAGNET, chance: 0.1 }
+			{ powerup: POWERUP_SLOMO, chance: 0.1 }
+			{ powerup: POWERUP_SHIELD, chance: 0.1 }
 		]
 	}
 	{
@@ -51,6 +76,15 @@ levels: [
 				sequences: [side_to_side, 3_pairs, side_to_side_hole, 3full_3hole, wall_shower]
 			}
 		]
+        coins: [
+            { chance: 0.65, coin: BRONZE }
+            { chance: 0.35, coin: SILVER }
+        ]
+		powerups: [
+			{ powerup: POWERUP_MAGNET, chance: 0.1 }
+			{ powerup: POWERUP_SLOMO, chance: 0.1 }
+			{ powerup: POWERUP_SHIELD, chance: 0.1 }
+		]
 	}
 	{
 		number: 4
@@ -65,6 +99,11 @@ levels: [
 				chance: 0.5
 				sequences: [side_to_side, 3_pairs, side_to_side_hole, 3full_3hole, wall_shower]
 			}
+		]
+		powerups: [
+			{ powerup: POWERUP_MAGNET, chance: 0.1 }
+			{ powerup: POWERUP_SLOMO, chance: 0.1 }
+			{ powerup: POWERUP_SHIELD, chance: 0.1 }
 		]
 	}
 	{
@@ -85,6 +124,11 @@ levels: [
 				chance: 0.4
 				sequences: [side_to_sidex2, 3_and_3, vee, hat, wall_shower]
 			}
+		]
+		powerups: [
+			{ powerup: POWERUP_MAGNET, chance: 0.1 }
+			{ powerup: POWERUP_SLOMO, chance: 0.1 }
+			{ powerup: POWERUP_SHIELD, chance: 0.1 }
 		]
 	}
 	{
