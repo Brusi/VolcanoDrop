@@ -3,19 +3,22 @@ package com.retrom.volcano.shop;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.data.ShopData;
+import com.retrom.volcano.game.Utils;
 import com.retrom.volcano.menus.BackMenuButton;
 import com.retrom.volcano.menus.ExitMenuButton;
 import com.retrom.volcano.menus.MenuButton;
 import com.retrom.volcano.screens.GameScreen;
+import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
 public class ShopMenu {
 
 	private static final float menuFinalYPos = 180;
 
-	GraphicObject menuBg = new StaticGraphicObject(Assets.shopMenuBg, 0, menuFinalYPos);
+	GraphicObject menuBg = new StaticGraphicObject(Assets.shopMenuBg, 0, menuFinalYPos - 10);
 	GraphicObject menuFg = new StaticGraphicObject(Assets.shopMenuFg, 0, menuFinalYPos);
 	
 	MenuButton exitButton;
@@ -38,8 +41,12 @@ public class ShopMenu {
 				backButton.hide();
 				break;
 			case BLESSINGS:
+				content = blessingsContent;
+				backButton.show();
 				break;
 			case COSTUMES:
+				content = costumesContent;
+				backButton.show();
 				break;
 			case POWERS:
 				content = powersContent;
@@ -60,6 +67,8 @@ public class ShopMenu {
 	
 	private ShopMenuContent mainContent = new MainShopContent(listener);
 	private ShopMenuContent powersContent = new PowersShopMenuContent(listener);
+	private ShopMenuContent blessingsContent = new BlessingsShopMenuContent(listener);
+	private ShopMenuContent costumesContent = new CostumesShopMenuContent(listener);
 	
 	private ShopMenuContent content;
 			
@@ -106,12 +115,18 @@ public class ShopMenu {
 	public void render(SpriteBatch batch) {
 		menuBg.render(batch);
 		content.render(batch);
+		renderBottomFade(batch);
 		menuFg.render(batch);
 		goldCounter.render(batch);
 		exitButton.render(batch);
 		backButton.render(batch);
 	}
 	
+	private void renderBottomFade(SpriteBatch batch) {
+		Sprite s = content.getBottomFade();
+		if (s != null) Utils.drawCenter(batch, s, 0, 174);
+	}
+
 	public boolean getBuy() {
 		boolean $ = buy;
 		buy = false;

@@ -3,6 +3,7 @@ package com.retrom.volcano.shop;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.menus.ExitMenuButton;
@@ -52,4 +53,8 @@ public class MainShopContent implements ShopMenuContent {
 		// Nothing to refresh...
 	}
 
+	@Override
+	public Sprite getBottomFade() {
+		return null;
+	}
 }

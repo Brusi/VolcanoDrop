@@ -1,5 +1,6 @@
 package com.retrom.volcano.shop;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public interface ShopMenuContent {
@@ -8,4 +9,6 @@ public interface ShopMenuContent {
 	
 	// Refreshes data shown by the menu.
 	public void refresh();
+	
+	abstract public Sprite getBottomFade();
 }
