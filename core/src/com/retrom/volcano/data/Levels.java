@@ -41,6 +41,7 @@ public class Levels {
 		public int number;
 		public float start_time;
 		public float time_between_walls;
+		public float avg_sack_time;
 		// List of level sequence groups and their probabilities.
 		public List<ProbabilityGroup> groups;
 		public ProbabilityGroup level_start_group;
@@ -98,17 +99,9 @@ public class Levels {
 				coins_wr = builder.add(1, null).build();
 				return;
 			}
-			float total_chance = 0;
 			for (CoinChance cc : coins) {
-				total_chance += cc.chance;
 				builder.add(cc.chance, cc.coin);
 			}
-			if (total_chance > 1) {
-				throw new RuntimeException("Powerup chances exceeds 1 !");
-			}
-			// Add null as default value.
-			builder.add(1 - total_chance, null);
-			
 			coins_wr = builder.build();
 		}
 

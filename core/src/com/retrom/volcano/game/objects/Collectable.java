@@ -46,7 +46,7 @@ public class Collectable extends DynamicGameObject {
 	}
 	
 	public enum BaseType {
-		BRONZE, SILVER, GOLD, RING, DIAMOND, TOKEN;
+		BRONZE, SILVER, GOLD, RING, DIAMOND, TOKEN, NONE;
 	}
 	
 	public final Type type;
@@ -127,11 +127,15 @@ public class Collectable extends DynamicGameObject {
 		magnetDir.x = playerPos.x - position.x;
 		magnetDir.y = playerPos.y - position.y;
 		magnetDir.nor();
-		velocity.x += magnetDir.x * MAGNETIZED_FORCE * deltaTime;
-		velocity.y += magnetDir.y * MAGNETIZED_FORCE * deltaTime;
+		velocity.x += magnetDir.x * getMagnetForce() * deltaTime;
+		velocity.y += magnetDir.y * getMagnetForce() * deltaTime;
 		
 		velocity.x *= Math.pow(MAGNETIZED_FRICTION, deltaTime);
 		velocity.y *= Math.pow(MAGNETIZED_FRICTION, deltaTime);
+	}
+
+	private float getMagnetForce() {
+		return MAGNETIZED_FORCE * 1.2f;
 	}
 
 	public int state() {

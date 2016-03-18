@@ -171,9 +171,15 @@ public class SoundAssets {
 		return Gdx.audio.newSound(Gdx.files.internal("sound/" + filename));
 	}
 
-	public static void loopSound(Sound sound) {
+	public static long loopSound(Sound sound) {
 		sound.stop();
-		if (Settings.soundEnabled) sound.loop(1);
+		if (!Settings.soundEnabled) {
+			return 0;
+		}
+		long id = sound.loop(1);
+		currentlyPlaying.add(sound, id);
+		sound.setPitch(id, pitch);
+		return id;
 	}
 	
 	public static void stopSound(Sound sound) {
