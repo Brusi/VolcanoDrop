@@ -18,6 +18,8 @@ public class ShopData {
 	public static ShopEntry wallFoot;
 	public static ShopEntry charge;
 	public static ShopEntry cheetahr;
+	public static ShopEntry frogger;
+	public static ShopEntry slowWalker;
 	
 	private static final Preferences prefs = Gdx.app
 			.getPreferences(PREFS_NAME);
@@ -28,6 +30,8 @@ public class ShopData {
 		wallFoot = createAndRegister("powers_wallfoot", 3000);
 		charge = createAndRegister("powers_charge", 4500);
 		cheetahr = createAndRegister("powers_cheetahr", 5000);
+		frogger = createAndRegister("powers_frogger", 1000);
+		slowWalker = createAndRegister("powers_slow_walker", 6000);
 		
 		// Blessings
 		// TBD

@@ -1,5 +1,5 @@
 shopbg.png
-size: 2048, 1024
+size: 2048, 2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -20,6 +20,27 @@ shopmenu_menubox
 shopmenu_menubox_bg
   rotate: false
   xy: 1278, 0
+  size: 638, 607
+  orig: 638, 607
+  offset: 0, 0
+  index: -1
+shopmenu_menubox_buttomfade_blessings
+  rotate: false
+  xy: 0, 960
+  size: 638, 607
+  orig: 638, 607
+  offset: 0, 0
+  index: -1
+shopmenu_menubox_buttomfade_costume
+  rotate: false
+  xy: 638, 960
+  size: 638, 607
+  orig: 638, 607
+  offset: 0, 0
+  index: -1
+shopmenu_menubox_buttomfade_powers
+  rotate: false
+  xy: 1276, 960
   size: 638, 607
   orig: 638, 607
   offset: 0, 0

@@ -243,6 +243,10 @@ public class Assets {
 	public static Sprite shopMenuBg;
 	public static Sprite shopMenuFg;
 	
+	public static Sprite bottomFadePowers;
+	public static Sprite bottomFadeBlessings;
+	public static Sprite bottomFadeCostumes;
+	
 	public static Array<Sprite> shamanIdle;
 	public static Array<Sprite> shamanBuy;
 	public static Sprite shopFg;
@@ -283,6 +287,9 @@ public class Assets {
 	
 	public static Sprite shopItemCheetahrIcon;
 	public static Sprite shopItemCheetahrTitle;
+	
+	public static Sprite shopItemSlowWalkerIcon;
+	public static Sprite shopItemSlowWalkerTitle;
 	
 	public static Sprite shopItemFroggerIcon;
 	public static Sprite shopItemFroggerTitle;
@@ -562,6 +569,10 @@ public class Assets {
 		shopMenuBg = shopBgSheet.createSprite("shopmenu_menubox_bg");
 		shopMenuFg = shopBgSheet.createSprite("shopmenu_menubox");
 		
+		bottomFadePowers = shopBgSheet.createSprite("shopmenu_menubox_buttomfade_powers");
+		bottomFadeBlessings = shopBgSheet.createSprite("shopmenu_menubox_buttomfade_blessings");
+		bottomFadeCostumes = shopBgSheet.createSprite("shopmenu_menubox_buttomfade_costume");
+		
 		TextureAtlas shopSheet = new TextureAtlas("shop/shop.txt");
 		shamanIdle = shopSheet.createSprites("shopmenu_shaman_idle");
 		shamanBuy = shopSheet.createSprites("shopmenu_shaman_buy");
@@ -601,6 +612,12 @@ public class Assets {
 		
 		shopItemCheetahrIcon = shopItemsSheet.createSprite("shopmenu_items_powers_cheetahr");
 		shopItemCheetahrTitle = shopItemsSheet.createSprite("shopmenu_items_powers_cheetahr_text");
+		
+		shopItemFroggerIcon = shopItemsSheet.createSprite("shopmenu_items_powers_frogger");
+		shopItemFroggerTitle = shopItemsSheet.createSprite("shopmenu_items_powers_frogger_text");
+		
+		shopItemSlowWalkerIcon = shopItemsSheet.createSprite("shopmenu_items_powers_slowalker");
+		shopItemSlowWalkerTitle = shopItemsSheet.createSprite("shopmenu_items_powers_slowalker_text");
 		
 		
 		
