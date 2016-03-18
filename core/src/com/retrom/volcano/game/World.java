@@ -27,6 +27,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.retrom.volcano.assets.SoundAssets;
+import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.effects.BurnParticle;
 import com.retrom.volcano.effects.BurningWallGlow;
 import com.retrom.volcano.effects.CoinMagnetGlowEffect;
@@ -154,6 +155,8 @@ public class World {
 	
 	private float gameTime = 0;
 
+	private float slomoRatio_;
+
 	public interface WorldListener {
 		public void restartGame();
 	}
@@ -179,9 +182,9 @@ public class World {
 					}
 				}
 			}
-		}, new Player.JumpHandler() {
+		}, new Player.EventHandler() {
 			@Override
-			public void handle(SIDE side) {
+			public void handleJump(SIDE side) {
 				switch (side) {
 				case DOUBLE:
 					screenEffects.add(EffectFactory.playerJumpPuff(player.position));
@@ -198,6 +201,18 @@ public class World {
 				default:
 					break;
 				}
+			}
+
+			@Override
+			public void handleDash() {
+				addEffectsUnder.add(new PlayerOnionSkinEffect(player.position.cpy(), player.state(), player.stateTime, player.side));
+				screenEffects.add(EffectFactory.playerDashPuff(player.position, player.velocity.x));
+				worldEvents_.addEventFromNow(Player.DASH_DURATION, new EventQueue.Event() {
+					@Override
+					public void invoke() {
+						player.endDash();
+					}
+				});
 			}
 		});
 		this.spawner_ = new Spawner(floors_, activeWalls_, collectables_, new Spawner.SpawnerHandler() {
@@ -394,16 +409,16 @@ public class World {
 	
 	public void step(float deltaTime) {
 		if (slomoTime > 0) {
-			float slomoRatio;
 			if (slomoTime > 1) {
-				slomoRatio = 0.66f;
+				slomoRatio_ = 0.66f;
 			} else {
-				slomoRatio = 1f / (slomoTime+1);
+				slomoRatio_ = 1f / (slomoTime+1);
 			}
-			deltaTime *= slomoRatio;
+			deltaTime *= slomoRatio_;
 			
-			SoundAssets.setPitch(slomoRatio);
+			SoundAssets.setPitch(slomoRatio_);
 		} else {
+			slomoRatio_ = 1f;
 			SoundAssets.setPitch(1f);
 		}
 		
@@ -801,6 +816,7 @@ public class World {
 				if (sack.bounds.overlaps(rect)) {
 					if (sack.state() != GoldSack.STATE_FALLING) {
 						sack.setState(GoldSack.STATE_DONE);
+						screenEffects.add(EffectFactory.sackCrushed(sack.position));
 						continue sackloop;
 					}
 					sack.setState(GoldSack.STATE_GROUND);
@@ -809,12 +825,15 @@ public class World {
 					SoundAssets.playSound(SoundAssets.coinSackStart);
 				}
 			}
-			if (sack.bounds.overlaps(player.bounds)) {
+			if (player.isAlive() && sack.bounds.overlaps(player.bounds)) {
 				boolean shouldPumpNow = false;
 				if (sack.state() == GoldSack.STATE_GROUND) {
 					shouldPumpNow = true;
 				}
-				if (sack.hasCoinsLeft() && sack.state() == GoldSack.STATE_PUMP && deltaTime * Math.abs(player.velocity.len()) > Math.random() * 40 + 2) {
+				if (sack.hasCoinsLeft()
+						&& sack.state() == GoldSack.STATE_PUMP
+						&& deltaTime * Math.abs(player.velocity.len()) > Math
+								.random() * 40 + 2) {
 					shouldPumpNow = true;
 				}
 				if (shouldPumpNow) {
@@ -1231,6 +1250,9 @@ public class World {
 	}
 
 	private void updatePlayer (float deltaTime) {
+		if (ShopData.slowWalker.isOwn())
+			deltaTime /= slomoRatio_;
+		
 		if (player.state() == Player.STATE_DIE) {
 			endEffects();
 			if (godMode_) {
@@ -1289,7 +1311,9 @@ public class World {
 	}
 	
 	public void unpause() {
-		SoundAssets.resumeMusicAt(gameTime);
+		if (slomoTime <= 0) {
+			SoundAssets.resumeMusicAt(gameTime);
+		}
 	}
 
 	public float magnetRatio() {

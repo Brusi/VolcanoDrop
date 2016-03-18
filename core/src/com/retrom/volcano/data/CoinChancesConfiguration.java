@@ -127,6 +127,10 @@ public class CoinChancesConfiguration {
 			return rings.getNext();
 		case TOKEN:
 			return Collectable.Type.TOKEN;
+		case NONE:
+			return null;
+		default:
+			break;
 		}
 		// Should never happen.
 		return null;

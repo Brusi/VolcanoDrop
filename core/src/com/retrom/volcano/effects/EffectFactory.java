@@ -205,6 +205,13 @@ public class EffectFactory {
 		return new FiniteAnimationEffect(Assets.doubleJumpEffect, pos, false);
 	}
 	
+	public static Effect playerDashPuff(Vector2 player_position, float xvel) {
+		Vector2 pos = player_position.cpy();
+		FiniteAnimationEffect e = new FiniteAnimationEffect(Assets.doubleJumpEffect, pos, false); 
+		e.setConstantNoRotation(xvel > 0 ? -90 : 90);
+		return e; 
+	}
+	
 	public static Effect playerJumpPuffLeftWall(Vector2 player_position) {
 		Vector2 pos = player_position.cpy();
 		pos.y -= 50f;
@@ -220,6 +227,13 @@ public class EffectFactory {
 		pos.x -= 10f;
 		FiniteAnimationEffect e = new FiniteAnimationEffect(Assets.jumpPuff, pos, false);
 		e.setConstantNoRotation(-90);
+		return e;
+	}
+	
+	public static Effect sackCrushed(Vector2 sack_position) {
+		Vector2 pos = sack_position.cpy();
+		pos.y -= 10f;
+		FiniteAnimationEffect e = new FiniteAnimationEffect(Assets.jumpPuff, pos, false);
 		return e;
 	}
 }

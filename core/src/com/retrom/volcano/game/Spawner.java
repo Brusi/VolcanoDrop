@@ -85,6 +85,8 @@ public class Spawner {
 		if (!enabled) {
 			return;
 		}
+		
+		
 		timeCount += deltaTime;
 		if (sequence_cooldown > 0) {
 			sequence_cooldown -= deltaTime;
@@ -98,20 +100,24 @@ public class Spawner {
 		if (queue.isEmpty()) {
 			updateLevel();
 		}
+		
+		if (level_ < 0) return;
+		
 		// Updating the level can change isEmpty status, so checking again.
 		if (queue.isEmpty()) {
 			dropPowerupOrWalls();
 		}
 		dropCoins(deltaTime);
 
-		dropSackAtRate(deltaTime, AVG_SACK_TIME);
+		
+		dropSackAtRate(deltaTime, getCurrentLevelDef().avg_sack_time);
 //		dropFireballAtRate(deltaTime, AVG_FIREBALL_TIME);
 	}
 
 	// Drops powerup according to rules and chances.
 	// Returns true if a powerup was dropped.
 	private boolean tryDropPowerup() {
-		Collectable.Type powerup = currentLevelDef().powerup_wr.getNext();
+		Collectable.Type powerup = getCurrentLevelDef().powerup_wr.getNext();
 		if (powerup == null) {
 			return false;
 		}
@@ -130,11 +136,9 @@ public class Spawner {
 	}
 	
 	private void dropPowerupOrWalls() {
-		Collectable.Type powerup = currentLevelDef().powerup_wr.getNext();
 		if (tryDropPowerup()) {
 			return;
 		}
-		
 		dropWalls();
 	}
 
@@ -155,7 +159,7 @@ public class Spawner {
 			float coinX = randomCoinX();
 			
 			Collectable.Type type = CoinChancesConfiguration
-					.CoinFromBase(currentLevelDef().coins_wr.getNext()); 
+					.CoinFromBase(getCurrentLevelDef().coins_wr.getNext()); 
 					
 			if (type == null) return;
 			
@@ -199,7 +203,7 @@ public class Spawner {
 		System.out.println("setting level " + level);
 		level_ = level;
 		
-		LevelDefinition ld = currentLevelDef();
+		LevelDefinition ld = getCurrentLevelDef();
 		{
 			float tbw = ld.time_between_walls;
 			if (tbw != 0) time_between_walls_ = tbw;
@@ -215,8 +219,11 @@ public class Spawner {
 		}
 	}
 
-	private LevelDefinition currentLevelDef() {
-		return levels.levels.get(level_);
+	private LevelDefinition getCurrentLevelDef() {
+		if (level_ >= 0) {
+			return levels.levels.get(level_);
+		}
+		throw new IllegalStateException("Cannot get level " + level_);
 	}
 
 	private void updateHotkeys() {
@@ -238,6 +245,10 @@ public class Spawner {
 	}
 
 	private void dropSackAtRate(float deltaTime, float sack_rate) {
+		if (sack_rate <= 0) {
+			// Rate 0 means disabled.
+			return;
+		}
 		if (Math.random() < deltaTime / sack_rate) {
 			int col = randomColumn();
 			if (sackSilenceTime_[col] <= 0) {
@@ -251,7 +262,7 @@ public class Spawner {
 		// Get the next sequence.
 		ProbabilityGroup group;
 
-		LevelDefinition levelDef = currentLevelDef();
+		LevelDefinition levelDef = getCurrentLevelDef();
 		if (sequence_cooldown > 0 && levelDef.nswr != null) {
 			group = levelDef.nswr.getNext();
 		} else {

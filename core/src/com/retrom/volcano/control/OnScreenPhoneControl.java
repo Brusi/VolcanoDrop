@@ -18,8 +18,8 @@ public class OnScreenPhoneControl extends AbstractControl {
 	// TODO: little vibration when touching left&right.
 	
 	private static final float SIDE_CONTROL_WIDTH = 244;
-	private static final float SIDE_CONTROL_HEIGHT = 140;
-	private static final float JUMP_RECT_SIZE = 140;
+	private static final float SIDE_CONTROL_HEIGHT = 140 * 2;
+	private static final float JUMP_RECT_SIZE = 140 * 2;
 	final Rectangle leftRect = new Rectangle(
 			-WorldRenderer.FRUSTUM_WIDTH / 2,
 			-WorldRenderer.FRUSTUM_HEIGHT / 2,
@@ -37,6 +37,9 @@ public class OnScreenPhoneControl extends AbstractControl {
 			JUMP_RECT_SIZE, JUMP_RECT_SIZE);
 	
 	final TouchToPoint ttp = TouchToPoint.create();
+	
+	private boolean left_just_touched = false;
+	private boolean right_just_touched = false;
 
 	@Override
 	public boolean isAnalog() {
@@ -128,6 +131,7 @@ public class OnScreenPhoneControl extends AbstractControl {
 			$ = true;
 		}
 		leftWasTouched = leftTouchedNow;
+		left_just_touched = $;
 		return $;
 	}
 	
@@ -138,6 +142,8 @@ public class OnScreenPhoneControl extends AbstractControl {
 			$ = true;
 		}
 		rightWasTouched = rightTouchedNow;
+		
+		right_just_touched = $;
 		return $;
 	}
 	
@@ -146,12 +152,12 @@ public class OnScreenPhoneControl extends AbstractControl {
 	}
 	
 	static void drawAtCenterOfRect(SpriteBatch batch, Sprite sprite, Rectangle rect) {
-		drawAtCenterOfRect(batch, sprite, rect, 0);
+		drawAtCenterOfRect(batch, sprite, rect, 0, 0);
 	}
 	
-	static void drawAtCenterOfRect(SpriteBatch batch, Sprite sprite, Rectangle rect, float xOffset) {
+	static void drawAtCenterOfRect(SpriteBatch batch, Sprite sprite, Rectangle rect, float xOffset, float yOffset) {
 		sprite.setScale(1.2f);
-		sprite.setPosition(rect.x + rect.width / 2 - sprite.getWidth() / 2 + xOffset, rect.y + rect.height / 2 - sprite.getHeight() / 2);
+		sprite.setPosition(rect.x + rect.width / 2 - sprite.getWidth() / 2 + xOffset, rect.y + rect.height / 2 - sprite.getHeight() / 2 + yOffset);
 		sprite.draw(batch);
 	}
 	
@@ -166,22 +172,32 @@ public class OnScreenPhoneControl extends AbstractControl {
 		{
 			Sprite s = Assets.leftRightControl;
 			s.setScale(1.2f);
-			drawAtCenter(batch, s, leftRect.x + leftRect.width, leftRect.y + leftRect.height / 2);
+			drawAtCenter(batch, s, leftRect.x + leftRect.width, leftRect.y + leftRect.height / 4);
 		}
 		{
 			Sprite s = Assets.jumpControl;
 			s.setScale(1.2f);
-			drawAtCenter(batch, s, jumpRect.x + jumpRect.width / 2, leftRect.y + leftRect.height / 2);
+			drawAtCenter(batch, s, jumpRect.x + jumpRect.width / 2, jumpRect.y + jumpRect.height / 4);
 		}
 		
 		if (leftTouched()) {
-			drawAtCenterOfRect(batch, Assets.leftControlOn, leftRect, 11);
+			drawAtCenterOfRect(batch, Assets.leftControlOn, leftRect, 11, -leftRect.height / 4);
 		}
 		if (rightTouched()) {
-			drawAtCenterOfRect(batch, Assets.rightControlOn, rightRect, -13);
+			drawAtCenterOfRect(batch, Assets.rightControlOn, rightRect, -13, -rightRect.height / 4);
 		}
 		if (upTouched()) {
-			drawAtCenterOfRect(batch, Assets.jumpControlOn, jumpRect);
+			drawAtCenterOfRect(batch, Assets.jumpControlOn, jumpRect, 0, -jumpRect.height / 4);
 		}
+	}
+	
+	@Override
+	public boolean isLeftJustPressed() {
+		return left_just_touched;
+	}
+	
+	@Override
+	public boolean isRightJustPressed() {
+		return right_just_touched;
 	}
 }

@@ -21,6 +21,13 @@ public abstract class AbstractControl {
 	abstract public boolean isJumpPressed();
 	abstract public boolean isJumpPressedContinuously();
 	
+	public boolean isLeftJustPressed() {
+		throw new UnsupportedOperationException("Not implemented or not supported by this controller.");
+	}
+	public boolean isRightJustPressed() {
+		throw new UnsupportedOperationException("Not implemented or not supported by this controller.");
+	}
+	
 	public void render(SpriteBatch batch) {
 		// If controls needs rendering, they will override this.
 		return;

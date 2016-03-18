@@ -27,7 +27,7 @@ import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.control.AbstractControl;
 import com.retrom.volcano.control.ControlManager;
 import com.retrom.volcano.data.ShopData;
-import com.retrom.volcano.game.Player.JumpHandler.SIDE;
+import com.retrom.volcano.game.Player.EventHandler.SIDE;
 import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.DynamicGameObject;
 import com.retrom.volcano.game.objects.Wall;
@@ -37,14 +37,16 @@ public class Player extends DynamicGameObject {
 	interface HitRectHandler {
 		void handle(Rectangle rect);
 	}
-	interface JumpHandler {
+	interface EventHandler {
 		enum SIDE {
 			LEFT, RIGHT, UP, DOUBLE;
 		}
 		// -1 for jumping from wall, facing left.
 		// 0 for jumping up.
 		// 1 for jumping from wall, facing right.
-		void handle(SIDE side);
+		void handleJump(SIDE side);
+		
+		void handleDash();
 	}
 	
 	public static final int WIDTH = 36;
@@ -67,17 +69,25 @@ public class Player extends DynamicGameObject {
 	private static final float JUMP_VEL = 900;
 	private static final float WALL_JUMP_Y_VEL = 800;
 	private static final float WALL_JUMP_X_VEL = 800f;
-	private static final float JUMP_PRESS_ACCELL = /*650*/ 0;
+	private static final float JUMP_PRESS_ACCELL = 650; ///
 	
 	private static final float WALLJUMP_ALLOWED_DELAY = 0.2f;
+	private static final float DASH_CLICK_MAX_DELAY = 0.2f;
+	private static final float DASH_VEL = 3000f;
+	private static final float MAX_NON_DASH_VEL = 1000f;
+	protected static final float DASH_DURATION = 0.05f;
 	
 	private List<Rectangle> obstacles_;
 	private List<Wall> activeWalls_;
-
+	
 	private int state_ = STATE_IDLE;
 	float stateTime;
 	private float timeSinceLanding;
 	private float timeSinceWallTouch;
+	
+	// Dash
+	private float timeSinceLastPressLeft = 0;
+	private float timeSinceLastPressRight = 0;
 	
 	public int deathType;
 	
@@ -92,12 +102,12 @@ public class Player extends DynamicGameObject {
 	private boolean is_shield_active_;
 	
 	private final HitRectHandler hitRectHandler_;
-	private final JumpHandler jumpHandler_;
+	private final EventHandler jumpHandler_;
 	
 	// X position after push; only if not pushed by two stones at once.
 	private Float newBoundsX = null;
 	
-	public Player (float x, float y, HitRectHandler rectHandler, JumpHandler jumpHandler) {
+	public Player (float x, float y, HitRectHandler rectHandler, EventHandler jumpHandler) {
 		super(x, y, WIDTH, HEIGHT);
 		hitRectHandler_ = rectHandler;
 		jumpHandler_ = jumpHandler;
@@ -119,32 +129,55 @@ public class Player extends DynamicGameObject {
 			velocity.x += control.getDigitalXDir() * X_ANALOG_ACCEL * deltaTime;
 		}
 		
+		// Dash logic.
+		checkDash(control);
+		
 //		// Phone controls
 //		float accel = Gdx.input.getAccelerometerX();
 //		if (Math.abs(accel) > 0.5) {
 //			velocity.x = -200 * accel;
 //		}
 		
-		// TODO: activate double jump on store.
-		if ((grounded_  || canAirJump()) && control.isJumpPressed()) {
+		if ((grounded_ || canAirJump()) && control.isJumpPressed()) {
 			if (!grounded_) {
 				airJump_ = true;
 			}
-			jumpHandler_.handle(grounded_ ? SIDE.UP : SIDE.DOUBLE);
+			jumpHandler_.handleJump(grounded_ ? SIDE.UP : SIDE.DOUBLE);
 			grounded_ = false;
 			resetState(STATE_JUMPING);
 			velocity.y = JUMP_VEL;
-			if (timeSinceLanding > 0.1f) {
+			if (timeSinceLanding > 0.1f && !airJump_) {
 				SoundAssets.playRandomSound(SoundAssets.playerJump);
 			} else {
 				SoundAssets.playRandomSound(SoundAssets.playerJumpIntense);
 			}
 		} else if (canWallJump() && control.isJumpPressed()) {
 			velocity.y = WALL_JUMP_Y_VEL;
-			jumpHandler_.handle(wallGlide == 1 ? SIDE.LEFT : SIDE.RIGHT);
+			jumpHandler_.handleJump(wallGlide == 1 ? SIDE.LEFT : SIDE.RIGHT);
 			resetState(STATE_JUMPING);
 			velocity.x = -WALL_JUMP_X_VEL * wallGlide;
 			wallGlide = 0;
+			SoundAssets.playRandomSound(SoundAssets.playerJumpIntense);
+		}
+	}
+
+	private void checkDash(AbstractControl control) {
+		if (!ShopData.charge.isOwn()) return;
+		if (control.isLeftJustPressed()) {
+			System.out.println("PRESSED LEFT");
+			if (timeSinceLastPressLeft < DASH_CLICK_MAX_DELAY) {
+				jumpHandler_.handleDash();
+				this.velocity.x = -DASH_VEL;
+				System.out.println("DASH LEFT!");
+			}
+			timeSinceLastPressLeft = 0;
+		}
+		if (control.isRightJustPressed()) {
+			if (timeSinceLastPressRight < DASH_CLICK_MAX_DELAY) {
+				jumpHandler_.handleDash();
+				this.velocity.x = DASH_VEL;
+			}
+			timeSinceLastPressRight = 0;
 		}
 	}
 
@@ -161,6 +194,9 @@ public class Player extends DynamicGameObject {
 		stateTime += deltaTime;
 		timeSinceLanding += deltaTime;
 		timeSinceWallTouch += deltaTime;
+		timeSinceLastPressLeft += deltaTime;
+		timeSinceLastPressRight += deltaTime;
+		
 		if (state_ == STATE_DIE || state_ == STATE_DEAD) {
 			return;
 		}
@@ -206,8 +242,8 @@ public class Player extends DynamicGameObject {
 	private void tryMove(float deltaTime) {
 		AbstractControl control = ControlManager.getControl();
 		velocity.add(0, World.gravity.y * deltaTime);
-		// TODO: if shop item activated.
-		if (!grounded_ && control.isJumpPressedContinuously()) {
+		// TODO: Activate only if shop item activated.
+		if (ShopData.frogger.isOwn() && !grounded_ && control.isJumpPressedContinuously()) {
 			velocity.add(0, JUMP_PRESS_ACCELL * deltaTime);
 		}
 		if (!control.isAnalog()) {
@@ -376,5 +412,9 @@ public class Player extends DynamicGameObject {
 	public int getGliding() {
 		if (timeSinceWallTouch != 0 || velocity.y >= 0) return 0;
 		return wallGlide;
+	}
+
+	public void endDash() {
+		velocity.limit(MAX_NON_DASH_VEL);
 	}
 }
