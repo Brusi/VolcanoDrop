@@ -47,6 +47,8 @@ public class Player extends DynamicGameObject {
 		void handleJump(SIDE side);
 		
 		void handleDash();
+		
+		void handleBurnWall(Wall wall);
 	}
 	
 	public static final int WIDTH = 36;
@@ -102,7 +104,7 @@ public class Player extends DynamicGameObject {
 	private boolean is_shield_active_;
 	
 	private final HitRectHandler hitRectHandler_;
-	private final EventHandler jumpHandler_;
+	private final EventHandler handler_;
 	
 	// X position after push; only if not pushed by two stones at once.
 	private Float newBoundsX = null;
@@ -110,7 +112,7 @@ public class Player extends DynamicGameObject {
 	public Player (float x, float y, HitRectHandler rectHandler, EventHandler jumpHandler) {
 		super(x, y, WIDTH, HEIGHT);
 		hitRectHandler_ = rectHandler;
-		jumpHandler_ = jumpHandler;
+		handler_ = jumpHandler;
 		setState(STATE_IDLE);
 		stateTime = 0;
 	}
@@ -142,7 +144,7 @@ public class Player extends DynamicGameObject {
 			if (!grounded_) {
 				airJump_ = true;
 			}
-			jumpHandler_.handleJump(grounded_ ? SIDE.UP : SIDE.DOUBLE);
+			handler_.handleJump(grounded_ ? SIDE.UP : SIDE.DOUBLE);
 			grounded_ = false;
 			resetState(STATE_JUMPING);
 			velocity.y = JUMP_VEL;
@@ -153,7 +155,7 @@ public class Player extends DynamicGameObject {
 			}
 		} else if (canWallJump() && control.isJumpPressed()) {
 			velocity.y = WALL_JUMP_Y_VEL;
-			jumpHandler_.handleJump(wallGlide == 1 ? SIDE.LEFT : SIDE.RIGHT);
+			handler_.handleJump(wallGlide == 1 ? SIDE.LEFT : SIDE.RIGHT);
 			resetState(STATE_JUMPING);
 			velocity.x = -WALL_JUMP_X_VEL * wallGlide;
 			wallGlide = 0;
@@ -166,7 +168,7 @@ public class Player extends DynamicGameObject {
 		if (control.isLeftJustPressed()) {
 			System.out.println("PRESSED LEFT");
 			if (timeSinceLastPressLeft < DASH_CLICK_MAX_DELAY) {
-				jumpHandler_.handleDash();
+				handler_.handleDash();
 				this.velocity.x = -DASH_VEL;
 				System.out.println("DASH LEFT!");
 			}
@@ -174,7 +176,7 @@ public class Player extends DynamicGameObject {
 		}
 		if (control.isRightJustPressed()) {
 			if (timeSinceLastPressRight < DASH_CLICK_MAX_DELAY) {
-				jumpHandler_.handleDash();
+				handler_.handleDash();
 				this.velocity.x = DASH_VEL;
 			}
 			timeSinceLastPressRight = 0;
@@ -360,9 +362,10 @@ public class Player extends DynamicGameObject {
 
 	private void checkBurningWalls() {
 		for (Wall wall : activeWalls_) {
-			if (wall.bounds.overlaps(this.bounds)) {
-				if (wall instanceof BurningWall && !is_shield_active_) {
+			if (!is_shield_active_ && wall instanceof BurningWall) {
+				if (wall.bounds.overlaps(this.bounds)) {
 					killByBurn();
+					handler_.handleBurnWall(wall);
 					return;
 				}
 			} 

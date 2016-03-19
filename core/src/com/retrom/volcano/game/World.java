@@ -214,9 +214,13 @@ public class World {
 					}
 				});
 			}
+
+			@Override
+			public void handleBurnWall(Wall wall) {
+				addEffects.add(new HotBrickEffect(wall.position));
+			}
 		});
 		this.spawner_ = new Spawner(floors_, activeWalls_, collectables_, new Spawner.SpawnerHandler() {
-			
 			@Override
 			public void dropWall(int col) {
 				addWall(col);

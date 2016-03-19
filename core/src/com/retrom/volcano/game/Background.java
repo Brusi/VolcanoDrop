@@ -176,7 +176,6 @@ public class Background {
 		
 		
 		if (leftHoleList.peek() != null && y_ > leftHoleList.peek() + HEIGHT) {
-			System.out.println("Hole removed!");
 			leftHoleList.removeFirst();
 		}
 	}

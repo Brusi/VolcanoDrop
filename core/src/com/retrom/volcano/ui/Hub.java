@@ -23,15 +23,18 @@ public class Hub {
 	float stateTime_ = 0;
 	
 	private int score_;
+	private float time_;
 
-	private Label _score_text;
+	private Label score_text_;
+	private Label time_text_;
 	
 	private final TouchToPoint ttp = TouchToPoint.create();
 
 	private final Rectangle pauseRect;
 
 	public Hub() {
-		_score_text = new Label("0", new LabelStyle(Assets.scoreFont, Color.WHITE));
+		score_text_ = new Label("0", new LabelStyle(Assets.scoreFont, Color.WHITE));
+		time_text_ = new Label("0:00", new LabelStyle(Assets.timeFont, Color.WHITE));
 		
 		float PAUSE_X_POS = WorldRenderer.FRUSTUM_WIDTH / 2 - Assets.pauseButton.getWidth();
 		float PAUSE_Y_POS = WorldRenderer.FRUSTUM_HEIGHT / 2 - Assets.pauseButton.getHeight();
@@ -49,13 +52,18 @@ public class Hub {
 		stateTime_ = 0;
 		score_ = score;
 	}
+	
+	public void setTime(float time) {
+		time_ = time;
+	}
 
 	public void render(SpriteBatch batch, Camera cam, boolean isPaused) {
 		float COIN_X_POS = - cam.viewportWidth / 2 + PADDING;
-		float COIN_Y_POS = cam.viewportHeight / 2 - Assets.scoreIcon.getHeight() - PADDING; 
+		float COIN_Y_POS = cam.viewportHeight / 2 - Assets.scoreIcon.getHeight() - PADDING - 50; 
 		batch.draw(Assets.scoreIcon, COIN_X_POS, COIN_Y_POS);
 		
-		_score_text.setPosition(COIN_X_POS + 50, COIN_Y_POS + 8);
+		score_text_.setPosition(COIN_X_POS + 50, COIN_Y_POS + 8);
+		time_text_.setPosition(COIN_X_POS, COIN_Y_POS + 58);
 		
 		
 		 
@@ -63,13 +71,23 @@ public class Hub {
 		batch.draw(buttonSprite, pauseRect.x, pauseRect.y);
 		
 		updateScoreText();
+		updateTimeText();
 		
-		_score_text.draw(batch, 1);
+		score_text_.draw(batch, 1);
+		time_text_.draw(batch, 1);
 		
 	}
 	
+	private void updateTimeText() {
+		int t = (int)time_;
+		String text = "" + t/60 + ":" + ((t%60 < 10) ? "0" : "") + t%60;
+		time_text_.setText(text);
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void updateScoreText() {
-		_score_text.setText("" + score_);
+		score_text_.setText("" + score_);
 		float scale = 1f;
 		if (stateTime_ < POP_TIME) {
 			scale = 1f + POP_ADDED_SCALE * (POP_TIME - stateTime_) / POP_TIME;
@@ -77,7 +95,7 @@ public class Hub {
 		
 		Assets.scoreFont.getData().setScale(scale);
 		LabelStyle style = new LabelStyle(Assets.scoreFont, Color.WHITE);
-		_score_text.setStyle(style);
+		score_text_.setStyle(style);
 	}
 	
 	public boolean isPauseAreaTouched() {

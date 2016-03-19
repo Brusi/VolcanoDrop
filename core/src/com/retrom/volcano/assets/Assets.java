@@ -151,6 +151,8 @@ public class Assets {
 	public static Array<Sprite> burnParticle;
 	public static Array<Sprite> jumpPuff;
 	
+	public static Sprite hotBrick;
+	
 	// Glow:
 	public static Sprite burningWallGlow;
 	
@@ -237,6 +239,7 @@ public class Assets {
 	
 	// Fonts
 	public static BitmapFont scoreFont;
+	public static BitmapFont timeFont;
 	
 	// Shop
 	public static Sprite shopBg;
@@ -515,6 +518,8 @@ public class Assets {
 		burnParticle = vfxSheet.createSprites("particles_burnpiece");
 		jumpPuff = vfxSheet.createSprites("jump_puff");
 		
+		hotBrick = vfxSheet.createSprite("fire_glow_extrahotbricks_x1");
+		
 		burningWallGlow = vfxSheet.createSprite("fire_glow");
 		
 		TextureAtlas enemiesSheet = new TextureAtlas("enemies/enemies.txt");
@@ -563,6 +568,7 @@ public class Assets {
 		jumpControlOn = guiSheet.createSprite("GUI_MovementControls_Jump_up_click");
 		
 		scoreFont = new BitmapFont(Gdx.files.internal("ui/font/volcano_score.fnt"), false);
+		timeFont = new BitmapFont(Gdx.files.internal("ui/font/volcano_time.fnt"), false);
 		
 		TextureAtlas shopBgSheet = new TextureAtlas("shop/shopbg.txt");
 		shopBg = shopBgSheet.createSprite("shopmenu_bg");

@@ -75,6 +75,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		if (!isPaused_) {
 			world_.update(delta);
 			hub_.setScore(world_.score);
+			hub_.setTime(world_.gameTime);
 			hub_.update(delta);
 		}
 		
