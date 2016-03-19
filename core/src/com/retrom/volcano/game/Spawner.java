@@ -492,6 +492,10 @@ public class Spawner {
 	private void makeWarning(float time, int col) {
 		queue.addEventFromNow(time - 1, warningEvent(col, getWithSound(time)));
 	}
+
+	public void setTimeCount(float time) {
+		timeCount = time;
+	}
 }
 
 

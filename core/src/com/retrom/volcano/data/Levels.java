@@ -128,6 +128,7 @@ public class Levels {
 	}
 	
 	public List<LevelDefinition> levels;
+	public float start_time = 0;
 	
 	public static Levels loadFromDefault() {
 		FileHandle file = Gdx.files.local(PATH);

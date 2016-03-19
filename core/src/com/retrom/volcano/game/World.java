@@ -41,6 +41,7 @@ import com.retrom.volcano.effects.FireballGlow;
 import com.retrom.volcano.effects.FireballStartEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.FlameGlowEffect;
+import com.retrom.volcano.effects.HotBrickEffect;
 import com.retrom.volcano.effects.PlayerMagnetEffect;
 import com.retrom.volcano.effects.PlayerMagnetGlow;
 import com.retrom.volcano.effects.PlayerOnionSkinEffect;
@@ -153,7 +154,7 @@ public class World {
 
 	private static float QUAKE_DURATION = 2.6f;
 	
-	private float gameTime = 0;
+	public float gameTime = 0;
 
 	private float slomoRatio_;
 
@@ -271,12 +272,20 @@ public class World {
 			}
 		});
 		
+		setGameTime(spawner_.levels.start_time);
+		
 //		worldEvents_.addEventFromNow(2f, new EventQueue.Event() {
 //			@Override
 //			public void invoke() {
 //				startQuake();
 //			}
 //		});
+	}
+
+	private void setGameTime(float start_time) {
+		spawner_.setTimeCount(start_time);
+		gameTime = start_time;
+		SoundAssets.resumeMusicAt(gameTime);
 	}
 
 	private void updateCheats() {
