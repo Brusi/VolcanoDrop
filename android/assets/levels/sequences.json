@@ -73,12 +73,13 @@ sequences: [
 	}
 	{
 		name: 2_temples
+		hotkey: 4
 		seq: [{type: WALL, time: 1.00, col: 0}
-		      {type: WALL, time: 1.60, col: 1}
+		      {type: WALL, time: 1.10, col: 1}
 		      {type: WALL, time: 1.00, col: 2}
-			  {type: WALL, time: 2.00, col: 3}
-			  {type: WALL, time: 2.60, col: 4}
-			  {type: WALL, time: 2.00, col: 5}
+			  {type: WALL, time: 2.70, col: 3}
+			  {type: WALL, time: 2.80, col: 4}
+			  {type: WALL, time: 2.70, col: 5}
 		      {type: NOP,  time: 5}]
 	}
 	{
@@ -118,10 +119,10 @@ sequences: [
 		name: 3_pairs
 		seq: [{type: WALL, time: 1.00, col: 2}
 		      {type: WALL, time: 1.00, col: 3}
-			  {type: WALL, time: 2.00, col: 0}
-		      {type: WALL, time: 2.00, col: 1}
-		      {type: WALL, time: 3.00, col: 4}
-		      {type: WALL, time: 3.00, col: 5}
+			  {type: WALL, time: 2.30, col: 0}
+		      {type: WALL, time: 2.30, col: 1}
+		      {type: WALL, time: 3.60, col: 4}
+		      {type: WALL, time: 3.60, col: 5}
 		      {type: NOP,  time: 4}]
 	}
 	{
@@ -511,6 +512,26 @@ sequences: [
 			  {type: WALL, time: 3.10, col: 0}
 			  {type: FIREBALL,  time: 2.3, col: 5}
 		      {type: NOP, time: 5}]
+	}
+	{
+		name: fireball_3flame
+		seq: [{type: FIREBALL, time: 2.00, col: 0}
+			  {type: FLAME, time: 1.20, col: 1}
+			  {type: FIREBALL, time: 3.50, col: 2}
+			  {type: FLAME,  time: 1.10, col: 3}
+			  {type: FIREBALL,  time: 2.00, col: 4}
+			  {type: FLAME,  time: 1.00, col: 5}
+		      {type: NOP, time: 7}]
+	}
+	{
+		name: fireball_2flame
+		seq: [{type: FIREBALL, time: 4.50, col: 0}
+			  {type: FLAME, time: 1.00, col: 1}
+			  {type: FIREBALL, time: 2.00, col: 2}
+			  {type: FIREBALL,  time: 2.00, col: 3}
+			  {type: FLAME,  time: 1.10, col: 4}
+			  {type: FIREBALL,  time: 4.50, col: 5}
+		      {type: NOP, time: 7}]
 	}
 	{
 		name: fireball_rain
