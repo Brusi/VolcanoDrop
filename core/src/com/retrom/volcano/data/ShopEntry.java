@@ -2,30 +2,18 @@ package com.retrom.volcano.data;
 
 import com.badlogic.gdx.Preferences;
 
-public class ShopEntry {
-	private boolean own = false;
+public abstract class ShopEntry {
 	final public String name;
-	final public int price;
 	
-	public ShopEntry(String name, int price) {
+	
+	public ShopEntry(String name) {
 		this.name = name;
-		this.price = price;
 	}
 	
-	public boolean isOwn() {
-		return own;
-	}
+	abstract public void save(Preferences prefs);
+	abstract public void load(Preferences prefs);
+	abstract public void buy(Preferences prefs);
 	
-	public void save(Preferences prefs) {
-		prefs.putBoolean(name, own);
-	}
-	
-	public void load(Preferences prefs) {
-		own = prefs.getBoolean(name, false);
-	}
-
-	void buy(Preferences prefs) {
-		own = true;
-		prefs.putBoolean(name, own);
-	}
+	abstract public int getPrice();
+	abstract public boolean isOwn();
 }

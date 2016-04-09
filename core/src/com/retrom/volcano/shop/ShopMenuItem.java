@@ -1,15 +1,14 @@
 package com.retrom.volcano.shop;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.retrom.volcano.assets.Assets;
+import com.retrom.volcano.data.CostumeShopEntry;
 import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.data.ShopEntry;
 import com.retrom.volcano.game.WorldRenderer;
 import com.retrom.volcano.menus.MenuButton;
-import com.retrom.volcano.utils.TouchToPoint;
 
 public class ShopMenuItem extends MenuButton {
 	
@@ -21,6 +20,8 @@ public class ShopMenuItem extends MenuButton {
 		BUYING,
 		OWN;
 	}
+	
+	boolean active;
 	
 	State state = State.CANT_BUY;
 	float stateTime;
@@ -37,8 +38,12 @@ public class ShopMenuItem extends MenuButton {
 	private final Sprite icon;
 	private final Sprite title;
 	private final ShopEntry entry;
-	
+
 	public ShopMenuItem(int indexInMenu, Sprite icon, Sprite title, ShopEntry entry, MenuButton.Action action) {
+		this(indexInMenu, icon, title, entry, action, false);
+	}
+	
+	public ShopMenuItem(int indexInMenu, Sprite icon, Sprite title, ShopEntry entry, MenuButton.Action action, boolean costume) {
 		super(new Rectangle(iconWidth - RECT_HEIGHT / 2, 0, RECT_HEIGHT, RECT_HEIGHT), action);
 		this.indexInMenu_ = indexInMenu;
 		this.icon = icon;
@@ -53,7 +58,7 @@ public class ShopMenuItem extends MenuButton {
 			state = State.OWN;
 			return;
 		}
-		if (ShopData.getGold() < entry.price) {
+		if (ShopData.getGold() < entry.getPrice()) {
 			state = State.CANT_BUY;
 		} else {
 			state = State.CAN_BUY;
@@ -114,11 +119,13 @@ public class ShopMenuItem extends MenuButton {
 				bg.draw(batch);
 		}
 		
-		if (state != State.BUYING && state != State.OWN) {
-			Sprite price = Assets.prices.get(entry.price);
-			price.setY(y - 27);
-			price.setX(iconWidth - price.getWidth() / 2 - 7);
-			price.draw(batch);
+		if (state == State.CAN_BUY || state == State.CANT_BUY) {
+			if (entry.getPrice() > 0) {
+				Sprite price = Assets.prices.get(entry.getPrice());
+				price.setY(y - 27);
+				price.setX(iconWidth - price.getWidth() / 2 - 7);
+				price.draw(batch);
+			}
 		}
 		
 		{
@@ -128,10 +135,27 @@ public class ShopMenuItem extends MenuButton {
 			sack.draw(batch);
 		}
 		if (state == State.BUYING || state == State.OWN) {
-			Sprite own = Assets.shopItemButtonOwn;
-			own.setY(y - own.getHeight() / 2);
-			own.setX(iconWidth - own.getWidth() / 2);
-			own.draw(batch);
+			if (entry instanceof CostumeShopEntry) {
+				CostumeShopEntry cse = (CostumeShopEntry)entry;
+				if (cse.isEquipped()) {
+					Sprite equip = Assets.shopItemButtonEquip;
+					equip.setY(y - equip.getHeight() / 2 - 6);
+					equip.setX(iconWidth - equip.getWidth() / 2);
+					equip.draw(batch);
+				} else {
+					Sprite equiped = Assets.shopItemButtonEquipped;
+					equiped.setY(y - equiped.getHeight() / 2 - 4);
+					equiped.setX(iconWidth - equiped.getWidth() / 2 + 7);
+					equiped.draw(batch);
+				}
+			} else {
+				Sprite own = Assets.shopItemButtonOwn;
+				own.setY(y - own.getHeight() / 2);
+				own.setX(iconWidth - own.getWidth() / 2);
+				if (Math.random() < 0.5) {
+					own.draw(batch);
+				}
+			}
 		}
 	}
 

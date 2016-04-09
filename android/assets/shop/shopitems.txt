@@ -3,199 +3,213 @@ size: 1024, 1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-shopmenu_items_blessings_bolderfist
-  rotate: false
-  xy: 0, 0
-  size: 120, 120
-  orig: 120, 120
-  offset: 0, 0
-  index: -1
-shopmenu_items_blessings_bolderfist_text
-  rotate: false
-  xy: 120, 0
-  size: 285, 93
-  orig: 285, 93
-  offset: 0, 0
-  index: -1
-shopmenu_items_blessings_hazebless
-  rotate: false
-  xy: 405, 0
-  size: 120, 120
-  orig: 120, 120
-  offset: 0, 0
-  index: -1
-shopmenu_items_blessings_hazebless_text
-  rotate: false
-  xy: 525, 0
-  size: 251, 92
-  orig: 251, 92
-  offset: 0, 0
-  index: -1
-shopmenu_items_blessings_mightbless
-  rotate: false
-  xy: 776, 0
-  size: 120, 120
-  orig: 120, 120
-  offset: 0, 0
-  index: -1
-shopmenu_items_blessings_mightbless_text
-  rotate: false
-  xy: 0, 120
-  size: 262, 93
-  orig: 262, 93
-  offset: 0, 0
-  index: -1
-shopmenu_items_blessings_reborn
-  rotate: false
-  xy: 262, 120
-  size: 120, 120
-  orig: 120, 120
-  offset: 0, 0
-  index: -1
-shopmenu_items_blessings_reborn_text
-  rotate: false
-  xy: 382, 120
-  size: 316, 93
-  orig: 316, 93
-  offset: 0, 0
-  index: -1
-shopmenu_items_blessings_templehopper
-  rotate: false
-  xy: 698, 120
-  size: 120, 120
-  orig: 120, 120
-  offset: 0, 0
-  index: -1
 shopmenu_items_blessings_templehopper_text
   rotate: false
-  xy: 0, 240
+  xy: 0, 0
   size: 323, 92
   orig: 323, 92
   offset: 0, 0
   index: -1
-shopmenu_items_blessings_timebender
+shopmenu_items_powers_wallfoot_text
   rotate: false
-  xy: 323, 240
-  size: 120, 120
-  orig: 120, 120
-  offset: 0, 0
-  index: -1
-shopmenu_items_blessings_timebender_text
-  rotate: false
-  xy: 443, 240
-  size: 275, 94
-  orig: 275, 94
-  offset: 0, 0
-  index: -1
-shopmenu_items_powers_airstep
-  rotate: false
-  xy: 718, 240
-  size: 120, 120
-  orig: 120, 120
-  offset: 0, 0
-  index: -1
-shopmenu_items_powers_airstep_text
-  rotate: false
-  xy: 0, 360
-  size: 200, 93
-  orig: 200, 93
-  offset: 0, 0
-  index: -1
-shopmenu_items_powers_charge
-  rotate: false
-  xy: 200, 360
-  size: 120, 120
-  orig: 120, 120
-  offset: 0, 0
-  index: -1
-shopmenu_items_powers_charge_text
-  rotate: false
-  xy: 320, 360
-  size: 249, 94
-  orig: 249, 94
-  offset: 0, 0
-  index: -1
-shopmenu_items_powers_cheetahr
-  rotate: false
-  xy: 569, 360
-  size: 120, 120
-  orig: 120, 120
-  offset: 0, 0
-  index: -1
-shopmenu_items_powers_cheetahr_text
-  rotate: false
-  xy: 689, 360
-  size: 220, 93
-  orig: 220, 93
-  offset: 0, 0
-  index: -1
-shopmenu_items_powers_frogger
-  rotate: false
-  xy: 0, 480
-  size: 120, 120
-  orig: 120, 120
-  offset: 0, 0
-  index: -1
-shopmenu_items_powers_frogger_text
-  rotate: false
-  xy: 120, 480
-  size: 207, 93
-  orig: 207, 93
-  offset: 0, 0
-  index: -1
-shopmenu_items_powers_goldenshield
-  rotate: false
-  xy: 327, 480
-  size: 120, 120
-  orig: 120, 120
-  offset: 0, 0
-  index: -1
-shopmenu_items_powers_goldenshield_text
-  rotate: false
-  xy: 447, 480
-  size: 313, 93
-  orig: 313, 93
-  offset: 0, 0
-  index: -1
-shopmenu_items_powers_lootbuster
-  rotate: false
-  xy: 760, 480
-  size: 120, 120
-  orig: 120, 120
-  offset: 0, 0
-  index: -1
-shopmenu_items_powers_lootbuster_text
-  rotate: false
-  xy: 0, 600
-  size: 306, 93
-  orig: 306, 93
-  offset: 0, 0
-  index: -1
-shopmenu_items_powers_slowalker
-  rotate: false
-  xy: 306, 600
-  size: 120, 120
-  orig: 120, 120
+  xy: 323, 0
+  size: 238, 92
+  orig: 238, 92
   offset: 0, 0
   index: -1
 shopmenu_items_powers_slowalker_text
   rotate: false
-  xy: 426, 600
+  xy: 561, 0
   size: 288, 93
   orig: 288, 93
   offset: 0, 0
   index: -1
-shopmenu_items_powers_wallfoot
+shopmenu_items_costume_default_text
   rotate: false
-  xy: 714, 600
+  xy: 0, 93
+  size: 242, 93
+  orig: 242, 93
+  offset: 0, 0
+  index: -1
+shopmenu_items_blessings_timebender_text
+  rotate: false
+  xy: 242, 93
+  size: 275, 93
+  orig: 275, 93
+  offset: 0, 0
+  index: -1
+shopmenu_items_powers_cheetahr_text
+  rotate: false
+  xy: 517, 93
+  size: 220, 93
+  orig: 220, 93
+  offset: 0, 0
+  index: -1
+shopmenu_items_powers_goldenshield_text
+  rotate: false
+  xy: 0, 186
+  size: 313, 93
+  orig: 313, 93
+  offset: 0, 0
+  index: -1
+shopmenu_items_powers_lootbuster_text
+  rotate: false
+  xy: 313, 186
+  size: 306, 93
+  orig: 306, 93
+  offset: 0, 0
+  index: -1
+shopmenu_items_powers_frogger_text
+  rotate: false
+  xy: 619, 186
+  size: 207, 93
+  orig: 207, 93
+  offset: 0, 0
+  index: -1
+shopmenu_items_powers_airstep_text
+  rotate: false
+  xy: 0, 279
+  size: 200, 93
+  orig: 200, 93
+  offset: 0, 0
+  index: -1
+shopmenu_items_blessings_bolderfist_text
+  rotate: false
+  xy: 200, 279
+  size: 285, 93
+  orig: 285, 93
+  offset: 0, 0
+  index: -1
+shopmenu_items_blessings_hazebless_text
+  rotate: false
+  xy: 485, 279
+  size: 246, 93
+  orig: 246, 93
+  offset: 0, 0
+  index: -1
+shopmenu_items_blessings_reborn_text
+  rotate: false
+  xy: 0, 372
+  size: 316, 93
+  orig: 316, 93
+  offset: 0, 0
+  index: -1
+shopmenu_items_blessings_mightbless_text
+  rotate: false
+  xy: 316, 372
+  size: 262, 93
+  orig: 262, 93
+  offset: 0, 0
+  index: -1
+shopmenu_items_powers_charge_text
+  rotate: false
+  xy: 578, 372
+  size: 249, 94
+  orig: 249, 94
+  offset: 0, 0
+  index: -1
+shopmenu_items_powers_goldenshield
+  rotate: false
+  xy: 827, 372
   size: 120, 120
   orig: 120, 120
   offset: 0, 0
   index: -1
-shopmenu_items_powers_wallfoot_text
+shopmenu_items_powers_lootbuster
   rotate: false
-  xy: 0, 720
-  size: 238, 92
-  orig: 238, 92
+  xy: 0, 492
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+shopmenu_items_blessings_mightbless
+  rotate: false
+  xy: 120, 492
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+shopmenu_items_powers_wallfoot
+  rotate: false
+  xy: 240, 492
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+shopmenu_items_blessings_hazebless
+  rotate: false
+  xy: 360, 492
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+shopmenu_items_powers_slowalker
+  rotate: false
+  xy: 480, 492
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+shopmenu_items_powers_frogger
+  rotate: false
+  xy: 600, 492
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+shopmenu_items_blessings_timebender
+  rotate: false
+  xy: 720, 492
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+shopmenu_items_costume_default
+  rotate: false
+  xy: 840, 492
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+shopmenu_items_blessings_templehopper
+  rotate: false
+  xy: 0, 612
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+shopmenu_items_blessings_reborn
+  rotate: false
+  xy: 120, 612
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+shopmenu_items_powers_airstep
+  rotate: false
+  xy: 240, 612
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+shopmenu_items_powers_cheetahr
+  rotate: false
+  xy: 360, 612
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+shopmenu_items_blessings_bolderfist
+  rotate: false
+  xy: 480, 612
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+shopmenu_items_powers_charge
+  rotate: false
+  xy: 600, 612
+  size: 120, 120
+  orig: 120, 120
   offset: 0, 0
   index: -1

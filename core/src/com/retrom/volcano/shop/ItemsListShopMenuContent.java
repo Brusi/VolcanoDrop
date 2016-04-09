@@ -70,9 +70,8 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 		Action action = new Action() {
 			@Override
 			public void act() {
-				ShopData.reduceGold(entry.price);
+				ShopData.reduceGold(entry.getPrice());
 				ShopData.buyFromShop(entry);
-				System.out.println("buy");
 				
 				listener_.act(ShopMenu.Command.BUY);
 				for (ShopMenuItem item : items) {

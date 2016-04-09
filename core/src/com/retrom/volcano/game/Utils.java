@@ -95,9 +95,9 @@ public class Utils {
 			TextureAtlas sheet, String name) {
 		Map<Integer, Sprite> prices = new HashMap<Integer, Sprite>();
 		for (ShopEntry entry : ShopData.allShopEntries) {
-			Sprite s = sheet.createSprite(name, entry.price);
+			Sprite s = sheet.createSprite(name, entry.getPrice());
 			if (s != null) {
-				prices.put(entry.price, s);
+				prices.put(entry.getPrice(), s);
 			}
 		}
 		return prices;

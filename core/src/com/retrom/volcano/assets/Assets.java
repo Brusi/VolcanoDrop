@@ -259,6 +259,8 @@ public class Assets {
 	public static Array<Sprite> shopItemButtonBuy;
 	public static Sprite shopItemButtonGoldSack;
 	public static Sprite shopItemButtonOwn;
+	public static Sprite shopItemButtonEquip;
+	public static Sprite shopItemButtonEquipped;
 	
 	public static Sprite shopPrice1500;
 	public static Sprite shopPrice4500;
@@ -296,6 +298,9 @@ public class Assets {
 	
 	public static Sprite shopItemFroggerIcon;
 	public static Sprite shopItemFroggerTitle;
+	
+	public static Sprite shopItemDefaultCostumeIcon;
+	public static Sprite shopItemDefaultCostumeTitle;
 	
 
 	public static Texture loadTexture (String file) {
@@ -589,6 +594,8 @@ public class Assets {
 		shopItemButtonBuy = shopSheet.createSprites("shopmenu_item_button_buy");
 		shopItemButtonGoldSack = shopSheet.createSprite("shopmenu_item_button_goldsackicon");
 		shopItemButtonOwn = shopSheet.createSprite("shopmenu_item_button_ownicon");
+		shopItemButtonEquip = shopSheet.createSprite("shopmenu_item_button_equipbutton");
+		shopItemButtonEquipped = shopSheet.createSprite("shopmenu_item_button_equippedicon");
 		
 		shopPrice1500 = shopSheet.createSprite("1500_price");
 		shopPrice4500 = shopSheet.createSprite("4500_price");
@@ -625,7 +632,8 @@ public class Assets {
 		shopItemSlowWalkerIcon = shopItemsSheet.createSprite("shopmenu_items_powers_slowalker");
 		shopItemSlowWalkerTitle = shopItemsSheet.createSprite("shopmenu_items_powers_slowalker_text");
 		
-		
+		shopItemDefaultCostumeIcon = shopItemsSheet.createSprite("shopmenu_items_costume_default");
+		shopItemDefaultCostumeTitle = shopItemsSheet.createSprite("shopmenu_items_costume_default_text");
 		
 	}
 }
