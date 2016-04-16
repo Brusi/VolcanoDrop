@@ -66,9 +66,10 @@ public class Hub {
 		time_text_.setPosition(COIN_X_POS, COIN_Y_POS + 58);
 		
 		
-		 
-		Sprite buttonSprite = isPaused ? Assets.pauseButtonClicked : Assets.pauseButton; 
-		batch.draw(buttonSprite, pauseRect.x, pauseRect.y);
+        // TODO convert to real menu button.
+		Sprite buttonSprite = isPaused ? Assets.pauseButtonClicked : Assets.pauseButton;
+		if (!isPaused)
+			batch.draw(buttonSprite, pauseRect.x, pauseRect.y);
 		
 		updateScoreText();
 		updateTimeText();

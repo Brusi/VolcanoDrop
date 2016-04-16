@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.game.WorldRenderer;
+import com.retrom.volcano.menus.GraphicObject;
 
 public class Shaman extends GraphicObject{
 	

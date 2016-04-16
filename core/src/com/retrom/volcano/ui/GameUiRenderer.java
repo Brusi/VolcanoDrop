@@ -7,6 +7,8 @@ import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.control.ControlManager;
 import com.retrom.volcano.game.World;
 import com.retrom.volcano.game.WorldRenderer;
+import com.retrom.volcano.menus.PauseMenu;
+import com.retrom.volcano.utils.BatchUtils;
 
 public class GameUiRenderer {
 	
@@ -15,10 +17,12 @@ public class GameUiRenderer {
 	private final PowerupUiRenderer powerupUiRenderer_;
 	
 	private final Hub scoreHub_;
-	private World world_;
+	private final World world_;
+	private final PauseMenu pauseMenu_;
 
-	public GameUiRenderer(Hub scoreHub, World world) {
+	public GameUiRenderer(Hub scoreHub, World world, PauseMenu pauseMenu_) {
 		world_ = world;
+		this.pauseMenu_ = pauseMenu_;
 		cam_ = new OrthographicCamera(
 				WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT);
 		batch_ = new SpriteBatch();
@@ -40,6 +44,18 @@ public class GameUiRenderer {
 		powerupUiRenderer_.setSlomoRatio(world_.slomoRatio());
 		powerupUiRenderer_.setShieldRatio(world_.shieldRatio());
 		powerupUiRenderer_.render();
+		
+		if (isPaused) {
+			renderPauseMenu();
+		}
+	}
+
+	private void renderPauseMenu() {
+		BatchUtils.setBlendFuncNormal(batch_);
+		batch_.begin();
+		pauseMenu_.render(batch_);
+		batch_.end();
+		
 	}
 
 	private void renderControls() {

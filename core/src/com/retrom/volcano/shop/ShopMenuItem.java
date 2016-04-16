@@ -152,9 +152,7 @@ public class ShopMenuItem extends MenuButton {
 				Sprite own = Assets.shopItemButtonOwn;
 				own.setY(y - own.getHeight() / 2);
 				own.setX(iconWidth - own.getWidth() / 2);
-				if (Math.random() < 0.5) {
-					own.draw(batch);
-				}
+				own.draw(batch);
 			}
 		}
 	}

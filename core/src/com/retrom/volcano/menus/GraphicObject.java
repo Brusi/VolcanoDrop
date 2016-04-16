@@ -1,4 +1,4 @@
-package com.retrom.volcano.shop;
+package com.retrom.volcano.menus;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,7 +9,7 @@ public abstract class GraphicObject {
 	public Vector2 position_;
 	protected float stateTime_;
 	
-	GraphicObject(float x, float y) {
+	public GraphicObject(float x, float y) {
 		position_ = new Vector2(x, y);
 		stateTime_ = 0;
 	}

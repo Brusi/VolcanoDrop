@@ -1,4 +1,4 @@
-package com.retrom.volcano.shop;
+package com.retrom.volcano.menus;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 

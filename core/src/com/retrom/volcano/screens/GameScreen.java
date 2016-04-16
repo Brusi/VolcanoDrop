@@ -14,9 +14,12 @@ import com.retrom.volcano.game.Settings;
 import com.retrom.volcano.game.World;
 import com.retrom.volcano.game.World.WorldListener;
 import com.retrom.volcano.game.WorldRenderer;
+import com.retrom.volcano.menus.PauseMenu;
+import com.retrom.volcano.menus.PauseMenu.Command;
 import com.retrom.volcano.ui.GameUiRenderer;
 import com.retrom.volcano.ui.Hub;
 import com.retrom.volcano.ui.PowerupUiRenderer;
+import com.retrom.volcano.utils.BatchUtils;
 import com.retrom.volcano.utils.TouchToPoint;
 
 public class GameScreen extends ScreenAdapter implements Screen {
@@ -25,6 +28,8 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	
 	World world_;
 	WorldRenderer worldRenderer_;
+	
+	PauseMenu pauseMenu_;
 	
 	Hub hub_;
 	
@@ -35,18 +40,42 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	@Override
 	public void show() {
 		world_ = new World(new WorldListener() {
-
 			@Override
-			public void restartGame() {
-				finalizeGame();
-				((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen());
+			public void restart() {
+				restartGame();
 			}
 		});
 		
 		hub_ = new Hub();
+		pauseMenu_ = new PauseMenu(new PauseMenu.Listener() {
+			@Override
+			public void act(Command cmd) {
+				System.out.println(cmd.name());
+				switch (cmd) {
+				case RESTART:
+					restartGame();;
+					break;
+				case RESUME:
+					// TODO: unpause?
+					togglePause();
+					break;
+				case SHOP:
+					goToShop();
+					break;
+				default:
+					Gdx.app.error("Error", "Illegal pause menu command.");
+					break;
+				}
+			}
+		});
 		
 		worldRenderer_ = new WorldRenderer(batch_, world_);
-		uiRenderer_ = new GameUiRenderer(hub_, world_);
+		uiRenderer_ = new GameUiRenderer(hub_, world_, pauseMenu_);
+	}
+	
+	private void restartGame() {
+		finalizeGame();
+		((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen());
 	}
 
 	private void togglePause() {
@@ -77,6 +106,8 @@ public class GameScreen extends ScreenAdapter implements Screen {
 			hub_.setScore(world_.score);
 			hub_.setTime(world_.gameTime);
 			hub_.update(delta);
+		} else {
+			pauseMenu_.update(delta);
 		}
 		
 		worldRenderer_.render(delta, isPaused_);

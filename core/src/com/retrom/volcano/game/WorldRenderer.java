@@ -38,6 +38,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
+import com.retrom.volcano.assets.CostumeAssets;
 import com.retrom.volcano.effects.DiamondGlowEffect;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectVisitor;
@@ -536,7 +537,7 @@ public class WorldRenderer {
 				@Override
 				public Sprite visit(PlayerOnionSkinEffect effect) {
 					Sprite s = getPlayerFrame(effect.playerState,
-							effect.playerStateTime, effect.playerSide);
+							effect.playerStateTime, effect.playerSide, getCostumeAssets());
 					float tint = effect.getTint();
 					s.setColor(tint, tint, tint, tint);
 					return s;
@@ -644,6 +645,10 @@ public class WorldRenderer {
 		return null;
 	}
 	
+	static public CostumeAssets getCostumeAssets() {
+		return Assets.defaultCostume;
+	}
+	
 	private void renderCoins() {
 		for (Collectable coin : world.collectables_) {
 			TextureRegion keyFrame = null;
@@ -700,41 +705,41 @@ public class WorldRenderer {
 
 	private void renderPlayer () {
 		Player player = world.player;
-		Sprite keyFrame = getPlayerFrame(player.state(), player.stateTime, player.side);
+		Sprite keyFrame = getPlayerFrame(player.state(), player.stateTime, player.side, getCostumeAssets());
 		keyFrame.setColor(1,1,1,1);
 		drawCenter(keyFrame, player.position);
 	}
 	
-	private Sprite getPlayerFrame(int state, float stateTime, boolean side) {
+	private Sprite getPlayerFrame(int state, float stateTime, boolean side, CostumeAssets ca) {
 		Sprite keyFrame = null;
 		switch (state) {
 		case Player.STATE_IDLE:
-			keyFrame = getFrameLoop(Assets.playerIdle, stateTime);
+			keyFrame = getFrameLoop(ca.playerIdle, stateTime);
 			keyFrame.setFlip(side, false);
 			break;
 		case Player.STATE_RUNNING:
-			float startTime = FRAME_TIME * Assets.playerRunStart.size / 3;
-			if (stateTime < startTime * Assets.playerRunStart.size) {
-				keyFrame = getFrameLoop(Assets.playerRunStart, stateTime); 
+			float startTime = FRAME_TIME * ca.playerRunStart.size / 3;
+			if (stateTime < startTime * ca.playerRunStart.size) {
+				keyFrame = getFrameLoop(ca.playerRunStart, stateTime); 
 			} else {
-				keyFrame = getFrameLoop(Assets.playerRun, stateTime - startTime);
+				keyFrame = getFrameLoop(ca.playerRun, stateTime - startTime);
 			}
 			keyFrame.setFlip(side, false);
 			break;
 		case Player.STATE_JUMPING:
-			keyFrame = getFrameLoop(Assets.playerJump, stateTime);
+			keyFrame = getFrameLoop(ca.playerJump, stateTime);
 			keyFrame.setFlip(side, false);
 			break;
 		case Player.STATE_LANDING:
-			keyFrame = getFrameStopAtLastFrame(Assets.playerLand, stateTime);
+			keyFrame = getFrameStopAtLastFrame(ca.playerLand, stateTime);
 			keyFrame.setFlip(side, false);
 			break;
 		case Player.STATE_DIE:
 		case Player.STATE_DEAD:
 			if (world.player.deathType == Player.DEATH_BY_BURN) {
-				keyFrame = getFrameDisappearAfterLastFrame(Assets.playerBurn, stateTime);
+				keyFrame = getFrameDisappearAfterLastFrame(ca.playerBurn, stateTime);
 			} else if (world.player.deathType == Player.DEATH_BY_CRUSH) {
-				keyFrame = getFrameDisappearAfterLastFrame(Assets.playerSquash, stateTime);
+				keyFrame = getFrameDisappearAfterLastFrame(ca.playerSquash, stateTime);
 			} else {
 				Gdx.app.log("ERROR", "Player is in death type: " + world.player.deathType);
 			}

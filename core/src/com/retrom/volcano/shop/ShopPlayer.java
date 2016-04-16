@@ -1,11 +1,9 @@
 package com.retrom.volcano.shop;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
-import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.game.WorldRenderer;
+import com.retrom.volcano.menus.GraphicObject;
 
 public class ShopPlayer extends GraphicObject{
 
@@ -15,7 +13,7 @@ public class ShopPlayer extends GraphicObject{
 
 	@Override
 	protected Sprite getSprite() {
-		return getFrameLoop(Assets.playerIdle, stateTime_);
+		return getFrameLoop(WorldRenderer.getCostumeAssets().playerIdle, stateTime_);
 	}
 
 	private Sprite getFrameLoop(Array<Sprite> anim, float stateTime) {

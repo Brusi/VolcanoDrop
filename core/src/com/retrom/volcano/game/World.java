@@ -159,7 +159,7 @@ public class World {
 	private float slomoRatio_;
 
 	public interface WorldListener {
-		public void restartGame();
+		public void restart();
 	}
 	
 	public World (WorldListener listener) {
@@ -1316,7 +1316,7 @@ public class World {
 
 	private void finishGame() {
 		SoundAssets.stopAllSounds();
-		listener_.restartGame();
+		listener_.restart();
 	}
 	
 	public void pause() {

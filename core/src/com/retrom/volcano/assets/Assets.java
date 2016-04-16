@@ -29,20 +29,15 @@ import com.retrom.volcano.game.Utils;
 import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
 public class Assets {
+	public static CostumeAssets defaultCostume;
+	public static CostumeAssets blikCostume;
+	public static CostumeAssets goboCostume;
+	
 	public static Array<Sprite> walls1;
 	public static Array<Sprite> walls2;
 	public static Array<Sprite> wallParticles;
 	
-	
-	public static Array<Sprite> playerIdle;
-	public static Array<Sprite> playerRun;
-	public static Array<Sprite> playerRunStart;
-	public static Array<Sprite> playerJump;
-	public static Array<Sprite> playerLand;
-	public static Array<Sprite> playerBurn;
-	public static Array<Sprite> playerSquash;
 	public static Sprite empty;
-	
 	
 	public static Array<Sprite> pillars;
 	public static Array<Sprite> pillars_big;
@@ -302,6 +297,20 @@ public class Assets {
 	public static Sprite shopItemDefaultCostumeIcon;
 	public static Sprite shopItemDefaultCostumeTitle;
 	
+	// Pause menu
+	public static Sprite pauseMenuBG;
+	public static Sprite pauseMenuTitle;
+	public static Sprite pauseOptionsButton;
+	public static Sprite pauseOptionsButtonClicked;
+	public static Sprite pauseShopButton;
+	public static Sprite pauseShopButtonClicked;
+	public static Sprite pauseResumeButton;
+	public static Sprite pauseResumeButtonClicked;
+	public static Sprite pauseRetryButton;
+	public static Sprite pauseRetryButtonClicked;
+	public static Sprite pauseQuestbox;
+	public static Sprite pauseQuestboxCompleted;
+	
 
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -319,19 +328,16 @@ public class Assets {
 	}
 
 	public static void load() {
+		defaultCostume = new CostumeAssets("player/playersheet.txt");
+		
+		
 		TextureAtlas wallsSheet = new TextureAtlas("walls/walls.txt");
 		walls1 = wallsSheet.createSprites("x1");
 		walls2 = wallsSheet.createSprites("x2");
 		wallParticles = wallsSheet.createSprites("wall_particle");
 
 		TextureAtlas playerSheet = new TextureAtlas("player/playersheet.txt");
-		playerIdle = playerSheet.createSprites("player_idle");
-		playerRun = playerSheet.createSprites("player_run");
-		playerRunStart = playerSheet.createSprites("player_run_start");
-		playerJump = playerSheet.createSprites("player_jump");
-		playerLand = playerSheet.createSprites("player_land");
-		playerBurn = playerSheet.createSprites("player_die_burn");
-		playerSquash = playerSheet.createSprites("player_die_squash");
+		
 		empty = playerSheet.createSprite("empty");
 
 		TextureAtlas environmentSheet = new TextureAtlas("walls/enviroment.txt");
@@ -635,5 +641,18 @@ public class Assets {
 		shopItemDefaultCostumeIcon = shopItemsSheet.createSprite("shopmenu_items_costume_default");
 		shopItemDefaultCostumeTitle = shopItemsSheet.createSprite("shopmenu_items_costume_default_text");
 		
+		TextureAtlas pauseMenuSheet = new TextureAtlas("menu/pausemenu.txt");
+		pauseMenuBG = pauseMenuSheet.createSprite("pausemenu_body");
+		pauseMenuTitle = pauseMenuSheet.createSprite("pausemenu_title");
+		pauseOptionsButton = pauseMenuSheet.createSprite("pausemenu_buttons_options");
+		pauseOptionsButtonClicked = pauseMenuSheet.createSprite("pausemenu_buttons_options_click");
+		pauseShopButton = pauseMenuSheet.createSprite("pausemenu_buttons_shop");
+		pauseShopButtonClicked = pauseMenuSheet.createSprite("pausemenu_buttons_shop_click");
+		pauseResumeButton = pauseMenuSheet.createSprite("pausemenu_buttons_resume");
+		pauseResumeButtonClicked = pauseMenuSheet.createSprite("pausemenu_buttons_resume_click");
+		pauseRetryButton = pauseMenuSheet.createSprite("pausemenu_buttons_retry");
+		pauseRetryButtonClicked = pauseMenuSheet.createSprite("pausemenu_buttons_retry_click");
+		pauseQuestbox = pauseMenuSheet.createSprite("pausemenu_questbox");
+		pauseQuestboxCompleted = pauseMenuSheet.createSprite("pausemenu_questbox_completed");
 	}
 }

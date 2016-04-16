@@ -1,0 +1,194 @@
+pausemenu.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+pausemenu_options_buttons_controls_large
+  rotate: false
+  xy: 0, 0
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+pausemenu_options_buttons_controls_small
+  rotate: false
+  xy: 80, 0
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+pausemenu_options_buttons_controls_medium
+  rotate: false
+  xy: 160, 0
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+pausemenu_options_buttons_off
+  rotate: false
+  xy: 240, 0
+  size: 148, 149
+  orig: 148, 149
+  offset: 0, 0
+  index: -1
+pausemenu_options_buttons_on
+  rotate: false
+  xy: 388, 0
+  size: 148, 149
+  orig: 148, 149
+  offset: 0, 0
+  index: -1
+pausemenu_questbox
+  rotate: false
+  xy: 536, 0
+  size: 151, 197
+  orig: 151, 197
+  offset: 0, 0
+  index: -1
+pausemenu_questbox_completed
+  rotate: false
+  xy: 687, 0
+  size: 151, 197
+  orig: 151, 197
+  offset: 0, 0
+  index: -1
+pausemenu_rusuremenu_answers_yes_click
+  rotate: false
+  xy: 838, 0
+  size: 156, 112
+  orig: 156, 112
+  offset: 0, 0
+  index: -1
+pausemenu_rusuremenu_answers_yes
+  rotate: false
+  xy: 994, 0
+  size: 156, 112
+  orig: 156, 112
+  offset: 0, 0
+  index: -1
+pausemenu_rusuremenu_answers_no
+  rotate: false
+  xy: 1150, 0
+  size: 156, 112
+  orig: 156, 112
+  offset: 0, 0
+  index: -1
+pausemenu_rusuremenu_answers_no_click
+  rotate: false
+  xy: 1306, 0
+  size: 156, 112
+  orig: 156, 112
+  offset: 0, 0
+  index: -1
+pausemenu_buttons_options
+  rotate: false
+  xy: 1462, 0
+  size: 183, 184
+  orig: 183, 184
+  offset: 0, 0
+  index: -1
+pausemenu_buttons_options_click
+  rotate: false
+  xy: 1645, 0
+  size: 183, 184
+  orig: 183, 184
+  offset: 0, 0
+  index: -1
+pausemenu_options_buttons_back_click
+  rotate: false
+  xy: 1828, 0
+  size: 183, 184
+  orig: 183, 184
+  offset: 0, 0
+  index: -1
+pausemenu_options_buttons_back
+  rotate: false
+  xy: 0, 197
+  size: 183, 184
+  orig: 183, 184
+  offset: 0, 0
+  index: -1
+pausemenu_buttons_shop
+  rotate: false
+  xy: 183, 197
+  size: 196, 196
+  orig: 196, 196
+  offset: 0, 0
+  index: -1
+pausemenu_buttons_shop_click
+  rotate: false
+  xy: 379, 197
+  size: 196, 196
+  orig: 196, 196
+  offset: 0, 0
+  index: -1
+pausemenu_title
+  rotate: false
+  xy: 575, 197
+  size: 218, 84
+  orig: 218, 84
+  offset: 0, 0
+  index: -1
+pausemenu_buttons_retry_click
+  rotate: false
+  xy: 793, 197
+  size: 237, 161
+  orig: 237, 161
+  offset: 0, 0
+  index: -1
+pausemenu_buttons_retry
+  rotate: false
+  xy: 1030, 197
+  size: 237, 161
+  orig: 237, 161
+  offset: 0, 0
+  index: -1
+pausemenu_options_title
+  rotate: false
+  xy: 1267, 197
+  size: 265, 83
+  orig: 265, 83
+  offset: 0, 0
+  index: -1
+pausemenu_buttons_resume
+  rotate: false
+  xy: 1532, 197
+  size: 277, 160
+  orig: 277, 160
+  offset: 0, 0
+  index: -1
+pausemenu_buttons_resume_click
+  rotate: false
+  xy: 0, 393
+  size: 277, 160
+  orig: 277, 160
+  offset: 0, 0
+  index: -1
+pausemenu_rusuremenu_text
+  rotate: false
+  xy: 277, 393
+  size: 465, 171
+  orig: 465, 171
+  offset: 0, 0
+  index: -1
+pausemenu_body
+  rotate: false
+  xy: 742, 393
+  size: 633, 607
+  orig: 633, 607
+  offset: 0, 0
+  index: -1
+pausemenu_options_body
+  rotate: false
+  xy: 1375, 393
+  size: 634, 607
+  orig: 634, 607
+  offset: 0, 0
+  index: -1
+pausemenu_rusuremenu_body
+  rotate: false
+  xy: 0, 1000
+  size: 635, 418
+  orig: 635, 418
+  offset: 0, 0
+  index: -1

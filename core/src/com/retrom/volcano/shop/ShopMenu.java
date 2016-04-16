@@ -10,7 +10,9 @@ import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.game.Utils;
 import com.retrom.volcano.menus.BackMenuButton;
 import com.retrom.volcano.menus.ExitMenuButton;
+import com.retrom.volcano.menus.GraphicObject;
 import com.retrom.volcano.menus.MenuButton;
+import com.retrom.volcano.menus.StaticGraphicObject;
 import com.retrom.volcano.screens.GameScreen;
 import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 

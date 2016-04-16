@@ -13,12 +13,12 @@ import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.game.WorldRenderer;
-import com.retrom.volcano.shop.GraphicObject;
+import com.retrom.volcano.menus.GraphicObject;
+import com.retrom.volcano.menus.StaticGraphicObject;
 import com.retrom.volcano.shop.Shaman;
 import com.retrom.volcano.shop.ShopFire;
 import com.retrom.volcano.shop.ShopMenu;
 import com.retrom.volcano.shop.ShopPlayer;
-import com.retrom.volcano.shop.StaticGraphicObject;
 import com.retrom.volcano.utils.BatchUtils;
 
 public class ShopScreen extends ScreenAdapter implements Screen {
