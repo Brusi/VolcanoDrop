@@ -1,6 +1,5 @@
 package com.retrom.volcano.menus;
 
-import com.badlogic.gdx.Gdx;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.game.Settings;
 

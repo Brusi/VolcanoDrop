@@ -18,7 +18,7 @@ public class PauseMenu extends Menu {
 	
 	private final Listener listener_;
 
-	private boolean optionsOn;
+	private boolean optionsOn = false;
 	private final OptionsMenu optionsMenu = new OptionsMenu(new OptionsMenu.Listener() {
 		@Override
 		public void act(OptionsMenu.Command cmd) {
@@ -27,8 +27,8 @@ public class PauseMenu extends Menu {
 				optionsOn = false;
 				break;
 			case SHOP:
-				optionsOn = false;
-				listener_.act(Command.SHOP);
+//				optionsOn = false;
+				shopOn = true;
 				break;
 			default:
 				Gdx.app.error("ERROR", "Unknown options menu command.");
@@ -36,6 +36,30 @@ public class PauseMenu extends Menu {
 			}
 		}
 	});
+	
+	private YesNoMenu makeYesNoMenu(final Command command) {
+		return new YesNoMenu(new YesNoMenu.Listener() {
+			@Override
+			public void act(YesNoMenu.Command cmd) {
+				restartOn = false;
+				shopOn = false;
+				switch (cmd) {
+				case NO:
+					// Do nothing.
+					break;
+				case YES:
+					listener_.act(command);
+					break;
+				}
+			}
+		});
+	}
+	
+	private boolean restartOn = false;
+	private YesNoMenu restartGameMenu = makeYesNoMenu(Command.RESTART);
+	
+	private boolean shopOn = false;
+	private YesNoMenu shopMenu = makeYesNoMenu(Command.SHOP);
 	
 	MenuButton.Action commandAction(final Command cmd) {
 		return new MenuButton.Action() {
@@ -61,7 +85,12 @@ public class PauseMenu extends Menu {
 				}));
 		buttons.add(new SimpleMenuButton(223, 330, 140, 140,
 				Assets.pauseShopButton, Assets.pauseShopButtonClicked,
-				commandAction(Command.SHOP)));
+				new MenuButton.Action() {
+			@Override
+			public void act() {
+				shopOn = true;
+			}
+		}));
 		
 		buttons.add(new SimpleMenuButton(0, 127, 230, 100,
 				Assets.pauseResumeButton, Assets.pauseResumeButtonClicked,
@@ -69,24 +98,46 @@ public class PauseMenu extends Menu {
 		
 		buttons.add(new SimpleMenuButton(0, -9, 230, 100,
 				Assets.pauseRetryButton, Assets.pauseRetryButtonClicked,
-				commandAction(Command.RESTART)));
+				new MenuButton.Action() {
+					@Override
+					public void act() {
+						restartOn = true;
+					}
+				}));
 	}
 	
 	@Override
 	public void render(SpriteBatch batch) {
-		if (!optionsOn) {
+		if (optionsOn) {
+			optionsMenu.render(batch);
+		} else {
 			super.render(batch);
+		}
+		
+		if (restartOn) {
+			restartGameMenu.render(batch);
 			return;
 		}
-		optionsMenu.render(batch);
+		if (shopOn) {
+			shopMenu.render(batch);
+			return;
+		}
 	}
 	
 	@Override
 	public void update(float deltaTime) {
-		if (!optionsOn) {
-			super.update(deltaTime);
+		if (shopOn) {
+			shopMenu.update(deltaTime);
 			return;
 		}
-		optionsMenu.update(deltaTime);
+		if (optionsOn) {
+			optionsMenu.update(deltaTime);
+			return;
+		}
+		if (restartOn) {
+			restartGameMenu.update(deltaTime);
+			return;
+		}
+		super.update(deltaTime);
 	}
 }

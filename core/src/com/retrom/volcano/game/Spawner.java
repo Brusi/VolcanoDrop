@@ -15,6 +15,7 @@ import com.retrom.volcano.data.SequenceLib;
 import com.retrom.volcano.data.SpawnerAction;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
+import com.retrom.volcano.utils.EventQueue;
 
 public class Spawner {
 	

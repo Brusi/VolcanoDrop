@@ -318,6 +318,13 @@ public class Assets {
 	public static Sprite optionsMenuOn;
 	public static Sprite optionsMenuOff;
 	
+	public static Sprite yesNoMenuBg;
+	public static Sprite yesNoMenuTitle;
+	public static Sprite yesButton;
+	public static Sprite yesButtonClicked;
+	public static Sprite noButton;
+	public static Sprite noButtonClicked;
+	
 
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -668,5 +675,12 @@ public class Assets {
 		optionsMenuBackClicked = pauseMenuSheet.createSprite("pausemenu_options_buttons_back_click");
 		optionsMenuOn = pauseMenuSheet.createSprite("pausemenu_options_buttons_on");
 		optionsMenuOff = pauseMenuSheet.createSprite("pausemenu_options_buttons_off");
+		
+		yesNoMenuBg = pauseMenuSheet.createSprite("pausemenu_rusuremenu_body");
+		yesNoMenuTitle = pauseMenuSheet.createSprite("pausemenu_rusuremenu_text");
+		yesButton = pauseMenuSheet.createSprite("pausemenu_rusuremenu_answers_yes");
+		yesButtonClicked = pauseMenuSheet.createSprite("pausemenu_rusuremenu_answers_yes_click");
+		noButton = pauseMenuSheet.createSprite("pausemenu_rusuremenu_answers_no");
+		noButtonClicked = pauseMenuSheet.createSprite("pausemenu_rusuremenu_answers_no_click");
 	}
 }

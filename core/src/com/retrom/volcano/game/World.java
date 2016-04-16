@@ -61,7 +61,6 @@ import com.retrom.volcano.effects.ShieldFlare;
 import com.retrom.volcano.effects.SmokeEffect;
 import com.retrom.volcano.effects.WarningExclEffect;
 import com.retrom.volcano.effects.WarningSkullEffect;
-import com.retrom.volcano.game.EventQueue.Event;
 import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Collectable.Type;
@@ -75,6 +74,8 @@ import com.retrom.volcano.game.objects.TopFireball;
 import com.retrom.volcano.game.objects.WallDual;
 import com.retrom.volcano.game.objects.Wall;
 import com.retrom.volcano.game.objects.WallSingle;
+import com.retrom.volcano.utils.EventQueue;
+import com.retrom.volcano.utils.EventQueue.Event;
 
 public class World {
 
