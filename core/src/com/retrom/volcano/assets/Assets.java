@@ -311,6 +311,13 @@ public class Assets {
 	public static Sprite pauseQuestbox;
 	public static Sprite pauseQuestboxCompleted;
 	
+	public static Sprite optionsMenuBG;
+	public static Sprite optionsMenuTitle;
+	public static Sprite optionsMenuBack;
+	public static Sprite optionsMenuBackClicked;
+	public static Sprite optionsMenuOn;
+	public static Sprite optionsMenuOff;
+	
 
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -654,5 +661,12 @@ public class Assets {
 		pauseRetryButtonClicked = pauseMenuSheet.createSprite("pausemenu_buttons_retry_click");
 		pauseQuestbox = pauseMenuSheet.createSprite("pausemenu_questbox");
 		pauseQuestboxCompleted = pauseMenuSheet.createSprite("pausemenu_questbox_completed");
+		
+		optionsMenuBG = pauseMenuSheet.createSprite("pausemenu_options_body");
+		optionsMenuTitle = pauseMenuSheet.createSprite("pausemenu_options_title");
+		optionsMenuBack = pauseMenuSheet.createSprite("pausemenu_options_buttons_back");
+		optionsMenuBackClicked = pauseMenuSheet.createSprite("pausemenu_options_buttons_back_click");
+		optionsMenuOn = pauseMenuSheet.createSprite("pausemenu_options_buttons_on");
+		optionsMenuOff = pauseMenuSheet.createSprite("pausemenu_options_buttons_off");
 	}
 }

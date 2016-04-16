@@ -21,7 +21,39 @@ import com.badlogic.gdx.files.FileHandle;
 import com.retrom.volcano.assets.SoundAssets;
 
 public class Settings {
-	public static boolean soundEnabled = true;
+	
+	public static class Option {
+		// TODO: load options from properties.
+		private boolean on_ = true;
+		
+		public boolean on() {
+			return on_;
+		}
+		
+		public void set(boolean on) {
+			on_ = on;
+		}
+		
+		public void toggle() {
+			on_ = !on_;
+		}
+	}
+	
+	public static class SoundEnabledOption extends Option {
+		@Override
+		public void toggle() {
+			super.toggle();
+			if (!on()) {
+				SoundAssets.stopAllSounds();
+				SoundAssets.pauseMusic();
+			}
+		}
+	}
+	
+	public static final Option soundEnabled = new SoundEnabledOption();
+	public static final Option vibrationEnabled = new Option();
+	
+	
 	public static int[] highscores = new int[] {100, 80, 50, 30, 10};
 	public final static String file = ".superjumper";
 
@@ -31,7 +63,7 @@ public class Settings {
 			
 			String[] strings = filehandle.readString().split("\n");
 			
-			soundEnabled = Boolean.parseBoolean(strings[0]);
+			soundEnabled.set(Boolean.parseBoolean(strings[0]));
 			for (int i = 0; i < 5; i++) {
 				highscores[i] = Integer.parseInt(strings[i+1]);
 			}
@@ -44,7 +76,7 @@ public class Settings {
 		try {
 			FileHandle filehandle = Gdx.files.external(file);
 			
-			filehandle.writeString(Boolean.toString(soundEnabled)+"\n", false);
+			filehandle.writeString(Boolean.toString(soundEnabled.on())+"\n", false);
 			for (int i = 0; i < 5; i++) {
 				filehandle.writeString(Integer.toString(highscores[i])+"\n", true);
 			}
@@ -60,17 +92,6 @@ public class Settings {
 				highscores[i] = score;
 				break;
 			}
-		}
-	}
-	
-	public static void toggleSound() {
-		if (soundEnabled) {
-			soundEnabled = false;
-			SoundAssets.stopAllSounds();
-			SoundAssets.pauseMusic();
-		} else {
-			soundEnabled = true;
-			SoundAssets.resumeMusic();
 		}
 	}
 }

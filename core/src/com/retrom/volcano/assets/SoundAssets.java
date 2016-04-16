@@ -154,7 +154,7 @@ public class SoundAssets {
 	}
 	
 	public static long playSound (Sound sound) {
-		if (!Settings.soundEnabled)
+		if (!Settings.soundEnabled.on())
 			return 0;
 		long id = sound.play(1);
 		currentlyPlaying.add(sound, id);
@@ -173,7 +173,7 @@ public class SoundAssets {
 
 	public static long loopSound(Sound sound) {
 		sound.stop();
-		if (!Settings.soundEnabled) {
+		if (!Settings.soundEnabled.on()) {
 			return 0;
 		}
 		long id = sound.loop(1);
@@ -234,7 +234,7 @@ public class SoundAssets {
 	
 	public static void startMusic() {
 		shopMusic.stop();
-		if (!Settings.soundEnabled) {
+		if (!Settings.soundEnabled.on()) {
 			return;
 		}
 		gameMusic.stop();
@@ -246,14 +246,14 @@ public class SoundAssets {
 	}
 	
 	public static void resumeMusic() {
-		if (!Settings.soundEnabled) {
+		if (!Settings.soundEnabled.on()) {
 			return;
 		}
 		gameMusic.play();
 	}
 	
 	public static void resumeMusicAt(float position) {
-		if (!Settings.soundEnabled) {
+		if (!Settings.soundEnabled.on()) {
 			return;
 		}
 		gameMusic.setPosition(position);
@@ -261,7 +261,7 @@ public class SoundAssets {
 	}
 	
 	public static void startShopMusic() {
-		if (!Settings.soundEnabled) {
+		if (!Settings.soundEnabled.on()) {
 			return;
 		}
 		gameMusic.stop();

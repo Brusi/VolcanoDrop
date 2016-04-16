@@ -135,7 +135,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 			togglePause();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-			Settings.toggleSound();
+			Settings.soundEnabled.toggle();
 		}
 		
 	}
