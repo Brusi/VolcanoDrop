@@ -79,6 +79,8 @@ import com.retrom.volcano.utils.EventQueue.Event;
 
 public class World {
 
+	private static final float CAM_OFFSET = WorldRenderer.FRUSTUM_HEIGHT / 3f - Wall.SIZE;
+
 	public final Player player;
 	
 	public final List<Wall> walls_ = new ArrayList<Wall>();
@@ -608,7 +610,7 @@ public class World {
 	}
 
 	private void updateCamera(float deltaTime) {
-		camTarget = (floors_.getTotalBlocks()) * Wall.SIZE / 6f + WorldRenderer.FRUSTUM_HEIGHT / 3f;
+		camTarget = (floors_.getTotalBlocks()) * Wall.SIZE / 6f + CAM_OFFSET;
 		background.setY(camTarget);
 		
 	}

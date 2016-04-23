@@ -1,4 +1,4 @@
-package com.retrom.volcano.game;
+package com.retrom.volcano.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,5 +67,9 @@ public class EventQueue {
 
 	public int size() {
 		return events_.size();
+	}
+	
+	protected float getTime() {
+		return time_;
 	}
 }

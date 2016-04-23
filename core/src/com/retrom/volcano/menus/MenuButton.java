@@ -22,6 +22,7 @@ public abstract class MenuButton {
 	private boolean pressed = false;
 	
 	private boolean visible = true;
+	protected float alpha_ = 1;
 	
 	public MenuButton(Rectangle rect, Action action) {
 		this.rect = rect;
@@ -73,6 +74,10 @@ public abstract class MenuButton {
 	}
 	public float getY() {
 		return rect.y + rect.height / 2;
+	}
+
+	public void setAlpha(float alpha) {
+		alpha_  = alpha;
 	}
 	
 }

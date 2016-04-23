@@ -10,5 +10,8 @@ public interface ShopMenuContent {
 	// Refreshes data shown by the menu.
 	public void refresh();
 	
+	// Set master opacity.
+	public void setAlpha(float alpha);
+	
 	abstract public Sprite getBottomFade();
 }

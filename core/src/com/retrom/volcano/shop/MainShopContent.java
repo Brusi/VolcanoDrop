@@ -57,4 +57,12 @@ public class MainShopContent implements ShopMenuContent {
 	public Sprite getBottomFade() {
 		return null;
 	}
+
+	@Override
+	public void setAlpha(float alpha) {
+		for (MenuButton button : buttons) {
+			button.setAlpha(alpha);
+		}
+		// TODO Auto-generated method stub
+	}
 }

@@ -20,19 +20,22 @@ public class MainShopMenuButton extends MenuButton {
 	
 	@Override
 	public void render(Batch batch) {
+		Sprite bgSprite = Assets.mainShopBg;
 		if (isPressed()) {
-			Assets.mainShopBg.setScale(0.9f);
+			bgSprite.setScale(0.9f);
 			sprite.setScale(0.95f);
 		} else {
-			Assets.mainShopBg.setScale(1f);
+			bgSprite.setScale(1f);
 			sprite.setScale(1f);
 		}
 		
-		Utils.drawCenter(batch, Assets.mainShopBg, 0, rect.y + rect.height / 2);
+		bgSprite.setAlpha(alpha_);
+		sprite.setAlpha(alpha_);
+		
+		Utils.drawCenter(batch, bgSprite, 0, rect.y + rect.height / 2);
 		Utils.drawCenter(batch, sprite,
 				rect.x + rect.width / 2,
 				rect.y + rect.height / 2);
-		super.render(batch);
 	}
 	
 	private static Rectangle makeRect(float y) {

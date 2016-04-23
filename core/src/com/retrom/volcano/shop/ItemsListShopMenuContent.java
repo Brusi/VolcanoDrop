@@ -34,6 +34,7 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 	private float scrollY = 0;
 	private float tgtY = 0;
 	private int runningIndex = 0;
+	private float alpha_ = 1;
 	
 	@Override
 	public void update(float deltaTime) {
@@ -48,6 +49,7 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 	public void render(SpriteBatch batch) {
 		for (ShopMenuItem item : items) {
 			item.setScrollY(scrollY);
+			item.setAlpha(alpha_);
 			item.render(batch);
 		}
 		
@@ -80,5 +82,10 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 			}
 		};
 		items.add(new ShopMenuItem(runningIndex++, icon, title, entry, action));
+	}
+	
+	@Override
+	public void setAlpha(float alpha) {
+		alpha_  = alpha;
 	}
 }

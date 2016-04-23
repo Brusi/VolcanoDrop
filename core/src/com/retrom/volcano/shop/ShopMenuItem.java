@@ -25,6 +25,7 @@ public class ShopMenuItem extends MenuButton {
 	
 	State state = State.CANT_BUY;
 	float stateTime;
+	float alpha = 1;
 	
 	private static final float baseY = 290;
 	
@@ -101,22 +102,26 @@ public class ShopMenuItem extends MenuButton {
 		float y = getY();
 		icon.setY(y - icon.getHeight() / 2);
 		icon.setX(-iconWidth - icon.getWidth() / 2);
+		icon.setAlpha(alpha_);
 		icon.draw(batch);
 		
 		title.setY(y - title.getHeight() / 2);
 		title.setX(0 - 160);
+		title.setAlpha(alpha_);
 		title.draw(batch);
 		
 		if (state == State.CAN_BUY) {
 			Sprite bg = Assets.shopItemButtonBg;
 			bg.setY(y - bg.getHeight() / 2);
 			bg.setX(iconWidth - bg.getWidth() / 2);
+			bg.setAlpha(alpha_);
 			bg.draw(batch);
 		} else if (state == State.BUYING) {
-				Sprite bg = WorldRenderer.getFrameStopAtLastFrame(Assets.shopItemButtonBuy, stateTime);
-				bg.setY(y - bg.getHeight() / 2);
-				bg.setX(iconWidth - bg.getWidth() / 2);
-				bg.draw(batch);
+			Sprite bg = WorldRenderer.getFrameStopAtLastFrame(Assets.shopItemButtonBuy, stateTime);
+			bg.setY(y - bg.getHeight() / 2);
+			bg.setX(iconWidth - bg.getWidth() / 2);
+			bg.setAlpha(alpha_);
+			bg.draw(batch);
 		}
 		
 		if (state == State.CAN_BUY || state == State.CANT_BUY) {
@@ -124,6 +129,7 @@ public class ShopMenuItem extends MenuButton {
 				Sprite price = Assets.prices.get(entry.getPrice());
 				price.setY(y - 27);
 				price.setX(iconWidth - price.getWidth() / 2 - 7);
+				price.setAlpha(alpha_);
 				price.draw(batch);
 			}
 		}
@@ -132,6 +138,7 @@ public class ShopMenuItem extends MenuButton {
 			Sprite sack = Assets.shopItemButtonGoldSack;
 			sack.setY(y - 5);
 			sack.setX(iconWidth - sack.getWidth() / 2 + 5);
+			sack.setAlpha(alpha_);
 			sack.draw(batch);
 		}
 		if (state == State.BUYING || state == State.OWN) {
@@ -141,17 +148,20 @@ public class ShopMenuItem extends MenuButton {
 					Sprite equip = Assets.shopItemButtonEquip;
 					equip.setY(y - equip.getHeight() / 2 - 6);
 					equip.setX(iconWidth - equip.getWidth() / 2);
+					equip.setAlpha(alpha_);
 					equip.draw(batch);
 				} else {
 					Sprite equiped = Assets.shopItemButtonEquipped;
 					equiped.setY(y - equiped.getHeight() / 2 - 4);
 					equiped.setX(iconWidth - equiped.getWidth() / 2 + 7);
+					equiped.setAlpha(alpha_);
 					equiped.draw(batch);
 				}
 			} else {
 				Sprite own = Assets.shopItemButtonOwn;
 				own.setY(y - own.getHeight() / 2);
 				own.setX(iconWidth - own.getWidth() / 2);
+				own.setAlpha(alpha_);
 				own.draw(batch);
 			}
 		}

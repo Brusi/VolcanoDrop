@@ -2,6 +2,7 @@ package com.retrom.volcano.menus;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.menus.OptionsMenu.Command;
 
@@ -107,19 +108,19 @@ public class PauseMenu extends Menu {
 	}
 	
 	@Override
-	public void render(SpriteBatch batch) {
+	public void render(SpriteBatch batch, ShapeRenderer shapes) {
 		if (optionsOn) {
-			optionsMenu.render(batch);
+			optionsMenu.render(batch, shapes);
 		} else {
-			super.render(batch);
+			super.render(batch, shapes);
 		}
 		
 		if (restartOn) {
-			restartGameMenu.render(batch);
+			restartGameMenu.render(batch, shapes);
 			return;
 		}
 		if (shopOn) {
-			shopMenu.render(batch);
+			shopMenu.render(batch, shapes);
 			return;
 		}
 	}

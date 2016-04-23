@@ -27,6 +27,7 @@ public class ControlManager {
 		case Desktop:
 		case WebGL:
 			currentControl = keyboard;
+//			currentControl = onScreen;
 			break;
 		case HeadlessDesktop:
 		default:

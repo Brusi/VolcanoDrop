@@ -3,6 +3,7 @@ package com.retrom.volcano.ui;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.control.ControlManager;
 import com.retrom.volcano.game.World;
@@ -13,6 +14,7 @@ import com.retrom.volcano.utils.BatchUtils;
 public class GameUiRenderer {
 	
 	private final SpriteBatch batch_;
+	private final ShapeRenderer shapes_;
 	private final Camera cam_;
 	private final PowerupUiRenderer powerupUiRenderer_;
 	
@@ -26,7 +28,9 @@ public class GameUiRenderer {
 		cam_ = new OrthographicCamera(
 				WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT);
 		batch_ = new SpriteBatch();
+		shapes_ = new ShapeRenderer();
 		batch_.setProjectionMatrix(cam_.combined);
+		shapes_.setProjectionMatrix(cam_.combined);
 		
 		scoreHub_ = scoreHub;
 		
@@ -53,7 +57,7 @@ public class GameUiRenderer {
 	private void renderPauseMenu() {
 		BatchUtils.setBlendFuncNormal(batch_);
 		batch_.begin();
-		pauseMenu_.render(batch_);
+		pauseMenu_.render(batch_, shapes_);
 		batch_.end();
 		
 	}

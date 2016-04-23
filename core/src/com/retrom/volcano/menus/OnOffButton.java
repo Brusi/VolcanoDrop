@@ -29,7 +29,8 @@ public class OnOffButton extends MenuButton {
 		if (!isVisible()) {
 			return;
 		}
-		Sprite s = option.on() ? Assets.optionsMenuOn : Assets.optionsMenuOff; 
+		Sprite s = option.on() ? Assets.optionsMenuOn : Assets.optionsMenuOff;
+		s.setAlpha(alpha_);
 		Utils.drawCenter(batch, s, getX(), getY());
 	}
 }

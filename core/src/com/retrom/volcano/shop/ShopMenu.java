@@ -14,14 +14,19 @@ import com.retrom.volcano.menus.GraphicObject;
 import com.retrom.volcano.menus.MenuButton;
 import com.retrom.volcano.menus.StaticGraphicObject;
 import com.retrom.volcano.screens.GameScreen;
+import com.retrom.volcano.utils.Tween;
+import com.retrom.volcano.utils.TweenQueue;
 import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
 public class ShopMenu {
 
+	private static final float menuStartYPos = 1000;
 	private static final float menuFinalYPos = 180;
+	
+	TweenQueue tweens = new TweenQueue();
 
-	GraphicObject menuBg = new StaticGraphicObject(Assets.shopMenuBg, 0, menuFinalYPos - 10);
-	GraphicObject menuFg = new StaticGraphicObject(Assets.shopMenuFg, 0, menuFinalYPos);
+	GraphicObject menuBg = new StaticGraphicObject(Assets.shopMenuBg, 0, menuStartYPos - 10);
+	GraphicObject menuFg = new StaticGraphicObject(Assets.shopMenuFg, 0, menuStartYPos);
 	
 	MenuButton exitButton;
 	MenuButton backButton;
@@ -96,6 +101,9 @@ public class ShopMenu {
 					}
 				});
 		backButton.hide();
+		
+		tweens.addTweenFromNow(2, 0.6f, new Tween.EaseOut(new Tween.MovePoint(menuBg.position_).from(0, menuStartYPos).to(0, menuFinalYPos)));
+		tweens.addTweenFromNow(2, 0.6f, new Tween.EaseOut(new Tween.MovePoint(menuFg.position_).from(0, menuStartYPos-10).to(0, menuFinalYPos-10)));
 	}
 
 	public void update(float deltaTime) {
@@ -108,6 +116,7 @@ public class ShopMenu {
 			content.refresh();
 		}
 		
+		tweens.update(deltaTime);
 		content.update(deltaTime);
 		goldCounter.update();
 		exitButton.checkClick();
