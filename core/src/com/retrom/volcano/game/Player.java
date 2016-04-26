@@ -192,7 +192,7 @@ public class Player extends DynamicGameObject {
 		return ShopData.airStep.isOwn() && !airJump_ && !canWallJump();
 	}
 	
-	public void update (float deltaTime) {
+	public void update(float deltaTime) {
 		stateTime += deltaTime;
 		timeSinceLanding += deltaTime;
 		timeSinceWallTouch += deltaTime;
@@ -202,6 +202,13 @@ public class Player extends DynamicGameObject {
 		if (state_ == STATE_DIE || state_ == STATE_DEAD) {
 			return;
 		}
+		if (state_ == STATE_RUNNING) {
+			stateTime -= deltaTime / 2;
+			float addition = deltaTime * Math.abs(velocity.x) * 4 / MAX_NON_DASH_VEL;
+			System.out.println("addition="+addition);
+			stateTime += addition;
+		}
+		
 		processInput(deltaTime);
 		tryMove(deltaTime);
 		

@@ -37,8 +37,6 @@ public class Assets {
 	public static Array<Sprite> walls2;
 	public static Array<Sprite> wallParticles;
 	
-	public static Sprite empty;
-	
 	public static Array<Sprite> pillars;
 	public static Array<Sprite> pillars_big;
 	public static Sprite pillars_start;
@@ -349,10 +347,6 @@ public class Assets {
 		walls1 = wallsSheet.createSprites("x1");
 		walls2 = wallsSheet.createSprites("x2");
 		wallParticles = wallsSheet.createSprites("wall_particle");
-
-		TextureAtlas playerSheet = new TextureAtlas("player/playersheet.txt");
-		
-		empty = playerSheet.createSprite("empty");
 
 		TextureAtlas environmentSheet = new TextureAtlas("walls/enviroment.txt");
 		pillars = environmentSheet.createSprites("pillars");

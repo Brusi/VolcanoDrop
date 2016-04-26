@@ -28,5 +28,4 @@ public class PlayerOnionSkinEffect extends Effect {
 	public float getTint() {
 		return (1 - stateTime() / duration()) * MAX_TINT;
 	}
-
 }

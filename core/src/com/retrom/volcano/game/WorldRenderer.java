@@ -329,6 +329,8 @@ public class WorldRenderer {
 	}
 
 	private void renderEffects(List<Effect> effects) {
+		final float[] tiltY = {0};
+		
 		for (Effect e : effects) {
 			Sprite s = e.accept(new EffectVisitor<Sprite>() {
 
@@ -540,14 +542,17 @@ public class WorldRenderer {
 							effect.playerStateTime, effect.playerSide, getCostumeAssets());
 					float tint = effect.getTint();
 					s.setColor(tint, tint, tint, tint);
+					tiltY[0] = 42f;
 					return s;
 				}
 			});
-			s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
-			s.setRotation(e.getRotation());
-			s.setScale(e.getScale());
-			s.setY(snapToY(s.getY()));
-			s.draw(batch);
+			if (s != null) {
+				s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
+				s.setRotation(e.getRotation());
+				s.setScale(e.getScale());
+				s.setY(snapToY(s.getY()) + tiltY[0]);
+				s.draw(batch);
+			}
 		}
 	}
 
@@ -706,8 +711,9 @@ public class WorldRenderer {
 	private void renderPlayer () {
 		Player player = world.player;
 		Sprite keyFrame = getPlayerFrame(player.state(), player.stateTime, player.side, getCostumeAssets());
+		if (keyFrame == null) return;
 		keyFrame.setColor(1,1,1,1);
-		drawCenter(keyFrame, player.position);
+		drawCenterBottom(keyFrame, player.position.x, player.position.y - 42);
 	}
 	
 	private Sprite getPlayerFrame(int state, float stateTime, boolean side, CostumeAssets ca) {
@@ -718,11 +724,11 @@ public class WorldRenderer {
 			keyFrame.setFlip(side, false);
 			break;
 		case Player.STATE_RUNNING:
-			float startTime = FRAME_TIME * ca.playerRunStart.size / 3;
-			if (stateTime < startTime * ca.playerRunStart.size) {
-				keyFrame = getFrameLoop(ca.playerRunStart, stateTime); 
+			float startTime = FRAME_TIME * ca.playerRunStart.size;
+			if (stateTime < startTime) {
+				keyFrame = getFrameLoop(ca.playerRunStart, stateTime, FPS); 
 			} else {
-				keyFrame = getFrameLoop(ca.playerRun, stateTime - startTime);
+				keyFrame = getFrameLoop(ca.playerRun, stateTime - startTime, FPS);
 			}
 			keyFrame.setFlip(side, false);
 			break;
@@ -743,7 +749,9 @@ public class WorldRenderer {
 			} else {
 				Gdx.app.log("ERROR", "Player is in death type: " + world.player.deathType);
 			}
-			keyFrame.setFlip(side, false);
+			if (keyFrame != null) {
+				keyFrame.setFlip(side, false);
+			}
 			break;
 		default:
 			Gdx.app.log("ERROR", "Player is in invalid state: " + state);
@@ -762,7 +770,11 @@ public class WorldRenderer {
 	}
 	
 	private Sprite getFrameLoop(Array<Sprite> anim, float stateTime) {
-		return anim.get((int) (stateTime * FPS) % anim.size);
+		return getFrameLoop(anim, stateTime, FPS);
+	}
+	
+	private Sprite getFrameLoop(Array<Sprite> anim, float stateTime, float fps) {
+		return anim.get((int) (stateTime * fps) % anim.size);
 	}
 	
 	public static Sprite getFrameStopAtLastFrame(Array<Sprite> anim, float stateTime) {
@@ -774,7 +786,7 @@ public class WorldRenderer {
 	private Sprite getFrameDisappearAfterLastFrame(Array<Sprite> anim, float stateTime) {
 		int frameIndex = (int) (stateTime * FPS);
 		if (frameIndex > anim.size-1) {
-			return Assets.empty;
+			return null;
 		}
 		return anim.get(frameIndex);
 	}

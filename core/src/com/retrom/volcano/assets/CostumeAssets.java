@@ -1,10 +1,8 @@
 package com.retrom.volcano.assets;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
-import com.retrom.volcano.game.Player;
 
 public class CostumeAssets {
 	
