@@ -13,6 +13,7 @@ public class ShopData {
 	
 	
 	public static final List<ShopEntry> allShopEntries = new ArrayList<ShopEntry>();
+	public static final List<CostumeShopEntry> costumeEntries = new ArrayList<CostumeShopEntry>();
 	
 	public static ShopEntry airStep;
 	public static ShopEntry wallFoot;
@@ -21,7 +22,9 @@ public class ShopData {
 	public static ShopEntry frogger;
 	public static ShopEntry slowWalker;
 	
-	public static ShopEntry defaultCostume;
+	public static CostumeShopEntry defaultCostume;
+	public static CostumeShopEntry goboCostume;
+	public static CostumeShopEntry blikCostume;
 	
 	private static final Preferences prefs = Gdx.app
 			.getPreferences(PREFS_NAME);
@@ -40,6 +43,8 @@ public class ShopData {
 		
 		// Costumes
 		defaultCostume = createCostume("costumes_default", 0, true);
+		goboCostume = createCostume("costumes_gobo", 1000, false);
+		blikCostume = createCostume("costumes_blik", 2000, false);
 		
 		load();
 	}
@@ -69,6 +74,17 @@ public class ShopData {
 		prefs.flush();
 	}
 	
+	public static void equipCostume(CostumeShopEntry entry) {
+		for (CostumeShopEntry e : costumeEntries) {
+			e.unEquip();
+			e.save(prefs);
+		}
+		entry.equip();
+		entry.save(prefs);
+		prefs.flush();
+		
+	}
+	
 	private static ShopEntry createOwn(String name, int price) {
 		ShopEntry entry = new OwnShopEntry(name, price);
 		allShopEntries.add(entry);
@@ -79,9 +95,10 @@ public class ShopData {
 		return createCostume(name, price, false);
 	}
 	
-	private static ShopEntry createCostume(String name, int price, boolean defaultCostume) {
+	private static CostumeShopEntry createCostume(String name, int price, boolean defaultCostume) {
 		CostumeShopEntry entry = new CostumeShopEntry(name, price, defaultCostume);
 		allShopEntries.add(entry);
+		costumeEntries.add(entry);
 		return entry;
 	}
 	
@@ -105,5 +122,4 @@ public class ShopData {
 		gold -= amount;
 		setGold(gold);
 	}
-
 }

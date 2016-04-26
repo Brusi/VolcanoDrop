@@ -341,6 +341,8 @@ public class Assets {
 
 	public static void load() {
 		defaultCostume = new CostumeAssets("player/playersheet.txt");
+		goboCostume = new CostumeAssets("player/playergobo.txt");
+		blikCostume = new CostumeAssets("player/playerblik.txt");
 		
 		
 		TextureAtlas wallsSheet = new TextureAtlas("walls/walls.txt");

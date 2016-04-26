@@ -83,13 +83,16 @@ public class ShopMenuItem extends MenuButton {
 			state = State.OWN;
 		}
 		
-		if (state == State.CAN_BUY) {
-			if (checkClick()) {
+		if (checkClick()) {
+			if (state == State.CAN_BUY) {
 				buy();
+			} else if (state == State.OWN && entry instanceof CostumeShopEntry){
+				CostumeShopEntry cse = (CostumeShopEntry)entry;
+				ShopData.equipCostume(cse);
 			}
 		}
 	}
-	
+
 	public void setScrollY(float scrollY) {
 		this.scrollY = scrollY;
 		if (getY() > 380 || getY() < -50) this.hide(); else this.show();
@@ -110,7 +113,8 @@ public class ShopMenuItem extends MenuButton {
 		title.setAlpha(alpha_);
 		title.draw(batch);
 		
-		if (state == State.CAN_BUY) {
+		if (state == State.CAN_BUY || 
+    	   (entry instanceof CostumeShopEntry && !((CostumeShopEntry)entry).isEquipped())) {
 			Sprite bg = Assets.shopItemButtonBg;
 			bg.setY(y - bg.getHeight() / 2);
 			bg.setX(iconWidth - bg.getWidth() / 2);
@@ -144,7 +148,7 @@ public class ShopMenuItem extends MenuButton {
 		if (state == State.BUYING || state == State.OWN) {
 			if (entry instanceof CostumeShopEntry) {
 				CostumeShopEntry cse = (CostumeShopEntry)entry;
-				if (cse.isEquipped()) {
+				if (!cse.isEquipped()) {
 					Sprite equip = Assets.shopItemButtonEquip;
 					equip.setY(y - equip.getHeight() / 2 - 6);
 					equip.setX(iconWidth - equip.getWidth() / 2);

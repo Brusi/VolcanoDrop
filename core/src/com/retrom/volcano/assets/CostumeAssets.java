@@ -14,7 +14,9 @@ public class CostumeAssets {
 	public Array<Sprite> playerJump;
 	public Array<Sprite> playerLand;
 	public Array<Sprite> playerBurn;
+	public Array<Sprite> playerBurnAdd;
 	public Array<Sprite> playerSquash;
+	public Array<Sprite> playerSquashAdd;
 	
 	public CostumeAssets(String path) {
 		this.path = path;
@@ -29,6 +31,8 @@ public class CostumeAssets {
 		playerJump = sheet.createSprites("player_jump");
 		playerLand = sheet.createSprites("player_land");
 		playerBurn = sheet.createSprites("player_die_burn");
+		playerBurnAdd = sheet.createSprites("player_die_burn_add");
 		playerSquash = sheet.createSprites("player_die_squash");
+		playerSquashAdd = sheet.createSprites("player_die_squash_add");
 	}
 }

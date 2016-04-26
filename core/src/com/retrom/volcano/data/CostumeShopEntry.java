@@ -32,8 +32,11 @@ public class CostumeShopEntry extends OwnShopEntry {
 	
 	@Override
 	public void load(Preferences prefs) {
-		prefs.getBoolean(equippedKey(), defaultCostume);
+		equipped = prefs.getBoolean(equippedKey(), defaultCostume);
 		super.load(prefs);
+		if (!isOwn() && defaultCostume) {
+			own = true;
+		}
 	}
 	
 	private String equippedKey() {

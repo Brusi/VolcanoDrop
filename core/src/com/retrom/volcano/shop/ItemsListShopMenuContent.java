@@ -72,8 +72,11 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 		Action action = new Action() {
 			@Override
 			public void act() {
-				ShopData.reduceGold(entry.getPrice());
-				ShopData.buyFromShop(entry);
+				// TODO: move action to insude item. No need to pass it from outside mostly.
+				if (!entry.isOwn()) {
+					ShopData.reduceGold(entry.getPrice());
+					ShopData.buyFromShop(entry);
+				}
 				
 				listener_.act(ShopMenu.Command.BUY);
 				for (ShopMenuItem item : items) {

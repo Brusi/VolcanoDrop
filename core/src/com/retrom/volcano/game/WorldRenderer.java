@@ -20,16 +20,11 @@ import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
-
-import javax.swing.event.ListSelectionEvent;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Pixmap.Filter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -39,6 +34,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.assets.CostumeAssets;
+import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.effects.DiamondGlowEffect;
 import com.retrom.volcano.effects.Effect;
 import com.retrom.volcano.effects.EffectVisitor;
@@ -104,6 +100,7 @@ public class WorldRenderer {
 	}
 	
 	public static final float CAM_SPEED = 40f;
+	public static final float PLAYER_SPRITE_Y_OFFSET = 42f;
 	
 	
 	public void render(float deltaTime, boolean isPaused) {
@@ -542,7 +539,7 @@ public class WorldRenderer {
 							effect.playerStateTime, effect.playerSide, getCostumeAssets());
 					float tint = effect.getTint();
 					s.setColor(tint, tint, tint, tint);
-					tiltY[0] = 42f;
+					tiltY[0] = PLAYER_SPRITE_Y_OFFSET;
 					return s;
 				}
 			});
@@ -651,6 +648,16 @@ public class WorldRenderer {
 	}
 	
 	static public CostumeAssets getCostumeAssets() {
+		if (ShopData.defaultCostume.isEquipped()) {
+			return Assets.defaultCostume;
+		}
+		if (ShopData.goboCostume.isEquipped()) {
+			return Assets.goboCostume;
+		}
+		if (ShopData.blikCostume.isEquipped()) {
+			return Assets.blikCostume;
+		}
+		Gdx.app.error("ERROR", "No costume defined for this shop entry.");
 		return Assets.defaultCostume;
 	}
 	
@@ -713,7 +720,14 @@ public class WorldRenderer {
 		Sprite keyFrame = getPlayerFrame(player.state(), player.stateTime, player.side, getCostumeAssets());
 		if (keyFrame == null) return;
 		keyFrame.setColor(1,1,1,1);
-		drawCenterBottom(keyFrame, player.position.x, player.position.y - 42);
+		drawCenterBottom(keyFrame, player.position.x, player.position.y - PLAYER_SPRITE_Y_OFFSET);
+		
+		Sprite addKeyFrame = getPlayerAddFrame(player.state(), player.stateTime, player.side, getCostumeAssets());
+		if (addKeyFrame != null) {
+			BatchUtils.setBlendFuncAdd(batch);
+			drawCenterBottom(addKeyFrame , player.position.x, player.position.y - PLAYER_SPRITE_Y_OFFSET);
+			BatchUtils.setBlendFuncNormal(batch);
+		}
 	}
 	
 	private Sprite getPlayerFrame(int state, float stateTime, boolean side, CostumeAssets ca) {
@@ -746,6 +760,33 @@ public class WorldRenderer {
 				keyFrame = getFrameDisappearAfterLastFrame(ca.playerBurn, stateTime);
 			} else if (world.player.deathType == Player.DEATH_BY_CRUSH) {
 				keyFrame = getFrameDisappearAfterLastFrame(ca.playerSquash, stateTime);
+			} else {
+				Gdx.app.log("ERROR", "Player is in death type: " + world.player.deathType);
+			}
+			if (keyFrame != null) {
+				keyFrame.setFlip(side, false);
+			}
+			break;
+		default:
+			Gdx.app.log("ERROR", "Player is in invalid state: " + state);
+		}
+		return keyFrame;
+	}
+	
+	private Sprite getPlayerAddFrame(int state, float stateTime, boolean side, CostumeAssets ca) {
+		Sprite keyFrame = null;
+		switch (state) {
+		case Player.STATE_IDLE:
+		case Player.STATE_RUNNING:
+		case Player.STATE_JUMPING:
+		case Player.STATE_LANDING:
+			return null;
+		case Player.STATE_DIE:
+		case Player.STATE_DEAD:
+			if (world.player.deathType == Player.DEATH_BY_BURN) {
+				keyFrame = getFrameDisappearAfterLastFrame(ca.playerBurnAdd, stateTime);
+			} else if (world.player.deathType == Player.DEATH_BY_CRUSH) {
+				keyFrame = getFrameDisappearAfterLastFrame(ca.playerSquashAdd, stateTime);
 			} else {
 				Gdx.app.log("ERROR", "Player is in death type: " + world.player.deathType);
 			}

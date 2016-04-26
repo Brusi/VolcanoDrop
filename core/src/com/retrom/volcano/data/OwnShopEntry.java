@@ -4,7 +4,7 @@ import com.badlogic.gdx.Preferences;
 
 public class OwnShopEntry extends ShopEntry {
 	final public int price;
-	private boolean own = false;
+	protected boolean own = false;
 	
 	public OwnShopEntry(String name, int price) {
 		super(name);

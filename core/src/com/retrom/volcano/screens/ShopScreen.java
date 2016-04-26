@@ -39,7 +39,7 @@ public class ShopScreen extends ScreenAdapter implements Screen {
 	GraphicObject shopBg = new StaticGraphicObject(Assets.shopBg, 0, 0);
 	GraphicObject shopFg = new StaticGraphicObject(Assets.shopFg, 207, -274);
 	
-	ShopPlayer player = new ShopPlayer(-410,-350);
+	ShopPlayer player = new ShopPlayer(-410,-350 + 42);
 	Shaman shaman = new Shaman(385,-280);
 	ShopFire fire = new ShopFire(0, -322);
 	
@@ -55,7 +55,7 @@ public class ShopScreen extends ScreenAdapter implements Screen {
 		tweens_.addTweenFromNow(0, 1.5f, new Tween.EaseOut(new Tween.MovePoint(
 				shaman.position_).from(255, -280).to(185, -280)));
 		tweens_.addTweenFromNow(0, 1, new Tween.EaseOut(new Tween.MovePoint(
-				player.position_).from(-260,-350).to(-210,-350)));
+				player.position_).from(-260,-350 + 42).to(-210,-350 + 42)));
 	}
 
 	@Override
