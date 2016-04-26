@@ -51,11 +51,11 @@ public class ShopScreen extends ScreenAdapter implements Screen {
 		shapes_.setProjectionMatrix(cam_.combined);
 		SoundAssets.startShopMusic();
 		
-		tweens_.addTweenFromNow(0, 1, fade_.in);
-		tweens_.addTweenFromNow(0.5f, 3, new Tween.EaseOut(new Tween.MovePoint(
-				shaman.position_).from(385, -280).to(185, -280)));
-		tweens_.addTweenFromNow(0.5f, 2, new Tween.EaseOut(new Tween.MovePoint(
-				player.position_).from(-410,-350).to(-210,-350)));
+		tweens_.addTweenFromNow(0, 0.75f, fade_.in);
+		tweens_.addTweenFromNow(0, 1.5f, new Tween.EaseOut(new Tween.MovePoint(
+				shaman.position_).from(255, -280).to(185, -280)));
+		tweens_.addTweenFromNow(0, 1, new Tween.EaseOut(new Tween.MovePoint(
+				player.position_).from(-260,-350).to(-210,-350)));
 	}
 
 	@Override

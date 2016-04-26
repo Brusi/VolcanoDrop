@@ -38,15 +38,6 @@ public interface Tween {
 		private float to_x;
 		private float to_y;
 
-//		public MovePoint(Vector2 point, float from_x, float from_y,
-//				float to_x, float to_y) {
-//			this.point = point;
-//			this.from_x = from_x;
-//			this.from_y = from_y;
-//			this.to_x = to_x;
-//			this.to_y = to_y;
-//		}
-		
 		public MovePoint(Vector2 point) {
 			this.point = point;
 		}

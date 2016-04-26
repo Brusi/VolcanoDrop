@@ -21,7 +21,7 @@ import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 public class ShopMenu {
 
 	private static final float menuStartYPos = 1000;
-	private static final float menuFinalYPos = 180;
+	private static final float menuFinalYPos = 176;
 	
 	TweenQueue tweens = new TweenQueue();
 
@@ -69,6 +69,7 @@ public class ShopMenu {
 			default:
 				break;
 			}
+			content.refresh();
 		}
 	};
 	
@@ -86,6 +87,7 @@ public class ShopMenu {
 	
 	public ShopMenu() {
 		content = mainContent;
+		content.refresh();
 		exitButton = new ExitMenuButton(ExitMenuButton.DEFAULT_X,
 				ExitMenuButton.DEFAULT_Y, new MenuButton.Action() {
 					@Override
@@ -102,8 +104,13 @@ public class ShopMenu {
 				});
 		backButton.hide();
 		
-		tweens.addTweenFromNow(2, 0.6f, new Tween.EaseOut(new Tween.MovePoint(menuBg.position_).from(0, menuStartYPos).to(0, menuFinalYPos)));
-		tweens.addTweenFromNow(2, 0.6f, new Tween.EaseOut(new Tween.MovePoint(menuFg.position_).from(0, menuStartYPos-10).to(0, menuFinalYPos-10)));
+		tweens.addTweenFromNow(1, 0.6f, new Tween.EaseIn(new Tween.MovePoint(menuBg.position_).from(1, menuStartYPos).to(1, menuFinalYPos)));
+		tweens.addTweenFromNow(1, 0.6f, new Tween.EaseIn(new Tween.MovePoint(menuFg.position_).from(1, menuStartYPos-10).to(1, menuFinalYPos)));
+		tweens.addTweenFromNow(1.5f, 0.6f, new Tween() {
+			@Override
+			public void invoke(float t) {
+				goldCounter.setAlpha(t);
+			}});
 	}
 
 	public void update(float deltaTime) {

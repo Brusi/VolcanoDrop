@@ -22,11 +22,11 @@ public class MainShopMenuButton extends MenuButton {
 	public void render(Batch batch) {
 		Sprite bgSprite = Assets.mainShopBg;
 		if (isPressed()) {
-			bgSprite.setScale(0.9f);
-			sprite.setScale(0.95f);
+			bgSprite.setScale(0.9f * scale_);
+			sprite.setScale(0.95f* scale_);
 		} else {
-			bgSprite.setScale(1f);
-			sprite.setScale(1f);
+			bgSprite.setScale(1f* scale_);
+			sprite.setScale(1f* scale_);
 		}
 		
 		bgSprite.setAlpha(alpha_);
