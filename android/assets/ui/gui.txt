@@ -1,117 +1,138 @@
 gui.png
-size: 1805, 176
+size: 512, 969
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-GUI_MovementControls_Jump_body
-  rotate: false
-  xy: 2, 2
-  size: 103, 103
-  orig: 103, 103
-  offset: 0, 0
-  index: -1
-GUI_MovementControls_Jump_up_click
-  rotate: false
-  xy: 107, 2
-  size: 73, 73
-  orig: 73, 73
-  offset: 0, 0
-  index: -1
-GUI_MovementControls_LeftRight_body
-  rotate: false
-  xy: 182, 2
-  size: 206, 116
-  orig: 206, 116
-  offset: 0, 0
-  index: -1
-GUI_MovementControls_LeftRight_left_click
-  rotate: false
-  xy: 390, 2
-  size: 83, 74
-  orig: 83, 74
-  offset: 0, 0
-  index: -1
-GUI_MovementControls_LeftRight_right_click
-  rotate: false
-  xy: 475, 2
-  size: 83, 74
-  orig: 83, 74
-  offset: 0, 0
-  index: -1
-GUI_buttons_pause
-  rotate: false
-  xy: 560, 2
-  size: 166, 171
-  orig: 166, 171
-  offset: 0, 0
-  index: -1
-GUI_buttons_pause_click
-  rotate: false
-  xy: 728, 2
-  size: 166, 171
-  orig: 166, 171
-  offset: 0, 0
-  index: -1
 GUI_warnings_excmark
   rotate: false
-  xy: 896, 2
+  xy: 2, 2
   size: 14, 35
   orig: 14, 35
   offset: 0, 0
   index: -1
+gui_score_gold_icon
+  rotate: false
+  xy: 18, 2
+  size: 42, 42
+  orig: 42, 42
+  offset: 0, 0
+  index: -1
 GUI_warnings_skull
   rotate: false
-  xy: 912, 2
+  xy: 62, 2
   size: 64, 58
   orig: 64, 58
   offset: 0, 0
   index: -1
 gui_powerups_magnet
   rotate: false
-  xy: 978, 2
+  xy: 128, 2
   size: 85, 85
   orig: 85, 85
-  offset: 0, 0
-  index: -1
-gui_powerups_magnet_on
-  rotate: false
-  xy: 1065, 2
-  size: 172, 172
-  orig: 172, 172
-  offset: 0, 0
-  index: -1
-gui_powerups_shield
-  rotate: false
-  xy: 1239, 2
-  size: 85, 85
-  orig: 85, 85
-  offset: 0, 0
-  index: -1
-gui_powerups_shield_on
-  rotate: false
-  xy: 1326, 2
-  size: 172, 172
-  orig: 172, 172
   offset: 0, 0
   index: -1
 gui_powerups_timebend
   rotate: false
-  xy: 1500, 2
+  xy: 215, 2
   size: 85, 85
   orig: 85, 85
   offset: 0, 0
   index: -1
-gui_powerups_timebend_on
+gui_powerups_shield
   rotate: false
-  xy: 1587, 2
+  xy: 302, 2
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: -1
+GUI_MovementControls_LeftRight_right_cilck
+  rotate: false
+  xy: 2, 89
+  size: 174, 118
+  orig: 174, 118
+  offset: 0, 0
+  index: -1
+GUI_MovementControls_LeftRight_right
+  rotate: false
+  xy: 178, 89
+  size: 174, 118
+  orig: 174, 118
+  offset: 0, 0
+  index: -1
+GUI_MovementControls_LeftRight_left_click
+  rotate: false
+  xy: 2, 209
+  size: 174, 118
+  orig: 174, 118
+  offset: 0, 0
+  index: -1
+GUI_MovementControls_LeftRight_left
+  rotate: false
+  xy: 178, 209
+  size: 174, 118
+  orig: 174, 118
+  offset: 0, 0
+  index: -1
+GUI_MovementControls_LeftRight_body
+  rotate: false
+  xy: 2, 329
+  size: 355, 126
+  orig: 355, 126
+  offset: 0, 0
+  index: -1
+GUI_MovementControls_Jump_body
+  rotate: false
+  xy: 359, 329
+  size: 129, 138
+  orig: 129, 138
+  offset: 0, 0
+  index: -1
+GUI_MovementControls_Jump_body_click
+  rotate: false
+  xy: 2, 469
+  size: 129, 138
+  orig: 129, 138
+  offset: 0, 0
+  index: -1
+GUI_MovementControls_LeftRight_frame
+  rotate: false
+  xy: 133, 469
+  size: 362, 150
+  orig: 362, 150
+  offset: 0, 0
+  index: -1
+GUI_buttons_pause_click
+  rotate: false
+  xy: 2, 621
+  size: 166, 171
+  orig: 166, 171
+  offset: 0, 0
+  index: -1
+GUI_buttons_pause
+  rotate: false
+  xy: 170, 621
+  size: 166, 171
+  orig: 166, 171
+  offset: 0, 0
+  index: -1
+gui_powerups_magnet_on
+  rotate: false
+  xy: 338, 621
   size: 172, 172
   orig: 172, 172
   offset: 0, 0
   index: -1
-gui_score_gold_icon
+gui_powerups_timebend_on
   rotate: false
-  xy: 1761, 2
-  size: 42, 42
-  orig: 42, 42
+  xy: 2, 795
+  size: 172, 172
+  orig: 172, 172
+  offset: 0, 0
+  index: -1
+gui_powerups_shield_on
+  rotate: false
+  xy: 176, 795
+  size: 172, 172
+  orig: 172, 172
   offset: 0, 0
   index: -1
