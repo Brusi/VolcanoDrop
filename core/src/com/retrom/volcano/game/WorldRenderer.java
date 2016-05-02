@@ -70,6 +70,7 @@ import com.retrom.volcano.game.objects.Spitter;
 import com.retrom.volcano.game.objects.TopFireball;
 import com.retrom.volcano.game.objects.Wall;
 import com.retrom.volcano.utils.BatchUtils;
+import com.sun.org.apache.regexp.internal.recompile;
 
 public class WorldRenderer {
 	static final public float FRUSTUM_WIDTH = 640;
@@ -114,7 +115,6 @@ public class WorldRenderer {
 			}
 
 			cam.position.y = snapToY(cam_position);
-			
 			cam.position.x = world.quakeX;
 			cam.update();
 			batch.setProjectionMatrix(cam.combined);
@@ -122,15 +122,17 @@ public class WorldRenderer {
 		
 		renderBackground();
 		renderObjects();
+		renderLava();
 		renderOverlay();
 		if (Gdx.input.isKeyJustPressed(Input.Keys.PLUS)) {
 			offset += 1;
 		}
 	}
+
 	public float offset = 0;
 
 	private void renderOverlay() {
-		if (world.slomoTime <= 0) {
+		if (world.slomoTime <= 0 && world.lava_ == null) {
 			return;
 		}
 		float alpha = 
@@ -142,10 +144,24 @@ public class WorldRenderer {
 	    Gdx.gl.glEnable(GL20.GL_BLEND);
 		shapeRenderer.setProjectionMatrix(cam.combined);
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(1, 0, 1, alpha);
-		shapeRenderer.rect(- FRUSTUM_WIDTH / 2, - FRUSTUM_HEIGHT + world.camTarget, FRUSTUM_WIDTH, FRUSTUM_HEIGHT * 2);
+		if (alpha > 0) {
+			shapeRenderer.setColor(1, 0, 1, alpha);
+			shapeRenderer.rect(- FRUSTUM_WIDTH / 2, - FRUSTUM_HEIGHT + world.camTarget, FRUSTUM_WIDTH, FRUSTUM_HEIGHT * 2);
+		}
 		shapeRenderer.end();
 		return;
+	}
+	
+	private void renderLava() {
+		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+	    Gdx.gl.glEnable(GL20.GL_BLEND);
+		shapeRenderer.setProjectionMatrix(cam.combined);
+		shapeRenderer.begin(ShapeType.Filled);
+		if (world.lava_ != null) {
+			world.lava_.cam_y = cam.position.y;
+			world.lava_.render(batch, shapeRenderer);
+		}
+		shapeRenderer.end();
 	}
 
 	private static float snapToPixels(float cam_position) {
@@ -269,6 +285,7 @@ public class WorldRenderer {
 		renderEnemies();
 		renderGoldSacks();
 		renderCoins();
+		renderRelic();
 		renderFloor();
 		
 		drawPillar(world.background.leftPillar, -PILLAR_POS, world.background.leftBaseY(), false);
@@ -280,6 +297,12 @@ public class WorldRenderer {
 		BatchUtils.setBlendFuncAdd(batch);
 		renderEffects(world.addEffects);
 		batch.end();
+	}
+
+	private void renderRelic() {
+		if (world.relic_ != null) {
+			world.relic_.render(batch);
+		}
 	}
 
 	private void renderPillarBg() {
@@ -810,11 +833,11 @@ public class WorldRenderer {
 		}
 	}
 	
-	private Sprite getFrameLoop(Array<Sprite> anim, float stateTime) {
+	public static Sprite getFrameLoop(Array<Sprite> anim, float stateTime) {
 		return getFrameLoop(anim, stateTime, FPS);
 	}
 	
-	private Sprite getFrameLoop(Array<Sprite> anim, float stateTime, float fps) {
+	public static Sprite getFrameLoop(Array<Sprite> anim, float stateTime, float fps) {
 		return anim.get((int) (stateTime * fps) % anim.size);
 	}
 	

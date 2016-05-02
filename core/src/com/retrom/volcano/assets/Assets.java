@@ -47,6 +47,10 @@ public class Assets {
 	public static Sprite background;
 	public static Sprite floor;
 	
+	public static Array<Sprite> bodyBubble;
+	public static Array<Sprite> surfaceBubble;
+	public static Array<Sprite> bubbleParticle;
+	
 	public static Array<Sprite> bg_world1;
 	public static Array<Sprite> bg_overlay_world1;
 	
@@ -85,6 +89,9 @@ public class Assets {
 	public static Array<Sprite> coin5_3_land;
 	public static Sprite coin5_4;
 	public static Array<Sprite> coin5_4_land;
+	
+	public static Sprite relic;
+	public static Array<Sprite> relic_loop;
 	
 	public static Sprite goldSackIdle;
 	public static Sprite goldSackFalling;
@@ -365,6 +372,11 @@ public class Assets {
 		setFilterNearest(pillars_hole_bg);
 		floor = environmentSheet.createSprite("floor");
 		setFilterNearest(floor);
+		
+		bodyBubble = environmentSheet.createSprites("lava_bodybubble");
+		surfaceBubble = environmentSheet.createSprites("lava_surfacebubble");
+		bubbleParticle = environmentSheet.createSprites("lava_bubble_particle");
+		
 		background = environmentSheet.createSprite("bg_base");
 		setFilterNearest(background);
 		
@@ -432,6 +444,9 @@ public class Assets {
 		coin5_2_land = treasure.createSprites("coin_5_2_land/coin5_2_land");
 		coin5_3_land = treasure.createSprites("coin_5_3_land/coin5_3_land");
 		coin5_4_land = treasure.createSprites("coin_5_4_land/coin5_4_land");
+		
+		relic = treasure.createSprite("Relic");
+		relic_loop = treasure.createSprites("relic_loop");
 		
 		Array<Sprite> gold_sack_sprites = treasure.createSprites("gold_sack");
 		goldSackIdle = gold_sack_sprites.get(0);
@@ -585,8 +600,8 @@ public class Assets {
 		jumpControl = guiSheet.createSprite("GUI_MovementControls_Jump_body");
 		
 		leftControlOn = guiSheet.createSprite("GUI_MovementControls_LeftRight_left_click");
-		rightControlOn = guiSheet.createSprite("GUI_MovementControls_LeftRight_right_click");
-		jumpControlOn = guiSheet.createSprite("GUI_MovementControls_Jump_up_click");
+		rightControlOn = guiSheet.createSprite("GUI_MovementControls_LeftRight_right_cilck");
+		jumpControlOn = guiSheet.createSprite("GUI_MovementControls_Jump_body_click");
 		
 		scoreFont = new BitmapFont(Gdx.files.internal("ui/font/volcano_score.fnt"), false);
 		timeFont = new BitmapFont(Gdx.files.internal("ui/font/volcano_time.fnt"), false);

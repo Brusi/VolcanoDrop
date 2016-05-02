@@ -65,6 +65,10 @@ public class SoundAssets {
 	
 	public static Sound shopClick;
 	
+	public static Sound[] rockLava;
+	
+	public static Sound coinLava;
+	
 	private static Random rand = new Random();
 
 	
@@ -151,6 +155,9 @@ public class SoundAssets {
 		warning = newSound("warning.wav");
 		
 		shopClick = newSound("menus_shop_click.wav");
+		
+		rockLava = new Sound[] { newSound("x1_rock_lava1.wav"), newSound("x1_rock_lava2.wav") };
+		coinLava = newSound("coins_burned.wav");
 	}
 	
 	public static long playSound (Sound sound) {

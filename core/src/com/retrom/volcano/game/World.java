@@ -19,8 +19,10 @@ package com.retrom.volcano.game;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -68,6 +70,7 @@ import com.retrom.volcano.game.objects.Enemy;
 import com.retrom.volcano.game.objects.Flame;
 import com.retrom.volcano.game.objects.FlamethrowerWall;
 import com.retrom.volcano.game.objects.GoldSack;
+import com.retrom.volcano.game.objects.Relic;
 import com.retrom.volcano.game.objects.SideFireball;
 import com.retrom.volcano.game.objects.Spitter;
 import com.retrom.volcano.game.objects.TopFireball;
@@ -102,6 +105,10 @@ public class World {
 	
 	public ActiveFloors floors_ = new ActiveFloors();
 	
+	public Lava lava_ = new Lava();
+	
+	public Relic relic_ = new Relic();
+	
 	private final Spawner spawner_;
 	private final EventQueue worldEvents_ = new EventQueue();
 	
@@ -110,7 +117,6 @@ public class World {
 	final EventQueue pauseEffectEvents = new EventQueue();
 	final public List<Effect> pauseEffects = new ArrayList<Effect>();
 	float pauseEffectStateTime_;
-	
 	
 	// Powerup time counters.
 	float magnetTime = 0f;
@@ -158,6 +164,12 @@ public class World {
 	private static float QUAKE_DURATION = 2.6f;
 	
 	public float gameTime = 0;
+	
+	enum State {
+		BEFORE_START,
+		GAME,
+	}
+	State gameState = State.BEFORE_START;
 
 	private float slomoRatio_;
 
@@ -166,10 +178,8 @@ public class World {
 	}
 	
 	public World (WorldListener listener) {
-		SoundAssets.startMusic();
-		
 		this.listener_ = listener;
-		this.player = new Player(0, 200, new Player.HitRectHandler() {
+		this.player = new Player(-200, 200, new Player.HitRectHandler() {
 			@Override
 			public void handle(Rectangle rect) {
 				if (shieldTime <= 0) {
@@ -275,7 +285,9 @@ public class World {
 			}
 		});
 		
-		setGameTime(spawner_.levels.start_time);
+		if (spawner_.levels.start_time != 0) {
+			setGameTime(spawner_.levels.start_time);
+		}
 		
 //		worldEvents_.addEventFromNow(2f, new EventQueue.Event() {
 //			@Override
@@ -335,7 +347,7 @@ public class World {
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
-			startSmallQuake();
+			startQuake();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.U)) {
 			screenEffects.add(new DustEffect(new Vector2(100,100)));
@@ -398,9 +410,20 @@ public class World {
 						xpos *= -1;
 					}
 					screenEffects.add(new DustEffect(new Vector2(xpos, ypos)));
+					//
+					lava_.hitRandom();
 				}
 			});
 		}
+//		int NUM_WAVES = 5;
+//		for (int i=0; i < NUM_WAVES; ++i) {
+//			worldEvents_.addEventFromNow(i * duration / NUM_WAVES, new EventQueue.Event() {
+//				@Override
+//				public void invoke() {
+//					lava_.hitSides();
+//				}
+//			});
+//		}
 	}
 	
 	private void startQuake() {
@@ -438,14 +461,19 @@ public class World {
 			SoundAssets.setPitch(1f);
 		}
 		
-		gameTime += deltaTime;
-		if (gameTime > 5 && gameTime < 90) {
-			background.level = 2;
-		} else if (gameTime >= 90){
-			background.level = 3;
+		if (gameState == State.GAME) {
+			updateSpawner(deltaTime);
+			gameTime += deltaTime;
+			if (gameTime > 5 && gameTime < 90) {
+				background.level = 2;
+			} else if (gameTime >= 90){
+				background.level = 3;
+			}
 		}
 		
 		updateQuake(deltaTime);
+		updateLava(deltaTime);
+		updateRelic(deltaTime);
 		
 		updateCheats();
 		worldEvents_.update(deltaTime);
@@ -466,7 +494,6 @@ public class World {
 		
 		updateCoins(deltaTime);
 		updateGoldSacks(deltaTime);
-		updateSpawner(deltaTime);
 		updatePowerups(deltaTime);
 		updateEffects(deltaTime);
 		
@@ -475,6 +502,57 @@ public class World {
 		
 		leftWall_.y = player.bounds.y - leftWall_.height/2;
 		rightWall_.y = player.bounds.y - rightWall_.height/2;
+	}
+	
+	private void updateRelic(float deltaTime) {
+		if (relic_ == null) {
+			return;
+		}
+		relic_.update(deltaTime);
+		if (player.bounds.overlaps(relic_.bounds)) {
+			// TODO: add effects.
+			relic_ = null;
+			startGame();
+		}
+	}
+
+	private void startGame() {
+		gameState = State.GAME;
+		setGameTime(0);
+	}
+
+	private Set<Wall> underlava = new HashSet<Wall>();
+
+	private void updateLava(float deltaTime) {
+		lava_.setHeight(Math.min(gameTime * 5, 70));
+		lava_.update(deltaTime);
+		
+		// TODO: do not kill when just touching but make some smoke effect.
+		if (player.isAlive() && player.position.y - player.bounds.height / 2 < lava_.finalY()) {
+			lava_.hitAt(player.position.x, player.velocity.y / 3, player.bounds.width);
+			if (godMode_)
+				player.revive();
+			else {
+				player.killByBurn();
+			}
+		} 
+		for (Wall wall : activeWalls_) {
+			if (!underlava.contains(wall) && wall.position.y - wall.bounds.height / 1.5f < lava_.finalY()) {
+				underlava.add(wall);
+				lava_.hitAt(wall.position.x, wall.velocity.y / 3, wall.bounds.width);
+				if (wall.velocity.len() > 0.1f) {
+					SoundAssets.playRandomSound(SoundAssets.rockLava);
+				}
+			}
+		}
+		for (Collectable coin : collectables_) {
+			if (coin.position.y < lava_.finalY()) {
+				lava_.hitAt(coin.position.x, coin.velocity.y / 3, coin.bounds.width);
+				coin.setState(Collectable.STATUS_TAKEN);
+				addSmoke(coin.position.x, coin.position.y);
+				SoundAssets.playSound(SoundAssets.coinLava);
+			}
+		}
 	}
 
 	private void updateQuake(float deltaTime) {
@@ -932,6 +1010,7 @@ public class World {
 			Wall wall = it.next();
 			if (wall.status() == Wall.STATUS_INACTIVE || wall.status() == Wall.STATUS_GONE) {
 				it.remove();
+				underlava.remove(wall);
 			}
 		}
 		
@@ -1327,6 +1406,7 @@ public class World {
 	}
 	
 	public void unpause() {
+		System.out.println("unpause");
 		if (slomoTime <= 0) {
 			SoundAssets.resumeMusicAt(gameTime);
 		}
