@@ -31,7 +31,7 @@ public abstract class Effect {
 		
 		stateTime_ += deltaTime;
 		if (stateTime_ > duration_) {
-			state_ = STATE_DONE;
+			destroy();
 		}
 		
 		childSpecificUpdating(deltaTime);
@@ -63,7 +63,19 @@ public abstract class Effect {
 		return 1f;
 	}
 	
+	public float getXScale() {
+		return getScale();
+	}
+	
+	public float getYScale() {
+		return getScale();
+	}
+	
 	public float getTint() {
+		return 1f;
+	}
+	
+	public float getAlpha() {
 		return 1f;
 	}
 	
@@ -74,4 +86,5 @@ public abstract class Effect {
 	public void advanceStateTime(float stateTime) {
 		stateTime_ = Math.max(stateTime_, stateTime);
 	}
+	
 }

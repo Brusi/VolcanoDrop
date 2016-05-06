@@ -122,7 +122,6 @@ public class WorldRenderer {
 		
 		renderBackground();
 		renderObjects();
-		renderLava();
 		renderOverlay();
 		if (Gdx.input.isKeyJustPressed(Input.Keys.PLUS)) {
 			offset += 1;
@@ -160,6 +159,18 @@ public class WorldRenderer {
 		if (world.lava_ != null) {
 			world.lava_.cam_y = cam.position.y;
 			world.lava_.render(batch, shapeRenderer);
+		}
+		shapeRenderer.end();
+	}
+	
+	private void renderLavaTop() {
+		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+	    Gdx.gl.glEnable(GL20.GL_BLEND);
+		shapeRenderer.setProjectionMatrix(cam.combined);
+		shapeRenderer.begin(ShapeType.Filled);
+		if (world.lava_ != null) {
+			world.lava_.cam_y = cam.position.y;
+			world.lava_.renderTop(batch, shapeRenderer);
 		}
 		shapeRenderer.end();
 	}
@@ -290,6 +301,11 @@ public class WorldRenderer {
 		
 		drawPillar(world.background.leftPillar, -PILLAR_POS, world.background.leftBaseY(), false);
 		drawPillar(world.background.rightPillar, PILLAR_POS, world.background.rightBaseY(), true);
+
+		batch.end();
+		renderLava();
+		batch.enableBlending();
+		batch.begin();
 		
 		renderEffects(world.effects);
 		BatchUtils.setBlendFuncScreen(batch);
@@ -297,6 +313,8 @@ public class WorldRenderer {
 		BatchUtils.setBlendFuncAdd(batch);
 		renderEffects(world.addEffects);
 		batch.end();
+		
+		renderLavaTop();
 	}
 
 	private void renderRelic() {
@@ -569,8 +587,9 @@ public class WorldRenderer {
 			if (s != null) {
 				s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
 				s.setRotation(e.getRotation());
-				s.setScale(e.getScale());
+				s.setScale(e.getXScale(), e.getYScale());
 				s.setY(snapToY(s.getY()) + tiltY[0]);
+				s.setAlpha(e.getAlpha());
 				s.draw(batch);
 			}
 		}

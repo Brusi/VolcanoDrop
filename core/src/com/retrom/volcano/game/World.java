@@ -28,10 +28,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.effects.BurnParticle;
 import com.retrom.volcano.effects.BurningWallGlow;
+import com.retrom.volcano.effects.CoinBreakParticle;
 import com.retrom.volcano.effects.CoinMagnetGlowEffect;
 import com.retrom.volcano.effects.CoinMagnetStartEffect;
 import com.retrom.volcano.effects.DiamondGlowEffect;
@@ -44,6 +46,9 @@ import com.retrom.volcano.effects.FireballStartEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.FlameGlowEffect;
 import com.retrom.volcano.effects.HotBrickEffect;
+import com.retrom.volcano.effects.LavaBodyBubble;
+import com.retrom.volcano.effects.LavaSurfaceBubble;
+import com.retrom.volcano.effects.LavaSurfaceBubbleParticle;
 import com.retrom.volcano.effects.PlayerMagnetEffect;
 import com.retrom.volcano.effects.PlayerMagnetGlow;
 import com.retrom.volcano.effects.PlayerOnionSkinEffect;
@@ -522,20 +527,60 @@ public class World {
 	}
 
 	private Set<Wall> underlava = new HashSet<Wall>();
+	private boolean playerUnderLava = false;
 
 	private void updateLava(float deltaTime) {
+		if (lava_ == null) {
+			return;
+		}
+		
+		if (Math.random() < deltaTime * 1.5f) {
+			effects.add(new LavaBodyBubble(lava_));
+		}
+		if (Math.random() < deltaTime) {
+			effects.add(new LavaSurfaceBubble(lava_, new LavaSurfaceBubble.OnPopListener() {
+				@Override
+				public void pop(final LavaSurfaceBubble bubble) {
+					worldEvents_.addEventFromNow(0, new EventQueue.Event() {
+						@Override
+						public void invoke() {
+							for (int i=0; i < 4 * bubble.getScale(); i++) {
+								effects.add(EffectFactory.lavaBreakParticle(bubble.position_));
+							}
+						}
+					});
+				}
+			}));
+		}
+		
 		lava_.setHeight(Math.min(gameTime * 5, 70));
 		lava_.update(deltaTime);
 		
 		// TODO: do not kill when just touching but make some smoke effect.
 		if (player.isAlive() && player.position.y - player.bounds.height / 2 < lava_.finalY()) {
-			lava_.hitAt(player.position.x, player.velocity.y / 3, player.bounds.width);
-			if (godMode_)
-				player.revive();
-			else {
-				player.killByBurn();
+			if (!playerUnderLava) {
+				lava_.hitAt(player.position.x, player.velocity.y / 3, player.bounds.width);
+				addSmoke(player.position.x, player.position.y);
+				playerUnderLava = true;
+				SoundAssets.playSound(SoundAssets.coinLava);
 			}
-		} 
+			if (shieldTime > 0) {
+				/// TODO: do some smoky thing?
+			} else { 
+				if (godMode_)
+					player.revive();
+				else {
+					player.killByBurn();
+				}
+			}
+		} else {
+			if (playerUnderLava == true) {
+				lava_.hitAt(player.position.x, player.velocity.y / 3, player.bounds.width);
+				addSmoke(player.position.x, player.position.y);
+				SoundAssets.playSound(SoundAssets.coinLava);
+			}
+			playerUnderLava = false;
+		}
 		for (Wall wall : activeWalls_) {
 			if (!underlava.contains(wall) && wall.position.y - wall.bounds.height / 1.5f < lava_.finalY()) {
 				underlava.add(wall);

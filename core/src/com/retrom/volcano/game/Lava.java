@@ -1,14 +1,8 @@
 package com.retrom.volcano.game;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Vector2;
-import com.retrom.volcano.effects.LavaBodyBubble;
 
 public class Lava {
 	
@@ -19,7 +13,7 @@ public class Lava {
 	private static final float LINE_WIDTH = 8;
 	private static final float CONST_OFFSET = -400f;
 	
-	private static class Node {
+	public static class Node {
 		public final float x;
 		public float y = 0;
 		private float vel_ = 0;
@@ -40,9 +34,6 @@ public class Lava {
 			vel_ *= Math.pow(0.4, deltaTime);
 		}
 	}
-	
-	private final List<LavaBodyBubble> bodyBubbles = new ArrayList<LavaBodyBubble>();
-//	private final List<LavaBodyBubble> surfaceBubbles = new ArrayList<LavaBodyBubble>();
 	
 	private final Node[] nodes;
 	private float height_ = 50;
@@ -71,12 +62,6 @@ public class Lava {
 		
 		for (int i=0; i < nodes.length; i++) {
 			nodes[i].update(deltaTime);
-		}
-		
-		if (Math.random() < deltaTime) {
-			bodyBubbles.add(new LavaBodyBubble(
-					new Vector2(finalY() - 200,
-							    Utils.random2Range(WIDTH / 2 - 50))));
 		}
 	}
 	
@@ -166,9 +151,9 @@ public class Lava {
         	}
 			drawRippleLine(shapes, i, LINE_WIDTH / 2, LINE_WIDTH / 4);
         }
-        
-//        drawBubbles(batch);
-        
+	}
+	
+	public void renderTop(SpriteBatch batch, ShapeRenderer shapes) {
 		// Draw bottomfade.
 		{
 			Color bottomColor = new Color(0.53f, 0, 0, 1);
@@ -178,14 +163,6 @@ public class Lava {
 		}
 	}
 	
-	private void drawBubbles(SpriteBatch batch) {
-		batch.begin();
-		for (LavaBodyBubble bubble : bodyBubbles) {
-			Utils.drawCenter(batch, bubble.sprite(), bubble.position_.x, bubble.position_.y);
-		}
-		batch.end();
-	}
-
 	private void drawRippleLine(ShapeRenderer shapes, int i, float width, float offset) {
 		shapes.rectLine(nodes[i].x, nodes[i].y + finalY() + offset,
 				        nodes[i + 1].x, nodes[i + 1].y + finalY() + offset, width);
@@ -196,8 +173,10 @@ public class Lava {
 
 	// Hit lava at some point and make a ripple in it.
 	public void hitAt(float x, float strength, float width) {
-		int first_i = (int)Math.round((x - width/2 + WIDTH / 2) / SPACING);
-		int last_i = (int)Math.round((x + width/2 + WIDTH / 2) / SPACING);
+		int first_i = Math.max(0,
+				(int) Math.round((x - width / 2 + WIDTH / 2) / SPACING));
+		int last_i = Math.min(nodes.length - 1,
+				(int) Math.round((x + width / 2 + WIDTH / 2) / SPACING));
 		for (int i = first_i; i <= last_i; i++) {
 			//int i = (int)Math.round((x + WIDTH / 2) / SPACING);
 			nodes[i].vel_ = strength / 2;
@@ -213,5 +192,13 @@ public class Lava {
 	public void hitRandom() {
 		int i = Utils.randomInt(nodes.length);
 		nodes[i].vel_ = Utils.random2Range(120);
+	}
+
+	public int getRandomSegmentIndex() {
+		return Utils.randomInt(nodes.length-1);
+	}
+	
+	public Node getNode(int i) {
+		return nodes[i];
 	}
 }

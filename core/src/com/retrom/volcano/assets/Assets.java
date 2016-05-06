@@ -341,9 +341,20 @@ public class Assets {
 		}
 	}
 	
+	public static void setFilterLinear(Array<Sprite> sprites) {
+		for (Sprite sprite : sprites) {
+			setFilterLinear(sprite);
+		}
+	}
+	
 	public static void setFilterNearest(Sprite sprite) {
 		sprite.getTexture().setFilter(Texture.TextureFilter.Nearest,
 				Texture.TextureFilter.Nearest);
+	}
+	
+	public static void setFilterLinear(Sprite sprite) {
+		sprite.getTexture().setFilter(Texture.TextureFilter.MipMapLinearLinear,
+				Texture.TextureFilter.MipMapLinearLinear);
 	}
 
 	public static void load() {
@@ -376,6 +387,9 @@ public class Assets {
 		bodyBubble = environmentSheet.createSprites("lava_bodybubble");
 		surfaceBubble = environmentSheet.createSprites("lava_surfacebubble");
 		bubbleParticle = environmentSheet.createSprites("lava_bubble_particle");
+		
+		setFilterLinear(bodyBubble);
+		setFilterLinear(surfaceBubble);
 		
 		background = environmentSheet.createSprite("bg_base");
 		setFilterNearest(background);

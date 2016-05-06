@@ -129,6 +129,10 @@ public class EffectFactory {
 		}
 		return null;
 	}
+	
+	public static Effect lavaBreakParticle(Vector2 position) {
+		return new LavaParticle(Assets.bubbleParticle, position);
+	}
 
 	public static Effect powerupBackGlow(Type type, Collectable c) {
 		switch (type) {
