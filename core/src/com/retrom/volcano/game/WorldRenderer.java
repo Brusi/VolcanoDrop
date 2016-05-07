@@ -95,7 +95,7 @@ public class WorldRenderer {
 	public WorldRenderer (SpriteBatch batch, World world) {
 		this.world = world;
 		this.cam = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-		cam_position = this.cam.position.y = FRUSTUM_HEIGHT / 3f;
+		cam_position = this.cam.position.y = 3000;
 		this.batch = batch;
 		System.out.println("FRUSTUM_HEIGHT=" + FRUSTUM_HEIGHT);
 	}
@@ -112,6 +112,9 @@ public class WorldRenderer {
 			cam_target = world.camTarget;
 			if (cam_position < cam_target) {
 				cam_position += (cam_target - cam_position) * deltaTime / 2;
+			} else if (cam_position > cam_target + 50) {
+				// Set minimum height
+				cam_position = this.cam.position.y = cam_target + 50;
 			}
 
 			cam.position.y = snapToY(cam_position);
@@ -131,6 +134,8 @@ public class WorldRenderer {
 	public float offset = 0;
 
 	private void renderOverlay() {
+		/**/System.out.println("cam_target="+cam_target);
+		
 		if (world.slomoTime <= 0 && world.lava_ == null) {
 			return;
 		}

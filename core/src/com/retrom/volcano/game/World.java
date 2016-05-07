@@ -53,6 +53,7 @@ import com.retrom.volcano.effects.PlayerMagnetEffect;
 import com.retrom.volcano.effects.PlayerMagnetGlow;
 import com.retrom.volcano.effects.PlayerOnionSkinEffect;
 import com.retrom.volcano.effects.PlayerShieldEffect;
+import com.retrom.volcano.effects.RubbleEffect;
 import com.retrom.volcano.effects.SackFlare;
 import com.retrom.volcano.effects.Score10Effect;
 import com.retrom.volcano.effects.Score15GreenEffect;
@@ -310,7 +311,8 @@ public class World {
 
 	private void updateCheats() {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-			goldSacks_.add(new GoldSack(100, 100, 5));
+			goldSacks_.add(new GoldSack(Utils.xOfCol(Utils.randomInt(6)),
+					topScreenY(), 4));
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
 			dropCoinFromCeiling(0, Collectable.Type.POWERUP_MAGNET);
@@ -323,6 +325,9 @@ public class World {
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
 			dropCoinFromCeiling(0, Collectable.Type.POWERUP_SLOMO);
+		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.K)) {
+			dropRabble();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
 			dropCoinFromCeiling((float) (Math.random() * 200), Collectable.Type.TOKEN);
@@ -377,6 +382,11 @@ public class World {
 		}
 	}
 
+	private void dropRabble() {
+		// TODO: re-adjust top screen y.
+		effects.add(new RubbleEffect(new Vector2(Utils.random2Range(Wall.SIZE * 3), topScreenY() + 50), floors_, lava_));
+	}
+
 	private void addBurnParticle(float base_x, float base_y) {
 		Vector2 dir = Utils.randomDir();
 		float x = base_x + dir.x * Utils.randomRange(10, 35);
@@ -420,15 +430,16 @@ public class World {
 				}
 			});
 		}
-//		int NUM_WAVES = 5;
-//		for (int i=0; i < NUM_WAVES; ++i) {
-//			worldEvents_.addEventFromNow(i * duration / NUM_WAVES, new EventQueue.Event() {
-//				@Override
-//				public void invoke() {
-//					lava_.hitSides();
-//				}
-//			});
-//		}
+		
+		int NUM_RUBBLE = (int) (NUM_DUST / 4 * Utils.randomRange(0.6f, 1));
+		for (int i=0; i < NUM_RUBBLE; ++i) {
+			worldEvents_.addEventFromNow((float)(duration * Math.random()), new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					dropRabble();
+				}
+			});
+		}
 	}
 	
 	private void startQuake() {
@@ -593,9 +604,24 @@ public class World {
 		for (Collectable coin : collectables_) {
 			if (coin.position.y < lava_.finalY()) {
 				lava_.hitAt(coin.position.x, coin.velocity.y / 3, coin.bounds.width);
-				coin.setState(Collectable.STATUS_TAKEN);
+				coin.setState(Collectable.STATUS_CRUSHED);
 				addSmoke(coin.position.x, coin.position.y);
 				SoundAssets.playSound(SoundAssets.coinLava);
+			}
+		}
+		for (GoldSack sack: goldSacks_) {
+			if (sack.state() == GoldSack.STATE_FALLING) {
+				continue;
+			}
+			if (sack.state() != GoldSack.STATE_EMPTY
+					&& sack.state() != GoldSack.STATE_DONE
+					&& sack.position.y - sack.bounds.height < lava_.finalY()) {
+				if (Math.random() < deltaTime * 10) {
+					addBurnParticle(sack.position.x, lava_.finalY());
+				}
+			}
+			if (sack.position.y < lava_.finalY()) {
+				pumpIfCoinsLeft(sack);
 			}
 		}
 	}
@@ -969,24 +995,13 @@ public class World {
 				if (sack.state() == GoldSack.STATE_GROUND) {
 					shouldPumpNow = true;
 				}
-				if (sack.hasCoinsLeft()
-						&& sack.state() == GoldSack.STATE_PUMP
+				if (sack.state() == GoldSack.STATE_PUMP
 						&& deltaTime * Math.abs(player.velocity.len()) > Math
 								.random() * 40 + 2) {
 					shouldPumpNow = true;
 				}
 				if (shouldPumpNow) {
-					sack.pump();
-					float COIN_X_SPEED = 250;
-					float COIN_Y_SPEED = 250;
-					Type type = GoldSack.randomSackCoin();
-					Collectable coin = createCoin(sack.position.x, sack.position.y + 15, type) ;
-					coin.velocity.x = Utils.randomDir().x * COIN_X_SPEED;
-					coin.velocity.y = COIN_Y_SPEED;
-					SoundAssets.playRandomSound(SoundAssets.coinSackHit);
-					if (magnetTime > 0) {
-						addCoinMagnetGlowEffect(coin);
-					}
+					pumpIfCoinsLeft(sack);
 				}
 			}
 			if (sack.state() == GoldSack.STATE_EMPTY && sack.stateTime() > GoldSack.EMPTY_ANIMATION_TIME) {
@@ -1001,6 +1016,22 @@ public class World {
 			GoldSack sack = it.next();
 			if (sack.state() == GoldSack.STATE_DONE) {
 				it.remove();
+			}
+		}
+	}
+
+	private void pumpIfCoinsLeft(GoldSack sack) {
+		if (sack.hasCoinsLeft()) {
+			sack.pump();
+			float COIN_X_SPEED = 250;
+			float COIN_Y_SPEED = 250;
+			Type type = GoldSack.randomSackCoin();
+			Collectable coin = createCoin(sack.position.x, sack.position.y + 15, type) ;
+			coin.velocity.x = Utils.randomDir().x * COIN_X_SPEED;
+			coin.velocity.y = COIN_Y_SPEED;
+			SoundAssets.playRandomSound(SoundAssets.coinSackHit);
+			if (magnetTime > 0) {
+				addCoinMagnetGlowEffect(coin);
 			}
 		}
 	}

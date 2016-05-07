@@ -35,8 +35,14 @@ public class WarningSkullEffect extends OneFrameEffect {
 //		return Math.min(1, stateTime_ / APPEAR_TIME);
 	}
 	
+//	@Override
+//	public float getTint() {
+//		float timeToEnd = DURATION - stateTime_;
+//		return Math.max(0, Math.min(1, timeToEnd / DISAPPEAR_TIME));
+//	}
+	
 	@Override
-	public float getTint() {
+	public float getAlpha() {
 		float timeToEnd = DURATION - stateTime_;
 		return Math.max(0, Math.min(1, timeToEnd / DISAPPEAR_TIME));
 	}
