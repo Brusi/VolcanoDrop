@@ -28,12 +28,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.effects.BurnParticle;
 import com.retrom.volcano.effects.BurningWallGlow;
-import com.retrom.volcano.effects.CoinBreakParticle;
 import com.retrom.volcano.effects.CoinMagnetGlowEffect;
 import com.retrom.volcano.effects.CoinMagnetStartEffect;
 import com.retrom.volcano.effects.DiamondGlowEffect;
@@ -48,7 +46,7 @@ import com.retrom.volcano.effects.FlameGlowEffect;
 import com.retrom.volcano.effects.HotBrickEffect;
 import com.retrom.volcano.effects.LavaBodyBubble;
 import com.retrom.volcano.effects.LavaSurfaceBubble;
-import com.retrom.volcano.effects.LavaSurfaceBubbleParticle;
+import com.retrom.volcano.effects.MagnetTrailParticle;
 import com.retrom.volcano.effects.PlayerMagnetEffect;
 import com.retrom.volcano.effects.PlayerMagnetGlow;
 import com.retrom.volcano.effects.PlayerOnionSkinEffect;
@@ -80,8 +78,8 @@ import com.retrom.volcano.game.objects.Relic;
 import com.retrom.volcano.game.objects.SideFireball;
 import com.retrom.volcano.game.objects.Spitter;
 import com.retrom.volcano.game.objects.TopFireball;
-import com.retrom.volcano.game.objects.WallDual;
 import com.retrom.volcano.game.objects.Wall;
+import com.retrom.volcano.game.objects.WallDual;
 import com.retrom.volcano.game.objects.WallSingle;
 import com.retrom.volcano.utils.EventQueue;
 import com.retrom.volcano.utils.EventQueue.Event;
@@ -111,7 +109,7 @@ public class World {
 	
 	public ActiveFloors floors_ = new ActiveFloors();
 	
-	public Lava lava_ = new Lava();
+	public Lava lava_;
 	
 	public Relic relic_ = new Relic();
 	
@@ -301,6 +299,12 @@ public class World {
 //				startQuake();
 //			}
 //		});
+		
+		createLava();
+	}
+
+	private void createLava() {
+		 lava_ = new Lava();
 	}
 
 	private void setGameTime(float start_time) {
@@ -427,6 +431,7 @@ public class World {
 					screenEffects.add(new DustEffect(new Vector2(xpos, ypos)));
 					//
 					lava_.hitRandom();
+					addLavaSurfaceBubble();
 				}
 			});
 		}
@@ -548,20 +553,8 @@ public class World {
 		if (Math.random() < deltaTime * 1.5f) {
 			effects.add(new LavaBodyBubble(lava_));
 		}
-		if (Math.random() < deltaTime) {
-			effects.add(new LavaSurfaceBubble(lava_, new LavaSurfaceBubble.OnPopListener() {
-				@Override
-				public void pop(final LavaSurfaceBubble bubble) {
-					worldEvents_.addEventFromNow(0, new EventQueue.Event() {
-						@Override
-						public void invoke() {
-							for (int i=0; i < 4 * bubble.getScale(); i++) {
-								effects.add(EffectFactory.lavaBreakParticle(bubble.position_));
-							}
-						}
-					});
-				}
-			}));
+		if (Math.random() < deltaTime * 2f) {
+			addLavaSurfaceBubble();
 		}
 		
 		lava_.setHeight(Math.min(gameTime * 5, 70));
@@ -624,6 +617,22 @@ public class World {
 				pumpIfCoinsLeft(sack);
 			}
 		}
+	}
+
+	private void addLavaSurfaceBubble() {
+		effects.add(new LavaSurfaceBubble(lava_, new LavaSurfaceBubble.OnPopListener() {
+			@Override
+			public void pop(final LavaSurfaceBubble bubble) {
+				worldEvents_.addEventFromNow(0, new EventQueue.Event() {
+					@Override
+					public void invoke() {
+						for (int i=0; i < 4 * bubble.getScale(); i++) {
+							effects.add(EffectFactory.lavaBreakParticle(bubble.position_));
+						}
+					}
+				});
+			}
+		}));
 	}
 
 	private void updateQuake(float deltaTime) {
@@ -1040,6 +1049,11 @@ public class World {
 		for (Wall wall : activeWalls_) {
 			wall.update(deltaTime);
 			
+			if (wall instanceof BurningWall) {
+				if (Math.random() / 20f < deltaTime)
+				addBurnParticle(wall.position.x, wall.position.y);
+			}
+			
 			if (wall.status() == Wall.STATUS_EXPLODE) {
 				wall.setStatus(Wall.STATUS_GONE);
 				if (wall.isDual()) {
@@ -1181,6 +1195,10 @@ public class World {
 						|| c.state() == Collectable.STATUS_IDLE
 						|| c.state() == Collectable.STATUS_MAGNETIZED) {
 					c.magnetTo(player.position, deltaTime);
+				}
+				/// TODO: depend on deltaTime
+				if (Math.random() / 15f < deltaTime) {
+					addEffectsUnder.add(new MagnetTrailParticle(c.position));
 				}
 			}
 

@@ -524,7 +524,7 @@ public class WorldRenderer {
 				public Sprite visit(FireballStartEffect effect) {
 					effect.position_.y = effect.originalY + cam.position.y; 
 					Sprite $ = getFrameStopAtLastFrame(effect.getAnimation(), effect.stateTime());
-					$.setY($.getY() + world.camTarget);
+//					$.setY($.getY() + world.camTarget);
 					return $;
 				}
 				

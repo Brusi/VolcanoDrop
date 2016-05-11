@@ -1,551 +1,642 @@
 magnet.png
-size: 1692, 1054
+size: 1042, 1797
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-powerup_magnet_animated_glow
+powerup_magnet_treasure_spark
   rotate: false
   xy: 2, 2
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 132, 2
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 262, 2
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 392, 2
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 522, 2
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 652, 2
-  size: 128, 128
-  orig: 128, 128
+  size: 85, 85
+  orig: 85, 85
   offset: 0, 0
   index: 5
-powerup_magnet_animated_glow
+powerup_magnet_treasure_spark
   rotate: false
-  xy: 782, 2
-  size: 128, 128
-  orig: 128, 128
+  xy: 89, 2
+  size: 85, 85
+  orig: 85, 85
   offset: 0, 0
   index: 6
-powerup_magnet_animated_glow
+powerup_magnet_treasure_spark
   rotate: false
-  xy: 912, 2
-  size: 128, 128
-  orig: 128, 128
+  xy: 176, 2
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: 4
+powerup_magnet_treasure_spark
+  rotate: false
+  xy: 263, 2
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: 1
+powerup_magnet_treasure_spark
+  rotate: false
+  xy: 350, 2
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: 0
+powerup_magnet_treasure_spark
+  rotate: false
+  xy: 437, 2
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: 3
+powerup_magnet_treasure_spark
+  rotate: false
+  xy: 524, 2
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: 2
+powerup_magnet_treasure_spark
+  rotate: false
+  xy: 611, 2
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: 12
+powerup_magnet_treasure_spark
+  rotate: false
+  xy: 698, 2
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: 11
+powerup_magnet_treasure_spark
+  rotate: false
+  xy: 785, 2
+  size: 85, 85
+  orig: 85, 85
   offset: 0, 0
   index: 7
-powerup_magnet_animated_glow
+powerup_magnet_treasure_spark
   rotate: false
-  xy: 1042, 2
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 8
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 1172, 2
-  size: 128, 128
-  orig: 128, 128
+  xy: 872, 2
+  size: 85, 85
+  orig: 85, 85
   offset: 0, 0
   index: 9
-powerup_magnet_animated_glow
+powerup_magnet_treasure_spark
   rotate: false
-  xy: 1302, 2
-  size: 128, 128
-  orig: 128, 128
+  xy: 2, 89
+  size: 85, 85
+  orig: 85, 85
+  offset: 0, 0
+  index: 8
+powerup_magnet_treasure_spark
+  rotate: false
+  xy: 89, 89
+  size: 85, 85
+  orig: 85, 85
   offset: 0, 0
   index: 10
 powerup_magnet_animated_glow
   rotate: false
-  xy: 1432, 2
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 11
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 1562, 2
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 12
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 2, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 13
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 132, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 14
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 262, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 15
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 392, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 16
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 522, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 17
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 652, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 18
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 782, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 19
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 912, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 20
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 1042, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 21
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 1172, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 22
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 1302, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 23
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 1432, 132
+  xy: 176, 89
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 24
 powerup_magnet_animated_glow
   rotate: false
-  xy: 1562, 132
+  xy: 306, 89
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 23
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 436, 89
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 25
 powerup_magnet_animated_glow
   rotate: false
-  xy: 2, 262
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 26
-powerup_magnet_animated_glow
-  rotate: false
-  xy: 132, 262
+  xy: 566, 89
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 27
 powerup_magnet_animated_glow
   rotate: false
-  xy: 262, 262
+  xy: 696, 89
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 26
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 826, 89
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 29
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 2, 219
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 22
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 132, 219
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 28
 powerup_magnet_animated_glow
   rotate: false
-  xy: 392, 262
+  xy: 262, 219
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 29
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 522, 262
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
   index: 0
-powerup_magnet_animated_glow_die
+powerup_magnet_animated_glow
   rotate: false
-  xy: 652, 262
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 1
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 782, 262
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 2
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 912, 262
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 3
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 1042, 262
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 4
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 1172, 262
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 5
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 1302, 262
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 6
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 1432, 262
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 7
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 1562, 262
-  size: 128, 196
-  orig: 128, 196
+  xy: 392, 219
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: 8
-powerup_magnet_animated_glow_die
+powerup_magnet_animated_glow
   rotate: false
-  xy: 2, 460
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 9
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 132, 460
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 10
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 262, 460
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 11
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 392, 460
-  size: 128, 196
-  orig: 128, 196
+  xy: 522, 219
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: 12
-powerup_magnet_animated_glow_die
+powerup_magnet_animated_glow
   rotate: false
-  xy: 522, 460
-  size: 128, 196
-  orig: 128, 196
+  xy: 652, 219
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 9
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 782, 219
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 11
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 912, 219
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 10
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 2, 349
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 7
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 132, 349
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 262, 349
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 6
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 392, 349
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 522, 349
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 652, 349
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 5
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 782, 349
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 912, 349
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 21
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 2, 479
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: 13
-powerup_magnet_animated_glow_die
+powerup_magnet_animated_glow
   rotate: false
-  xy: 652, 460
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 14
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 782, 460
-  size: 128, 196
-  orig: 128, 196
+  xy: 132, 479
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: 15
-powerup_magnet_animated_glow_die
+powerup_magnet_animated_glow
   rotate: false
-  xy: 912, 460
-  size: 128, 196
-  orig: 128, 196
+  xy: 262, 479
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: 16
-powerup_magnet_animated_glow_die
+powerup_magnet_animated_glow
   rotate: false
-  xy: 1042, 460
-  size: 128, 196
-  orig: 128, 196
+  xy: 392, 479
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 14
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 522, 479
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 20
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 652, 479
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: 17
-powerup_magnet_animated_glow_die
+powerup_magnet_animated_glow
   rotate: false
-  xy: 1172, 460
-  size: 128, 196
-  orig: 128, 196
+  xy: 782, 479
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 19
+powerup_magnet_animated_glow
+  rotate: false
+  xy: 912, 479
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: 18
 powerup_magnet_animated_glow_die
   rotate: false
-  xy: 1302, 460
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 19
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 1432, 460
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 20
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 1562, 460
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 21
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 2, 658
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 22
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 132, 658
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 23
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 262, 658
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 24
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 392, 658
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 25
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 522, 658
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 26
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 652, 658
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 27
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 782, 658
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 28
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 912, 658
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 29
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 1042, 658
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 30
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 1172, 658
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 31
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 1302, 658
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 32
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 1432, 658
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 33
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 1562, 658
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 34
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 2, 856
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 35
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 132, 856
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 36
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 262, 856
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 37
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 392, 856
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 38
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 522, 856
+  xy: 2, 609
   size: 128, 196
   orig: 128, 196
   offset: 0, 0
   index: 39
 powerup_magnet_animated_glow_die
   rotate: false
-  xy: 652, 856
+  xy: 132, 609
   size: 128, 196
   orig: 128, 196
   offset: 0, 0
   index: 40
 powerup_magnet_animated_glow_die
   rotate: false
-  xy: 782, 856
+  xy: 262, 609
   size: 128, 196
   orig: 128, 196
   offset: 0, 0
   index: 41
 powerup_magnet_animated_glow_die
   rotate: false
-  xy: 912, 856
+  xy: 392, 609
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 38
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 522, 609
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 34
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 652, 609
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 37
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 782, 609
   size: 128, 196
   orig: 128, 196
   offset: 0, 0
   index: 42
 powerup_magnet_animated_glow_die
   rotate: false
-  xy: 1042, 856
+  xy: 912, 609
   size: 128, 196
   orig: 128, 196
   offset: 0, 0
-  index: 43
+  index: 36
 powerup_magnet_animated_glow_die
   rotate: false
-  xy: 1172, 856
+  xy: 2, 807
   size: 128, 196
   orig: 128, 196
   offset: 0, 0
-  index: 44
+  index: 35
 powerup_magnet_animated_glow_die
   rotate: false
-  xy: 1302, 856
-  size: 128, 196
-  orig: 128, 196
-  offset: 0, 0
-  index: 45
-powerup_magnet_animated_glow_die
-  rotate: false
-  xy: 1432, 856
+  xy: 132, 807
   size: 128, 196
   orig: 128, 196
   offset: 0, 0
   index: 46
 powerup_magnet_animated_glow_die
   rotate: false
-  xy: 1562, 856
+  xy: 262, 807
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 43
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 392, 807
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 2
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 522, 807
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 0
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 652, 807
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 1
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 782, 807
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 3
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 912, 807
   size: 128, 196
   orig: 128, 196
   offset: 0, 0
   index: 47
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 2, 1005
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 44
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 132, 1005
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 4
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 262, 1005
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 45
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 392, 1005
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 33
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 522, 1005
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 12
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 652, 1005
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 32
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 782, 1005
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 13
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 912, 1005
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 15
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 2, 1203
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 16
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 132, 1203
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 14
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 262, 1203
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 11
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 392, 1203
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 5
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 522, 1203
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 10
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 652, 1203
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 6
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 782, 1203
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 8
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 912, 1203
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 9
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 2, 1401
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 7
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 132, 1401
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 17
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 262, 1401
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 27
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 392, 1401
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 18
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 522, 1401
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 28
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 652, 1401
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 30
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 782, 1401
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 31
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 912, 1401
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 29
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 2, 1599
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 26
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 132, 1599
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 19
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 262, 1599
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 20
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 392, 1599
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 25
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 522, 1599
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 21
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 652, 1599
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 23
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 782, 1599
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 24
+powerup_magnet_animated_glow_die
+  rotate: false
+  xy: 912, 1599
+  size: 128, 196
+  orig: 128, 196
+  offset: 0, 0
+  index: 22

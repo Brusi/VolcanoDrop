@@ -41,6 +41,11 @@ public class Utils {
 		return new Vector2((float)Math.cos(angle), (float)Math.sin(angle));
 	}
 	
+	public static Vector2 randomDir30Up() {
+		double angle = Utils.randomRange((float) Math.PI / 3, 2 * (float) Math.PI / 3);
+		return new Vector2((float)Math.cos(angle), (float)Math.sin(angle));
+	}
+	
 	// Returns a random float between -limit and +limit.
 	public static float random2Range(float limit) {
 		return randomRange(-limit, limit); 

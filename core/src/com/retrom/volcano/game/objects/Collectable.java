@@ -135,7 +135,7 @@ public class Collectable extends DynamicGameObject {
 	}
 
 	private float getMagnetForce() {
-		return MAGNETIZED_FORCE * 1.2f;
+		return MAGNETIZED_FORCE;
 	}
 
 	public int state() {

@@ -18,7 +18,7 @@ public class LavaBodyBubble extends OneFrameEffect {
 	
 	private float scale_ = Utils.randomRange(0.5f, 1f);
 
-	private float up_vel = Utils.randomRange(40, 80);
+	private float up_vel = Utils.randomRange(20, 60);
 
 	private float phase_ = Utils.randomRange(0.8f, 1f);
 

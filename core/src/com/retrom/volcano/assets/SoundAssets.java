@@ -66,8 +66,8 @@ public class SoundAssets {
 	public static Sound shopClick;
 	
 	public static Sound[] rockLava;
-	
 	public static Sound coinLava;
+	public static Sound[] lavaBubble;
 	
 	private static Random rand = new Random();
 
@@ -158,20 +158,32 @@ public class SoundAssets {
 		
 		rockLava = new Sound[] { newSound("x1_rock_lava1.wav"), newSound("x1_rock_lava2.wav") };
 		coinLava = newSound("coins_burned.wav");
+		lavaBubble = new Sound[] { newSound("lava_bubble_1.wav"),
+				                   newSound("lava_bubble_2.wav"),
+				                   newSound("lava_bubble_3.wav"),
+				                   newSound("lava_bubble_4.wav") };
 	}
 	
-	public static long playSound (Sound sound) {
+	public static long playSound (Sound sound, float volume) {
 		if (!Settings.soundEnabled.on())
 			return 0;
-		long id = sound.play(1);
+		long id = sound.play(volume);
 		currentlyPlaying.add(sound, id);
 		sound.setPitch(id, pitch);
 		return id;
 	}
 	
+	public static long playSound(Sound sound) {
+		return playSound(sound, 1);
+	}
+	
 	public static void playRandomSound(Sound[] sounds) {
+		playRandomSound(sounds, 1);
+	}
+	
+	public static void playRandomSound(Sound[] sounds, float volume) {
 		int index = rand.nextInt(sounds.length);
-		playSound(sounds[index]);
+		playSound(sounds[index], volume);
 	}
 	
 	private static Sound newSound(String filename) {

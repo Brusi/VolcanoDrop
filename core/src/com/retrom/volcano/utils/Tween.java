@@ -60,4 +60,20 @@ public interface Tween {
 			point.y = from_y * (1 - t) + to_y * t;
 		}
 	}
+	
+	public static class Bounce implements Tween {
+		private final Tween tween;
+
+		public Bounce(Tween tween) {
+			this.tween = tween;
+		}
+
+		@Override
+		public void invoke(float t) {
+			if (t < 0.5f) {
+			}
+			
+			tween.invoke(1-(1-t)*(1-t));
+		}
+	}
 }

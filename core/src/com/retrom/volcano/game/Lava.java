@@ -16,7 +16,7 @@ public class Lava {
 	public static class Node {
 		public final float x;
 		public float y = 0;
-		private float vel_ = 0;
+		public float vel_ = 0;
 		
 		private float force_ = 0;
 		
@@ -194,8 +194,8 @@ public class Lava {
 		nodes[i].vel_ = Utils.random2Range(120);
 	}
 
-	public int getRandomSegmentIndex() {
-		return Utils.randomInt(nodes.length-1);
+	public int getRandomSegmentIndexForSurfaceBubbles() {
+		return Utils.randomInt(nodes.length-5) + 2;
 	}
 	
 	public Node getNode(int i) {
