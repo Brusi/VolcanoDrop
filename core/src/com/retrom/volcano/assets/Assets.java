@@ -23,10 +23,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.game.Utils;
-import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
 public class Assets {
 	public static CostumeAssets defaultCostume;
@@ -58,6 +56,9 @@ public class Assets {
 	public static Array<Sprite> bg_overlay_world2;
 	
 	public static Array<Sprite> bg_world3;
+	
+	public static Sprite title;
+	public static Sprite tapToStart;
 	
 	public static Sprite coin1_1;
 	public static Array<Sprite> coin1_1_land;
@@ -408,6 +409,10 @@ public class Assets {
 		setFilterNearest(bg_overlay_world2);
 		bg_world3 = environmentSheet2.createSprites("bg_world3");
 		setFilterNearest(bg_world3);
+		
+		TextureAtlas openingSheet = new TextureAtlas("walls/opening.txt");
+		title = openingSheet.createSprite("openingscreen_title");
+		tapToStart = openingSheet.createSprite("openingscreen_text_tap");
 		
 		TextureAtlas treasure = new TextureAtlas("treasure/treasure.txt");
 		

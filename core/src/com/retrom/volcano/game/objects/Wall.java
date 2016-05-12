@@ -70,4 +70,8 @@ public class Wall extends DynamicGameObject {
 	public boolean isDual() {
 		return false;
 	}
+	
+	public int getHeight() {
+		return 1;
+	}
 }

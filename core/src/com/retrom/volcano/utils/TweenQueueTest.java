@@ -71,6 +71,16 @@ public class TweenQueueTest {
 	}
 	
 	@Test
+	public void testBounce() {
+		tq.addTweenFromNow(0, 1, new Tween.Bounce(tween));
+		System.out.println(""+target[0]);
+		for (int i=0; i < 100; i++) {
+			tq.update(1f / 100);
+			System.out.println(""+target[0]);
+		}
+	}
+	
+	@Test
 	public void testLongTime() {
 		tq.addTweenFromNow(0, 2, tween);
 		assertEquals(0, target[0], EPSILON);

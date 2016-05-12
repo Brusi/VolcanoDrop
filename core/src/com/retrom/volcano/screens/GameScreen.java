@@ -5,8 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.data.ShopData;
@@ -14,13 +12,11 @@ import com.retrom.volcano.game.Settings;
 import com.retrom.volcano.game.World;
 import com.retrom.volcano.game.World.WorldListener;
 import com.retrom.volcano.game.WorldRenderer;
+import com.retrom.volcano.menus.Fade;
 import com.retrom.volcano.menus.PauseMenu;
 import com.retrom.volcano.menus.PauseMenu.Command;
 import com.retrom.volcano.ui.GameUiRenderer;
 import com.retrom.volcano.ui.Hub;
-import com.retrom.volcano.ui.PowerupUiRenderer;
-import com.retrom.volcano.utils.BatchUtils;
-import com.retrom.volcano.utils.TouchToPoint;
 
 public class GameScreen extends ScreenAdapter implements Screen {
 	

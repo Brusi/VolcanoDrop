@@ -48,7 +48,7 @@ public class Fade {
 	    shapes.begin(ShapeType.Filled);
 	    color_.set(color_.r, color_.g, color_.b, alpha_);
 	    shapes.setColor(color_);
-	    shapes.rect(- FRUSTUM_WIDTH / 2, - FRUSTUM_HEIGHT / 2, FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+	    shapes.rect(- FRUSTUM_WIDTH, - FRUSTUM_HEIGHT, FRUSTUM_WIDTH*2, FRUSTUM_HEIGHT*2);
 	    shapes.end();
 	}
 	

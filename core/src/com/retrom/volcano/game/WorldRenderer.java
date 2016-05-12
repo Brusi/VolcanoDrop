@@ -65,14 +65,18 @@ import com.retrom.volcano.game.objects.Enemy;
 import com.retrom.volcano.game.objects.Flame;
 import com.retrom.volcano.game.objects.FlamethrowerWall;
 import com.retrom.volcano.game.objects.GoldSack;
+import com.retrom.volcano.game.objects.OpeningScene;
 import com.retrom.volcano.game.objects.SideFireball;
 import com.retrom.volcano.game.objects.Spitter;
+import com.retrom.volcano.game.objects.StackWall;
 import com.retrom.volcano.game.objects.TopFireball;
 import com.retrom.volcano.game.objects.Wall;
+import com.retrom.volcano.menus.Fade;
 import com.retrom.volcano.utils.BatchUtils;
 import com.sun.org.apache.regexp.internal.recompile;
 
 public class WorldRenderer {
+	private static final float INITIAL_CAM_POSITION = -400;
 	static final public float FRUSTUM_WIDTH = 640;
 	static final public float FRUSTUM_HEIGHT = FRUSTUM_WIDTH / Gdx.graphics.getWidth() * Gdx.graphics.getHeight();
 	
@@ -91,11 +95,11 @@ public class WorldRenderer {
 	private float cam_target;
 	private float cam_position;
 	private ShapeRenderer shapeRenderer = new ShapeRenderer();
-
+	
 	public WorldRenderer (SpriteBatch batch, World world) {
 		this.world = world;
 		this.cam = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-		cam_position = this.cam.position.y = 3000;
+		cam_position = World.OPENING_CAM_OFFSET;
 		this.batch = batch;
 		System.out.println("FRUSTUM_HEIGHT=" + FRUSTUM_HEIGHT);
 	}
@@ -110,12 +114,12 @@ public class WorldRenderer {
 
 		if (!isPaused) {
 			cam_target = world.camTarget;
-			if (cam_position < cam_target) {
+//			if (cam_position < cam_target) {
 				cam_position += (cam_target - cam_position) * deltaTime / 2;
-			} else if (cam_position > cam_target + 50) {
-				// Set minimum height
-				cam_position = this.cam.position.y = cam_target + 50;
-			}
+//			} else if (cam_position > cam_target + 50) {
+//				// Set minimum height
+////				cam_position = this.cam.position.y = cam_target + 50;
+//			}
 
 			cam.position.y = snapToY(cam_position);
 			cam.position.x = world.quakeX;
@@ -129,6 +133,21 @@ public class WorldRenderer {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.PLUS)) {
 			offset += 1;
 		}
+		
+		renderOpening();
+	}
+
+	private void renderOpening() {
+		OpeningScene opening = world.opening;
+		if (opening != null) {
+			BatchUtils.setBlendFuncNormal(batch);
+			batch.begin();
+			opening.render(batch);
+			batch.end();
+
+			opening.fade.render(shapeRenderer);
+		}
+		
 	}
 
 	public float offset = 0;
@@ -609,39 +628,48 @@ public class WorldRenderer {
 	private void renderWalls() {
 		for (Wall wall : world.walls_) {
 			float y = wall.position.y;
-			TextureRegion keyFrame = null;
-			if (wall instanceof BurningWall) {
+			// TODO: reuse array for performence.
+			TextureRegion[] keyFrame = new TextureRegion[1];
+			if (wall instanceof StackWall) {
+				StackWall sw = (StackWall)wall;
+				keyFrame = new TextureRegion[wall.getHeight()];
+				for (int i=0; i < keyFrame.length; i++) {
+					keyFrame[i] = Assets.walls1.get(sw.graphics_[i]);
+				}
+			} else if (wall instanceof BurningWall) {
 				if (wall.status() == Wall.STATUS_ACTIVE) {
 					if (wall.stateTime() < BurningWall.TIME_WITHOUT_BURN) {
-						keyFrame = Assets.burningWall;
+						keyFrame[0] = Assets.burningWall;
 					} else if (wall.stateTime() < BurningWall.TIME_START){
-						keyFrame = getFrameStopAtLastFrame(Assets.burningWallStart, wall.stateTime() - BurningWall.TIME_WITHOUT_BURN);
+						keyFrame[0] = getFrameStopAtLastFrame(Assets.burningWallStart, wall.stateTime() - BurningWall.TIME_WITHOUT_BURN);
 					} else {
-						keyFrame = getFrameLoop(Assets.burningWallBurn, wall.stateTime() - BurningWall.TIME_START);
+						keyFrame[0] = getFrameLoop(Assets.burningWallBurn, wall.stateTime() - BurningWall.TIME_START);
 					}
 				} else if (wall.status() == Wall.STATUS_INACTIVE) {
-					keyFrame = getFrameStopAtLastFrame(Assets.burningWallEnd, wall.stateTime());
+					keyFrame[0] = getFrameStopAtLastFrame(Assets.burningWallEnd, wall.stateTime());
 				}
 				y += 12;
 			} else if (wall instanceof FlamethrowerWall) {
 				if (wall.status() == Wall.STATUS_ACTIVE) {
-					keyFrame = Assets.flamethrower;
+					keyFrame[0] = Assets.flamethrower;
 				} else if (wall.status() == Wall.STATUS_INACTIVE) {
-					keyFrame = getFrameStopAtLastFrame(Assets.flamethrowerAll, wall.stateTime());
+					keyFrame[0] = getFrameStopAtLastFrame(Assets.flamethrowerAll, wall.stateTime());
 				}
 				y += 12;
 			} else {
-				keyFrame = wall.isDual() ? keyFrame = Assets.walls2
-						.get(wall.graphic_) : Assets.walls1.get(wall.graphic_);  
+				keyFrame[0] = wall.isDual() ? Assets.walls2 .get(wall.graphic_)
+						                    : Assets.walls1.get(wall.graphic_);  
 			}
-			
 			
 			if (wall.status() == Wall.STATUS_INACTIVE && !(wall instanceof BurningWall)) {
 				int index = (int) (wall.stateTime() * FPS);
 				if (index < wallBounceArray.size())
 				y +=  wallBounceArray.get(index);
 			}
-			drawCenter(keyFrame, wall.position.x, y);
+			for (int i=0; i < keyFrame.length; i++) {
+				float myY = y - Wall.SIZE * (wall.getHeight()-1) / 2 + Wall.SIZE * i;
+				drawCenter(keyFrame[i], wall.position.x, myY);
+			}
 		}
 		
 	}

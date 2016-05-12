@@ -67,13 +67,26 @@ public interface Tween {
 		public Bounce(Tween tween) {
 			this.tween = tween;
 		}
+		
+		private float getT(float t) {
+			if (t < 0.5f) {
+				float s = t * 2;
+				return s*s;
+			} else if (t < 0.75f) {
+				float s = (t - 0.5f) * 4;
+				return 1 - (s * (1-s) * 0.5f);
+			} else if (t < 0.95) {
+				float s = (t - 0.75f) / 0.20f;
+				return 1 - (s * (1-s) * 0.20f);
+			} else {
+				float s = (t - 0.95f) / 0.05f;
+				return 1 - (s * (1-s) * 0.04f);
+			}
+		}
 
 		@Override
 		public void invoke(float t) {
-			if (t < 0.5f) {
-			}
-			
-			tween.invoke(1-(1-t)*(1-t));
+			tween.invoke(getT(t));
 		}
 	}
 }

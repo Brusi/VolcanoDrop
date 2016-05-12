@@ -74,9 +74,11 @@ import com.retrom.volcano.game.objects.Enemy;
 import com.retrom.volcano.game.objects.Flame;
 import com.retrom.volcano.game.objects.FlamethrowerWall;
 import com.retrom.volcano.game.objects.GoldSack;
+import com.retrom.volcano.game.objects.OpeningScene;
 import com.retrom.volcano.game.objects.Relic;
 import com.retrom.volcano.game.objects.SideFireball;
 import com.retrom.volcano.game.objects.Spitter;
+import com.retrom.volcano.game.objects.StackWall;
 import com.retrom.volcano.game.objects.TopFireball;
 import com.retrom.volcano.game.objects.Wall;
 import com.retrom.volcano.game.objects.WallDual;
@@ -86,7 +88,10 @@ import com.retrom.volcano.utils.EventQueue.Event;
 
 public class World {
 
-	private static final float CAM_OFFSET = WorldRenderer.FRUSTUM_HEIGHT / 3f - Wall.SIZE;
+	public static final float OPENING_CAM_OFFSET = WorldRenderer.FRUSTUM_HEIGHT / 2f - 90;
+	public static final float GAME_CAM_OFFSET = WorldRenderer.FRUSTUM_HEIGHT / 2f - 210;
+	
+	public final OpeningScene opening = new OpeningScene();
 
 	public final Player player;
 	
@@ -171,6 +176,7 @@ public class World {
 	
 	enum State {
 		BEFORE_START,
+		OPENING,
 		GAME,
 	}
 	State gameState = State.BEFORE_START;
@@ -300,7 +306,8 @@ public class World {
 //			}
 //		});
 		
-		createLava();
+		// TODO: create lava when needed...
+//		createLava();
 	}
 
 	private void createLava() {
@@ -340,6 +347,11 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
 			finishGame();
 		}
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.U)) {
+			addStackWall(Utils.randomInt(6), Utils.randomInt(3)+2);
+		}
+		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.H)) {
 			addSpitter(400, false);
 		}
@@ -362,9 +374,6 @@ public class World {
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
 			startQuake();
-		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.U)) {
-			screenEffects.add(new DustEffect(new Vector2(100,100)));
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
 			spawner_.enabled = !spawner_.enabled;
@@ -430,8 +439,10 @@ public class World {
 					}
 					screenEffects.add(new DustEffect(new Vector2(xpos, ypos)));
 					//
-					lava_.hitRandom();
-					addLavaSurfaceBubble();
+					if (lava_ != null) {
+						lava_.hitRandom();
+						addLavaSurfaceBubble();
+					}
 				}
 			});
 		}
@@ -491,6 +502,8 @@ public class World {
 				background.level = 3;
 			}
 		}
+		
+		opening.update(deltaTime);
 		
 		updateQuake(deltaTime);
 		updateLava(deltaTime);
@@ -768,7 +781,11 @@ public class World {
 	}
 
 	private void updateCamera(float deltaTime) {
-		camTarget = (floors_.getTotalBlocks()) * Wall.SIZE / 6f + CAM_OFFSET;
+		if (gameState == State.BEFORE_START) {
+			camTarget = OPENING_CAM_OFFSET;
+		} else {
+			camTarget = (floors_.getTotalBlocks()) * Wall.SIZE / 6f + GAME_CAM_OFFSET;
+		}
 		background.setY(camTarget);
 		
 	}
@@ -908,6 +925,13 @@ public class World {
 	public void addFlamethrower(int col) {
 		float wallY = topScreenY() + Wall.SIZE / 2;
 		FlamethrowerWall wall = new FlamethrowerWall(col, wallY);
+		walls_.add(wall);
+		activeWalls_.add(wall);
+	}
+	
+	public void addStackWall(int col, int height) {
+		float wallY = topScreenY() + Wall.SIZE * height / 2;
+		Wall wall = new StackWall(col, wallY, height);
 		walls_.add(wall);
 		activeWalls_.add(wall);
 	}
@@ -1088,7 +1112,9 @@ public class World {
 					} else if (wall instanceof FlamethrowerWall){
 						floors_.addToColumn(wall.col());
 					} else {
-						floors_.addToColumn(wall.col());
+						for (int i=0; i < wall.getHeight(); i++) {
+							floors_.addToColumn(wall.col());
+						}
 						SoundAssets.playRandomSound(SoundAssets.wallHit);
 					}
 				}

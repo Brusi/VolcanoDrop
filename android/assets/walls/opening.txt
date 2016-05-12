@@ -1,0 +1,89 @@
+opening.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bg_openingtile
+  rotate: false
+  xy: 2, 2
+  size: 640, 913
+  orig: 640, 913
+  offset: 0, 0
+  index: -1
+openingscreen_floor
+  rotate: false
+  xy: 644, 2
+  size: 492, 169
+  orig: 492, 169
+  offset: 0, 0
+  index: -1
+openingscreen_outsidelightADD
+  rotate: false
+  xy: 1138, 2
+  size: 417, 214
+  orig: 417, 214
+  offset: 0, 0
+  index: -1
+openingscreen_relic_shrine_off
+  rotate: false
+  xy: 1557, 2
+  size: 244, 104
+  orig: 244, 104
+  offset: 0, 0
+  index: -1
+openingscreen_relic_shrine_on
+  rotate: false
+  xy: 2, 917
+  size: 244, 104
+  orig: 244, 104
+  offset: 0, 0
+  index: -1
+openingscreen_roots_foreground1
+  rotate: false
+  xy: 248, 917
+  size: 640, 411
+  orig: 640, 411
+  offset: 0, 0
+  index: -1
+openingscreen_sleepinggod
+  rotate: false
+  xy: 890, 917
+  size: 250, 218
+  orig: 250, 218
+  offset: 0, 0
+  index: -1
+openingscreen_sleepinggod_roots
+  rotate: false
+  xy: 1142, 917
+  size: 250, 218
+  orig: 250, 218
+  offset: 0, 0
+  index: -1
+openingscreen_stonedoor
+  rotate: false
+  xy: 1394, 917
+  size: 72, 162
+  orig: 72, 162
+  offset: 0, 0
+  index: -1
+openingscreen_text_tap
+  rotate: false
+  xy: 1468, 917
+  size: 408, 82
+  orig: 408, 82
+  offset: 0, 0
+  index: -1
+openingscreen_title
+  rotate: false
+  xy: 2, 1330
+  size: 538, 243
+  orig: 538, 243
+  offset: 0, 0
+  index: -1
+openingscreen_tourch
+  rotate: false
+  xy: 542, 1330
+  size: 60, 116
+  orig: 60, 116
+  offset: 0, 0
+  index: -1
