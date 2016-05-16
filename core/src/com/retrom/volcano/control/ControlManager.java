@@ -5,7 +5,9 @@ import com.badlogic.gdx.Gdx;
 public class ControlManager {
 	public static AbstractControl keyboard = new KeyboardControl();
 	public static AbstractControl tiltAndTap = new TiltAndTapPhoneControl();
-	public static AbstractControl onScreen = new OnScreenPhoneControl();
+	public static AbstractControl onScreen = new OnScreenPhoneControl(
+			new ControlInput.Combine(ControlInput.Touch.INSTANCE_90,
+					                 ControlInput.Keyboard.INSTANCE));
 	
 	public static AbstractControl getControl() {
 		return currentControl;
@@ -27,7 +29,7 @@ public class ControlManager {
 		case Desktop:
 		case WebGL:
 			currentControl = keyboard;
-//			currentControl = onScreen;
+			currentControl = onScreen;
 			break;
 		case HeadlessDesktop:
 		default:

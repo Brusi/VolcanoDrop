@@ -31,7 +31,7 @@ public class FlamethrowerWall extends Wall {
 		} else {
 			this.stateTime_ = Math.max(stateTime_, TIME_UNTIL_FLAME_STARTS + Flame.DURATION - 0.15f);
 		}
-		SoundAssets.flamethrowerStart.stop(soundId);
+		SoundAssets.stopSound(SoundAssets.flamethrowerStart);
 		SoundAssets.playSound(SoundAssets.flamethrowerEnd);
 	}
 	

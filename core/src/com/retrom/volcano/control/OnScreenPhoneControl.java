@@ -17,29 +17,14 @@ public class OnScreenPhoneControl extends AbstractControl {
 	private boolean rightWasTouched = false;
 	// TODO: little vibration when touching left&right.
 	
-	private static final float SIDE_CONTROL_WIDTH = 244;
-	private static final float SIDE_CONTROL_HEIGHT = 140 * 2;
-	private static final float JUMP_RECT_SIZE = 140 * 2;
-	final Rectangle leftRect = new Rectangle(
-			-WorldRenderer.FRUSTUM_WIDTH / 2,
-			-WorldRenderer.FRUSTUM_HEIGHT / 2,
-			SIDE_CONTROL_WIDTH / 2,
-			SIDE_CONTROL_HEIGHT);
-	final Rectangle rightRect = new Rectangle(
-			-WorldRenderer.FRUSTUM_WIDTH / 2 + SIDE_CONTROL_WIDTH / 2,
-			-WorldRenderer.FRUSTUM_HEIGHT / 2,
-			SIDE_CONTROL_WIDTH / 2,
-			SIDE_CONTROL_HEIGHT);
-	
-	final Rectangle jumpRect = new Rectangle(
-			WorldRenderer.FRUSTUM_WIDTH / 2 - JUMP_RECT_SIZE,
-			-WorldRenderer.FRUSTUM_HEIGHT / 2,
-			JUMP_RECT_SIZE, JUMP_RECT_SIZE);
-	
-	final TouchToPoint ttp = TouchToPoint.create();
-	
 	private boolean left_just_touched = false;
 	private boolean right_just_touched = false;
+	
+	private final ControlInput input;
+	
+	OnScreenPhoneControl(ControlInput input) {
+		this.input = input;
+	}
 
 	@Override
 	public boolean isAnalog() {
@@ -66,7 +51,6 @@ public class OnScreenPhoneControl extends AbstractControl {
 		if (leftNewTouch() || rightNewTouch()) {
 			Gdx.input.vibrate(20);
 		}
-		
 	}
 
 	@Override
@@ -83,33 +67,12 @@ public class OnScreenPhoneControl extends AbstractControl {
 		return upTouched();
 	}
 	
-	private boolean touchInRect(int i, Rectangle rect) {
-		Vector2 pnt = ttp.toPoint(Gdx.input.getX(i), Gdx.input.getY(i));
-		System.out.println("Checking point: " + pnt);
-		System.out.println("In rect: " + rect);
-		
-		return rect.contains(pnt);
-	}
-	
-	
-	private boolean isRectTouched(Rectangle rect) {
-		for (int i=0; i < 20; i++) {
-			if (!Gdx.input.isTouched(i)) {
-				continue;
-			}
-			if (touchInRect(i, rect)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	private boolean leftTouched() {
-		return isRectTouched(leftRect);
+		return input.isLeftPressed();
 	}
 	
 	private boolean rightTouched() {
-		return isRectTouched(rightRect);
+		return input.isRightPressed();
 	}
 	
 	// We don't want 'up' to be touched continuously, so we want to sample only
@@ -148,7 +111,7 @@ public class OnScreenPhoneControl extends AbstractControl {
 	}
 	
 	private boolean upTouched() {
-		return isRectTouched(jumpRect);
+		return input.isJumpPressed();
 	}
 	
 	static void drawAtCenterOfRect(SpriteBatch batch, Sprite sprite, Rectangle rect) {
@@ -169,26 +132,50 @@ public class OnScreenPhoneControl extends AbstractControl {
 	
 	@Override
 	public void render(SpriteBatch batch) {
+		final float mid_x = -WorldRenderer.FRUSTUM_WIDTH / 2 + ControlInput.MID_X_90;
+		final float mid_y = -WorldRenderer.FRUSTUM_HEIGHT / 2 + 72;
 		{
-			Sprite s = Assets.leftRightControl;
-			s.setScale(1.2f);
-			drawAtCenter(batch, s, leftRect.x + leftRect.width, leftRect.y + leftRect.height / 4);
+			Sprite s = Assets.leftRightControlBg;
+			s.setScale(0.9f);
+			drawAtCenter(batch, s, mid_x, mid_y);
 		}
 		{
-			Sprite s = Assets.jumpControl;
-			s.setScale(1.2f);
-			drawAtCenter(batch, s, jumpRect.x + jumpRect.width / 2, jumpRect.y + jumpRect.height / 4);
+			Sprite s = leftTouched() ? Assets.leftControlOn : Assets.leftControlOff;
+			s.setScale(0.9f);
+			drawAtCenter(batch, s, mid_x - 78, mid_y);
+		}
+		{
+			Sprite s = rightTouched() ? Assets.rightControlOn : Assets.rightControlOff;
+			s.setScale(0.9f);
+			drawAtCenter(batch, s, mid_x + 78, mid_y);
+		}
+		{
+			Sprite s = Assets.leftRightControlOver;
+			s.setScale(0.9f);
+			drawAtCenter(batch, s, mid_x + 3, mid_y + 3);
 		}
 		
-		if (leftTouched()) {
-			drawAtCenterOfRect(batch, Assets.leftControlOn, leftRect, 11, -leftRect.height / 4);
+		{
+			Sprite s = upTouched() ? Assets.jumpControlOn : Assets.jumpControlOff;
+			s.setScale(0.9f);
+			drawAtCenter(batch, s, WorldRenderer.FRUSTUM_WIDTH / 2 - 76, mid_y);
 		}
-		if (rightTouched()) {
-			drawAtCenterOfRect(batch, Assets.rightControlOn, rightRect, -13, -rightRect.height / 4);
-		}
-		if (upTouched()) {
-			drawAtCenterOfRect(batch, Assets.jumpControlOn, jumpRect, 0, -jumpRect.height / 4);
-		}
+		
+//		{
+//			Sprite s = Assets.jumpControl;
+//			s.setScale(1.2f);
+//			drawAtCenter(batch, s, jumpRect.x + jumpRect.width / 2, jumpRect.y + jumpRect.height / 4);
+//		}
+//		
+//		if (leftTouched()) {
+//			drawAtCenterOfRect(batch, Assets.leftControlOn, leftRect, 11, -leftRect.height / 4);
+//		}
+//		if (rightTouched()) {
+//			drawAtCenterOfRect(batch, Assets.rightControlOn, rightRect, -13, -rightRect.height / 4);
+//		}
+//		if (upTouched()) {
+//			drawAtCenterOfRect(batch, Assets.jumpControlOn, jumpRect, 0, -jumpRect.height / 4);
+//		}
 	}
 	
 	@Override

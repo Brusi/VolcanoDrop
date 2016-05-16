@@ -233,9 +233,12 @@ public class Assets {
 	public static Sprite shieldGuiOn;
 	
 	// On screen control
-	public static Sprite leftRightControl;
-	public static Sprite jumpControl;
+	public static Sprite leftRightControlBg;
+	public static Sprite leftRightControlOver;
 	
+	public static Sprite leftControlOff;
+	public static Sprite rightControlOff;
+	public static Sprite jumpControlOff;
 	public static Sprite leftControlOn;
 	public static Sprite rightControlOn;
 	public static Sprite jumpControlOn;
@@ -620,9 +623,12 @@ public class Assets {
 		
 		
 		
-		leftRightControl = guiSheet.createSprite("GUI_MovementControls_LeftRight_body");
-		jumpControl = guiSheet.createSprite("GUI_MovementControls_Jump_body");
-		
+		leftRightControlBg = guiSheet.createSprite("GUI_MovementControls_LeftRight_body");
+		leftRightControlOver = guiSheet.createSprite("GUI_MovementControls_LeftRight_frame");
+
+		leftControlOff = guiSheet.createSprite("GUI_MovementControls_LeftRight_left");
+		rightControlOff = guiSheet.createSprite("GUI_MovementControls_LeftRight_right");
+		jumpControlOff = guiSheet.createSprite("GUI_MovementControls_Jump_body");
 		leftControlOn = guiSheet.createSprite("GUI_MovementControls_LeftRight_left_click");
 		rightControlOn = guiSheet.createSprite("GUI_MovementControls_LeftRight_right_cilck");
 		jumpControlOn = guiSheet.createSprite("GUI_MovementControls_Jump_body_click");
