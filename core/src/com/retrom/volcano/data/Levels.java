@@ -136,8 +136,6 @@ public class Levels {
 			Gdx.app.log("INFO", "local file missing; using internal.");
 			file = Gdx.files.internal(PATH);
 		}
-		System.out.println("file="+file);
-		System.out.println(file.readString());
 		return loadFromFile(file);
 	}
 	
@@ -204,7 +202,6 @@ public class Levels {
 			levels.levels.add(ld);
 		}
 		
-		System.out.println("Writing to: " + PATH);
 		String s = json.prettyPrint(levels);
 		Gdx.files.local(PATH).writeString(s, false);
 	}

@@ -170,11 +170,9 @@ public class Player extends DynamicGameObject {
 	private void checkDash(AbstractControl control) {
 		if (!ShopData.charge.isOwn()) return;
 		if (control.isLeftJustPressed()) {
-			System.out.println("PRESSED LEFT");
 			if (timeSinceLastPressLeft < DASH_CLICK_MAX_DELAY) {
 				handler_.handleDash();
 				this.velocity.x = -DASH_VEL;
-				System.out.println("DASH LEFT!");
 			}
 			timeSinceLastPressLeft = 0;
 		}

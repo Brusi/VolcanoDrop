@@ -26,8 +26,6 @@ public class SequenceLib {
 			Gdx.app.log("INFO", "local file missing; using internal.");
 			file = Gdx.files.internal(PATH);
 		}
-		System.out.println("file="+file);
-		System.out.println(file.readString());
 		return loadFromFile(file);
 	}
 	
