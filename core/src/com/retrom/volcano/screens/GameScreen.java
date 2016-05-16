@@ -12,15 +12,12 @@ import com.retrom.volcano.game.Settings;
 import com.retrom.volcano.game.World;
 import com.retrom.volcano.game.World.WorldListener;
 import com.retrom.volcano.game.WorldRenderer;
-import com.retrom.volcano.menus.Fade;
+import com.retrom.volcano.menus.MenuButton;
 import com.retrom.volcano.menus.PauseMenu;
 import com.retrom.volcano.menus.PauseMenu.Command;
 import com.retrom.volcano.ui.GameUiRenderer;
 import com.retrom.volcano.ui.Hub;
 import com.retrom.volcano.ui.Splash;
-import com.retrom.volcano.ui.Splash.State;
-import com.retrom.volcano.utils.EventQueue;
-import com.retrom.volcano.utils.Tween;
 
 public class GameScreen extends ScreenAdapter implements Screen {
 	
@@ -31,7 +28,12 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	
 	PauseMenu pauseMenu_;
 	
-	private final Hub hub_ = new Hub();;
+	private final Hub hub_ = new Hub(new MenuButton.Action() {
+		@Override
+		public void act() {
+			togglePause();
+		}
+	});
 	private final Splash splash_ = new Splash(hub_);
 	
 	private GameUiRenderer uiRenderer_;
@@ -142,7 +144,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	}
 
 	private void checkPause() {
-		if (Gdx.input.isKeyJustPressed(Input.Keys.P) || hub_.isPauseAreaTouched()) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
 			togglePause();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {

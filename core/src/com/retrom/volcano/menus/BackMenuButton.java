@@ -16,14 +16,4 @@ public class BackMenuButton extends SimpleMenuButton {
 	public BackMenuButton(float x, float y, Action action) {
 		super(x, y, WIDTH, HEIGHT, Assets.shopBack, Assets.shopBackClick, action);
 	}
-
-	@Override
-	public void render(Batch batch) {
-		if (!isVisible()) {
-			return;
-		}
-		Sprite sprite = isPressed() ? Assets.shopBackClick : Assets.shopBack;
-		Utils.drawCenter(batch, sprite,
-				getX(), getY());
-	}
 }

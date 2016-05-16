@@ -8,6 +8,7 @@ import com.badlogic.gdx.Preferences;
 
 public class ShopData {
 	
+	private static final String BEST_TIME_PREFS_NAME = "best_time";
 	private static final String GOLD_PREFS_NAME = "gold"; 
 	private static final String PREFS_NAME = "volcanoprefs";
 	
@@ -121,5 +122,17 @@ public class ShopData {
 		int gold = getGold();
 		gold -= amount;
 		setGold(gold);
+	}
+	
+	// Returns whether the best time has been updated.
+	public static boolean updateBestTime(float time) {
+		int new_time = (int) Math.floor(time);
+		int best_time = prefs.getInteger(BEST_TIME_PREFS_NAME, 0);
+		if (new_time > best_time) {
+			prefs.putInteger(BEST_TIME_PREFS_NAME, new_time);
+			prefs.flush();
+			return true;
+		}
+		return false;
 	}
 }

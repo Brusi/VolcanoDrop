@@ -71,7 +71,7 @@ public class SoundAssets {
 	
 	private static Random rand = new Random();
 	
-	private static boolean ENABLE_OVERALL_SOUNDS = false; 
+	private static boolean ENABLE_OVERALL_SOUNDS = true; 
 	
 	private final static SoundEvictingQueue currentlyPlaying = new SoundEvictingQueue(40);
 	private static float pitch = 1f;

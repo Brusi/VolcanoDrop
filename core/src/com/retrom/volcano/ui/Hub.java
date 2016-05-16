@@ -1,18 +1,15 @@
 package com.retrom.volcano.ui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.retrom.volcano.assets.Assets;
-import com.retrom.volcano.game.Utils;
 import com.retrom.volcano.game.WorldRenderer;
-import com.retrom.volcano.utils.TouchToPoint;
+import com.retrom.volcano.menus.MenuButton;
+import com.retrom.volcano.menus.SimpleMenuButton;
 
 public class Hub {
 	
@@ -29,23 +26,22 @@ public class Hub {
 	private Label score_text_;
 	private Label time_text_;
 	
-	private final TouchToPoint ttp = TouchToPoint.create();
-
-	private final Rectangle pauseRect;
+	private final MenuButton pauseButton;
 	
 	private float alpha = 0;
 
-	public Hub() {
+	public Hub(MenuButton.Action action) {
 		score_text_ = new Label("0", new LabelStyle(Assets.scoreFont, Color.WHITE));
 		time_text_ = new Label("0:00", new LabelStyle(Assets.timeFont, Color.WHITE));
 		
-		float PAUSE_X_POS = WorldRenderer.FRUSTUM_WIDTH / 2 - Assets.pauseButton.getWidth();
-		float PAUSE_Y_POS = WorldRenderer.FRUSTUM_HEIGHT / 2 - Assets.pauseButton.getHeight();
-		pauseRect = new Rectangle(PAUSE_X_POS, PAUSE_Y_POS, Assets.pauseButton.getWidth(), Assets.pauseButton.getHeight());
+		pauseButton = new SimpleMenuButton(
+					WorldRenderer.FRUSTUM_WIDTH / 2 - 83, WorldRenderer.FRUSTUM_HEIGHT / 2 - 86, 165f, 172f,
+					Assets.pauseButton, Assets.pauseButtonClicked, action);
 	}
 	
 	public void update(float deltaTime) {
 		stateTime_ += deltaTime;
+		pauseButton.checkClick();
 	}
 	
 	public void setScore(int score) {
@@ -77,10 +73,8 @@ public class Hub {
 		
         // TODO convert to real menu button.
 		if (!isPaused) {
-			Sprite buttonSprite = isPaused ? Assets.pauseButtonClicked : Assets.pauseButton;
-			buttonSprite.setAlpha(alpha);
-			buttonSprite.setPosition(pauseRect.x, pauseRect.y);
-			buttonSprite.draw(batch);
+			pauseButton.setAlpha(alpha);
+			pauseButton.render(batch);
 		}
 		
 		updateScoreText();
@@ -113,18 +107,6 @@ public class Hub {
 		score_text_.setStyle(style);
 	}
 	
-	public boolean isPauseAreaTouched() {
-		if (!Gdx.input.justTouched()) {
-			return false;
-		}
-		int x = Gdx.input.getX();
-		int y = Gdx.input.getY();
-		
-		Vector2 pnt = ttp.toPoint(x, y);
-		return pauseRect.contains(pnt);
-//		return x > Gdx.graphics.getWidth() * 3f / 4f && y < Gdx.graphics.getWidth() / 4f;  
-	}
-
 	public void setAlpha(float alpha) {
 		this.alpha = alpha;
 	}
