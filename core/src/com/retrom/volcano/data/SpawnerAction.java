@@ -13,6 +13,7 @@ public class SpawnerAction {
 		BURN,
 		FLAME,
 		FIREBALL,
+		STACK,
 		NOP,
 		// Actions which are not of a sequence:
 		WALL_NOT_DUAL(true),
@@ -34,12 +35,17 @@ public class SpawnerAction {
 	public Type type;
 	public float time;
 	public int col;
+	public int size;
 	
 	public SpawnerAction() {}
 	public SpawnerAction(Type type, float time, int col) {
+		this(type, time, col, 0); 
+	}
+	public SpawnerAction(Type type, float time, int col, int size) {
 		this.type = type;
 		this.time = time;
 		this.col = col;
+		this.size = size;
 	}
 	
 	public static void test() {

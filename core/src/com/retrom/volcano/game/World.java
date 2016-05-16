@@ -175,6 +175,7 @@ public class World {
 	public float gameTime = 0;
 	
 	enum State {
+		SPLASH,
 		BEFORE_START,
 		OPENING,
 		GAME,
@@ -189,7 +190,7 @@ public class World {
 	
 	public World (WorldListener listener) {
 		this.listener_ = listener;
-		this.player = new Player(-200, 200, new Player.HitRectHandler() {
+		this.player = new Player(-200, 0 + Player.HEIGHT / 2, new Player.HitRectHandler() {
 			@Override
 			public void handle(Rectangle rect) {
 				if (shieldTime <= 0) {
@@ -261,25 +262,30 @@ public class World {
 			}
 
 			@Override
+			public void dropStackWall(int col, int size) {
+				addStackWall(col, size);
+			}
+			
+			@Override
 			public void dropBurningWall(int col) {
 				addBurningWall(col);
 			}
-
+			
 			@Override
 			public void dropFlamethrower(int col) {
 				addFlamethrower(col);
 			}
-
+			
 			@Override
 			public void dropFireball(int col) {
 				prepareFireball(col);
 			}
-
+			
 			@Override
 			public void dropSack(int col, int numCoins) {
 				addSack(col, numCoins);
 			}
-
+			
 			@Override
 			public void quake(boolean big) {
 				if (big) {
@@ -288,7 +294,7 @@ public class World {
 					startSmallQuake();
 				}
 			}
-
+			
 			@Override
 			public void warning(int col, boolean sound) {
 				createWarning(col, sound);
@@ -493,6 +499,8 @@ public class World {
 			SoundAssets.setPitch(1f);
 		}
 		
+		opening.update(deltaTime);
+		
 		if (gameState == State.GAME) {
 			updateSpawner(deltaTime);
 			gameTime += deltaTime;
@@ -503,7 +511,6 @@ public class World {
 			}
 		}
 		
-		opening.update(deltaTime);
 		
 		updateQuake(deltaTime);
 		updateLava(deltaTime);
@@ -781,7 +788,7 @@ public class World {
 	}
 
 	private void updateCamera(float deltaTime) {
-		if (gameState == State.BEFORE_START) {
+		if (gameState == State.SPLASH) {
 			camTarget = OPENING_CAM_OFFSET;
 		} else {
 			camTarget = (floors_.getTotalBlocks()) * Wall.SIZE / 6f + GAME_CAM_OFFSET;
@@ -929,9 +936,9 @@ public class World {
 		activeWalls_.add(wall);
 	}
 	
-	public void addStackWall(int col, int height) {
-		float wallY = topScreenY() + Wall.SIZE * height / 2;
-		Wall wall = new StackWall(col, wallY, height);
+	public void addStackWall(int col, int size) {
+		float wallY = topScreenY() + Wall.SIZE * size / 2;
+		Wall wall = new StackWall(col, wallY, size);
 		walls_.add(wall);
 		activeWalls_.add(wall);
 	}

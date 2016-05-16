@@ -548,20 +548,28 @@ sequences: [
 		seq: [{type: FIREBALL, time: 0.20, col: 0}
 			  {type: FIREBALL, time: 0.10, col: 1}
 			  {type: FIREBALL, time: 0.00, col: 2}
-			  {type: FIREBALL,  time: 2.20, col: 3}
-			  {type: FIREBALL,  time: 2.30, col: 4}
-			  {type: FIREBALL,  time: 2.40, col: 5}
-		      {type: NOP, time: 4}]
+		      {type: NOP, time: 1.5}]
 	}
 	{
 		name: fireball_3_and_3
 		seq: [{type: FIREBALL, time: 0.00, col: 0}
 			  {type: FIREBALL, time: 1.50, col: 1}
-			  {type: FIREBALL, time: 0.00, col: 2}
-			  {type: FIREBALL,  time: 1.50, col: 3}
-			  {type: FIREBALL,  time: 0.00, col: 4}
-			  {type: FIREBALL,  time: 1.50, col: 5}
+			  {type: FIREBALL, time: 0.10, col: 2}
+			  {type: FIREBALL,  time: 1.60, col: 3}
+			  {type: FIREBALL,  time: 0.20, col: 4}
+			  {type: FIREBALL,  time: 1.70, col: 5}
 		      {type: NOP, time: 4}]
+	}
+	{
+		name: stack
+		hotkey: 1
+		seq: [{type: STACK, time: 0, col: 0, size: 2}
+			  {type: STACK, time: 1, col: 1, size: 3}
+			  {type: STACK, time: 2, col: 2, size: 4}
+			  {type: STACK,  time: 3, col: 3, size: 5}
+			  {type: STACK,  time: 4, col: 4, size: 6}
+			  {type: STACK,  time: 7, col: 5, size: 7}
+		      {type: NOP, time: 10}]
 	}
 ]
 }

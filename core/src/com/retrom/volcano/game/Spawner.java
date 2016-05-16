@@ -25,6 +25,7 @@ public class Spawner {
 		public void dropWall(int col);
 		public void dropCoin(float x, Collectable.Type type);
 		public void dropDualWall(int col);
+		public void dropStackWall(int col, int size);
 		public void dropBurningWall(int col);
 		public void dropFlamethrower(int col);
 		public void dropFireball(int col);
@@ -346,6 +347,15 @@ public class Spawner {
 		}; 
 	}
 	
+	EventQueue.Event dropStackWallEvent(final int col, final int size) {
+		return new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				handler_.dropStackWall(col, size);
+			}
+		};
+	}
+	
 	EventQueue.Event dropWallEvent(final int col) {
 		return new EventQueue.Event() {
 			@Override
@@ -470,6 +480,10 @@ public class Spawner {
 			break;
 		case NOP:
 			queue.addEventFromNow(action.time, NOP);
+			break;
+		case STACK:
+			assert(action.size > 0);
+			queue.addEventFromNow(action.time, dropStackWallEvent(col, action.size));
 			break;
 		case WALL:
 			queue.addEventFromNow(action.time, dropWallEvent(col));
