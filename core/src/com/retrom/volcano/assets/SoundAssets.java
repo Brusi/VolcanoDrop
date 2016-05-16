@@ -70,13 +70,17 @@ public class SoundAssets {
 	public static Sound[] lavaBubble;
 	
 	private static Random rand = new Random();
-
+	
+	private static boolean ENABLE_OVERALL_SOUNDS = false; 
 	
 	private final static SoundEvictingQueue currentlyPlaying = new SoundEvictingQueue(40);
 	private static float pitch = 1f;
 	
 	
 	public static void load() {
+		if (!ENABLE_OVERALL_SOUNDS) {
+			return;
+		}
 		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("music/gameplay.mp3"));
 		gameMusic.setLooping(true);
 //		music.setVolume(0.5f);
@@ -165,6 +169,8 @@ public class SoundAssets {
 	}
 	
 	public static long playSound (Sound sound, float volume) {
+		if (!ENABLE_OVERALL_SOUNDS) return 0;
+		
 		if (!Settings.soundEnabled.on())
 			return 0;
 		long id = sound.play(volume);
@@ -182,6 +188,7 @@ public class SoundAssets {
 	}
 	
 	public static void playRandomSound(Sound[] sounds, float volume) {
+		if (!ENABLE_OVERALL_SOUNDS) return;
 		int index = rand.nextInt(sounds.length);
 		playSound(sounds[index], volume);
 	}
@@ -191,6 +198,7 @@ public class SoundAssets {
 	}
 
 	public static long loopSound(Sound sound) {
+		if (!ENABLE_OVERALL_SOUNDS) return 0;
 		sound.stop();
 		if (!Settings.soundEnabled.on()) {
 			return 0;
@@ -202,10 +210,12 @@ public class SoundAssets {
 	}
 	
 	public static void stopSound(Sound sound) {
+		if (!ENABLE_OVERALL_SOUNDS) return;
 		sound.stop();
 	}
 	
 	public static void stopAllSounds() {
+		if (!ENABLE_OVERALL_SOUNDS) return;
 		currentlyPlaying.forEach(new SoundEvictingQueue.Consumer() {
 			@Override
 			public void accept(Sound s, long id) {
@@ -252,6 +262,7 @@ public class SoundAssets {
 	}
 	
 	public static void startMusic() {
+		if (!ENABLE_OVERALL_SOUNDS) return;
 		shopMusic.stop();
 		if (!Settings.soundEnabled.on()) {
 			return;
@@ -261,10 +272,12 @@ public class SoundAssets {
 	}
 
 	public static void pauseMusic() {
+		if (!ENABLE_OVERALL_SOUNDS) return;
 		gameMusic.pause();
 	}
 	
 	public static void resumeMusic() {
+		if (!ENABLE_OVERALL_SOUNDS) return;
 		if (!Settings.soundEnabled.on()) {
 			return;
 		}
