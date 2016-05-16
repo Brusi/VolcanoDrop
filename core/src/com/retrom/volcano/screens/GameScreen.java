@@ -17,6 +17,10 @@ import com.retrom.volcano.menus.PauseMenu;
 import com.retrom.volcano.menus.PauseMenu.Command;
 import com.retrom.volcano.ui.GameUiRenderer;
 import com.retrom.volcano.ui.Hub;
+import com.retrom.volcano.ui.Splash;
+import com.retrom.volcano.ui.Splash.State;
+import com.retrom.volcano.utils.EventQueue;
+import com.retrom.volcano.utils.Tween;
 
 public class GameScreen extends ScreenAdapter implements Screen {
 	
@@ -27,7 +31,8 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	
 	PauseMenu pauseMenu_;
 	
-	Hub hub_;
+	private final Hub hub_ = new Hub();;
+	private final Splash splash_ = new Splash(hub_);
 	
 	private GameUiRenderer uiRenderer_;
 
@@ -41,8 +46,6 @@ public class GameScreen extends ScreenAdapter implements Screen {
 				restartGame();
 			}
 		});
-		
-		hub_ = new Hub();
 		pauseMenu_ = new PauseMenu(new PauseMenu.Listener() {
 			@Override
 			public void act(Command cmd) {
@@ -66,7 +69,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		});
 		
 		worldRenderer_ = new WorldRenderer(batch_, world_);
-		uiRenderer_ = new GameUiRenderer(hub_, world_, pauseMenu_);
+		uiRenderer_ = new GameUiRenderer(hub_, world_, pauseMenu_, splash_);
 	}
 	
 	private void restartGame() {
@@ -102,6 +105,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 			hub_.setScore(world_.score);
 			hub_.setTime(world_.gameTime);
 			hub_.update(delta);
+			splash_.update(delta);
 		} else {
 			pauseMenu_.update(delta);
 		}
@@ -109,10 +113,21 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		worldRenderer_.render(delta, isPaused_);
 		uiRenderer_.render(delta, isPaused_);
 		
+		checkSplashTap();
 		checkPause();
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.HOME)) {
 			goToShop();
+		}
+	}
+	
+	private void checkSplashTap() {
+		if (splash_.state != Splash.State.SHOWING) {
+			return;
+		}
+		if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
+			splash_.disappear();
+			world_.doneWithSplash();
 		}
 	}
 	

@@ -21,10 +21,12 @@ public class GameUiRenderer {
 	private final Hub scoreHub_;
 	private final World world_;
 	private final PauseMenu pauseMenu_;
+	private final Splash splash_;
 
-	public GameUiRenderer(Hub scoreHub, World world, PauseMenu pauseMenu_) {
+	public GameUiRenderer(Hub scoreHub, World world, PauseMenu pauseMenu_, Splash splash_) {
 		world_ = world;
 		this.pauseMenu_ = pauseMenu_;
+		this.splash_ = splash_;
 		cam_ = new OrthographicCamera(
 				WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT);
 		batch_ = new SpriteBatch();
@@ -43,6 +45,8 @@ public class GameUiRenderer {
 		renderControls();
 		batch_.end();
 		
+		renderSplash();
+		
 		powerupUiRenderer_.update(deltaTime);
 		powerupUiRenderer_.setMagnetRatio(world_.magnetRatio());
 		powerupUiRenderer_.setSlomoRatio(world_.slomoRatio());
@@ -51,6 +55,17 @@ public class GameUiRenderer {
 		
 		if (isPaused) {
 			renderPauseMenu();
+		}
+	}
+
+	private void renderSplash() {
+		if (splash_ != null) {
+			BatchUtils.setBlendFuncNormal(batch_);
+			batch_.begin();
+			splash_.render(batch_);
+			batch_.end();
+
+			splash_.fade.render(shapes_);
 		}
 	}
 
@@ -63,6 +78,7 @@ public class GameUiRenderer {
 	}
 
 	private void renderControls() {
+		ControlManager.getControl().setAlpha(scoreHub_.getAlpha());
 		ControlManager.getControl().render(batch_);
 	}
 

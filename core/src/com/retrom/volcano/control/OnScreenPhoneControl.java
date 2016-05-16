@@ -22,6 +22,8 @@ public class OnScreenPhoneControl extends AbstractControl {
 	
 	private final ControlInput input;
 	
+	private float alpha = 1;
+	
 	OnScreenPhoneControl(ControlInput input) {
 		this.input = input;
 	}
@@ -137,45 +139,34 @@ public class OnScreenPhoneControl extends AbstractControl {
 		{
 			Sprite s = Assets.leftRightControlBg;
 			s.setScale(0.9f);
+			s.setAlpha(alpha);
 			drawAtCenter(batch, s, mid_x, mid_y);
 		}
 		{
 			Sprite s = leftTouched() ? Assets.leftControlOn : Assets.leftControlOff;
 			s.setScale(0.9f);
+			s.setAlpha(alpha);
 			drawAtCenter(batch, s, mid_x - 78, mid_y);
 		}
 		{
 			Sprite s = rightTouched() ? Assets.rightControlOn : Assets.rightControlOff;
 			s.setScale(0.9f);
+			s.setAlpha(alpha);
 			drawAtCenter(batch, s, mid_x + 78, mid_y);
 		}
 		{
 			Sprite s = Assets.leftRightControlOver;
 			s.setScale(0.9f);
+			s.setAlpha(alpha);
 			drawAtCenter(batch, s, mid_x + 3, mid_y + 3);
 		}
 		
 		{
 			Sprite s = upTouched() ? Assets.jumpControlOn : Assets.jumpControlOff;
 			s.setScale(0.9f);
+			s.setAlpha(alpha);
 			drawAtCenter(batch, s, WorldRenderer.FRUSTUM_WIDTH / 2 - 76, mid_y);
 		}
-		
-//		{
-//			Sprite s = Assets.jumpControl;
-//			s.setScale(1.2f);
-//			drawAtCenter(batch, s, jumpRect.x + jumpRect.width / 2, jumpRect.y + jumpRect.height / 4);
-//		}
-//		
-//		if (leftTouched()) {
-//			drawAtCenterOfRect(batch, Assets.leftControlOn, leftRect, 11, -leftRect.height / 4);
-//		}
-//		if (rightTouched()) {
-//			drawAtCenterOfRect(batch, Assets.rightControlOn, rightRect, -13, -rightRect.height / 4);
-//		}
-//		if (upTouched()) {
-//			drawAtCenterOfRect(batch, Assets.jumpControlOn, jumpRect, 0, -jumpRect.height / 4);
-//		}
 	}
 	
 	@Override
@@ -186,5 +177,9 @@ public class OnScreenPhoneControl extends AbstractControl {
 	@Override
 	public boolean isRightJustPressed() {
 		return right_just_touched;
+	}
+	
+	public void setAlpha(float alpha) {
+		this.alpha = alpha;
 	}
 }

@@ -108,6 +108,7 @@ public class Player extends DynamicGameObject {
 	
 	// X position after push; only if not pushed by two stones at once.
 	private Float newBoundsX = null;
+	private boolean active_ = false;
 	
 	public Player (float x, float y, HitRectHandler rectHandler, EventHandler jumpHandler) {
 		super(x, y, WIDTH, HEIGHT);
@@ -122,6 +123,9 @@ public class Player extends DynamicGameObject {
 	}
 	
 	private void processInput(float deltaTime) {
+		if (!active_) {
+			return;
+		}
 		AbstractControl control = ControlManager.getControl();
 		
 		// PC controls
@@ -426,5 +430,9 @@ public class Player extends DynamicGameObject {
 
 	public void endDash() {
 		velocity.limit(MAX_NON_DASH_VEL);
+	}
+
+	public void activate() {
+		active_ = true;
 	}
 }

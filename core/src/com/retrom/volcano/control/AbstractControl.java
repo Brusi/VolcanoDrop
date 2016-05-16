@@ -32,4 +32,8 @@ public abstract class AbstractControl {
 		// If controls needs rendering, they will override this.
 		return;
 	}
+	
+	public void setAlpha(float alpha) {
+		// Do nothing; not all controls have graphics.
+	}
 }

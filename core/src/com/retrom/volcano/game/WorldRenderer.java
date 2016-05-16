@@ -65,7 +65,6 @@ import com.retrom.volcano.game.objects.Enemy;
 import com.retrom.volcano.game.objects.Flame;
 import com.retrom.volcano.game.objects.FlamethrowerWall;
 import com.retrom.volcano.game.objects.GoldSack;
-import com.retrom.volcano.game.objects.OpeningScene;
 import com.retrom.volcano.game.objects.SideFireball;
 import com.retrom.volcano.game.objects.Spitter;
 import com.retrom.volcano.game.objects.StackWall;
@@ -133,28 +132,11 @@ public class WorldRenderer {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.PLUS)) {
 			offset += 1;
 		}
-		
-		renderOpening();
-	}
-
-	private void renderOpening() {
-		OpeningScene opening = world.opening;
-		if (opening != null) {
-			BatchUtils.setBlendFuncNormal(batch);
-			batch.begin();
-			opening.render(batch);
-			batch.end();
-
-			opening.fade.render(shapeRenderer);
-		}
-		
 	}
 
 	public float offset = 0;
 
 	private void renderOverlay() {
-		/**/System.out.println("cam_target="+cam_target);
-		
 		if (world.slomoTime <= 0 && world.lava_ == null) {
 			return;
 		}

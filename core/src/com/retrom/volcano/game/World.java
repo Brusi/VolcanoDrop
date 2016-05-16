@@ -74,7 +74,6 @@ import com.retrom.volcano.game.objects.Enemy;
 import com.retrom.volcano.game.objects.Flame;
 import com.retrom.volcano.game.objects.FlamethrowerWall;
 import com.retrom.volcano.game.objects.GoldSack;
-import com.retrom.volcano.game.objects.OpeningScene;
 import com.retrom.volcano.game.objects.Relic;
 import com.retrom.volcano.game.objects.SideFireball;
 import com.retrom.volcano.game.objects.Spitter;
@@ -83,6 +82,7 @@ import com.retrom.volcano.game.objects.TopFireball;
 import com.retrom.volcano.game.objects.Wall;
 import com.retrom.volcano.game.objects.WallDual;
 import com.retrom.volcano.game.objects.WallSingle;
+import com.retrom.volcano.ui.Splash;
 import com.retrom.volcano.utils.EventQueue;
 import com.retrom.volcano.utils.EventQueue.Event;
 
@@ -91,8 +91,6 @@ public class World {
 	public static final float OPENING_CAM_OFFSET = WorldRenderer.FRUSTUM_HEIGHT / 2f - 90;
 	public static final float GAME_CAM_OFFSET = WorldRenderer.FRUSTUM_HEIGHT / 2f - 210;
 	
-	public final OpeningScene opening = new OpeningScene();
-
 	public final Player player;
 	
 	public final List<Wall> walls_ = new ArrayList<Wall>();
@@ -180,7 +178,7 @@ public class World {
 		OPENING,
 		GAME,
 	}
-	State gameState = State.BEFORE_START;
+	State gameState = State.SPLASH;
 
 	private float slomoRatio_;
 
@@ -498,8 +496,6 @@ public class World {
 			slomoRatio_ = 1f;
 			SoundAssets.setPitch(1f);
 		}
-		
-		opening.update(deltaTime);
 		
 		if (gameState == State.GAME) {
 			updateSpawner(deltaTime);
@@ -1549,5 +1545,12 @@ public class World {
 	
 	public float shieldRatio() {
 		return shieldTime / TOTAL_SHIELD_TIME;
+	}
+
+	public void doneWithSplash() {
+		if (gameState == State.SPLASH) {
+			gameState = State.BEFORE_START;
+		}
+		player.activate();
 	}
 }
