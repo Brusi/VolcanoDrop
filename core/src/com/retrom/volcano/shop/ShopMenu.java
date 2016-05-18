@@ -83,7 +83,7 @@ public class ShopMenu {
 
 	private boolean buy = false;
 	
-	private GoldCounter goldCounter = new GoldCounter();
+	private GoldCounter goldCounter = new GoldCounter(374);
 	
 	public ShopMenu() {
 		content = mainContent;

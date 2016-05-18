@@ -28,6 +28,11 @@ public class Background {
 		PILLAR_HOLE(76f),
 		PILLAR_HOLE_BG(0),
 		
+		PILLAR_OPENING_GAP(162f),
+		PILLAR_OPENING_TOP(89f),
+		
+		BACKGROUND_OPENING(913f),
+		
 		BACKGROUND_BASE(BG_HEIGHT),
 		
 		BACKGROUND_WORLD1_1(BG_HEIGHT, 0),
@@ -110,7 +115,7 @@ public class Background {
 	private static final Random rand = new Random();
 	
 	public static final float HEIGHT = 800f; 
-	public static final float BASE = -3 * Wall.SIZE;
+	public static final float BASE = -192f;
 	
 	// The minimal y value from which holes start to appear on walls.
 	private static final float HOLE_MIN_HEIGHT = 900f;
@@ -136,6 +141,38 @@ public class Background {
 	private float bgBaseY_ = BASE;
 	private float y_ = 0f;
 	
+	private final boolean has_opening_scene = true; 
+	
+	public Background() {
+		if (has_opening_scene) {
+			initOpeningScene();
+		}
+	}
+
+	private void initOpeningScene() {
+		addElement(Element.BACKGROUND_OPENING);
+		
+		addToLeftPillar(Element.PILLAR_END);
+		addToLeftPillar(Element.bigPillar());
+		addToLeftPillar(Element.PILLAR_OPENING_GAP);
+		addToLeftPillar(Element.PILLAR_OPENING_TOP);
+		addToLeftPillar(Element.pillar());
+		addToLeftPillar(Element.PILLAR_END);
+		addToLeftPillar(Element.bigPillar());
+		addToLeftPillar(Element.bigPillar());
+		addToLeftPillar(Element.PILLAR_START);
+	}
+	
+	private void addToLeftPillar(Element e) {
+		leftPillar.addLast(e);
+		leftHeight += e.height();
+	}
+	
+	private void addToRightPillar(Element e) {
+		rightPillar.addLast(e);
+		rightHeight += e.height();
+	}
+
 	private void addElement(Element e) {
 		float heightAdded = e.height_;
 		bgPillar.addLast(e);

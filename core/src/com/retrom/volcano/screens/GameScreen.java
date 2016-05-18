@@ -28,12 +28,19 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	
 	PauseMenu pauseMenu_;
 	
-	private final Hub hub_ = new Hub(new MenuButton.Action() {
-		@Override
-		public void act() {
-			togglePause();
-		}
-	});
+	private final Hub hub_ = new Hub(new MenuButton.Action[] {
+			new MenuButton.Action() {
+				@Override
+				public void act() {
+					togglePause();
+				}
+			}, new MenuButton.Action() {
+				@Override
+				public void act() {
+					goToShop();
+				}
+			} });
+	
 	private final Splash splash_ = new Splash(hub_);
 	
 	private GameUiRenderer uiRenderer_;
@@ -46,6 +53,11 @@ public class GameScreen extends ScreenAdapter implements Screen {
 			@Override
 			public void restart() {
 				restartGame();
+			}
+
+			@Override
+			public void startGame() {
+				hub_.startGame();
 			}
 		});
 		pauseMenu_ = new PauseMenu(new PauseMenu.Listener() {

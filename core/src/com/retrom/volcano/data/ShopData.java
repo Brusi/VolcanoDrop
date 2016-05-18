@@ -127,12 +127,16 @@ public class ShopData {
 	// Returns whether the best time has been updated.
 	public static boolean updateBestTime(float time) {
 		int new_time = (int) Math.floor(time);
-		int best_time = prefs.getInteger(BEST_TIME_PREFS_NAME, 0);
+		int best_time = getBestTime();
 		if (new_time > best_time) {
 			prefs.putInteger(BEST_TIME_PREFS_NAME, new_time);
 			prefs.flush();
 			return true;
 		}
 		return false;
+	}
+	
+	public static int getBestTime() {
+		return prefs.getInteger(BEST_TIME_PREFS_NAME, 0);
 	}
 }

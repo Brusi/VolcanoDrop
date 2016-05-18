@@ -11,10 +11,11 @@ import com.retrom.volcano.game.Utils;
 
 public class GoldCounter {
 	private Label score_text = new Label("0", new LabelStyle(Assets.scoreFont, Color.WHITE));;
-	private final float y = 374;
+	private final float y;
 	private float alpha_ = 0;
 	
-	public GoldCounter() {
+	public GoldCounter(float y) {
+		this.y = y;
 		score_text.setY(y - score_text.getHeight() / 2);
 	}
 	

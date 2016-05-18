@@ -71,7 +71,7 @@ public class SoundAssets {
 	
 	private static Random rand = new Random();
 	
-	private static boolean ENABLE_OVERALL_SOUNDS = true; 
+	private static final boolean ENABLE_OVERALL_SOUNDS = false; 
 	
 	private final static SoundEvictingQueue currentlyPlaying = new SoundEvictingQueue(40);
 	private static float pitch = 1f;
@@ -285,6 +285,8 @@ public class SoundAssets {
 	}
 	
 	public static void resumeMusicAt(float position) {
+		if (!ENABLE_OVERALL_SOUNDS) return;
+		
 		if (!Settings.soundEnabled.on()) {
 			return;
 		}
@@ -293,6 +295,7 @@ public class SoundAssets {
 	}
 	
 	public static void startShopMusic() {
+		if (!ENABLE_OVERALL_SOUNDS) return;
 		if (!Settings.soundEnabled.on()) {
 			return;
 		}

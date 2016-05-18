@@ -59,6 +59,11 @@ public class Assets {
 	
 	public static Sprite title;
 	public static Sprite tapToStart;
+	public static Sprite opening_background;
+	public static Sprite openingDoor;
+	public static Sprite openingDoorTop;
+	public static Sprite openingDoorLight;
+	public static Sprite openingFloor;
 	
 	public static Sprite coin1_1;
 	public static Array<Sprite> coin1_1_land;
@@ -217,6 +222,7 @@ public class Assets {
 	
 	// Gui
 	public static Sprite scoreIcon;
+	public static Sprite guiTimeBestIcon;
 	public static Sprite pauseButton;
 	public static Sprite pauseButtonClicked;
 	
@@ -416,6 +422,11 @@ public class Assets {
 		TextureAtlas openingSheet = new TextureAtlas("walls/opening.txt");
 		title = openingSheet.createSprite("openingscreen_title");
 		tapToStart = openingSheet.createSprite("openingscreen_text_tap");
+		opening_background = openingSheet.createSprite("bg_openingtile");
+		openingDoor = openingSheet.createSprite("openingscreen_stonedoor");
+		openingDoorTop = openingSheet.createSprite("pillars_entrance_start");
+		openingDoorLight = openingSheet.createSprite("openingscreen_outsidelight");
+		openingFloor = openingSheet.createSprite("openingscreen_floor");
 		
 		TextureAtlas treasure = new TextureAtlas("treasure/treasure.txt");
 		
@@ -606,7 +617,8 @@ public class Assets {
 		
 		// Gui
 		TextureAtlas guiSheet = new TextureAtlas("ui/gui.txt");
-		scoreIcon =  guiSheet.createSprite("gui_score_gold_icon");
+		scoreIcon = guiSheet.createSprite("gui_score_gold_icon");
+		guiTimeBestIcon = guiSheet.createSprite("gui_time_best");
 		pauseButton= guiSheet.createSprite("GUI_buttons_pause");
 		pauseButtonClicked = guiSheet.createSprite("GUI_buttons_pause_click");
 		

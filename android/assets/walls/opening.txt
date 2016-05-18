@@ -3,87 +3,115 @@ size: 2048, 2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-bg_openingtile
+openingscreen_text_tap
   rotate: false
   xy: 2, 2
-  size: 640, 913
-  orig: 640, 913
+  size: 408, 82
+  orig: 408, 82
   offset: 0, 0
   index: -1
-openingscreen_floor
+pillars_entrance_start
   rotate: false
-  xy: 644, 2
-  size: 492, 169
-  orig: 492, 169
-  offset: 0, 0
-  index: -1
-openingscreen_outsidelightADD
-  rotate: false
-  xy: 1138, 2
-  size: 417, 214
-  orig: 417, 214
+  xy: 412, 2
+  size: 132, 89
+  orig: 132, 89
   offset: 0, 0
   index: -1
 openingscreen_relic_shrine_off
   rotate: false
-  xy: 1557, 2
+  xy: 546, 2
   size: 244, 104
   orig: 244, 104
   offset: 0, 0
   index: -1
 openingscreen_relic_shrine_on
   rotate: false
-  xy: 2, 917
+  xy: 792, 2
   size: 244, 104
   orig: 244, 104
   offset: 0, 0
   index: -1
-openingscreen_roots_foreground1
+openingscreen_tourch
   rotate: false
-  xy: 248, 917
-  size: 640, 411
-  orig: 640, 411
+  xy: 1038, 2
+  size: 60, 116
+  orig: 60, 116
+  offset: 0, 0
+  index: -1
+background_entrance pillar
+  rotate: false
+  xy: 1100, 2
+  size: 86, 152
+  orig: 86, 152
+  offset: 0, 0
+  index: -1
+openingscreen_stonedoor
+  rotate: false
+  xy: 1188, 2
+  size: 72, 162
+  orig: 72, 162
+  offset: 0, 0
+  index: -1
+openingscreen_roots_foreground2
+  rotate: false
+  xy: 1262, 2
+  size: 410, 206
+  orig: 410, 206
+  offset: 0, 0
+  index: -1
+openingscreen_outsidelight
+  rotate: false
+  xy: 2, 210
+  size: 417, 214
+  orig: 417, 214
+  offset: 0, 0
+  index: -1
+openingscreen_floor
+  rotate: false
+  xy: 421, 210
+  size: 492, 215
+  orig: 492, 215
   offset: 0, 0
   index: -1
 openingscreen_sleepinggod
   rotate: false
-  xy: 890, 917
+  xy: 915, 210
+  size: 250, 218
+  orig: 250, 218
+  offset: 0, 0
+  index: -1
+openingscreen_sleepinggod_glow
+  rotate: false
+  xy: 1167, 210
   size: 250, 218
   orig: 250, 218
   offset: 0, 0
   index: -1
 openingscreen_sleepinggod_roots
   rotate: false
-  xy: 1142, 917
+  xy: 1419, 210
   size: 250, 218
   orig: 250, 218
   offset: 0, 0
   index: -1
-openingscreen_stonedoor
-  rotate: false
-  xy: 1394, 917
-  size: 72, 162
-  orig: 72, 162
-  offset: 0, 0
-  index: -1
-openingscreen_text_tap
-  rotate: false
-  xy: 1468, 917
-  size: 408, 82
-  orig: 408, 82
-  offset: 0, 0
-  index: -1
 openingscreen_title
   rotate: false
-  xy: 2, 1330
+  xy: 2, 430
   size: 538, 243
   orig: 538, 243
   offset: 0, 0
   index: -1
-openingscreen_tourch
+openingscreen_roots_foreground1
   rotate: false
-  xy: 542, 1330
-  size: 60, 116
-  orig: 60, 116
+  xy: 542, 430
+  size: 640, 411
+  orig: 640, 411
+  offset: 0, 0
+  index: -1
+bg_openingtile
+  rotate: false
+  xy: 1184, 430
+  size: 640, 913
+  orig: 640, 913
   offset: 0, 0
   index: -1

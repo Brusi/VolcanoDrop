@@ -1,13 +1,7 @@
 package com.retrom.volcano.ui;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Event;
 import com.retrom.volcano.assets.Assets;
-import com.retrom.volcano.control.ControlManager;
-import com.retrom.volcano.control.OnScreenPhoneControl;
 import com.retrom.volcano.game.WorldRenderer;
 import com.retrom.volcano.menus.Fade;
 import com.retrom.volcano.menus.GraphicObject;
@@ -43,11 +37,12 @@ public class Splash {
 	
 	public Splash(Hub hub) {
 		this.hub = hub;
-		queue.addTweenFromNow(0, 1, fade.in);
-		queue.addTweenFromNow(1, 1, new Tween.Bounce(new Tween.MovePoint(
+		fade.setAlpha(1);
+		queue.addTweenFromNow(0, 2/3f, new Tween.Bounce(new Tween.MovePoint(
 				title.position_).from(-5, TITLE_INITIAL_Y)
 				.to(-5, TITLE_FINAL_Y)));
-		queue.addEventFromNow(2, new EventQueue.Event() {
+		queue.addTweenFromNow(2/3f, 2/3f, fade.in);
+		queue.addEventFromNow(4/3f, new EventQueue.Event() {
 			@Override
 			public void invoke() {
 				state = State.SHOWING;
@@ -58,9 +53,8 @@ public class Splash {
 	public void update(float deltaTime) {
 		queue.update(deltaTime);
 		stateTime += deltaTime;
-		if (state == State.SHOWING) {
-			tapToStart.position_.x = ((stateTime % 1 > 0.5f && stateTime > 2) ? 10000 : 0);
-		}
+		if (stateTime > 4f/3) stateTime -= 4f/3;
+		tapToStart.position_.x = stateTime > 2/3f ? 0 : 100000;
 	}	
 
 	public void render(SpriteBatch batch) {

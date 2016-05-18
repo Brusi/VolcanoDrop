@@ -61,11 +61,11 @@ public class GameUiRenderer {
 	private void renderSplash() {
 		if (splash_ != null) {
 			BatchUtils.setBlendFuncNormal(batch_);
+			splash_.fade.render(shapes_);
+
 			batch_.begin();
 			splash_.render(batch_);
 			batch_.end();
-
-			splash_.fade.render(shapes_);
 		}
 	}
 

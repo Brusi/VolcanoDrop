@@ -232,8 +232,18 @@ public class WorldRenderer {
 			case PILLAR_HOLE_BG:
 				keyFrame = Assets.pillars_hole_bg;
 				break;
+			case PILLAR_OPENING_GAP:
+				keyFrame = null;
+				break;
+			case PILLAR_OPENING_TOP:
+				keyFrame = Assets.openingDoorTop;
+				break;
 			case BACKGROUND_BASE:
 				keyFrame = Assets.background;
+				keyFrame.rotate(30f);
+				break;
+			case BACKGROUND_OPENING:
+				keyFrame = Assets.opening_background;
 				keyFrame.rotate(30f);
 				break;
 			case BACKGROUND_WORLD1_1:
@@ -279,8 +289,10 @@ public class WorldRenderer {
 //				Gdx.app.log("ERROR", "Unhandled pillar type: " + e);
 				break;
 			}
-			keyFrame.setFlip(flip, false);
-			drawTasks.addFirst(new DrawTask(keyFrame, x, y));
+			if (keyFrame != null) {
+				keyFrame.setFlip(flip, false);
+				drawTasks.addFirst(new DrawTask(keyFrame, x, y));
+			}
 			y += e.height();
 		}
 		for (DrawTask task : drawTasks) {
@@ -304,6 +316,7 @@ public class WorldRenderer {
 		renderCoins();
 		renderRelic();
 		renderFloor();
+		renderOpening();
 		
 		drawPillar(world.background.leftPillar, -PILLAR_POS, world.background.leftBaseY(), false);
 		drawPillar(world.background.rightPillar, PILLAR_POS, world.background.rightBaseY(), true);
@@ -605,6 +618,13 @@ public class WorldRenderer {
 		drawCenterBottom(Assets.floor, 0, -90);
 		drawCenter(Assets.pillars_big.get(0), 0, -149);
 		drawCenter(Assets.pillars_end, 0, -260);
+	}
+	
+	private void renderOpening() {
+//		world.opening.render(batch);
+//		drawCenterBottom(Assets.floor, 0, -90);
+//		drawCenter(Assets.pillars_big.get(0), 0, -149);
+//		drawCenter(Assets.pillars_end, 0, -260);
 	}
 
 	private void renderWalls() {

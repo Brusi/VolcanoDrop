@@ -153,7 +153,7 @@ public class World {
 	float quakeX;
 
 	public Background background = new Background();
-	
+	public Opening opening;
 
 	final public List<Effect> addEffectsUnder = new ArrayList<Effect>();
 	final public List<Effect> effects = new ArrayList<Effect>();
@@ -184,9 +184,10 @@ public class World {
 
 	public interface WorldListener {
 		public void restart();
+		public void startGame();
 	}
 	
-	public World (WorldListener listener) {
+	public World(WorldListener listener) {
 		this.listener_ = listener;
 		this.player = new Player(-200, 0 + Player.HEIGHT / 2, new Player.HitRectHandler() {
 			@Override
@@ -556,6 +557,7 @@ public class World {
 	private void startGame() {
 		gameState = State.GAME;
 		setGameTime(0);
+		listener_.startGame();
 	}
 
 	private Set<Wall> underlava = new HashSet<Wall>();
