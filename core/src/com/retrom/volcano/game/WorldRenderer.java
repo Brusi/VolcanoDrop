@@ -321,6 +321,8 @@ public class WorldRenderer {
 		
 		drawPillar(world.background.leftPillar, -PILLAR_POS, world.background.leftBaseY(), false);
 		drawPillar(world.background.rightPillar, PILLAR_POS, world.background.rightBaseY(), true);
+		
+		world.opening.renderForeground(batch);
 
 		batch.end();
 		renderLava();

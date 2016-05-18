@@ -32,7 +32,7 @@ public abstract class MenuButton {
 	
 	// Check if button is clicked, if it does, invoke action and return true.
 	public boolean checkClick() {
-		if (!visible) {
+		if (!visible || alpha_ == 0) {
 			pressed = false; 
 			return false;
 		}

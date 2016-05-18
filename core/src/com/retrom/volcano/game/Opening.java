@@ -33,6 +33,13 @@ public class Opening {
 	private final LoopingGraphicObject leftTorchFire = new LoopingGraphicObject(Assets.openingTorchFire, -210, 450);
 	private final LoopingGraphicObject rightTorchFire = new LoopingGraphicObject(Assets.openingTorchFire, 210, 450);
 	
+	private final StaticGraphicObject bossSleeps = new StaticGraphicObject(Assets.openingBossSleeps, 140, 94);
+	private final StaticGraphicObject bossSleepsGlow = new StaticGraphicObject(Assets.openingBossSleepsGlow, 140, 94);
+	private final StaticGraphicObject bossSleepsRoots = new StaticGraphicObject(Assets.openingBossSleepsRoots, 140, 94);
+	
+	private final StaticGraphicObject fgRoots1 = new StaticGraphicObject(Assets.openingForegroundRoots1, 0, 292); 
+	private final StaticGraphicObject fgRoots2 = new StaticGraphicObject(Assets.openingForegroundRoots2, -115, -92);
+	
 	float doorLightScale = 1;
 	
 	public Opening() {
@@ -56,6 +63,10 @@ public class Opening {
 	private boolean isRelicTaken = false;
 	
 	public void render(SpriteBatch batch) {
+		bossSleeps.render(batch);
+		bossSleepsGlow.render(batch);
+		bossSleepsRoots.render(batch);
+		
 		if (isRelicTaken) {
 			shrineOff.render(batch);
 		} else {
@@ -65,7 +76,7 @@ public class Opening {
 		renderDoorLight(batch);
 		leftTorch.render(batch);
 		rightTorch.render(batch);
-		if (isRelicTaken) {
+		if (!isRelicTaken) {
 			BatchUtils.setBlendFuncAdd(batch);
 			leftTorchFire.render(batch);
 			rightTorchFire.render(batch);
@@ -76,6 +87,11 @@ public class Opening {
 	public void renderTop(SpriteBatch batch) {
 		door.render(batch);
 		floor.render(batch);
+	}
+	
+	public void renderForeground(SpriteBatch batch) {
+		fgRoots1.render(batch);
+		fgRoots2.render(batch);
 	}
 
 	private void renderDoorLight(SpriteBatch batch) {

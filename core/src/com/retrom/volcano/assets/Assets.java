@@ -70,6 +70,12 @@ public class Assets {
 	public static Sprite openingTorch;
 	public static Array<Sprite> openingTorchFire;
 	
+	public static Sprite openingBossSleeps;
+	public static Sprite openingBossSleepsGlow;
+	public static Sprite openingBossSleepsRoots;
+	public static Sprite openingForegroundRoots1;
+	public static Sprite openingForegroundRoots2;
+	
 	public static Sprite coin1_1;
 	public static Array<Sprite> coin1_1_land;
 	public static Sprite coin1_2;
@@ -437,6 +443,13 @@ public class Assets {
 		openingShrineOff = openingSheet.createSprite("openingscreen_relic_shrine_off");
 		openingTorch = openingSheet.createSprite("openingscreen_tourch");
 		openingTorchFire = openingSheet.createSprites("torch_fire");
+		
+		openingBossSleeps = openingSheet.createSprite("openingscreen_sleepinggod");
+		openingBossSleepsGlow = openingSheet.createSprite("openingscreen_sleepinggod_glow");
+		openingBossSleepsRoots = openingSheet.createSprite("openingscreen_sleepinggod_roots");
+		
+		openingForegroundRoots1 = openingSheet.createSprite("openingscreen_roots_foreground1");
+		openingForegroundRoots2 = openingSheet.createSprite("openingscreen_roots_foreground2");
 		
 		TextureAtlas treasure = new TextureAtlas("treasure/treasure.txt");
 		
