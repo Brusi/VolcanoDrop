@@ -28,7 +28,7 @@ public class Background {
 		PILLAR_HOLE(76f),
 		PILLAR_HOLE_BG(0),
 		
-		PILLAR_OPENING_GAP(162f),
+		PILLAR_OPENING_GAP(152f),
 		PILLAR_OPENING_TOP(89f),
 		
 		BACKGROUND_OPENING(913f),
@@ -115,7 +115,8 @@ public class Background {
 	private static final Random rand = new Random();
 	
 	public static final float HEIGHT = 800f; 
-	public static final float BASE = -192f;
+	public static final float BG_BASE = -192f;
+	public static final float PILLAR_BASE = -263f;
 	
 	// The minimal y value from which holes start to appear on walls.
 	private static final float HOLE_MIN_HEIGHT = 900f;
@@ -136,9 +137,9 @@ public class Background {
 	
 	boolean last_bg_is_overlay_ = false;
 	
-	private float leftBaseY_ = BASE;
-	private float rightBaseY_ = BASE;
-	private float bgBaseY_ = BASE;
+	private float leftBaseY_ = PILLAR_BASE;
+	private float rightBaseY_ = PILLAR_BASE;
+	private float bgBaseY_ = BG_BASE;
 	private float y_ = 0f;
 	
 	private final boolean has_opening_scene = true; 
@@ -152,6 +153,7 @@ public class Background {
 	private void initOpeningScene() {
 		addElement(Element.BACKGROUND_OPENING);
 		
+		addToLeftPillar(Element.pillar());
 		addToLeftPillar(Element.PILLAR_END);
 		addToLeftPillar(Element.bigPillar());
 		addToLeftPillar(Element.PILLAR_OPENING_GAP);
@@ -161,6 +163,18 @@ public class Background {
 		addToLeftPillar(Element.bigPillar());
 		addToLeftPillar(Element.bigPillar());
 		addToLeftPillar(Element.PILLAR_START);
+		
+		addToRightPillar(Element.pillar());
+		addToRightPillar(Element.PILLAR_END);
+		addToRightPillar(Element.bigPillar());
+		addToRightPillar(Element.bigPillar());
+		addToRightPillar(Element.PILLAR_START);
+		addToRightPillar(Element.pillar());
+		addToRightPillar(Element.pillar());
+		addToRightPillar(Element.pillar());
+		addToRightPillar(Element.PILLAR_END);
+		addToRightPillar(Element.bigPillar());
+		addToRightPillar(Element.PILLAR_START);
 	}
 	
 	private void addToLeftPillar(Element e) {
@@ -274,7 +288,7 @@ public class Background {
 //			pillar.addLast(Element.PILLAR_HOLE_BG);
 			pillar.addLast(Element.PILLAR_HOLE);
 			heightAdded += Element.PILLAR_HOLE.height();
-			holeList.addLast(height + BASE);
+			holeList.addLast(height + PILLAR_BASE);
 			return heightAdded;
 		}
 		

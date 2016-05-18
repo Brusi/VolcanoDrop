@@ -305,6 +305,7 @@ public class WorldRenderer {
 		BatchUtils.setBlendFuncNormal(batch);
 		batch.begin();
 		renderPillarBg();
+		world.opening.render(batch);
 		renderWalls();
 		BatchUtils.setBlendFuncAdd(batch);
 		renderEffects(world.addEffectsUnder);
@@ -314,9 +315,9 @@ public class WorldRenderer {
 		renderEnemies();
 		renderGoldSacks();
 		renderCoins();
+		world.opening.renderTop(batch);
 		renderRelic();
-		renderFloor();
-		renderOpening();
+		
 		
 		drawPillar(world.background.leftPillar, -PILLAR_POS, world.background.leftBaseY(), false);
 		drawPillar(world.background.rightPillar, PILLAR_POS, world.background.rightBaseY(), true);
@@ -612,19 +613,6 @@ public class WorldRenderer {
 				s.draw(batch);
 			}
 		}
-	}
-
-	private void renderFloor() {
-		drawCenterBottom(Assets.floor, 0, -90);
-		drawCenter(Assets.pillars_big.get(0), 0, -149);
-		drawCenter(Assets.pillars_end, 0, -260);
-	}
-	
-	private void renderOpening() {
-//		world.opening.render(batch);
-//		drawCenterBottom(Assets.floor, 0, -90);
-//		drawCenter(Assets.pillars_big.get(0), 0, -149);
-//		drawCenter(Assets.pillars_end, 0, -260);
 	}
 
 	private void renderWalls() {

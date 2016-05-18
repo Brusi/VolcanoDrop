@@ -62,8 +62,13 @@ public class Assets {
 	public static Sprite opening_background;
 	public static Sprite openingDoor;
 	public static Sprite openingDoorTop;
+	public static Sprite openingDoorBg;
 	public static Sprite openingDoorLight;
 	public static Sprite openingFloor;
+	public static Sprite openingShrineOn;
+	public static Sprite openingShrineOff;
+	public static Sprite openingTorch;
+	public static Array<Sprite> openingTorchFire;
 	
 	public static Sprite coin1_1;
 	public static Array<Sprite> coin1_1_land;
@@ -425,8 +430,13 @@ public class Assets {
 		opening_background = openingSheet.createSprite("bg_openingtile");
 		openingDoor = openingSheet.createSprite("openingscreen_stonedoor");
 		openingDoorTop = openingSheet.createSprite("pillars_entrance_start");
+		openingDoorBg = openingSheet.createSprite("background_entrance_pillar");
 		openingDoorLight = openingSheet.createSprite("openingscreen_outsidelight");
 		openingFloor = openingSheet.createSprite("openingscreen_floor");
+		openingShrineOn = openingSheet.createSprite("openingscreen_relic_shrine_on");
+		openingShrineOff = openingSheet.createSprite("openingscreen_relic_shrine_off");
+		openingTorch = openingSheet.createSprite("openingscreen_tourch");
+		openingTorchFire = openingSheet.createSprites("torch_fire");
 		
 		TextureAtlas treasure = new TextureAtlas("treasure/treasure.txt");
 		

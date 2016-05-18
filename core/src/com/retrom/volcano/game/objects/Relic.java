@@ -9,7 +9,7 @@ import com.retrom.volcano.game.WorldRenderer;
 public class Relic extends GameObject {
 
 	public Relic() {
-		super(0, 200, 50, 80);
+		super(0, 144, 50, 80);
 	}
 	
 	float stateTime = 0;

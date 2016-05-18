@@ -95,7 +95,7 @@ public class Utils {
 		sprite.setPosition(x - sprite.getRegionWidth()/2, y - sprite.getRegionHeight()/2);
 		sprite.draw(batch);
 	}
-
+	
 	public static Map<Integer, Sprite> createSpritesIndexMap(
 			TextureAtlas sheet, String name) {
 		Map<Integer, Sprite> prices = new HashMap<Integer, Sprite>();

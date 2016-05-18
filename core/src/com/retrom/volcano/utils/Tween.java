@@ -31,6 +31,21 @@ public interface Tween {
 		}
 	}
 	
+	public static class EaseBoth implements Tween {
+		private final Tween tween;
+
+		public EaseBoth(Tween tween) {
+			this.tween = tween;
+		}
+
+		@Override
+		public void invoke(float t) {
+			float s = (float) ((Math.cos(t * Math.PI - Math.PI) + 1) / 2);
+			System.out.println("s="+s);
+			tween.invoke(s);
+		}
+	}
+	
 	public static class MovePoint implements Tween {
 		private Vector2 point;
 		private float from_x;

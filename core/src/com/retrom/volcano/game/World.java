@@ -153,7 +153,7 @@ public class World {
 	float quakeX;
 
 	public Background background = new Background();
-	public Opening opening;
+	public Opening opening = new Opening();
 
 	final public List<Effect> addEffectsUnder = new ArrayList<Effect>();
 	final public List<Effect> effects = new ArrayList<Effect>();
@@ -509,6 +509,7 @@ public class World {
 		}
 		
 		
+		updateOpening(deltaTime);
 		updateQuake(deltaTime);
 		updateLava(deltaTime);
 		updateRelic(deltaTime);
@@ -542,6 +543,10 @@ public class World {
 		rightWall_.y = player.bounds.y - rightWall_.height/2;
 	}
 	
+	private void updateOpening(float deltaTime) {
+		opening.update(deltaTime);
+	}
+
 	private void updateRelic(float deltaTime) {
 		if (relic_ == null) {
 			return;
@@ -550,6 +555,8 @@ public class World {
 		if (player.bounds.overlaps(relic_.bounds)) {
 			// TODO: add effects.
 			relic_ = null;
+			opening.startScene();
+			// TODO: start only after start scene ends.
 			startGame();
 		}
 	}
