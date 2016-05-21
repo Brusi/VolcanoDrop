@@ -84,7 +84,7 @@ public class WorldRenderer {
 	
 	private static final List<Integer> wallBounceArray = Arrays.asList(1,6,8,6,3,1,2,3,2,0,1,0);
 	
-	private static final float PILLAR_POS = FRUSTUM_WIDTH / 2 - 40;
+	public static final float PILLAR_POS = FRUSTUM_WIDTH / 2 - 38;
 	
 	
 	World world;
@@ -113,13 +113,12 @@ public class WorldRenderer {
 
 		if (!isPaused) {
 			cam_target = world.camTarget;
-//			if (cam_position < cam_target) {
+			if (cam_position < cam_target) {
 				cam_position += (cam_target - cam_position) * deltaTime / 2;
-//			} else if (cam_position > cam_target + 50) {
-//				// Set minimum height
-////				cam_position = this.cam.position.y = cam_target + 50;
-//			}
-
+			} else {
+				cam_position += Math.min(-0.4, (cam_target - cam_position) * deltaTime * 1.7f);
+			}
+			
 			cam.position.y = snapToY(cam_position);
 			cam.position.x = world.quakeX;
 			cam.update();
@@ -621,10 +620,10 @@ public class WorldRenderer {
 		for (Wall wall : world.walls_) {
 			float y = wall.position.y;
 			// TODO: reuse array for performence.
-			TextureRegion[] keyFrame = new TextureRegion[1];
+			Sprite[] keyFrame = new Sprite[1];
 			if (wall instanceof StackWall) {
 				StackWall sw = (StackWall)wall;
-				keyFrame = new TextureRegion[wall.getHeight()];
+				keyFrame = new Sprite[wall.getHeight()];
 				for (int i=0; i < keyFrame.length; i++) {
 					keyFrame[i] = Assets.walls1.get(sw.graphics_[i]);
 				}
@@ -690,7 +689,7 @@ public class WorldRenderer {
 		return null;
 	}
 	
-	private TextureRegion getCoinKeyFrame(Collectable.Type type) {
+	private Sprite getCoinKeyFrame(Collectable.Type type) {
 		switch(type) {
 		case BRONZE_1: return Assets.coin1_1;
 		case BRONZE_2: return Assets.coin1_2;
@@ -730,7 +729,7 @@ public class WorldRenderer {
 	
 	private void renderCoins() {
 		for (Collectable coin : world.collectables_) {
-			TextureRegion keyFrame = null;
+			Sprite keyFrame = null;
 			if (coin.isPowerup() || coin.state() != Collectable.STATUS_IDLE) {
 				keyFrame = getCoinKeyFrame(coin.type);
 			} else {
@@ -899,17 +898,17 @@ public class WorldRenderer {
 		return anim.get(frameIndex);
 	}
 	
-	private void drawCenterBottom(TextureRegion keyFrame, float x, float y) {
-		drawCenter(keyFrame, x, y + keyFrame.getRegionHeight()/2);
+	private void drawCenterBottom(Sprite keyFrame, float x, float y) {
+		drawCenter(keyFrame, x, y + keyFrame.getHeight()/2);
 	}
 	
-	private void drawCenter(TextureRegion keyFrame, Vector2 position) {
+	private void drawCenter(Sprite keyFrame, Vector2 position) {
 		drawCenter(keyFrame, position.x, position.y);
 	}
 	
-	private  void drawCenter(TextureRegion keyFrame, float x, float y) {
+	private  void drawCenter(Sprite keyFrame, float x, float y) {
 		y = snapToY(y);
-		batch.draw(keyFrame, x - keyFrame.getRegionWidth()/2, y - keyFrame.getRegionHeight()/2);
+		batch.draw(keyFrame, x - keyFrame.getWidth()/2, y - keyFrame.getHeight()/2);
 	}
 	
 	public static float snapToY(float y) {

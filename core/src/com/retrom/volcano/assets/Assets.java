@@ -170,6 +170,11 @@ public class Assets {
 	
 	public static Sprite hotBrick;
 	
+	// opening vfx;
+	public static Array<Sprite> relic_flames;
+	public static Sprite relic_glow;
+	
+	
 	// Glow:
 	public static Sprite burningWallGlow;
 	
@@ -575,6 +580,10 @@ public class Assets {
 		
 		powerupMagnetAppearSparkReversed = new Array<Sprite>(powerupMagnetAppearSpark);
 		powerupMagnetAppearSparkReversed.reverse();
+		
+		TextureAtlas openingVfxSheet = new TextureAtlas("vfx/openingvfx.txt");
+		relic_flames = openingVfxSheet.createSprites("flames_circle");
+		relic_glow = openingVfxSheet.createSprite("relic_glow");
 		
 		TextureAtlas powerupSheet = new TextureAtlas("vfx/powerup.txt");
 		magnetBackGlow = powerupSheet.createSprite("powerup_magnet_backglow");

@@ -21,8 +21,11 @@ public class OnScreenPhoneControl extends AbstractControl {
 	private boolean right_just_touched = false;
 	
 	private final ControlInput input;
-	
-	private float alpha = 1;
+	private float slide_ = 1;
+	private float sides_scale = 1;
+	private float jump_scale = 1;
+	private boolean show;
+	private boolean enabled;
 	
 	OnScreenPhoneControl(ControlInput input) {
 		this.input = input;
@@ -70,11 +73,18 @@ public class OnScreenPhoneControl extends AbstractControl {
 	}
 	
 	private boolean leftTouched() {
+		if (!enabled) return false;
 		return input.isLeftPressed();
 	}
 	
 	private boolean rightTouched() {
+		if (!enabled) return false;
 		return input.isRightPressed();
+	}
+	
+	private boolean upTouched() {
+		if (!enabled) return false;
+		return input.isJumpPressed();
 	}
 	
 	// We don't want 'up' to be touched continuously, so we want to sample only
@@ -112,10 +122,6 @@ public class OnScreenPhoneControl extends AbstractControl {
 		return $;
 	}
 	
-	private boolean upTouched() {
-		return input.isJumpPressed();
-	}
-	
 	static void drawAtCenterOfRect(SpriteBatch batch, Sprite sprite, Rectangle rect) {
 		drawAtCenterOfRect(batch, sprite, rect, 0, 0);
 	}
@@ -134,37 +140,35 @@ public class OnScreenPhoneControl extends AbstractControl {
 	
 	@Override
 	public void render(SpriteBatch batch) {
+		if (!show) {
+			return;
+		}
 		final float mid_x = -WorldRenderer.FRUSTUM_WIDTH / 2 + ControlInput.MID_X_90;
 		final float mid_y = -WorldRenderer.FRUSTUM_HEIGHT / 2 + 72;
 		{
 			Sprite s = Assets.leftRightControlBg;
-			s.setScale(0.9f);
-			s.setAlpha(alpha);
+			s.setScale(0.9f * sides_scale);
 			drawAtCenter(batch, s, mid_x, mid_y);
 		}
 		{
 			Sprite s = leftTouched() ? Assets.leftControlOn : Assets.leftControlOff;
-			s.setScale(0.9f);
-			s.setAlpha(alpha);
-			drawAtCenter(batch, s, mid_x - 78, mid_y);
+			s.setScale(0.9f * sides_scale);
+			drawAtCenter(batch, s, mid_x -78 * sides_scale, mid_y);
 		}
 		{
 			Sprite s = rightTouched() ? Assets.rightControlOn : Assets.rightControlOff;
-			s.setScale(0.9f);
-			s.setAlpha(alpha);
-			drawAtCenter(batch, s, mid_x + 78, mid_y);
+			s.setScale(0.9f * sides_scale);
+			drawAtCenter(batch, s, mid_x + 78 * sides_scale, mid_y);
 		}
 		{
 			Sprite s = Assets.leftRightControlOver;
-			s.setScale(0.9f);
-			s.setAlpha(alpha);
+			s.setScale(0.9f * sides_scale);
 			drawAtCenter(batch, s, mid_x + 3, mid_y + 3);
 		}
 		
 		{
 			Sprite s = upTouched() ? Assets.jumpControlOn : Assets.jumpControlOff;
-			s.setScale(0.9f);
-			s.setAlpha(alpha);
+			s.setScale(0.9f * jump_scale);
 			drawAtCenter(batch, s, WorldRenderer.FRUSTUM_WIDTH / 2 - 76, mid_y);
 		}
 	}
@@ -179,7 +183,48 @@ public class OnScreenPhoneControl extends AbstractControl {
 		return right_just_touched;
 	}
 	
-	public void setAlpha(float alpha) {
-		this.alpha = alpha;
+	@Override
+	public void setSlide(float slide) {
+		this.slide_ = slide;
 	}
+	
+	@Override
+	public void setSidesButtonsScale(float scale) {
+		sides_scale = scale;
+	}
+	
+	@Override
+	public void setJumpButtonScale(float scale) {
+		jump_scale = scale; 
+	}
+	
+	@Override
+	public void show() {
+		show = true;
+	}
+	
+	@Override
+	public void hide() {
+		show = false;
+	}
+	
+	@Override
+	public void enable() {
+		enabled = true;
+	}
+	
+	@Override
+	public void disable() {
+		enabled = false;
+	}
+	
+	@Override
+	public void reset() {
+		enabled = false;
+		show = false;
+		sides_scale = 0;
+		jump_scale = 0;
+		slide_ = 1;
+	}
+	
 }

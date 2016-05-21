@@ -2,6 +2,7 @@ package com.retrom.volcano.ui;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.assets.Assets;
+import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.game.WorldRenderer;
 import com.retrom.volcano.menus.Fade;
 import com.retrom.volcano.menus.GraphicObject;
@@ -48,6 +49,14 @@ public class Splash {
 				state = State.SHOWING;
 			}
 		});
+		
+		queue.addEventFromNow(1/3f, new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				SoundAssets.startMenuMusic();
+				SoundAssets.playRandomSound(SoundAssets.wallDualHit);
+			}
+		});
 	}
 	
 	public void update(float deltaTime) {
@@ -80,15 +89,6 @@ public class Splash {
 			}
 		});
 		
-		showControls();
-	}
-	
-	private void showControls() {
-		queue.addTweenFromNow(1.5f, 1f, new Tween() {
-			@Override
-			public void invoke(float t) {
-				hub.setAlpha(t);
-			}
-		});
+		hub.showBeforeSplash();
 	}
 }

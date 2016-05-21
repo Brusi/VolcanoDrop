@@ -78,7 +78,6 @@ public class GameUiRenderer {
 	}
 
 	private void renderControls() {
-		ControlManager.getControl().setAlpha(scoreHub_.getAlpha());
 		ControlManager.getControl().render(batch_);
 	}
 

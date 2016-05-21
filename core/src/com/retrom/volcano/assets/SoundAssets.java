@@ -15,6 +15,7 @@ public class SoundAssets {
 	public static long musicid;
 	
 	public static Music shopMusic;
+	public static Music menuMusic;
 	
 	public static Sound[] playerJump;
 	public static Sound[] playerJumpIntense;
@@ -32,6 +33,8 @@ public class SoundAssets {
 	public static Sound[] coinsCollectRing;
 	public static Sound coinsCollectGoldMask;
 	public static Sound coinsCollectBigToken;
+	
+	public static Sound coinsRelic;
 	
 	public static Sound coinSackStart;
 	public static Sound[] coinSackHit;
@@ -64,6 +67,7 @@ public class SoundAssets {
 	public static Sound warning;
 	
 	public static Sound shopClick;
+	public static Sound shopShamanOpenPop;
 	
 	public static Sound[] rockLava;
 	public static Sound coinLava;
@@ -71,11 +75,10 @@ public class SoundAssets {
 	
 	private static Random rand = new Random();
 	
-	private static final boolean ENABLE_OVERALL_SOUNDS = false; 
+	private static final boolean ENABLE_OVERALL_SOUNDS = true; 
 	
 	private final static SoundEvictingQueue currentlyPlaying = new SoundEvictingQueue(40);
 	private static float pitch = 1f;
-	
 	
 	public static void load() {
 		if (!ENABLE_OVERALL_SOUNDS) {
@@ -88,6 +91,9 @@ public class SoundAssets {
 		
 		shopMusic = Gdx.audio.newMusic(Gdx.files.internal("music/shop.mp3"));
 		shopMusic.setLooping(true);
+		
+		menuMusic = Gdx.audio.newMusic(Gdx.files.internal("music/menu.mp3"));
+		menuMusic.setLooping(true);
 		
 		playerJump = new Sound[] {newSound("player_jump_0a.wav"), newSound("player_jump_0b.wav")};
 		playerJumpIntense = new Sound[] {newSound("player_jump_1.wav"), newSound("player_jump_2.wav"), newSound("player_jump_3.wav"), newSound("player_jump_4.wav")};
@@ -121,6 +127,8 @@ public class SoundAssets {
 		
 		coinsCollectBigToken = newSound("coins_collect_bigtoken.wav");
 		coinsCollectGoldMask = newSound("coins_collect_goldmask.wav");
+		
+		coinsRelic = newSound("coins_relic.wav");
 		
 		coinSackStart = newSound("coins_sack_start.wav");
 		coinSackHit = new Sound[] { newSound("coins_sack_hit_1.wav"), newSound("coins_sack_hit_2.wav") };
@@ -159,6 +167,7 @@ public class SoundAssets {
 		warning = newSound("warning.wav");
 		
 		shopClick = newSound("menus_shop_click.wav");
+		shopShamanOpenPop = newSound("shop_shaman_openpop.wav");
 		
 		rockLava = new Sound[] { newSound("x1_rock_lava1.wav"), newSound("x1_rock_lava2.wav") };
 		coinLava = newSound("coins_burned.wav");
@@ -223,8 +232,16 @@ public class SoundAssets {
 			}
 		});
 		currentlyPlaying.clear();
+		
+		stopAllMusic();
 	}
 	
+	private static void stopAllMusic() {
+		gameMusic.stop();
+		menuMusic.stop();
+		shopMusic.stop();
+	}
+
 	public static void setPitch(float newPitch) {
 		if (newPitch == pitch) {
 			return;
@@ -263,11 +280,10 @@ public class SoundAssets {
 	
 	public static void startMusic() {
 		if (!ENABLE_OVERALL_SOUNDS) return;
-		shopMusic.stop();
+		stopAllMusic();
 		if (!Settings.soundEnabled.on()) {
 			return;
 		}
-		gameMusic.stop();
 		gameMusic.play();
 	}
 
@@ -299,7 +315,18 @@ public class SoundAssets {
 		if (!Settings.soundEnabled.on()) {
 			return;
 		}
-		gameMusic.stop();
+		stopAllMusic();
+		
 		shopMusic.play();
+	}
+	
+	public static void startMenuMusic() {
+		if (!ENABLE_OVERALL_SOUNDS) return;
+		stopAllMusic();
+		if (!Settings.soundEnabled.on()) {
+			return;
+		}
+		
+		menuMusic.play();
 	}
 }

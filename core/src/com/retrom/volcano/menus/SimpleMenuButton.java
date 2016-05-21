@@ -27,6 +27,7 @@ public class SimpleMenuButton extends MenuButton {
 		}
 		Sprite s = isPressed() ? sprite_pressed_ : sprite_;
 		s.setAlpha(alpha_);
+		s.setScale(scale_);
 		Utils.drawCenter(batch, s, getX(), getY());
 	}
 }

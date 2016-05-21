@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.assets.SoundAssets;
+import com.retrom.volcano.control.ControlManager;
 import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.game.Settings;
 import com.retrom.volcano.game.World;
@@ -84,6 +85,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		
 		worldRenderer_ = new WorldRenderer(batch_, world_);
 		uiRenderer_ = new GameUiRenderer(hub_, world_, pauseMenu_, splash_);
+		ControlManager.getControl().reset();
 	}
 	
 	private void restartGame() {

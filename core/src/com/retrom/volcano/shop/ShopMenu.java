@@ -106,11 +106,11 @@ public class ShopMenu {
 		
 		tweens.addTweenFromNow(1, 1f, new Tween.Bounce(new Tween.MovePoint(menuBg.position_).from(1, menuStartYPos).to(1, menuFinalYPos)));
 		tweens.addTweenFromNow(1, 1f, new Tween.Bounce(new Tween.MovePoint(menuFg.position_).from(1, menuStartYPos-10).to(1, menuFinalYPos)));
-		tweens.addTweenFromNow(1.5f, 0.6f, new Tween() {
+		tweens.addTweenFromNow(1.5f, 0.6f, new Tween.Bubble(new Tween() {
 			@Override
 			public void invoke(float t) {
-				goldCounter.setAlpha(t);
-			}});
+				goldCounter.setScale(t);
+			}}));
 	}
 
 	public void update(float deltaTime) {

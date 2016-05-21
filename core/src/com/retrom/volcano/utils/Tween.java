@@ -31,10 +31,10 @@ public interface Tween {
 		}
 	}
 	
-	public static class EaseBoth implements Tween {
+	public static class EaseBothSin implements Tween {
 		private final Tween tween;
 
-		public EaseBoth(Tween tween) {
+		public EaseBothSin(Tween tween) {
 			this.tween = tween;
 		}
 
@@ -45,6 +45,74 @@ public interface Tween {
 			tween.invoke(s);
 		}
 	}
+	
+	public static class EaseBothQuad implements Tween {
+		private final Tween tween;
+
+		public EaseBothQuad(Tween tween) {
+			this.tween = tween;
+		}
+		
+		private float getValue(float t) {
+			if (t < 0.5f) {
+				float s = t * 2;
+				return s*s / 2;
+			}
+			
+			float s = (t - 0.5f) * 2;
+			return (1-(1-s)*(1-s)) * 0.5f + 0.5f;
+			
+		}
+
+		@Override
+		public void invoke(float t) {
+			tween.invoke(getValue(t));
+		}
+	}
+	
+	public static class EaseBoth2 implements Tween {
+		private final Tween tween;
+
+		public EaseBoth2(Tween tween) {
+			this.tween = tween;
+		}
+
+		@Override
+		public void invoke(float t) {
+			if (t < 0.5f) {
+				float s = t * 2;
+				float r = (float) ((Math.cos(s * Math.PI - Math.PI) + 1) / 2);
+				tween.invoke(r * 0.95f);
+				return;
+			} else {
+				float s = (t - 0.5f) * 2;
+				float r = s * 0.05f + 0.95f;
+				tween.invoke(r);
+			}
+		}
+	}
+
+	
+	public static class Bubble implements Tween {
+		private final Tween tween;
+
+		public Bubble(Tween tween) {
+			this.tween = tween;
+		}
+		
+		private float getValue(float t) {
+			if (t < 0.7f) {
+				return t / 0.7f * 1.2f;
+			}
+			return 1 + (1 - (t - 0.7f) / 0.3f) * 0.2f;
+		}
+
+		@Override
+		public void invoke(float t) {
+			tween.invoke(getValue(t));
+		}
+	}
+	
 	
 	public static class MovePoint implements Tween {
 		private Vector2 point;

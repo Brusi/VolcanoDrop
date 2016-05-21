@@ -557,7 +557,10 @@ public class World {
 			relic_ = null;
 			opening.startScene();
 			// TODO: start only after start scene ends.
-			startGame();
+//			startGame();
+			// TODO: fade music out.
+			SoundAssets.stopAllSounds();
+			SoundAssets.playSound(SoundAssets.coinsRelic);
 		}
 	}
 

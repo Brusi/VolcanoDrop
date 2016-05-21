@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.retrom.volcano.game.objects.Wall;
 
 /**
  * A class for generating environment images.
@@ -116,8 +115,7 @@ public class Background {
 	
 	public static final float HEIGHT = 800f; 
 	public static final float BG_BASE = -192f;
-	public static final float PILLAR_BASE = -263f;
-	
+	public static final float PILLAR_BASE = -259f; // TODO: draw opening accordingly.
 	// The minimal y value from which holes start to appear on walls.
 	private static final float HOLE_MIN_HEIGHT = 900f;
 	

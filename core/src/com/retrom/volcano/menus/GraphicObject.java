@@ -10,6 +10,7 @@ public abstract class GraphicObject {
 	protected float stateTime_;
 	
 	float alpha_ = 1;
+	float tint_ = 1;
 	
 	public GraphicObject(float x, float y) {
 		position_ = new Vector2(x, y);
@@ -26,11 +27,15 @@ public abstract class GraphicObject {
 		this.alpha_ = alpha;
 	}
 	
+	public void setTint(float alpha) {
+		this.tint_ = alpha;
+	}
+	
 	public void render(SpriteBatch batch) {
 		Sprite s = getSprite();
 		s.setPosition(position_.x - s.getWidth() / 2, position_.y - s.getHeight() / 2);
 		s.setFlip(false, false);
-		s.setColor(1,1,1,1);
+		s.setColor(tint_,tint_,tint_,1);
 		s.setAlpha(alpha_);
 		s.draw(batch);
 	}

@@ -33,7 +33,36 @@ public abstract class AbstractControl {
 		return;
 	}
 	
-	public void setAlpha(float alpha) {
+	public void show() {
+		
+	}
+	
+	public void hide() {
+		
+	}
+	
+	public void enable() {
+		
+	}
+	
+	public void disable() {
+		
+	}
+	
+	// Set slide position. 1 is completely in, 0 is completely out.
+	public void setSlide(float slide) {
 		// Do nothing; not all controls have graphics.
+	}
+	
+	public void setSidesButtonsScale(float scale) {
+		// Do nothing; not all controls have graphics.
+	}
+	
+	public void setJumpButtonScale(float scale) {
+		// Do nothing; not all controls have graphics.
+	}
+
+	public void reset() {
+		// Do nothing... not all controls need resetting.
 	}
 }
