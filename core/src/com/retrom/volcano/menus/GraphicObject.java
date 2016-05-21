@@ -11,6 +11,8 @@ public abstract class GraphicObject {
 	
 	float alpha_ = 1;
 	float tint_ = 1;
+	float scaleX_ = 1;
+	float scaleY_ = 1;
 	
 	public GraphicObject(float x, float y) {
 		position_ = new Vector2(x, y);
@@ -21,6 +23,18 @@ public abstract class GraphicObject {
 	
 	public void update(float deltaTime) {
 		stateTime_ += deltaTime;
+	}
+	
+	public void setScale(float scale) {
+		this.scaleX_ = this.scaleY_ = scale;
+	}
+	
+	public void setScaleX(float scale) {
+		this.scaleX_ = scale;
+	}
+	
+	public void setScaleY(float scale) {
+		this.scaleY_ = scale;
 	}
 	
 	public void setAlpha(float alpha) {
@@ -37,6 +51,7 @@ public abstract class GraphicObject {
 		s.setFlip(false, false);
 		s.setColor(tint_,tint_,tint_,1);
 		s.setAlpha(alpha_);
+		s.setScale(scaleX_, scaleY_);
 		s.draw(batch);
 	}
 }

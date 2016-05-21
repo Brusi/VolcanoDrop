@@ -369,16 +369,15 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
 			prepareFireball((int) Math.floor(Math.random() * 6));
 		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-			addEffects.add(new FireballStartEffect(new Vector2(100,100)));
-		}
-		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
 			godMode_ = !godMode_;
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
 			startQuake();
+		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+			startMiniQuake();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
 			spawner_.enabled = !spawner_.enabled;
@@ -433,7 +432,14 @@ public class World {
 			}
 		});
 		int NUM_DUST = Math.round(20 * duration / QUAKE_DURATION);
-		for (int i=0; i < NUM_DUST; ++i) {
+		dropQuakeDust(duration, NUM_DUST);
+		
+		int NUM_RUBBLE = (int) (NUM_DUST / 4 * Utils.randomRange(0.6f, 1));
+		dropSomeRabble(duration, NUM_RUBBLE);
+	}
+
+	private void dropQuakeDust(float duration, int num_dust) {
+		for (int i=0; i < num_dust; ++i) {
 			worldEvents_.addEventFromNow((float)(duration * Math.random()), new EventQueue.Event() {
 				@Override
 				public void invoke() {
@@ -451,9 +457,10 @@ public class World {
 				}
 			});
 		}
-		
-		int NUM_RUBBLE = (int) (NUM_DUST / 4 * Utils.randomRange(0.6f, 1));
-		for (int i=0; i < NUM_RUBBLE; ++i) {
+	}
+
+	private void dropSomeRabble(float duration, int num_rubble) {
+		for (int i=0; i < num_rubble; ++i) {
 			worldEvents_.addEventFromNow((float)(duration * Math.random()), new EventQueue.Event() {
 				@Override
 				public void invoke() {
@@ -471,6 +478,12 @@ public class World {
 	private void startSmallQuake() {
 		SoundAssets.playRandomSound(SoundAssets.quakeSmall);
 		startQuakeWithParams(QUAKE_DURATION / 3, 0.5f);
+	}
+	
+	private void startMiniQuake() {
+		startQuakeWithParams(0.2f, 2f);
+		dropQuakeDust(0.2f, 10);
+		dropSomeRabble(0.2f, 3);
 	}
 
 	public void update(float deltaTime) {
@@ -561,7 +574,63 @@ public class World {
 			// TODO: fade music out.
 			SoundAssets.stopAllSounds();
 			SoundAssets.playSound(SoundAssets.coinsRelic);
+			
+			afterRelicEffects();
 		}
+	}
+
+	private void afterRelicEffects() {
+		for (int i=0; i < 15; i ++) {
+			worldEvents_.addEventFromNow(0.333f + i * 2.333f / 15f, new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					// Add dust to closing door.
+					addDust(opening.door.position_.x + Utils.random2Range(36), opening.door.position_.y - 73);
+				}
+			});
+			worldEvents_.addEventFromNow(0.333f + i * 1.8f / 15f, new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					// Add dust to shrine.
+					addDust(Utils.random2Range(122), 0);
+					addSmallDust(Utils.random2Range(122), 0);
+				}
+			});
+		}
+		
+		worldEvents_.addEventFromNow(3.3f, new EventQueue.Event() {
+			@Override public void invoke() { startMiniQuake();
+			for (int i=0; i < 10; i++) {
+					addSmallDust(Utils.randomRange(90, 247), Utils.randomRange(0, 192));
+			}}});
+		worldEvents_.addEventFromNow(4.3f, new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				startMiniQuake();
+				for (int i = 0; i < 10; i++) {
+					addSmallDust(Utils.randomRange(90, 247),
+							Utils.randomRange(0, 192));
+				}
+			}
+		});
+		worldEvents_.addEventFromNow(5.6f, new EventQueue.Event() {
+			@Override public void invoke() {
+				startMiniQuake();
+				for (int i = 0; i < 20; i++) {
+					addSmallDust(Utils.randomRange(90, 247),
+							Utils.randomRange(0, 192));
+				}
+				for (int i = 0; i < 20; i++) {
+					addDust(Utils.randomRange(90 - 50, 247 + 50),
+							Utils.randomRange(0 - 50, 192 + 50));
+				}
+			}
+		});
+		worldEvents_.addEventFromNow(5.8f, new EventQueue.Event() {
+			@Override public void invoke() { startQuake();}});
+		
+		worldEvents_.addEventFromNow(7.667f, new EventQueue.Event() {
+			@Override public void invoke() { startGame(); }});
 	}
 
 	private void startGame() {

@@ -72,6 +72,7 @@ public class Assets {
 	
 	public static Sprite openingBossSleeps;
 	public static Sprite openingBossSleepsGlow;
+	public static Sprite openingBossAngryGlow;
 	public static Sprite openingBossSleepsRoots;
 	public static Sprite openingForegroundRoots1;
 	public static Sprite openingForegroundRoots2;
@@ -451,6 +452,7 @@ public class Assets {
 		
 		openingBossSleeps = openingSheet.createSprite("openingscreen_sleepinggod");
 		openingBossSleepsGlow = openingSheet.createSprite("openingscreen_sleepinggod_glow");
+		openingBossAngryGlow = openingSheet.createSprite("openingscreen_sleepinggod_angryglow");
 		openingBossSleepsRoots = openingSheet.createSprite("openingscreen_sleepinggod_roots");
 		
 		openingForegroundRoots1 = openingSheet.createSprite("openingscreen_roots_foreground1");

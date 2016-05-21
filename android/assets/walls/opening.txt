@@ -10,18 +10,18 @@ openingscreen_tourch
   orig: 60, 116
   offset: 0, 0
   index: -1
-pillars_entrance_start
-  rotate: false
-  xy: 64, 2
-  size: 132, 89
-  orig: 132, 89
-  offset: 0, 0
-  index: -1
 openingscreen_stonedoor
   rotate: false
-  xy: 198, 2
+  xy: 64, 2
   size: 72, 162
   orig: 72, 162
+  offset: 0, 0
+  index: -1
+pillars_entrance_start
+  rotate: false
+  xy: 138, 2
+  size: 132, 89
+  orig: 132, 89
   offset: 0, 0
   index: -1
 background_entrance_pillar
@@ -51,63 +51,63 @@ torch_fire
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 13
+  index: 19
 torch_fire
   rotate: false
   xy: 982, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 20
+  index: 12
 torch_fire
   rotate: false
   xy: 1112, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 12
+  index: 11
 torch_fire
   rotate: false
   xy: 1242, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 19
+  index: 18
 torch_fire
   rotate: false
   xy: 1372, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 18
+  index: 17
 torch_fire
   rotate: false
   xy: 1502, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 14
+  index: 13
 torch_fire
   rotate: false
   xy: 1632, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 15
+  index: 14
 torch_fire
   rotate: false
   xy: 1762, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 17
+  index: 16
 torch_fire
   rotate: false
   xy: 1892, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 16
+  index: 15
 torch_fire
   rotate: false
   xy: 2, 260
@@ -121,63 +121,63 @@ torch_fire
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 11
+  index: 27
 torch_fire
   rotate: false
   xy: 262, 260
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 28
+  index: 20
 torch_fire
   rotate: false
   xy: 392, 260
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 30
+  index: 28
 torch_fire
   rotate: false
   xy: 522, 260
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 29
+  index: 30
 torch_fire
   rotate: false
   xy: 652, 260
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 27
+  index: 29
 torch_fire
   rotate: false
   xy: 782, 260
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 22
+  index: 26
 torch_fire
   rotate: false
   xy: 912, 260
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 26
+  index: 10
 torch_fire
   rotate: false
   xy: 1042, 260
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 23
+  index: 25
 torch_fire
   rotate: false
   xy: 1172, 260
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 25
+  index: 22
 torch_fire
   rotate: false
   xy: 1302, 260
@@ -191,21 +191,21 @@ torch_fire
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 8
+  index: 23
 torch_fire
   rotate: false
   xy: 1562, 260
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 3
+  index: 7
 torch_fire
   rotate: false
   xy: 1692, 260
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 4
+  index: 3
 torch_fire
   rotate: false
   xy: 1822, 260
@@ -233,14 +233,14 @@ torch_fire
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 10
+  index: 9
 torch_fire
   rotate: false
   xy: 392, 518
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 9
+  index: 8
 torch_fire
   rotate: false
   xy: 522, 518
@@ -254,87 +254,94 @@ torch_fire
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 5
+  index: 4
 torch_fire
   rotate: false
   xy: 782, 518
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 7
+  index: 6
 torch_fire
   rotate: false
   xy: 912, 518
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 6
-openingscreen_sleepinggod_glow
+  index: 5
+openingscreen_text_tap
   rotate: false
   xy: 1042, 518
+  size: 408, 82
+  orig: 408, 82
+  offset: 0, 0
+  index: -1
+openingscreen_sleepinggod_angryglow
+  rotate: false
+  xy: 1452, 518
+  size: 250, 218
+  orig: 250, 218
+  offset: 0, 0
+  index: -1
+openingscreen_sleepinggod_glow
+  rotate: false
+  xy: 1704, 518
   size: 250, 218
   orig: 250, 218
   offset: 0, 0
   index: -1
 openingscreen_sleepinggod_roots
   rotate: false
-  xy: 1294, 518
+  xy: 2, 776
   size: 250, 218
   orig: 250, 218
   offset: 0, 0
   index: -1
 openingscreen_sleepinggod
   rotate: false
-  xy: 1546, 518
+  xy: 254, 776
   size: 250, 218
   orig: 250, 218
   offset: 0, 0
   index: -1
-openingscreen_text_tap
-  rotate: false
-  xy: 2, 776
-  size: 408, 82
-  orig: 408, 82
-  offset: 0, 0
-  index: -1
 openingscreen_roots_foreground2
   rotate: false
-  xy: 412, 776
+  xy: 506, 776
   size: 410, 206
   orig: 410, 206
   offset: 0, 0
   index: -1
 openingscreen_outsidelight
   rotate: false
-  xy: 824, 776
+  xy: 918, 776
   size: 417, 214
   orig: 417, 214
   offset: 0, 0
   index: -1
 openingscreen_floor
   rotate: false
-  xy: 1243, 776
+  xy: 1337, 776
   size: 492, 215
   orig: 492, 215
   offset: 0, 0
   index: -1
 openingscreen_title
   rotate: false
-  xy: 2, 993
+  xy: 2, 996
   size: 538, 243
   orig: 538, 243
   offset: 0, 0
   index: -1
 openingscreen_roots_foreground1
   rotate: false
-  xy: 542, 993
+  xy: 542, 996
   size: 640, 411
   orig: 640, 411
   offset: 0, 0
   index: -1
 bg_openingtile
   rotate: false
-  xy: 1184, 993
+  xy: 1184, 996
   size: 640, 913
   orig: 640, 913
   offset: 0, 0
