@@ -1,9 +1,6 @@
 package com.retrom.volcano.menus;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.retrom.volcano.assets.Assets;
-import com.retrom.volcano.game.Utils;
 
 public class BackMenuButton extends SimpleMenuButton {
 	

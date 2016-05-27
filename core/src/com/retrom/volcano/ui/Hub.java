@@ -170,7 +170,7 @@ public class Hub {
 	};
 
 	private void appearUI() {
-		queue.addTweenFromNow(0.8f, 0.333f, new Tween.Bubble(new Tween() {
+		queue.addTweenFromNow(0.8f, 0.333f, Tween.bubble(new Tween() {
 			@Override
 			public void invoke(float t) {
 				shopButton.setScale(t);
@@ -178,7 +178,7 @@ public class Hub {
 		}));
 		queue.addEventFromNow(0.633f, playPopSoundEvent); 
 		
-		queue.addTweenFromNow(0.7f, 0.333f, new Tween.Bubble(new Tween() {
+		queue.addTweenFromNow(0.7f, 0.333f, Tween.bubble(new Tween() {
 			@Override
 			public void invoke(float t) {
 				total_gold_counter.setScale(t);
@@ -186,7 +186,7 @@ public class Hub {
 		}));
 		queue.addEventFromNow(0.867f, playPopSoundEvent);
 		
-		queue.addTweenFromNow(0.933f, 0.333f, new Tween.Bubble(new Tween() {
+		queue.addTweenFromNow(0.933f, 0.333f, Tween.bubble(new Tween() {
 			@Override
 			public void invoke(float t) {
 				best_time_scale_ = t;
@@ -200,14 +200,14 @@ public class Hub {
 		ControlManager.getControl().setSidesButtonsScale(0);
 		ControlManager.getControl().setJumpButtonScale(0);
 		queue.addEventFromNow(0.5f, playPopSoundEvent);
-		queue.addTweenFromNow(0.5f, 0.333f, new Tween.Bubble(new Tween() {
+		queue.addTweenFromNow(0.5f, 0.333f, Tween.bubble(new Tween() {
 			@Override
 			public void invoke(float t) {
 				ControlManager.getControl().setSidesButtonsScale(t);
 			}
 		}));
 		queue.addEventFromNow(0.567f, playPopSoundEvent);
-		queue.addTweenFromNow(0.567f, 0.333f, new Tween.Bubble(new Tween() {
+		queue.addTweenFromNow(0.567f, 0.333f, Tween.bubble(new Tween() {
 			@Override
 			public void invoke(float t) {
 				ControlManager.getControl().setJumpButtonScale(t);

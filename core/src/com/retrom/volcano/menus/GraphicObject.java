@@ -1,7 +1,7 @@
 package com.retrom.volcano.menus;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class GraphicObject {
@@ -45,7 +45,7 @@ public abstract class GraphicObject {
 		this.tint_ = alpha;
 	}
 	
-	public void render(SpriteBatch batch) {
+	public void render(Batch batch) {
 		Sprite s = getSprite();
 		s.setPosition(position_.x - s.getWidth() / 2, position_.y - s.getHeight() / 2);
 		s.setFlip(false, false);

@@ -68,12 +68,12 @@ public class MainShopContent implements ShopMenuContent {
 				buttons.get(1).setScale(t);
 			}
 		});
-		tweens.addTweenFromNow(0.2f, 0.5f, new Tween.EaseOut(new Tween() {
+		tweens.addTweenFromNow(0.2f, 0.5f, new Tween() {
 			@Override
 			public void invoke(float t) {
 				buttons.get(2).setScale(t);
 			}
-		}));
+		});
 	}
 
 	@Override

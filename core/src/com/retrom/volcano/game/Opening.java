@@ -2,12 +2,12 @@ package com.retrom.volcano.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.retrom.volcano.assets.Assets;
-import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.menus.StaticGraphicObject;
 import com.retrom.volcano.shop.LoopingGraphicObject;
 import com.retrom.volcano.utils.BatchUtils;
@@ -71,7 +71,7 @@ public class Opening {
 		// TODO: offset phase of animation.
 		rightTorch = new StaticGraphicObject(Assets.openingTorch, 217, 349) {
 			@Override
-			public void render(SpriteBatch batch) {
+			public void render(Batch batch) {
 				Sprite s = getSprite();
 				s.setFlip(true,  false);
 				Utils.drawCenter(batch, s, position_.x, position_.y);
@@ -301,7 +301,7 @@ public class Opening {
 	private void takeShrineDown() {
 		queue.addTweenFromNow(
 				0.333f, 2.666f,
-				new Tween.MovePoint(shrineOff.position_).from(0,
+				Tween.movePoint(shrineOff.position_).from(0,
 						SHRINE_INITIAL_Y).to(0, SHRINE_FINAL_Y));
 		queue.addTweenFromNow(0.333f, 2.666f, new Tween() {
 			@Override
@@ -313,7 +313,7 @@ public class Opening {
 		
 		queue.addTweenFromNow(
 				0, 0.5f,
-				new Tween.EaseBothSin(new Tween() {
+				Tween.easeBothSin(new Tween() {
 					@Override
 					public void invoke(float t) {
 						shrineGlowAlpha = 1-t;
@@ -324,7 +324,7 @@ public class Opening {
 	private void closdDoor() {
 		queue.addTweenFromNow(
 				0.333f, 2.666f,
-				new Tween.EaseBoth2(new Tween.MovePoint(door.position_)
+				new Tween.EaseBoth2(Tween.movePoint(door.position_)
 				  .from(DOOR_X, DOOR_INITIAL_Y).to(DOOR_X, DOOR_FINAL_Y)));
 		queue.addTweenFromNow(
 				0.333f, 2.666f,

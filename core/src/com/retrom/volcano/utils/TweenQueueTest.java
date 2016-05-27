@@ -48,7 +48,7 @@ public class TweenQueueTest {
 	
 	@Test
 	public void testEaseIn() {
-		tq.addTweenFromNow(0, 1, new Tween.EaseOut(tween));
+		tq.addTweenFromNow(0, 1, Tween.easeOut(tween));
 		assertEquals(0, target[0], EPSILON);
 		tq.update(0.001f);
 		// Slope at begin of EaseIn is 2.
@@ -60,7 +60,7 @@ public class TweenQueueTest {
 	
 	@Test
 	public void testEaseOut() {
-		tq.addTweenFromNow(0, 1, new Tween.EaseIn(tween));
+		tq.addTweenFromNow(0, 1, Tween.easeIn(tween));
 		assertEquals(0, target[0], EPSILON);
 		tq.update(0.5f);
 		// With EaseIn, aftet 0.5 time, 0.25 of the way is done.
@@ -72,7 +72,7 @@ public class TweenQueueTest {
 	
 	@Test
 	public void testBounce() {
-		tq.addTweenFromNow(0, 1, new Tween.Bounce(tween));
+		tq.addTweenFromNow(0, 1, Tween.bounce(tween));
 		System.out.println(""+target[0]);
 		for (int i=0; i < 100; i++) {
 			tq.update(1f / 100);

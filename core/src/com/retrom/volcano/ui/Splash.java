@@ -39,7 +39,7 @@ public class Splash {
 	public Splash(Hub hub) {
 		this.hub = hub;
 		fade.setAlpha(1);
-		queue.addTweenFromNow(0, 2/3f, new Tween.Bounce(new Tween.MovePoint(
+		queue.addTweenFromNow(0, 2/3f, Tween.bounce(Tween.movePoint(
 				title.position_).from(-5, TITLE_INITIAL_Y)
 				.to(-5, TITLE_FINAL_Y)));
 		queue.addTweenFromNow(2/3f, 2/3f, fade.in);

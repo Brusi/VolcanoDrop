@@ -1,13 +1,17 @@
 package com.retrom.volcano.menus;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.retrom.volcano.utils.TouchToPoint;
+import com.sun.org.apache.xml.internal.utils.UnImplNode;
 
 
 
-public abstract class MenuButton {
+public abstract class MenuButton extends GraphicObject{
 	
 	protected static TouchToPoint ttp = TouchToPoint.create();
 	
@@ -26,6 +30,7 @@ public abstract class MenuButton {
 	protected float scale_ = 1;
 	
 	public MenuButton(Rectangle rect, Action action) {
+		super(rect.x + rect.width / 2, rect.y + rect.height / 2);
 		this.rect = rect;
 		this.action = action;
 	}
@@ -58,6 +63,7 @@ public abstract class MenuButton {
 		return false;
 	}
 	
+	@Override
 	public void render(Batch batch) {
 		// A button does not have to be visible :)
 	}
@@ -83,6 +89,12 @@ public abstract class MenuButton {
 	
 	public void setScale(float scale) {
 		scale_ = scale;
+	}
+	
+	@Override
+	protected Sprite getSprite() {
+		// Buttons are not using the getSprite mechanism.
+		throw new NotImplementedException();
 	}
 	
 }
