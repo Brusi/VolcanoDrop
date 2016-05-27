@@ -1,0 +1,488 @@
+boss.png
+size: 3716, 1412
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+volcanogod_floatingrocks
+  rotate: false
+  xy: 2, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 3
+volcanogod_floatingrocks
+  rotate: false
+  xy: 44, 2
+  size: 40, 45
+  orig: 40, 45
+  offset: 0, 0
+  index: 4
+volcanogod_floatingrocks
+  rotate: false
+  xy: 86, 2
+  size: 41, 56
+  orig: 41, 56
+  offset: 0, 0
+  index: 1
+volcanogod_floatingrocks
+  rotate: false
+  xy: 129, 2
+  size: 57, 51
+  orig: 57, 51
+  offset: 0, 0
+  index: 2
+volcanogod_eyesglow
+  rotate: false
+  xy: 188, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 22
+volcanogod_eyesglow
+  rotate: false
+  xy: 440, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 21
+volcanogod_eyesglow
+  rotate: false
+  xy: 692, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 20
+volcanogod_eyesglow
+  rotate: false
+  xy: 944, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 18
+volcanogod_eyesglow
+  rotate: false
+  xy: 1196, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 23
+volcanogod_eyesglow
+  rotate: false
+  xy: 1448, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 17
+volcanogod_eyesglow
+  rotate: false
+  xy: 1700, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 19
+volcanogod_eyesglow
+  rotate: false
+  xy: 1952, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 25
+volcanogod_reg
+  rotate: false
+  xy: 2204, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: -1
+volcanogod_eyesglow
+  rotate: false
+  xy: 2456, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 29
+volcanogod_eyesglow
+  rotate: false
+  xy: 2708, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 24
+volcanogod_eyesglow
+  rotate: false
+  xy: 2960, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 28
+volcanogod_eyesglow
+  rotate: false
+  xy: 3212, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 26
+volcanogod_eyesglow
+  rotate: false
+  xy: 3464, 2
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 16
+volcanogod_eyesglow
+  rotate: false
+  xy: 2, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 27
+volcanogod_angry
+  rotate: false
+  xy: 254, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: -1
+volcanogod_eyesglow
+  rotate: false
+  xy: 506, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 5
+volcanogod_eyesglow
+  rotate: false
+  xy: 758, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 2
+volcanogod_eyesglow
+  rotate: false
+  xy: 1010, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 4
+volcanogod_eyesglow
+  rotate: false
+  xy: 1262, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 3
+volcanogod_eyesglow
+  rotate: false
+  xy: 1514, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 1
+volcanogod_eyesglow
+  rotate: false
+  xy: 1766, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 0
+volcanogod_angry_cracksglow
+  rotate: false
+  xy: 2018, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: -1
+volcanogod_dark
+  rotate: false
+  xy: 2270, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: -1
+volcanogod_angry_mouthglow
+  rotate: false
+  xy: 2522, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: -1
+volcanogod_eyesglow
+  rotate: false
+  xy: 2774, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 15
+volcanogod_eyesglow
+  rotate: false
+  xy: 3026, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 11
+volcanogod_eyesglow
+  rotate: false
+  xy: 3278, 254
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 12
+volcanogod_eyesglow
+  rotate: false
+  xy: 2, 506
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 14
+volcanogod_eyesglow
+  rotate: false
+  xy: 254, 506
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 13
+volcanogod_eyesglow
+  rotate: false
+  xy: 506, 506
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 6
+volcanogod_eyesglow
+  rotate: false
+  xy: 758, 506
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 7
+volcanogod_eyesglow
+  rotate: false
+  xy: 1010, 506
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 10
+volcanogod_eyesglow
+  rotate: false
+  xy: 1262, 506
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 8
+volcanogod_eyesglow
+  rotate: false
+  xy: 1514, 506
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: 9
+volcanogod_outerglow
+  rotate: false
+  xy: 1766, 506
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 21
+volcanogod_outerglow
+  rotate: false
+  xy: 2068, 506
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 20
+volcanogod_outerglow
+  rotate: false
+  xy: 2370, 506
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 19
+volcanogod_outerglow
+  rotate: false
+  xy: 2672, 506
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 18
+volcanogod_outerglow
+  rotate: false
+  xy: 2974, 506
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 17
+volcanogod_outerglow
+  rotate: false
+  xy: 3276, 506
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 22
+volcanogod_outerglow
+  rotate: false
+  xy: 2, 808
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 23
+volcanogod_outerglow
+  rotate: false
+  xy: 304, 808
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 29
+volcanogod_outerglow
+  rotate: false
+  xy: 606, 808
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 28
+volcanogod_outerglow
+  rotate: false
+  xy: 908, 808
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 16
+volcanogod_outerglow
+  rotate: false
+  xy: 1210, 808
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 27
+volcanogod_outerglow
+  rotate: false
+  xy: 1512, 808
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 25
+volcanogod_outerglow
+  rotate: false
+  xy: 1814, 808
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 24
+volcanogod_outerglow
+  rotate: false
+  xy: 2116, 808
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 26
+volcanogod_outerglow
+  rotate: false
+  xy: 2418, 808
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 15
+volcanogod_outerglow
+  rotate: false
+  xy: 2720, 808
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 6
+volcanogod_outerglow
+  rotate: false
+  xy: 3022, 808
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 5
+volcanogod_outerglow
+  rotate: false
+  xy: 3324, 808
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 0
+volcanogod_outerglow
+  rotate: false
+  xy: 2, 1110
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 4
+volcanogod_outerglow
+  rotate: false
+  xy: 304, 1110
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 2
+volcanogod_outerglow
+  rotate: false
+  xy: 606, 1110
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 1
+volcanogod_outerglow
+  rotate: false
+  xy: 908, 1110
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 3
+volcanogod_outerglow
+  rotate: false
+  xy: 1210, 1110
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 7
+volcanogod_outerglow
+  rotate: false
+  xy: 1512, 1110
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 14
+volcanogod_outerglow
+  rotate: false
+  xy: 1814, 1110
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 13
+volcanogod_outerglow
+  rotate: false
+  xy: 2116, 1110
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 8
+volcanogod_outerglow
+  rotate: false
+  xy: 2418, 1110
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 12
+volcanogod_outerglow
+  rotate: false
+  xy: 2720, 1110
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 10
+volcanogod_outerglow
+  rotate: false
+  xy: 3022, 1110
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 9
+volcanogod_outerglow
+  rotate: false
+  xy: 3324, 1110
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 11

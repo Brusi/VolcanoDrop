@@ -236,6 +236,16 @@ public class Assets {
 	public static Array<Sprite> playerMagnetGlowDie;
 	public static Array<Sprite> magnetTrailParticle;
 	
+	// Boss:
+	public static Sprite bossRegular;
+	public static Sprite bossAngry;
+	public static Sprite bossDark;
+	
+	public static Sprite bossAngryCracksGlow;
+	public static Sprite bossAngryMouthGlow;
+	
+	public static Array<Sprite> bossFloatingRocks;
+	
 	
 	// Gui
 	public static Sprite scoreIcon;
@@ -648,6 +658,16 @@ public class Assets {
 		
 		TextureAtlas enemiesAddSheet2 = new TextureAtlas("enemies/enemies_add_2.txt");
 		fireballStartEffect = enemiesAddSheet2.createSprites("fireball_start");
+		
+		TextureAtlas bossSheet = new TextureAtlas("enemies/boss.txt");
+		bossRegular = bossSheet.createSprite("volcanogod_reg");
+		bossAngry = bossSheet.createSprite("volcanogod_angry");
+		bossDark = bossSheet.createSprite("volcanogod_dark");
+		
+		bossAngryCracksGlow = bossSheet.createSprite("volcanogod_angry_cracksglow");
+		bossAngryMouthGlow = bossSheet.createSprite("volcanogod_angry_mouthglow");
+		
+		bossFloatingRocks = bossSheet.createSprites("volcanogod_floatingrocks");
 		
 		// Gui
 		TextureAtlas guiSheet = new TextureAtlas("ui/gui.txt");

@@ -1,7 +1,11 @@
 package com.retrom.volcano.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.menus.StaticGraphicObject;
@@ -52,6 +56,8 @@ public class Opening {
 	private final StaticGraphicObject fgRoots1 = new StaticGraphicObject(Assets.openingForegroundRoots1, 0, 280); 
 	private final StaticGraphicObject fgRoots2 = new StaticGraphicObject(Assets.openingForegroundRoots2, -115, -92);
 	
+	private final StaticGraphicObject wokenBoss = new StaticGraphicObject(Assets.bossRegular, 0, 0);
+	
 	private float doorLightScale = 1;
 	private float shrineGlowAlpha = 1;
 
@@ -84,8 +90,8 @@ public class Opening {
 		leftTorchFire.update(deltaTime);
 		rightTorchFire.update(deltaTime);
 	}
-	
-	public void render(SpriteBatch batch) {
+	public void render(ShapeRenderer shapes, SpriteBatch batch) {
+		
 		bossSleeps.render(batch);
 		renderBossEyes(batch);
 		bossSleepsRoots.render(batch);
@@ -94,9 +100,7 @@ public class Opening {
 		bossAngryGlow.render(batch);
 		bossAngryGlowAdd.render(batch);
 		
-		shrineOff.render(batch);
-		shrineOn.setAlpha(shrineGlowAlpha);
-		shrineOn.render(batch);
+		renderShrine(shapes, batch);
 		
 		door_back.render(batch);
 		leftTorch.render(batch);
@@ -114,6 +118,57 @@ public class Opening {
 		rightTorchGlow.setTint((shrineGlowAlpha) * (doorLightScale - (float)Math.random() * 0.1f));
 		rightTorchGlow.render(batch);
 		BatchUtils.setBlendFuncNormal(batch);
+	}
+
+	private void renderShrine(ShapeRenderer shapes, SpriteBatch batch) {
+		batch.end();
+		
+		//2. clear our depth buffer with 1.0
+		Gdx.gl.glClearDepthf(1f);
+		Gdx.gl.glClear(GL20.GL_DEPTH_BUFFER_BIT);
+		
+		//3. set the function to LESS
+		Gdx.gl.glDepthFunc(GL20.GL_LESS);
+		
+		//4. enable depth writing
+		Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
+		
+		//5. Enable depth writing, disable RGBA color writing 
+		Gdx.gl.glDepthMask(true);
+		Gdx.gl.glColorMask(false, false, false, false);
+		
+		// 6. render your primitive shapes
+		shapes.begin(ShapeType.Filled);
+		
+		// TODO: remove setColor if not needed.
+		shapes.setColor(1f, 0f, 0f, 0.5f);
+		// shapes.circle(200, 200, 100);
+		shapes.setColor(0f, 1f, 0f, 0.5f);
+		// shapes.rect(200, 200, 100, 100);
+		shapes.rect(-300, 0, 600, 500);
+		
+		shapes.rect(100,100,100,100);
+		
+		shapes.end();
+		
+		batch.begin();
+		//8. Enable RGBA color writing
+		//   (SpriteBatch.begin() will disable depth mask)
+		Gdx.gl.glColorMask(true, true, true, true);
+		
+		//9. Make sure testing is enabled.
+		Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
+		
+		//10. Now depth discards pixels outside our masked shapes
+		Gdx.gl.glDepthFunc(GL20.GL_EQUAL);
+		
+		shrineOff.render(batch);
+		shrineOn.setAlpha(shrineGlowAlpha);
+		shrineOn.render(batch);
+		
+		batch.end();
+		Gdx.gl.glDepthFunc(GL20.GL_ALWAYS);
+		batch.begin();
 	}
 
 	private void renderBossEyes(SpriteBatch batch) {
@@ -210,6 +265,9 @@ public class Opening {
 		queue.addTweenFromNow(4.3f, 1.7f, scaleSleepingBossTween(1.05f, 1f));
 		queue.addTweenFromNow(5.333f, 0.233f, scaleSleepingBossTween(1, 0.80f));
 		queue.addTweenFromNow(5.567f, 0.067f, scaleSleepingBossTween(0.80f, 1.20f));
+		
+		// From here the boss is released.
+		
 		queue.addTweenFromNow(5.633f, 1.7f, scaleSleepingBossTween(1.20f, 1f));
 		
 		queue.addTweenFromNow(3.3f, 0.7f, bossEyesAddTween);

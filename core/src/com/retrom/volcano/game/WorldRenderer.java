@@ -304,7 +304,7 @@ public class WorldRenderer {
 		BatchUtils.setBlendFuncNormal(batch);
 		batch.begin();
 		renderPillarBg();
-		world.opening.render(batch);
+		world.opening.render(shapeRenderer, batch);
 		renderWalls();
 		BatchUtils.setBlendFuncAdd(batch);
 		renderEffects(world.addEffectsUnder);
