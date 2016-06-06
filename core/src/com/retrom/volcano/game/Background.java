@@ -28,7 +28,7 @@ public class Background {
 		PILLAR_HOLE_BG(0),
 		
 		PILLAR_OPENING_GAP(152f),
-		PILLAR_OPENING_TOP(89f),
+		PILLAR_OPENING_TOP(88f),
 		
 		BACKGROUND_OPENING(913f),
 		
@@ -208,17 +208,17 @@ public class Background {
 		}
 
 		// Remove from the bottom of the pillars.
-		if (y_ > leftBaseY_ + HEIGHT) {
+		if (y_ > leftBaseY_ + HEIGHT + leftPillar.getFirst().height()) {
 			leftBaseY_ = leftBaseY_ + leftPillar.getFirst().height();
 			leftPillar.removeFirst();
 		}
 		
-		if (y_ > rightBaseY_ + HEIGHT) {
+		if (y_ > rightBaseY_ + HEIGHT + rightPillar.getFirst().height()) {
 			rightBaseY_ += rightPillar.getFirst().height();
 			rightPillar.removeFirst();
 		}
 		
-		if (y_ > bgBaseY_ + HEIGHT) {
+		if (y_ > bgBaseY_ + HEIGHT + bgPillar.getFirst().height()) {
 			bgBaseY_ += bgPillar.getFirst().height();
 			bgPillar.removeFirst();
 		}

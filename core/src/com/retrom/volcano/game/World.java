@@ -47,6 +47,8 @@ import com.retrom.volcano.effects.HotBrickEffect;
 import com.retrom.volcano.effects.LavaBodyBubble;
 import com.retrom.volcano.effects.LavaSurfaceBubble;
 import com.retrom.volcano.effects.MagnetTrailParticle;
+import com.retrom.volcano.effects.OpeningLeafParticle;
+import com.retrom.volcano.effects.OpeningRootParticle;
 import com.retrom.volcano.effects.PlayerMagnetEffect;
 import com.retrom.volcano.effects.PlayerMagnetGlow;
 import com.retrom.volcano.effects.PlayerOnionSkinEffect;
@@ -312,7 +314,7 @@ public class World {
 //		});
 		
 		// TODO: create lava when needed...
-//		createLava();
+		createLava();
 	}
 
 	private void createLava() {
@@ -377,7 +379,7 @@ public class World {
 			startQuake();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-			startMiniQuake();
+			addLeafParticle(100,100);
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
 			spawner_.enabled = !spawner_.enabled;
@@ -470,20 +472,31 @@ public class World {
 		}
 	}
 	
+	// Full length earthquake for between levels.
 	private void startQuake() {
 		SoundAssets.playRandomSound(SoundAssets.quake);
 		startQuakeWithParams(QUAKE_DURATION, 1);
 	}
 	
+	// Short earthquake for before sequences.
 	private void startSmallQuake() {
 		SoundAssets.playRandomSound(SoundAssets.quakeSmall);
 		startQuakeWithParams(QUAKE_DURATION / 3, 0.5f);
 	}
 	
+	// Very strong but short earthquake for opening scene.
 	private void startMiniQuake() {
 		startQuakeWithParams(0.2f, 2f);
 		dropQuakeDust(0.2f, 10);
 		dropSomeRabble(0.2f, 3);
+	}
+	
+	// Strong and full-length earthquake for last hit in opening scene.
+	private void startUltraQuake() {
+		startQuakeWithParams(2.6f, 2f);
+		SoundAssets.playRandomSound(SoundAssets.quake);
+		dropQuakeDust(2.6f, 50);
+		dropSomeRabble(2.6f, 15);
 	}
 
 	public void update(float deltaTime) {
@@ -513,7 +526,9 @@ public class World {
 		
 		if (gameState == State.GAME) {
 			updateSpawner(deltaTime);
-			gameTime += deltaTime;
+			if (player.isAlive()) {
+				gameTime += deltaTime;
+			}
 			if (gameTime > 5 && gameTime < 90) {
 				background.level = 2;
 			} else if (gameTime >= 90){
@@ -566,7 +581,42 @@ public class World {
 		}
 		relic_.update(deltaTime);
 		if (player.bounds.overlaps(relic_.bounds)) {
-			// TODO: add effects.
+			// Heavy stroke:
+			addRelicBurnParticle(-21,-4);
+			addRelicBurnParticle(-20,2);
+			addRelicBurnParticle(-18,17);
+			addRelicBurnParticle(-16,24);
+			addRelicBurnParticle(-6,33);
+			addRelicBurnParticle(0,35);
+			addRelicBurnParticle(7,34);
+			addRelicBurnParticle(17,26);
+			addRelicBurnParticle(19,10);
+			addRelicBurnParticle(21,2);
+			addRelicBurnParticle(22,-6);
+			addRelicBurnParticle(22,-6);
+			addRelicBurnParticle(20,-19);
+			addRelicBurnParticle(20,-33);
+			addRelicBurnParticle(25,-36);
+			addRelicBurnParticle(15,-36);
+			addRelicBurnParticle(7,-36);
+			addRelicBurnParticle(1,-36);
+			addRelicBurnParticle(-6,-36);
+			addRelicBurnParticle(-14,-37);
+			
+			// Heavy fill:
+			addRelicFlare(-20,-21);
+			addRelicFlare(19,-18);
+			addRelicFlare(-1,-13);
+			addRelicFlare(-15,-5);
+			addRelicFlare(11,-5);
+			addRelicFlare(-1,3);
+			addRelicFlare(-12,10);
+			addRelicFlare(14,11);
+			addRelicFlare(-1,19);
+			addRelicFlare(-9,28);
+			addRelicFlare(9,29);
+			addRelicFlare(0,35);
+			
 			relic_ = null;
 			opening.startScene();
 			// TODO: start only after start scene ends.
@@ -577,6 +627,22 @@ public class World {
 			
 			afterRelicEffects();
 		}
+	}
+	
+	public void addRelicBurnParticle(float x, float y) {
+		float xpos = relic_.position.x + x;
+		float ypos = relic_.position.y + y;
+		float speedRatio = Utils.randomRange(0.12f, 0.25f);
+		addEffectsUnder.add(new BurnParticle(xpos, ypos, new Vector2(x
+				* speedRatio, y * speedRatio + 15)));
+//		addEffects.add(EffectFactory.relicFlareParticle(new Vector2(xpos, ypos)));
+	}
+	
+	public void addRelicFlare(float x, float y) {
+//		addRelicBurnParticle(x,y);
+		float xpos = relic_.position.x + x;
+		float ypos = relic_.position.y + y;
+		addEffects.add(EffectFactory.relicFlareParticle(new Vector2(xpos, ypos)));
 	}
 
 	private void afterRelicEffects() {
@@ -599,23 +665,40 @@ public class World {
 		}
 		
 		worldEvents_.addEventFromNow(3.3f, new EventQueue.Event() {
-			@Override public void invoke() { startMiniQuake();
-			for (int i=0; i < 10; i++) {
-					addSmallDust(Utils.randomRange(90, 247), Utils.randomRange(0, 192));
-			}}});
+			@Override public void invoke() {
+				for (int i = 0; i < 10; i++) {
+					addSmallDust(Utils.randomRange(90, 247),
+							     Utils.randomRange(0, 192));
+				}
+				for (int i=0; i < 5; i++) {
+					addRootParticle(Utils.randomRange(90, 247),
+					                Utils.randomRange(0, 192),
+					                150);
+				}
+				addLeafParticle(Utils.randomRange(90, 247),
+						Utils.randomRange(0, 192));
+			}
+		});
 		worldEvents_.addEventFromNow(4.3f, new EventQueue.Event() {
 			@Override
 			public void invoke() {
 				startMiniQuake();
 				for (int i = 0; i < 10; i++) {
 					addSmallDust(Utils.randomRange(90, 247),
+							     Utils.randomRange(0, 192));
+					addRootParticle(Utils.randomRange(90, 247),
+							        Utils.randomRange(0, 192),
+							        300);
+				}
+				for (int i = 0; i < 3; i++) {
+					addLeafParticle(Utils.randomRange(90, 247),
 							Utils.randomRange(0, 192));
 				}
 			}
 		});
 		worldEvents_.addEventFromNow(5.6f, new EventQueue.Event() {
 			@Override public void invoke() {
-				startMiniQuake();
+				startUltraQuake();
 				for (int i = 0; i < 20; i++) {
 					addSmallDust(Utils.randomRange(90, 247),
 							Utils.randomRange(0, 192));
@@ -623,11 +706,18 @@ public class World {
 				for (int i = 0; i < 20; i++) {
 					addDust(Utils.randomRange(90 - 50, 247 + 50),
 							Utils.randomRange(0 - 50, 192 + 50));
+					addDust(Utils.randomRange(90 - 50, 247 + 50),
+							Utils.randomRange(0 - 50, 192 + 50));
+					addRootParticle(Utils.randomRange(90, 247),
+					                Utils.randomRange(0, 192),
+					                600);
+				}
+				for (int i = 0; i < 5; i++) {
+					addLeafParticle(Utils.randomRange(90, 247),
+							Utils.randomRange(0, 192));
 				}
 			}
 		});
-		worldEvents_.addEventFromNow(5.8f, new EventQueue.Event() {
-			@Override public void invoke() { startQuake();}});
 		
 		worldEvents_.addEventFromNow(7.667f, new EventQueue.Event() {
 			@Override public void invoke() { startGame(); }});
@@ -653,7 +743,7 @@ public class World {
 		if (Math.random() < deltaTime * 2f) {
 			addLavaSurfaceBubble();
 		}
-		
+			
 		lava_.setHeight(Math.min(gameTime * 5, 70));
 		lava_.update(deltaTime);
 		
@@ -1255,6 +1345,14 @@ public class World {
 		screenEffects.add(e);
 	}
 	
+	private void addRootParticle(float x, float y, float speed) {
+		effects.add(new OpeningRootParticle(new Vector2(x,y), speed));
+	}
+	
+	private void addLeafParticle(float x, float y) {
+		effects.add(new OpeningLeafParticle(new Vector2(x,y)));
+	}
+	
 	private void addSingleSmoke(final float x, final float y) {
 		screenEffects.add(new SmokeEffect(x, y));
 	}
@@ -1602,6 +1700,7 @@ public class World {
 
 	private void finishGame() {
 		SoundAssets.stopAllSounds();
+		ShopData.updateBestTime(gameTime);
 		listener_.restart();
 	}
 	

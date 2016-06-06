@@ -69,6 +69,8 @@ public class Assets {
 	public static Sprite openingShrineOff;
 	public static Sprite openingTorch;
 	public static Array<Sprite> openingTorchFire;
+	public static Array<Sprite> openingRootsParticles;
+	
 	
 	public static Sprite openingBossSleeps;
 	public static Sprite openingBossSleepsGlow;
@@ -240,6 +242,7 @@ public class Assets {
 	public static Sprite bossRegular;
 	public static Sprite bossAngry;
 	public static Sprite bossDark;
+	public static Sprite bossGlow;
 	
 	public static Sprite bossAngryCracksGlow;
 	public static Sprite bossAngryMouthGlow;
@@ -369,6 +372,7 @@ public class Assets {
 	public static Sprite noButton;
 	public static Sprite noButtonClicked;
 	
+	
 
 	public static Texture loadTexture (String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -452,6 +456,7 @@ public class Assets {
 		opening_background = openingSheet.createSprite("bg_openingtile");
 		openingDoor = openingSheet.createSprite("openingscreen_stonedoor");
 		openingDoorTop = openingSheet.createSprite("pillars_entrance_start");
+		setFilterNearest(openingDoorTop);
 		openingDoorBg = openingSheet.createSprite("background_entrance_pillar");
 		openingDoorLight = openingSheet.createSprite("openingscreen_outsidelight");
 		openingFloor = openingSheet.createSprite("openingscreen_floor");
@@ -459,6 +464,8 @@ public class Assets {
 		openingShrineOff = openingSheet.createSprite("openingscreen_relic_shrine_off");
 		openingTorch = openingSheet.createSprite("openingscreen_tourch");
 		openingTorchFire = openingSheet.createSprites("torch_fire");
+		
+		openingRootsParticles = openingSheet.createSprites("openingscreen_roots_particle");
 		
 		openingBossSleeps = openingSheet.createSprite("openingscreen_sleepinggod");
 		openingBossSleepsGlow = openingSheet.createSprite("openingscreen_sleepinggod_glow");
@@ -663,6 +670,7 @@ public class Assets {
 		bossRegular = bossSheet.createSprite("volcanogod_reg");
 		bossAngry = bossSheet.createSprite("volcanogod_angry");
 		bossDark = bossSheet.createSprite("volcanogod_dark");
+		bossGlow = bossSheet.createSprite("volcanogod_glow");
 		
 		bossAngryCracksGlow = bossSheet.createSprite("volcanogod_angry_cracksglow");
 		bossAngryMouthGlow = bossSheet.createSprite("volcanogod_angry_mouthglow");

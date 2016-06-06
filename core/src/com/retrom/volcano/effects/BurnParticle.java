@@ -19,7 +19,11 @@ public class BurnParticle extends Particle {
 	}
 	
 	public BurnParticle(float x, float y) {
-		super(Assets.burnParticle.random(), DURATION + Utils.random2Range(0.5f), new Vector2(x, y), UPVEL);
+		this(x, y, UPVEL);
+	}
+	
+	public BurnParticle(float x, float y, Vector2 velocity) {
+		super(Assets.burnParticle.random(), DURATION + Utils.random2Range(0.5f), new Vector2(x, y), velocity);
 		rotation = Utils.randomRange(0, 360f);
 		rotationVel = Utils.randomRange(60, 100) * (Utils.randomBool() ? 1 : -1);
 		base_scale = Utils.randomRange(0.6f, 1);
@@ -29,7 +33,7 @@ public class BurnParticle extends Particle {
 	@Override
 	public float getScale() {
 		if (stateTime() < 0.2f) {
-			return stateTime() / 0.2f;
+			return base_scale * Utils.limit01(stateTime() / 0.2f);
 		}
 		return base_scale * Math.min(1, (duration() - stateTime()) * 3 / duration());
 	}

@@ -90,7 +90,10 @@ public class EffectFactory {
 	public static Effect wallExplodeEffect(Vector2 position) {
 		return new FiniteAnimationEffect(Assets.wallExplode, position);
 	}
-	
+
+	public static Effect relicFlareParticle(Vector2 position) {
+		return new RelicFlareParticle(position);
+	}
 
 	public static Effect coinCrushParticle(Collectable.Type type, Vector2 position) {
 		switch (type) {

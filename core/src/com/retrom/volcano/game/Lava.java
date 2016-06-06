@@ -1,5 +1,6 @@
 package com.retrom.volcano.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -12,6 +13,11 @@ public class Lava {
 	private static final float NEIGHBOR_FORCE = 60f / 3 * 2;
 	private static final float LINE_WIDTH = 8;
 	private static final float CONST_OFFSET = -400f;
+	
+	public static enum State {
+		OPENING,  // Only to see the lava at the bottom.
+		RISING;   // Dangerous rising lava! 
+	}
 	
 	public static class Node {
 		public final float x;
@@ -40,6 +46,8 @@ public class Lava {
 	
 	public float cam_y;
 	
+	State state_ = State.OPENING;
+	
 	public Lava() {
 		nodes = new Node[(int)(WIDTH / SPACING) + 1];
 		for (int i=0; i < nodes.length; i++) {
@@ -66,7 +74,14 @@ public class Lava {
 	}
 	
 	public float finalY() {
-		return cam_y + CONST_OFFSET + height_;
+		switch (state_) {
+		case OPENING:
+			return -170;
+		case RISING:
+			return cam_y + CONST_OFFSET + height_;
+		}
+		Gdx.app.error("ERROR", "Illegal lava state.");
+		return 0;
 	}
 	
 	private void drawQuad(ShapeRenderer shapes, float x1, float y1, float x2, float y2, float x3,

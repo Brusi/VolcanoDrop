@@ -123,6 +123,28 @@ public abstract class Tween {
 		};
 	}
 	
+	public static class TSpan extends tTransformTween {
+
+		private final float from;
+		private final float to;
+
+		public TSpan(float from, float to, Tween tween) {
+			super(tween);
+			this.from = from;
+			this.to = to;
+		}
+
+		@Override
+		float transformFunc(float t) {
+			return from * (1-t) + to * t;
+		}
+		
+	}
+	
+	public static Tween tSpan(float from, float to, final Tween tween) {
+		return new Tween.TSpan(from, to, tween);
+	}
+	
 	public static class MovePointTween extends Tween {
 		private Vector2 point;
 		
@@ -206,6 +228,24 @@ public abstract class Tween {
 			@Override
 			public void invoke(float t) {
 				gobj_.setAlpha(t);
+			}
+		};
+	}
+	
+	public static Tween tint(final GraphicObject gobj) {
+		return new Tween.GraphicObjectTween(gobj) {
+			@Override
+			public void invoke(float t) {
+				gobj_.setTint(t);
+			}
+		};
+	}
+	
+	public static Tween rotate(final GraphicObject gobj) {
+		return new Tween.GraphicObjectTween(gobj) {
+			@Override
+			public void invoke(float t) {
+				gobj_.setRotation(t);
 			}
 		};
 	}

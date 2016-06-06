@@ -3,244 +3,279 @@ size: 2048, 2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-openingscreen_tourch
+openingscreen_roots_particle
   rotate: false
   xy: 2, 2
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: 3
+openingscreen_roots_particle
+  rotate: false
+  xy: 44, 2
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: 1
+openingscreen_roots_particle
+  rotate: false
+  xy: 86, 2
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: 4
+openingscreen_roots_particle
+  rotate: false
+  xy: 128, 2
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: 5
+openingscreen_roots_particle
+  rotate: false
+  xy: 170, 2
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: 2
+openingscreen_tourch
+  rotate: false
+  xy: 212, 2
   size: 60, 116
   orig: 60, 116
   offset: 0, 0
   index: -1
 openingscreen_stonedoor
   rotate: false
-  xy: 64, 2
+  xy: 274, 2
   size: 72, 162
   orig: 72, 162
   offset: 0, 0
   index: -1
-pillars_entrance_start
-  rotate: false
-  xy: 138, 2
-  size: 132, 89
-  orig: 132, 89
-  offset: 0, 0
-  index: -1
 background_entrance_pillar
   rotate: false
-  xy: 272, 2
+  xy: 348, 2
   size: 86, 152
   orig: 86, 152
   offset: 0, 0
   index: -1
-openingscreen_relic_shrine_off
-  rotate: false
-  xy: 360, 2
-  size: 244, 104
-  orig: 244, 104
-  offset: 0, 0
-  index: -1
-openingscreen_relic_shrine_on
-  rotate: false
-  xy: 606, 2
-  size: 244, 104
-  orig: 244, 104
-  offset: 0, 0
-  index: -1
 torch_fire
   rotate: false
-  xy: 852, 2
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 19
-torch_fire
-  rotate: false
-  xy: 982, 2
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 12
-torch_fire
-  rotate: false
-  xy: 1112, 2
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 11
-torch_fire
-  rotate: false
-  xy: 1242, 2
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 18
-torch_fire
-  rotate: false
-  xy: 1372, 2
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 17
-torch_fire
-  rotate: false
-  xy: 1502, 2
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 13
-torch_fire
-  rotate: false
-  xy: 1632, 2
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 14
-torch_fire
-  rotate: false
-  xy: 1762, 2
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 16
-torch_fire
-  rotate: false
-  xy: 1892, 2
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 15
-torch_fire
-  rotate: false
-  xy: 2, 260
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 21
-torch_fire
-  rotate: false
-  xy: 132, 260
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 27
-torch_fire
-  rotate: false
-  xy: 262, 260
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 20
-torch_fire
-  rotate: false
-  xy: 392, 260
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 28
-torch_fire
-  rotate: false
-  xy: 522, 260
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 30
-torch_fire
-  rotate: false
-  xy: 652, 260
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 29
-torch_fire
-  rotate: false
-  xy: 782, 260
-  size: 128, 256
-  orig: 128, 256
-  offset: 0, 0
-  index: 26
-torch_fire
-  rotate: false
-  xy: 912, 260
+  xy: 436, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
   index: 10
 torch_fire
   rotate: false
-  xy: 1042, 260
+  xy: 566, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 25
+  index: 19
 torch_fire
   rotate: false
-  xy: 1172, 260
+  xy: 696, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 22
+  index: 18
 torch_fire
   rotate: false
-  xy: 1302, 260
+  xy: 826, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 24
+  index: 17
 torch_fire
   rotate: false
-  xy: 1432, 260
+  xy: 956, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 23
+  index: 11
 torch_fire
   rotate: false
-  xy: 1562, 260
+  xy: 1086, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 7
+  index: 16
 torch_fire
   rotate: false
-  xy: 1692, 260
+  xy: 1216, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 3
+  index: 15
 torch_fire
   rotate: false
-  xy: 1822, 260
+  xy: 1346, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 2
+  index: 14
 torch_fire
   rotate: false
-  xy: 2, 518
+  xy: 1476, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 0
+  index: 12
 torch_fire
   rotate: false
-  xy: 132, 518
+  xy: 1606, 2
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
-  index: 1
+  index: 13
 torch_fire
   rotate: false
-  xy: 262, 518
+  xy: 1736, 2
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 21
+torch_fire
+  rotate: false
+  xy: 1866, 2
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 27
+torch_fire
+  rotate: false
+  xy: 2, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 20
+torch_fire
+  rotate: false
+  xy: 132, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 28
+torch_fire
+  rotate: false
+  xy: 262, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 30
+torch_fire
+  rotate: false
+  xy: 392, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 29
+torch_fire
+  rotate: false
+  xy: 522, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 26
+torch_fire
+  rotate: false
+  xy: 652, 260
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
   index: 9
 torch_fire
   rotate: false
-  xy: 392, 518
+  xy: 782, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 25
+torch_fire
+  rotate: false
+  xy: 912, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 22
+torch_fire
+  rotate: false
+  xy: 1042, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 24
+torch_fire
+  rotate: false
+  xy: 1172, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 23
+torch_fire
+  rotate: false
+  xy: 1302, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 5
+torch_fire
+  rotate: false
+  xy: 1432, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 3
+torch_fire
+  rotate: false
+  xy: 1562, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 2
+torch_fire
+  rotate: false
+  xy: 1692, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 0
+torch_fire
+  rotate: false
+  xy: 1822, 260
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 1
+torch_fire
+  rotate: false
+  xy: 2, 518
   size: 128, 256
   orig: 128, 256
   offset: 0, 0
   index: 8
+torch_fire
+  rotate: false
+  xy: 132, 518
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 7
+torch_fire
+  rotate: false
+  xy: 262, 518
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 4
+torch_fire
+  rotate: false
+  xy: 392, 518
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: 6
 torch_fire
   rotate: false
   xy: 522, 518
@@ -248,44 +283,44 @@ torch_fire
   orig: 128, 256
   offset: 0, 0
   index: 31
-torch_fire
+pillars_entrance_start
   rotate: false
   xy: 652, 518
-  size: 128, 256
-  orig: 128, 256
+  size: 132, 89
+  orig: 132, 89
   offset: 0, 0
-  index: 4
-torch_fire
+  index: -1
+openingscreen_relic_shrine_on
   rotate: false
-  xy: 782, 518
-  size: 128, 256
-  orig: 128, 256
+  xy: 786, 518
+  size: 244, 104
+  orig: 244, 104
   offset: 0, 0
-  index: 6
-torch_fire
+  index: -1
+openingscreen_relic_shrine_off
   rotate: false
-  xy: 912, 518
-  size: 128, 256
-  orig: 128, 256
+  xy: 1032, 518
+  size: 244, 104
+  orig: 244, 104
   offset: 0, 0
-  index: 5
-openingscreen_text_tap
+  index: -1
+openingscreen_sleepinggod
   rotate: false
-  xy: 1042, 518
-  size: 408, 82
-  orig: 408, 82
+  xy: 1278, 518
+  size: 250, 218
+  orig: 250, 218
   offset: 0, 0
   index: -1
 openingscreen_sleepinggod_angryglow
   rotate: false
-  xy: 1452, 518
+  xy: 1530, 518
   size: 250, 218
   orig: 250, 218
   offset: 0, 0
   index: -1
 openingscreen_sleepinggod_glow
   rotate: false
-  xy: 1704, 518
+  xy: 1782, 518
   size: 250, 218
   orig: 250, 218
   offset: 0, 0
@@ -297,30 +332,30 @@ openingscreen_sleepinggod_roots
   orig: 250, 218
   offset: 0, 0
   index: -1
-openingscreen_sleepinggod
+openingscreen_text_tap
   rotate: false
   xy: 254, 776
-  size: 250, 218
-  orig: 250, 218
+  size: 408, 82
+  orig: 408, 82
   offset: 0, 0
   index: -1
 openingscreen_roots_foreground2
   rotate: false
-  xy: 506, 776
+  xy: 664, 776
   size: 410, 206
   orig: 410, 206
   offset: 0, 0
   index: -1
 openingscreen_outsidelight
   rotate: false
-  xy: 918, 776
+  xy: 1076, 776
   size: 417, 214
   orig: 417, 214
   offset: 0, 0
   index: -1
 openingscreen_floor
   rotate: false
-  xy: 1337, 776
+  xy: 1495, 776
   size: 492, 215
   orig: 492, 215
   offset: 0, 0
@@ -332,17 +367,17 @@ openingscreen_title
   orig: 538, 243
   offset: 0, 0
   index: -1
-openingscreen_roots_foreground1
-  rotate: false
-  xy: 542, 996
-  size: 640, 411
-  orig: 640, 411
-  offset: 0, 0
-  index: -1
 bg_openingtile
   rotate: false
-  xy: 1184, 996
+  xy: 542, 996
   size: 640, 913
   orig: 640, 913
+  offset: 0, 0
+  index: -1
+openingscreen_roots_foreground1
+  rotate: false
+  xy: 1184, 996
+  size: 640, 411
+  orig: 640, 411
   offset: 0, 0
   index: -1

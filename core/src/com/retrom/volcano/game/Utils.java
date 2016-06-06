@@ -113,4 +113,12 @@ public class Utils {
 		float y = y2 - y1;
 		return (float) (Math.atan2(y, x) / 2 / Math.PI * 360);
 	}
+
+	public static float radToDeg(float rad) {
+		return (float) (rad / (2 * Math.PI) * 360f);
+	}
+
+	public static float limit01(float f) {
+		return Math.max(0, Math.min(1, f));
+	}
 }

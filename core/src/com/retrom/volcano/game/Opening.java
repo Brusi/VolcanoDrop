@@ -8,9 +8,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.retrom.volcano.assets.Assets;
+import com.retrom.volcano.game.objects.BossGraphic;
 import com.retrom.volcano.menus.StaticGraphicObject;
 import com.retrom.volcano.shop.LoopingGraphicObject;
 import com.retrom.volcano.utils.BatchUtils;
+import com.retrom.volcano.utils.EventQueue;
 import com.retrom.volcano.utils.Tween;
 import com.retrom.volcano.utils.TweenQueue;
 
@@ -27,6 +29,11 @@ public class Opening {
 	
 	private static final float SHRINE_INITIAL_Y = 52;
 	private static final float SHRINE_FINAL_Y = SHRINE_INITIAL_Y - 105;
+	
+	private static final float BOSS_AWAKE_INITIAL_X = 179;
+	private static final float BOSS_AWAKE_INITIAL_Y = 92;
+	private static final float BOSS_AWAKE_TOP_Y = 678;
+	private static final float BOSS_AWAKE_INITIAL_ROTATION = 8f;
 	
 	public final StaticGraphicObject door = new StaticGraphicObject(Assets.openingDoor, DOOR_X, DOOR_INITIAL_Y);
 	private final StaticGraphicObject door_back = new StaticGraphicObject(
@@ -56,7 +63,7 @@ public class Opening {
 	private final StaticGraphicObject fgRoots1 = new StaticGraphicObject(Assets.openingForegroundRoots1, 0, 280); 
 	private final StaticGraphicObject fgRoots2 = new StaticGraphicObject(Assets.openingForegroundRoots2, -115, -92);
 	
-	private final StaticGraphicObject wokenBoss = new StaticGraphicObject(Assets.bossRegular, 0, 0);
+	private final BossGraphic bossAwake = new BossGraphic(BOSS_AWAKE_INITIAL_X ,BOSS_AWAKE_INITIAL_Y);
 	
 	private float doorLightScale = 1;
 	private float shrineGlowAlpha = 1;
@@ -80,6 +87,8 @@ public class Opening {
 		
 		bossAngryGlow.setAlpha(0);
 		bossAngryGlowAdd.setAlpha(0);
+		
+		bossAwake.setAlpha(0);
 	}
 	
 	public void update(float deltaTime) {
@@ -89,16 +98,18 @@ public class Opening {
 		queue.update(deltaTime);
 		leftTorchFire.update(deltaTime);
 		rightTorchFire.update(deltaTime);
+		bossAwake.update(deltaTime);
 	}
 	public void render(ShapeRenderer shapes, SpriteBatch batch) {
 		
 		bossSleeps.render(batch);
 		renderBossEyes(batch);
-		bossSleepsRoots.render(batch);
 		bossSleepsGlow.render(batch);
 		
 		bossAngryGlow.render(batch);
 		bossAngryGlowAdd.render(batch);
+		bossAwake.render(batch);
+		bossSleepsRoots.render(batch);
 		
 		renderShrine(shapes, batch);
 		
@@ -118,6 +129,7 @@ public class Opening {
 		rightTorchGlow.setTint((shrineGlowAlpha) * (doorLightScale - (float)Math.random() * 0.1f));
 		rightTorchGlow.render(batch);
 		BatchUtils.setBlendFuncNormal(batch);
+		
 	}
 
 	private void renderShrine(ShapeRenderer shapes, SpriteBatch batch) {
@@ -232,6 +244,8 @@ public class Opening {
 				bossSleeps.setScale(scale);
 				bossAngryGlow.setScale(scale);
 				bossAngryGlowAdd.setScale(scale);
+				
+				System.out.println("scale = " + scale);
 
 				float movedX = BOSS_X + (1 - scale) * 73 / 2;
 				bossSleeps.position_.x = movedX;
@@ -242,6 +256,8 @@ public class Opening {
 	}
 
 	private void bossWakesUp() {
+		bossAwake.setRotation(BOSS_AWAKE_INITIAL_ROTATION);
+		
 		queue.addTweenFromNow(1.833f, 0.666f, new Tween() {
 			@Override
 			public void invoke(float t) {
@@ -259,21 +275,63 @@ public class Opening {
 		
 		queue.addTweenFromNow(3f, 0.233f, scaleSleepingBossTween(1, 0.97f));
 		queue.addTweenFromNow(3.233f, 0.067f, scaleSleepingBossTween(0.97f, 1.02f));
-		queue.addTweenFromNow(3.3f, 1.7f, scaleSleepingBossTween(1.02f, 1f));
+		queue.addTweenFromNow(3.3f, 0.7f, scaleSleepingBossTween(1.02f, 1f));
 		queue.addTweenFromNow(4f, 0.233f, scaleSleepingBossTween(1, 0.97f));
 		queue.addTweenFromNow(4.233f, 0.067f, scaleSleepingBossTween(0.97f, 1.05f));
-		queue.addTweenFromNow(4.3f, 1.7f, scaleSleepingBossTween(1.05f, 1f));
+		queue.addTweenFromNow(4.3f, 0.7f, scaleSleepingBossTween(1.05f, 1f));
 		queue.addTweenFromNow(5.333f, 0.233f, scaleSleepingBossTween(1, 0.80f));
 		queue.addTweenFromNow(5.567f, 0.067f, scaleSleepingBossTween(0.80f, 1.20f));
 		
-		// From here the boss is released.
-		
-		queue.addTweenFromNow(5.633f, 1.7f, scaleSleepingBossTween(1.20f, 1f));
-		
 		queue.addTweenFromNow(3.3f, 0.7f, bossEyesAddTween);
 		queue.addTweenFromNow(4.3f, 0.7f, bossEyesAddTween);
-		queue.addTweenFromNow(5.567f, 1.4f, bossEyesAddTween);
+		queue.addTweenFromNow(5.567f, 0.5f, bossEyesAddTween);
 		
+		// From here the boss is released.
+		queue.addEventFromNow(5.633f + 0.5f, new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				bossSleeps.setAlpha(0);
+				bossAngryGlow.setAlpha(0);
+				bossAngryGlowAdd.setAlpha(0);
+			}
+		});
+		queue.addTweenFromNow(5.633f, 0.5f, scaleSleepingBossTween(1.2f, 1));
+		queue.addTweenFromNow(5.633f, 0.5f, Tween.alpha(bossAwake));
+		queue.addTweenFromNow(5.633f, 0.5f, Tween.tint(bossAwake));
+		
+		queue.addTweenFromNow(5.633f, 0.5f, Tween.easeBothSin(Tween.tSpan(1.2f, 1, Tween.scale(bossAwake))));
+		queue.addTweenFromNow(
+				6.25f, 1f,
+				Tween.easeBothQuad(Tween.movePoint(bossAwake.position_)
+						.fromX(BOSS_AWAKE_INITIAL_X).toX(0)));
+		
+		queue.addTweenFromNow(
+				6.25f, 1.7f,
+				Tween.easeBothSin(Tween.movePoint(bossAwake.position_)
+						.fromY(BOSS_AWAKE_INITIAL_Y).toY(BOSS_AWAKE_TOP_Y)));
+		
+		queue.addTweenFromNow(
+				6.25f, 0.5f,
+				Tween.tSpan(BOSS_AWAKE_INITIAL_ROTATION, 0,
+						Tween.rotate(bossAwake)));
+		
+		queue.addEventFromNow(7.0f, new EventQueue.Event() {
+			@Override public void invoke() {
+				bossAwake.setState_(BossGraphic.State.DARK);
+			}
+		});
+		queue.addEventFromNow(9.25f, new EventQueue.Event() {
+			@Override public void invoke() {
+				bossAwake.setState_(BossGraphic.State.HIDDEN);
+			}
+		});
+		
+		queue.addTweenFromNow(
+				8.25f, 1f,
+				Tween.easeIn(Tween.movePoint(bossAwake.position_)
+						.fromY(BOSS_AWAKE_TOP_Y).toY(WorldRenderer.FRUSTUM_HEIGHT + 200)));
+		
+		// Roots shake.
 		Tween rootsShake = new Tween() {
 			@Override
 			public void invoke(float t) {
@@ -283,7 +341,7 @@ public class Opening {
 		queue.addTweenFromNow(3.3f, 0.5f, rootsShake);
 		queue.addTweenFromNow(4.3f, 0.5f, rootsShake);
 		queue.addTweenFromNow(5.567f, 0.5f, rootsShake);
-		queue.addTweenFromNow(5.567f, 0.2f, new Tween() {
+		queue.addTweenFromNow(5.567f, 0.5f, new Tween() {
 			@Override public void invoke(float t) {
 				bossSleepsRoots.setScaleY(1-t);
 				bossSleepsRoots.position_.y = BOSS_Y - t * 109; 

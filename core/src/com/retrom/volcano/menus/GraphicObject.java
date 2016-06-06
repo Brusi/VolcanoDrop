@@ -9,10 +9,11 @@ public abstract class GraphicObject {
 	public Vector2 position_;
 	protected float stateTime_;
 	
-	float alpha_ = 1;
-	float tint_ = 1;
-	float scaleX_ = 1;
-	float scaleY_ = 1;
+	protected float alpha_ = 1;
+	protected float tint_ = 1;
+	protected float scaleX_ = 1;
+	protected float scaleY_ = 1;
+	protected float rotation_ = 0;
 	
 	public GraphicObject(float x, float y) {
 		position_ = new Vector2(x, y);
@@ -41,17 +42,26 @@ public abstract class GraphicObject {
 		this.alpha_ = alpha;
 	}
 	
-	public void setTint(float alpha) {
-		this.tint_ = alpha;
+	public void setTint(float tint) {
+		this.tint_ = tint;
+	}
+	
+	public void setRotation(float degrees) {
+		this.rotation_ = degrees;
 	}
 	
 	public void render(Batch batch) {
 		Sprite s = getSprite();
+		renderSprite(batch, s);
+	}
+
+	protected void renderSprite(Batch batch, Sprite s) {
 		s.setPosition(position_.x - s.getWidth() / 2, position_.y - s.getHeight() / 2);
 		s.setFlip(false, false);
 		s.setColor(tint_,tint_,tint_,1);
 		s.setAlpha(alpha_);
 		s.setScale(scaleX_, scaleY_);
+		s.setRotation(rotation_);
 		s.draw(batch);
 	}
 }

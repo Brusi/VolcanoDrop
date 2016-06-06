@@ -310,12 +310,12 @@ public class WorldRenderer {
 		renderEffects(world.addEffectsUnder);
 		BatchUtils.setBlendFuncNormal(batch);
 		
+		renderRelic();
 		renderPlayer();
 		renderEnemies();
 		renderGoldSacks();
 		renderCoins();
 		world.opening.renderTop(batch);
-		renderRelic();
 		
 		
 		drawPillar(world.background.leftPillar, -PILLAR_POS, world.background.leftBaseY(), false);
