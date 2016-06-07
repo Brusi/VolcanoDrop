@@ -23,6 +23,36 @@ sequences: [
 		{type: NOP,  time: 2.5}]
 	}
 	{
+		name: singlebrick_0
+		seq: [{type: WALL, time: 1.00, col: 0}
+		      {type: NOP,  time: 2}]
+	}
+	{
+		name: singlebrick_1
+		seq: [{type: WALL, time: 1.00, col: 1}
+		      {type: NOP,  time: 2}]
+	}
+	{
+		name: singlebrick_2
+		seq: [{type: WALL, time: 1.00, col: 2}
+		      {type: NOP,  time: 2}]
+	}
+	{
+		name: singlebrick_3
+		seq: [{type: WALL, time: 1.00, col: 3}
+		      {type: NOP,  time: 2}]
+	}
+	{
+		name: singlebrick_4
+		seq: [{type: WALL, time: 1.00, col: 4}
+		      {type: NOP,  time: 2}]
+	}
+	{
+		name: singlebrick_5
+		seq: [{type: WALL, time: 1.00, col: 5}
+		      {type: NOP,  time: 2}]
+	}
+	{
 		name: side_to_side
 		seq: [{type: WALL, time: 1.15, col: 0}
 			  {type: WALL, time: 1.30, col: 1}
@@ -73,7 +103,6 @@ sequences: [
 	}
 	{
 		name: 2_temples
-		hotkey: 4
 		seq: [{type: WALL, time: 1.00, col: 0}
 		      {type: WALL, time: 1.10, col: 1}
 		      {type: WALL, time: 1.00, col: 2}
@@ -123,6 +152,26 @@ sequences: [
 		      {type: WALL, time: 2.30, col: 1}
 		      {type: WALL, time: 3.60, col: 4}
 		      {type: WALL, time: 3.60, col: 5}
+		      {type: NOP,  time: 4}]
+	}
+	{
+		name: 4_and_pair
+		seq: [{type: WALL, time: 1.00, col: 0}
+		      {type: WALL, time: 1.00, col: 1}
+			  {type: WALL, time: 2.60, col: 2}
+		      {type: WALL, time: 2.40, col: 3}
+		      {type: WALL, time: 2.20, col: 4}
+		      {type: WALL, time: 2.00, col: 5}
+		      {type: NOP,  time: 4}]
+	}
+	{
+		name: pair_sides
+		seq: [{type: WALL, time: 2.00, col: 0}
+		      {type: WALL, time: 2.20, col: 1}
+			  {type: WALL, time: 1.00, col: 2}
+		      {type: WALL, time: 1.00, col: 3}
+		      {type: WALL, time: 2.20, col: 4}
+		      {type: WALL, time: 2.00, col: 5}
 		      {type: NOP,  time: 4}]
 	}
 	{
@@ -191,7 +240,7 @@ sequences: [
 		      {type: BURN, time: 1.40, col: 1}
 		      {type: WALL, time: 1.00, col: 2}
 			  {type: WALL, time: 2.40, col: 3}
-			  {type: BURN, time: 2.60, col: 4}
+			  {type: BURN, time: 2.80, col: 4}
 			  {type: WALL, time: 2.40, col: 5}
 		      {type: NOP,  time: 4}]
 	}
@@ -223,6 +272,27 @@ sequences: [
 		      {type: WALL, time: 1.60, col: 3}
 		      {type: BURN, time: 1.75, col: 4}
 		      {type: NOP,  time: 3}]
+	}
+	{
+		name: burn_hole
+		hotkey: 4
+		seq: [{type: WALL, time: 1.00, col: 0}
+			  {type: WALL, time: 1.20, col: 1}
+		      {type: WALL, time: 1.40, col: 2}
+		      {type: WALL, time: 1.60, col: 3}
+		      {type: WALL, time: 1.80, col: 4}
+			  {type: BURN, time: 2.70, col: 5}
+		      {type: NOP,  time: 4}]
+	}
+	{
+		name: burn_3_and_3
+		seq: [{type: BURN, time: 1.00, col: 0}
+		      {type: WALL, time: 1.15, col: 1}
+			  {type: BURN, time: 1.30, col: 2}
+		      {type: BURN, time: 1.90, col: 5}
+		      {type: WALL, time: 2.05, col: 4}
+		      {type: BURN, time: 2.20, col: 3}
+		      {type: NOP,  time: 4}]
 	}
 	{
 		name: burn_side_to_sidex2
@@ -302,6 +372,11 @@ sequences: [
 			  {type: BURN, time: 1.2, col: 4}
 			  {type: BURN, time: 1.6, col: 3}
 		      {type: NOP,  time: 3}]
+	}
+	{
+		name: flame_firsttime
+		seq: [{type: FLAME, time: 1.0, col: 2}
+		      {type: NOP,  time: 5}]
 	}
 	{
 		name: flame_2pillars
@@ -465,14 +540,6 @@ sequences: [
 		      {type: NOP,  time: 8}]
 	}
 	{
-	    name: fireball_firstime
-		seq: [{type: BURN, time: 0.5, col: 2}
-		      {type: BURN, time: 0.5, col: 3}
-		      {type: FIREBALL, time: 1.5, col: 2}
-			  {type: FIREBALL, time: 1.5, col: 3}
-		      {type: NOP, time: 5}]
-	}
-	{
 		name: fireball_side_to_side
 		seq: [{type: FIREBALL, time: 0.00, col: 0}
 			  {type: FIREBALL, time: 0.15, col: 1}
@@ -548,7 +615,10 @@ sequences: [
 		seq: [{type: FIREBALL, time: 0.20, col: 0}
 			  {type: FIREBALL, time: 0.10, col: 1}
 			  {type: FIREBALL, time: 0.00, col: 2}
-		      {type: NOP, time: 1.5}]
+			  {type: FIREBALL, time: 1.20, col: 3}
+			  {type: FIREBALL, time: 1.30, col: 4}
+			  {type: FIREBALL, time: 1.40, col: 5}
+		      {type: NOP, time: 4}]
 	}
 	{
 		name: fireball_3_and_3

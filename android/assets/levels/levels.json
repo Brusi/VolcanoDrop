@@ -9,7 +9,7 @@ levels: [
 			{
 				chance: 1
 				single: true
-				sequences: [wall_not_dual]
+				sequences: [singlebrick_0, singlebrick_1, singlebrick_2, singlebrick_3, singlebrick_4, singlebrick_5]
 			}
 		]
         coins: [
@@ -70,7 +70,7 @@ levels: [
 			{
 				on_level_start: true
 				chance: 0.5
-				sequences: [side_to_side, 3_pairs, 3_and_3, middle_hole]
+				sequences: [side_to_side, 3_pairs, 3_and_3, pair_sides]
 			}
 		]
 		coins: [
@@ -85,13 +85,13 @@ levels: [
 		avg_sack_time: 40
 		groups: [
 			{
-				chance: 0.3
+				chance: 0.4
 				single: true
 				sequences: [wall]
 			}
 			{
-				chance: 0.7
-				sequences: [side_to_side, 3_pairs, 3_and_3, middle_hole, side_to_side_hole, wall_shower, 0_3_5, 2_temples, 102, 201]
+				chance: 0.6
+				sequences: [side_to_sidex2, side_to_side_hole, 3_pairs, 3_and_3, middle_hole, wall_shower, 2_temples, 102, 201, 4_and_pair, pair_sides]
 			}
 		]
 		coins: [
@@ -110,14 +110,20 @@ levels: [
 		start_time: 48
 		avg_sack_time: 35
 		groups: [
+		    {
+				on_level_start: true
+				chance: 0.3
+				single: true
+				sequences: [burn]
+			} 
 			{
 				chance: 0.2
 				single: true
 				sequences: [wall]
 			}
 			{
-				chance: 0.8
-				sequences: [side_to_sidex2, side_to_side_hole, 3_pairs, 3_and_3, middle_hole, vee, hat, wall_shower, 0_3_5, 2_temples, 3full_3hole, 102, 201]
+				chance: 0.5
+				sequences: [side_to_sidex2, 0_3_5, 4_and_pair, 3full_3hole_burn, burn_2_temples, burn_3_pairs, burn_hole, burn_3_and_3]
 			}
 		]
 		coins: [
@@ -138,19 +144,18 @@ levels: [
 		avg_sack_time: 25
 		groups: [
 			{
-				on_level_start: true
-				chance: 0.5
-				single: true
-				sequences: [burn]
-			}
-			{
-				chance: 0.4
+				chance: 0.1
 				single: true
 				sequences: [wall]
 			}
 			{
-				chance: 0.1
-				sequences: [side_to_sidex2, vee, hat, 3full_3hole_burn, 102, 201, burn_2_temples, burn_3_pairs, burn_side_to_side]
+				chance: 0.4
+				single: true
+				sequences: [burn]
+			}
+			{
+				chance: 0.5
+				sequences: [3full_3hole_burn, burn_shower, burn_side_to_side, burn_3_pairs, burn_vee, burn_hat, burn_2_temples, burn_hole, burn_3_and_3]
 			}
 		]
 		coins: [
@@ -170,9 +175,20 @@ levels: [
 		avg_sack_time: 20
 		groups: [
 			{
-				chance: 0.3
+				chance: 0.15
 				single: true
 				sequences: [burn]
+			}
+			{
+				chance: 0.05
+				on_level_start: true
+				single: true
+				sequences: [flame_firsttime]
+			}
+			{
+				chance: 0.4
+				single: true
+				sequences: [flame_2pillars, flame_center_pillars, flame_side_pillars, flame_single1, flame_single2]
 			}
 			{
 				chance: 0.2
@@ -180,8 +196,8 @@ levels: [
 				sequences: [wall]
 			}
 			{
-				chance: 0.5
-				sequences: [3full_3hole_burn, burn_shower, burn_side_to_side, burn_3_pairs, burn_vee, burn_hat, side_to_sidex2, burn_2_temples]
+				chance: 0.2
+				sequences: [3full_3hole_burn, burn_shower, burn_side_to_side, burn_3_pairs, burn_vee, burn_hat, burn_2_temples, burn_hole, burn_3_and_3]
 			}
 		]
 		coins: [
@@ -205,19 +221,19 @@ levels: [
 				sequences: [burn]
 			}
 			{
+				chance: 0.3
+				on_level_start: true
+				single: true
+				sequences: [flame]
+			}
+			{
 				chance: 0.2
 				single: true
 				sequences: [wall]
 			}
 			{
 				chance: 0.3
-				sequences: [3full_3hole_burn, burn_shower, burn_102, burn_201, burn_hole_1, burn_3_pairsx2, burn_side_to_side, burn_2_temples, flame_trio]
-			}
-			{
-				chance: 0.3
-				on_level_start: true
-				single: true
-				sequences: [flame_2pillars, flame_center_pillars, flame_side_pillars, flame_single1, flame_single2]
+				sequences: [3full_3hole_burn, burn_shower, burn_102, burn_201, burn_hole_1, burn_3_pairsx2, burn_side_to_side, burn_hole, burn_2_temples, burn_3_and_3, flame_trio, flame_single1_burn, flame_single2_burn, flame_trio, flame_lavafloor, flame_shower, flame_stairs]
 			}
 		]
 		coins: [
@@ -235,32 +251,27 @@ levels: [
 		number: 9
 		start_time: 117
 		time_between_walls: 0.8
-		avg_sack_time: 20
+		avg_sack_time: 15
 		groups: [
 			{
-				chance: 0.3
-				on_level_start: true
+				chance: 0.2
 				single: true
 				sequences: [flame]
 			}
 			{
-				chance: 0.2
+				chance: 0.1
 				single: true
 				sequences: [burn]
 			}
 			{
-				chance: 0.1
+				chance: 0.3
+				on_level_start: true
 				single: true
-				sequences: [wall]
+				sequences: [fireball]
 			}
 			{
-				chance: 0.2
-				single: true
-				sequences: [flame_single1_burn, flame_single2_burn, flame_trio, flame_lavafloor, flame_shower, flame_stairs]
-			}
-			{
-				chance: 0.2
-				sequences: [burn_shower, burn_side_to_sidex2, burn_102, burn_201, burn_side_to_sidex2, burn_hole_1, burn_closing_hole, burn_2_temples]
+				chance: 0.4
+				sequences: [flame_hat, flame_vee, flame_side_to_side, flame_3_and_3, flame_lavafloor, flame_shower, flame_stairs]
 			}
 		]
 		coins: [
@@ -280,7 +291,7 @@ levels: [
 		avg_sack_time: 15
 		groups: [
 			{
-				chance: 0.2
+				chance: 0.3
 				single: true
 				sequences: [flame]
 			}
@@ -290,18 +301,12 @@ levels: [
 				sequences: [burn]
 			}
 			{
-				chance: 0.00
+				chance: 0.3
 				on_level_start: true
-				single: true
-				sequences: [fireball_firstime]
+				sequences: [fireball_side_to_side, fireball_side_to_side_hole, fireball_pairs, fireball_rain, fireball_triples, fireball_3_and_3, fireball_pillars, fireball_3flame, fireball_2flame]
 			}
 			{
-				chance: 0.2
-				single: true
-				sequences: [fireball]
-			}
-			{
-				chance: 0.5
+				chance: 0.3
 				sequences: [flame_hat, flame_vee, flame_side_to_side, flame_3_and_3, flame_lavafloor, flame_shower, flame_stairs]
 			}
 		]
@@ -334,12 +339,12 @@ levels: [
 				sequences: [burn]
 			}
 			{
-				chance: 0.6
+				chance: 0.5
 				on_level_start: true
 				sequences: [fireball_side_to_side, fireball_side_to_side_hole, fireball_pairs, fireball_rain, fireball_triples, fireball_3_and_3, fireball_pillars, fireball_3flame, fireball_2flame]
 			}
 			{
-				chance: 0.2
+				chance: 0.3
 				sequences: [flame_hat, flame_vee, flame_side_to_side, flame_3_and_3, flame_lavafloor, flame_shower, flame_stairs]
 			}
 		]
@@ -350,8 +355,8 @@ levels: [
 			{ chance: 0.2, coin: TOKEN }
         ]
 		powerups: [
-			{ powerup: POWERUP_MAGNET, chance: 0.04 }
-			{ powerup: POWERUP_SLOMO, chance: 0.04 }
+			{ powerup: POWERUP_MAGNET, chance: 0.06 }
+			{ powerup: POWERUP_SLOMO, chance: 0.00 }
 			{ powerup: POWERUP_SHIELD, chance: 0.05 }
 		]
 	}
