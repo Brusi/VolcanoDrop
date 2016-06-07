@@ -14,9 +14,8 @@ public class CostumesShopMenuContent extends ItemsListShopMenuContent {
 	@Override
 	protected void initItems() {
 		addMenuItem(Assets.shopItemDefaultCostumeIcon, Assets.shopItemDefaultCostumeTitle, ShopData.defaultCostume);
-		// TODO: replace with real icons when ready. 
-		addMenuItem(Assets.goboCostume.playerIdle.get(0), Assets.shopItemDefaultCostumeTitle, ShopData.goboCostume);
-		addMenuItem(Assets.blikCostume.playerIdle.get(0), Assets.shopItemDefaultCostumeTitle, ShopData.blikCostume);
+		addMenuItem(Assets.shopItemGoboCostumeIcon, Assets.shopItemGoboCostumeTitle, ShopData.goboCostume);
+		addMenuItem(Assets.shopItemBlikCostumeIcon, Assets.shopItemBlikCostumeTitle, ShopData.blikCostume);
 	}
 
 	@Override

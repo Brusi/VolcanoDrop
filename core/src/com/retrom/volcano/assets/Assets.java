@@ -343,6 +343,10 @@ public class Assets {
 	
 	public static Sprite shopItemDefaultCostumeIcon;
 	public static Sprite shopItemDefaultCostumeTitle;
+	public static Sprite shopItemGoboCostumeIcon;
+	public static Sprite shopItemGoboCostumeTitle;
+	public static Sprite shopItemBlikCostumeIcon;
+	public static Sprite shopItemBlikCostumeTitle;
 	
 	// Pause menu
 	public static Sprite pauseMenuBG;
@@ -769,6 +773,10 @@ public class Assets {
 		
 		shopItemDefaultCostumeIcon = shopItemsSheet.createSprite("shopmenu_items_costume_default");
 		shopItemDefaultCostumeTitle = shopItemsSheet.createSprite("shopmenu_items_costume_default_text");
+		shopItemGoboCostumeIcon = shopItemsSheet.createSprite("shopmenu_items_costume_gobo");
+		shopItemGoboCostumeTitle = shopItemsSheet.createSprite("shopmenu_items_costume_gobo_text");
+		shopItemBlikCostumeIcon = shopItemsSheet.createSprite("shopmenu_items_costume_blik");
+		shopItemBlikCostumeTitle = shopItemsSheet.createSprite("shopmenu_items_costume_blik_text");
 		
 		TextureAtlas pauseMenuSheet = new TextureAtlas("menu/pausemenu.txt");
 		pauseMenuBG = pauseMenuSheet.createSprite("pausemenu_body");
