@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.assets.SoundAssets;
+import com.retrom.volcano.control.AbstractControl;
 import com.retrom.volcano.control.ControlManager;
 import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.game.Utils;
@@ -20,7 +21,9 @@ import com.retrom.volcano.utils.Tween;
 import com.retrom.volcano.utils.TweenQueue;
 
 public class Hub {
-	
+	private static final float SHOP_BUTTON_X = WorldRenderer.FRUSTUM_WIDTH / 2 - 88;
+	private static final float SHOP_BUTTON_Y = WorldRenderer.FRUSTUM_HEIGHT / 2 - 88;
+
 	private final TweenQueue queue = new TweenQueue();
 	
 	private static final float PADDING = 20;
@@ -37,6 +40,8 @@ public class Hub {
 	private Label time_text_;
 	
 	private float best_time_scale_ = 0;
+	private float best_time_alpha_ = 1;
+	private float score_scale_ = 0;
 	
 	private final MenuButton pauseButton;
 	private final MenuButton shopButton;
@@ -55,7 +60,7 @@ public class Hub {
 					WorldRenderer.FRUSTUM_WIDTH / 2 - 83, WorldRenderer.FRUSTUM_HEIGHT / 2 - 86, 165f, 172f,
 					Assets.pauseButton, Assets.pauseButtonClicked, action[0]);
 		shopButton = new SimpleMenuButton(
-				WorldRenderer.FRUSTUM_WIDTH / 2 - 88, WorldRenderer.FRUSTUM_HEIGHT / 2 - 88, 165f, 172f,
+				SHOP_BUTTON_X, SHOP_BUTTON_Y, 165f, 172f,
 				Assets.pauseShopButton, Assets.pauseShopButtonClicked, action[1]);
 		shopButton.setScale(0);
 		
@@ -87,20 +92,21 @@ public class Hub {
 
 	public void render(SpriteBatch batch, Camera cam, boolean isPaused) {
 		if (!gameStarted) {
-			if (best_time_scale_ > 0) {
+			if (best_time_scale_ > 0 && best_time_alpha_ > 0) {
 				Sprite s = Assets.guiTimeBestIcon;
 				s.setScale(best_time_scale_);
+				s.setAlpha(best_time_alpha_);
 				Utils.drawCenter(batch, s, -WorldRenderer.FRUSTUM_WIDTH / 2 + 66,
 						                   WorldRenderer.FRUSTUM_HEIGHT / 2 - 34);
 			
 				time_text_.setPosition(-WorldRenderer.FRUSTUM_WIDTH / 2 + 26 + time_text_.getWidth() * (1-best_time_scale_) / 2,
 						               WorldRenderer.FRUSTUM_HEIGHT / 2 - 91);
 				time_text_.setFontScale(best_time_scale_);
+				time_text_.setColor(1, 1, 1, best_time_alpha_);
 				time_text_.draw(batch, 1);
 				updateTimeText(ShopData.getBestTime());
-				
-				total_gold_counter.render(batch);
 			}
+			total_gold_counter.render(batch);
 			
 			shopButton.render(batch);
 			
@@ -112,15 +118,11 @@ public class Hub {
 		{
 			Sprite s = Assets.scoreIcon;
 			s.setPosition(COIN_X_POS, COIN_Y_POS);
+			s.setAlpha(1);
+			s.setScale(score_scale_);
 			s.draw(batch);
 		}
 		
-		
-		score_text_.setPosition(COIN_X_POS + 50, COIN_Y_POS + 8);
-		time_text_.setPosition(COIN_X_POS, COIN_Y_POS + 58);
-		
-		
-        // TODO convert to real menu button.
 		if (!isPaused) {
 			pauseButton.render(batch);
 		}
@@ -128,8 +130,17 @@ public class Hub {
 		updateScoreText();
 		updateTimeText(time_);
 		
-		score_text_.draw(batch, 1);
-		time_text_.draw(batch, 1);
+		if (score_scale_ > 0) {
+			score_text_.setPosition(COIN_X_POS + 50, COIN_Y_POS + 8);
+			score_text_.setFontScale(score_scale_);
+			score_text_.draw(batch, 1);
+		}
+		if (best_time_scale_ > 0) {
+			time_text_.setPosition(COIN_X_POS, COIN_Y_POS + 58);
+			time_text_.setColor(1, 1, 1, 1);
+			time_text_.setFontScale(best_time_scale_);
+			time_text_.draw(batch, 1);
+		}
 		
 	}
 	
@@ -155,11 +166,18 @@ public class Hub {
 	
 	public void startGame() {
 		gameStarted = true;
+		appearControls();
+		appearGameUi();
 	}
 
 	public void showBeforeSplash() {
 		appearControls();
-		appearUI();
+		appearOpeningUI();
+	}
+	
+	public void hideBeforeSplash() {
+		disappearOpeningUi();
+		disappearControls();
 	}
 	
 	static private EventQueue.Event playPopSoundEvent = new EventQueue.Event() {
@@ -169,14 +187,9 @@ public class Hub {
 		}
 	};
 
-	private void appearUI() {
-		queue.addTweenFromNow(0.8f, 0.333f, Tween.bubble(new Tween() {
-			@Override
-			public void invoke(float t) {
-				shopButton.setScale(t);
-			}
-		}));
-		queue.addEventFromNow(0.633f, playPopSoundEvent); 
+	private void appearOpeningUI() {
+		queue.addTweenFromNow(0.8f, 0.333f, Tween.bubble(Tween.scale(shopButton)));
+		queue.addEventFromNow(0.8f, playPopSoundEvent); 
 		
 		queue.addTweenFromNow(0.7f, 0.333f, Tween.bubble(new Tween() {
 			@Override
@@ -184,7 +197,7 @@ public class Hub {
 				total_gold_counter.setScale(t);
 			}
 		}));
-		queue.addEventFromNow(0.867f, playPopSoundEvent);
+		queue.addEventFromNow(0.7f, playPopSoundEvent);
 		
 		queue.addTweenFromNow(0.933f, 0.333f, Tween.bubble(new Tween() {
 			@Override
@@ -194,31 +207,85 @@ public class Hub {
 		}));
 		queue.addEventFromNow(0.933f, playPopSoundEvent);
 	}
+	
+	private void appearGameUi() {
+		best_time_alpha_ = 1;
+		
+		best_time_scale_ = 0;
+		score_scale_ = 0;
+		
+		queue.addEventFromNow(0.7f, playPopSoundEvent);
+		queue.addTweenFromNow(0.7f, 0.333f, Tween.bubble(new Tween() {
+			@Override
+			public void invoke(float t) {
+				best_time_scale_ = t;
+				score_scale_ = t;
+			}
+		}));
+		pauseButton.setScale(0);
+		queue.addTweenFromNow(0.8f, 0.333f, Tween.bubble(Tween.scale(pauseButton)));
+		queue.addEventFromNow(0.8f, playPopSoundEvent);
+	}
+	
+	private void disappearOpeningUi() {
+		queue.addTweenFromNow(0f, 0.6f, Tween.easeIn(Tween.tSpan(
+				SHOP_BUTTON_X - 165f / 2, SHOP_BUTTON_Y - 172f / 2,
+				new Tween() {
+					@Override
+					public void invoke(float t) {
+						shopButton.getRect().setX(t);
+					}
+				})));
+		
+		queue.addTweenFromNow(0.4f, 0.333f,
+				Tween.easeIn(new Tween() {
+					@Override public void invoke(float t) {
+						total_gold_counter.setAlpha(1-t);
+					}}));
+		queue.addTweenFromNow(0.4f, 0.333f,
+				Tween.easeIn(new Tween() {
+					@Override public void invoke(float t) {
+						best_time_alpha_ = 1-t;
+					}}));
+	}
 
 	private void appearControls() {
-		ControlManager.getControl().show();
-		ControlManager.getControl().setSidesButtonsScale(0);
-		ControlManager.getControl().setJumpButtonScale(0);
+		final AbstractControl control = ControlManager.getControl();
+		control.show();
+		control.setSidesButtonsScale(0);
+		control.setJumpButtonScale(0);
+		control.setSlide(0);
 		queue.addEventFromNow(0.5f, playPopSoundEvent);
 		queue.addTweenFromNow(0.5f, 0.333f, Tween.bubble(new Tween() {
 			@Override
 			public void invoke(float t) {
-				ControlManager.getControl().setSidesButtonsScale(t);
+				control.setSidesButtonsScale(t);
 			}
 		}));
 		queue.addEventFromNow(0.567f, playPopSoundEvent);
 		queue.addTweenFromNow(0.567f, 0.333f, Tween.bubble(new Tween() {
 			@Override
 			public void invoke(float t) {
-				ControlManager.getControl().setJumpButtonScale(t);
+				control.setJumpButtonScale(t);
 			}
 		}));
 		
 		queue.addEventFromNow(0.9f, new EventQueue.Event() {
 			@Override
 			public void invoke() {
-				ControlManager.getControl().enable();
+				control.enable();
 			}
 		});
+	}
+	
+	private void disappearControls() {
+		final AbstractControl control = ControlManager.getControl();
+		control.disable();
+		queue.addTweenFromNow(0.5f, 0.333f, Tween.easeIn(new Tween() {
+			@Override
+			public void invoke(float t) {
+				control.setSlide(t);
+			}
+		}));
 	}
 }

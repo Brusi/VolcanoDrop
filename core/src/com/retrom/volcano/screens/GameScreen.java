@@ -55,6 +55,11 @@ public class GameScreen extends ScreenAdapter implements Screen {
 			public void restart() {
 				restartGame();
 			}
+			
+			@Override
+			public void startOpeningScene() {
+				hub_.hideBeforeSplash();
+			}
 
 			@Override
 			public void startGame() {

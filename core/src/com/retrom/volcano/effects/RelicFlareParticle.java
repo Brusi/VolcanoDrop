@@ -20,11 +20,9 @@ public class RelicFlareParticle extends Particle {
 	}
 	
 	private final float scale_ = Utils.randomRange(0.7f, 1f);
-	private final float original_y;
 	
 	public RelicFlareParticle(Vector2 position) {
 		super(Assets.sackFlare, getDuration(), position.cpy(), getInitVel());
-		original_y = position.y - 70;
 		rotation_ = (float) (Math.random() * 360);
 		rotationSpeed_ = (float) (Math.random() * MAX_ROTATION - MAX_ROTATION / 2);
 		this.position_.x += Utils.random2Range(5);

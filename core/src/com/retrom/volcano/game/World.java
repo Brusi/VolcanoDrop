@@ -186,6 +186,7 @@ public class World {
 
 	public interface WorldListener {
 		public void restart();
+		public void startOpeningScene();
 		public void startGame();
 	}
 	
@@ -625,6 +626,7 @@ public class World {
 			SoundAssets.stopAllSounds();
 			SoundAssets.playSound(SoundAssets.coinsRelic);
 			
+			listener_.startOpeningScene();
 			afterRelicEffects();
 		}
 	}

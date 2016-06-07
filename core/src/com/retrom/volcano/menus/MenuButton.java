@@ -97,4 +97,8 @@ public abstract class MenuButton extends GraphicObject{
 		throw new NotImplementedException();
 	}
 	
+	public Rectangle getRect() {
+		return rect;
+	}
+	
 }

@@ -21,7 +21,7 @@ public class OnScreenPhoneControl extends AbstractControl {
 	private boolean right_just_touched = false;
 	
 	private final ControlInput input;
-	private float slide_ = 1;
+	private float slide_ = 0;
 	private float sides_scale = 1;
 	private float jump_scale = 1;
 	private boolean show;
@@ -143,7 +143,8 @@ public class OnScreenPhoneControl extends AbstractControl {
 		if (!show) {
 			return;
 		}
-		final float mid_x = -WorldRenderer.FRUSTUM_WIDTH / 2 + ControlInput.MID_X_90;
+		final float slide_x = slide_ * 350;
+		final float mid_x = -WorldRenderer.FRUSTUM_WIDTH / 2 + ControlInput.MID_X_90 - slide_x;
 		final float mid_y = -WorldRenderer.FRUSTUM_HEIGHT / 2 + 72;
 		{
 			Sprite s = Assets.leftRightControlBg;
@@ -169,7 +170,7 @@ public class OnScreenPhoneControl extends AbstractControl {
 		{
 			Sprite s = upTouched() ? Assets.jumpControlOn : Assets.jumpControlOff;
 			s.setScale(0.9f * jump_scale);
-			drawAtCenter(batch, s, WorldRenderer.FRUSTUM_WIDTH / 2 - 76, mid_y);
+			drawAtCenter(batch, s, WorldRenderer.FRUSTUM_WIDTH / 2 - 76 + slide_x, mid_y);
 		}
 	}
 	
@@ -224,7 +225,7 @@ public class OnScreenPhoneControl extends AbstractControl {
 		show = false;
 		sides_scale = 0;
 		jump_scale = 0;
-		slide_ = 1;
+		slide_ = 0;
 	}
 	
 }

@@ -13,6 +13,7 @@ public class GoldCounter {
 	private Label score_text = new Label("0", new LabelStyle(Assets.scoreFont, Color.WHITE));;
 	private final float y;
 	private float scale_;
+	private float alpha_ = 1;
 	
 	public GoldCounter(float y) {
 		this.y = y;
@@ -31,16 +32,22 @@ public class GoldCounter {
 	public void render(Batch batch) {
 		float x = - score_text.getWidth() * score_text.getText().length / 2;
 		if (scale_ > 0) {
+			score_text.setColor(1, 1, 1, alpha_);
 			score_text.setX(x * scale_);
 			score_text.draw(batch, 1);
 		}
 		
 		Sprite coin = Assets.scoreIcon; 
 		coin.setScale(scale_);
+		coin.setAlpha(alpha_);
 		Utils.drawCenter(batch, coin, (x - coin.getWidth() / 2 - 8) * scale_, y);
 	}
 
 	public void setScale(float scale) {
 		scale_ = scale;
+	}
+	
+	public void setAlpha(float alpha) {
+		alpha_ = alpha;
 	}
 }
