@@ -7,6 +7,7 @@ import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.data.CostumeShopEntry;
 import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.data.ShopEntry;
+import com.retrom.volcano.game.Utils;
 import com.retrom.volcano.game.WorldRenderer;
 import com.retrom.volcano.menus.MenuButton;
 
@@ -76,6 +77,14 @@ public class ShopMenuItem extends MenuButton {
 	}
 
 	public void update(float deltaTime) {
+		if (state == State.CAN_BUY || (entry instanceof CostumeShopEntry)
+				&& !((CostumeShopEntry) entry).isEquipped()) {
+			enable();
+		} else {
+			System.out.println("disabling button");
+			disable();
+		}
+		
 		stateTime += deltaTime;
 		rect.y = getY() - RECT_HEIGHT / 2;
 		
@@ -168,6 +177,9 @@ public class ShopMenuItem extends MenuButton {
 				own.setAlpha(alpha_);
 				own.draw(batch);
 			}
+		}
+		if (state == State.CAN_BUY && isPressed()) {
+			Utils.drawCenter(batch, Assets.shopItemButtonClicked, iconWidth, y);
 		}
 	}
 

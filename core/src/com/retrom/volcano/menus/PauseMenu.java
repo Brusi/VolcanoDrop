@@ -1,6 +1,7 @@
 package com.retrom.volcano.menus;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.retrom.volcano.assets.Assets;
@@ -15,6 +16,10 @@ public class PauseMenu extends Menu {
 	public interface Listener {
 		public void act(Command cmd);
 	}
+	
+	private final Fade fade = new Fade(new Color(0, 0.05f, 0.075f, 1));
+	
+	private final Fade yesNoFade = new Fade(new Color(0, 0, 0.0f, 1));
 	
 	
 	private final Listener listener_;
@@ -109,19 +114,34 @@ public class PauseMenu extends Menu {
 	
 	@Override
 	public void render(SpriteBatch batch, ShapeRenderer shapes) {
-		if (optionsOn) {
-			optionsMenu.render(batch, shapes);
-		} else {
-			super.render(batch, shapes);
-		}
+		yesNoFade.setAlpha(0.8f);
 		
-		if (restartOn) {
-			restartGameMenu.render(batch, shapes);
-			return;
-		}
-		if (shopOn) {
-			shopMenu.render(batch, shapes);
-			return;
+		fade.setAlpha(0.75f);
+		fade.render(shapes);
+		batch.begin();
+		try {
+			if (optionsOn) {
+				optionsMenu.render(batch, shapes);
+			} else {
+				super.render(batch, shapes);
+			}
+
+			if (restartOn) {
+				batch.end();
+				yesNoFade.render(shapes);
+				batch.begin();
+				restartGameMenu.render(batch, shapes);
+				return;
+			}
+			if (shopOn) {
+				batch.end();
+				yesNoFade.render(shapes);
+				batch.begin();
+				shopMenu.render(batch, shapes);
+				return;
+			}
+		} finally {
+			batch.end();
 		}
 	}
 	

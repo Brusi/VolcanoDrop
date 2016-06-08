@@ -303,6 +303,7 @@ public class Assets {
 	public static Sprite shopItemButtonOwn;
 	public static Sprite shopItemButtonEquip;
 	public static Sprite shopItemButtonEquipped;
+	public static Sprite shopItemButtonClicked;
 	
 	public static Sprite shopPrice1500;
 	public static Sprite shopPrice4500;
@@ -735,6 +736,7 @@ public class Assets {
 		shopItemButtonOwn = shopSheet.createSprite("shopmenu_item_button_ownicon");
 		shopItemButtonEquip = shopSheet.createSprite("shopmenu_item_button_equipbutton");
 		shopItemButtonEquipped = shopSheet.createSprite("shopmenu_item_button_equippedicon");
+		shopItemButtonClicked = shopSheet.createSprite("shopmenu_item_button_click");
 		
 		shopPrice1500 = shopSheet.createSprite("1500_price");
 		shopPrice4500 = shopSheet.createSprite("4500_price");

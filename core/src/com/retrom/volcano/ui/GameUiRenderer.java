@@ -40,6 +40,10 @@ public class GameUiRenderer {
 	}
 	
 	public void render(float deltaTime, boolean isPaused) {
+		if (isPaused) {
+			renderPauseMenu();
+			return;
+		}
 		batch_.begin();
 		renderScore(isPaused);
 		renderControls();
@@ -53,9 +57,6 @@ public class GameUiRenderer {
 		powerupUiRenderer_.setShieldRatio(world_.shieldRatio());
 		powerupUiRenderer_.render();
 		
-		if (isPaused) {
-			renderPauseMenu();
-		}
 	}
 
 	private void renderSplash() {
@@ -71,10 +72,7 @@ public class GameUiRenderer {
 
 	private void renderPauseMenu() {
 		BatchUtils.setBlendFuncNormal(batch_);
-		batch_.begin();
 		pauseMenu_.render(batch_, shapes_);
-		batch_.end();
-		
 	}
 
 	private void renderControls() {

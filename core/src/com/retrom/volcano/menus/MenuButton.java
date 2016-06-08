@@ -25,6 +25,7 @@ public abstract class MenuButton extends GraphicObject{
 	
 	private boolean pressed = false;
 	
+	private boolean enabled = true;
 	private boolean visible = true;
 	protected float alpha_ = 1;
 	protected float scale_ = 1;
@@ -37,7 +38,7 @@ public abstract class MenuButton extends GraphicObject{
 	
 	// Check if button is clicked, if it does, invoke action and return true.
 	public boolean checkClick() {
-		if (!visible || alpha_ == 0) {
+		if (!enabled || !visible || alpha_ == 0) {
 			pressed = false; 
 			return false;
 		}
@@ -75,6 +76,11 @@ public abstract class MenuButton extends GraphicObject{
 	public boolean isVisible() { return visible; }
 	public void show() { visible = true; } 
 	public void hide() { visible = false; }
+	
+	public boolean isEnabled() { return enabled; }
+	public void enable() { enabled = true; }
+	public void disable() { enabled = false; } 
+	
 	
 	public float getX() {
 		return rect.x + rect.width / 2;
