@@ -111,19 +111,23 @@ levels: [
 		avg_sack_time: 35
 		groups: [
 		    {
+				chance: 0.0
 				on_level_start: true
-				chance: 0.3
+				sequences: [singleburn_0, singleburn_1, singleburn_2, singleburn_3, singleburn_4, singleburn_5]
+			} 
+			{
+				chance: 0.4
 				single: true
 				sequences: [burn]
 			} 
 			{
-				chance: 0.2
+				chance: 0.1
 				single: true
 				sequences: [wall]
 			}
 			{
 				chance: 0.5
-				sequences: [side_to_sidex2, 0_3_5, 4_and_pair, 3full_3hole_burn, burn_2_temples, burn_3_pairs, burn_hole, burn_3_and_3]
+				sequences: [side_to_sidex2, 102, 201, 0_3_5, 4_and_pair, burn_shower, 3full_3hole_burn, burn_2_temples, burn_3_pairs, burn_hole, burn_3_and_3]
 			}
 		]
 		coins: [
@@ -155,7 +159,7 @@ levels: [
 			}
 			{
 				chance: 0.5
-				sequences: [3full_3hole_burn, burn_shower, burn_side_to_side, burn_3_pairs, burn_vee, burn_hat, burn_2_temples, burn_hole, burn_3_and_3]
+				sequences: [3full_3hole_burn, burn_shower, burn_side_to_side, burn_3_pairs, burn_vee, burn_hat, burn_2_temples, burn_hole, burn_3_and_3, burn_cages, burn_4triples]
 			}
 		]
 		coins: [
@@ -197,7 +201,7 @@ levels: [
 			}
 			{
 				chance: 0.2
-				sequences: [3full_3hole_burn, burn_shower, burn_side_to_side, burn_3_pairs, burn_vee, burn_hat, burn_2_temples, burn_hole, burn_3_and_3]
+				sequences: [3full_3hole_burn, burn_shower, burn_side_to_side, burn_3_pairs, burn_vee, burn_hat, burn_2_temples, burn_hole, burn_3_and_3, burn_cages, burn_4triples]
 			}
 		]
 		coins: [
@@ -291,7 +295,7 @@ levels: [
 		avg_sack_time: 15
 		groups: [
 			{
-				chance: 0.3
+				chance: 0.2
 				single: true
 				sequences: [flame]
 			}
@@ -300,13 +304,14 @@ levels: [
 				single: true
 				sequences: [burn]
 			}
-			{
-				chance: 0.3
+				{
+				chance: 0.2
 				on_level_start: true
-				sequences: [fireball_side_to_side, fireball_side_to_side_hole, fireball_pairs, fireball_rain, fireball_triples, fireball_3_and_3, fireball_pillars, fireball_3flame, fireball_2flame]
+				single: true
+				sequences: [fireball]
 			}
 			{
-				chance: 0.3
+				chance: 0.5
 				sequences: [flame_hat, flame_vee, flame_side_to_side, flame_3_and_3, flame_lavafloor, flame_shower, flame_stairs]
 			}
 		]
@@ -329,7 +334,7 @@ levels: [
 		avg_sack_time: 15
 		groups: [
 			{
-				chance: 0.1
+				chance: 0.2
 				single: true
 				sequences: [flame]
 			}
@@ -339,7 +344,7 @@ levels: [
 				sequences: [burn]
 			}
 			{
-				chance: 0.5
+				chance: 0.4
 				on_level_start: true
 				sequences: [fireball_side_to_side, fireball_side_to_side_hole, fireball_pairs, fireball_rain, fireball_triples, fireball_3_and_3, fireball_pillars, fireball_3flame, fireball_2flame]
 			}
