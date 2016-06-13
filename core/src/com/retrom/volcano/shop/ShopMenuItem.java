@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.data.CostumeShopEntry;
+import com.retrom.volcano.data.IncShopEntry;
 import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.data.ShopEntry;
 import com.retrom.volcano.game.Utils;
@@ -81,7 +82,6 @@ public class ShopMenuItem extends MenuButton {
 				&& !((CostumeShopEntry) entry).isEquipped()) {
 			enable();
 		} else {
-			System.out.println("disabling button");
 			disable();
 		}
 		
@@ -122,8 +122,7 @@ public class ShopMenuItem extends MenuButton {
 		title.setAlpha(alpha_);
 		title.draw(batch);
 		
-		if (state == State.CAN_BUY || 
-    	   (entry instanceof CostumeShopEntry && !((CostumeShopEntry)entry).isEquipped())) {
+		if (clickable()) {
 			Sprite bg = Assets.shopItemButtonBg;
 			bg.setY(y - bg.getHeight() / 2);
 			bg.setX(iconWidth - bg.getWidth() / 2);
@@ -178,9 +177,23 @@ public class ShopMenuItem extends MenuButton {
 				own.draw(batch);
 			}
 		}
-		if (state == State.CAN_BUY && isPressed()) {
+		if (isPressed()) {
 			Utils.drawCenter(batch, Assets.shopItemButtonClicked, iconWidth, y);
 		}
+		if (entry instanceof IncShopEntry) {
+			IncShopEntry ise = (IncShopEntry)entry;
+			int level = ise.getLevel();
+			if (level > 0) {
+				Sprite s = Assets.shopBlessingsLevelNumber.get(level - 1);
+				Utils.drawCenter(batch, s, -223, y-18);  // TODO: place correctly on screen.
+			}
+		}
+	}
+
+	// Whether an item button can be clicked (can be bought or equipped).
+	private boolean clickable() {
+		return state == State.CAN_BUY || 
+    	   (entry instanceof CostumeShopEntry && !((CostumeShopEntry)entry).isEquipped());
 	}
 
 	public void updateState() {

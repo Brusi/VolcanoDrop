@@ -71,6 +71,7 @@ public class Assets {
 	public static Array<Sprite> openingTorchFire;
 	public static Array<Sprite> openingRootsParticles;
 	
+	public static Sprite fireballWarningPillarEffect;
 	
 	public static Sprite openingBossSleeps;
 	public static Sprite openingBossSleepsGlow;
@@ -342,6 +343,11 @@ public class Assets {
 	public static Sprite shopItemFroggerIcon;
 	public static Sprite shopItemFroggerTitle;
 	
+	public static Array<Sprite> shopBlessingsLevelNumber;
+	
+	public static Sprite shopItemAirCharmIcon;
+	public static Sprite shopItemAirCharmTitle;
+	
 	public static Sprite shopItemDefaultCostumeIcon;
 	public static Sprite shopItemDefaultCostumeTitle;
 	public static Sprite shopItemGoboCostumeIcon;
@@ -609,6 +615,10 @@ public class Assets {
 		relic_flames = openingVfxSheet.createSprites("flames_circle");
 		relic_glow = openingVfxSheet.createSprite("relic_glow");
 		
+		// Packed in this sheet because it was easier:
+		fireballWarningPillarEffect = openingVfxSheet.createSprite("fireball_warningpillar");
+		System.out.println("fireballWarningPillarEffect="+fireballWarningPillarEffect);
+		
 		TextureAtlas powerupSheet = new TextureAtlas("vfx/powerup.txt");
 		magnetBackGlow = powerupSheet.createSprite("powerup_magnet_backglow");
 		slomoBackGlow = powerupSheet.createSprite("powerup_timebend_backglow");
@@ -754,7 +764,9 @@ public class Assets {
 		
 		prices = Utils.createSpritesIndexMap(shopSheet, "shopmenu_items_cost");
 		
+		//// Shop items
 		TextureAtlas shopItemsSheet = new TextureAtlas("shop/shopitems.txt");
+		// Powers
 		shopItemAirStepIcon = shopItemsSheet.createSprite("shopmenu_items_powers_airstep");
 		shopItemAirStepTitle = shopItemsSheet.createSprite("shopmenu_items_powers_airstep_text");
 		
@@ -773,6 +785,13 @@ public class Assets {
 		shopItemSlowWalkerIcon = shopItemsSheet.createSprite("shopmenu_items_powers_slowalker");
 		shopItemSlowWalkerTitle = shopItemsSheet.createSprite("shopmenu_items_powers_slowalker_text");
 		
+		// Blessings
+		shopBlessingsLevelNumber = shopItemsSheet.createSprites("shopmenu_items_blessings_level");
+		
+		shopItemAirCharmIcon = shopItemsSheet.createSprite("shopmenu_items_blessings_aircharm");
+		shopItemAirCharmTitle = shopItemsSheet.createSprite("shopmenu_items_blessings_aircharm_text");
+		
+		// Costumes
 		shopItemDefaultCostumeIcon = shopItemsSheet.createSprite("shopmenu_items_costume_default");
 		shopItemDefaultCostumeTitle = shopItemsSheet.createSprite("shopmenu_items_costume_default_text");
 		shopItemGoboCostumeIcon = shopItemsSheet.createSprite("shopmenu_items_costume_gobo");

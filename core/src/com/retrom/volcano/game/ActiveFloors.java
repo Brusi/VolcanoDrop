@@ -86,7 +86,11 @@ public class ActiveFloors {
 	}
 	
 	private Rectangle rectAt(int col, int row) {
-		return new Rectangle(LEFT + col * SIZE, BOTTOM + (row-1) * SIZE, SIZE, SIZE);
+		return new Rectangle(LEFT + col * SIZE, getRowY(row-1), SIZE, SIZE);
+	}
+
+	private float getRowY(int row) {
+		return BOTTOM + (row) * SIZE;
 	}
 
 	private void generateRects() {
@@ -149,5 +153,9 @@ public class ActiveFloors {
 		for (int i = 0; i < hist_.length; i++)
 			s += hist_[i] + ",";
 		return s;
+	}
+
+	public float getColY(int col) {
+		return getRowY(hist_[col]);
 	}
 }

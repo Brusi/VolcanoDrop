@@ -20,7 +20,14 @@ public class SpawnerAction {
 		WALL_OR_DUAL(true),
 		SINGLE_BURN(true),
 		SINGLE_FLAME(true),
-		SINGLE_FIREBALL(true);
+		SINGLE_FIREBALL(true),
+		
+		// Lava actions:
+		LAVA_NONE,
+		LAVA_HARMLESS,
+		LAVA_LOW,
+		LAVA_MEDIUM,
+		LAVA_HIGH;
 		
 		public final boolean random;
 		
@@ -46,6 +53,19 @@ public class SpawnerAction {
 		this.time = time;
 		this.col = col;
 		this.size = size;
+	}
+	
+	public static boolean isLavaType(Type type) {
+		switch (type) {
+		case LAVA_NONE:
+		case LAVA_HARMLESS:
+		case LAVA_LOW:
+		case LAVA_MEDIUM:
+		case LAVA_HIGH:
+			return true;
+		default:
+			return false;
+		}
 	}
 	
 	public static void test() {

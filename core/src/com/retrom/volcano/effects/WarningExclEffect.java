@@ -9,11 +9,11 @@ public class WarningExclEffect extends OneFrameEffect {
 	private static final float DURATION = APPEAR_TIME * 3 + WarningSkullEffect.APPEAR_TIME;
 	public static final float DISTANCE_FROM_TOP = 35;
 	
-	public final float originalY; 
-
-	public WarningExclEffect(Vector2 position) {
+	public final boolean floating;
+	
+	public WarningExclEffect(Vector2 position, boolean floating) {
 		super(Assets.warningExcl, DURATION, position);
-		originalY = position.y;
+		this.floating = floating;
 	}
 	
 	@Override
@@ -22,7 +22,7 @@ public class WarningExclEffect extends OneFrameEffect {
 	}
 	
 	@Override
-	public float getTint() {
+	public float getAlpha() {
 		if (stateTime_ < WarningSkullEffect.APPEAR_TIME)
 			return 0;
 		else

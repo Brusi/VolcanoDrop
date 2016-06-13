@@ -23,9 +23,21 @@ public class ShopData {
 	public static ShopEntry frogger;
 	public static ShopEntry slowWalker;
 	
+	public static IncShopEntry airCharm;
+//	public static IncShopEntry boulderFist;
+//	public static IncShopEntry goldDigger;
+//	public static IncShopEntry hazeBless;
+//	public static IncShopEntry mightBless;
+//	public static IncShopEntry reborn;
+//	public static IncShopEntry templeHopper;
+//	public static IncShopEntry timeBender;
+//	public static IncShopEntry treasureRain;
+//	public static IncShopEntry windBless;
+	
 	public static CostumeShopEntry defaultCostume;
 	public static CostumeShopEntry goboCostume;
 	public static CostumeShopEntry blikCostume;
+	
 	
 	private static final Preferences prefs = Gdx.app
 			.getPreferences(PREFS_NAME);
@@ -40,7 +52,7 @@ public class ShopData {
 		slowWalker = createOwn("powers_slow_walker", 6000);
 		
 		// Blessings
-		// TBD
+		airCharm = createInc("air_charm", new int[] { 1000, 1500, 2000 });
 		
 		// Costumes
 		defaultCostume = createCostume("costumes_default", 0, true);
@@ -88,6 +100,12 @@ public class ShopData {
 	
 	private static ShopEntry createOwn(String name, int price) {
 		ShopEntry entry = new OwnShopEntry(name, price);
+		allShopEntries.add(entry);
+		return entry;
+	}
+	
+	private static IncShopEntry createInc(String name, int[] prices) {
+		IncShopEntry entry = new IncShopEntry(name, prices);
 		allShopEntries.add(entry);
 		return entry;
 	}

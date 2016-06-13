@@ -41,6 +41,7 @@ import com.retrom.volcano.effects.EffectFactory;
 import com.retrom.volcano.effects.FireballAnimationEffect;
 import com.retrom.volcano.effects.FireballGlow;
 import com.retrom.volcano.effects.FireballStartEffect;
+import com.retrom.volcano.effects.FireballWarningPillarEffect;
 import com.retrom.volcano.effects.FlameEffect;
 import com.retrom.volcano.effects.FlameGlowEffect;
 import com.retrom.volcano.effects.HotBrickEffect;
@@ -301,6 +302,11 @@ public class World {
 			public void warning(int col, boolean sound) {
 				createWarning(col, sound);
 			}
+
+			@Override
+			public void setLavaState(Lava.State state) {
+				lava_.setState(state);
+			}
 		});
 		
 		if (spawner_.levels.start_time != 0) {
@@ -380,7 +386,7 @@ public class World {
 			startQuake();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-			addLeafParticle(100,100);
+			addBurningWall(Utils.randomInt(6));
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
 			spawner_.enabled = !spawner_.enabled;
@@ -412,6 +418,13 @@ public class World {
 		float x = base_x + dir.x * Utils.randomRange(10, 35);
 		float y = base_y + dir.y * Utils.randomRange(10, 35);
 		addEffectsUnder.add(new BurnParticle(x, y));
+	}
+	// Shameless copy of the function above.
+	private void addBurnParticle(float base_x, float base_y, float duration) {
+		Vector2 dir = Utils.randomDir();
+		float x = base_x + dir.x * Utils.randomRange(10, 35);
+		float y = base_y + dir.y * Utils.randomRange(10, 35);
+		addEffectsUnder.add(new BurnParticle(x, y, duration));
 	}
 	
 	private void addBurnParticles(float base_x, float base_y) {
@@ -746,7 +759,6 @@ public class World {
 			addLavaSurfaceBubble();
 		}
 			
-		lava_.setHeight(Math.min(gameTime * 5, 70));
 		lava_.update(deltaTime);
 		
 		// TODO: do not kill when just touching but make some smoke effect.
@@ -1038,8 +1050,9 @@ public class World {
 	
 	private void prepareFireball(final int col) {
 		final float y = topScreenY() - TopFireball.DISTANCE_FROM_TOP - camTarget;
-		addEffects.add(new FireballStartEffect(new Vector2(Utils
-				.xOfCol(col), y)));
+		addEffects.add(new FireballStartEffect(new Vector2(Utils.xOfCol(col), y)));
+		addEffectsUnder.add(new FireballWarningPillarEffect(new Vector2(Utils.xOfCol(col), floors_.getColY(col) + FireballWarningPillarEffect.Y_OFFSET), false));
+		addEffectsUnder.add(new FireballWarningPillarEffect(new Vector2(Utils.xOfCol(col), floors_.getColY(col) + FireballWarningPillarEffect.Y_OFFSET), true));
 		SoundAssets.playSound(SoundAssets.fireballStart);
 		worldEvents_.addEventFromNow(TopFireball.PREPARATION_DELAY, new Event() {
 			@Override
@@ -1049,13 +1062,23 @@ public class World {
 		});
 	}
 	
+	private void addWarningEffects(float x, float y) {
+		final float skull_y = y - WarningSkullEffect.DISTANCE_FROM_TOP;
+		effects.add(new WarningSkullEffect(new Vector2(x, skull_y)));
+		final float excl_y = y - WarningExclEffect.DISTANCE_FROM_TOP;
+		effects.add(new WarningExclEffect(new Vector2(x, excl_y), true));
+	}
+	
 	private void createWarning(final int col, boolean sound) {
-		final float skull_y = topScreenY() - WarningSkullEffect.DISTANCE_FROM_TOP - camTarget;
-		effects.add(new WarningSkullEffect(new Vector2(Utils
-				.xOfCol(col), skull_y)));
-		final float excl_y = topScreenY() - WarningExclEffect.DISTANCE_FROM_TOP - camTarget;
-		effects.add(new WarningExclEffect(new Vector2(Utils
-				.xOfCol(col), excl_y)));
+		addWarningEffects(Utils.xOfCol(col), topScreenY() - camTarget);
+		if (sound) {
+			SoundAssets.playSound(SoundAssets.warning);
+		}
+	}
+	
+	private void createBottomWarning(final int col, boolean sound) {
+		final float excl_y = floors_.getColY(col);
+		effects.add(new WarningExclEffect(new Vector2(Utils.xOfCol(col), excl_y + 40), false));
 		if (sound) {
 			SoundAssets.playSound(SoundAssets.warning);
 		}
@@ -1205,8 +1228,7 @@ public class World {
 					shouldPumpNow = true;
 				}
 				if (sack.state() == GoldSack.STATE_PUMP
-						&& deltaTime * Math.abs(player.velocity.len()) > Math
-								.random() * 40 + 2) {
+						&& deltaTime * Math.abs(player.velocity.len()) > Math.random() * 40 + 2) {
 					shouldPumpNow = true;
 				}
 				if (shouldPumpNow) {
@@ -1250,8 +1272,12 @@ public class World {
 			wall.update(deltaTime);
 			
 			if (wall instanceof BurningWall) {
-				if (Math.random() / 20f < deltaTime)
-				addBurnParticle(wall.position.x, wall.position.y);
+				BurningWall bw = (BurningWall)wall;
+				if (bw.stateTime() > BurningWall.TIME_WITHOUT_BURN
+						&& Math.random() / 20f < deltaTime) {
+					addBurnParticle(wall.position.x, wall.position.y,
+							Utils.randomRange(0.5f, 1));
+				}
 			}
 			
 			if (wall.status() == Wall.STATUS_EXPLODE) {
@@ -1312,6 +1338,10 @@ public class World {
 			
 			if (wall instanceof FlamethrowerWall) {
 				FlamethrowerWall f = (FlamethrowerWall) wall;
+				if (f.shouldWarn()) {
+					f.setWarned();
+					createBottomWarning(f.col(), true);
+				}
 				if (f.shouldAddFlame()) {
 					Effect flameEffect = new FlameEffect(new Vector2(new Vector2(wall.position.x, wall.position.y + 96)));
 					Effect flameGlowEffect = new FlameGlowEffect(new Vector2(new Vector2(wall.position.x, wall.position.y + Wall.SIZE/2)));

@@ -207,7 +207,6 @@ public class Player extends DynamicGameObject {
 		if (state_ == STATE_RUNNING) {
 			stateTime -= deltaTime / 2;
 			float addition = deltaTime * Math.abs(velocity.x) * 4 / MAX_NON_DASH_VEL;
-			System.out.println("addition="+addition);
 			stateTime += addition;
 		}
 		

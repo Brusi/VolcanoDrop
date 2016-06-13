@@ -305,10 +305,10 @@ public class WorldRenderer {
 		batch.begin();
 		renderPillarBg();
 		world.opening.render(shapeRenderer, batch);
-		renderWalls();
 		BatchUtils.setBlendFuncAdd(batch);
 		renderEffects(world.addEffectsUnder);
 		BatchUtils.setBlendFuncNormal(batch);
+		renderWalls();
 		
 		renderRelic();
 		renderPlayer();
@@ -388,9 +388,8 @@ public class WorldRenderer {
 	}
 
 	private void renderEffects(List<Effect> effects) {
-		final float[] tiltY = {0};
-		
 		for (Effect e : effects) {
+			final float[] tiltY = {0};
 			Sprite s = e.accept(new EffectVisitor<Sprite>() {
 
 				@Override
@@ -546,22 +545,20 @@ public class WorldRenderer {
 				
 				@Override
 				public Sprite visit(WarningSkullEffect effect) {
-					effect.position_.y = effect.originalY + cam.position.y; 
+					tiltY[0] = cam.position.y;
 					Sprite s = effect.sprite();
 					float tint = effect.getTint();
-					s.setColor(tint, tint, tint, tint);
-					s.setY(s.getY() + world.camTarget);
+					s.setColor(tint, tint, tint, 1);
 					return s;
 				}
 				
 				@Override
 				public Sprite visit(WarningExclEffect effect) {
 					// TODO: merge with WarningSkullEffect.
-					effect.position_.y = effect.originalY + cam.position.y; 
+					tiltY[0] = effect.floating ? cam.position.y : 0;
 					Sprite s = effect.sprite();
 					float tint = effect.getTint();
-					s.setColor(tint, tint, tint, tint);
-					s.setY(s.getY() + world.camTarget);
+					s.setColor(tint, tint, tint, 1);
 					return s;
 				}
 				
@@ -606,12 +603,10 @@ public class WorldRenderer {
 				}
 			});
 			if (s != null) {
-				s.setPosition(e.position_.x - s.getWidth()/2, e.position_.y - s.getHeight()/2);
 				s.setRotation(e.getRotation());
 				s.setScale(e.getXScale(), e.getYScale());
-				s.setY(snapToY(s.getY()) + tiltY[0]);
 				s.setAlpha(e.getAlpha());
-				s.draw(batch);
+				Utils.drawCenter(batch, s, e.position_.x, snapToY(e.position_.y + tiltY[0]));
 			}
 		}
 	}

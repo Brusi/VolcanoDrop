@@ -1,12 +1,12 @@
 package com.retrom.volcano.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Lava {
 	
+	private static final float LAVA_HEIGHT_NONE = -WorldRenderer.FRUSTUM_HEIGHT / 2 + 250;
 	public static final float SPACING = 14;
 	public static final float WIDTH = WorldRenderer.FRUSTUM_WIDTH - 150;
 	private static final float FEEDBACK = 20f;
@@ -15,8 +15,16 @@ public class Lava {
 	private static final float CONST_OFFSET = -400f;
 	
 	public static enum State {
-		OPENING,  // Only to see the lava at the bottom.
-		RISING;   // Dangerous rising lava! 
+		OPENING,  // Only to see the lava at the bottom of the opening.
+		NONE,     // Invisible. Out of screen.
+		HARMLESS, // Visible but too low to cause (extreme cases are possible). 
+		LOW,      // May harm you only if you are very low.
+		MEDIUM,   // You better stay on high ground, always possible.
+		HIGH;     // For hand-sewn sequences!
+	}
+	
+	public static enum Level {
+		
 	}
 	
 	public static class Node {
@@ -41,8 +49,11 @@ public class Lava {
 		}
 	}
 	
+	// TODO: do not render lava if out of screen.
+	
 	private final Node[] nodes;
-	private float height_ = 50;
+	private float height_ = LAVA_HEIGHT_NONE;
+	private float target_height_ = LAVA_HEIGHT_NONE;
 	
 	public float cam_y;
 	
@@ -71,17 +82,14 @@ public class Lava {
 		for (int i=0; i < nodes.length; i++) {
 			nodes[i].update(deltaTime);
 		}
+		height_ += (target_height_ - height_) * deltaTime / 2;
 	}
 	
 	public float finalY() {
-		switch (state_) {
-		case OPENING:
+		if (state_ == State.OPENING) {
 			return -170;
-		case RISING:
-			return cam_y + CONST_OFFSET + height_;
 		}
-		Gdx.app.error("ERROR", "Illegal lava state.");
-		return 0;
+		return cam_y + CONST_OFFSET + height_;
 	}
 	
 	private void drawQuad(ShapeRenderer shapes, float x1, float y1, float x2, float y2, float x3,
@@ -200,10 +208,6 @@ public class Lava {
 		}
 	}
 
-	public void setHeight(float height) {
-		height_ = height;		
-	}
-
 	public void hitRandom() {
 		int i = Utils.randomInt(nodes.length);
 		nodes[i].vel_ = Utils.random2Range(120);
@@ -215,5 +219,32 @@ public class Lava {
 	
 	public Node getNode(int i) {
 		return nodes[i];
+	}
+
+	public void setState(Lava.State state) {
+		state_ = state;
+		switch(state_) {
+		case NONE:
+			target_height_ = LAVA_HEIGHT_NONE;
+			break;
+		case HARMLESS:
+			target_height_ = -80;
+			break;
+		case LOW:
+			target_height_ = 0;
+			break;
+		case MEDIUM:
+			target_height_ = 50;
+			break;
+		case HIGH:
+			target_height_ = 100;
+			break;
+		case OPENING:
+			break;
+		default:
+			break;
+		
+		}
+		
 	}
 }

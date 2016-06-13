@@ -19,14 +19,26 @@ public class BurnParticle extends Particle {
 	}
 	
 	public BurnParticle(float x, float y) {
-		this(x, y, UPVEL);
+		this(x, y, UPVEL, getDuration());
+	}
+	
+	public BurnParticle(float x, float y, float duration) {
+		this(x, y, UPVEL, duration);
 	}
 	
 	public BurnParticle(float x, float y, Vector2 velocity) {
-		super(Assets.burnParticle.random(), DURATION + Utils.random2Range(0.5f), new Vector2(x, y), velocity);
+		this(x, y, velocity, getDuration());
+	}
+	
+	public BurnParticle(float x, float y, Vector2 velocity, float duration) {
+		super(Assets.burnParticle.random(), duration, new Vector2(x, y), velocity.cpy());
 		rotation = Utils.randomRange(0, 360f);
 		rotationVel = Utils.randomRange(60, 100) * (Utils.randomBool() ? 1 : -1);
 		base_scale = Utils.randomRange(0.6f, 1);
+	}
+
+	private static float getDuration() {
+		return DURATION + Utils.random2Range(0.5f);
 	}
 	
 	

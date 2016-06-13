@@ -5,7 +5,6 @@ import com.badlogic.gdx.Preferences;
 public abstract class ShopEntry {
 	final public String name;
 	
-	
 	public ShopEntry(String name) {
 		this.name = name;
 	}

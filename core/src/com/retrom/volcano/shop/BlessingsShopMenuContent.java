@@ -13,13 +13,7 @@ public class BlessingsShopMenuContent extends ItemsListShopMenuContent {
 
 	@Override
 	protected void initItems() {
-//		addMenuItem(Assets.shopItemAirStepIcon, Assets.shopItemAirStepTitle, ShopData.airStep);
-//		addMenuItem(Assets.shopItemWallFootIcon, Assets.shopItemWallFootTitle, ShopData.wallFoot);
-//		addMenuItem(Assets.shopItemChargeIcon, Assets.shopItemChargeTitle, ShopData.charge);
-//		addMenuItem(Assets.shopItemCheetahrIcon, Assets.shopItemCheetahrTitle, ShopData.cheetahr);
-//		addMenuItem(Assets.shopItemFroggerIcon, Assets.shopItemFroggerTitle, ShopData.frogger);
-//		addMenuItem(Assets.shopItemSlowWalkerIcon, Assets.shopItemSlowWalkerTitle, ShopData.slowWalker);
-		
+		addMenuItem(Assets.shopItemAirCharmIcon, Assets.shopItemAirCharmTitle, ShopData.airCharm);
 	}
 
 	@Override

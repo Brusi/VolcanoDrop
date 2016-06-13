@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import sun.awt.AWTAccessor.EventQueueAccessor;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.retrom.volcano.data.Levels;
@@ -13,6 +15,8 @@ import com.retrom.volcano.data.CoinChancesConfiguration;
 import com.retrom.volcano.data.Sequence;
 import com.retrom.volcano.data.SequenceLib;
 import com.retrom.volcano.data.SpawnerAction;
+import com.retrom.volcano.data.SpawnerAction.Type;
+import com.retrom.volcano.game.Lava.State;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Wall;
 import com.retrom.volcano.utils.EventQueue;
@@ -32,6 +36,7 @@ public class Spawner {
 		public void dropSack(int col, int numCoins);
 		public void warning(int col, boolean sound);
 		public void quake(boolean big);
+		public void setLavaState(State state);
 	}
 	
 	private final SpawnerHandler handler_;
@@ -401,6 +406,15 @@ public class Spawner {
 		};
 	}
 	
+	EventQueue.Event lavaEvent(final Lava.State state) {
+		return new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				handler_.setLavaState(state);
+			}
+		};
+	}
+	
 	// Sequence from class.
 	private void dropSequenceOrSingle(Sequence seq) {
 		boolean flipped = rand.nextBoolean();
@@ -464,7 +478,9 @@ public class Spawner {
 		}
 		
 		int col = flipped ? 5 - action.col : action.col;
-		if (!action.type.random && action.type != SpawnerAction.Type.NOP && action.type != SpawnerAction.Type.FIREBALL) {
+		if (!SpawnerAction.isLavaType(action.type) && !action.type.random
+				&& action.type != SpawnerAction.Type.NOP
+				&& action.type != SpawnerAction.Type.FIREBALL) {
 			makeWarning(action.time, col);
 		}
 		
@@ -488,16 +504,38 @@ public class Spawner {
 		case WALL:
 			queue.addEventFromNow(action.time, dropWallEvent(col));
 			break;
+		case LAVA_NONE:
+		case LAVA_HARMLESS:
+		case LAVA_LOW:
+		case LAVA_MEDIUM:
+		case LAVA_HIGH:
+			queue.addEventFromNow(action.time, lavaEvent(lavaState(action.type)));
 		default:
 			break;
 		}
 	}
 	
+	private State lavaState(Type type) {
+		switch(type) {
+		case LAVA_NONE:
+			return Lava.State.NONE;
+		case LAVA_HARMLESS:
+			return Lava.State.HARMLESS;
+		case LAVA_LOW:
+			return Lava.State.LOW;
+		case LAVA_MEDIUM:
+			return Lava.State.MEDIUM;
+		case LAVA_HIGH:
+			return Lava.State.HIGH;
+		default:
+			Gdx.app.error("ERROR", "Invalid lava state.");
+			return null;
+		}
+	}
+
 	private boolean getWithSound(float time) {
 		float diff = (timeCount + time) - lastWarningSoundTime;
 		boolean $ = (timeCount + time) - lastWarningSoundTime > SOUND_COOLDOWN_TIME;
-		System.out.println("diff="+diff);
-		System.out.println("$="+$);
 		if ($) {
 			lastWarningSoundTime = timeCount + time;
 		}
