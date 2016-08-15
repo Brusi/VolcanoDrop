@@ -16,6 +16,7 @@ public class Lava {
 	
 	public static enum State {
 		OPENING,  // Only to see the lava at the bottom of the opening.
+		AFTER_OPENING,    // Rise a little after the opening scene.
 		NONE,     // Invisible. Out of screen.
 		HARMLESS, // Visible but too low to cause (extreme cases are possible). 
 		LOW,      // May harm you only if you are very low.
@@ -88,6 +89,9 @@ public class Lava {
 	public float finalY() {
 		if (state_ == State.OPENING) {
 			return -170;
+		}
+		if (state_ == State.AFTER_OPENING) {
+			return -20;
 		}
 		return cam_y + CONST_OFFSET + height_;
 	}

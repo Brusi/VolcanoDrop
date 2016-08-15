@@ -27,7 +27,10 @@ public class SpawnerAction {
 		LAVA_HARMLESS,
 		LAVA_LOW,
 		LAVA_MEDIUM,
-		LAVA_HIGH;
+		LAVA_HIGH,
+		
+		//
+		BALANCE_FLOOR;  // For balancing the floor before the boss.
 		
 		public final boolean random;
 		

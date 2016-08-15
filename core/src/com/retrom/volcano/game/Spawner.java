@@ -3,6 +3,7 @@ package com.retrom.volcano.game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.TreeSet;
 
 import sun.awt.AWTAccessor.EventQueueAccessor;
 
@@ -85,6 +86,7 @@ public class Spawner {
 	
 	// Events.
 	private EventQueue.Event NOP;
+	private EventQueue.Event NOP_NO_SEQUENCE_COOLDOWN;
 	private EventQueue.Event QUAKE;
 	private EventQueue.Event QUAKE_SMALL;
 	
@@ -444,8 +446,58 @@ public class Spawner {
 			}
 		}
 	}
+	
+	private void dropWallForBalance() {
+		// First check for double walls.
+		int maxRow = floors_.getMaxRow();
+		int minRow = floors_.getMinRow();
+		if (maxRow == minRow) return;  // Floor already balanced!
+		
+		
+		// Prefer to drop a dual wall
+		List<Integer> candidates = new ArrayList<Integer>();
+//		for (int col = 0; col < NUMBER_OF_COLUMNS - 1; col++) {
+//			if (floors_.getColumnFloor(col) == minRow
+//					&& floors_.getColumnFloor(col + 1) == minRow) {
+//				candidates.add(col);
+//			}
+//		}
+//		for (Wall wall : activeWalls) {
+//			candidates.remove(new Integer(wall.col()));
+//			if (wall.isDual()) {
+//				candidates.remove(new Integer(wall.col() + 1));
+//			}
+//		}
+//		if (!candidates.isEmpty()) {
+//			int colToDrop = candidates.get(rand.nextInt(candidates.size()));
+//			handler_.dropDualWall(colToDrop);
+//			return;
+//		}
+
+		// If cant drop a dual, drop single.
+		for (int col = 0; col < NUMBER_OF_COLUMNS; col++) {
+			if (floors_.getColumnFloor(col) < maxRow) {
+				candidates.add(col);
+			}
+		}
+		for (Wall wall : activeWalls) {
+			candidates.remove(new Integer(wall.col()));
+			if (wall.isDual()) {
+				candidates.remove(new Integer(wall.col() + 1));
+			}
+		}
+		if (!candidates.isEmpty()) {
+			int colToDrop = candidates.get(rand.nextInt(candidates.size()));
+			handler_.dropWall(colToDrop);
+			return;
+		}
+	}
 		
 	private void addAction(SpawnerAction action, boolean flipped) {
+		if (action.type == Type.BALANCE_FLOOR) {
+			dropWallForBalance();
+		}
+		
 		if (action.type.random) {
 			List<Integer> candidates = getWallCandidates();
 			if (action.type == SpawnerAction.Type.WALL_OR_DUAL) {
@@ -480,7 +532,8 @@ public class Spawner {
 		int col = flipped ? 5 - action.col : action.col;
 		if (!SpawnerAction.isLavaType(action.type) && !action.type.random
 				&& action.type != SpawnerAction.Type.NOP
-				&& action.type != SpawnerAction.Type.FIREBALL) {
+				&& action.type != SpawnerAction.Type.FIREBALL
+				&& action.type != SpawnerAction.Type.BALANCE_FLOOR) {
 			makeWarning(action.time, col);
 		}
 		

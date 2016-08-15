@@ -116,6 +116,11 @@ public class GameScreen extends ScreenAdapter implements Screen {
 				update(delta);
 			}
 		}
+		if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+			for (int i=0; i < 300; i++) {
+				update(delta);
+			}
+		}
 		update(delta);
 	}
 

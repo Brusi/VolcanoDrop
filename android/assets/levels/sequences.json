@@ -9,6 +9,10 @@ sequences: [
 		seq: [{type: WALL_OR_DUAL}]
 	}
 	{
+		name: balance_floor
+		seq: [{type: BALANCE_FLOOR}]
+	}
+	{
 		name: burn
 		seq: [{type: SINGLE_BURN}]
 	}
@@ -152,7 +156,7 @@ sequences: [
 		      {type: WALL, time: 2.30, col: 1}
 		      {type: WALL, time: 3.60, col: 4}
 		      {type: WALL, time: 3.60, col: 5}
-		      {type: NOP,  time: 4}]
+		      {type: NOP,  time: 4.5}]
 	}
 	{
 		name: 4_and_pair
@@ -722,19 +726,99 @@ sequences: [
 		seq: [{type: LAVA_HIGH, time: 0}]	
 	}
     {
-		name: stack_with_lava
+		name: boss_lavaseq_stairs
+		hotkey: 8
+		seq: [{type: LAVA_HARMLESS, time: 0}
+			  {type: STACK, time: 1.8, col: 1, size: 2}
+			  {type: STACK, time: 1.6, col: 2, size: 3}
+			  {type: STACK, time: 1.4, col: 3, size: 4}
+			  {type: STACK, time: 1.2, col: 4, size: 5}
+			  {type: STACK, time: 1, col: 5, size: 6}
+			  {type: FIREBALL, time: 1.7, col: 0}
+			  {type: STACK, time: 5.2, col: 0, size: 6}
+			  {type: STACK, time: 5.4, col: 1, size: 4}
+			  {type: STACK, time: 5.6, col: 2, size: 3}
+			  {type: STACK, time: 5.8, col: 3, size: 2}
+			  {type: WALL, time: 6.0, col: 4, size: 1}
+			  {type: FIREBALL, time: 5.2, col: 5}
+			  {type: LAVA_LOW, time: 5.2}
+			  {type: FIREBALL, time: 8.7, col: 0}
+			  {type: STACK, time: 8.8, col: 1, size: 1}
+			  {type: STACK, time: 8.6, col: 2, size: 2}
+			  {type: STACK, time: 8.4, col: 3, size: 3}
+			  {type: STACK, time: 8.2, col: 4, size: 4}
+			  {type: STACK, time: 8.0, col: 5, size: 4}
+			  {type: FLAME, time: 9.5, col: 5}
+			  {type: STACK, time: 11.5, col: 0, size: 5}
+			  {type: STACK, time: 11.5, col: 1, size: 4}
+			  {type: STACK, time: 11.5, col: 2, size: 3}
+			  {type: STACK, time: 11.5, col: 3, size: 2}
+			  {type: BURN, time: 13, col: 4, size: 1}
+			  {type: LAVA_HARMLESS, time: 15}
+		      {type: NOP, time: 15}]
+	}
+	{
+		name: boss_lavaseq_pillars
 		hotkey: 9
-		seq: [{type: LAVA_LOW, time: 0}
-		      {type: WALL, time: 0, col: 0}
-			  {type: STACK, time: 2, col: 1, size: 2}
-			  {type: LAVA_MEDIUM, time: 2}
-			  {type: STACK, time: 3, col: 2, size: 3}
-			  {type: STACK, time: 4, col: 3, size: 4}
-			  {type: LAVA_HIGH, time: 4}
-			  {type: STACK, time: 5, col: 4, size: 5}
-			  {type: STACK, time: 6, col: 5, size: 6}
-			  {type: LAVA_HIGH, time: 6}
-			  {type: LAVA_NONE, time: 10}
+		seq: [{type: LAVA_MEDIUM, time: 0}
+	          {type: LAVA_HIGH, time: 1}	
+		      {type: STACK, time: 1, col: 0, size: 2}
+			  {type: STACK, time: 1, col: 2, size: 2}
+			  {type: STACK, time: 1, col: 4, size: 2}
+			  {type: FIREBALL, time: 2.50, col: 1}
+			  {type: FIREBALL, time: 3.00, col: 3}
+			  {type: FIREBALL, time: 3.50, col: 5}
+			  {type: BURN, time: 4.25, col: 0}
+			  {type: BURN, time: 5.25, col: 2}
+			  {type: BURN, time: 6.25, col: 4}
+			  {type: FIREBALL, time: 4.50, col: 1}
+			  {type: FIREBALL, time: 5.00, col: 3}
+			  {type: FIREBALL, time: 5.50, col: 5}
+			  {type: STACK, time: 10.5, col: 0, size: 2}
+			  {type: STACK, time: 10.5, col: 2, size: 2}
+			  {type: STACK, time: 10.5, col: 4, size: 2}
+			  {type: STACK, time: 9, col: 1, size: 4}
+			  {type: STACK, time: 9, col: 3, size: 4}
+			  {type: STACK, time: 9, col: 5, size: 4}
+			  {type: FLAME, time: 12.0, col: 1}
+			  {type: FLAME, time: 12.5, col: 3}
+			  {type: FLAME, time: 13.0, col: 5}
+			  {type: FIREBALL, time: 13.0, col: 4}
+			  {type: FIREBALL, time: 13.5, col: 2}
+			  {type: FIREBALL, time: 14.0, col: 0}
+			  {type: LAVA_MEDIUM, time: 8}
+			  {type: LAVA_HIGH, time: 11}
+			  {type: LAVA_MEDIUM, time: 13}
+			  {type: LAVA_HARMLESS, time: 15}
+		      {type: NOP, time: 17}]
+	}
+	{
+		name: boss_lavaseq_divider
+		hotkey: 7
+		seq: [{type: LAVA_HARMLESS, time: 0}	
+		      {type: STACK, time: 1, col: 2, size: 4}
+		      {type: STACK, time: 1, col: 3, size: 4}
+			  {type: FLAME, time: 2.5, col: 2}
+			  {type: FLAME, time: 2.5, col: 3}
+	          {type: LAVA_LOW, time: 3}	
+			  {type: BURN, time: 4, col: 0, size: 1}
+			  {type: WALL, time: 4, col: 5, size: 1}
+			  {type: WALL, time: 4.5, col: 1, size: 1}
+			  {type: BURN, time: 4.5, col: 4, size: 1}
+			  {type: BURN, time: 5, col: 0, size: 1}
+			  {type: WALL, time: 5, col: 5, size: 1}
+			  {type: WALL, time: 5.5, col: 1, size: 1}
+			  {type: BURN, time: 5.5, col: 4, size: 1}
+              {type: BURN, time: 6, col: 0, size: 1}
+			  {type: WALL, time: 6, col: 5, size: 1}
+			  {type: WALL, time: 6.5, col: 1, size: 1}
+			  {type: BURN, time: 6.5, col: 4, size: 1}
+			  {type: LAVA_HIGH, time: 7.5}	
+			  {type: STACK, time: 8.5, col: 0, size: 2}
+			  {type: STACK, time: 8.5, col: 1, size: 2}
+			  {type: STACK, time: 8.5, col: 4, size: 2}
+			  {type: STACK, time: 8.5, col: 5, size: 2}
+			  {type: LAVA_HARMLESS, time: 10}
 		      {type: NOP, time: 10}]
 	}
 ]

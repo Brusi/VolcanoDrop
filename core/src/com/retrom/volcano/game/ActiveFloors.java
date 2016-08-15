@@ -107,14 +107,6 @@ public class ActiveFloors {
 		}
 	}
 
-	public int getHighestFloor() {
-		int maxval = 0;
-		for (int col = 0; col < NUM_COLS; col++) {
-			maxval = Math.max(maxval, hist_[col]);
-		}
-		return maxval;
-	}
-	
 	public int getTotalBlocks() {
 		return totalBlocks_;
 	}
@@ -157,5 +149,9 @@ public class ActiveFloors {
 
 	public float getColY(int col) {
 		return getRowY(hist_[col]);
+	}
+	
+	public int getColumnFloor(int col) {
+		return hist_[col];
 	}
 }

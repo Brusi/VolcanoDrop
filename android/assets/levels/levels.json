@@ -365,5 +365,35 @@ levels: [
 			{ powerup: POWERUP_SHIELD, chance: 0.05 }
 		]
 	}
+	{
+		number: 12
+		start_time: 157
+		time_between_walls: 0.5
+		avg_sack_time: 15
+		groups: [
+		    {
+				chance: 0.0
+				on_level_start: true
+				sequences: [lava_low]
+			}
+			{
+				chance: 1
+				single: true
+				sequences: [balance_floor]
+			}
+		]
+	}
+	{
+		number: 13
+		start_time: 172
+		time_between_walls: 0.5
+		avg_sack_time: 15
+		groups: [
+			{
+				chance: 1
+				sequences: [boss_lavaseq_stairs, boss_lavaseq_pillars, lava_medium, lava_low]
+			}
+		]
+	}
 ]
 }
