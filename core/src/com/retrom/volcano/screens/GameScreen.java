@@ -29,6 +29,17 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	
 	PauseMenu pauseMenu_;
 	
+	public GameScreen() {
+		this(true);
+	}
+	
+	public GameScreen(boolean showOpening) {
+		this.showOpening = showOpening;
+		this.splash_ = showOpening ? new Splash(hub_) : null;
+	}
+	
+	private final boolean showOpening;
+	
 	private final Hub hub_ = new Hub(new MenuButton.Action[] {
 			new MenuButton.Action() {
 				@Override
@@ -42,7 +53,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 				}
 			} });
 	
-	private final Splash splash_ = new Splash(hub_);
+	private final Splash splash_;
 	
 	private GameUiRenderer uiRenderer_;
 
@@ -50,6 +61,8 @@ public class GameScreen extends ScreenAdapter implements Screen {
 
 	@Override
 	public void show() {
+		ControlManager.getControl().reset();
+		
 		world_ = new World(new WorldListener() {
 			@Override
 			public void restart() {
@@ -65,7 +78,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 			public void startGame() {
 				hub_.startGame();
 			}
-		});
+		}, showOpening);
 		pauseMenu_ = new PauseMenu(new PauseMenu.Listener() {
 			@Override
 			public void act(Command cmd) {
@@ -90,12 +103,11 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		
 		worldRenderer_ = new WorldRenderer(batch_, world_);
 		uiRenderer_ = new GameUiRenderer(hub_, world_, pauseMenu_, splash_);
-		ControlManager.getControl().reset();
 	}
 	
 	private void restartGame() {
 		finalizeGame();
-		((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen());
+		((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen(false));
 	}
 
 	private void togglePause() {
@@ -131,7 +143,8 @@ public class GameScreen extends ScreenAdapter implements Screen {
 			hub_.setScore(world_.score);
 			hub_.setTime(world_.gameTime);
 			hub_.update(delta);
-			splash_.update(delta);
+			if (splash_ != null)
+				splash_.update(delta);
 		} else {
 			pauseMenu_.update(delta);
 		}
@@ -148,6 +161,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	}
 	
 	private void checkSplashTap() {
+		if (splash_ == null) return;
 		if (splash_.state != Splash.State.SHOWING) {
 			return;
 		}

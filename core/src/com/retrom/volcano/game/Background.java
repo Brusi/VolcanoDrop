@@ -28,6 +28,7 @@ public class Background {
 		PILLAR_HOLE_BG(0),
 		
 		PILLAR_OPENING_GAP(152f),
+		PILLAR_OPENING_CLOSED_DOOR(152f),
 		PILLAR_OPENING_TOP(88f),
 		
 		BACKGROUND_OPENING(913f),
@@ -140,21 +141,24 @@ public class Background {
 	private float bgBaseY_ = BG_BASE;
 	private float y_ = 0f;
 	
-	private final boolean has_opening_scene = true; 
+	private final boolean has_opening_scene_; 
 	
-	public Background() {
-		if (has_opening_scene) {
-			initOpeningScene();
+	public Background(boolean has_opening_scene) {
+		this.has_opening_scene_ = has_opening_scene;
+		if (has_opening_scene_) {
+			addElement(Element.BACKGROUND_OPENING);
+			initOpeningPillars(true);
+		} else {
+			initOpeningPillars(false);
 		}
 	}
-
-	private void initOpeningScene() {
-		addElement(Element.BACKGROUND_OPENING);
-		
+	
+	private void initOpeningPillars(boolean door_is_open) {
 		addToLeftPillar(Element.pillar());
 		addToLeftPillar(Element.PILLAR_END);
 		addToLeftPillar(Element.bigPillar());
-		addToLeftPillar(Element.PILLAR_OPENING_GAP);
+		addToLeftPillar(door_is_open ? Element.PILLAR_OPENING_GAP
+				                     : Element.PILLAR_OPENING_CLOSED_DOOR);
 		addToLeftPillar(Element.PILLAR_OPENING_TOP);
 		addToLeftPillar(Element.pillar());
 		addToLeftPillar(Element.PILLAR_END);
@@ -174,7 +178,7 @@ public class Background {
 		addToRightPillar(Element.bigPillar());
 		addToRightPillar(Element.PILLAR_START);
 	}
-	
+
 	private void addToLeftPillar(Element e) {
 		leftPillar.addLast(e);
 		leftHeight += e.height();

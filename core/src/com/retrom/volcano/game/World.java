@@ -117,7 +117,7 @@ public class World {
 	
 	public Lava lava_;
 	
-	public Relic relic_ = new Relic();
+	public Relic relic_;
 	
 	private final Spawner spawner_;
 	private final EventQueue worldEvents_ = new EventQueue();
@@ -155,8 +155,8 @@ public class World {
 	float quakeShakeFactor;
 	float quakeX;
 
-	public Background background = new Background();
-	public Opening opening = new Opening();
+	public final Background background;
+	public final Opening opening;
 
 	final public List<Effect> addEffectsUnder = new ArrayList<Effect>();
 	final public List<Effect> effects = new ArrayList<Effect>();
@@ -191,63 +191,14 @@ public class World {
 		public void startGame();
 	}
 	
-	public World(WorldListener listener) {
+	public World(WorldListener listener, boolean show_opening) {
+		this.background = new Background(show_opening);
+		this.opening = show_opening ? new NewGameOpening() : new RestartOpening();
+		this.relic_ = show_opening ? new Relic() : null;
+		this.camTarget = show_opening ? OPENING_CAM_OFFSET : GAME_CAM_OFFSET;
+		
 		this.listener_ = listener;
-		this.player = new Player(-200, 0 + Player.HEIGHT / 2, new Player.HitRectHandler() {
-			@Override
-			public void handle(Rectangle rect) {
-				if (shieldTime <= 0) {
-					player.killByCrush();
-					return;
-				}
-				for (Wall wall : activeWalls_) {
-					if (wall.bounds == rect) {
-						wall.setStatus(Wall.STATUS_EXPLODE);
-						playerShieldEffect.hit();
-						SoundAssets.playSound(SoundAssets.powerupShieldHit);
-						player.landAnimation();
-						addDust(wall.position.x, wall.position.y);
-					}
-				}
-			}
-		}, new Player.EventHandler() {
-			@Override
-			public void handleJump(SIDE side) {
-				switch (side) {
-				case DOUBLE:
-					screenEffects.add(EffectFactory.playerJumpPuff(player.position));
-					break;
-				case LEFT:
-					screenEffects.add(EffectFactory.playerJumpPuffLeftWall(player.position));
-					break;
-				case RIGHT:
-					screenEffects.add(EffectFactory.playerJumpPuffRightWall(player.position));
-					break;
-				case UP:
-//					screenEffects.add(EffectFactory.playerJumpPuff(player.position));
-					break;
-				default:
-					break;
-				}
-			}
-
-			@Override
-			public void handleDash() {
-				addEffectsUnder.add(new PlayerOnionSkinEffect(player.position.cpy(), player.state(), player.stateTime, player.side));
-				screenEffects.add(EffectFactory.playerDashPuff(player.position, player.velocity.x));
-				worldEvents_.addEventFromNow(Player.DASH_DURATION, new EventQueue.Event() {
-					@Override
-					public void invoke() {
-						player.endDash();
-					}
-				});
-			}
-
-			@Override
-			public void handleBurnWall(Wall wall) {
-				addEffects.add(new HotBrickEffect(wall.position));
-			}
-		});
+		this.player = newPlayer(show_opening);
 		this.spawner_ = new Spawner(floors_, activeWalls_, collectables_, new Spawner.SpawnerHandler() {
 			@Override
 			public void dropWall(int col) {
@@ -312,6 +263,7 @@ public class World {
 		if (spawner_.levels.start_time != 0) {
 			setGameTime(spawner_.levels.start_time);
 		}
+		if (!show_opening) player.activate();
 		
 //		worldEvents_.addEventFromNow(2f, new EventQueue.Event() {
 //			@Override
@@ -322,6 +274,74 @@ public class World {
 		
 		// TODO: create lava when needed...
 		createLava();
+		
+		if (!show_opening) {
+			startGame();
+		}
+	}
+
+	private Player newPlayer(boolean show_opening) {
+		float x = show_opening ? -200 : 0;
+		float y = show_opening ? 0 : 100;
+		
+		Player p = new Player(x, y + Player.HEIGHT / 2, new Player.HitRectHandler() {
+			@Override
+			public void handle(Rectangle rect) {
+				if (shieldTime <= 0) {
+					player.killByCrush();
+					return;
+				}
+				for (Wall wall : activeWalls_) {
+					if (wall.bounds == rect) {
+						wall.setStatus(Wall.STATUS_EXPLODE);
+						playerShieldEffect.hit();
+						SoundAssets.playSound(SoundAssets.powerupShieldHit);
+						player.landAnimation();
+						addDust(wall.position.x, wall.position.y);
+					}
+				}
+			}
+		}, new Player.EventHandler() {
+			@Override
+			public void handleJump(SIDE side) {
+				switch (side) {
+				case DOUBLE:
+					screenEffects.add(EffectFactory.playerJumpPuff(player.position));
+					break;
+				case LEFT:
+					screenEffects.add(EffectFactory.playerJumpPuffLeftWall(player.position));
+					break;
+				case RIGHT:
+					screenEffects.add(EffectFactory.playerJumpPuffRightWall(player.position));
+					break;
+				case UP:
+//					screenEffects.add(EffectFactory.playerJumpPuff(player.position));
+					break;
+				default:
+					break;
+				}
+			}
+
+			@Override
+			public void handleDash() {
+				addEffectsUnder.add(new PlayerOnionSkinEffect(player.position.cpy(), player.state(), player.stateTime, player.side));
+				screenEffects.add(EffectFactory.playerDashPuff(player.position, player.velocity.x));
+				worldEvents_.addEventFromNow(Player.DASH_DURATION, new EventQueue.Event() {
+					@Override
+					public void invoke() {
+						player.endDash();
+					}
+				});
+			}
+
+			@Override
+			public void handleBurnWall(Wall wall) {
+				addEffects.add(new HotBrickEffect(wall.position));
+			}
+		});
+		
+		if (!show_opening) p.activate();
+		return p;
 	}
 
 	private void createLava() {
@@ -586,7 +606,9 @@ public class World {
 	}
 	
 	private void updateOpening(float deltaTime) {
-		opening.update(deltaTime);
+		if (opening != null) {
+			opening.update(deltaTime);
+		}
 	}
 
 	private void updateRelic(float deltaTime) {
@@ -666,7 +688,10 @@ public class World {
 				@Override
 				public void invoke() {
 					// Add dust to closing door.
-					addDust(opening.door.position_.x + Utils.random2Range(36), opening.door.position_.y - 73);
+					if (opening instanceof NewGameOpening) {
+						NewGameOpening ngo = (NewGameOpening)opening;
+						addDust(ngo.door.position_.x + Utils.random2Range(36), ngo.door.position_.y - 73);
+					}
 				}
 			});
 			worldEvents_.addEventFromNow(0.333f + i * 1.8f / 15f, new EventQueue.Event() {
@@ -975,7 +1000,6 @@ public class World {
 			camTarget = (floors_.getTotalBlocks()) * Wall.SIZE / 6f + GAME_CAM_OFFSET;
 		}
 		background.setY(camTarget);
-		
 	}
 	
 	private void addOnionSkinEvent() {

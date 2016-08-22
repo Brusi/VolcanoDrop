@@ -70,9 +70,7 @@ import com.retrom.volcano.game.objects.Spitter;
 import com.retrom.volcano.game.objects.StackWall;
 import com.retrom.volcano.game.objects.TopFireball;
 import com.retrom.volcano.game.objects.Wall;
-import com.retrom.volcano.menus.Fade;
 import com.retrom.volcano.utils.BatchUtils;
-import com.sun.org.apache.regexp.internal.recompile;
 
 public class WorldRenderer {
 	private static final float INITIAL_CAM_POSITION = -400;
@@ -98,7 +96,7 @@ public class WorldRenderer {
 	public WorldRenderer (SpriteBatch batch, World world) {
 		this.world = world;
 		this.cam = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-		cam_position = World.OPENING_CAM_OFFSET;
+		cam_position = world.camTarget;
 		this.batch = batch;
 		System.out.println("FRUSTUM_HEIGHT=" + FRUSTUM_HEIGHT);
 	}
@@ -233,6 +231,9 @@ public class WorldRenderer {
 				break;
 			case PILLAR_OPENING_GAP:
 				keyFrame = null;
+				break;
+			case PILLAR_OPENING_CLOSED_DOOR:
+				keyFrame = Assets.openingDoor;
 				break;
 			case PILLAR_OPENING_TOP:
 				keyFrame = Assets.openingDoorTop;
