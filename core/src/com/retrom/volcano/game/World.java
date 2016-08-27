@@ -190,7 +190,7 @@ public class World {
 	private float slomoRatio_;
 
 	public interface WorldListener {
-		public void restart();
+		public void finish();
 		public void startOpeningScene();
 		public void startGame();
 	}
@@ -294,7 +294,8 @@ public class World {
 					float y = boss_.bounds.y;
 					addDust(x, y);
 				}
-				startMiniQuake();
+				startSmallQuake();
+				dropSomeRabble(0.5f, 4);
 			}
 		});
 	}
@@ -1504,7 +1505,7 @@ public class World {
 				}
 			}
 
-			c.setObstacles(floors_.getRects());
+			c.setObstacles(obstacles_);
 			c.update(deltaTime);
 			for (Rectangle rect : floors_.getRects()) {
 				if (c.bounds.overlaps(rect)) {
@@ -1795,7 +1796,7 @@ public class World {
 	private void finishGame() {
 		SoundAssets.stopAllSounds();
 		ShopData.updateBestTime(gameTime);
-		listener_.restart();
+		listener_.finish();
 	}
 	
 	public void pause() {

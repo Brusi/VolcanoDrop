@@ -32,6 +32,7 @@ public class Boss extends DynamicGameObject {
 		FOLLOW_PLAYER,
 		PREPARE_THOMP,
 		THOMP,
+		STOP,
 		RISE,
 		BACKGROUND,
 	}
@@ -92,7 +93,7 @@ public class Boss extends DynamicGameObject {
 		    state_ == State.PREPARE_THOMP) {
 			
 			position.y += (target_pos.y - position.y) * deltaTime * 1.5f;
-			position.x += (target_pos.x - position.x) * deltaTime * 10f;
+			position.x += (target_pos.x - position.x) * deltaTime * 5f;
 			updateBounds();
 			return;
 		}
@@ -107,9 +108,9 @@ public class Boss extends DynamicGameObject {
 						position.y = rect.y + rect.height + bounds.height / 2;
 						updateBounds();
 						
-						setState(State.RISE);
-						
 						listener.thompHit();
+						setState(State.STOP);
+						queue.addEventFromNow(1, setStateEvent(State.RISE));
 						return;
 					}
 				}
@@ -307,5 +308,14 @@ public class Boss extends DynamicGameObject {
 				target_pos.x = 0;
 			}
 		});
+	}
+	
+	private EventQueue.Event setStateEvent(final State state) {
+		return new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				setState(state);
+			}
+		};
 	}
 }

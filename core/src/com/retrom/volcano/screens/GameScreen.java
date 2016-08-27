@@ -13,9 +13,9 @@ import com.retrom.volcano.game.Settings;
 import com.retrom.volcano.game.World;
 import com.retrom.volcano.game.World.WorldListener;
 import com.retrom.volcano.game.WorldRenderer;
+import com.retrom.volcano.menus.DeathMenu;
 import com.retrom.volcano.menus.MenuButton;
 import com.retrom.volcano.menus.PauseMenu;
-import com.retrom.volcano.menus.PauseMenu.Command;
 import com.retrom.volcano.ui.GameUiRenderer;
 import com.retrom.volcano.ui.Hub;
 import com.retrom.volcano.ui.Splash;
@@ -27,7 +27,11 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	World world_;
 	WorldRenderer worldRenderer_;
 	
-	PauseMenu pauseMenu_;
+	private PauseMenu pauseMenu_;
+	private DeathMenu deathMenu_;
+	
+	boolean isPaused_ = false;
+	boolean isGameFinished_ = false;
 	
 	public GameScreen() {
 		this(true);
@@ -57,16 +61,16 @@ public class GameScreen extends ScreenAdapter implements Screen {
 	
 	private GameUiRenderer uiRenderer_;
 
-	boolean isPaused_ = false;
-
 	@Override
 	public void show() {
 		ControlManager.getControl().reset();
 		
 		world_ = new World(new WorldListener() {
 			@Override
-			public void restart() {
-				restartGame();
+			public void finish() {
+				isGameFinished_ = true;
+				deathMenu_.setScoreAndTime(world_.score, world_.gameTime);
+//				restartGame();
 			}
 			
 			@Override
@@ -81,7 +85,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		}, showOpening);
 		pauseMenu_ = new PauseMenu(new PauseMenu.Listener() {
 			@Override
-			public void act(Command cmd) {
+			public void act(PauseMenu.Command cmd) {
 				System.out.println(cmd.name());
 				switch (cmd) {
 				case RESTART:
@@ -100,9 +104,26 @@ public class GameScreen extends ScreenAdapter implements Screen {
 				}
 			}
 		});
+		deathMenu_ = new DeathMenu(new DeathMenu.Listener() {
+			@Override
+			public void act(DeathMenu.Command cmd) {
+				System.out.println(cmd.name());
+				switch (cmd) {
+				case RESTART:
+					restartGame();;
+					break;
+				case SHOP:
+					goToShop();
+					break;
+				default:
+					Gdx.app.error("Error", "Illegal pause menu command.");
+					break;
+				}
+			}
+		});
 		
 		worldRenderer_ = new WorldRenderer(batch_, world_);
-		uiRenderer_ = new GameUiRenderer(hub_, world_, pauseMenu_, splash_);
+		uiRenderer_ = new GameUiRenderer(hub_, world_, pauseMenu_, deathMenu_, splash_);
 	}
 	
 	private void restartGame() {
@@ -112,9 +133,9 @@ public class GameScreen extends ScreenAdapter implements Screen {
 
 	private void togglePause() {
 		if (!isPaused_) {
-			pause();
+			pauseGame();
 		} else {
-			resume();
+			resumeFromPause();
 		}
 	}
 
@@ -144,19 +165,22 @@ public class GameScreen extends ScreenAdapter implements Screen {
 
 	private void update(float delta) {
 		delta = Math.min(1/30f, delta);
-		if (!isPaused_) {
+		
+		if (isGameFinished_) {
+			deathMenu_.update(delta);
+		} else if (isPaused_) {
+			pauseMenu_.update(delta);
+		} else {
 			world_.update(delta);
 			hub_.setScore(world_.score);
 			hub_.setTime(world_.gameTime);
 			hub_.update(delta);
 			if (splash_ != null)
 				splash_.update(delta);
-		} else {
-			pauseMenu_.update(delta);
 		}
 		
 		worldRenderer_.render(delta, isPaused_);
-		uiRenderer_.render(delta, isPaused_);
+		uiRenderer_.render(delta, isPaused_, isGameFinished_);
 		
 		checkSplashTap();
 		checkPause();
@@ -194,7 +218,19 @@ public class GameScreen extends ScreenAdapter implements Screen {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
 			Settings.soundEnabled.toggle();
 		}
-		
+	}
+	
+	public void pauseGame() {
+		isPaused_ = true;
+		SoundAssets.pauseAllSounds();
+		world_.pause();
+	}
+
+	public void resumeFromPause() 
+	{
+		isPaused_ = false;
+		SoundAssets.resumeAllSounds();
+		world_.unpause();
 	}
 
 	@Override
@@ -203,23 +239,18 @@ public class GameScreen extends ScreenAdapter implements Screen {
 
 	@Override
 	public void pause() {
-		isPaused_ = true;
-		SoundAssets.pauseAllSounds();
-		world_.pause();
+		pauseGame();
 	}
 
 	@Override
 	public void resume() 
 	{
-		isPaused_ = false;
-		SoundAssets.resumeAllSounds();
-		world_.unpause();
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		pause();
+//		pause();
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import com.retrom.volcano.assets.Assets;
 import com.retrom.volcano.control.ControlManager;
 import com.retrom.volcano.game.World;
 import com.retrom.volcano.game.WorldRenderer;
+import com.retrom.volcano.menus.DeathMenu;
 import com.retrom.volcano.menus.PauseMenu;
 import com.retrom.volcano.utils.BatchUtils;
 
@@ -22,10 +23,12 @@ public class GameUiRenderer {
 	private final World world_;
 	private final PauseMenu pauseMenu_;
 	private final Splash splash_;
+	private final DeathMenu deathMenu_;
 
-	public GameUiRenderer(Hub scoreHub, World world, PauseMenu pauseMenu_, Splash splash_) {
+	public GameUiRenderer(Hub scoreHub, World world, PauseMenu pauseMenu, DeathMenu deathMenu, Splash splash_) {
 		world_ = world;
-		this.pauseMenu_ = pauseMenu_;
+		this.pauseMenu_ = pauseMenu;
+		this.deathMenu_ = deathMenu;
 		this.splash_ = splash_;
 		cam_ = new OrthographicCamera(
 				WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT);
@@ -39,7 +42,11 @@ public class GameUiRenderer {
 		powerupUiRenderer_ = new PowerupUiRenderer(cam_);
 	}
 	
-	public void render(float deltaTime, boolean isPaused) {
+	public void render(float deltaTime, boolean isPaused, boolean isGameFinished) {
+		if (isGameFinished) {
+			renderDeathMenu();
+			return;
+		}
 		if (isPaused) {
 			renderPauseMenu();
 			return;
@@ -68,6 +75,11 @@ public class GameUiRenderer {
 			splash_.render(batch_);
 			batch_.end();
 		}
+	}
+	
+	private void renderDeathMenu() {
+		BatchUtils.setBlendFuncNormal(batch_);
+		deathMenu_.render(batch_, shapes_);
 	}
 
 	private void renderPauseMenu() {
