@@ -45,7 +45,7 @@ public class BurnParticle extends Particle {
 	@Override
 	public float getScale() {
 		if (stateTime() < 0.2f) {
-			return base_scale * Utils.limit01(stateTime() / 0.2f);
+			return base_scale * Utils.clamp01(stateTime() / 0.2f);
 		}
 		return base_scale * Math.min(1, (duration() - stateTime()) * 3 / duration());
 	}

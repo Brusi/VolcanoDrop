@@ -306,12 +306,14 @@ public class WorldRenderer {
 		batch.begin();
 		renderPillarBg();
 		world.opening.render(shapeRenderer, batch);
+		world.boss_.renderBg(batch);
 		BatchUtils.setBlendFuncAdd(batch);
 		renderEffects(world.addEffectsUnder);
 		BatchUtils.setBlendFuncNormal(batch);
 		renderWalls();
 		
 		renderRelic();
+		world.boss_.render(batch);
 		renderPlayer();
 		renderEnemies();
 		renderGoldSacks();

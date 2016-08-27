@@ -73,6 +73,10 @@ public class SoundAssets {
 	public static Sound coinLava;
 	public static Sound[] lavaBubble;
 	
+	// Boss
+	public static Sound[] bossLaugh; 
+	public static Sound[] bossFall;
+	
 	private static Random rand = new Random();
 	
 	private static final boolean ENABLE_OVERALL_SOUNDS = true; 
@@ -175,6 +179,14 @@ public class SoundAssets {
 				                   newSound("lava_bubble_2.wav"),
 				                   newSound("lava_bubble_3.wav"),
 				                   newSound("lava_bubble_4.wav") };
+		
+		// Boss
+		bossLaugh = new Sound[] { newSound("evilboss_laugh1.wav"),
+								  newSound("evilboss_laugh1.wav"),
+								  newSound("evilboss_laugh1.wav") };	
+		
+		bossFall = new Sound[] { newSound("evilboss_attacks_fall1.wav"),
+				                  newSound("evilboss_attacks_fall1.wav") };
 	}
 	
 	public static long playSound (Sound sound, float volume) {

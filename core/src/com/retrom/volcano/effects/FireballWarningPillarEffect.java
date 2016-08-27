@@ -21,11 +21,11 @@ public class FireballWarningPillarEffect extends OneFrameEffect {
 	public float getTint() {
 		if (stateTime_ < TIME_100_PERCENT) {
 			if (overlay) return 0;
-			return Utils.limit01(stateTime_ / TIME_100_PERCENT);
+			return Utils.clamp01(stateTime_ / TIME_100_PERCENT);
 		}
 		float t = (stateTime_ - TIME_100_PERCENT) / (DURATION - TIME_100_PERCENT);
 		t *= 1.2f;
-		return Utils.limit01(1-t); 
+		return Utils.clamp01(1-t); 
 	}
 	
 	@Override

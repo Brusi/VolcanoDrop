@@ -52,7 +52,7 @@ public class Player extends DynamicGameObject {
 	}
 	
 	public static final int WIDTH = 36;
-	public static final int HEIGHT = 84;
+	public static final int HEIGHT = 80;
 	
 	public static final int STATE_IDLE = 1;
 	public static final int STATE_RUNNING = 2;

@@ -70,6 +70,7 @@ import com.retrom.volcano.effects.ShieldFlare;
 import com.retrom.volcano.effects.SmokeEffect;
 import com.retrom.volcano.effects.WarningExclEffect;
 import com.retrom.volcano.effects.WarningSkullEffect;
+import com.retrom.volcano.game.objects.Boss;
 import com.retrom.volcano.game.objects.BurningWall;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.game.objects.Collectable.Type;
@@ -90,6 +91,8 @@ import com.retrom.volcano.utils.EventQueue;
 import com.retrom.volcano.utils.EventQueue.Event;
 
 public class World {
+	
+	private static final float BOSS_TIME = 157;
 
 	public static final float OPENING_CAM_OFFSET = WorldRenderer.FRUSTUM_HEIGHT / 2f - 90;
 	public static final float GAME_CAM_OFFSET = WorldRenderer.FRUSTUM_HEIGHT / 2f - 210;
@@ -116,6 +119,7 @@ public class World {
 	public ActiveFloors floors_ = new ActiveFloors();
 	
 	public Lava lava_;
+	public final Boss boss_;
 	
 	public Relic relic_;
 	
@@ -148,7 +152,7 @@ public class World {
 	
 	private final List<Effect> magnetEffects = new ArrayList<Effect>();
 
-	private List<Rectangle> obstacles_;
+	private final List<Rectangle> obstacles_ = new ArrayList<Rectangle>();
 
 	public float camTarget;
 	boolean quakeOn;
@@ -169,7 +173,7 @@ public class World {
 	private float rightHighestSpitter = 0;
 
 	// Cheats:
-	private boolean godMode_ = false;
+	public boolean godMode_ = false;
 
 	private static float QUAKE_DURATION = 2.6f;
 	
@@ -199,6 +203,7 @@ public class World {
 		
 		this.listener_ = listener;
 		this.player = newPlayer(show_opening);
+		this.boss_ = newBoss();
 		this.spawner_ = new Spawner(floors_, activeWalls_, collectables_, new Spawner.SpawnerHandler() {
 			@Override
 			public void dropWall(int col) {
@@ -278,6 +283,20 @@ public class World {
 		if (!show_opening) {
 			startGame();
 		}
+	}
+
+	private Boss newBoss() {
+		return new Boss(new Boss.Listener() {
+			@Override
+			public void thompHit() {
+				for (int i=0; i < 10; i++) {
+					float x = Utils.randomRange(boss_.bounds.x, boss_.bounds.x + boss_.bounds.width);
+					float y = boss_.bounds.y;
+					addDust(x, y);
+				}
+				startMiniQuake();
+			}
+		});
 	}
 
 	private Player newPlayer(boolean show_opening) {
@@ -392,9 +411,6 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
 			addSpitter(400, true);
 		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-			addSideFireball(0, 500, false);
-		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
 			prepareFireball((int) Math.floor(Math.random() * 6));
 		}
@@ -406,7 +422,14 @@ public class World {
 			startQuake();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-			addBurningWall(Utils.randomInt(6));
+//			addBurningWall(Utils.randomInt(6));
+			boss_.approach();
+		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+			addSideFireball(0, 500, false);
+		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
+			boss_.followPlayer();
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
 			spawner_.enabled = !spawner_.enabled;
@@ -576,17 +599,22 @@ public class World {
 		updateLava(deltaTime);
 		updateRelic(deltaTime);
 		
+		
 		updateCheats();
 		worldEvents_.update(deltaTime);
 		
-		obstacles_ = new ArrayList<Rectangle>();
+		obstacles_.clear();
 		obstacles_.add(leftWall_);
 		obstacles_.add(rightWall_);
 		for (Wall wall : activeWalls_) {
 			obstacles_.add(wall.bounds);
 		}
 		obstacles_.addAll(floors_.getRects());
+		if (boss_.isActive()) {
+			obstacles_.add(boss_.bounds);
+		}
 		
+		updateBoss(deltaTime);
 		updatePlayer(deltaTime);
 		updateWalls(deltaTime);
 		updateEnemies(deltaTime);
@@ -605,6 +633,16 @@ public class World {
 		rightWall_.y = player.bounds.y - rightWall_.height/2;
 	}
 	
+	private void updateBoss(float deltaTime) {
+		if (gameTime >= BOSS_TIME && !boss_.isActive()) {
+			boss_.approachSequence();
+		}
+		boss_.updateFloorBaseLine(camTarget);
+		boss_.updatePlayerPosition(player.position);
+		boss_.setObstacles(obstacles_);
+		boss_.update(deltaTime);
+	}
+
 	private void updateOpening(float deltaTime) {
 		if (opening != null) {
 			opening.update(deltaTime);
@@ -997,7 +1035,7 @@ public class World {
 		if (gameState == State.SPLASH) {
 			camTarget = OPENING_CAM_OFFSET;
 		} else {
-			camTarget = (floors_.getTotalBlocks()) * Wall.SIZE / 6f + GAME_CAM_OFFSET;
+			camTarget = floors_.getBaseLine() + GAME_CAM_OFFSET;
 		}
 		background.setY(camTarget);
 	}
@@ -1466,7 +1504,7 @@ public class World {
 				}
 			}
 
-			c.setObstacles(obstacles_);
+			c.setObstacles(floors_.getRects());
 			c.update(deltaTime);
 			for (Rectangle rect : floors_.getRects()) {
 				if (c.bounds.overlaps(rect)) {

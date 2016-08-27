@@ -118,7 +118,11 @@ public class Utils {
 		return (float) (rad / (2 * Math.PI) * 360f);
 	}
 
-	public static float limit01(float f) {
-		return Math.max(0, Math.min(1, f));
+	public static float clamp01(float val) {
+		return Math.max(0, Math.min(1, val));
+	}
+
+	public static float clamp(float val, float min, float max) {
+		return Math.max(min, Math.min(max, val));
 	}
 }

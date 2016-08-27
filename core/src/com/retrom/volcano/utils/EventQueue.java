@@ -30,6 +30,10 @@ public class EventQueue {
 	 * @param deltaTime the time that passed.
 	 */
 	public void update(float deltaTime) {
+		if (events_.isEmpty()) {
+			// No need to advance time if queue is empty.
+			return;
+		}
 		time_ += deltaTime;
 		while (!events_.isEmpty() && events_.firstKey() <= time_) {
 			Entry<Float, List<Event>> entry = events_.pollFirstEntry();

@@ -251,8 +251,6 @@ public class NewGameOpening implements Opening {
 				bossAngryGlow.setScale(scale);
 				bossAngryGlowAdd.setScale(scale);
 				
-				System.out.println("scale = " + scale);
-
 				float movedX = BOSS_X + (1 - scale) * 73 / 2;
 				bossSleeps.position_.x = movedX;
 				bossAngryGlow.position_.x = movedX;

@@ -47,6 +47,7 @@ public class Wall extends DynamicGameObject {
 	protected void childSpecificUpdating() {
 		// Can be implemented by children.
 	}
+	
 	public int col() {
 		return col_;
 	}

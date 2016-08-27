@@ -133,6 +133,12 @@ public class GameScreen extends ScreenAdapter implements Screen {
 				update(delta);
 			}
 		}
+		if (Gdx.input.isKeyPressed(Input.Keys.ALT_LEFT)) {
+			world_.godMode_ = true;
+			for (int i=0; i < 60* (156) && world_.gameTime < 60 + 60 + 30 ; i++) {
+				update(0.1f);
+			}
+		}
 		update(delta);
 	}
 

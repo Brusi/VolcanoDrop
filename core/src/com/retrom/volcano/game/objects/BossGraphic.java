@@ -60,7 +60,7 @@ public class BossGraphic extends GraphicObject {
 		
 		if (state_ == State.DARK && stateTime_ < 0.5f) {
 			float tmpAlpha = alpha_;
-			alpha_ = Utils.limit01(1 - stateTime_ * 2);
+			alpha_ = Utils.clamp01(1 - stateTime_ * 2);
 			renderSprite(batch, Assets.bossRegular);
 			alpha_ = tmpAlpha;
 		}

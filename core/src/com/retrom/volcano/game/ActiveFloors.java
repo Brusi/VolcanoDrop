@@ -111,6 +111,10 @@ public class ActiveFloors {
 		return totalBlocks_;
 	}
 	
+	public float getBaseLine() {
+		return getTotalBlocks() * Wall.SIZE / 6f;
+	}
+	
 	/**
 	 * Since we do not want a large difference between the heights, we allow
 	 * each time only some cols to be dropped.

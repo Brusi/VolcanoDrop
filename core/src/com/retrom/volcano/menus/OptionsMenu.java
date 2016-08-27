@@ -13,7 +13,6 @@ public class OptionsMenu extends Menu {
 		public void act(Command cmd);
 	}
 	
-	
 	private final Listener listener_;
 	
 	MenuButton.Action commandAction(final Command cmd) {

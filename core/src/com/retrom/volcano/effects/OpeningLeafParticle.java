@@ -51,8 +51,6 @@ public class OpeningLeafParticle extends Particle {
 //		velocity_.y += World.gravity.y * deltaTime * 0.5;
 		rotation_ += rotationSpeed_ * deltaTime;
 		base_pos_.y += velocity_.y * deltaTime;
-		System.out.println("velY="+velocity_.y);
-		System.out.println("base_pos_.y="+base_pos_.y);
 		
 		position_.x = (float) (base_pos_.x + Math.sin(theta_) * SIDE_AMP);
 		position_.y = (float) (base_pos_.y - Math.cos(theta_) * BOTTOM_AMP) + BOTTOM_AMP;

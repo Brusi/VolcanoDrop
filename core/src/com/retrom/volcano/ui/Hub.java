@@ -74,8 +74,11 @@ public class Hub {
 		queue.update(deltaTime);
 		total_gold_counter.update();
 		
-		pauseButton.checkClick();
-		shopButton.checkClick();
+		if (gameStarted) {
+			pauseButton.checkClick();
+		} else {
+			shopButton.checkClick();
+		}
 	}
 	
 	public void setScore(int score) {
