@@ -192,7 +192,7 @@ levels: [
 			{
 				chance: 0.4
 				single: true
-				sequences: [flame_2pillars, flame_center_pillars, flame_side_pillars, flame_single1, flame_single2]
+				sequences: [flame_2pillars, flame_center_pillars, flame_side_pillars, flame_single1, flame_single2, flame_stack2, flame_stack3, flame_stack4]
 			}
 			{
 				chance: 0.2
@@ -369,7 +369,7 @@ levels: [
 		number: 12
 		start_time: 157
 		time_between_walls: 0.5
-		avg_sack_time: 15
+		avg_sack_time: 0
 		groups: [
 		    {
 				chance: 0.0
@@ -385,9 +385,9 @@ levels: [
 	}
 	{
 		number: 13
-		start_time: 172
+		start_time: 182
 		time_between_walls: 0.5
-		avg_sack_time: 15
+		avg_sack_time: 0
 		groups: [
 			{
 				chance: 1
