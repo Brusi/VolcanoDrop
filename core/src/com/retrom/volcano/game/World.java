@@ -429,9 +429,6 @@ public class World {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
 			addSideFireball(0, 500, false);
 		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
-			boss_.followPlayer();
-		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
 			spawner_.enabled = !spawner_.enabled;
 		}

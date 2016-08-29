@@ -91,11 +91,6 @@ public class Spawner {
 	private EventQueue.Event QUAKE_SMALL;
 	
 	public void update(float deltaTime) {
-		if (!enabled) {
-			return;
-		}
-		
-		
 		timeCount += deltaTime;
 		if (sequence_cooldown > 0) {
 			sequence_cooldown -= deltaTime;
@@ -111,6 +106,10 @@ public class Spawner {
 		}
 		
 		if (level_ < 0) return;
+		
+		if (!enabled) {
+			return;
+		}
 		
 		// Updating the level can change isEmpty status, so checking again.
 		if (queue.isEmpty()) {
