@@ -1,4 +1,4 @@
-package com.retrom.volcano.android;
+package com.retrom.volcano;
 
 import android.os.Bundle;
 
