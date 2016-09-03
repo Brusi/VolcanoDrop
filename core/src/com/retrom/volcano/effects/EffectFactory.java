@@ -112,7 +112,7 @@ public class EffectFactory {
 		case RING_BLUE:
 		case TOKEN:
 			return new CoinBreakParticle(Assets.goldCoinBreak, position);
-		case DIANOMD_BLUE:
+			case DIAMOND_BLUE:
 			return new CoinBreakParticle(Assets.cyanDiamondBreak, position);
 		case DIAMOND_PURPLE:
 			return new CoinBreakParticle(Assets.purpleDiamondBreak, position);

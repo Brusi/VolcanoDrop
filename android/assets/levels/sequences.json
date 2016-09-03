@@ -741,140 +741,120 @@ sequences: [
 		name: lava_high
 		seq: [{type: LAVA_HIGH, time: 0}]	
 	}
-    {
-		name: boss_lavaseq_stairs
-		seq: [{type: LAVA_HARMLESS, time: 0}
-			  {type: STACK, time: 1.8, col: 1, size: 2}
-			  {type: STACK, time: 1.6, col: 2, size: 3}
-			  {type: STACK, time: 1.4, col: 3, size: 4}
-			  {type: STACK, time: 1.2, col: 4, size: 5}
-			  {type: STACK, time: 1, col: 5, size: 6}
-			  {type: FIREBALL, time: 1.7, col: 0}
-			  {type: STACK, time: 5.2, col: 0, size: 6}
-			  {type: STACK, time: 5.4, col: 1, size: 4}
-			  {type: STACK, time: 5.6, col: 2, size: 3}
-			  {type: STACK, time: 5.8, col: 3, size: 2}
-			  {type: WALL, time: 6.0, col: 4, size: 1}
-			  {type: FIREBALL, time: 5.2, col: 5}
-			  {type: LAVA_LOW, time: 5.2}
-			  {type: FIREBALL, time: 8.7, col: 0}
-			  {type: STACK, time: 8.8, col: 1, size: 1}
-			  {type: STACK, time: 8.6, col: 2, size: 2}
-			  {type: STACK, time: 8.4, col: 3, size: 3}
-			  {type: STACK, time: 8.2, col: 4, size: 4}
-			  {type: STACK, time: 8.0, col: 5, size: 4}
-			  {type: FLAME, time: 9.5, col: 5}
-			  {type: STACK, time: 11.5, col: 0, size: 5}
-			  {type: STACK, time: 11.5, col: 1, size: 4}
-			  {type: STACK, time: 11.5, col: 2, size: 3}
-			  {type: STACK, time: 11.5, col: 3, size: 2}
-			  {type: BURN, time: 13, col: 4, size: 1}
-			  {type: LAVA_HARMLESS, time: 15}
-		      {type: NOP, time: 15}]
-	}
-	{
-		name: boss_lavaseq_pillars
-		seq: [{type: LAVA_MEDIUM, time: 0}
-	          {type: LAVA_HIGH, time: 1}	
-		      {type: STACK, time: 1, col: 0, size: 2}
-			  {type: STACK, time: 1, col: 2, size: 2}
-			  {type: STACK, time: 1, col: 4, size: 2}
-			  {type: FIREBALL, time: 2.50, col: 1}
-			  {type: FIREBALL, time: 3.00, col: 3}
-			  {type: FIREBALL, time: 3.50, col: 5}
-			  {type: BURN, time: 4.25, col: 0}
-			  {type: BURN, time: 5.25, col: 2}
-			  {type: BURN, time: 6.25, col: 4}
-			  {type: FIREBALL, time: 4.50, col: 1}
-			  {type: FIREBALL, time: 5.00, col: 3}
-			  {type: FIREBALL, time: 5.50, col: 5}
-			  {type: STACK, time: 10.5, col: 0, size: 2}
-			  {type: STACK, time: 10.5, col: 2, size: 2}
-			  {type: STACK, time: 10.5, col: 4, size: 2}
-			  {type: STACK, time: 9, col: 1, size: 4}
-			  {type: STACK, time: 9, col: 3, size: 4}
-			  {type: STACK, time: 9, col: 5, size: 4}
-			  {type: FLAME, time: 12.0, col: 1}
-			  {type: FLAME, time: 12.5, col: 3}
-			  {type: FLAME, time: 13.0, col: 5}
-			  {type: FIREBALL, time: 13.0, col: 4}
-			  {type: FIREBALL, time: 13.5, col: 2}
-			  {type: FIREBALL, time: 14.0, col: 0}
-			  {type: LAVA_MEDIUM, time: 8}
-			  {type: LAVA_HIGH, time: 11}
-			  {type: LAVA_MEDIUM, time: 13}
-			  {type: LAVA_HARMLESS, time: 15}
-		      {type: NOP, time: 17}]
-	}
-	{
-		name: boss_lavaseq_divider
-		seq: [{type: LAVA_HARMLESS, time: 0}	
-		      {type: STACK, time: 1, col: 2, size: 4}
-		      {type: STACK, time: 1, col: 3, size: 4}
-			  {type: FLAME, time: 2.5, col: 2}
-			  {type: FLAME, time: 2.5, col: 3}
-	          {type: LAVA_LOW, time: 3}	
-			  {type: BURN, time: 4, col: 0, size: 1}
-			  {type: WALL, time: 4, col: 5, size: 1}
-			  {type: WALL, time: 4.5, col: 1, size: 1}
-			  {type: BURN, time: 4.5, col: 4, size: 1}
-			  {type: BURN, time: 5, col: 0, size: 1}
-			  {type: WALL, time: 5, col: 5, size: 1}
-			  {type: WALL, time: 5.5, col: 1, size: 1}
-			  {type: BURN, time: 5.5, col: 4, size: 1}
-              {type: BURN, time: 6, col: 0, size: 1}
-			  {type: WALL, time: 6, col: 5, size: 1}
-			  {type: WALL, time: 6.5, col: 1, size: 1}
-			  {type: BURN, time: 6.5, col: 4, size: 1}
-			  {type: LAVA_HIGH, time: 7.5}	
-			  {type: STACK, time: 8.5, col: 0, size: 2}
-			  {type: STACK, time: 8.5, col: 1, size: 2}
-			  {type: STACK, time: 8.5, col: 4, size: 2}
-			  {type: STACK, time: 8.5, col: 5, size: 2}
-			  {type: LAVA_HARMLESS, time: 10}
-		      {type: NOP, time: 10}]
-	}
 	{
 		name: boss_side_to_side
 		hotkey: 1
 		seq: [
-		      {type: LAVA_LOW, time: 10}
+		      {type: LAVA_LOW, time: 0}
+			  {type: COIN,  time: 0,    col: 5, coin_type: DIAMOND}
 		      {type: WALL,  time: 1.15, col: 0}
 			  {type: WALL,  time: 1.30, col: 1}
 		      {type: WALL,  time: 1.45, col: 2}
 		      {type: WALL,  time: 1.60, col: 3}
 		      {type: WALL,  time: 1.75, col: 4}
-		      {type: STACK, time: 3,    col: 5, size: 2}
-		      {type: WALL,  time: 3.15, col: 4}
-		      {type: WALL,  time: 3.30, col: 3}
-		      {type: WALL,  time: 3.45, col: 2}
-		      {type: WALL,  time: 3.60, col: 1}
-		      {type: STACK,  time: 5,    col: 0, size: 2}
-  			  {type: WALL,  time: 5.15, col: 1}
-		      {type: WALL,  time: 5.30, col: 2}
-		      {type: WALL,  time: 5.45, col: 3}
-		      {type: WALL,  time: 5.60, col: 4}
-		      {type: WALL,  time: 7,    col: 5}
-		      {type: NOP,   time: 8}]
+		      {type: STACK, time: 2.2,  col: 5, size: 2}
+              {type: COIN,  time: 1.75, col: 0, coin_type: DIAMOND}
+		      {type: WALL,  time: 2.35, col: 4}
+		      {type: WALL,  time: 2.50, col: 3}
+		      {type: WALL,  time: 2.65, col: 2}
+		      {type: WALL,  time: 2.80, col: 1}
+		      {type: STACK,  time: 3.4, col: 0, size: 2}
+              {type: COIN,  time: 2.80, col: 5, coin_type: DIAMOND}
+  			  {type: WALL,  time: 3.55, col: 1}
+		      {type: WALL,  time: 3.70, col: 2}
+		      {type: WALL,  time: 3.85, col: 3}
+		      {type: WALL,  time: 4.00, col: 4}
+		      {type: WALL,  time: 4.45, col: 5}
+              {type: COIN,  time: 4.00, col: 0, coin_type: DIAMOND}
+		      {type: NOP,   time: 5}]
 	}
 	{
 		name: boss_steps
 		hotkey: 2
-		seq: [{type: LAVA_MEDIUM, time: 0, col: 0}
+		seq: [{type: LAVA_LOW, time: 0, col: 0}
 		      {type: STACK,  time: 1.0, col: 3, size: 2}
 		      {type: STACK,  time: 1.0, col: 0, size: 2}
-		      {type: STACK,  time: 4.0, col: 1, size: 4}
-		      {type: LAVA_HIGH, time: 6, col: 0}
+			  {type: COIN,  time: 1.8, col: 3, coin_type: GOLD}
+		      {type: COIN,  time: 1.8, col: 0, coin_type: GOLD}
+              {type: LAVA_HIGH, time: 6, col: 0}
+              {type: STACK,  time: 4.0, col: 1, size: 4}
 		      {type: STACK,  time: 4.0, col: 5, size: 4}
+              {type: COIN,  time: 5.0, col: 1, coin_type: DIAMOND}
+              {type: COIN,  time: 5.0, col: 5, coin_type: DIAMOND}
 		      {type: STACK,  time: 6.0, col: 2, size: 6}
+              {type: COIN,  time: 7.0, col: 2, coin_type: TOKEN}
 		      {type: STACK,  time: 8.0, col: 0, size: 4}
 		      {type: STACK,  time: 8.0, col: 1, size: 2}
 		      {type: STACK,  time: 8.0, col: 3, size: 4}
 		      {type: STACK,  time: 8.0, col: 4, size: 6}
 		      {type: STACK,  time: 8.0, col: 5, size: 2}
-		      {type: LAVA_LOW,  time: 9.0, col: 5, size: 2}
-		      {type: NOP,   time: 9}]
+		      {type: LAVA_LOW,  time: 9.0}
+		      {type: NOP,   time: 10}]
 	}
-		
+    {
+        name: boss_jumps
+        hotkey: 3
+        seq: [{type: LAVA_MEDIUM, time: 0}
+              {type: STACK,  time: 1.0, col: 0, size: 2}
+              {type: STACK,  time: 1.4, col: 2, size: 2}
+              {type: STACK,  time: 1.6, col: 3, size: 2}
+              {type: STACK,  time: 2.0, col: 5, size: 2}
+              {type: LAVA_HIGH, time: 2.5}
+              {type: WALL,  time: 3.00, col: 0}
+              {type: WALL,  time: 3.00, col: 5}
+              {type: COIN,  time:  3.5, col: 4, coin_type: DIAMOND}
+              {type: STACK,  time: 4.0, col: 2, size: 2}
+              {type: STACK,  time: 4.0, col: 3, size: 2}
+              {type: STACK,  time: 5.0, col: 0, size: 2}
+              {type: STACK,  time: 5.0, col: 5, size: 2}
+              {type: COIN,  time:  5.5, col: 1, coin_type: DIAMOND}
+              {type: WALL,  time: 6.00, col: 2}
+              {type: WALL,  time: 6.00, col: 3}
+              {type: STACK,  time: 7.0, col: 1, size: 6}
+              {type: STACK,  time: 7.0, col: 4, size: 6}
+              {type: WALL,  time: 8.00, col: 0}
+              {type: WALL,  time: 8.30, col: 2}
+              {type: WALL,  time: 8.45, col: 3}
+              {type: WALL,  time: 8.75, col: 5}
+              {type: LAVA_LOW,  time: 8.0}
+              {type: NOP,   time: 9.5}]
+    }
+	{
+		name: boss_bumps
+		hotkey: 4
+		seq: [{type: LAVA_HIGH, time: 0}
+		      {type: WALL,  time: 1.0, col: 1}
+              {type: COIN,  time: 1.4, col: 1, coin_type: GOLD}
+
+              {type: WALL,  time: 2.5, col: 0}
+              {type: WALL,  time: 2.5, col: 2}
+              {type: STACK,  time: 2.5, col: 3, size: 2}
+              {type: WALL,  time: 2.5, col: 4}
+              {type: WALL,  time: 2.5, col: 5}
+              {type: COIN,  time: 3.0, col: 3, coin_type: GOLD}
+
+              {type: STACK,  time: 4.0, col: 0, size: 2}
+              {type: WALL,  time: 4.0, col: 1}
+              {type: WALL,  time: 4.0, col: 2}
+              {type: WALL,  time: 4.0, col: 4}
+              {type: WALL,  time: 4.0, col: 5}
+              {type: COIN,  time: 4.5, col: 0, coin_type: GOLD}
+
+              {type: WALL,  time: 5.5, col: 1}
+              {type: WALL,  time: 5.5, col: 2}
+              {type: WALL,  time: 5.5, col: 3}
+              {type: STACK,  time: 5.5, col: 4, size: 2}
+              {type: WALL,  time: 5.5, col: 5}
+              {type: COIN,  time: 6.0, col: 4, coin_type: GOLD}
+
+              {type: WALL,  time: 7, col: 0}
+              {type: WALL,  time: 7, col: 1}
+              {type: WALL,  time: 7, col: 2}
+              {type: WALL,  time: 7, col: 3}
+              {type: WALL,  time: 7, col: 5}
+
+              {type: LAVA_LOW,  time: 8.0}
+              {type: NOP,   time: 8.0}]
+	}
 ]
 }

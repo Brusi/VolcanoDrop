@@ -95,14 +95,14 @@ public class CoinChancesConfiguration {
 				.add(0.35f, Type.GOLD_2)
 				.add(0.3f, Type.GOLD_MASK).build();
 		
-		diamonds = builder()
+		rings = builder()
 				.add(1/3f, Type.RING_GREEN)
 				.add(1/3f, Type.RING_PURPLE)
 				.add(1/3f, Type.RING_BLUE).build();
 		
-		rings = builder()
+		diamonds = builder()
 				.add(1/3f, Type.DIAMOND_GREEN)
-				.add(1/3f, Type.DIANOMD_BLUE)
+				.add(1/3f, Type.DIAMOND_BLUE)
 				.add(1/3f, Type.DIAMOND_PURPLE).build();
 	}
 	

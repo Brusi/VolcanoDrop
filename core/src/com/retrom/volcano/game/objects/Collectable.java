@@ -34,7 +34,7 @@ public class Collectable extends DynamicGameObject {
 		GOLD_1, GOLD_2, GOLD_MASK, 
 		RING_GREEN, RING_PURPLE, RING_BLUE, 
 		TOKEN,
-		DIANOMD_BLUE, DIAMOND_PURPLE, DIAMOND_GREEN, 
+		DIAMOND_BLUE, DIAMOND_PURPLE, DIAMOND_GREEN,
 		
 		POWERUP_MAGNET, POWERUP_SLOMO, POWERUP_SHIELD;
 		
@@ -46,7 +46,7 @@ public class Collectable extends DynamicGameObject {
 	}
 	
 	public enum BaseType {
-		BRONZE, SILVER, GOLD, RING, DIAMOND, TOKEN, NONE;
+		BRONZE, SILVER, GOLD, RING, DIAMOND, TOKEN, NONE
 	}
 	
 	public final Type type;

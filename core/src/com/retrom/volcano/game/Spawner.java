@@ -3,9 +3,6 @@ package com.retrom.volcano.game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.TreeSet;
-
-import sun.awt.AWTAccessor.EventQueueAccessor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -27,17 +24,17 @@ public class Spawner {
 	private static final int NUMBER_OF_COLUMNS = 6;
 
 	public interface SpawnerHandler {
-		public void dropWall(int col);
-		public void dropCoin(float x, Collectable.Type type);
-		public void dropDualWall(int col);
-		public void dropStackWall(int col, int size);
-		public void dropBurningWall(int col);
-		public void dropFlamethrower(int col);
-		public void dropFireball(int col);
-		public void dropSack(int col, int numCoins);
-		public void warning(int col, boolean sound);
-		public void quake(boolean big);
-		public void setLavaState(State state);
+		void dropWall(int col);
+		void dropCoin(float x, Collectable.Type type);
+		void dropDualWall(int col);
+		void dropStackWall(int col, int size);
+		void dropBurningWall(int col);
+		void dropFlamethrower(int col);
+		void dropFireball(int col);
+		void dropSack(int col, int numCoins);
+		void warning(int col, boolean sound);
+		void quake(boolean big);
+		void setLavaState(State state);
 	}
 	
 	private final SpawnerHandler handler_;
@@ -319,10 +316,6 @@ public class Spawner {
 		return rand.nextInt(NUMBER_OF_COLUMNS);
 	}
 	
-	private int randomNonEdgeColumn() {
-		return rand.nextInt(NUMBER_OF_COLUMNS - 3) + 2;
-	}
-
 	private boolean isClearForDualWall(int col) {
 		for (Wall wall : activeWalls) {
 			if (wall.col() == col || wall.col() == col + 1
@@ -415,7 +408,17 @@ public class Spawner {
 			}
 		};
 	}
-	
+
+	private EventQueue.Event dropCoinEvent(final int col, final Collectable.BaseType coin_type) {
+		return new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				handler_.dropCoin(Utils.xOfCol(col),
+						          CoinChancesConfiguration.CoinFromBase(coin_type));
+			}
+		};
+	}
+
 	// Sequence from class.
 	private void dropSequenceOrSingle(Sequence seq) {
 		boolean flipped = rand.nextBoolean();
@@ -532,7 +535,8 @@ public class Spawner {
 		if (!SpawnerAction.isLavaType(action.type) && !action.type.random
 				&& action.type != SpawnerAction.Type.NOP
 				&& action.type != SpawnerAction.Type.FIREBALL
-				&& action.type != SpawnerAction.Type.BALANCE_FLOOR) {
+				&& action.type != SpawnerAction.Type.BALANCE_FLOOR
+                && action.type != SpawnerAction.Type.COIN) {
 			makeWarning(action.time, col);
 		}
 		
@@ -562,11 +566,14 @@ public class Spawner {
 		case LAVA_MEDIUM:
 		case LAVA_HIGH:
 			queue.addEventFromNow(action.time, lavaEvent(lavaState(action.type)));
+			break;
+		case COIN:
+			queue.addEventFromNow(action.time, dropCoinEvent(col, action.coin_type));
 		default:
 			break;
 		}
 	}
-	
+
 	private State lavaState(Type type) {
 		switch(type) {
 		case LAVA_NONE:

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.badlogic.gdx.utils.Json;
+import com.retrom.volcano.game.objects.Collectable;
 
 public class SpawnerAction {
 	
@@ -30,7 +31,10 @@ public class SpawnerAction {
 		LAVA_HIGH,
 		
 		//
-		BALANCE_FLOOR;  // For balancing the floor before the boss.
+		BALANCE_FLOOR,  // For balancing the floor before the boss.
+
+		// Coin
+		COIN;
 		
 		public final boolean random;
 		
@@ -46,6 +50,7 @@ public class SpawnerAction {
 	public float time;
 	public int col;
 	public int size;
+	public Collectable.BaseType coin_type;
 	
 	public SpawnerAction() {}
 	public SpawnerAction(Type type, float time, int col) {

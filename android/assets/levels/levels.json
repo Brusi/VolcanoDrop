@@ -391,7 +391,7 @@ levels: [
 		groups: [
 			{
 				chance: 1
-				sequences: [boss_lavaseq_stairs, boss_lavaseq_pillars, lava_medium, lava_low]
+				sequences: [boss_side_to_side, boss_steps]
 			}
 		]
 	}

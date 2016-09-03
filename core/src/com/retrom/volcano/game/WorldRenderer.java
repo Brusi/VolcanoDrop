@@ -506,7 +506,7 @@ public class WorldRenderer {
 					case TOKEN:
 						s = Assets.tokenGlow;
 						break;
-					case DIANOMD_BLUE:
+					case DIAMOND_BLUE:
 						s = Assets.diamondCyanGlow;
 						break;
 					case DIAMOND_PURPLE:
@@ -677,7 +677,7 @@ public class WorldRenderer {
 		case RING_PURPLE: return Assets.coin4_2_land;
 		case RING_BLUE: return Assets.coin4_3_land;
 		case TOKEN: return Assets.coin5_1_land;
-		case DIANOMD_BLUE: return Assets.coin5_2_land;
+		case DIAMOND_BLUE: return Assets.coin5_2_land;
 		case DIAMOND_PURPLE: return Assets.coin5_3_land;
 		case DIAMOND_GREEN: return Assets.coin5_4_land;
 		case POWERUP_MAGNET:
@@ -701,7 +701,7 @@ public class WorldRenderer {
 		case RING_PURPLE: return Assets.coin4_2;
 		case RING_BLUE: return Assets.coin4_3;
 		case TOKEN: return Assets.coin5_1;
-		case DIANOMD_BLUE: return Assets.coin5_2;
+			case DIAMOND_BLUE:D_BLUE: return Assets.coin5_2;
 		case DIAMOND_PURPLE: return Assets.coin5_3;
 		case DIAMOND_GREEN: return Assets.coin5_4;
 		case POWERUP_MAGNET: return Assets.powerupMagnet;

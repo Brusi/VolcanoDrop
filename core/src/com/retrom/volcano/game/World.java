@@ -289,7 +289,7 @@ public class World {
 		return new Boss(new Boss.Listener() {
 			@Override
 			public void thompHit() {
-				for (int i=0; i < 10; i++) {
+				for (int i = 0; i < 10; i++) {
 					float x = Utils.randomRange(boss_.bounds.x, boss_.bounds.x + boss_.bounds.width);
 					float y = boss_.bounds.y;
 					addDust(x, y);
@@ -1200,10 +1200,10 @@ public class World {
 		createCoin(x, yval, type);
 	}
 	
-	public Collectable createCoin(float x, float y, Collectable.Type type) {
+	public Collectable createCoin(float x, float y, Type type) {
 		Collectable coin = new Collectable(x, y, type);
 		collectables_.add(coin);
-		if (coin.type == Collectable.Type.TOKEN || coin.type == Collectable.Type.DIANOMD_BLUE || coin.type == Collectable.Type.DIAMOND_PURPLE || coin.type == Collectable.Type.DIAMOND_GREEN) {
+		if (coin.type == Type.TOKEN || coin.type == Type.DIAMOND_BLUE || coin.type == Type.DIAMOND_PURPLE || coin.type == Type.DIAMOND_GREEN) {
 			addEffects.add(new DiamondGlowEffect(coin));
 		}
 		if (coin.isPowerup()) {
@@ -1556,7 +1556,7 @@ public class World {
 	}
 
 	private void handleCollectable(Collectable collectable) {
-		final Collectable.Type type = collectable.type; 
+		final Type type = collectable.type;
 		switch (type) {
 		case POWERUP_MAGNET:
 			SoundAssets.pauseAllSounds();
@@ -1583,7 +1583,7 @@ public class World {
 			}
 			magnetTime = TOTAL_MAGNET_TIME;
 			
-			pauseEffectEvents.addEventFromNow(0.0f, new EventQueue.Event() {
+			pauseEffectEvents.addEventFromNow(0.0f, new Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.playSound(SoundAssets.powerupMagnetStart);
@@ -1592,7 +1592,7 @@ public class World {
 					addEffects.add(e);
 				}
 			});
-			pauseEffectEvents.addEventFromNow(PAUSE_EFFECT_DURATION, new EventQueue.Event() {
+			pauseEffectEvents.addEventFromNow(PAUSE_EFFECT_DURATION, new Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.resumeAllSounds();
@@ -1609,7 +1609,7 @@ public class World {
 			slomoTime = TOTAL_SLOMO_TIME;
 			SoundAssets.pauseAllSounds();
 			SoundAssets.pauseMusic();
-			pauseEffectEvents.addEventFromNow(0.0f, new EventQueue.Event() {
+			pauseEffectEvents.addEventFromNow(0.0f, new Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.playSound(SoundAssets.powerupTimeStart);
@@ -1618,7 +1618,7 @@ public class World {
 					addEffects.add(e1);
 				}
 			});
-			pauseEffectEvents.addEventFromNow(PAUSE_EFFECT_DURATION, new EventQueue.Event() {
+			pauseEffectEvents.addEventFromNow(PAUSE_EFFECT_DURATION, new Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.resumeAllSounds();
@@ -1631,7 +1631,7 @@ public class World {
 		case POWERUP_SHIELD:
 			SoundAssets.pauseAllSounds();
 			shieldTime = TOTAL_SHIELD_TIME;
-			pauseEffectEvents.addEventFromNow(0, new EventQueue.Event() {
+			pauseEffectEvents.addEventFromNow(0, new Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.playSound(SoundAssets.powerupShieldStart);
@@ -1640,7 +1640,7 @@ public class World {
 					addEffects.add(e);
 				}
 			});
-			pauseEffectEvents.addEventFromNow(PAUSE_EFFECT_DURATION, new EventQueue.Event() {
+			pauseEffectEvents.addEventFromNow(PAUSE_EFFECT_DURATION, new Event() {
 				@Override
 				public void invoke() {
 					SoundAssets.resumeAllSounds();
@@ -1703,7 +1703,7 @@ public class World {
 			SoundAssets.playSound(SoundAssets.coinsCollectBigToken);
 			addEffects.add(EffectFactory.goldCollectEffect(collectable.position));
 			break;
-		case DIANOMD_BLUE:
+		case DIAMOND_BLUE:
 			addScore(15);
 			effects.add(new Score15TealEffect(collectable.position.cpy()));
 			SoundAssets.playRandomSound(SoundAssets.coinsCollectDiamond);
