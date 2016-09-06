@@ -63,13 +63,13 @@ levels: [
 		avg_sack_time: 45
 		groups: [
 			{
-				chance: 0.5
+				chance: 0.3
 				single: true
 				sequences: [wall]
 			}
 			{
 				on_level_start: true
-				chance: 0.5
+				chance: 0.7
 				sequences: [side_to_side, 3_pairs, 3_and_3, pair_sides]
 			}
 		]
@@ -186,12 +186,10 @@ levels: [
 			{
 				chance: 0.05
 				on_level_start: true
-				single: true
 				sequences: [flame_firsttime]
 			}
 			{
 				chance: 0.4
-				single: true
 				sequences: [flame_2pillars, flame_center_pillars, flame_side_pillars, flame_single1, flame_single2, flame_stack2, flame_stack3, flame_stack4]
 			}
 			{
@@ -385,14 +383,64 @@ levels: [
 	}
 	{
 		number: 13
-		start_time: 182
+		start_time: 180
 		time_between_walls: 0.5
 		avg_sack_time: 0
 		groups: [
 			{
 				chance: 1
-				sequences: [boss_side_to_side, boss_steps]
+				sequences: [boss_side_to_side, boss_steps, boss_jumps, boss_holes, boss_fire_dance, boss_follow_thomp_1, boss_follow_thomp_2]
 			}
+		]
+
+	}
+	{
+		number: 14
+		start_time: 240
+		avg_sack_time: 0
+		groups: [
+			{
+				chance: 1
+				sequences: [boss_finish]
+			}
+		]
+	}
+	{
+		number: 15
+		start_time: 252
+		time_between_walls: 0.5
+		avg_sack_time: 15
+		groups: [
+			{
+				chance: 0.2
+				single: true
+				sequences: [flame]
+			}
+			{
+				chance: 0.1
+				single: true
+				sequences: [burn]
+			}
+			{
+				chance: 0.4
+				on_level_start: true
+				sequences: [fireball_side_to_side, fireball_side_to_side_hole, fireball_pairs, fireball_rain, fireball_triples, fireball_3_and_3, fireball_pillars, fireball_3flame, fireball_2flame]
+			}
+			{
+				chance: 0.3
+				sequences: [flame_hat, flame_vee, flame_side_to_side, flame_3_and_3, flame_lavafloor, flame_shower, flame_stairs]
+			}
+		]
+		coins: [
+			{ chance: 0.35, coin: GOLD }
+			{ chance: 0.25, coin: RING }
+			{ chance: 0.2, coin: DIAMOND }
+			{ chance: 0.2, coin: TOKEN }
+		]
+		powerups: [
+			{ powerup: POWERUP_MAGNET, chance: 0.06 }
+			{ powerup: POWERUP_SLOMO, chance: 0.00 }
+			{ powerup: POWERUP_SHIELD, chance: 0.05 }
 		]
 	}
 ]

@@ -182,7 +182,6 @@ public class World {
 	enum State {
 		SPLASH,
 		BEFORE_START,
-		OPENING,
 		GAME,
 	}
 	State gameState = State.SPLASH;
@@ -190,9 +189,9 @@ public class World {
 	private float slomoRatio_;
 
 	public interface WorldListener {
-		public void finish();
-		public void startOpeningScene();
-		public void startGame();
+		void finish();
+		void startOpeningScene();
+		void startGame();
 	}
 	
 	public World(WorldListener listener, boolean show_opening) {
@@ -263,6 +262,16 @@ public class World {
 			public void setLavaState(Lava.State state) {
 				lava_.setState(state);
 			}
+
+            @Override
+            public void bossLastThomp() {
+                boss_.finishSequence();
+            }
+
+            @Override
+            public void bossFollowPlayerThomp() {
+                boss_.followPlayerSequence();
+            }
 		});
 		
 		if (spawner_.levels.start_time != 0) {
@@ -297,7 +306,15 @@ public class World {
 				startSmallQuake();
 				dropSomeRabble(0.5f, 4);
 			}
-		});
+
+            @Override
+            public void finalThompHit() {
+                floors_.addToColumn(2);
+                floors_.addToColumn(2);
+                floors_.addToColumn(3);
+                floors_.addToColumn(3);
+            }
+        });
 	}
 
 	private Player newPlayer(boolean show_opening) {
@@ -608,7 +625,7 @@ public class World {
 			obstacles_.add(wall.bounds);
 		}
 		obstacles_.addAll(floors_.getRects());
-		if (boss_.isActive()) {
+		if (boss_.isAtFront()) {
 			obstacles_.add(boss_.bounds);
 		}
 		
@@ -908,14 +925,20 @@ public class World {
 		for (float hole : background.leftHoleList) {
 			if (camTarget > hole + 40 && hole > leftHighestSpitter) {
 				leftHighestSpitter = hole;
-				addSpitter(hole + 30, Spitter.LEFT);
+				// Don't add spitter if we are at the boss.
+				if (!boss_.isActive()) {
+					addSpitter(hole + 30, Spitter.LEFT);
+				}
 			}
 		}
 		
 		for (float hole : background.rightHoleList) {
 			if (camTarget > hole + 40 && hole > rightHighestSpitter) {
 				rightHighestSpitter = hole;
-				addSpitter(hole + 30, Spitter.RIGHT);
+				// Don't add spitter if we are at the boss.
+				if (!boss_.isActive()) {
+					addSpitter(hole + 30, Spitter.RIGHT);
+				}
 			}
 		}
 		

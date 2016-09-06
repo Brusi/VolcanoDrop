@@ -2,6 +2,7 @@ package com.retrom.volcano.game.objects;
 
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.math.Rectangle;
@@ -15,21 +16,25 @@ import com.retrom.volcano.menus.StaticGraphicObject;
 import com.retrom.volcano.utils.EventQueue;
 
 public class Boss extends DynamicGameObject {
-	
-	public interface Listener {
-		public void thompHit();
+
+    public interface Listener {
+		void thompHit();
+        void finalThompHit();
 	}
 	
-	static private final float WIDTH = Wall.SIZE * 2;
+	static private final float WIDTH = Wall.SIZE * 2 - 1;
 	static private final float HEIGHT = 214;
 	
 	static private final float POSITION_OVER_BASE_LINE = 300;
+
+	static private final float MAX_HORIZONTAL_SPEED = 500;
+
+	private boolean followingPlayer = false;
 	
 	enum State {
 		HIDDEN,
 		APPROACH,
 		FLOAT,
-		FOLLOW_PLAYER,
 		PREPARE_THOMP,
 		THOMP,
 		STOP,
@@ -52,13 +57,12 @@ public class Boss extends DynamicGameObject {
 	private Vector2 playerPosition_;
 	private final Listener listener;
 
+	private boolean last_thomp_ = false;
+	private float scale_ = 1;
+
 	public Boss(Listener listener) {
 		super(0, 0, WIDTH, HEIGHT);
 		this.listener = listener;
-	}
-	
-	public void followPlayer() {
-		setState(State.FOLLOW_PLAYER);
 	}
 	
 	public void approach() {
@@ -89,17 +93,17 @@ public class Boss extends DynamicGameObject {
 			state_ == State.BACKGROUND ||
 		    state_ == State.APPROACH ||
 		    state_ == State.RISE ||
-		    state_ == State.FOLLOW_PLAYER ||
 		    state_ == State.PREPARE_THOMP) {
-			
-			position.y += (target_pos.y - position.y) * deltaTime * 1.5f;
-			position.x += (target_pos.x - position.x) * deltaTime * 5f;
+
+            position.y += (target_pos.y - position.y) * deltaTime * 1.5f;
+            updatePosX(deltaTime);
 			updateBounds();
 			return;
 		}
 		if (state_ == State.THOMP) {
 			velocity.y += World.gravity.y * deltaTime; 
 			position.y += velocity.y * deltaTime;
+            updatePosX(deltaTime);
 			updateBounds();
 			
 			for (Rectangle rect : obstacles_) {
@@ -107,15 +111,34 @@ public class Boss extends DynamicGameObject {
 					if (bounds.y + bounds.height/ 2 > rect.y + rect.height / 2) {
 						position.y = rect.y + rect.height + bounds.height / 2;
 						updateBounds();
-						
+
+                        stopToFollowPlayer();
 						listener.thompHit();
 						setState(State.STOP);
-						queue.addEventFromNow(1, setStateEvent(State.RISE));
+                        if (!last_thomp_) {
+                            queue.addEventFromNow(1, setStateEvent(State.RISE));
+                        } else {
+                            listener.finalThompHit();
+                        }
 						return;
 					}
 				}
 			}
 		}
+	}
+
+    private void updatePosX(float deltaTime) {
+        float dx = (target_pos.x - position.x) * deltaTime * 5f;
+        position.x += Utils.clamp(dx,
+                                  -MAX_HORIZONTAL_SPEED * deltaTime,
+                                  +MAX_HORIZONTAL_SPEED * deltaTime);
+    }
+
+    private void startToFollowPlayer() {
+		followingPlayer = true;
+	}
+	private void stopToFollowPlayer() {
+		followingPlayer = false;
 	}
 	
 	private void updateBounds() {
@@ -124,15 +147,14 @@ public class Boss extends DynamicGameObject {
 	}
 
 	private void updateTargetPos(float deltaTime) {
+		if (followingPlayer) {
+			target_pos.x = playerPosition_.x;
+			target_pos.x = clampToGameArea(target_pos.x);
+		}
+
 		float float_y_pos = calc_float_y_pos();
 		if (state_ == State.FLOAT || state_ == State.BACKGROUND) {
 			target_pos.y = float_y_pos;
-			return;
-		}
-		if (state_ == State.FOLLOW_PLAYER) {
-			target_pos.y = float_y_pos;
-			target_pos.x = playerPosition_.x;
-			target_pos.x = clampToGameArea(target_pos.x);
 			return;
 		}
 		if (state_ == State.APPROACH) {
@@ -200,6 +222,7 @@ public class Boss extends DynamicGameObject {
 		}
 		if (state == State.THOMP) {
 			velocity.set(0, 0);
+            target_pos.x = position.x;
 			return;
 		}
 		if (state == State.FLOAT) {
@@ -223,6 +246,9 @@ public class Boss extends DynamicGameObject {
 	public boolean isActive() {
 		return this.state_ != State.HIDDEN;
 	}
+	public boolean isAtFront() {
+		return isActive() && this.state_ != State.BACKGROUND;
+	}
 
 	public void updatePlayerPosition(Vector2 playerPosition) {
 		playerPosition_ = playerPosition;
@@ -231,81 +257,104 @@ public class Boss extends DynamicGameObject {
 	public void approachSequence() {
 		SoundAssets.playRandomSound(SoundAssets.bossLaugh);
 		approach();
-		
-//		queue.addEventFromNow(8, new EventQueue.Event() {
-//			@Override
-//			public void invoke() {
-//				followPlayer();
-//			}
-//		});
-		queue.addEventFromNow(10, new EventQueue.Event() {
-			@Override
-			public void invoke() {
-				setState(State.PREPARE_THOMP);
-				
-				SoundAssets.playRandomSound(SoundAssets.bossFall);
-				target_pos.y = calc_float_y_pos() + -50;
-				target_pos.x = position.x;
-			}
-		});
-		queue.addEventFromNow(10.5f, new EventQueue.Event() {
-			@Override
-			public void invoke() {
-				target_pos.y = calc_float_y_pos() + 50;
-				target_pos.x = position.x;
-			}
-		});
-		queue.addEventFromNow(11f, new EventQueue.Event() {
-			@Override
-			public void invoke() {
-				setState(State.THOMP);
-			}
-		});
-		
+
+		thompSequence(10);
+
 		queue.addEventFromNow(16, new EventQueue.Event() {
 			@Override
 			public void invoke() {
-				followPlayer();
+				startToFollowPlayer();
 			}
 		});
-		
-		
-		queue.addEventFromNow(19, new EventQueue.Event() {
+
+
+		queue.addEventFromNow(16, new EventQueue.Event() {
 			@Override
 			public void invoke() {
-				setState(State.PREPARE_THOMP);
-				
-				SoundAssets.playRandomSound(SoundAssets.bossFall);
-				target_pos.y = calc_float_y_pos() + -50;
-				target_pos.x = position.x;
+				startToFollowPlayer();
 			}
 		});
-		queue.addEventFromNow(19.5f, new EventQueue.Event() {
+
+		thompSequence(18);
+		queue.addEventFromNow(18, new EventQueue.Event() {
 			@Override
 			public void invoke() {
-				target_pos.y = calc_float_y_pos() + 50;
-				target_pos.x = position.x;
+				stopToFollowPlayer();
 			}
 		});
-		queue.addEventFromNow(20f, new EventQueue.Event() {
-			@Override
-			public void invoke() {
-				setState(State.THOMP);
-			}
-		});
-		
-		queue.addEventFromNow(24f, new EventQueue.Event() {
+
+		queue.addEventFromNow(23f, new EventQueue.Event() {
 			@Override
 			public void invoke() {
 				setState(State.FLOAT);
 				target_pos.x = 0;
 			}
 		});
-		queue.addEventFromNow(25f, new EventQueue.Event() {
+		queue.addEventFromNow(24f, new EventQueue.Event() {
 			@Override
 			public void invoke() {
 				setState(State.BACKGROUND);
 				target_pos.x = 0;
+			}
+		});
+	}
+
+    public void finishSequence() {
+        SoundAssets.playRandomSound(SoundAssets.bossLaugh);
+
+        setState(State.FLOAT);
+        target_pos.x = 0;
+        stopToFollowPlayer();
+
+        thompSequence(2);
+        queue.addEventFromNow(2, new EventQueue.Event() {
+            @Override
+            public void invoke() {
+                position.x = 0;
+            }
+        });
+
+        last_thomp_ = true;
+    }
+
+    public void followPlayerSequence() {
+        SoundAssets.playRandomSound(SoundAssets.bossLaugh);
+
+        setState(State.FLOAT);
+        queue.addEventFromNow(1, new EventQueue.Event() {
+            @Override
+            public void invoke() {
+                startToFollowPlayer();
+            }
+        });
+
+        thompSequence(2);
+
+        queue.addEventFromNow(6, setStateEvent(State.BACKGROUND));
+    }
+
+	private void thompSequence(float t) {
+		queue.addEventFromNow(t, new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				setState(State.PREPARE_THOMP);
+
+				SoundAssets.playRandomSound(SoundAssets.bossFall);
+				target_pos.y = calc_float_y_pos() + -50;
+				target_pos.x = position.x;
+			}
+		});
+		queue.addEventFromNow(t + 0.5f, new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				target_pos.y = calc_float_y_pos() + 50;
+				target_pos.x = position.x;
+			}
+		});
+		queue.addEventFromNow(t + 1f, new EventQueue.Event() {
+			@Override
+			public void invoke() {
+				setState(State.THOMP);
 			}
 		});
 	}

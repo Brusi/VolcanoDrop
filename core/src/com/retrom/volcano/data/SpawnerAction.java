@@ -32,6 +32,8 @@ public class SpawnerAction {
 		
 		//
 		BALANCE_FLOOR,  // For balancing the floor before the boss.
+        BOSS_FOLLOW_PLAYER_THOMP,
+        BOSS_LAST_THOMP,
 
 		// Coin
 		COIN;

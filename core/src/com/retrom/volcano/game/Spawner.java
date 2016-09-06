@@ -35,7 +35,10 @@ public class Spawner {
 		void warning(int col, boolean sound);
 		void quake(boolean big);
 		void setLavaState(State state);
-	}
+
+        void bossLastThomp();
+        void bossFollowPlayerThomp();
+    }
 	
 	private final SpawnerHandler handler_;
 	private final ActiveFloors floors_;
@@ -91,7 +94,10 @@ public class Spawner {
 		timeCount += deltaTime;
 		if (sequence_cooldown > 0) {
 			sequence_cooldown -= deltaTime;
-		}
+            if (sequence_cooldown < 0) {
+                Gdx.app.log("","Sequence cooldown done.");
+            }
+        }
 		
 		
 		updateHotkeys();
@@ -136,7 +142,7 @@ public class Spawner {
 		
 		// Good to go!
 		handler_.dropCoin(randomCoinX(), powerup);
-		queue.addEventFromNow(getTimeBetweenWalls(), NOP);
+		queue.addEventFromNow(getTimeBetweenWalls(), NOP_NO_SEQUENCE_COOLDOWN);
 		return true;
 	}
 	
@@ -284,9 +290,7 @@ public class Spawner {
 		
 		// If single wall, the level-defined silence time.
 		if (group.single) {
-			queue.addEventFromNow(getTimeBetweenWalls(), NOP);
-		} else {
-			sequence_cooldown = SEQUENCE_COOLDOWN_TIME;
+			queue.addEventFromNow(getTimeBetweenWalls(), NOP_NO_SEQUENCE_COOLDOWN);
 		}
 	}
 
@@ -330,7 +334,13 @@ public class Spawner {
 	private void initEvents() {
 		NOP = new EventQueue.Event() {
 			@Override
-			public void invoke() {}
+			public void invoke() {
+                sequence_cooldown = 3; /// TODO: use constant.
+                Gdx.app.log("INFO", "Starting sequence_cooldown="+sequence_cooldown);
+                   }
+		};
+		NOP_NO_SEQUENCE_COOLDOWN = new EventQueue.Event() {
+			@Override public void invoke() {}
 		};
 		QUAKE = new EventQueue.Event() {
 			@Override
@@ -394,7 +404,6 @@ public class Spawner {
 		return new EventQueue.Event() {
 			@Override
 			public void invoke() {
-				System.out.println("invoking warning with sound="+first);
 				handler_.warning(col, first);
 			}
 		};
@@ -494,12 +503,16 @@ public class Spawner {
 			return;
 		}
 	}
-		
+
 	private void addAction(SpawnerAction action, boolean flipped) {
+        if (addBossAction(action)) {
+            return;
+        }
+
 		if (action.type == Type.BALANCE_FLOOR) {
 			dropWallForBalance();
 		}
-		
+
 		if (action.type.random) {
 			List<Integer> candidates = getWallCandidates();
 			if (action.type == SpawnerAction.Type.WALL_OR_DUAL) {
@@ -507,7 +520,7 @@ public class Spawner {
 				return;
 			}
 			if (candidates.isEmpty()) {
-				queue.addEventFromNow(getTimeBetweenWalls(), NOP);
+				queue.addEventFromNow(getTimeBetweenWalls(), NOP_NO_SEQUENCE_COOLDOWN);
 				return;
 			}
 			int col = candidates.get(rand.nextInt(candidates.size())); 
@@ -521,9 +534,11 @@ public class Spawner {
 				break;
 			case SINGLE_FIREBALL:
 				queue.addEventFromNow(action.time, dropFireballEvent(col));
+                queue.addEventFromNow(action.time + 2.3f, NOP_NO_SEQUENCE_COOLDOWN);
 				break;
 			case SINGLE_FLAME:
 				queue.addEventFromNow(action.time, dropFlamethrowerEvent(col));
+                queue.addEventFromNow(action.time + 2, NOP_NO_SEQUENCE_COOLDOWN);
 				break;
 			default:
 				break;
@@ -574,7 +589,29 @@ public class Spawner {
 		}
 	}
 
-	private State lavaState(Type type) {
+    private boolean addBossAction(SpawnerAction action) {
+        if (action.type == Type.BOSS_LAST_THOMP) {
+            queue.addEventFromNow(action.time, new EventQueue.Event() {
+                @Override
+                public void invoke() {
+                    handler_.bossLastThomp();
+                }
+            });
+            return true;
+        }
+        if (action.type == Type.BOSS_FOLLOW_PLAYER_THOMP) {
+            queue.addEventFromNow(action.time, new EventQueue.Event() {
+                @Override
+                public void invoke() {
+                    handler_.bossFollowPlayerThomp();
+                }
+            });
+            return true;
+        }
+        return false;
+    }
+
+    private State lavaState(Type type) {
 		switch(type) {
 		case LAVA_NONE:
 			return Lava.State.NONE;
