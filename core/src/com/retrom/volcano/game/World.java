@@ -309,6 +309,10 @@ public class World {
 
             @Override
             public void finalThompHit() {
+				for (int col=1; col <= 4; col++) {
+					addWall(col);
+				}
+
                 floors_.addToColumn(2);
                 floors_.addToColumn(2);
                 floors_.addToColumn(3);
@@ -829,6 +833,10 @@ public class World {
 		if (lava_ == null) {
 			return;
 		}
+        if (lava_.state_ == Lava.State.OPENING && camTarget > 350 + 170) {
+            System.out.println("Disappear lava at " + camTarget);
+            lava_.setState(Lava.State.NONE);
+        }
 		
 		if (Math.random() < deltaTime * 1.5f) {
 			effects.add(new LavaBodyBubble(lava_));

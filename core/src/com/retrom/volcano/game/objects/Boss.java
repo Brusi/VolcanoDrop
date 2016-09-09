@@ -26,8 +26,9 @@ public class Boss extends DynamicGameObject {
 	static private final float HEIGHT = 214;
 	
 	static private final float POSITION_OVER_BASE_LINE = 300;
-
 	static private final float MAX_HORIZONTAL_SPEED = 500;
+
+    public static final float BOSS_BG_SCALE = 0.95f;
 
 	private boolean followingPlayer = false;
 	
@@ -59,6 +60,7 @@ public class Boss extends DynamicGameObject {
 
 	private boolean last_thomp_ = false;
 	private float scale_ = 1;
+    private float front_alpha_ = 1;
 
 	public Boss(Listener listener) {
 		super(0, 0, WIDTH, HEIGHT);
@@ -67,7 +69,6 @@ public class Boss extends DynamicGameObject {
 	
 	public void approach() {
 		setState(State.APPROACH);
-		System.out.println("approaching....");
 	}
 	
 	public void updateFloorBaseLine(float baseLine) {
@@ -86,6 +87,13 @@ public class Boss extends DynamicGameObject {
 		stateTime_ += deltaTime;
 		updateTargetPos(deltaTime);
 		updatePos(deltaTime);
+        if (state_ == State.BACKGROUND) {
+            scale_ = Utils.clamp(scale_ - 0.1f * deltaTime, BOSS_BG_SCALE, 1);
+            front_alpha_ = Utils.clamp01(front_alpha_ - 1 * deltaTime);
+        } else {
+            scale_ = Utils.clamp(scale_ + 0.1f * deltaTime, BOSS_BG_SCALE, 1);
+            front_alpha_ = Utils.clamp01(front_alpha_ + 1 * deltaTime);
+        }
 	}
 
 	private void updatePos(float deltaTime) {
@@ -125,6 +133,15 @@ public class Boss extends DynamicGameObject {
 				}
 			}
 		}
+        if (state_ == State.STOP) {
+            for (Rectangle rect : obstacles_) {
+                if (rect.y > position.y && bounds.overlaps(rect)) {
+                    position.y = rect.y - this.bounds.height / 2;
+                    updateBounds();
+                    return;
+                }
+            }
+        }
 	}
 
     private void updatePosX(float deltaTime) {
@@ -186,8 +203,9 @@ public class Boss extends DynamicGameObject {
 	}
 	
 	public void renderBg(SpriteBatch batch) {
-		if (this.state_ == State.BACKGROUND) {
+		if (this.state_ == State.BACKGROUND || front_alpha_ < 1) {
 			body_dark.position_.set(position);
+            body_dark.setScale(scale_);
 			body_dark.setAlpha(1);
 			body_dark.render(batch);
 		}
@@ -198,13 +216,9 @@ public class Boss extends DynamicGameObject {
 			return;
 		}
 		body.position_.set(position);
-		if (this.state_ == State.BACKGROUND) {
-			body.setAlpha(Math.max(0, 1-stateTime_));
-			body.render(batch);
-		} else {
-			body.setAlpha(1);
-			body.render(batch);
-		} 
+        body.setScale(scale_);
+        body.setAlpha(front_alpha_);
+        body.render(batch);
 	}
 	
 	private void setState(State state) {
@@ -234,6 +248,9 @@ public class Boss extends DynamicGameObject {
 			velocity.set(0, 0);
 			return;
 		}
+        if (state == State.BACKGROUND) {
+            target_pos.x = 0;
+        }
 	}
 
 	private float approachStartPos() {
@@ -258,7 +275,19 @@ public class Boss extends DynamicGameObject {
 		SoundAssets.playRandomSound(SoundAssets.bossLaugh);
 		approach();
 
+        queue.addEventFromNow(8, new EventQueue.Event() {
+            @Override
+            public void invoke() {
+                startToFollowPlayer();
+            }
+        });
 		thompSequence(10);
+        queue.addEventFromNow(10, new EventQueue.Event() {
+            @Override
+            public void invoke() {
+                stopToFollowPlayer();
+            }
+        });
 
 		queue.addEventFromNow(16, new EventQueue.Event() {
 			@Override

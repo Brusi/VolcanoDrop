@@ -14,7 +14,7 @@ public class Lava {
 	private static final float LINE_WIDTH = 8;
 	private static final float CONST_OFFSET = -400f;
 	
-	public static enum State {
+	public enum State {
 		OPENING,  // Only to see the lava at the bottom of the opening.
 		AFTER_OPENING,    // Rise a little after the opening scene.
 		NONE,     // Invisible. Out of screen.
@@ -22,10 +22,6 @@ public class Lava {
 		LOW,      // May harm you only if you are very low.
 		MEDIUM,   // You better stay on high ground, always possible.
 		HIGH;     // For hand-sewn sequences!
-	}
-	
-	public static enum Level {
-		
 	}
 	
 	public static class Node {

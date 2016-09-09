@@ -900,11 +900,6 @@ sequences: [
               {type: STACK,  time: 1.6, col: 5, size: 3}
               {type: BOSS_LAST_THOMP, time: 1}
 
-              {type: WALL,  time: 9, col: 1}
-              {type: WALL,  time: 9.2, col: 2}
-              {type: WALL,  time: 9.4, col: 3}
-              {type: WALL,  time: 9.6, col: 4}
-
               {type: NOP,   time: 12.01}]
     }
     {
