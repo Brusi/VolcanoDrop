@@ -823,7 +823,7 @@ sequences: [
 		hotkey: 4
 		seq: [{type: LAVA_LOW, time: 0}
 		      {type: WALL,  time: 1.0, col: 1}
-              {type: COIN,  time: 1.4, col: 1, coin_type: GOLD}
+              {type: COIN,  time: 1.4, col: 1, coin_type: SACK}
 
               {type: LAVA_MEDIUM, time: 2.5}
               {type: WALL,  time: 2.5, col: 0}
@@ -831,21 +831,21 @@ sequences: [
               {type: STACK,  time: 2.5, col: 3, size: 2}
               {type: WALL,  time: 2.5, col: 4}
               {type: WALL,  time: 2.5, col: 5}
-              {type: COIN,  time: 3.0, col: 3, coin_type: GOLD}
+              {type: COIN,  time: 3.0, col: 3, coin_type: SACK}
 
               {type: STACK,  time: 4.0, col: 0, size: 2}
               {type: WALL,  time: 4.0, col: 1}
               {type: WALL,  time: 4.0, col: 2}
               {type: WALL,  time: 4.0, col: 4}
               {type: WALL,  time: 4.0, col: 5}
-              {type: COIN,  time: 4.5, col: 0, coin_type: GOLD}
+              {type: COIN,  time: 4.5, col: 0, coin_type: SACK}
 
               {type: WALL,  time: 5.5, col: 1}
               {type: WALL,  time: 5.5, col: 2}
               {type: WALL,  time: 5.5, col: 3}
               {type: STACK,  time: 5.5, col: 4, size: 2}
               {type: WALL,  time: 5.5, col: 5}
-              {type: COIN,  time: 6.0, col: 4, coin_type: GOLD}
+              {type: COIN,  time: 6.0, col: 4, coin_type: SACK}
 
               {type: WALL,  time: 7, col: 0}
               {type: WALL,  time: 7, col: 1}

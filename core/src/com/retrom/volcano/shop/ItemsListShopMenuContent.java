@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.retrom.volcano.data.ShopData;
 import com.retrom.volcano.data.ShopEntry;
+import com.retrom.volcano.game.Utils;
 import com.retrom.volcano.menus.BackMenuButton;
 import com.retrom.volcano.menus.ExitMenuButton;
 import com.retrom.volcano.menus.MenuButton;
@@ -18,29 +19,30 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 	
 	private ShopMenu.Listener listener_;
 
-	public interface BuyListener {
-		public void buy();
-	}
-	
-	ItemsListShopMenuContent(ShopMenu.Listener listener) {
-		this.listener_ = listener;
-		initItems();
-		refresh();
-	}
+
+
+    ItemsListShopMenuContent(ShopMenu.Listener listener) {
+        this.listener_ = listener;
+        initItems();
+        refresh();
+    }
 	
 	abstract protected void initItems();	
 	
 	List<ShopMenuItem> items = new ArrayList<ShopMenuItem>();
+    private int scrollCount = 0;
 	private float scrollY = 0;
 	private float tgtY = 0;
 	private int runningIndex = 0;
 	private float alpha_ = 1;
-	
-	@Override
+
+    @Override
 	public void update(float deltaTime) {
 		for (ShopMenuItem item : items) {
 			item.update(deltaTime);
 		}
+
+        tgtY = scrollCount * ShopMenuItem.ITEM_HEIGHT;
 		float vel = (tgtY - scrollY) * 10f;
 		scrollY += vel * deltaTime;
 	}
@@ -52,13 +54,6 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 			item.setAlpha(alpha_);
 			item.render(batch);
 		}
-		
-		if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-			tgtY += ShopMenuItem.ITEM_HEIGHT;
-		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-			tgtY -= ShopMenuItem.ITEM_HEIGHT;
-		}
 	}
 
 	@Override
@@ -66,6 +61,7 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 		for (ShopMenuItem item : items) {
 			item.initState();
 		}
+        scrollCount = 0;
 	}
 	
 	protected void addMenuItem(Sprite icon, Sprite title, final ShopEntry entry) {
@@ -91,4 +87,21 @@ public abstract class ItemsListShopMenuContent implements ShopMenuContent {
 	public void setAlpha(float alpha) {
 		alpha_  = alpha;
 	}
+
+    public void scrollUp() {
+        scrollCount--;
+        scrollCount = Utils.clamp(scrollCount, 0, items.size() - 3);
+    }
+    public void scrollDown() {
+        scrollCount++;
+        scrollCount = Utils.clamp(scrollCount, 0, items.size() - 3);
+    }
+
+    public boolean canScrollUp() {
+        return scrollCount > 0;
+    }
+
+    public boolean canScrollDown() {
+        return scrollCount < items.size() - 3;
+    }
 }

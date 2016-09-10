@@ -56,24 +56,24 @@ public class MainShopContent implements ShopMenuContent {
 	@Override
 	public void refresh() {
 		tweens = new TweenQueue();
-		tweens.addTweenFromNow(0, 0.5f, new Tween() {
-			@Override
-			public void invoke(float t) {
-				buttons.get(0).setScale(t);
-			}
-		});
-		tweens.addTweenFromNow(0.1f, 0.5f, new Tween() {
-			@Override
-			public void invoke(float t) {
-				buttons.get(1).setScale(t);
-			}
-		});
-		tweens.addTweenFromNow(0.2f, 0.5f, new Tween() {
-			@Override
-			public void invoke(float t) {
-				buttons.get(2).setScale(t);
-			}
-		});
+//		tweens.addTweenFromNow(0, 0.5f, new Tween() {
+//			@Override
+//			public void invoke(float t) {
+//				buttons.get(0).setScale(t);
+//			}
+//		});
+//		tweens.addTweenFromNow(0.1f, 0.5f, new Tween() {
+//			@Override
+//			public void invoke(float t) {
+//				buttons.get(1).setScale(t);
+//			}
+//		});
+//		tweens.addTweenFromNow(0.2f, 0.5f, new Tween() {
+//			@Override
+//			public void invoke(float t) {
+//				buttons.get(2).setScale(t);
+//			}
+//		});
 	}
 
 	@Override

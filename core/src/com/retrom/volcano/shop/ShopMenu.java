@@ -16,7 +16,6 @@ import com.retrom.volcano.menus.StaticGraphicObject;
 import com.retrom.volcano.screens.GameScreen;
 import com.retrom.volcano.utils.Tween;
 import com.retrom.volcano.utils.TweenQueue;
-import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
 public class ShopMenu {
 
@@ -28,15 +27,18 @@ public class ShopMenu {
 	GraphicObject menuBg = new StaticGraphicObject(Assets.shopMenuBg, 0, menuStartYPos - 10);
 	GraphicObject menuFg = new StaticGraphicObject(Assets.shopMenuFg, 0, menuStartYPos);
 	
-	MenuButton exitButton;
-	MenuButton backButton;
+	private final MenuButton exitButton;
+	private final MenuButton backButton;
+
+	private final MenuButton scrollUpButton;
+	private final MenuButton scrollDownButton;
 	
 	enum Command {
-		EXIT, BACK, POWERS, BLESSINGS, COSTUMES, BUY;
+		EXIT, BACK, POWERS, BLESSINGS, COSTUMES, BUY
 	}
 	
 	public interface Listener {
-		public void act(Command cmd);
+		void act(Command cmd);
 	}
 	
 	private Listener listener = new Listener() {
@@ -45,19 +47,19 @@ public class ShopMenu {
 			switch (cmd) {
 			case BACK:
 				content = mainContent;
-				backButton.hide();
+                hideControlButtons();
 				break;
 			case BLESSINGS:
 				content = blessingsContent;
-				backButton.show();
+                showControlButtons();
 				break;
 			case COSTUMES:
 				content = costumesContent;
-				backButton.show();
+                showControlButtons();
 				break;
 			case POWERS:
 				content = powersContent;
-				backButton.show();
+                showControlButtons();
 				break;
 			case BUY:
 				buy = true;
@@ -70,10 +72,23 @@ public class ShopMenu {
 				break;
 			}
 			content.refresh();
+            updateScrollButtons();
 		}
 	};
-	
-	private ShopMenuContent mainContent = new MainShopContent(listener);
+
+    private void hideControlButtons() {
+        backButton.hide();
+        scrollUpButton.hide();
+        scrollDownButton.hide();
+    }
+
+    private void showControlButtons() {
+        backButton.show();
+        scrollUpButton.show();
+        scrollDownButton.show();
+    }
+
+    private ShopMenuContent mainContent = new MainShopContent(listener);
 	private ShopMenuContent powersContent = new PowersShopMenuContent(listener);
 	private ShopMenuContent blessingsContent = new BlessingsShopMenuContent(listener);
 	private ShopMenuContent costumesContent = new CostumesShopMenuContent(listener);
@@ -102,8 +117,34 @@ public class ShopMenu {
 						listener.act(ShopMenu.Command.BACK);
 					}
 				});
-		backButton.hide();
-		
+        scrollUpButton = ScrollButton.UpScrollButton(-172, -88, new MenuButton.Action() {
+            @Override
+            public void act() {
+                if (!(content instanceof ItemsListShopMenuContent)) {
+                    Gdx.app.error("ERROR", "Scroll buttons should not be pressed when contemt menu is not items list.");
+                    return;
+                }
+                ItemsListShopMenuContent items_content = (ItemsListShopMenuContent) content;
+                items_content.scrollUp();
+                updateScrollButtons();
+            }
+        });
+        scrollDownButton = ScrollButton.DownScrollButton(172, -88, new MenuButton.Action() {
+            @Override
+            public void act() {
+                if (!(content instanceof ItemsListShopMenuContent)) {
+                    Gdx.app.error("ERROR", "Scroll buttons should not be pressed when contemt menu is not items list.");
+                    return;
+                }
+                ItemsListShopMenuContent items_content = (ItemsListShopMenuContent) content;
+                items_content.scrollDown();
+                updateScrollButtons();
+            }
+        });
+        backButton.hide();
+        scrollUpButton.hide();
+        scrollDownButton.hide();
+
 		tweens.addTweenFromNow(1, 1f, Tween.bounce(Tween.movePoint(menuBg.position_).from(1, menuStartYPos).to(1, menuFinalYPos)));
 		tweens.addTweenFromNow(1, 1f, Tween.bounce(Tween.movePoint(menuFg.position_).from(1, menuStartYPos-10).to(1, menuFinalYPos)));
 		tweens.addTweenFromNow(1.5f, 0.6f, Tween.bubble(new Tween() {
@@ -113,7 +154,25 @@ public class ShopMenu {
 			}}));
 	}
 
-	public void update(float deltaTime) {
+    private void updateScrollButtons() {
+        if (!(content instanceof ItemsListShopMenuContent)) {
+            return;
+        }
+        ItemsListShopMenuContent items_content = (ItemsListShopMenuContent) content;
+        if (items_content.canScrollUp()) {
+            scrollUpButton.enable();
+        } else  {
+            scrollUpButton.disable();
+        }
+
+        if (items_content.canScrollDown()) {
+            scrollDownButton.enable();
+        } else  {
+            scrollDownButton.disable();
+        }
+    }
+
+    public void update(float deltaTime) {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
 			ShopData.reset();
 			content.refresh();
@@ -128,6 +187,8 @@ public class ShopMenu {
 		goldCounter.update();
 		exitButton.checkClick();
 		backButton.checkClick();
+        scrollUpButton.checkClick();
+        scrollDownButton.checkClick();
 	}
 	
 	public void render(SpriteBatch batch) {
@@ -138,6 +199,8 @@ public class ShopMenu {
 		goldCounter.render(batch);
 		exitButton.render(batch);
 		backButton.render(batch);
+        scrollUpButton.render(batch);
+        scrollDownButton.render(batch);
 	}
 	
 	private void renderBottomFade(SpriteBatch batch) {

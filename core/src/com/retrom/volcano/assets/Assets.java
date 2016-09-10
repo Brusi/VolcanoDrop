@@ -306,8 +306,13 @@ public class Assets {
 	public static Sprite shopItemButtonEquipped;
 	public static Sprite shopItemButtonClicked;
 	
-	public static Sprite shopPrice1500;
-	public static Sprite shopPrice4500;
+	public static Sprite scrollUpButton;
+	public static Sprite scrollUpButtonPressed;
+	public static Sprite scrollUpButtonDisabled;
+
+	public static Sprite scrollDownButton;
+	public static Sprite scrollDownButtonPressed;
+	public static Sprite scrollDownButtonDisabled;
 	
 	// Main shop menu items
 	public static Sprite mainShopPowers;
@@ -617,8 +622,7 @@ public class Assets {
 		
 		// Packed in this sheet because it was easier:
 		fireballWarningPillarEffect = openingVfxSheet.createSprite("fireball_warningpillar");
-		System.out.println("fireballWarningPillarEffect="+fireballWarningPillarEffect);
-		
+
 		TextureAtlas powerupSheet = new TextureAtlas("vfx/powerup.txt");
 		magnetBackGlow = powerupSheet.createSprite("powerup_magnet_backglow");
 		slomoBackGlow = powerupSheet.createSprite("powerup_timebend_backglow");
@@ -747,9 +751,14 @@ public class Assets {
 		shopItemButtonEquip = shopSheet.createSprite("shopmenu_item_button_equipbutton");
 		shopItemButtonEquipped = shopSheet.createSprite("shopmenu_item_button_equippedicon");
 		shopItemButtonClicked = shopSheet.createSprite("shopmenu_item_button_click");
-		
-		shopPrice1500 = shopSheet.createSprite("1500_price");
-		shopPrice4500 = shopSheet.createSprite("4500_price");
+
+		scrollUpButton = shopSheet.createSprite("shopmenu_buttons_equip_scroll_up");
+		scrollUpButtonPressed = shopSheet.createSprite("shopmenu_buttons_equip_scroll_up_click");
+		scrollUpButtonDisabled = shopSheet.createSprite("shopmenu_buttons_equip_scroll_up_disable");
+
+		scrollDownButton = shopSheet.createSprite("shopmenu_buttons_equip_scroll_down");
+		scrollDownButtonPressed = shopSheet.createSprite("shopmenu_buttons_equip_scroll_down_click");
+		scrollDownButtonDisabled = shopSheet.createSprite("shopmenu_buttons_equip_scroll_down_disable");
 		
 		mainShopPowers = shopSheet.createSprite("shopmenu_maintitles_powers");
 		mainShopBlessings = shopSheet.createSprite("shopmenu_maintitles_blessings");

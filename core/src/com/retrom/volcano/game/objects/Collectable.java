@@ -46,7 +46,7 @@ public class Collectable extends DynamicGameObject {
 	}
 	
 	public enum BaseType {
-		BRONZE, SILVER, GOLD, RING, DIAMOND, TOKEN, NONE
+		BRONZE, SILVER, GOLD, RING, DIAMOND, TOKEN, SACK, NONE
 	}
 	
 	public final Type type;

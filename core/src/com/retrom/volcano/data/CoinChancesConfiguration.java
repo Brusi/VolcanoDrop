@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.retrom.volcano.game.objects.Collectable;
 import com.retrom.volcano.utils.WeightedRandom;
 import com.retrom.volcano.game.objects.Collectable.Type;
@@ -127,9 +128,13 @@ public class CoinChancesConfiguration {
 			return rings.getNext();
 		case TOKEN:
 			return Collectable.Type.TOKEN;
+		case SACK:
+			Gdx.app.error("ERROR", "No coin from SACK base type.");
+			return null;
 		case NONE:
 			return null;
 		default:
+
 			break;
 		}
 		// Should never happen.

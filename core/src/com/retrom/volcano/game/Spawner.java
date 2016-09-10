@@ -419,6 +419,14 @@ public class Spawner {
 	}
 
 	private EventQueue.Event dropCoinEvent(final int col, final Collectable.BaseType coin_type) {
+		if (coin_type == Collectable.BaseType.SACK) {
+			return new EventQueue.Event() {
+				@Override
+				public void invoke() {
+					handler_.dropSack(col, randomSackCoins());
+				}
+			};
+		}
 		return new EventQueue.Event() {
 			@Override
 			public void invoke() {
