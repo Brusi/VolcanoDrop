@@ -19,6 +19,7 @@ package com.retrom.volcano.assets;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -27,6 +28,8 @@ import com.badlogic.gdx.utils.Array;
 import com.retrom.volcano.game.Utils;
 
 public class Assets {
+	public static AssetManager assetManager = new AssetManager();
+
 	public static CostumeAssets defaultCostume;
 	public static CostumeAssets blikCostume;
 	public static CostumeAssets goboCostume;
@@ -387,13 +390,7 @@ public class Assets {
 	public static Sprite yesButtonClicked;
 	public static Sprite noButton;
 	public static Sprite noButtonClicked;
-	
-	
 
-	public static Texture loadTexture (String file) {
-		return new Texture(Gdx.files.internal(file));
-	}
-	
 	public static void setFilterNearest(Array<Sprite> sprites) {
 		for (Sprite sprite : sprites) {
 			setFilterNearest(sprite);
@@ -416,18 +413,46 @@ public class Assets {
 				Texture.TextureFilter.MipMapLinearLinear);
 	}
 
-	public static void load() {
-		defaultCostume = new CostumeAssets("player/playersheet.txt");
-		goboCostume = new CostumeAssets("player/playergobo.txt");
-		blikCostume = new CostumeAssets("player/playerblik.txt");
-		
-		
-		TextureAtlas wallsSheet = new TextureAtlas("walls/walls.txt");
+	public static void startLoad() {
+		defaultCostume = new CostumeAssets("player/playersheet.txt", assetManager);
+		goboCostume = new CostumeAssets("player/playergobo.txt", assetManager);
+		blikCostume = new CostumeAssets("player/playerblik.txt", assetManager);
+
+        assetManager.load("walls/walls.txt", TextureAtlas.class);
+        assetManager.load("walls/enviroment.txt", TextureAtlas.class);
+        assetManager.load("walls/enviroment2.txt", TextureAtlas.class);
+        assetManager.load("walls/opening.txt", TextureAtlas.class);
+        assetManager.load("treasure/treasure.txt", TextureAtlas.class);
+        assetManager.load("treasure/score_num.txt", TextureAtlas.class);
+        assetManager.load("vfx/playervfx.txt", TextureAtlas.class);
+        assetManager.load("vfx/playervfx2.txt", TextureAtlas.class);
+        assetManager.load("vfx/vfx.txt", TextureAtlas.class);
+        assetManager.load("vfx/openingvfx.txt", TextureAtlas.class);
+        assetManager.load("vfx/powerup.txt", TextureAtlas.class);
+        assetManager.load("vfx/magnet.txt", TextureAtlas.class);
+        assetManager.load("enemies/enemies.txt", TextureAtlas.class);
+        assetManager.load("enemies/enemies_add_1.txt", TextureAtlas.class);
+        assetManager.load("enemies/enemies_add_2.txt", TextureAtlas.class);
+        assetManager.load("enemies/boss.txt", TextureAtlas.class);
+        assetManager.load("ui/gui.txt", TextureAtlas.class);
+        assetManager.load("shop/shopbg.txt", TextureAtlas.class);
+        assetManager.load("shop/shop.txt", TextureAtlas.class);
+        assetManager.load("shop/shopitems.txt", TextureAtlas.class);
+        assetManager.load("menu/pausemenu.txt", TextureAtlas.class);
+	}
+
+	// Must be called after load is done.
+	public static void initAssets() {
+		defaultCostume.initAssets();
+		goboCostume.initAssets();
+		blikCostume.initAssets();
+
+		TextureAtlas wallsSheet = assetManager.get("walls/walls.txt", TextureAtlas.class);
 		walls1 = wallsSheet.createSprites("x1");
 		walls2 = wallsSheet.createSprites("x2");
 		wallParticles = wallsSheet.createSprites("wall_particle");
 
-		TextureAtlas environmentSheet = new TextureAtlas("walls/enviroment.txt");
+		TextureAtlas environmentSheet = assetManager.get("walls/enviroment.txt", TextureAtlas.class);
 		pillars = environmentSheet.createSprites("pillars");
 		setFilterNearest(pillars);
 		pillars_big = environmentSheet.createSprites("pillars_big");
@@ -458,7 +483,7 @@ public class Assets {
 		bg_overlay_world1 = environmentSheet.createSprites("bg_world1_base_1");
 		setFilterNearest(bg_overlay_world1);
 		
-		TextureAtlas environmentSheet2 = new TextureAtlas("walls/enviroment2.txt");
+		TextureAtlas environmentSheet2 = assetManager.get("walls/enviroment2.txt", TextureAtlas.class);
 		bg_world2 = environmentSheet2.createSprites("bg_world2");
 		setFilterNearest(bg_world2);
 		bg_overlay_world2 = environmentSheet2.createSprites("bg_world2_base_1");
@@ -466,7 +491,7 @@ public class Assets {
 		bg_world3 = environmentSheet2.createSprites("bg_world3");
 		setFilterNearest(bg_world3);
 		
-		TextureAtlas openingSheet = new TextureAtlas("walls/opening.txt");
+		TextureAtlas openingSheet = assetManager.get("walls/opening.txt", TextureAtlas.class);
 		title = openingSheet.createSprite("openingscreen_title");
 		tapToStart = openingSheet.createSprite("openingscreen_text_tap");
 		opening_background = openingSheet.createSprite("bg_openingtile");
@@ -491,7 +516,7 @@ public class Assets {
 		openingForegroundRoots1 = openingSheet.createSprite("openingscreen_roots_foreground1");
 		openingForegroundRoots2 = openingSheet.createSprite("openingscreen_roots_foreground2");
 		
-		TextureAtlas treasure = new TextureAtlas("treasure/treasure.txt");
+		TextureAtlas treasure = assetManager.get("treasure/treasure.txt", TextureAtlas.class);
 		
 		Array<Sprite> coin1Arr = treasure.createSprites("coin_1");
 		coin1_1 = coin1Arr.get(0);
@@ -564,7 +589,7 @@ public class Assets {
 		purpleDiamondBreak = treasure.createSprites("coins_diamonds_purple_break");
 		cyanDiamondBreak = treasure.createSprites("coins_diamonds_cyan_break");
 		
-		TextureAtlas scoreNumsSheet = new TextureAtlas("treasure/score_num.txt");
+		TextureAtlas scoreNumsSheet = assetManager.get("treasure/score_num.txt", TextureAtlas.class);
 		scoreNum1 = scoreNumsSheet.createSprite("gui_score_+1");
 		scoreNum3 = scoreNumsSheet.createSprite("gui_score_+3");
 		scoreNum4 = scoreNumsSheet.createSprite("gui_score_+4");
@@ -576,14 +601,14 @@ public class Assets {
 		scoreNum15teal = scoreNumsSheet.createSprite("gui_score_+15teal");
 		scoreNum25 = scoreNumsSheet.createSprite("gui_score_+25");
 		
-		TextureAtlas playerVfxSheet = new TextureAtlas("vfx/playervfx.txt");
+		TextureAtlas playerVfxSheet = assetManager.get("vfx/playervfx.txt", TextureAtlas.class);
 		playerExplode = playerVfxSheet.createSprites("player_die_explotion");
 		wallExplode = playerVfxSheet.createSprites("StoneBreak_puff");
 		
-		TextureAtlas playerVfxSheet2 = new TextureAtlas("vfx/playervfx2.txt");
+		TextureAtlas playerVfxSheet2 = assetManager.get("vfx/playervfx2.txt", TextureAtlas.class);
 		doubleJumpEffect = playerVfxSheet2.createSprites("double_jump_puff");
 		
-		TextureAtlas vfxSheet = new TextureAtlas("vfx/vfx.txt");
+		TextureAtlas vfxSheet = assetManager.get("vfx/vfx.txt", TextureAtlas.class);
 		bronzeCollectEffect1 = vfxSheet.createSprites("coin_collect_bronze1");
 		bronzeCollectEffect2 = vfxSheet.createSprites("coin_collect_bronze2"); 
 		silverCollectEffect1 = vfxSheet.createSprites("coin_collect_silver1"); 
@@ -616,14 +641,14 @@ public class Assets {
 		powerupMagnetAppearSparkReversed = new Array<Sprite>(powerupMagnetAppearSpark);
 		powerupMagnetAppearSparkReversed.reverse();
 		
-		TextureAtlas openingVfxSheet = new TextureAtlas("vfx/openingvfx.txt");
+		TextureAtlas openingVfxSheet = assetManager.get("vfx/openingvfx.txt", TextureAtlas.class);
 		relic_flames = openingVfxSheet.createSprites("flames_circle");
 		relic_glow = openingVfxSheet.createSprite("relic_glow");
 		
 		// Packed in this sheet because it was easier:
 		fireballWarningPillarEffect = openingVfxSheet.createSprite("fireball_warningpillar");
 
-		TextureAtlas powerupSheet = new TextureAtlas("vfx/powerup.txt");
+		TextureAtlas powerupSheet = assetManager.get("vfx/powerup.txt", TextureAtlas.class);
 		magnetBackGlow = powerupSheet.createSprite("powerup_magnet_backglow");
 		slomoBackGlow = powerupSheet.createSprite("powerup_timebend_backglow");
 		shieldBackGlow = powerupSheet.createSprite("powerup_shield_backglow");
@@ -643,7 +668,7 @@ public class Assets {
 		
 		playerSlomoEffect = powerupSheet.createSprites("powerup_timebend_animated_glow_die");
 		
-		TextureAtlas powerupMagnetSheet = new TextureAtlas("vfx/magnet.txt");
+		TextureAtlas powerupMagnetSheet = assetManager.get("vfx/magnet.txt", TextureAtlas.class);
 		playerMagnetEffect = powerupMagnetSheet.createSprites("powerup_magnet_animated_glow");
 		playerMagnetGlow = powerupSheet.createSprite("powerup_magnet_glow");
 		playerMagnetGlowDie = powerupMagnetSheet.createSprites("powerup_magnet_animated_glow_die");
@@ -666,7 +691,7 @@ public class Assets {
 		
 		burningWallGlow = vfxSheet.createSprite("fire_glow");
 		
-		TextureAtlas enemiesSheet = new TextureAtlas("enemies/enemies.txt");
+		TextureAtlas enemiesSheet = assetManager.get("enemies/enemies.txt", TextureAtlas.class);
 		burningWall = enemiesSheet.createSprite("burning_wall");
 		burningWallStart = enemiesSheet.createSprites("burning_wall_start");
 		burningWallBurn = enemiesSheet.createSprites("burning_wall_burn");
@@ -677,15 +702,15 @@ public class Assets {
 		
 		spitter = enemiesSheet.createSprites("wall_spitter_sequence");
 		
-		TextureAtlas enemiesAddSheet1 = new TextureAtlas("enemies/enemies_add_1.txt");
+		TextureAtlas enemiesAddSheet1 = assetManager.get("enemies/enemies_add_1.txt", TextureAtlas.class);
 		flamethrowerFlame = enemiesAddSheet1.createSprites("flamethrower_flame");
 		fireballExplodeEffect = enemiesAddSheet1.createSprites("fireball_end");
 		topFireballLoop = enemiesAddSheet1.createSprites("fireball_loop");
 		
-		TextureAtlas enemiesAddSheet2 = new TextureAtlas("enemies/enemies_add_2.txt");
+		TextureAtlas enemiesAddSheet2 = assetManager.get("enemies/enemies_add_2.txt", TextureAtlas.class);
 		fireballStartEffect = enemiesAddSheet2.createSprites("fireball_start");
 		
-		TextureAtlas bossSheet = new TextureAtlas("enemies/boss.txt");
+		TextureAtlas bossSheet = assetManager.get("enemies/boss.txt", TextureAtlas.class);
 		bossRegular = bossSheet.createSprite("volcanogod_reg");
 		bossAngry = bossSheet.createSprite("volcanogod_angry");
 		bossDark = bossSheet.createSprite("volcanogod_dark");
@@ -697,7 +722,7 @@ public class Assets {
 		bossFloatingRocks = bossSheet.createSprites("volcanogod_floatingrocks");
 		
 		// Gui
-		TextureAtlas guiSheet = new TextureAtlas("ui/gui.txt");
+		TextureAtlas guiSheet = assetManager.get("ui/gui.txt", TextureAtlas.class);
 		scoreIcon = guiSheet.createSprite("gui_score_gold_icon");
 		guiTimeBestIcon = guiSheet.createSprite("gui_time_best");
 		pauseButton= guiSheet.createSprite("GUI_buttons_pause");
@@ -729,7 +754,7 @@ public class Assets {
 		scoreFont = new BitmapFont(Gdx.files.internal("ui/font/volcano_score.fnt"), false);
 		timeFont = new BitmapFont(Gdx.files.internal("ui/font/volcano_time.fnt"), false);
 		
-		TextureAtlas shopBgSheet = new TextureAtlas("shop/shopbg.txt");
+		TextureAtlas shopBgSheet = assetManager.get("shop/shopbg.txt", TextureAtlas.class);
 		shopBg = shopBgSheet.createSprite("shopmenu_bg");
 		shopMenuBg = shopBgSheet.createSprite("shopmenu_menubox_bg");
 		shopMenuFg = shopBgSheet.createSprite("shopmenu_menubox");
@@ -738,7 +763,7 @@ public class Assets {
 		bottomFadeBlessings = shopBgSheet.createSprite("shopmenu_menubox_buttomfade_blessings");
 		bottomFadeCostumes = shopBgSheet.createSprite("shopmenu_menubox_buttomfade_costume");
 		
-		TextureAtlas shopSheet = new TextureAtlas("shop/shop.txt");
+		TextureAtlas shopSheet = assetManager.get("shop/shop.txt", TextureAtlas.class);
 		shamanIdle = shopSheet.createSprites("shopmenu_shaman_idle");
 		shamanBuy = shopSheet.createSprites("shopmenu_shaman_buy");
 		shopFg = shopSheet.createSprite("shopmenu_bg_foreground");
@@ -774,7 +799,7 @@ public class Assets {
 		prices = Utils.createSpritesIndexMap(shopSheet, "shopmenu_items_cost");
 		
 		//// Shop items
-		TextureAtlas shopItemsSheet = new TextureAtlas("shop/shopitems.txt");
+		TextureAtlas shopItemsSheet = assetManager.get("shop/shopitems.txt", TextureAtlas.class);
 		// Powers
 		shopItemAirStepIcon = shopItemsSheet.createSprite("shopmenu_items_powers_airstep");
 		shopItemAirStepTitle = shopItemsSheet.createSprite("shopmenu_items_powers_airstep_text");
@@ -808,7 +833,7 @@ public class Assets {
 		shopItemBlikCostumeIcon = shopItemsSheet.createSprite("shopmenu_items_costume_blik");
 		shopItemBlikCostumeTitle = shopItemsSheet.createSprite("shopmenu_items_costume_blik_text");
 		
-		TextureAtlas pauseMenuSheet = new TextureAtlas("menu/pausemenu.txt");
+		TextureAtlas pauseMenuSheet = assetManager.get("menu/pausemenu.txt", TextureAtlas.class);
 		pauseMenuBG = pauseMenuSheet.createSprite("pausemenu_body");
 		pauseMenuTitle = pauseMenuSheet.createSprite("pausemenu_title");
 		pauseOptionsButton = pauseMenuSheet.createSprite("pausemenu_buttons_options");

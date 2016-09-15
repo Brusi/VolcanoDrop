@@ -9,6 +9,7 @@ import com.retrom.volcano.control.ControlManager;
 import com.retrom.volcano.data.CoinChancesConfiguration;
 import com.retrom.volcano.data.Levels;
 import com.retrom.volcano.data.ShopData;
+import com.retrom.volcano.screens.LoadingScreen;
 import com.retrom.volcano.screens.ShopScreen;
 import com.retrom.volcano.screens.GameScreen;
 
@@ -19,12 +20,9 @@ public class Volcano extends Game {
 	@Override
 	public void create () {
 		// TODO: preload levels and sequences.
-		SoundAssets.load();
 		ControlManager.init();
 		CoinChancesConfiguration.init();
 		ShopData.init();
-		Assets.load();
-		setScreen(new GameScreen());
-//		setScreen(new ShopScreen());
+		setScreen(new LoadingScreen());
 	}
 }

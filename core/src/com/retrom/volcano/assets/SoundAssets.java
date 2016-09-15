@@ -3,8 +3,10 @@ package com.retrom.volcano.assets;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.retrom.volcano.game.Settings;
 import com.retrom.volcano.game.objects.Collectable.Type;
 import com.retrom.volcano.utils.SoundEvictingQueue;
@@ -83,20 +85,39 @@ public class SoundAssets {
 	
 	private final static SoundEvictingQueue currentlyPlaying = new SoundEvictingQueue(40);
 	private static float pitch = 1f;
+    // This should be a reference to the asset manager owned by Assets.
+    private static AssetManager assetManager;
+
+    public static void preload(AssetManager assetManager) {
+        SoundAssets.assetManager = assetManager;
+        {
+            FileHandle dirHandle = Gdx.files.internal("sound/");
+            for (FileHandle fileHandle : dirHandle.list()) {
+                assetManager.load(fileHandle.path(), Sound.class);
+            }
+        }
+        {
+            FileHandle dirHandle = Gdx.files.internal("music/");
+            for (FileHandle fileHandle : dirHandle.list()) {
+                assetManager.load(fileHandle.path(), Music.class);
+            }
+        }
+	}
 	
 	public static void load() {
 		if (!ENABLE_OVERALL_SOUNDS) {
 			return;
 		}
-		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("music/gameplay.mp3"));
+		gameMusic = assetManager.get("music/gameplay.mp3", Music.class);
 		gameMusic.setLooping(true);
+
 //		music.setVolume(0.5f);
 //		if (Settings.soundEnabled) music.play();
 		
-		shopMusic = Gdx.audio.newMusic(Gdx.files.internal("music/shop.mp3"));
+		shopMusic = assetManager.get("music/shop.mp3", Music.class);
 		shopMusic.setLooping(true);
 		
-		menuMusic = Gdx.audio.newMusic(Gdx.files.internal("music/menu.mp3"));
+		menuMusic = assetManager.get("music/menu.mp3", Music.class);
 		menuMusic.setLooping(true);
 		
 		playerJump = new Sound[] {newSound("player_jump_0a.wav"), newSound("player_jump_0b.wav")};
@@ -215,7 +236,8 @@ public class SoundAssets {
 	}
 	
 	private static Sound newSound(String filename) {
-		return Gdx.audio.newSound(Gdx.files.internal("sound/" + filename));
+//		return Gdx.audio.newSound(Gdx.files.internal("sound/" + filename));
+        return assetManager.get("sound/" + filename, Sound.class);
 	}
 
 	public static long loopSound(Sound sound) {

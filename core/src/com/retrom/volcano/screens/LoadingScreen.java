@@ -1,29 +1,41 @@
 package com.retrom.volcano.screens;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.retrom.volcano.assets.Assets;
+import com.retrom.volcano.assets.SoundAssets;
 
 public class LoadingScreen implements Screen {
 
-	private Sprite splash;
 	private SpriteBatch batch;
-	private Texture texture;
 
 	@Override
 	public void show() {
-		showLoading();
-	}
+        Assets.startLoad();
+        SoundAssets.preload(Assets.assetManager);
+		batch = new SpriteBatch();
+    }
 
 	@Override
 	public void render(float delta) {
-		texture = new Texture("menu/shopmenu_bg.png");
-		splash = new Sprite(texture);
-		batch = new SpriteBatch();
 		batch.begin();
-		splash.draw(batch);
+
 		batch.end();
+        if (Assets.assetManager.update()) {
+            Gdx.app.log("INFO", "Done loading");
+
+            Assets.initAssets();
+            SoundAssets.load();
+
+            Game x = ((Game)(Gdx.app.getApplicationListener()));
+            x.setScreen(new GameScreen());
+            return;
+        }
+        Gdx.app.log("INFO", "loading " + Assets.assetManager.getProgress());
 	}
 
 	@Override
@@ -52,12 +64,6 @@ public class LoadingScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		texture.dispose();
 		batch.dispose();
 	}
-	
-	private void showLoading() {
-
-	}
-
 }
