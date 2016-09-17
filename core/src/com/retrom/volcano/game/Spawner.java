@@ -335,9 +335,8 @@ public class Spawner {
 		NOP = new EventQueue.Event() {
 			@Override
 			public void invoke() {
-                sequence_cooldown = 3; /// TODO: use constant.
-                Gdx.app.log("INFO", "Starting sequence_cooldown="+sequence_cooldown);
-                   }
+				sequence_cooldown = 3; /// TODO: use constant.
+			}
 		};
 		NOP_NO_SEQUENCE_COOLDOWN = new EventQueue.Event() {
 			@Override public void invoke() {}

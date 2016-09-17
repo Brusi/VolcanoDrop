@@ -81,7 +81,7 @@ public class SoundAssets {
 	
 	private static Random rand = new Random();
 	
-	private static final boolean ENABLE_OVERALL_SOUNDS = true; 
+	private static final boolean ENABLE_OVERALL_SOUNDS = true;
 	
 	private final static SoundEvictingQueue currentlyPlaying = new SoundEvictingQueue(40);
 	private static float pitch = 1f;
@@ -89,16 +89,21 @@ public class SoundAssets {
     private static AssetManager assetManager;
 
     public static void preload(AssetManager assetManager) {
+        if (!ENABLE_OVERALL_SOUNDS) {
+            return;
+        }
+
         SoundAssets.assetManager = assetManager;
         {
-            FileHandle dirHandle = Gdx.files.internal("sound/");
+            FileHandle dirHandle = Gdx.files.internal("sound/vfx");
             for (FileHandle fileHandle : dirHandle.list()) {
                 assetManager.load(fileHandle.path(), Sound.class);
             }
         }
         {
-            FileHandle dirHandle = Gdx.files.internal("music/");
+            FileHandle dirHandle = Gdx.files.internal("sound/music");
             for (FileHandle fileHandle : dirHandle.list()) {
+                Gdx.app.log("INFO", fileHandle.path());
                 assetManager.load(fileHandle.path(), Music.class);
             }
         }
@@ -108,16 +113,16 @@ public class SoundAssets {
 		if (!ENABLE_OVERALL_SOUNDS) {
 			return;
 		}
-		gameMusic = assetManager.get("music/gameplay.mp3", Music.class);
+		gameMusic = newMusic("gameplay.mp3");
 		gameMusic.setLooping(true);
 
 //		music.setVolume(0.5f);
 //		if (Settings.soundEnabled) music.play();
 		
-		shopMusic = assetManager.get("music/shop.mp3", Music.class);
+		shopMusic = newMusic("shop.mp3");
 		shopMusic.setLooping(true);
 		
-		menuMusic = assetManager.get("music/menu.mp3", Music.class);
+		menuMusic = newMusic("menu.mp3");
 		menuMusic.setLooping(true);
 		
 		playerJump = new Sound[] {newSound("player_jump_0a.wav"), newSound("player_jump_0b.wav")};
@@ -209,8 +214,8 @@ public class SoundAssets {
 		bossFall = new Sound[] { newSound("evilboss_attacks_fall1.wav"),
 				                  newSound("evilboss_attacks_fall1.wav") };
 	}
-	
-	public static long playSound (Sound sound, float volume) {
+
+    public static long playSound (Sound sound, float volume) {
 		if (!ENABLE_OVERALL_SOUNDS) return 0;
 		
 		if (!Settings.soundEnabled.on())
@@ -236,9 +241,14 @@ public class SoundAssets {
 	}
 	
 	private static Sound newSound(String filename) {
-//		return Gdx.audio.newSound(Gdx.files.internal("sound/" + filename));
-        return assetManager.get("sound/" + filename, Sound.class);
+		return Gdx.audio.newSound(Gdx.files.internal("sound/vfx/" + filename));
+//        return assetManager.get("sound/" + filename, Sound.class);
 	}
+
+    private static Music newMusic(String filename) {
+        return Gdx.audio.newMusic(Gdx.files.internal("sound/music/" + filename));
+//        return assetManager.get("sound/music/" + filename, Music.class);
+    }
 
 	public static long loopSound(Sound sound) {
 		if (!ENABLE_OVERALL_SOUNDS) return 0;
