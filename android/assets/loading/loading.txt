@@ -1,0 +1,82 @@
+loading.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+loadingmenu_bg
+  rotate: false
+  xy: 531, 671
+  size: 640, 960
+  orig: 640, 960
+  offset: 0, 0
+  index: -1
+loadingmenu_loadingbar_body
+  rotate: false
+  xy: 237, 0
+  size: 237, 99
+  orig: 237, 99
+  offset: 0, 0
+  index: -1
+loadingmenu_loadingbar_fill
+  rotate: false
+  xy: 0, 0
+  size: 237, 99
+  orig: 237, 99
+  offset: 0, 0
+  index: -1
+loadingmenu_loadingbar_tip
+  rotate: false
+  xy: 474, 0
+  size: 491, 270
+  orig: 491, 270
+  offset: 0, 0
+  index: 1
+loadingmenu_loadingbar_tip
+  rotate: false
+  xy: 932, 324
+  size: 326, 347
+  orig: 326, 347
+  offset: 0, 0
+  index: 2
+loadingmenu_loadingbar_tip
+  rotate: false
+  xy: 531, 324
+  size: 401, 329
+  orig: 401, 329
+  offset: 0, 0
+  index: 3
+loadingmenu_loadingbar_tip
+  rotate: false
+  xy: 965, 0
+  size: 437, 320
+  orig: 437, 320
+  offset: 0, 0
+  index: 4
+loadingmenu_loadingbar_tip
+  rotate: false
+  xy: 1258, 324
+  size: 427, 347
+  orig: 427, 347
+  offset: 0, 0
+  index: 5
+loadingmenu_loadingbar_tip
+  rotate: false
+  xy: 0, 671
+  size: 531, 384
+  orig: 531, 384
+  offset: 0, 0
+  index: 6
+loadingmenu_loadingbar_tip
+  rotate: false
+  xy: 1402, 0
+  size: 531, 324
+  orig: 531, 324
+  offset: 0, 0
+  index: 7
+loadingmenu_loadingbar_tip
+  rotate: false
+  xy: 0, 324
+  size: 531, 324
+  orig: 531, 324
+  offset: 0, 0
+  index: 8

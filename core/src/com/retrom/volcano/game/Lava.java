@@ -3,6 +3,7 @@ package com.retrom.volcano.game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.retrom.volcano.utils.BatchUtils;
 
 public class Lava {
 	
@@ -92,18 +93,6 @@ public class Lava {
 		return cam_y + CONST_OFFSET + height_;
 	}
 	
-	private void drawQuad(ShapeRenderer shapes, float x1, float y1, float x2, float y2, float x3,
-			float y3, float x4, float y4) {
-		shapes.triangle(x1, y1, x2, y2, x3, y3);
-    	shapes.triangle(x1, y1, x3, y3, x4, y4);
-	}
-	
-	private void drawQuad(ShapeRenderer shapes, float x1, float y1, float x2, float y2, float x3,
-			float y3, float x4, float y4, Color bottomColor, Color topColor) {
-		shapes.triangle(x1, y1, x2, y2, x3, y3, bottomColor, bottomColor, topColor);
-    	shapes.triangle(x1, y1, x3, y3, x4, y4, bottomColor, topColor, topColor);
-	}
-	
 	public void render(SpriteBatch batch, ShapeRenderer shapes) {
 		
 //		Gdx.gl.glBlendFunc(GL20.GL_ONE, GL20.GL_ONE);
@@ -114,16 +103,16 @@ public class Lava {
 		for (int i=0; i < nodes.length - 1; i++) {
 			{
 				// Draw topline outerglow.
-				Color topColor = new Color(.61f, .04f, .02f, 0); 
+				Color topColor = new Color(.61f, .04f, .02f, 0);
 				Color bottomColor = new Color(.61f, .04f, .02f, 1);
-	        	drawQuad(shapes, nodes[i].x, nodes[i].y + finalY(), nodes[i + 1].x, nodes[i + 1].y + finalY(), nodes[i+1].x, finalY() + 36, nodes[i].x, finalY() + 36, bottomColor, topColor);
+	        	BatchUtils.drawQuad(shapes, nodes[i].x, nodes[i].y + finalY(), nodes[i + 1].x, nodes[i + 1].y + finalY(), nodes[i+1].x, finalY() + 36, nodes[i].x, finalY() + 36, bottomColor, topColor);
 			}
         }
 		
         // Draw 75% redbg.
 		for (int i=0; i < nodes.length - 1; i++) {
         	shapes.setColor(1, 0.2f, 0, 0.75f);
-        	drawQuad(shapes, nodes[i].x, nodes[i].y + finalY(), nodes[i + 1].x, nodes[i + 1].y + finalY(), nodes[i+1].x, -1000, nodes[i].x, -1000);
+            BatchUtils.drawQuad(shapes, nodes[i].x, nodes[i].y + finalY(), nodes[i + 1].x, nodes[i + 1].y + finalY(), nodes[i+1].x, -1000, nodes[i].x, -1000);
         	// Orange ripple line.
         	shapes.setColor(0.98f, 0.53f, 0.14f, 1);
 			drawRippleLine(shapes, i, LINE_WIDTH, 0);
@@ -138,17 +127,17 @@ public class Lava {
 				// Draw orange line glows.
 				Color bottomColor = new Color(1f, .47f, 0, 0.5f);
 				Color topColor = new Color(1f, .47f, 0, 0);
-				drawQuad(shapes, nodes[i].x, nodes[i].y + finalY() + 4,
-				         nodes[i + 1].x, nodes[i + 1].y + finalY() + 4,
-				         nodes[i + 1].x, nodes[i+1].y + finalY() + 12,
-				         nodes[i].x, nodes[i].y + finalY() + 12,
-				         bottomColor, topColor);
-		
-				drawQuad(shapes, nodes[i].x, nodes[i].y + finalY() - 4,
-				         nodes[i + 1].x, nodes[i + 1].y + finalY() - 4,
-				         nodes[i + 1].x, nodes[i+1].y + finalY() - 19,
-				         nodes[i].x, nodes[i].y + finalY() -19,
-				         bottomColor, topColor);
+                BatchUtils.drawQuad(shapes, nodes[i].x, nodes[i].y + finalY() + 4,
+				                    nodes[i + 1].x, nodes[i + 1].y + finalY() + 4,
+				                    nodes[i + 1].x, nodes[i+1].y + finalY() + 12,
+				                    nodes[i].x, nodes[i].y + finalY() + 12,
+				                    bottomColor, topColor);
+
+                BatchUtils.drawQuad(shapes, nodes[i].x, nodes[i].y + finalY() - 4,
+				                    nodes[i + 1].x, nodes[i + 1].y + finalY() - 4,
+				                    nodes[i + 1].x, nodes[i+1].y + finalY() - 19,
+				                    nodes[i].x, nodes[i].y + finalY() -19,
+				                    bottomColor, topColor);
 			}
 		}
 		
@@ -160,13 +149,13 @@ public class Lava {
         		// Yellow line glow:
 	        	Color topColor = new Color(1f, .61f, .02f, 0); 
 	        	Color bottomColor = new Color(1f, .61f, .02f, 0.5f);
-				drawQuad(shapes, nodes[i].x, nodes[i].y + finalY() + 2 + LINE_WIDTH / 4,
+                BatchUtils.drawQuad(shapes, nodes[i].x, nodes[i].y + finalY() + 2 + LINE_WIDTH / 4,
 						         nodes[i + 1].x, nodes[i + 1].y + finalY() + 2 + LINE_WIDTH / 4,
 						         nodes[i + 1].x, nodes[i+1].y + finalY() + 5 + LINE_WIDTH / 4,
 						         nodes[i].x, nodes[i].y + finalY() + 5 + LINE_WIDTH / 4,
 						         bottomColor, topColor);
-				
-				drawQuad(shapes, nodes[i].x, nodes[i].y + finalY() - 2 + LINE_WIDTH / 4,
+
+                BatchUtils.drawQuad(shapes, nodes[i].x, nodes[i].y + finalY() - 2 + LINE_WIDTH / 4,
 						         nodes[i + 1].x, nodes[i + 1].y + finalY() - 2 + LINE_WIDTH / 4,
 						         nodes[i + 1].x, nodes[i+1].y + finalY() - 9 + LINE_WIDTH / 4,
 						         nodes[i].x, nodes[i].y + finalY() - 9 + LINE_WIDTH / 4,

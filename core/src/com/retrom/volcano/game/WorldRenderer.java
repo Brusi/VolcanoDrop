@@ -23,6 +23,7 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -83,6 +84,9 @@ public class WorldRenderer {
 	private static final List<Integer> wallBounceArray = Arrays.asList(1,6,8,6,3,1,2,3,2,0,1,0);
 	
 	public static final float PILLAR_POS = FRUSTUM_WIDTH / 2 - 38;
+
+    public static final float BOTTOM_FADE_HEIGHT = 150f;
+
 	
 	
 	World world;
@@ -327,6 +331,7 @@ public class WorldRenderer {
 		world.opening.renderForeground(batch);
 
 		batch.end();
+        renderBlackBottomFade();
 		renderLava();
 		batch.enableBlending();
 		batch.begin();
@@ -341,7 +346,40 @@ public class WorldRenderer {
 		renderLavaTop();
 	}
 
-	private void renderRelic() {
+    private void renderBlackBottomFade() {
+        if (world.gameState != World.State.GAME) {
+            return;
+        }
+
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+
+        shapeRenderer.begin(ShapeType.Filled);
+
+        float y = cam.position.y - FRUSTUM_HEIGHT / 2;
+
+        float x_left = -Lava.WIDTH / 2;
+        float x_right = Lava.WIDTH / 2;
+
+        Color topColor = new Color(0, 0, 0, 0);
+        Color bottomColor = new Color(0, 0, 0, 0.8f * Utils.clamp01(world.gameTime));
+        BatchUtils.drawQuad(shapeRenderer,
+                x_left, y,
+                x_right, y,
+                x_right, y + BOTTOM_FADE_HEIGHT / 3,
+                x_left, y + BOTTOM_FADE_HEIGHT / 3,
+                bottomColor, bottomColor);
+        BatchUtils.drawQuad(shapeRenderer,
+                x_left, y + BOTTOM_FADE_HEIGHT / 3,
+                x_right, y + BOTTOM_FADE_HEIGHT / 3,
+                x_right, y + BOTTOM_FADE_HEIGHT,
+                x_left, y + BOTTOM_FADE_HEIGHT,
+                bottomColor, topColor);
+
+        shapeRenderer.end();
+    }
+
+    private void renderRelic() {
 		if (world.relic_ != null) {
 			world.relic_.render(batch);
 		}
