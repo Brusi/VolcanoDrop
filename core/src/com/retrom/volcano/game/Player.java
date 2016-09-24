@@ -96,7 +96,7 @@ public class Player extends DynamicGameObject {
 	boolean grounded_ = true;
 	boolean airJump_ = false;
 	public int wallGlide = 0;
-	
+
 	static final boolean LEFT = true; 
 	static final boolean RIGHT = false;
 	
@@ -213,10 +213,10 @@ public class Player extends DynamicGameObject {
 		processInput(deltaTime);
 		tryMove(deltaTime);
 		
-		updateState(deltaTime);
+		updateState();
 	}
 
-	private void updateState(float deltaTime) {
+	private void updateState() {
 		if (state_ == STATE_DIE || state_ == STATE_DEAD) {
 			return;
 		}
@@ -251,21 +251,19 @@ public class Player extends DynamicGameObject {
 
 	private void tryMove(float deltaTime) {
 		AbstractControl control = ControlManager.getControl();
-		velocity.add(0, World.gravity.y * deltaTime);
-		// TODO: Activate only if shop item activated.
-		if (ShopData.frogger.isOwn() && !grounded_ && control.isJumpPressedContinuously()) {
-			velocity.add(0, JUMP_PRESS_ACCELL * deltaTime);
+        if (ShopData.frogger.isOwn() && !grounded_ && !airJump_ && control.isJumpPressedContinuously()) {
+            velocity.add(0, JUMP_PRESS_ACCELL * deltaTime);
 		}
 		if (!control.isAnalog()) {
-			float friction_rate = FRICTION_RATE;
-			if (velocity.x > 0 && control.getDigitalXDir() <= 0
-		     || velocity.x < 0 && control.getDigitalXDir() >= 0) {
-				friction_rate /= 100;
-			}
-			velocity.x *= Math.pow(friction_rate, deltaTime);
-		}
-		
-		if (velocity.x > 0) {
+            float friction_rate = FRICTION_RATE * (ShopData.cheetahr.isOwn() ? 1 : 0.2f);
+            if (velocity.x > 0 && control.getDigitalXDir() <= 0 ||
+                velocity.x < 0 && control.getDigitalXDir() >= 0) {
+                friction_rate /= 100;
+            }
+            velocity.x *= Math.pow(friction_rate, deltaTime);
+        }
+
+        if (velocity.x > 0) {
 			side = RIGHT;
 		} else if (velocity.x < 0) {
 			side = LEFT;

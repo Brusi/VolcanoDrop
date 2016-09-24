@@ -570,8 +570,7 @@ public class World {
 	// Strong and full-length earthquake for last hit in opening scene.
 	private void startUltraQuake() {
 		startQuakeWithParams(2.6f, 2f);
-		SoundAssets.playRandomSound(SoundAssets.quake);
-		dropQuakeDust(2.6f, 50);
+        dropQuakeDust(2.6f, 50);
 		dropSomeRabble(2.6f, 15);
 	}
 
@@ -828,6 +827,7 @@ public class World {
 
 	private Set<Wall> underlava = new HashSet<Wall>();
 	private boolean playerUnderLava = false;
+    private float timeUnderLava = 0f;
 
 	private void updateLava(float deltaTime) {
 		if (lava_ == null) {
@@ -848,15 +848,21 @@ public class World {
 		lava_.update(deltaTime);
 		
 		// TODO: do not kill when just touching but make some smoke effect.
-		if (player.isAlive() && player.position.y - player.bounds.height / 2 < lava_.finalY()) {
+		if (!player.isAlive()) {
+			// Do nothing if the player is not alive.
+			return;
+		}
+        if (player.position.y - player.bounds.height / 2 < lava_.finalY()) {
+            timeUnderLava += deltaTime;
 			if (!playerUnderLava) {
 				lava_.hitAt(player.position.x, player.velocity.y / 3, player.bounds.width);
 				addSmoke(player.position.x, player.position.y);
 				playerUnderLava = true;
 				SoundAssets.playSound(SoundAssets.coinLava);
 			}
-			if (shieldTime > 0) {
-				/// TODO: do some smoky thing?
+			if (shieldTime > 0 || timeUnderLava < 0.2f) {
+				// Don't kill player.
+                /// TODO: do some smoky thing?
 			} else { 
 				if (godMode_)
 					player.revive();
@@ -865,6 +871,7 @@ public class World {
 				}
 			}
 		} else {
+            timeUnderLava = 0;
 			if (playerUnderLava == true) {
 				lava_.hitAt(player.position.x, player.velocity.y / 3, player.bounds.width);
 				addSmoke(player.position.x, player.position.y);
@@ -1151,6 +1158,13 @@ public class World {
 				addFireball(col, y + camTarget);
 			}
 		});
+        worldEvents_.addEventFromNow(TopFireball.PREPARATION_DELAY - 1, new Event() {
+            @Override
+            public void invoke() {
+                createBottomWarning(col, true);
+            }
+        });
+
 	}
 	
 	private void addWarningEffects(float x, float y) {
@@ -1770,8 +1784,11 @@ public class World {
 	}
 
 	private void updatePlayer (float deltaTime) {
-		if (ShopData.slowWalker.isOwn())
-			deltaTime /= slomoRatio_;
+		if (ShopData.slowWalker.isOwn()) {
+            deltaTime /= slomoRatio_;
+        } else {
+            deltaTime *= 1.2f;
+        }
 		
 		if (player.state() == Player.STATE_DIE) {
 			endEffects();
