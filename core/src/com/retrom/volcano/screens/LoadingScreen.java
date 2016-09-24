@@ -14,8 +14,14 @@ import com.retrom.volcano.assets.PreloaderAssets;
 import com.retrom.volcano.assets.SoundAssets;
 import com.retrom.volcano.game.Utils;
 import com.retrom.volcano.game.WorldRenderer;
+import com.retrom.volcano.menus.Fade;
+import com.retrom.volcano.utils.BatchUtils;
 
 public class LoadingScreen implements Screen {
+
+    Fade fade = new Fade();
+    float fadeTime = 0;
+    private boolean isDoneLoading = false;
 
 	private SpriteBatch batch;
     private ShapeRenderer shapes;
@@ -26,8 +32,11 @@ public class LoadingScreen implements Screen {
 
     private Sprite tip_sprite;
 
+    private float progress = 0;
+
 	@Override
 	public void show() {
+        fade.setAlpha(0);
 
         Assets.startLoad();
         SoundAssets.preload(Assets.assetManager);
@@ -40,23 +49,38 @@ public class LoadingScreen implements Screen {
         tip_sprite = preloaderAssets.tips.random();
     }
 
+    private void afterDoneLoading(float deltaTime) {
+
+    }
+
 	@Override
 	public void render(float delta) {
-        if (Assets.assetManager.update()) {
-            Gdx.app.log("INFO", "done loading.");
-            doneLoading();
+        if (isDoneLoading) {
+            fadeTime += delta * 2;
+            fade.setAlpha(fadeTime);
+            if (fadeTime >= 1) {
+                Game x = ((Game)(Gdx.app.getApplicationListener()));
+                x.setScreen(new GameScreen());
+                return;
+            }
+            renderGraphics();
             return;
         }
+
+        if (Assets.assetManager.update()) {
+            doneLoading();
+        }
+        float actualProgress = Assets.assetManager.getProgress();
+        float vel = (actualProgress - progress) * 10;
+        progress = Math.min(actualProgress, progress + vel * delta);
+
         renderGraphics();
 	}
 
     private void doneLoading() {
-        Gdx.app.log("INFO","A");
         Assets.initAssets();
         SoundAssets.load();
-
-        Game x = ((Game)(Gdx.app.getApplicationListener()));
-        x.setScreen(new GameScreen());
+        isDoneLoading = true;
     }
 
     private void renderGraphics() {
@@ -91,7 +115,8 @@ public class LoadingScreen implements Screen {
         shapes.setColor(0f, 1f, 0f, 0.5f);
         // shapes.rect(200, 200, 100, 100);
 
-        shapes.rect(-3 - 93, -389 - 20, Assets.assetManager.getProgress() * 186, 40);
+
+        shapes.rect(-3 - 93, -389 - 20, progress * 190, 40);
 
         shapes.end();
 
@@ -114,8 +139,9 @@ public class LoadingScreen implements Screen {
         batch.end();
 
         Gdx.gl.glDepthFunc(GL20.GL_ALWAYS);
+        BatchUtils.setBlendFuncNormal(batch);
 
-
+        fade.render(shapes);
     }
 
     @Override
