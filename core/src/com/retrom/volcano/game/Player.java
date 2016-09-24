@@ -251,6 +251,8 @@ public class Player extends DynamicGameObject {
 
 	private void tryMove(float deltaTime) {
 		AbstractControl control = ControlManager.getControl();
+        velocity.add(0, World.gravity.y * deltaTime);
+        
         if (ShopData.frogger.isOwn() && !grounded_ && !airJump_ && control.isJumpPressedContinuously()) {
             velocity.add(0, JUMP_PRESS_ACCELL * deltaTime);
 		}
